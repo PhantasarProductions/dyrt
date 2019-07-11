@@ -1,3 +1,5 @@
+#macro skiptomenu true
+
 global void Bubble_Init()
   // Actual code comes later!
 end
