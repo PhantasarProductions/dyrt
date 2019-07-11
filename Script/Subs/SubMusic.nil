@@ -1,0 +1,63 @@
+global bool MUSICSCRIPT=true
+
+#use "libs/stack"
+#use "script/use/anyway"
+
+
+var stacked
+
+class TMusic
+	readonly string filename
+	readonly var resource
+	
+	void CONSTRUCTOR(string file)
+		CSayF("Loading music file \"%s\"",file)
+		self.filename=file
+		// Loading comes later
+	end
+end	
+
+var curplaying
+
+
+
+void init()
+	stacked = stack.NEW()
+end
+
+global void MUS_Play(string file)
+	var newmus
+	if curplaying and curplaying.filename==file then return end
+	newmus = TMusic.NEW(file)
+	if curplaying
+		curplaying.resource.Stop()
+		curplaying = newmus
+	end
+end
+
+global void MUS_Stop()
+end
+
+global void MUS_Push()
+	assert(curplaying,"I cannot push when no music is loaded!")
+	stacked.Value = curplaying
+end
+
+global void MUS_Pop()
+	var popped
+	popped = stacked.Value
+	if not popped then return end
+	if curplaying and curplaying.filename!=popped.filename
+		curplaying.Stop()
+		popped.Play()
+	end
+	curplaying = stacked.Value	
+end
+
+
+
+
+
+
+
+init()
