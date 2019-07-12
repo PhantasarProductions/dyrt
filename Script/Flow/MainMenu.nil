@@ -1,0 +1,39 @@
+#use "script/use/anyway"
+#use "libs/linkedlist"
+
+var MenuItems
+MenuItems = TLinkedList.NEW()
+
+class MenuItem
+	static int count = 0
+	readonly int id
+	readonly string Caption
+	readonly var CaptionText
+	readonly delegate Action
+	readonly bool available
+	
+	void CONSTRUCTOR(string capt,delegate act, bool avail)
+		self.Caption = capt
+		self.Action = act
+		self.id = MenuItem.count
+		self.available = avail
+		MenuItem.count = MenuItem.count + 1
+		// TODO: Generate grapic presentation
+		MenuItems.AddLast(self)
+	end
+end
+
+// Temp function for bug prevention!
+void NOTHINGYET()
+end
+
+MenuItem.NEW("New Game",NOTHINGYET,true)
+MenuItem.NEW("New Game+",NOTHINGYET,false)
+MenuItem.NEW("New Game: True Abyss",NOTHINGYET,false)
+MenuItem.NEW("Continue a game",NOTHINGYET,false)
+MenuItem.NEW("Encyclopedia",NOTHINGYET,true)
+MenuItem.NEW("Jukebox",NOTHINGYET,true)
+MenuItem.NEW("Websites",NOTHINGYET,true)
+MenuItem.NEW("Repository & Bug tracker",NOTHINGYET,true)
+MenuItem.NEW("Credits",NOTHINGYET,true)
+MenuItem.NEW("Quit",NOTHINGYET,true)
