@@ -11,10 +11,12 @@ class TMusic
 	readonly var resource
 	
 	void CONSTRUCTOR(string file)
-		CSayF("Loading music file \"%s\"",file)
+		file = trim(file)
+		CSay("Loading music file \""..file.."\"")
 		self.filename=file
-		// Loading comes later
+		self.resource = LoadAudio(file)
 	end
+	
 end	
 
 var curplaying
@@ -30,9 +32,10 @@ global void MUS_Play(string file)
 	if curplaying and curplaying.filename==file then return end
 	newmus = TMusic.NEW(file)
 	if curplaying
-		curplaying.resource.Stop()
-		curplaying = newmus
+		curplaying.resource.Stop()	
 	end
+	curplaying = newmus
+	curplaying.resource.Play()
 end
 
 global void MUS_Stop()

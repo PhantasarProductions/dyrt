@@ -1,1 +1,2 @@
-#macro FONT_MainMenu "Fonts/Abigail.jfbf"
+#use "libs/strings"
+#macro FONT_MainMenu "Fonts/abigail.24.jfbf"

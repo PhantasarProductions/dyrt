@@ -1,5 +1,22 @@
+#say "Init script is being loaded!"
 #macro skiptomenu true
 
+
+CSay("")
+CSay("Welcome to Phantasar!")
+CSay("Join us on our travel to Dyrt!");
+CSay("")
+
 global void Bubble_Init()
-  // Actual code comes later!
+	// Only put in for debugging as having to see the intro all the time will become bothersome sooner or later!
+	if skiptomenu		
+		CSay("Quick forward to main menu!")
+		CSay("Compiling: MainMenu.nil")
+		LoadFlow("MAINMENU","Script/Flow/MainMenu.nil")
+		CSay("Chain to Main Menu")
+		GoToFlow("MAINMENU")
+	end
+	// Let's rock, and roll!!!
+	CSay("Time to start the flow!")
+	//StartFlow()
 end

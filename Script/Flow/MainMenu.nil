@@ -1,34 +1,53 @@
+#say "MainMenu: Use commands"
 #use "script/use/anyway"
 #use "libs/linkedlist"
 
-var MenuItems
-MenuItems = TLinkedList.NEW()
+// Headconfirm
+CSay("Setting up MainMenu")
 
+// declarations and definitions
+
+#say "MainMenu: Declare menu items and font"
+var MenuItems
+var ItemFont
+
+#say "MainMenu: Define them"
+CSay("Define Menu Items")
+MenuItems = TLinkedList.NEW()
+CSay('Load font: FONT_MainMenu')
+ItemFont  = LoadImageFont(FONT_MainMenu)
+
+#say "MainMenu: class MenuItem"
+CSay("Create class")
 class MenuItem
-	private static int count = 0
+	static int count = 0
 	static var Current
 	readonly int id
 	readonly string Caption
 	readonly var CaptionText
-	readonly delegate Action
+	readonly var Action
 	readonly bool available
 	
-	void CONSTRUCTOR(string capt,delegate act, bool avail)
+	void CONSTRUCTOR(string capt, act, bool avail)
+		CSay("Menu Item constructor called")
 		self.Caption = capt
 		self.Action = act
 		self.id = MenuItem.count
 		self.available = avail
 		MenuItem.count = MenuItem.count + 1
-		MenuItem.Current = MenuItem.Current or self
+		MenuItem.Current = MenuItem.Current or self;
 		// TODO: Generate grapic presentation
 		MenuItems.AddLast(self)
+		CSayF("Created menu item #%d: %s",self.id,capt)		
 	end
 end
 
+#say "MainMenu: temp void"
 // Temp function for bug prevention!
 void NOTHINGYET()
 end
 
+#say "MainMenu: Init menu items"
 MenuItem.NEW("New Game",NOTHINGYET,true)
 MenuItem.NEW("New Game+",NOTHINGYET,false)
 MenuItem.NEW("New Game: True Abyss",NOTHINGYET,false)
@@ -40,3 +59,19 @@ MenuItem.NEW("Repository & Bug tracker",NOTHINGYET,true)
 MenuItem.NEW("Credits",NOTHINGYET,true)
 MenuItem.NEW("Quit",NOTHINGYET,true)
 
+#say "MainMenu: Let's ROCK, baby!"
+global void BUB_Arrive()
+	CSay("Main Menu Flow activated")	
+	Music.Play("Music/StartUp/MainMenu.wav")
+end
+
+global void BUB_Draw()
+	
+end
+
+global void BUB_Update()
+end
+
+// Confirm
+CSay("MainMenu should be successfully loaded")
+#say "MainMenu:Translation done!"
