@@ -5,7 +5,8 @@ var MenuItems
 MenuItems = TLinkedList.NEW()
 
 class MenuItem
-	static int count = 0
+	private static int count = 0
+	static var Current
 	readonly int id
 	readonly string Caption
 	readonly var CaptionText
@@ -18,6 +19,7 @@ class MenuItem
 		self.id = MenuItem.count
 		self.available = avail
 		MenuItem.count = MenuItem.count + 1
+		MenuItem.Current = MenuItem.Current or self
 		// TODO: Generate grapic presentation
 		MenuItems.AddLast(self)
 	end
@@ -37,3 +39,4 @@ MenuItem.NEW("Websites",NOTHINGYET,true)
 MenuItem.NEW("Repository & Bug tracker",NOTHINGYET,true)
 MenuItem.NEW("Credits",NOTHINGYET,true)
 MenuItem.NEW("Quit",NOTHINGYET,true)
+
