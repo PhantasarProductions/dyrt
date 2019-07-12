@@ -36,6 +36,9 @@ global void MUS_Play(string file)
 end
 
 global void MUS_Stop()
+	if curplaying
+		curplaying.Stop()
+	end
 end
 
 global void MUS_Push()
