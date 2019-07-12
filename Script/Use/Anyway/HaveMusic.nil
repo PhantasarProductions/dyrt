@@ -1,0 +1,3 @@
+global musicavailable = false
+CSay("Music is NOT available")
+

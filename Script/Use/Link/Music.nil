@@ -1,0 +1,41 @@
+if MUSICSCRIPT then return nil end
+
+
+void LoadSubMusic()
+	if !StateExists("MUSIC")
+		CSay("Loading sub: MUSIC")
+		LoadState("MUSIC","Script/Use/Subs/Music.nil")
+	end
+end
+
+void MsExe(command)
+	LoadSubMusic()
+	LuaDoString("MUSIC",command,"Call sub: MUSIC") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+end
+
+#pure
+local
+#endpure
+
+class ClassMusic
+
+	void Play(string file)
+		MsExe(string.format("MUS_Play(\"%s\")",file))
+	end
+
+	void Stop()
+		MsExe("MUS_Stop()")
+	end
+
+	void Push()
+		MsExe("MUS_Push")
+	end
+
+	void Pop()
+		MsExe("MUS_Pop")
+	end
+
+end
+
+
+return ClassMusic.NEW()
