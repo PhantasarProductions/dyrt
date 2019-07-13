@@ -1,6 +1,7 @@
 #say "MainMenu: Use commands"
 #use "script/use/anyway"
 #use "libs/linkedlist"
+#use "libs/BuildData"
 
 // Headconfirm
 CSay("Setting up MainMenu")
@@ -9,13 +10,26 @@ CSay("Setting up MainMenu")
 
 #say "MainMenu: Declare menu items and font"
 var MenuItems
+var Background
 var ItemFont
+var CopyFont
+var CopyText
+var Logo
 
 #say "MainMenu: Define them"
 CSay("Define Menu Items")
 MenuItems = TLinkedList.NEW()
+
+#say "Load assets"
 CSay('Load font: FONT_MainMenu')
 ItemFont  = LoadImageFont(FONT_MainMenu)
+Logo = LoadImage("GFX/Alg/Dyrt_Logo.png")
+int MidXLogo
+MidXLogo = Logo.Width/2
+Background = LoadImage("GFX/Alg/MenuBack.png")
+CopyFont = LoadImageFont(FONT_Blitz)
+CopyText = CopyFont.Text("(c) "..BuildData.Copyright[2019].." Jeroen P. Broks")
+
 
 #say "MainMenu: class MenuItem"
 CSay("Create class")
@@ -48,25 +62,39 @@ void NOTHINGYET()
 end
 
 #say "MainMenu: Init menu items"
-MenuItem.NEW("New Game",NOTHINGYET,true)
-MenuItem.NEW("New Game+",NOTHINGYET,false)
-MenuItem.NEW("New Game: True Abyss",NOTHINGYET,false)
-MenuItem.NEW("Continue a game",NOTHINGYET,false)
-MenuItem.NEW("Encyclopedia",NOTHINGYET,true)
-MenuItem.NEW("Jukebox",NOTHINGYET,true)
-MenuItem.NEW("Websites",NOTHINGYET,true)
-MenuItem.NEW("Repository & Bug tracker",NOTHINGYET,true)
-MenuItem.NEW("Credits",NOTHINGYET,true)
-MenuItem.NEW("Quit",NOTHINGYET,true)
+new MenuItem("New Game",NOTHINGYET,true)
+new MenuItem("New Game+",NOTHINGYET,false)
+new MenuItem("New Game: True Abyss",NOTHINGYET,false)
+new MenuItem("Continue a game",NOTHINGYET,false)
+new MenuItem("Encyclopedia",NOTHINGYET,true)
+new MenuItem("Jukebox",NOTHINGYET,true)
+new MenuItem("Websites",NOTHINGYET,true)
+new MenuItem("Repository & Bug tracker",NOTHINGYET,true)
+new MenuItem("Credits",NOTHINGYET,true)
+new MenuItem("Quit",NOTHINGYET,true)
 
 #say "MainMenu: Let's ROCK, baby!"
 global void BUB_Arrive()
 	CSay("Main Menu Flow activated")	
 	Music.Play("Music/StartUp/MainMenu.wav")
+	MidScreen.Update()
 end
 
 global void BUB_Draw()
+	// debug
+	Dev.ConCheck()
 	
+	// Autoupdate
+	MidScreen.Auto()
+	
+	// Background
+	Background.Tile(0,0,Screen.Width,Screen.Height)
+	
+	// Logo
+	Logo.Draw(MidScreen.X-MidXLogo,20)
+	
+	// Copyright
+	CopyText.Draw(MidScreen.X,Screen.Height-25,2,0)
 end
 
 global void BUB_Update()

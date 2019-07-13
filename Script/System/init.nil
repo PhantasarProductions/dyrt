@@ -18,5 +18,5 @@ global void Bubble_Init()
 	end
 	// Let's rock, and roll!!!
 	CSay("Time to start the flow!")
-	//StartFlow()
+	StartFlow()
 end

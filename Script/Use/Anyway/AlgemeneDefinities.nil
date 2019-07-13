@@ -1,2 +1,32 @@
 #use "libs/strings"
+
+#macro DEVELOPMENT true
+
 #macro FONT_MainMenu "Fonts/abigail.24.jfbf"
+#macro FONT_Blitz "Fonts/Blitz.jfbf"
+
+class MidScreen
+	static int x
+	static int y
+	static int X
+	static int Y
+	static int ow
+	static int oh
+	static void Update()
+		MidScreen.ow = Screen.Width
+		MidScreen.oh = Screen.Height
+		MidScreen.x = Screen.Width/2
+		MidScreen.y = Screen.Height/2
+		MidScreen.X = MidScreen.x
+		MidScreen.Y = MidScreen.y
+	end	
+	static void Auto()
+		if MidScreen.ow != Screen.Width or MidScreen.oh != Screen.Height
+			MidScreen.Update()
+		end
+	end
+end
+MidScreen.Update()
+
+
+

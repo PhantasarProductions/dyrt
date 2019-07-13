@@ -1,0 +1,42 @@
+#say "Debug feature class!"
+
+// I am still working for a more elegant way in NIL to do this
+#pure
+local
+#endpure
+
+class ClassDevelopment
+
+	void ConCheck()
+		if Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
+			GoConsole()
+		end
+	end
+
+end
+
+#say "Only needed to have an empty function"
+void NOTHING()
+end
+
+
+#say "Is this the debug mode, or not?"
+var ret
+
+if (DEVELOPMENT) then
+	ret = ClassDevelopment.NEW()
+else
+	table fake
+	table fakemeta
+	fakemeta.__index = var(a,b,c) 
+		return NOTHING
+	end
+	setmetatable(fake,fakemeta)
+	#pure
+	ClassDevelopment=nil;
+	#endpure
+	ret = fake
+end
+
+
+return ret
