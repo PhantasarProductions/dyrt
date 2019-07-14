@@ -19,4 +19,25 @@ If it's a hard game you want, a hard game you'll get. Some people just hate easy
 without using your growth books? Who thinks Breath of Fire Dragon Quarter is too easy? Then this may be the difficulty setting for you. Many limits and extra handicaps have been put into the game, just to annoy the crap out of you 
 and make sure you'll be suffering from loss of hair and high blood pressure and tons of stress (for which I hereby disclaim all resposibility).
 
-The table below goes more into the deep of matters
+## Table of matters
+
+The table below goes more into the deep of matters:
+
+
+Stuff | Easy | Casual | Hard
+---|---|---|---
+Buy prices in shop | 25% cheaper (never less than 1) | ... | 25% more expensive
+Sell prices in shop | As high as buying prices | 25% less of buying price (never less than 1) | 75% less of buying price (never less than 1)
+Experience | More than casual | ... | Less than casual
+Experience for non-competitors | Same | Half | None
+Experience fallen characters | Half | None | None
+Experience penalty for repeatitive enemeies | None | None | The more times you meet the same enemy, the less experience it will grand you.
+Money loss losing battle* | Doesn't happen | Money not in bank halved | All money not in bank gone
+Max number per item | 50 | 25 | 5
+Experience penalty for losing battle | None | None | Depending on your level, you may need a lot more experience to gain the next level
+Random Encounter Frequency | Low | Normal | High
+
+
+
+
+* = "Bound to lose fights", in other words fights that must be lost due to scenario reasons do no count for this rule
