@@ -1,0 +1,53 @@
+#use "script/use/anyway"
+
+
+table stages
+global stage = 1
+
+#say "Translating stage: Game Jolt!"
+class Stage_GameJolt
+	
+	readonly var gjlogo
+	
+	void CONSTRUCTOR()
+		gjlogo = LoadImage("GFX/alg/Game Jolt Transparent.png")
+	end
+	
+	void draw()
+	end
+	
+	void update()
+	end
+	
+end
+
+stages[#stages+1] = new Stage_GameJolt
+
+#say "Difficulty settings!
+class Stage_Skill
+	void CONSTRUCTOR()
+	end
+	
+	void draw()
+	end
+	
+	void update()
+	end
+	
+end
+stages[#stages+1] = new Stage_Skill
+
+#say "Language"
+class Stage_Language
+	void CONSTRUCTOR()
+	end
+	
+	void draw()
+	end
+	
+	void update()
+	end
+	
+end
+
+stages[#stages+1] = new Stage_Language
