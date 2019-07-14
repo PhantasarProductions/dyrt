@@ -42,6 +42,9 @@
 #macro FONT_MainMenu "Fonts/abigail.24.jfbf"
 #macro FONT_Blitz "Fonts/Blitz.jfbf"
 
+#macro __white Color(255,255,255)
+
+
 class MidScreen
 	static int x
 	static int y

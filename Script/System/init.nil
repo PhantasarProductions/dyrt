@@ -18,7 +18,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-#say "Init script is being loaded!"
+#say "Init script is being loaded!!"
 #macro skiptomenu true
 
 
@@ -29,13 +29,18 @@ CSay("")
 
 global void Bubble_Init()
 	// Only put in for debugging as having to see the intro all the time will become bothersome sooner or later!
-	if skiptomenu		
+	if skiptomenu
 		CSay("Quick forward to main menu!")
 		CSay("Compiling: MainMenu.nil")
 		LoadFlow("MAINMENU","Script/Flow/MainMenu.nil")
 		CSay("Chain to Main Menu")
 		GoToFlow("MAINMENU")
 	end
+	
+	// Mouse pointer
+	CSay("Load the mouse pointer!!")
+	Mouse.Pointer ="GFX/Alg/Mouse.png"
+	
 	// Let's rock, and roll!!!
 	CSay("Time to start the flow!")
 	StartFlow()

@@ -45,6 +45,9 @@ CSay("Setting up MainMenu")
 
 // declarations and definitions
 
+#macro marge_menu_y 170
+#macro dist_menu_y 40
+
 #say "MainMenu: Declare menu items and font"
 var MenuItems
 var Background
@@ -55,7 +58,7 @@ var Logo
 
 #say "MainMenu: Define them"
 CSay("Define Menu Items")
-MenuItems = TLinkedList.NEW()
+MenuItems = new TLinkedList
 
 #say "Load assets"
 CSay('Load font: FONT_MainMenu')
@@ -73,6 +76,8 @@ CSay("Create class")
 class MenuItem
 	static int count = 0
 	static var Current
+	static int oldmousex
+	static int oldmousey
 	readonly int id
 	readonly string Caption
 	readonly var CaptionText
@@ -87,10 +92,67 @@ class MenuItem
 		self.available = avail
 		MenuItem.count = MenuItem.count + 1
 		MenuItem.Current = MenuItem.Current or self;
-		// TODO: Generate grapic presentation
+		self.CaptionText = ItemFont.Text(capt)
 		MenuItems.AddLast(self)
 		CSayF("Created menu item #%d: %s",self.id,capt)		
 	end
+	
+	get int x
+		return MidScreen.x
+	end
+	
+	get int y
+		return marge_menu_y + (self.id * dist_menu_y)
+	end
+	
+	int cdu(int val,cd)
+		return math.ceil(val-(val*cd))
+	end
+	
+	void Draw()
+		var cdu
+		cdu = self.cdu
+		number cd
+		cd = math.abs((self.Current.id-self.id)/MenuItems.Count)
+		if self.available
+			Color(cdu(180,cd),cdu(255,cd),0)
+		else
+			Color(cdu(255,cd),0,0)
+		end
+		if self.id==self.Current.id
+			Rect(10,self.y,Screen.Width-20,dist_menu_y,"line")
+		end
+		self.CaptionText.Draw(self.x,self.y,2,0)
+		if (self.oldmousex!=Mouse.X or self.oldmousey!=Mouse.Y) and Mouse.Y>self.y and Mouse.Y<self.y+dist_menu_y
+			self.Current=self
+		end
+	end
+	
+	static void UpdateMouse()
+		MenuItem.oldmousex=Mouse.X
+		MenuItem.oldmousey=Mouse.Y
+	end
+	
+	static void Next()
+		for item in MenuItems.Each
+			if item.id==MenuItem.Current.id+1
+				MenuItem.Current=item
+				// error("NEXT") // debug
+				return
+			end
+		end
+	end
+
+	static void Previous()
+		for item in MenuItems.Each
+			if item.id==MenuItem.Current.id-1
+				MenuItem.Current=item
+				//error("PREVIOUS") // debug
+				return
+			end
+		end
+	end
+	
 end
 
 #say "MainMenu: temp void"
@@ -118,6 +180,8 @@ global void BUB_Arrive()
 end
 
 global void BUB_Draw()
+	__white
+	
 	// debug
 	Dev.ConCheck()
 	
@@ -132,9 +196,27 @@ global void BUB_Draw()
 	
 	// Copyright
 	CopyText.Draw(MidScreen.X,Screen.Height-25,2,0)
+	
+	// Menu Items
+	for item in MenuItems.Each
+		item.Draw()
+	end
+	MenuItem.UpdateMouse()
+	
+	// Mouse pointer (must be last)
+	__white
+	Mouse.Show()
 end
 
 global void BUB_Update()
+	switch Keyboard.Name
+		case "Down"
+			MenuItem.Next()
+		case "Up"
+			MenuItem.Previous()
+		case "Escape"
+			CSay("Note! Quit feature not available yet!")
+	end
 end
 
 // Confirm
