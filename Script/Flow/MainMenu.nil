@@ -71,6 +71,25 @@ CopyFont = LoadImageFont(FONT_Blitz)
 CopyText = CopyFont.Text("(c) "..BuildData.Copyright[2019].." Jeroen P. Broks")
 
 
+#say "Let's set up the menu item action functions!"
+
+void ToGitHub()
+	OpenURL(URL_GitHub)
+end
+
+void StartNewGame(bool plus)
+	error("No link to the game yet")
+end
+
+void NewGame()
+	StartNewGame(false)
+end
+
+void NewGamePlus()
+	StartNewGame(true)
+end
+
+
 #say "MainMenu: class MenuItem"
 CSay("Create class")
 class MenuItem
@@ -161,14 +180,14 @@ void NOTHINGYET()
 end
 
 #say "MainMenu: Init menu items"
-new MenuItem("New Game",NOTHINGYET,true)
-new MenuItem("New Game+",NOTHINGYET,false)
+new MenuItem("New Game",NewGame,true)
+new MenuItem("New Game+",NewGamePlus,false)
 new MenuItem("New Game: True Abyss",NOTHINGYET,false)
 new MenuItem("Continue a game",NOTHINGYET,false)
 new MenuItem("Encyclopedia",NOTHINGYET,true)
 new MenuItem("Jukebox",NOTHINGYET,true)
 new MenuItem("Websites",NOTHINGYET,true)
-new MenuItem("Repository & Bug tracker",NOTHINGYET,true)
+new MenuItem("Repository & Bug tracker",URL_GitHub,true)
 new MenuItem("Credits",NOTHINGYET,true)
 new MenuItem("Quit",NOTHINGYET,true)
 
@@ -214,6 +233,10 @@ global void BUB_Update()
 			MenuItem.Next()
 		case "Up"
 			MenuItem.Previous()
+		case "Enter" "Space"
+			if (MenuItem.Current.available) 
+				MenuItem.Current.Action()
+			end
 		case "Escape"
 			CSay("Note! Quit feature not available yet!")
 	end

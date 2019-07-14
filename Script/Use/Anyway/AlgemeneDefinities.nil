@@ -42,6 +42,8 @@
 #macro FONT_MainMenu "Fonts/abigail.24.jfbf"
 #macro FONT_Blitz "Fonts/Blitz.jfbf"
 
+#macro URL_GitHub "https://github.com/PhantasarProductions/dyrt.net"
+
 #macro __white Color(255,255,255)
 
 
