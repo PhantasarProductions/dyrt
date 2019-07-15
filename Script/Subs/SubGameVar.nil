@@ -1,0 +1,61 @@
+bool GAMEVARSCRIPT = true
+
+#use "Libs/tables"
+#use "Libs/strings"
+
+table varBool
+table varString
+table varNum
+table varAll 
+table varType
+table varDef
+
+varAll = {varBool,varString,VarNum}
+varType = { Bool=varBool,String=varString,Num=varNum }
+varDef = { Bool=false, String="",Num=0 }
+
+global void varClear()
+	for v in each(varall) 
+		table temp
+		for k,_ in pairs(v) 
+			temp[#temp+1]=k
+		end
+		for ik in each(temp)
+			v[ik]=nil;
+		end
+	end
+end
+
+
+global void varGet(string vType,string vName)
+	var v
+	v = varType[vType][vName]
+	if v==nil then v=varDef[vType] end
+	SuperGlobal.varCommunicate = v 
+end
+
+global void varSet(string vType,string vName, vValue)
+	varType[vType][vName] = vValue
+end
+
+global void varDone(string vName)
+	varGet("Bool",vName)
+	varSet("Bool",vName,true)
+end
+
+global void varSerialize()
+	string ret
+	ret = "// Booleans\n"
+	for k,v in spairs(varBool)
+		ret = ret + sprintf("gv.Bool[\"%s\"] = %s\n",SafeString(k),v)
+	end
+	ret = ret + "\n//Numbers\n"
+	for k,v in spairs(varNum)
+		ret = ret + sprintf("gv.Num[\"%s\"] = %s\n",SafeString(k),v)
+	end
+	ret = ret + "\n//Strings\n"
+	for k,v in spairs(varNum)
+		ret = ret + sprintf("gv.String[\"%s\"] = \"%s\"\n",SafeString(k),SafeString(v))
+	end
+	SuperGlobal.VarCommunicate = ret
+end

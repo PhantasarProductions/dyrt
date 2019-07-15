@@ -1,0 +1,150 @@
+// This is a safety pre-caution
+#accept GAMEVARSCRIPT
+if GAMEVARSCRIPT then return end
+
+
+// declarations
+global table gv
+table gvbool
+table gvnumber
+table gvstring
+table gvmeta
+table gvmetabool
+table gvmetanumber
+table gvmetastring
+table inc
+table incmeta
+
+
+global table Done
+global table done
+done = Done
+table donemeta
+
+
+// Communicate with the real code
+void LoadSubVar()
+	if not StateExists("GAMEVARS")
+		CSay("Loading sub: GAMEVARS")
+		LoadState("MUSIC","Script/Subs/SubGameVar.nil")
+	end
+end
+
+string popCOMM()
+	string ret
+	ret = SuperGlobal.VarCommunicate
+	SuperGlobal.VarCommunicate = ""
+	return ret
+end
+
+// Main metatable
+gvmeta.__newindex = void(t,k,v)
+	error("GameVars Type Indexes are READ-ONLY so you cannot assign any data to type "+k+"!")
+end
+
+gvmeta.__index = table(t,k)
+	switch k:upper()
+		case "BOOL" "B" "&" "BOOLEAN" "BOOLE" "GEORGEBOOLE"
+			return gvbool
+		case "NUM" "NUMBER" "INT" "GETAL" "GRAHAM" "N" "%"
+			return gvnumber
+		case "STRING" "S" "$" "CHAR*"
+			return gvstring
+		case "DONE"
+			return Done		
+		default
+			error("Unknown GameVar type "+k)
+	end
+end
+
+gvmeta.__call() = string(t)
+	LoadSubVar()
+	LuaDoString("GAMEVARS","varSerialize()")
+	return popCOMM()
+end
+
+setmetatable(gv,gvmeta)
+
+
+// Boolean Metatable
+gvmetanum.__newindex = void(t,string k, int v)
+	LuaDoString("GAMEVARS",sprintf("varSet(\"Num\",\"%s\",%s)",SafeString(k:upper()), vValue)
+end
+
+gvmetanum.__index = int(t, string k)
+	var r
+	LuaDoString("GAMEVARS",sprintf("varGet(\"Num\",\"%s\",%s)",SafeString(k:upper()))
+	r = popCOMM()
+	switch type(r)
+		case "number"
+			return r
+		case "string"
+			return tonumber(r) or 0
+	end
+	return 0
+end
+
+gvmetaint.__call=int(t, string k)
+	return gvint[k]
+end
+
+setmetatable(gvnum,gvmetanum)
+
+// Boolean Metatable
+gvmetabool.__newindex = void(t,string k, bool v)
+	LuaDoString("GAMEVARS",sprintf("varSet(\"Bool\",\"%s\",%s)",SafeString(k:upper()), vValue)
+end
+
+gvmetabool.__index =bool(t, string k)
+	var r
+	LuaDoString("GAMEVARS",sprintf("varGet(\"Bool\",\"%s\",%s)",SafeString(k:upper()))
+	r = popCOMM()
+	return r==true or r=='true'
+end
+
+gvmetabool.__call=bool(t, string k)
+	return gvbool[k]
+end
+
+setmetatable(gvbool,gvmetabool)
+
+
+
+// String Metatable
+gvmetastring.__newindex = void(t,string k, string v)
+	LuaDoString("GAMEVARS",sprintf("varSet(\"String\",\"%s\",\"%s\")",SafeString(k:upper()), SafeString(vValue))
+end
+
+gvmetastring.__index =string(t, string k)
+	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\",%s)",SafeString(k:upper()))
+	return popCOMM() or ""
+end
+
+gvmetabool.__call=bool(t, string k)
+	return gvbool[k]
+end
+
+setmetatable(gvbool,gvmetabool)
+
+
+// Inc
+incmeta.__newindex = void(t,string k, int value)
+	gvbool[k] = gvbool + value
+end
+
+incmeta.__index = void()
+	error("Inc is WRITE-ONLY!")
+end
+
+// Done
+donemeta.__index = bool(t,k)
+	var r
+	LuaDoString("GAMEVARS",sprintf("varDone(\"%s\")",SafeString(k:upper())
+	r = popCOMM()
+	return r==true or r=='true'
+end
+
+donemeta.__newindex = void()
+	error("Done is READ-ONLY!")
+end
+setmetatable(Done,donemeta)
