@@ -30,19 +30,25 @@ table varAll
 table varType
 table varDef
 
-varAll = {varBool,varString,VarNum}
+// I'll do this in "pure" Lua.
+// NIL inevitably comes with a few limitations, and the code below is just one of them
+// (still doesn't outrank the benefits, so...)
+#pure
+varAll = {varBool,varString,varNum}
 varType = { Bool=varBool,String=varString,Num=varNum }
 varDef = { Bool=false, String="",Num=0 }
+#endpure
 
 global void varClear(bool onlydefs)
-	for k,v in pairs(varType) 
+	for Type,v in pairs(varType) 
 		table temp
 		for k,_ in pairs(v) 
 			temp[#temp+1]=k
 		end
 		for ik in each(temp)
 			if (not onlydefs) or varDef[Type]==v[ik] 
-			v[ik]=nil;
+				v[ik]=nil;
+			end
 		end
 	end
 end

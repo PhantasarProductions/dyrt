@@ -51,20 +51,21 @@ class Stage_GameJolt
 	readonly var gjlogo
 	
 	void CONSTRUCTOR()
-		gjlogo = LoadImage("GFX/alg/Game Jolt Transparent.png")
+		self.gjlogo = LoadImage("GFX/alg/Game Jolt Transparent.png")
 	end
 	
 	void draw()
+		self.gjlogo.Draw(MidScreen.X-(self.gjlogo.Width/2),25)
 	end
 	
-	void update()
+	void update()		
 	end
 	
 end
 
 stages[#stages+1] = new Stage_GameJolt
 
-#say "Difficulty settings!
+#say "Difficulty settings!"
 class Stage_Skill
 	void CONSTRUCTOR()
 	end
@@ -95,7 +96,7 @@ stages[#stages+1] = new Stage_Language
 
 #say "To plus, or not to plus! That's the question!"
 global void NewGamePlus()
-	CSayF("NewGame+ from %s to %s",Done.NewGamePlus,DoneNewGamePlus)
+	CSayF("NewGame+ from %s to %s",Done.NewGamePlus,Done.NewGamePlus)
 end
 
 
@@ -114,14 +115,14 @@ global void BUB_Draw()
 	Background.Tile(0,0,Screen.Width,Screen.Height)
 
 	// Execute Stage Draw
-	stages[stage].draw()
+	stages[stage]['draw']()
 	
 	// Mouse
 	Mouse.Show()
 end
 
 global void BUB_Update()
-	stages[stage].Update()
+	stages[stage]['update']()
 end
 
 

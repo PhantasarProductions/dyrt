@@ -6,14 +6,16 @@ if GAMEVARSCRIPT then return end
 // declarations
 global table gv
 table gvbool
+table gvnum
 table gvnumber
 table gvstring
 table gvmeta
 table gvmetabool
-table gvmetanumber
+table gvmetanum
 table gvmetastring
 table inc
 table incmeta
+gvnumber = gvnum
 
 int cd_garbage = 1000
 
@@ -67,13 +69,13 @@ gvmeta.__index = table(t,k)
 	end
 	cd_garbage = cd_garbage - 1
 	if cd_garbage<=0
-		Say("GameVar Garbage Collecting")
+		CSay("GameVar Garbage Collecting")
 		cd_garbage=1000
 		LuaDoString("GAMEVARS","varClear(true)")
 	end
 end
 
-gvmeta.__call() = string(t)
+gvmeta.__call = string(t)
 	LoadSubVar()
 	LuaDoString("GAMEVARS","varSerialize()")
 	return popCOMM()
@@ -84,41 +86,42 @@ setmetatable(gv,gvmeta)
 
 // Boolean Metatable
 gvmetanum.__newindex = void(t,string k, int v)	
-	LuaDoString("GAMEVARS",sprintf("varSet(\"Num\",\"%s\",%s)",SafeString(k:upper()), vValue)
+	LuaDoString("GAMEVARS",sprintf("varSet(\"Num\",\"%s\",%s)",SafeString(k:upper()), v))
 end
 
 gvmetanum.__index = int(t, string k)
-	var r	
-	LuaDoString("GAMEVARS",sprintf("varGet(\"Num\",\"%s\",%s)",SafeString(k:upper()))
+	var r
+	int r2 = 0
+	LuaDoString("GAMEVARS",sprintf("varGet(\"Num\",\"%s\",%s)",SafeString(k:upper())))
 	r = popCOMM()
 	switch type(r)
 		case "number"
-			return r
+			r2 = r
 		case "string"
-			return tonumber(r) or 0
+			r2 = tonumber(r) or 0
 	end
-	return 0
+	return r2
 end
 
-gvmetaint.__call=int(t, string k)
-	return gvint[k]
+gvmetanum.__call=int(t, string k)
+	return gvnum[k]
 end
 
 setmetatable(gvnum,gvmetanum)
 
 // Boolean Metatable
 gvmetabool.__newindex = void(t,string k, bool v)
-	LuaDoString("GAMEVARS",sprintf("varSet(\"Bool\",\"%s\",%s)",SafeString(k:upper()), vValue)
+	LuaDoString("GAMEVARS",sprintf("varSet(\"Bool\",\"%s\",%s)",SafeString(k:upper()), v))
 end
 
-gvmetabool.__index =bool(t, string k)
+gvmetabool.__index = boolean(t, string k)
 	var r
-	LuaDoString("GAMEVARS",sprintf("varGet(\"Bool\",\"%s\",%s)",SafeString(k:upper()))
+	LuaDoString("GAMEVARS",sprintf("varGet(\"Bool\",\"%s\",%s)",SafeString(k:upper())))
 	r = popCOMM()
 	return r==true or r=='true'
 end
 
-gvmetabool.__call=bool(t, string k)
+gvmetabool.__call=boolean(t, string k)
 	return gvbool[k]
 end
 
@@ -128,15 +131,15 @@ setmetatable(gvbool,gvmetabool)
 
 // String Metatable
 gvmetastring.__newindex = void(t,string k, string v)
-	LuaDoString("GAMEVARS",sprintf("varSet(\"String\",\"%s\",\"%s\")",SafeString(k:upper()), SafeString(vValue))
+	LuaDoString("GAMEVARS",sprintf("varSet(\"String\",\"%s\",\"%s\")",SafeString(k:upper()), SafeString(v)))
 end
 
 gvmetastring.__index =string(t, string k)
-	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\",%s)",SafeString(k:upper()))
+	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\",%s)",SafeString(k:upper())))
 	return popCOMM() or ""
 end
 
-gvmetabool.__call=bool(t, string k)
+gvmetabool.__call=boolean(t, string k)
 	return gvbool[k]
 end
 
@@ -153,9 +156,9 @@ incmeta.__index = void()
 end
 
 // Done
-donemeta.__index = bool(t,k)
+donemeta.__index = boolean(t,k)
 	var r
-	LuaDoString("GAMEVARS",sprintf("varDone(\"%s\")",SafeString(k:upper())
+	LuaDoString("GAMEVARS",sprintf("varDone(\"%s\")",SafeString(k:upper())))
 	r = popCOMM()
 	return r==true or r=='true'
 end
