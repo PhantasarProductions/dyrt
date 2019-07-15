@@ -15,6 +15,8 @@ table gvmetastring
 table inc
 table incmeta
 
+int cd_garbage = 1000
+
 
 global table Done
 global table done
@@ -26,7 +28,7 @@ table donemeta
 void LoadSubVar()
 	if not StateExists("GAMEVARS")
 		CSay("Loading sub: GAMEVARS")
-		LoadState("MUSIC","Script/Subs/SubGameVar.nil")
+		LoadState("GAMEVARS","Script/Subs/SubGameVar.nil")
 	end
 end
 
@@ -37,12 +39,20 @@ string popCOMM()
 	return ret
 end
 
+// Clear all
+global void gvClearAll()
+	LoadSubVar()
+	LuaDoString("GAMEVARS","varClear(false)")
+end   
+   
+
 // Main metatable
 gvmeta.__newindex = void(t,k,v)
 	error("GameVars Type Indexes are READ-ONLY so you cannot assign any data to type "+k+"!")
 end
 
 gvmeta.__index = table(t,k)
+	LoadSubVar()
 	switch k:upper()
 		case "BOOL" "B" "&" "BOOLEAN" "BOOLE" "GEORGEBOOLE"
 			return gvbool
@@ -54,6 +64,12 @@ gvmeta.__index = table(t,k)
 			return Done		
 		default
 			error("Unknown GameVar type "+k)
+	end
+	cd_garbage = cd_garbage - 1
+	if cd_garbage<=0
+		Say("GameVar Garbage Collecting")
+		cd_garbage=1000
+		LuaDoString("GAMEVARS","varClear(true)")
 	end
 end
 
@@ -67,12 +83,12 @@ setmetatable(gv,gvmeta)
 
 
 // Boolean Metatable
-gvmetanum.__newindex = void(t,string k, int v)
+gvmetanum.__newindex = void(t,string k, int v)	
 	LuaDoString("GAMEVARS",sprintf("varSet(\"Num\",\"%s\",%s)",SafeString(k:upper()), vValue)
 end
 
 gvmetanum.__index = int(t, string k)
-	var r
+	var r	
 	LuaDoString("GAMEVARS",sprintf("varGet(\"Num\",\"%s\",%s)",SafeString(k:upper()))
 	r = popCOMM()
 	switch type(r)

@@ -34,13 +34,14 @@ varAll = {varBool,varString,VarNum}
 varType = { Bool=varBool,String=varString,Num=varNum }
 varDef = { Bool=false, String="",Num=0 }
 
-global void varClear()
-	for v in each(varall) 
+global void varClear(bool onlydefs)
+	for k,v in pairs(varType) 
 		table temp
 		for k,_ in pairs(v) 
 			temp[#temp+1]=k
 		end
 		for ik in each(temp)
+			if (not onlydefs) or varDef[Type]==v[ik] 
 			v[ik]=nil;
 		end
 	end
