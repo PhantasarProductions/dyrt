@@ -79,14 +79,19 @@ void ToGitHub()
 end
 
 void StartNewGame(bool plus)
-	error("No link to the game yet")
+	LoadFlow("NEWGAME","Script/Flow/NewGame.nil")
+	if plus
+		LuaDoString("FLOW_NEWGAME","NewGamePlus()")
+	end
+	GoToFlow("NEWGAME")
+	KillFlow("MAINMENU")
 end
 
 void NewGame()
 	StartNewGame(false)
 end
 
-void NewGamePlus()
+void NewGamePlus()	
 	StartNewGame(true)
 end
 
@@ -115,6 +120,10 @@ class MenuItem
 		self.CaptionText = ItemFont.Text(capt)
 		MenuItems.AddLast(self)
 		CSayF("Created menu item #%d: %s",self.id,capt)		
+	end
+	
+	void DESTRUCTOR()
+		CSayF("Destroying menu item \"%s\"",self.Caption)
 	end
 	
 	get int x

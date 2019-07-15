@@ -37,9 +37,13 @@
 
 #use "script/use/anyway"
 
+var Background
+Background = TImage.Obtain("MENUBACK")
 
 table stages
 global int stage = 1
+gvClearAll()
+
 
 #say "Translating stage: Game Jolt!"
 class Stage_GameJolt
@@ -91,13 +95,29 @@ stages[#stages+1] = new Stage_Language
 
 #say "To plus, or not to plus! That's the question!"
 global void NewGamePlus()
+	CSayF("NewGame+ from %s to %s",Done.NewGamePlus,DoneNewGamePlus)
 end
 
 
 
 #say "The actual stuff"
 global void BUB_Draw()
-	stages[stage].Draw()
+	__white
+	
+	// debug
+	Dev.ConCheck()
+	
+	// Autoupdate
+	MidScreen.Auto()
+	
+	// Background
+	Background.Tile(0,0,Screen.Width,Screen.Height)
+
+	// Execute Stage Draw
+	stages[stage].draw()
+	
+	// Mouse
+	Mouse.Show()
 end
 
 global void BUB_Update()
