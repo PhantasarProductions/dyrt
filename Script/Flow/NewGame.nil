@@ -97,9 +97,11 @@ end
 
 #say "The actual stuff"
 global void BUB_Draw()
+	stages[stage].Draw()
 end
 
 global void BUB_Update()
+	stages[stage].Update()
 end
 
 

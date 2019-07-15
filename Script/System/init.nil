@@ -18,7 +18,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
 #say "Init script is being loaded!!"
 #macro skiptomenu true
 
