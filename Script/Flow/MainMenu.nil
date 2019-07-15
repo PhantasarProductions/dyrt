@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 19.07.13
+// Version: 19.07.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 #say "MainMenu: Use commands"
 #use "script/use/anyway"
@@ -245,4 +246,5 @@ end
 // Confirm
 CSay("MainMenu should be successfully loaded")
 #say "MainMenu:Translation done!"
+
 
