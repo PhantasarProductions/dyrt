@@ -2,7 +2,7 @@
 
 
 table stages
-global stage = 1
+global int stage = 1
 
 #say "Translating stage: Game Jolt!"
 class Stage_GameJolt
@@ -51,3 +51,19 @@ class Stage_Language
 end
 
 stages[#stages+1] = new Stage_Language
+
+#say "To plus, or not to plus! That's the question!"
+global void NewGamePlus()
+end
+
+
+
+#say "The actual stuff"
+global void BUB_Draw()
+end
+
+global void BUB_Update()
+end
+
+
+
