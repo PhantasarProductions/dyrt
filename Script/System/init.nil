@@ -37,6 +37,9 @@ global void Bubble_Init()
 		GoToFlow("MAINMENU")
 	end
 	
+	// Background
+	LoadImage("GFX/Alg/MenuBack.png","MENUBACK")
+	
 	// Mouse pointer
 	CSay("Load the mouse pointer!!")
 	Mouse.Pointer ="GFX/Alg/Mouse.png"

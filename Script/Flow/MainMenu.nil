@@ -66,7 +66,7 @@ ItemFont  = LoadImageFont(FONT_MainMenu)
 Logo = LoadImage("GFX/Alg/Dyrt_Logo.png")
 int MidXLogo
 MidXLogo = Logo.Width/2
-Background = LoadImage("GFX/Alg/MenuBack.png")
+Background = TImage.Obtain("MENUBACK")
 CopyFont = LoadImageFont(FONT_Blitz)
 CopyText = CopyFont.Text("(c) "..BuildData.Copyright[2019].." Jeroen P. Broks")
 
