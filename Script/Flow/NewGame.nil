@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/NewGame.nil
-// Version: 19.07.15
+// Version: 19.07.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -35,7 +35,13 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 #use "script/use/anyway"
+#use "libs/tables"
+#use "libs/strings"
+
+#macro next_marge_x 40
+#macro next_marge_y 40
 
 var Background
 Background = TImage.Obtain("MENUBACK")
@@ -44,26 +50,117 @@ table stages
 global int stage = 1
 gvClearAll()
 
+var font
+font = LoadImageFont("Fonts/Coolvetica.20.jfbf")
+
+var bfont
+bfont = LoadImageFont(FONT_Blitz)
+
+var imgNext
+imgNext = TImage.Obtain("NEXT")
+
 
 #say "Translating stage: Game Jolt!"
 class Stage_GameJolt
 	
 	readonly var gjlogo
+	readonly table gjtext
 	
-	void CONSTRUCTOR()
+	string gju_name
+	string gju_token
+	string gju
+	table gju_capt
+	table gjupos
+	
+	void CONSTRUCTOR()		
 		self.gjlogo = LoadImage("GFX/alg/Game Jolt Transparent.png")
+		self.gjtext = { font.Text("Here you can enter your Game Jolt creditials to allow"), font.Text("the game to log in onto Game Jolt and"), font.Text("log your achievements."), font.Text("There are also other benefits from using Game Jolt in the game"),font.Text("If you do not want that, you can just leave the fields"),font.Text("blank and move on into the next stage") }
+		self.gju_capt = { ['name'] = "User name:", ['token'] = "Token:" }
+		self.gjupos = { ['name'] = { ['pcx'] = 25 }, ['token'] = {['pcx']=50} }
+		self.gju = 'name'
+	end
+	
+	void check()
+		bool allow
+		allow = GameJolt.ByResource("Secu/Sites/GameJolt")
+		CSayF("Allow Game Jolt outcome: %s",allow)
+		if not allow
+			stage = 2
+		end
 	end
 	
 	void draw()
+		string scursor
+		int y=100
 		self.gjlogo.Draw(MidScreen.X-(self.gjlogo.Width/2),25)
+		for tx in each(self.gjtext)
+			tx.Draw(MidScreen.X,y,2,0)
+			y = y + 25
+		end
+		for k,pos in pairs(self.gjupos)
+			int x
+			int w
+			x = math.floor(Screen.Width*(pos.pcx/100))
+			w = math.floor(Screen.Width*(22/100))
+			if k==self.gju
+				Color(255,255,0)
+				scursor="_"
+			else
+				Color(255,255,255)
+				scursor=""
+			end
+			bfont.DrawText(self.gju_capt[k],x,y)
+			Rect(x,y+30,w,30)
+			__black
+			bfont.DrawText(self['gju_'..k]..scursor,x,y+31)
+		end
+		__white
+		imgNext.Draw(Screen.Width-next_marge_x,Screen.Height-next_marge_y)
 	end
 	
-	void update()		
+	void update()
+		string ch
+		string nm
+		int w
+		w = math.floor(Screen.Width*(22/100)) // I know that this is not really efficient CPU wise, but please note that the overall code wasn't too demanding anyway, so if you notice the difference as a human being, your computer is too slow for modern software, anyway!
+		ch = Keyboard.Char
+		nm = Keyboard.Name:upper()
+		// CSayF("Pressed %s > %s ",ch,nm) // debug!
+		switch nm
+			case "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" " " "SPACE" "OEMMINUS" "SUBTRACT"
+				if bfont.TextWidth(self['gju_'..self.gju].."_x")<w
+					self['gju_'..self.gju] = self['gju_'..self.gju] .. ch
+				end
+			case "BACK" "BACKSPACE"
+				if self['gju_'..self.gju]!=""
+					self['gju_'..self.gju] = Left(self['gju_'..self.gju],#(self['gju_'..self.gju])-1)
+				end
+			case "TAB"
+				switch self.gju
+					case "name"
+						self.gju="token"
+						return
+					case "token"						
+						self.gju="name"
+						return
+					default
+						error(sprintf("?Huh? %s ?Huh?",self.gju))
+				end
+		end
+		if Mouse.HeldLeft
+			if Mouse.X<MidScreen.X
+				self.gju="name"
+			else
+				self.gju="token"
+			end
+		end
 	end
 	
 end
 
-stages[#stages+1] = new Stage_GameJolt
+var stageGJ 
+stageGJ = new Stage_GameJolt
+stages[#stages+1] = stageGJ
 
 #say "Difficulty settings!"
 class Stage_Skill
@@ -100,6 +197,9 @@ global void NewGamePlus()
 end
 
 
+#say "Checkup! Is Game Jolt Actually allowed?"
+stageGJ.check()
+
 
 #say "The actual stuff"
 global void BUB_Draw()
@@ -118,12 +218,14 @@ global void BUB_Draw()
 	stages[stage]['draw']()
 	
 	// Mouse
+	__white
 	Mouse.Show()
 end
 
 global void BUB_Update()
 	stages[stage]['update']()
 end
+
 
 
 
