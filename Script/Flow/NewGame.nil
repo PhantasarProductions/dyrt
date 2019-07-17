@@ -51,10 +51,14 @@ global int stage = 1
 gvClearAll()
 
 var font
+var Font
 font = LoadImageFont("Fonts/Coolvetica.20.jfbf")
+Font = font
 
 var bigfont
 bigfont = LoadImageFont("Fonts/Coolvetica.35.jfbf")
+var BigFont
+BigFont=bigfont // Lazy, I know, but I don't care!
 
 var bfont
 bfont = LoadImageFont(FONT_Blitz)
@@ -213,13 +217,31 @@ class Stage_Skill
 	table skillnames
 	table skilldesc
 	table skillpic
+	int hover = 0
 	
 	void CONSTRUCTOR()
-		skillnames = { BigFont.Text("Stay away from me!!!"), BigFont.Text("Bring it on!"), BigFont.Text("There is no life in the VOID!") }
-		skilldesc = { {Font.Text("In this mode the game is heavily simplefied"),Font.Text("More bonusses, quicker level gaining and more stuff will help you to get on the way"), Font.Text("This mode is intended for beginners!") }, {Font.Text("In this mode you'll get the game the way it was intended")}, {Font.Text("Think you are though?"),Font.Text("Can you beat Dr. Nim without cheating?"),Font.Text("Are you ready for the ultimate madness?"),Font.Text("If it's a hard game you want, a hard game you get!"),Font.Text("This mode is for the tough guys who need a life!") } }
+		self.skillnames = { BigFont.Text("Stay away from me!!!"), BigFont.Text("Bring it on!"), BigFont.Text("There is no life in the VOID!") }
+		self.skilldesc = { {Font.Text("In this mode the game is heavily simplefied"),Font.Text("More bonusses, quicker level gaining and more stuff will help you to get on the way"), Font.Text("This mode is intended for beginners!") }, {Font.Text("In this mode you'll get the game the way it was intended")}, {Font.Text("Think you are though?"),Font.Text("Can you beat Dr. Nim without cheating?"),Font.Text("Are you ready for the ultimate madness?"),Font.Text("If it's a hard game you want, a hard game you get!"),Font.Text("This mode is for the tough guys who need a life!") } }
+		for i=1,3			
+			self.skillpic[i] = LoadImage("gfx/skill/"..i..".png")
+			
+		end
 	end
 	
 	void draw()
+		self.hover=0
+		for i=1,3 
+			__white
+			self.skillpic[i]['Draw'](20,i*150)
+			if Mouse.Y>i*150 and Mouse.Y<(i+1)*150
+				self.hover=i
+				for idx,txt in ipairs(self.skilldesc[i])
+					txt.Draw(300,idx*40)
+				end
+				__skyblue
+			end
+			self.skillnames[i]["Draw"](100,(i*150)+80)
+		end
 	end
 	
 	void update()
