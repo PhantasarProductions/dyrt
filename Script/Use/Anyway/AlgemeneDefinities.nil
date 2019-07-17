@@ -50,7 +50,7 @@
 #macro __amber Color(255,180,  0)
 #macro __skyblue Color(0,180,180)
 
-#macro __lang__ gv.String.Lang
+#macro __lang gv.String.Lang
 
 
 
@@ -79,57 +79,5 @@ end
 MidScreen.Update()
 
 
-
-table EnglishNames 
-
-// this works quicker
-#pure
-EnglishNames = {
-   Eric = "Eric",
-   Irravonia = "Irravonia",
-   Brendor = "Brendor",
-   PreScyndi = "Seelah Gandra",
-   PostScyndi = "Scyndi",
-   Rebecca = "Rebecca",
-   Dernor = "Dernor",
-   Merya = "Merya",
-   Aziella = 'Azi|"ella',
-   Shanda = 'Shanda',
-   Kirana = 'Kirana'
-}
-#endpure
-
-global table Names
-table LangToNames 
-table MetaNames
-
-MetaNames.__index = string(t,k) {
-	table chktable
-	string ret
-	chktable = LangToNames[__lang]
-	ret = chktable[k] or EnglishNames[k]
-	assert(ret,sprintf("No name tied for character %s in language %s or the English language table!",k,__lang))
-	return ret
-end
-
-MetaNames.__newindex = string(t,k,v) {
-	error("Name Table is read-only")
-}
-
-void ignore()
-end
-
-MetaNames.__call = void(t,lang) 
-	for k,_ in pairs(EnglishNames)
-		switch k
-			case "PostScyndi" "PreScyndi"
-				gv.String.Scyndi = Names.PreScyndi
-			default
-				gv.String[k] = Names[k]
-		end
-	end
-end
-
-setmetatable(Names,MetaNames)
 
 

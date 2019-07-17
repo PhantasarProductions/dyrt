@@ -245,17 +245,63 @@ class Stage_Skill
 	end
 	
 	void update()
+		if Mouse.HeldLeft
+			if self.hover>0
+				gv.Number.Skill=self.hover
+				stage = stage + 1
+			end
+		end
 	end
 	
 end
 stages[#stages+1] = new Stage_Skill
 
 #say "Language"
+class NG_Lang
+	string code
+	string name
+	var textname
+	int x
+	int y
+	static int sx = 5
+	static int sy = 50
+	static var list
+	static var hover
+	
+	void CONSTRUCTOR(string acode, string aname)
+		self.list = self.list or new TLinkedList
+		self.list.AddLast(self)
+		self.code = acode
+		self.name = aname
+		self.textname = font.Text(aname)
+		self.x = self.sx
+		self.y = self.sy
+		self.sy = self.sy + 25
+		if self.sy>Screen.Width-100
+			self.sy = 50
+			self.sx = self.sx + 150
+		end
+		CSayF("Added language '%s' > '%s'", acode, aname)
+	end
+end
+
 class Stage_Language
 	void CONSTRUCTOR()
+		for lcode, lname in spairs(Languages)
+			new NG_Lang(lcode,lname)
+		end
 	end
 	
 	void draw()
+		NG_Lang.hover=nil;
+		for lang in NG_Lang.list.Each
+			__white
+			if Mouse.X>lang.x and Mouse.Y>lang.y and Mouse.X<lang.x+145 and Mouse.Y<lang.y+25
+				lang.hover = lang
+				__skyblue
+			end
+			lang.textname.Draw(lang.x,lang.y)
+		end
 	end
 	
 	void update()
