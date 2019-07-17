@@ -53,6 +53,9 @@ gvClearAll()
 var font
 font = LoadImageFont("Fonts/Coolvetica.20.jfbf")
 
+var bigfont
+bigfont = LoadImageFont("Fonts/Coolvetica.35.jfbf")
+
 var bfont
 bfont = LoadImageFont(FONT_Blitz)
 
@@ -206,7 +209,14 @@ stages[#stages+1] = stageGJ
 
 #say "Difficulty settings!"
 class Stage_Skill
+
+	table skillnames
+	table skilldesc
+	table skillpic
+	
 	void CONSTRUCTOR()
+		skillnames = { BigFont.Text("Stay away from me!!!"), BigFont.Text("Bring it on!"), BigFont.Text("There is no life in the VOID!") }
+		skilldesc = { {Font.Text("In this mode the game is heavily simplefied"),Font.Text("More bonusses, quicker level gaining and more stuff will help you to get on the way"), Font.Text("This mode is intended for beginners!") }, {Font.Text("In this mode you'll get the game the way it was intended")}, {Font.Text("Think you are though?"),Font.Text("Can you beat Dr. Nim without cheating?"),Font.Text("Are you ready for the ultimate madness?"),Font.Text("If it's a hard game you want, a hard game you get!"),Font.Text("This mode is for the tough guys who need a life!") } }
 	end
 	
 	void draw()
