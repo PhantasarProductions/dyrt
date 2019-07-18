@@ -305,6 +305,10 @@ class Stage_Language
 	end
 	
 	void update()
+		if Mouse.HitLeft and NG_Lang.hover
+			__Lang = NG_Lang.hover.code
+			error("Link to main game cannot yet be established!")
+		end
 	end
 	
 end

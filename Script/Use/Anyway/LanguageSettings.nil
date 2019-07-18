@@ -1,0 +1,61 @@
+#say "Language"
+#use "Script/Use/Link/GameVars.nil"
+#use "Libs/LinkedList"
+
+table EnglishNames 
+global table Languages 
+Languages = { ["EN"] = "English", ["NL"] = "Dutch" }
+
+// this works quicker
+#pure
+EnglishNames = {
+   Eric = "Eric",
+   Irravonia = "Irravonia",
+   Brendor = "Brendor",
+   PreScyndi = "Seelah Gandra",
+   PostScyndi = "Scyndi",
+   Rebecca = "Rebecca",
+   Dernor = "Dernor",
+   Merya = "Merya",
+   Aziella = 'Azi|"ella',
+   Shanda = 'Shanda',
+   Kirana = 'Kirana'
+}
+#endpure
+
+global table Names
+table LangToNames 
+table MetaNames
+
+#say "Meta-Name Index"
+MetaNames.__index = string(t,k) 
+	table chktable
+	string ret
+	chktable = LangToNames[__lang]
+	ret = chktable[k] or EnglishNames[k]
+	assert(ret,sprintf("No name tied for character %s in language %s or the English language table!",k,__lang))
+	return ret
+end
+
+#say "No new index!"
+MetaNames.__newindex = string(t,k,v) 
+	error("Name Table is read-only")
+end
+
+#say "What more?"
+void ignore()
+end
+
+MetaNames.__call = void(t,lang) 
+	for k,_ in pairs(EnglishNames)
+		switch k
+			case "PostScyndi" "PreScyndi"
+				gv.String.Scyndi = Names.PreScyndi
+			default
+				gv.String[k] = Names[k]
+		end
+	end
+end
+
+setmetatable(Names,MetaNames)
+
