@@ -1,0 +1,4 @@
+:HELLO
+	call print,"Hello World"
+	end
+
