@@ -4,6 +4,15 @@
 
 table ret
 ret = {
+	["KILL_7"] = {
+		["AutoProcess"] = true,
+		["Description"] = "Kill 7 enemies",
+		["Name"] = "License to kill",
+		["ProcessMax"] = 7,
+		["ProcessString"] = "{Value} of {Max}",
+		["ProcessValue"] = "KILL",
+
+	},
 	["SCEN_BEGIN"] = {
 		["AutoProcess"] = false,
 		["Description"] = "Succesfully start a new game",

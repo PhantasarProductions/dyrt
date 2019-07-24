@@ -28,6 +28,14 @@ ProcessString={Value} or {Max}
 # Data last generated 24/7/2019
 
 
+Rec: KILL_7
+	AutoProcess = TRUE
+	Description = Kill 7 enemies
+	Name = License to kill
+	ProcessMax = 7
+	ProcessString = {Value} of {Max}
+	ProcessValue = KILL
+
 Rec: SCEN_BEGIN
 	AutoProcess = FALSE
 	Description = Succesfully start a new game
