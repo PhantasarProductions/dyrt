@@ -3,6 +3,7 @@ global bool FLOW_FIELD = true
 #use "Script/Use/Anyway"
 #use "libs/saskia"
 
+
 global void LoadMap(string Map)
 end
 
