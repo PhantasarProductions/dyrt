@@ -28,7 +28,7 @@ MapMeta = {
 						if (i>1) then parm = parm ..", " end
 						parm = parm .. a
 					end
-					LuaDoString("GAMEVARS",sprintf("%s(%s)",parm)
+					LuaDoString("GAMEVARS",sprintf("MScript.%s(%s)",k,parm)
 				end
 				#endpure
 		end
