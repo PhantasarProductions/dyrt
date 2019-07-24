@@ -1,0 +1,37 @@
+#pure
+return {
+	-- Water
+	Heal       = { Skill_Water = 1 },
+	Splash     = { Skill_Water = 5 },
+	Tsunami    = { Skill_Water = 15 },
+	
+	-- Fire
+	Fire       = { Skill_Fire  = 1 },
+	Fireblasst = { Skill_Fire  = 15 },
+	Inferno    = { Skill_Fire  = 25 },
+	
+	-- Wind
+	Breeze     = { Skill_Wind  = 1 },
+	BlowAway   = { Skill_Wind  = 5 },
+	Hurricane  = { Skill_Wind  = 15 },
+	
+	-- Earth
+	Rock       = { Skill_Earth = 1 },
+	EarthQuake = { Skill_Earth = 15 },
+	IDDQD      = { Skill_Earth = 30 },
+	
+	-- Scharum
+	MagicStrike = { Scharum = true },
+	
+	-- Sealed Boss
+	Catastrophe = { SealedBoss = true },
+	
+	-- Combination spells
+	Meditation  = { Skill_Water = 20, Skill_Fire = 20, Skill_Wind = 20, Skill_Earth = 20 },
+	Blizzard    = { Skill_Water = 55, Skill_Wind = 45 },
+	Yggdrassil  = { Skill_Water = 65, Skill_Earth = 50 },
+	Mjolnir     = { Skill_Fire  = 65, Skill_Wind = 70 },
+	Vesuvius    = { Skill_Fire  = 75, Skill_Earth = 80 }
+
+}
+#endpure
