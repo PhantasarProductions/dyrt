@@ -4,4 +4,11 @@ group MScript
 		CSay("Welcome in jail!")
 	end
 	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+	
 end
