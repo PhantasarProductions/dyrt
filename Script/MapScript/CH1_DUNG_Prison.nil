@@ -1,0 +1,7 @@
+group MScript
+	
+	void CONSTRUCTOR()
+		CSay("Welcome in jail!")
+	end
+	
+end
