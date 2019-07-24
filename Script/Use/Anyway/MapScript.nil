@@ -1,0 +1,38 @@
+#use "libs/strings"
+global table MapScript
+
+void StartSaskia(string script,string label)
+	error("SASKIA start not yet implemented!")
+end
+
+
+table MapMeta
+MapMeta = {
+	['__newindex'] = void()
+		error("MapScript values cannot be defined");
+	end,
+	
+	['__index'] = void(t,k)
+		switch(k:ToUpper())
+			case "SASKIA"
+				return void(string label)
+					StartSaskia("MAP",label)
+				end
+			default
+				assert(StateExists("MAP"),"Map script call, but no map script was loaded!")
+				#pure
+				return function(...)
+					local args = {...}
+					local parm = "";
+					for i,a in ipairs(args) do
+						if (i>1) then parm = parm ..", " end
+						parm = parm .. a
+					end
+					LuaDoString("GAMEVARS",sprintf("%s(%s)",parm)
+				end
+				#endpure
+		end
+	end
+}
+
+setmetatable ( MapScript, MapMeta )
