@@ -316,6 +316,16 @@ end
 
 stages[#stages+1] = new Stage_Language
 
+
+
+void StartGame()
+	LoadFlow("FIELD","Script/Flow/Field.nil")
+	RPGParty = {"YoungIrravonia"}
+end
+
+
+
+
 #say "To plus, or not to plus! That's the question!"
 global void NewGamePlus()
 	CSayF("NewGame+ from %s to %s",Done.NewGamePlus,Done.NewGamePlus)
