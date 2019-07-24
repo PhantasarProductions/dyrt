@@ -13,3 +13,4 @@
 #use "Script/Use/Link/Field_h.nil"
 #use "Script/Use/Link/GameVars.nil"
 #use "Script/Use/Link/Music.nil"
+#use "Script/Use/Link/Party.nil"
