@@ -1,22 +1,22 @@
 #pure
 return {
 	-- Water
-	Heal       = { Skill_Water = 1 },
+	Heal       = { Skill_Water = 1, Start=true },
 	Splash     = { Skill_Water = 5 },
 	Tsunami    = { Skill_Water = 15 },
 	
 	-- Fire
-	Fire       = { Skill_Fire  = 1 },
+	Fire       = { Skill_Fire  = 1, Start=true },
 	Fireblasst = { Skill_Fire  = 15 },
 	Inferno    = { Skill_Fire  = 25 },
 	
 	-- Wind
-	Breeze     = { Skill_Wind  = 1 },
-	BlowAway   = { Skill_Wind  = 5 },
+	Breeze     = { Skill_Wind  = 1, Start=true },
+	BlowAway   = { Skill_Wind  = 5S},
 	Hurricane  = { Skill_Wind  = 15 },
 	
 	-- Earth
-	Rock       = { Skill_Earth = 1 },
+	Rock       = { Skill_Earth = 1, Start=true },
 	EarthQuake = { Skill_Earth = 15 },
 	IDDQD      = { Skill_Earth = 30 },
 	
