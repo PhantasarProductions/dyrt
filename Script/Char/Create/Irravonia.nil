@@ -1,1 +1,17 @@
+#use "Script/Use/AnyWay"
+var Irra
+
+Irra = RPG.GetChar("Irravonia")
+Irra.Name = Names.Irravonia
+
+Irra.Data["SKILL0"] = "Wand Wielding"
+Irra.Data["SKILL1"] = "Fire Magic"
+Irra.Data["SKILL2"] = "Wind Magic"
+Irra.Data["SKILL3"] = "Water Magic"
+Irra.Data["SKILL4"] = "Earth Magic"
+
+for i=0,4
+	Irra.Points(sprintf("SKILLEXP%d",i)).Have    = 1
+	Irra.Points(sprintf("SKILLLVL%d",i)).Have    = 1
+end
 
