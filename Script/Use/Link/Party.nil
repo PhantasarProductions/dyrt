@@ -1,0 +1,22 @@
+#use "libs\strings"
+
+void LoadSub()
+	if not StateExists("PARTY")
+		LoadState("PARTY","Script/Subs/SubParty.nil")
+	end
+end
+
+void PtExe(command)
+	LoadSub()
+	LuaDoString("PARTY",command,"Call sub: PARTY") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+end
+
+
+group Party
+
+	void NewCharacter(string tag,int startlevel)
+		PtExe("PARTY",printf("PartySub.NewCharacter(\"%s\",%d)",tag,startlevel)
+	end 
+
+end
+

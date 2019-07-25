@@ -1,0 +1,6 @@
+group SubParty
+
+	void NewCharacter(string tag, int level)
+	end
+
+end

@@ -320,7 +320,8 @@ stages[#stages+1] = new Stage_Language
 
 void StartGame()
 	LoadFlow("FIELD","Script/Flow/Field.nil")
-	RPGParty = {"YoungIrravonia"}
+	RPG.Party.Max=8
+	RPG.Party[1]="Young Irravonia"
 end
 
 
