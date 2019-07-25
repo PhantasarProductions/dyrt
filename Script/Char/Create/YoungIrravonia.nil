@@ -1,0 +1,10 @@
+#use "Script/Use/AnyWay"
+
+var yi
+
+yi = RPG.GetChar("YoungIrravonia")
+yi.Name = Names.Irravonia
+
+yi.Data["SKILL0"] = "Twig twitching"
+
+CSay("Young Irravonia Configured")
