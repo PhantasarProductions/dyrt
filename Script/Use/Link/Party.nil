@@ -17,6 +17,10 @@ group Party
 	void NewCharacter(string tag,int startlevel)
 		PtExe("PARTY",printf("PartySub.NewCharacter(\"%s\",%d)",tag,startlevel)
 	end 
+	
+	void SetLevelStats(string tag, int level)
+		PtExe("PARTY",printf("PartySub.SetLevelStats(\"%s\",%d)",tag,startlevel)
+	end
 
 end
 

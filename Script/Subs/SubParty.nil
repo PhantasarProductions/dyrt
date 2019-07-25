@@ -1,6 +1,89 @@
+#use "libs/qff"
+#use "libs/tables"
+#use "libs/strings"
+#use "Script/Use/Anyway"
+
+
 group SubParty
 
+	table StatSubs
+	string SubCollecto
+	
+	void CONSTRUCTOR()
+		StatSubs = {
+			"BASE_",          // Base stat, defined by level
+			"PERMPOWERUP_",   // Some items can give you a permanent powerup. Going up skill levels can also affect this!
+			"BUFF_",          // Stat buffs (negative numbers can be used for debuffs)
+			"EQUIP_",         // Calculated whenever equipment changes
+			"END_"            // End result when all other fields have been added together
+		}
+		for sub in each(self.StatSubs)
+			if self.SubCollecto!="" then self.SubCollecto = self.SubCollecto .. ","
+			self.SubCollecto = self.SubCollecto .. sub
+		end
+		self.SubCollecto = "SUM:"..self.SubCollecto
+	end
+
 	void NewCharacter(string tag, int level)
+		assert (level>0,"Level is zero or lower!")
+		table lines
+		var ch
+		ch = RPG.CreateChar(tag)
+		self.SetLevelStats(tag,level)
+		NIL.Use("Script/Char/Create/"..tag..".nil")
+		CSayF("Created new character: %s",tag)
+	end
+	
+	void SetLevelStats(string tag, int level)
+		ch = RPG.Char(tag)
+		ch.Stat("Level").Value=level
+		lines = qff.LoadLines(sprintf("Data/LvStats/%s",tag))
+		for line in each(lines)
+			line = Trim(line)
+			if line!=""
+				table gespleten
+				string cmd
+				string para
+				int chklevel
+				gespleten = split(line)
+				cmd = gespleten[1]:upper()
+				para = gespleten[2]
+				if cmd=="REM"
+					// Alright, move along, there's nothing to see here!
+				elseif cmd=="LEVEL"
+					chklevel = tonumber(para) or 0
+				elseif Left(cmd,5)=="STAT."
+					table splitmore
+					string stat					
+					splitmore = split(cmd,".")
+					stat = splitmore[2]
+					for subs in each(self.StatSubs)
+						int v = 0
+						if subs=="BASE_" then v = tonumber(para) or 0 end
+						if subs=="END_"
+							ch.Stat(sprintf("%s%s",subs,stat)).Script = self.SubCollecto
+						else
+							ch.Stat(sprintf("%s%s",subs,stat)).Value = v
+						end
+						CSayF("%s has a base %s of %d",tag,stat,v)
+					end
+				end
+			end
+		end
+		ch.Points("HP",true).MaxCopy = "END_HP"
+		ch.Points("AP",true).MaxCopy = "END_AP"
+		ch.Points("VIT",true).Maximum = 0 + ((3 - __skill)*100)
+		// Not efficient, I know, but this routine only gets called when a new character 
+		// is created anyway, and that process only takes place about 11 times in the entire game!
+		for p in each({"HP","AP","VIT"})
+			ch.Points(p).Have = ch.Points(p).Maximum
+		end
+		for i=0,4
+			ch.Points(sprintf("SKILLEXP%d",i),true).Maximum = 1000 * (10^__skill)
+			ch.Points(sprintf("SKILLEXP%d",i)     ).Have    = 0
+			ch.Points(sprintf("SKILLLVL%d",i),true).Maximum = ({1000,250,100])[__skill]
+			ch.Points(sprintf("SKILLLVL%d",i)     ).Have    = 0
+		end
 	end
 
 end
