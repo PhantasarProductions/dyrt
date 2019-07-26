@@ -218,11 +218,19 @@ class Stage_Skill
 	table skillnames
 	table skilldesc
 	table skillpic
+	table skillnotes
 	int hover = 0
 	
 	void CONSTRUCTOR()
 		self.skillnames = { BigFont.Text("Stay away from me!!!"), BigFont.Text("Bring it on!"), BigFont.Text("There is no life in the VOID!") }
 		self.skilldesc = { {Font.Text("In this mode the game is heavily simplefied"),Font.Text("More bonusses, quicker level gaining and more stuff will help you to get on the way"), Font.Text("This mode is intended for beginners!") }, {Font.Text("In this mode you'll get the game the way it was intended")}, {Font.Text("Think you are though?"),Font.Text("Can you beat Dr. Nim without cheating?"),Font.Text("Are you ready for the ultimate madness?"),Font.Text("If it's a hard game you want, a hard game you get!"),Font.Text("This mode is for the tough guys who need a life!") } }
+		// The text here must be in REVERSED order!
+		self.skillnotes = { 
+			Font.Text("affected by this, as well. So therefore make your choice WISELY!"),
+			Font.Text("Inventory space and level up tables and much more things, are"),
+			Font.Text("This difficulty does not just affect enemy strength, you know!"),
+			Font.Text("Please note that you can NOT change this later") 
+		}
 		for i=1,3			
 			self.skillpic[i] = LoadImage("gfx/skill/"..i..".png")
 			
@@ -242,6 +250,10 @@ class Stage_Skill
 				__skyblue
 			end
 			self.skillnames[i]["Draw"](100,(i*150)+80)
+		end
+		__white
+		for i,t in ipairs(self.skillnotes)
+			t.Draw(Screen.Width/2,Screen.Height-i*30,2,0)
 		end
 	end
 	
