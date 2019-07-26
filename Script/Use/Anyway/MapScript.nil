@@ -12,8 +12,10 @@ MapMeta = {
 		error("MapScript values cannot be defined");
 	end,
 	
-	['__index'] = void(t,k)
-		switch(k:ToUpper())
+	['__index'] = delegate(t,lk)
+		string k 
+		k = lk:upper()
+		switch k
 			case "SASKIA"
 				return void(string label)
 					StartSaskia("MAP",label)
@@ -31,6 +33,7 @@ MapMeta = {
 					LuaDoString("GAMEVARS",sprintf("MScript.%s(%s)",k,parm)
 				end
 				#endpure
+				// Pure code was needed as I couldn't yet get NIL to support '...'
 		end
 	end
 }
