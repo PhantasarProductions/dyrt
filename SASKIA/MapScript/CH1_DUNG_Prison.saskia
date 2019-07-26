@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.07.22
+; version: 19.07.27
 ; End License Information
+
 
 :Prologue_Start
 	; Normally this many scenarios are not needed
@@ -48,4 +49,5 @@ end
 
 :From_World
 	end
+
 
