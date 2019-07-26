@@ -52,6 +52,14 @@ Rec: KILL_00250
 	ProcessString = {Value} of {Max}
 	ProcessValue = KILL
 
+Rec: KILL_01000
+	AutoProcess = TRUE
+	Description = Kill 1000 enemies
+	Name = Another one bites the dust
+	ProcessMax = 1000
+	ProcessString = {Value} of {Max}
+	ProcessValue = KILL
+
 Rec: SCEN_BEGIN
 	AutoProcess = FALSE
 	Description = Succesfully start a new game

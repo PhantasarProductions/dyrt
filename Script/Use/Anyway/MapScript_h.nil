@@ -1,4 +1,6 @@
 #use "libs/strings"
+
+
 global table MapScript
 
 void StartSaskia(string script,string label)
@@ -30,7 +32,7 @@ MapMeta = {
 						if (i>1) then parm = parm ..", " end
 						parm = parm .. a
 					end
-					LuaDoString("GAMEVARS",sprintf("MScript.%s(%s)",k,parm)
+					LuaDoString("GAMEVARS",sprintf("MScript.%s(%s)",k,parm))
 				end
 				#endpure
 				// Pure code was needed as I couldn't yet get NIL to support '...'
@@ -39,3 +41,5 @@ MapMeta = {
 }
 
 setmetatable ( MapScript, MapMeta )
+
+return MapScript

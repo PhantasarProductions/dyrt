@@ -9,7 +9,7 @@
 #use "Script/Use/Anyway/Dev.nil"
 #use "Script/Use/Anyway/HaveMusic.nil"
 #use "Script/Use/Anyway/LanguageSettings.nil"
-#use "Script/Use/Anyway/MapScript.nil"
+#use "Script/Use/Anyway/MapScript_h.nil"
 #use "Script/Use/Link/Field_h.nil"
 #use "Script/Use/Link/GameVars.nil"
 #use "Script/Use/Link/Music.nil"

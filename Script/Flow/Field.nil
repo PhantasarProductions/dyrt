@@ -4,8 +4,12 @@ global bool FLOW_FIELD = true
 #use "libs/saskia"
 
 
-global void LoadMap(string Map)
-end
+group FlowField
 
-global void ChainMap(string Map,string SaskiaLabel)
+	void LoadMap(string Map)
+	end
+
+	void ChainMap(string Map,string SaskiaLabel)
+	end
+	
 end

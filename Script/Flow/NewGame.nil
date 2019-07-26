@@ -307,22 +307,50 @@ class Stage_Language
 	
 	void update()
 		if Mouse.HitLeft and NG_Lang.hover
-			__Lang = NG_Lang.hover.code
-			error("Link to main game cannot yet be established!")
+			__lang = NG_Lang.hover.code
+			stage = stage + 1
 		end
 	end
 	
 end
 
-stages[#stages+1] = new Stage_Language
 
+stages[#stages+1] = new Stage_Language
 
 
 void StartGame()
 	LoadFlow("FIELD","Script/Flow/Field.nil")
 	RPG.Party.Max=8
 	RPG.Party[1]="Young Irravonia"
+	error("Gateway into the game ends here... for now")
 end
+
+
+class Stage_StartGame
+
+	int CD = 25
+	var LImage
+
+	void CONSTRUCTOR()
+		self.LImage = TImage.Obtain("LOADING")
+	end
+	
+	void draw()
+		// The countdown has to make sure the message actually appears on screen, as that is with this interface, hard to tell!
+		self.CD = self.CD - 1
+		self.LImage.Draw((Screen.Width/2)-(self.LImage.Width/2),(Screen.Height/2)-(self.LImage.Height/2))
+	end
+	
+	void update()
+		if self.CD<=0
+			StartGame()
+		end
+	end
+end
+
+stages[#stages+1] = new Stage_StartGame
+
+
 
 
 

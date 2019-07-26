@@ -1,4 +1,4 @@
-#use "libs\strings"
+#use "libs/strings"
 
 void LoadSub()
 	if not StateExists("PARTY")
@@ -15,11 +15,11 @@ end
 group Party
 
 	void NewCharacter(string tag,int startlevel)
-		PtExe("PARTY",printf("PartySub.NewCharacter(\"%s\",%d)",tag,startlevel)
+		PtExe("PARTY",printf("PartySub.NewCharacter(\"%s\",%d)",tag,startlevel))
 	end 
 	
-	void SetLevelStats(string tag, int level)
-		PtExe("PARTY",printf("PartySub.SetLevelStats(\"%s\",%d)",tag,startlevel)
+	void SetLevelStats(string tag, int startlevel)
+		PtExe("PARTY",printf("PartySub.SetLevelStats(\"%s\",%d)",tag,startlevel))
 	end
 
 end

@@ -31,6 +31,15 @@ ret = {
 		["ProcessValue"] = "KILL",
 
 	},
+	["KILL_01000"] = {
+		["AutoProcess"] = true,
+		["Description"] = "Kill 1000 enemies",
+		["Name"] = "Another one bites the dust",
+		["ProcessMax"] = 1000,
+		["ProcessString"] = "{Value} of {Max}",
+		["ProcessValue"] = "KILL",
+
+	},
 	["SCEN_BEGIN"] = {
 		["AutoProcess"] = false,
 		["Description"] = "Succesfully start a new game",

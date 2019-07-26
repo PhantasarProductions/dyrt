@@ -1,16 +1,16 @@
-#accept FLOW_FIELD
-if FLOW_FIELD
-	return
-end
+
 
 void FieldCheck()
 	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
 end
 
+group Field
 
-global void LoadMap(string Map)
-end
+	void LoadMap(string Map)
+	end
 
-global void ChainMap(string Map,string SaskiaLabel)
-end
+	void ChainMap(string Map,string SaskiaLabel)
+	end
+	
+end	
 

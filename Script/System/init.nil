@@ -41,6 +41,9 @@ global void Bubble_Init()
 	// Background
 	LoadImage("GFX/Alg/MenuBack.png","MENUBACK")
 	
+	// Message banners
+	LoadImage("GFX/Alg/Loading.png","LOADING")
+	
 	// UI
 	LoadImage("GFX/Alg/Next.png","NEXT")
 	LoadImage("GFX/Alg/Prev.png","PREV")
