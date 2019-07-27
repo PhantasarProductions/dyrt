@@ -335,7 +335,9 @@ void StartGame()
 	LoadFlow("FIELD","Script/Flow/Field.nil")
 	RPG.Party.Max=8
 	RPG.Party[1]="Young Irravonia"
-	error("Gateway into the game ends here... for now")
+	Field.LoadMap("CH1_DUNG_Prison")
+	GoToFlow("FIELD")
+	KillFlow("NEWGAME")
 end
 
 

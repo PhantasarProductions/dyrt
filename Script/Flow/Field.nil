@@ -39,11 +39,32 @@ global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
 #use "libs/saskia"
+#use "libs/strings"
 
+group FieldMap
+	
+	link Script = MapScript
+	var Kthura
+	var Saskia
+	
+end
 
 group FlowField
-
-	void LoadMap(string Map)
+	
+	link Map = FieldMap
+	
+	void LoadMap(string MapFile)
+		CSayF("Loading Map: %s",MapFile)
+		CSay ("= Kthura")
+		self.Map.Kthura = Kthura.Load(MapFile)
+		
+		CSay("= NIL Script")
+		LoadState("MAP",sprintf("Script/Maps/%s.nil",MapFile))
+		
+		CSay("= SAKSIA Script")
+		self.Map.SASKIA = saskia(sprintf("SASKIA/MapScript/%s.saskia",MapFile,"OnLoad"))
+		
+		
 	end
 
 	void ChainMap(string Map,string SaskiaLabel)

@@ -35,6 +35,9 @@
 ; version: 19.07.27
 ; End License Information
 
+:OnLoad
+	end
+
 
 :Prologue_Start
 	; Normally this many scenarios are not needed

@@ -41,7 +41,13 @@ void FieldCheck()
 	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
 end
 
+group Map
+	link Script = MapScript
+end
+
 group Field
+
+	link Map = Map
 
 	void LoadMap(string Map)
 	end
