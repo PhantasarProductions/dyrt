@@ -238,6 +238,12 @@ global void BUB_Draw()
 	Mouse.Show()
 end
 
+void ComeIntoAction()
+	if (MenuItem.Current.available) 
+		MenuItem.Current.Action()
+	end
+end
+
 global void BUB_Update()
 	switch Keyboard.Name
 		case "Down"
@@ -245,11 +251,12 @@ global void BUB_Update()
 		case "Up"
 			MenuItem.Previous()
 		case "Enter" "Space"
-			if (MenuItem.Current.available) 
-				MenuItem.Current.Action()
-			end
+			ComeIntoAction()
 		case "Escape"
 			CSay("Note! Quit feature not available yet!")
+	end
+	if Mouse.HitLeft
+		ComeIntoAction()
 	end
 end
 
