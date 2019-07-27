@@ -56,13 +56,20 @@ group FlowField
 	void LoadMap(string MapFile)
 		CSayF("Loading Map: %s",MapFile)
 		CSay ("= Kthura")
-		self.Map.Kthura = Kthura.Load(MapFile)
+		var kth
+		kth = new Kthura(MapFile)
+		if kth
+			CSay("= Success!")
+		else
+			CSay("= Fail!")
+		end
+		FieldMap.Kthura = kth
 		
 		CSay("= NIL Script")
-		LoadState("MAP",sprintf("Script/Maps/%s.nil",MapFile))
+		LoadState("MAP","Script/MapScript/"..Trim(MapFile)..".nil")
 		
 		CSay("= SAKSIA Script")
-		self.Map.SASKIA = saskia(sprintf("SASKIA/MapScript/%s.saskia",MapFile,"OnLoad"))
+		self.Map.Saskia = saskia(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile),"OnLoad"))
 		
 		
 	end
@@ -72,3 +79,14 @@ group FlowField
 	
 end
 
+
+global void BUB_Draw()
+	FlowField.Map.Kthura.Draw()
+end
+
+
+global void BUB_Update()
+	// debug
+	Dev.ConCheck()
+
+end

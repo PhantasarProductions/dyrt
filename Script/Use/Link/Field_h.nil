@@ -41,6 +41,11 @@ void FieldCheck()
 	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
 end
 
+void FLD_Exe(string do_it)
+	FieldCheck()
+	LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+end
+
 group Map
 	link Script = MapScript
 end
@@ -49,10 +54,11 @@ group Field
 
 	link Map = Map
 
-	void LoadMap(string Map)
+	void LoadMap(string MapFile)
+		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
 	end
 
-	void ChainMap(string Map,string SaskiaLabel)
+	void ChainMap(string MapFile,string SaskiaLabel)
 	end
 	
 end	
