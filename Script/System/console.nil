@@ -1,0 +1,15 @@
+#use "libs/strings"
+
+// This group is called by the console, whenever it's used to type commands
+// that are not by default in the engine itself.
+
+group ConsoleCommands
+
+	void HAMANDJAMANDSPAMALOT(infinity)
+		for i,s in ipairs( { infinity } )
+			CSayF("%6d. %s",i,s)
+		end
+		CSay("But at least this game was not coded in Python!")
+	end
+
+end

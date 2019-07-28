@@ -40,6 +40,7 @@ global bool FLOW_FIELD = true
 #use "Script/Use/Anyway"
 #use "libs/saskia"
 #use "libs/strings"
+#use "libs/tables"
 
 group FieldMap
 	
@@ -89,4 +90,15 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 
+end
+
+
+group ConsoleCommands
+	
+	void COUNTOBJECTS()
+		for k,cnt in spairs(FlowField.Map.Kthura.CountObjects())
+			CSayF("%20s:%9d",k,cnt)
+		end
+	end
+	
 end
