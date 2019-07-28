@@ -41,10 +41,10 @@
 
 :Prologue_Start
 	; Normally this many scenarios are not needed
-	call SerialBoxText,PROLOGUE_START,A
-	call SerialBoxText,PROLOGUE_START,INT
-	call SerialBoxText,PROLOGUE_START,B
-	call SerialBoxText,PROLOGUE_START,C
+	call BoxText,PROLOGUE_START,A
+	call BoxText,PROLOGUE_START,INT
+	call BoxText,PROLOGUE_START,B
+	call BoxText,PROLOGUE_START,C
 	; It's best NOT to put any other command except for "end" after a call to chainmap...
 	; Otherwise conflicts might occur!
 	call ChainMap,CH1_HUB_IRRAHOME,Irravonia_Prologue

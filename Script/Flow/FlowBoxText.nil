@@ -1,5 +1,42 @@
+#use "script/use/anyway.nil"
+#use "libs/strings"
 #use "libs/Scenario"
 
-group FlowBoxText
+void InitScenario()
 
+	CSay("Configuring Scenario library")
+
+	// Set Language
+	Scenario.lang = __lang
+	
+	// Link JCR to the scenario library
+	Scenario.JCR_Lines = table(string file)
+		string content
+		content = JCR_GetString(file)
+		return split(content,"\r")
+	end
+	
+	Scenario.JCR_Exists = JCR_EntryExists
+	
+end
+
+
+group FlowBoxText
+	
+	string Tag
+	int Num
+	string Scen
+	string ReturnFlow
+	
+	void CONSTRUCTOR()
+		InitScenario()
+	end
+	
+	void InitBTFlow(string AScen, string ATag, RF, ANum)
+		self.ReturnFlow = RF or CurrentFlow()
+		self.Num = ANum or 1
+		GoToFlow("BOXTEXT")
+	end
+
+	
 end
