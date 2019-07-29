@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.07.27
+// version: 19.07.29
 // End License Information
+
 
 #use "Script/Use/AnyWay"
 
@@ -45,4 +46,5 @@ yi.Name = Names.Irravonia
 yi.Data["SKILL0"] = "Twig twitching"
 
 CSay("Young Irravonia Configured")
+
 
