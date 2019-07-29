@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/NewGame.nil
-// Version: 19.07.27
+// Version: 19.07.29
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -405,6 +406,7 @@ end
 global void BUB_Update()
 	stages[stage]['update']()
 end
+
 
 
 
