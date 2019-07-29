@@ -49,6 +49,9 @@ global void Bubble_Init()
 	LoadImage("GFX/Alg/Next.png","NEXT")
 	LoadImage("GFX/Alg/Prev.png","PREV")
 	
+	// BoxText Font
+	LoadImageFont("Fonts/Coolvetica.20.jfbf","BOXTEXT")
+	
 	// Mouse pointer
 	CSay("Load the mouse pointer!!")
 	Mouse.Pointer ="GFX/Alg/Mouse.png"

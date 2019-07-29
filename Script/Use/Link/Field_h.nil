@@ -60,6 +60,8 @@ group Field
 	end
 
 	void ChainMap(string MapFile,string SaskiaLabel)
+		FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
+		
 	end
 	
 end	

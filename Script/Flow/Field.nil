@@ -71,25 +71,40 @@ group FlowField
 		LoadState("MAP","Script/MapScript/"..Trim(MapFile)..".nil")
 		
 		CSay("= SAKSIA Script")
-		self.Map.Saskia = saskia(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile),"OnLoad"))
+		self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
+		self.Map.Saskia.Start("OnLoad")
 		
 		
 	end
 
-	void ChainMap(string Map,string SaskiaLabel)
+	void DrawScreen()
+		FieldMap.Kthura.Draw()
+	end
+
+
+	void ChainMap(string MapFile,string SaskiaLabel)
+		self.LoadMap(MapFile)
+		self.Map.Saskia.Start(SaskiaLabel)
 	end
 	
 end
 
 
 global void BUB_Draw()
-	FlowField.Map.Kthura.Draw()
+	// This function will draw the screen minus the character bar
+	// That way it can be easily called from BoxText and maybe a few other functions
+	FlowField.DrawScreen()
+	
+	// TODO: Call to character screen
 end
 
 
 global void BUB_Update()
 	// debug
 	Dev.ConCheck()
+	
+	// SASKIA Cycle
+	SASKIA.Cycle()
 
 end
 

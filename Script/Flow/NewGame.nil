@@ -336,8 +336,8 @@ void StartGame()
 	LoadFlow("FIELD","Script/Flow/Field.nil")
 	RPG.Party.Max=8
 	RPG.Party[1]="Young Irravonia"
-	Field.LoadMap("CH1_DUNG_Prison")
 	BoxText.Load("GENSCEN/CH1/STARTGAME","STARTGAME")
+	Field.ChainMap("CH1_DUNG_Prison","")
 	GoToFlow("FIELD")
 	KillFlow("NEWGAME")
 end

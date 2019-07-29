@@ -39,7 +39,7 @@
 
 void LoadBoxText()
 	if not StateExists("FLOW_BOXTEXT")
-		LoadFlow("FIELD","Script/Flow/FlowBoxtext.nil")
+		LoadFlow("BOXTEXT","Script/Flow/FlowBoxtext.nil")
 	end
 end
 
@@ -59,7 +59,8 @@ group TrueBoxTextGroup
 		if not StateExists("FLOW_BOXTEXT")
 			error("Bold thing to call the BoxText while the flow's not even been loaded, let alone any scenario file!")
 		end
-		LuaDoString("FLOW_TEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 0),"Chain to flow: BOXTEXT")
+		LuaDoString("FLOW_BOXTEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 0),"Chain to flow: BOXTEXT")
+		GoToFlow("BOXTEXT")
 	end
 
 end
