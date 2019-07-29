@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.07.27
+// version: 19.07.29
 // End License Information
+
 
 #use "Script/Use/AnyWay"
 var Irra
@@ -51,5 +52,6 @@ for i=0,4
 	Irra.Points(sprintf("SKILLEXP%d",i)).Have    = 1
 	Irra.Points(sprintf("SKILLLVL%d",i)).Have    = 1
 end
+
 
 
