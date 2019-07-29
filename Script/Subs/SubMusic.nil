@@ -30,6 +30,7 @@ var stacked
 class TMusic
 	readonly string filename
 	readonly var resource
+	var instance
 	
 	void CONSTRUCTOR(string file)
 		file = trim(file)
@@ -48,7 +49,7 @@ void init()
 	stacked = stack.NEW()
 end
 
-global void MUS_Play(string file)
+global void MUS_Play(string file,dontloop)
 	var newmus
 	if curplaying and curplaying.filename==file then return end
 	newmus = TMusic.NEW(file)
@@ -56,12 +57,16 @@ global void MUS_Play(string file)
 		curplaying.resource.Stop()	
 	end
 	curplaying = newmus
-	curplaying.resource.Play()
+	if dontloop
+		curplaying.instance = curplaying.resource.Play()
+	else
+		curplaying.instance = curplaying.resource.Loop()
+	end
 end
 
 global void MUS_Stop()
 	if curplaying
-		curplaying.Stop()
+		curplaying.instance.Stop()
 	end
 end
 
