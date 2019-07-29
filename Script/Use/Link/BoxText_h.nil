@@ -11,9 +11,7 @@ void BTExe(string command)
 	LuaDoString("FLOW_BOXTEXT",command,"Call flow: BOXTEXT")
 end	
 
-
-
-private group TrueBoxTextGroup
+group TrueBoxTextGroup
 
 	void Load(string Scenario,string File)
 		CWriteLine(sprintf("Loading scenario %s from file %s",Scenario,File),180,0,255)
@@ -29,13 +27,18 @@ private group TrueBoxTextGroup
 
 end
 
-
 // I am thinking of a way to make direct support for this in classes and groups
 // But for now, this will do ;)
 global table BoxText
 setmetatable(BoxText,{
-	[__call] = function(t) return TrueBoxTextGroup.CallMe end
-	[__index] = function(t,k) return TrueBoxTextGroup[k] end
-	[__newindex] = function(t,k,v) TrueBoxTextGroup[k]=v end
+	['__call'] = delegate(t) 
+			return TrueBoxTextGroup.CallMe 
+		end,
+	['__index'] = var(t,string k)
+			return TrueBoxTextGroup[k] 
+		end,
+	['__newindex'] = void(t,k,v) 
+			TrueBoxTextGroup[k]=v 
+		end
 })
 
