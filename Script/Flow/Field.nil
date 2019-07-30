@@ -43,6 +43,11 @@ global bool FLOW_FIELD = true
 #use "libs/strings"
 #use "libs/tables"
 
+SASKIA.LoadFunction = string(string File2Load)
+	return JCR_GetString(File2Load)
+end
+	
+
 group FieldMap
 	
 	link Script = MapScript
