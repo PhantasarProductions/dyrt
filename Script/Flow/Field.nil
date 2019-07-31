@@ -40,6 +40,7 @@
 global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
+//#use "Script/Use/Link/Music"
 #use "libs/saskia"
 #use "libs/strings"
 #use "libs/tables"
@@ -80,6 +81,22 @@ group FlowField
 		self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
 		self.Map.Saskia.Start("OnLoad")
 		
+		string pref
+		string rest
+		if Mid(kth.Data.Music,4,1)==":"
+			pref = string.upper(Left(kth.Data.Music,3))
+			rest = Right(kth.Data.Music,#kth.Data.Music-4)
+			switch pref
+				case "SAS"
+					self.Map.Saskia.Start(rest)
+				case "NIL"
+					MapScript(rest)
+				default
+					error("Unknown alternate music direction: "..pref)
+			end
+		else
+			Music.Play(kth.Data.Music)
+		end
 	end
 
 	void DrawScreen()

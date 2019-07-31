@@ -55,7 +55,7 @@ global void MUS_Play(string file,dontloop)
 	if curplaying and curplaying.filename==file then return end
 	newmus = TMusic.NEW(file)
 	if curplaying
-		curplaying.resource.Stop()	
+		curplaying.instance.Stop()	
 	end
 	curplaying = newmus
 	if dontloop
