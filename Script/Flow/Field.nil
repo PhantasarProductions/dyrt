@@ -80,7 +80,6 @@ group FlowField
 		self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
 		self.Map.Saskia.Start("OnLoad")
 		
-		
 	end
 
 	void DrawScreen()
@@ -123,6 +122,12 @@ group ConsoleCommands
 	void COUNTOBJECTS()
 		for k,cnt in spairs(FlowField.Map.Kthura.CountObjects())
 			CSayF("%20s:%9d",k,cnt)
+		end
+	end
+	
+	void MAPDATA()
+		for k,v in spairs(FlowField.Map.Kthura.Data())
+			CSayF("%25s = %s",k,v)
 		end
 	end
 	

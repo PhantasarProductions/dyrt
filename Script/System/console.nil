@@ -36,6 +36,7 @@ group ConsoleCommands
 	void FLOW()
 		CWriteLine("Current flow is: "..CurrentFlow(),255,255,100)
 	end
+	
 
 end
 
