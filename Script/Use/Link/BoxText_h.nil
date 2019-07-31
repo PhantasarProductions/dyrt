@@ -59,6 +59,7 @@ group TrueBoxTextGroup
 		if not StateExists("FLOW_BOXTEXT")
 			error("Bold thing to call the BoxText while the flow's not even been loaded, let alone any scenario file!")
 		end
+		CSayF("Boxtext request! Scen=%s; Tag=%s",Scenario,Tag)
 		LuaDoString("FLOW_BOXTEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 0),"Chain to flow: BOXTEXT")
 		GoToFlow("BOXTEXT")
 	end
@@ -69,8 +70,8 @@ end
 // But for now, this will do ;)
 global table BoxText
 setmetatable(BoxText,{
-	['__call'] = delegate(t) 
-			return TrueBoxTextGroup.CallMe 
+	['__call'] = delegate(t,infinity) 
+			return TrueBoxTextGroup.CallMe(infinity) 
 		end,
 	['__index'] = var(t,string k)
 			return TrueBoxTextGroup[k] 

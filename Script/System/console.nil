@@ -31,6 +31,10 @@ group ConsoleCommands
 		end
 		CSay("But at least this game was not coded in Python!")
 	end
+	
+	void FLOW()
+		CWriteLine("Current flow is: "..CurrentFlow(),255,255,100)
+	end
 
 end
 

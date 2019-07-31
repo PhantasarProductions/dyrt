@@ -74,7 +74,15 @@ group FlowBoxText
 		self.Num = ANum or 1
 		GoToFlow("BOXTEXT")
 	end
-
 	
+end
+
+
+global void BUB_Draw()
+end
+
+global void BUB_Update()
+	// debug
+	Dev.ConCheck()
 end
 

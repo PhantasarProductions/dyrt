@@ -82,6 +82,8 @@ MidScreen.Update()
 
 
 
+NIL.Error = void(errmessage)
+	BubbleCrash(errmessage)
+end
 
-
-
+//--SASKIA_CHAT = CSayF

@@ -88,6 +88,9 @@ group FlowField
 
 
 	void ChainMap(string MapFile,string SaskiaLabel)
+		MapFile = trim(MapFile)
+		SaskiaLabel = trim(SaskiaLabel)
+		CSayF("Loading Map: %s; Starting SASKIA script from label: %s!",MapFile,SaskiaLabel)
 		self.LoadMap(MapFile)
 		self.Map.Saskia.Start(SaskiaLabel)
 	end
