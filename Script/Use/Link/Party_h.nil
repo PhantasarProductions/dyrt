@@ -1,6 +1,6 @@
 // License Information:
-// src/Tricky Script/Script/Use/Link/Party.nil
-// Version: 19.07.29
+// src/Tricky Script/Script/Use/Link/Party_h.nil
+// Version: 19.08.01
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 #use "libs/strings"
 
 void LoadSub()
@@ -65,6 +66,7 @@ group Party
 	end
 
 end
+
 
 
 
