@@ -120,7 +120,8 @@ global void BUB_Draw()
 	// That way it can be easily called from BoxText and maybe a few other functions
 	FlowField.DrawScreen()
 	
-	// TODO: Call to character screen
+	// Character screen
+	Party.ShowBar()
 end
 
 

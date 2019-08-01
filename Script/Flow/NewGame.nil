@@ -336,7 +336,8 @@ stages[#stages+1] = new Stage_Language
 void StartGame()
 	LoadFlow("FIELD","Script/Flow/Field.nil")
 	RPG.Party.Max=8
-	RPG.Party[1]="Young Irravonia"
+	RPG.Party[1]="YoungIrravonia"
+	
 	BoxText.Load("GENSCEN/CH1/STARTGAME","STARTGAME")
 	//Field.ChainMap("CH1_DUNG_Prison","Prologue_Start")
 	Field.LoadMap("CH1_DUNG_Prison","Prologue_Start") // Debug ONLY!

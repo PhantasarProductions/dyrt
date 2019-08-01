@@ -1,0 +1,67 @@
+#say "Loading: Boxes.nil"
+#use "libs/LinkedList"
+
+class Box
+	
+	static var Back
+	static var List
+	
+	int x
+	int y
+	int w
+	int h
+	int ix
+	int iy
+	bool Kill
+	
+	void Draw()
+		int wd = 5
+		self.Back.ITile(self.x,self.y,self.w,self.h,self.ix,self.iy)
+		if self.w<20 or self.h<20
+			wd=3
+		end
+		for i=0,wd-1
+			GraphColor.Alpha=120
+			__white
+			Rect(self.x+wd,self.y+i,self.w-(i+1+wd),1) // Top
+			Rect(self.x+i,self.y,1,self.h-(i+1)) // Left
+			Color(111,112,116)
+			Rect(self.x+i+1,(self.y+self.h)-i,self.w-(i+1),1) // Bottom
+			Rect((self.x+self.w)-i,self.y+i,1,self.h-(i+1+wd)) // Right
+			GraphColor.Alpha=255
+		end
+	end
+	
+	static void DrawAll()
+		for ibox,lnk in Box.List.Each
+			ibox.Draw()
+			if ibox.kill 
+				lnk.UnLink()
+			end
+		end
+	end
+	
+	
+	void CONSTRUCTOR(int ax,int ay,int aw, int ah, aix, aiy)
+		// Create what we don't have on the first time
+		self.Back = self.Back or TImage.Obtain("MENUBACK")
+		self.List = self.List or new TLinkedList
+		
+		// Create the box itself
+		self.x=ax
+		self.y=ay
+		self.w=aw
+		self.h=ah
+		
+		// If not set, use modulos to get the correct position
+		self.ix = aix or -(ax % self.Back.Width)
+		self.iy = aiy or -(ay % self.Back.Height)
+		
+		// Add to the list
+		self.List.AddLast(self)
+		
+		// Debug notice
+		CWriteLine(sprintf("Created new box at (%d,%d); format %dx%d; Insert(%d,%d)",ax,ay,aw,ah,self.ix,self.iy),180,255,0)
+	end
+
+end

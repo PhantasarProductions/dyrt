@@ -37,6 +37,10 @@ group ConsoleCommands
 		CWriteLine("Current flow is: "..CurrentFlow(),255,255,100)
 	end
 	
+	void SCREENSIZE()
+		CWriteLine(sprintf("Screen size: %4dx%4d",Screen.Width,Screen.Height),math.random(0,255),math.random(0,255),math.random(0,255))
+	end
+	
 
 end
 

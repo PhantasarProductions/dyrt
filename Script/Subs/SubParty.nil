@@ -35,20 +35,26 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-#use "libs/qff"
+#say "Loading Party Sub!"
+#say "= Importing: libs/tables"
 #use "libs/tables"
+#say "= Importing: libs/strings"
 #use "libs/strings"
+#say "= Importing in-game stuff"
 #use "Script/Use/Anyway"
+#use "Script/Use/Boxes"
 
 
+#say "= Starting group!"
 group SubParty
 
 	table StatSubs
 	string SubCollecto
+	table BarBoxes
 	
+	#say "= Constructor"
 	void CONSTRUCTOR()
-		StatSubs = {
+		self.StatSubs = {
 			"BASE_",          // Base stat, defined by level
 			"PERMPOWERUP_",   // Some items can give you a permanent powerup. Going up skill levels can also affect this!
 			"BUFF_",          // Stat buffs (negative numbers can be used for debuffs)
@@ -56,12 +62,13 @@ group SubParty
 			"END_"            // End result when all other fields have been added together
 		}
 		for sub in each(self.StatSubs)
-			if self.SubCollecto!="" then self.SubCollecto = self.SubCollecto .. ","
+			if self.SubCollecto!="" then self.SubCollecto = self.SubCollecto .. "," end
 			self.SubCollecto = self.SubCollecto .. sub
 		end
 		self.SubCollecto = "SUM:"..self.SubCollecto
 	end
 
+	#say "= New Character"
 	void NewCharacter(string tag, int level)
 		assert (level>0,"Level is zero or lower!")
 		table lines
@@ -72,10 +79,13 @@ group SubParty
 		CSayF("Created new character: %s",tag)
 	end
 	
+	#say "= Set level stats"
 	void SetLevelStats(string tag, int level)
+		var ch
+		table lines
 		ch = RPG.Char(tag)
-		ch.Stat("Level").Value=level
-		lines = qff.LoadLines(sprintf("Data/LvStats/%s",tag))
+		ch.Stat("Level")['Value']=level
+		lines = JCR_GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
 		for line in each(lines)
 			line = Trim(line)
 			if line!=""
@@ -84,7 +94,7 @@ group SubParty
 				string para
 				int chklevel
 				gespleten = split(line)
-				cmd = gespleten[1]:upper()
+				cmd =  string.upper(gespleten[1])
 				para = gespleten[2]
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
@@ -99,31 +109,57 @@ group SubParty
 						int v = 0
 						if subs=="BASE_" then v = tonumber(para) or 0 end
 						if subs=="END_"
-							ch.Stat(sprintf("%s%s",subs,stat)).Script = self.SubCollecto
+							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto
 						else
-							ch.Stat(sprintf("%s%s",subs,stat)).Value = v
+							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
 						end
 						CSayF("%s has a base %s of %d",tag,stat,v)
 					end
 				end
 			end
 		end
-		ch.Points("HP",true).MaxCopy = "END_HP"
-		ch.Points("AP",true).MaxCopy = "END_AP"
-		ch.Points("VIT",true).Maximum = 0 + ((3 - __skill)*100)
+		ch.Points("HP",true)['MaxCopy'] = "END_HP"
+		ch.Points("AP",true)['MaxCopy'] = "END_AP"
+		ch.Points("VIT",true)['Maximum'] = 0 + ((3 - __skill)*100)
 		// Not efficient, I know, but this routine only gets called when a new character 
 		// is created anyway, and that process only takes place about 11 times in the entire game!
 		for p in each({"HP","AP","VIT"})
-			ch.Points(p).Have = ch.Points(p).Maximum
+			ch.Points(p)['Have'] = ch.Points(p)['Maximum']
 		end
 		for i=0,4
 			ch.Points(sprintf("SKILLEXP%d",i),true).Maximum = 1000 * (10^__skill)
 			ch.Points(sprintf("SKILLEXP%d",i)     ).Have    = 0
-			ch.Points(sprintf("SKILLLVL%d",i),true).Maximum = ({1000,250,100])[__skill]
+			ch.Points(sprintf("SKILLLVL%d",i),true).Maximum = ({1000,250,100})[__skill]
 			ch.Points(sprintf("SKILLLVL%d",i)     ).Have    = 0
+		end
+	end
+	
+	#say "= Back Char"
+	void BackChar(int num)
+		assert(num>4 and num<=8,"Illegal BackChar number")
+		self.BarBoxes[num] = self.BarBoxes[num] or new Box( Screen.Width-32, (Screen.Height-128)+((num-5)*32),32,32 )
+		self.BarBoxes[num]["Draw"]()
+	end
+	
+	#say "= Char box"
+	void Char(int num)
+		self.BarBoxes[num] = self.BarBoxes[num] or new Box( (num-1)*math.floor((Screen.Width-32)/4),Screen.Height-128,math.floor((Screen.Width-32)/4),128 )
+		self.BarBoxes[num]["Draw"]()
+	end
+	
+	#say "= Entire bar"
+	void CharBar()
+		for i=1,8
+			switch i
+				case 1 2 3 4
+					self.Char(i)
+				case 5 6 7 8
+					self.BackChar(i)
+			end
 		end
 	end
 
 end
 
 
+#say "Compiling Party Sub!"
