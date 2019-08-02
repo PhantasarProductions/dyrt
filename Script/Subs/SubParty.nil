@@ -68,7 +68,7 @@ group SubParty
 	string SubCollecto(string stat)
 		string ret
 		for sub in each(self.StatSubs)
-			if self.SubCollecto!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
+			if ret!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
 			ret = ret .. sub .. stat
 		end
 		ret = "SUM:"..ret 
@@ -105,28 +105,29 @@ group SubParty
 				string cmd
 				string para
 				gespleten = split(line," ")
-				cmd =  trim(string.upper(gespleten[1]))
+				cmd =  trim(gespleten[1])
 				para = gespleten[2]
 				CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
-				elseif cmd=="LEVEL"
+				elseif cmd:upper()=="LEVEL"
 					chklevel = tonumber(para) or 0
-				elseif Left(cmd,5)=="STAT." and chklevel==level
+				elseif Left(cmd,5):upper()=="STAT." and chklevel==level
 					levelfound=true
 					table splitmore
-					string stat					
+					string stat
 					splitmore = split(cmd,".")
 					stat = splitmore[2]
 					for subs in each(self.StatSubs)
 						int v = 0
 						if subs=="BASE_" then v = tonumber(para) or 0 end
 						if subs=="END_"
+							CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
 							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto(stat)
 						else
 							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
 						end
-						CSayF("%s has a base %s of %d",tag,stat,ch.Stat(sprintf("%s%s",subs,stat))['Value'])
+						CSayF("%s has stat %s%s of %d",tag,subs,stat,ch.Stat(sprintf("%s%s",subs,stat)).Value)
 					end
 				end
 			end
