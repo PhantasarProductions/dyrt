@@ -1,0 +1,14 @@
+#use "libs/strings"
+
+table pics
+
+global void BoxPic(int x, int y,string Char,Spec)	
+	string file
+	string tag
+	file = sprintf("GFX/BoxPic/%s/%s.png",Char,Spec or "General")
+	tag = sprintf("%s.%s",Char,Spec or "GENERAL"):upper()
+	pics[tag] = pics[tag] or LoadImage(file,tag)
+	pics[tag].Draw(x,y-pics[tag].Height)
+end
+
+return BoxPic

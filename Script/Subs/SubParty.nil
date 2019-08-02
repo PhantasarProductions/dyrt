@@ -44,13 +44,14 @@
 #say "= Importing in-game stuff"
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
+#use "Script/Use/BoxPics"
+
 
 
 #say "= Starting group!"
 group SubParty
 
 	table StatSubs
-	string SubCollecto
 	table BarBoxes
 	
 	#say "= Constructor"
@@ -62,15 +63,21 @@ group SubParty
 			"EQUIP_",         // Calculated whenever equipment changes
 			"END_"            // End result when all other fields have been added together
 		}
+	end
+	
+	string SubCollecto(string stat)
+		string ret
 		for sub in each(self.StatSubs)
-			if self.SubCollecto!="" then self.SubCollecto = self.SubCollecto .. "," end
-			self.SubCollecto = self.SubCollecto .. sub
+			if self.SubCollecto!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
+			ret = ret .. sub .. stat
 		end
-		self.SubCollecto = "SUM:"..self.SubCollecto
+		ret = "SUM:"..ret 
+		return ret
 	end
 
 	#say "= New Character"
 	void NewCharacter(string tag, int level)
+		tag=trim(tag)
 		assert (level>0,"Level is zero or lower!")
 		table lines
 		var ch
@@ -84,24 +91,29 @@ group SubParty
 	void SetLevelStats(string tag, int level)
 		var ch
 		table lines
+		bool levelfound = false
+		int chklevel
+		tag = trim(tag)
 		ch = RPG.Char(tag)
-		ch.Stat("Level")['Value']=level
+		ch.Stat("Level").Value=level
 		lines = JCR_GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
-		for line in each(lines)
+		CSayF("Parsing %s lines of LvStat data",#lines)
+		for ln,line in ipairs(lines)
 			line = Trim(line)
 			if line!=""
 				table gespleten
 				string cmd
 				string para
-				int chklevel
-				gespleten = split(line)
-				cmd =  string.upper(gespleten[1])
+				gespleten = split(line," ")
+				cmd =  trim(string.upper(gespleten[1]))
 				para = gespleten[2]
+				CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
 				elseif cmd=="LEVEL"
 					chklevel = tonumber(para) or 0
-				elseif Left(cmd,5)=="STAT."
+				elseif Left(cmd,5)=="STAT." and chklevel==level
+					levelfound=true
 					table splitmore
 					string stat					
 					splitmore = split(cmd,".")
@@ -110,15 +122,16 @@ group SubParty
 						int v = 0
 						if subs=="BASE_" then v = tonumber(para) or 0 end
 						if subs=="END_"
-							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto
+							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto(stat)
 						else
 							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
 						end
-						CSayF("%s has a base %s of %d",tag,stat,v)
+						CSayF("%s has a base %s of %d",tag,stat,ch.Stat(sprintf("%s%s",subs,stat))['Value'])
 					end
 				end
 			end
 		end
+		assert(levelfound,("No level data has been found for %s level %d"):format(tag,level))
 		ch.Points("HP",true)['MaxCopy'] = "END_HP"
 		ch.Points("AP",true)['MaxCopy'] = "END_AP"
 		ch.Points("VIT",true)['Maximum'] = 0 + ((3 - __skill)*100)
@@ -144,8 +157,14 @@ group SubParty
 	
 	#say "= Char box"
 	void Char(int num)
+		// Box
 		self.BarBoxes[num] = self.BarBoxes[num] or new Box( (num-1)*math.floor((Screen.Width-32)/4),Screen.Height-128,math.floor((Screen.Width-32)/4),128 )
 		self.BarBoxes[num]["Draw"]()
+		__white
+		if RPG.Party[num] and RPG.Party[num]!=""
+			// Portrait
+			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
+		end
 	end
 	
 	#say "= Entire bar"
