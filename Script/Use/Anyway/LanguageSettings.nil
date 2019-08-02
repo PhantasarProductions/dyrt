@@ -69,8 +69,8 @@ table MetaNames
 MetaNames.__index = string(t,k) 
 	table chktable
 	string ret
-	chktable = LangToNames[__lang]
-	ret = chktable[k] or EnglishNames[k]
+	chktable = LangToNames[__lang] or EnglishNames
+	ret = chktable[k] 
 	assert(ret,sprintf("No name tied for character %s in language %s or the English language table!",k,__lang))
 	return ret
 end

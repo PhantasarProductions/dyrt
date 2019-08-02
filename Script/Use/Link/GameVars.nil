@@ -104,7 +104,6 @@ end
 
 setmetatable(gv,gvmeta)
 
-
 // Boolean Metatable
 gvmetanum.__newindex = void(t,string k, int v)	
 	LuaDoString("GAMEVARS",sprintf("varSet(\"Num\",\"%s\",%s)",SafeString(k:upper()), v))
@@ -113,7 +112,7 @@ end
 gvmetanum.__index = int(t, string k)
 	var r
 	int r2 = 0
-	LuaDoString("GAMEVARS",sprintf("varGet(\"Num\",\"%s\",%s)",SafeString(k:upper())))
+	LuaDoString("GAMEVARS",sprintf("varGet(\"Num\",\"%s\")",SafeString(k:upper())))
 	r = popCOMM()
 	switch type(r)
 		case "number"
@@ -137,7 +136,7 @@ end
 
 gvmetabool.__index = boolean(t, string k)
 	var r
-	LuaDoString("GAMEVARS",sprintf("varGet(\"Bool\",\"%s\",%s)",SafeString(k:upper())))
+	LuaDoString("GAMEVARS",sprintf("varGet(\"Bool\",\"%s\")",SafeString(k:upper())))
 	r = popCOMM()
 	return r==true or r=='true'
 end
@@ -156,7 +155,7 @@ gvmetastring.__newindex = void(t,string k, string v)
 end
 
 gvmetastring.__index =string(t, string k)
-	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\",%s)",SafeString(k:upper())))
+	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\")",SafeString(k:upper())))
 	return popCOMM() or ""
 end
 

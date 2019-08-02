@@ -59,7 +59,7 @@ global void varGet(string vType,string vName)
 	var v
 	v = varType[vType][vName]
 	if v==nil then v=varDef[vType] end
-	SuperGlobal.varCommunicate = v 
+	SuperGlobal.VarCommunicate = tostring(v)
 end
 
 global void varSet(string vType,string vName, vValue)

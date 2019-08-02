@@ -84,8 +84,8 @@ group SubParty
 		table lines
 		var ch
 		ch = RPG.CreateChar(tag)
-		self.SetLevelStats(tag,level)
 		NIL.Use("Script/Char/Create/"..tag..".nil")
+		self.SetLevelStats(tag,level)
 		CSayF("Created new character: %s",tag)
 	end
 	
@@ -109,7 +109,7 @@ group SubParty
 				gespleten = split(line," ")
 				cmd =  trim(gespleten[1])
 				para = gespleten[2]
-				CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
+				// CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
 				elseif cmd:upper()=="LEVEL"
@@ -135,15 +135,19 @@ group SubParty
 			end
 		end
 		assert(levelfound,("No level data has been found for %s level %d"):format(tag,level))
-		ch.Points("HP",true)['MaxCopy'] = "END_HP"
-		ch.Points("AP",true)['Maximum'] = level * ({20,10,5})[__skill]
-		ch.Points("VIT",true)['Maximum'] = 0 + ((3 - __skill)*100)
+		CSay("Configuring HP, AP and Vitality")
+		CSay("Skill: "..tostring(__skill))
+		ch.Points("HP",true)['MaxCopy'] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
+		ch.Points("AP",true)['Maximum'] = level * ({20,10,5})[__skill]; CSayF("Max  AP: %4d",ch.Points("AP").Maximum)
+		ch.Points("VIT",true)['Maximum'] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
 		// Not efficient, I know, but this routine only gets called when a new character 
 		// is created anyway, and that process only takes place about 11 times in the entire game!
-		for p in each({"HP","AP","VIT"})
+		for p in each({"HP","VIT"})
+			CSayF("Maxing Points %s",p)
 			ch.Points(p)['Have'] = ch.Points(p)['Maximum']
 		end
 		for i=0,4
+			CSayF("Configuring Skill #%d",i)
 			ch.Points(sprintf("SKILLEXP%d",i),true).Maximum = 1000 * (10^__skill)
 			ch.Points(sprintf("SKILLEXP%d",i)     ).Have    = 0
 			ch.Points(sprintf("SKILLLVL%d",i),true).Maximum = ({1000,250,100})[__skill]
