@@ -68,8 +68,10 @@ group SubParty
 	string SubCollecto(string stat)
 		string ret
 		for sub in each(self.StatSubs)
-			if ret!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
-			ret = ret .. sub .. stat
+			if sub!="END_" then 
+				if ret!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
+				ret = ret .. sub .. stat 
+			end
 		end
 		ret = "SUM:"..ret 
 		return ret
@@ -134,7 +136,7 @@ group SubParty
 		end
 		assert(levelfound,("No level data has been found for %s level %d"):format(tag,level))
 		ch.Points("HP",true)['MaxCopy'] = "END_HP"
-		ch.Points("AP",true)['MaxCopy'] = "END_AP"
+		ch.Points("AP",true)['Maximum'] = level * ({20,10,5})[__skill]
 		ch.Points("VIT",true)['Maximum'] = 0 + ((3 - __skill)*100)
 		// Not efficient, I know, but this routine only gets called when a new character 
 		// is created anyway, and that process only takes place about 11 times in the entire game!
