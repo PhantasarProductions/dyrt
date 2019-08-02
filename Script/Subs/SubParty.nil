@@ -41,10 +41,69 @@
 #use "libs/tables"
 #say "= Importing: libs/strings"
 #use "libs/strings"
+#say "= Importing: libs/DarkText"
+#use "libs/DarkText"
 #say "= Importing in-game stuff"
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
+
+
+
+class PartyBar
+	static var Font
+	readonly string Tag
+	readonly var TagIcon
+	
+	string Char
+	readonly int R
+	readonly int G
+	readonly int B
+	
+	void CONSTRUCTOR(string ATag,int AR,int AG,int AB)
+		self.Font     = self.Font or LoadImageFont("Fonts/Party.jfbf")
+		self.Tag     = ATag
+		self.R       = AR
+		self.G       = AG
+		self.B       = AB
+		self.TagIcon = LoadImage(sprintf("gfx/PartyBar/%s.png",ATag))
+	end
+	
+end
+
+group HPBar
+	link Font = PartyBar.Font
+	readonly string Tag = "HP"
+	readonly var TagIcon
+	string Char
+	
+	get int G
+		var HP
+		int C
+		HP = RPG.Char(self.Char).Points("HP")
+		C = math.floor( (HP.Have/HP.Maximum)*255 )
+		return C
+	end
+	
+	get int R
+		return 255-self.G
+	end
+	
+	get int B
+		return 0
+	end
+	
+	void CONSTRUCTOR()
+		self.TagIcon = LoadImage("gfx/PartyBar/HP.png")
+	end
+end
+
+table Bars
+Bars[1] = HPBar
+Bars[2] = new PartyBar("AP",0,180,255)
+Bars[3] = new PartyBar("VIT",255,180,0)
+
+
 
 
 
@@ -154,6 +213,32 @@ group SubParty
 			ch.Points(sprintf("SKILLLVL%d",i)     ).Have    = 0
 		end
 	end
+
+	void PointsBar(string Ch,int spot, int num)
+		int x
+		int y
+		var bar
+		var pnt		
+		int w
+		bar = Bars[num]
+		x = self.BarBoxes[spot].x + 128
+		y = self.BarBoxes[spot].y + (num * 32)
+		w = self.BarBoxes[spot].w - (128 + 16)
+		pnt = RPG.Char(Ch).Points(bar.Tag)
+		if pnt.Maximum==0 then return end
+		bar.Char = Ch
+		// bar back
+		Color(100,100,100)
+		Rect(x,y,w,5)
+		// bar color + bar
+		Color(bar.R,bar.G,bar.B)
+		Rect(x,y,math.floor( (pnt.Have/pnt.Maximum) * w ), 5 )
+		// Icon
+		bar.TagIcon.Draw(x-30,y-20)
+		// Points
+		DarkText.Font(PartyBar.Font,tostring(pnt.Have),x+w,y-20,1,0)
+	end
+
 	
 	#say "= Back Char"
 	void BackChar(int num)
@@ -171,10 +256,13 @@ group SubParty
 		if RPG.Party[num] and RPG.Party[num]!=""
 			// Portrait
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
+			for i=1,#Bars 
+				self.PointsBar(RPG.Party[num],num,i)
+			end
 		end
 	end
 	
-	#say "= Entire bar"
+	#say "= Entire bar"	
 	void CharBar()
 		for i=1,8
 			switch i
@@ -189,5 +277,6 @@ group SubParty
 end
 
 
+CSay(tostring(SubParty))
 #say "Compiling Party Sub!"
 

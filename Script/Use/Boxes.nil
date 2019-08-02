@@ -52,6 +52,7 @@ class Box
 	bool Kill
 	
 	void Draw()
+		__white
 		int wd = 5
 		self.Back.ITile(self.x,self.y,self.w,self.h,self.ix,self.iy)
 		if self.w<20 or self.h<20
