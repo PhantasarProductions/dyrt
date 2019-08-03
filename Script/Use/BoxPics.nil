@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/BoxPics.nil
 // Version: 19.08.03
-// Copyright (C)  BoxPix
+// Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 #use "libs/strings"
 
 table pics
@@ -49,4 +50,5 @@ global void BoxPic(int x, int y,string Char,Spec)
 end
 
 return BoxPic
+
 
