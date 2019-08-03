@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FlowBoxText.nil
-// Version: 19.07.31
+// Version: 19.08.03
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 #use "script/use/anyway"
@@ -235,5 +236,6 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 end
+
 
 

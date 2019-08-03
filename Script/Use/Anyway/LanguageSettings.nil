@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.07.19
+// version: 19.08.03
 // End License Information
+
 
 
 #say "Language"
@@ -96,6 +97,7 @@ MetaNames.__call = void(t,lang)
 end
 
 setmetatable(Names,MetaNames)
+
 
 
 
