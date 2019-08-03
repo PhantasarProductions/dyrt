@@ -115,6 +115,10 @@ group FlowField
 	
 end
 
+global void BoxText_Back()
+	FlowField.DrawScreen()
+end
+
 
 global void BUB_Draw()
 	// This function will draw the screen minus the character bar

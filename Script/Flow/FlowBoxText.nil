@@ -36,10 +36,16 @@
 // End License Information
 
 
-#use "script/use/anyway.nil"
+#use "script/use/anyway"
+#use "script/use/boxes"
 #use "libs/strings"
 #use "libs/Scenario"
 
+#macro __BoxTextTotalWidthMargin 100
+#macro __BoxTextFontSize 25
+
+
+table LoadedPortret
 void InitScenario()
 
 	CSay("Configuring Scenario library")
@@ -51,11 +57,150 @@ void InitScenario()
 	Scenario.JCR_Lines = table(string file)
 		string content
 		content = JCR_GetString(file)
-		return split(content,"\r")
+		return split(content,"\n")
 	end
 	
+	Scenario.print = CSay
 	Scenario.JCR_Exists = JCR_EntryExists
 	
+	//bool ImageLoaded(string tag)
+	//	return LoadedPortret[tag]!=nil;
+	//end
+	//Image.Loaded = ImageLoaded
+	//Image.Exists = JCR_Exists
+	
+end
+
+class TextBox
+	// real class
+	string Header
+	string PicDir
+	string PicSpc
+	string PicRef	
+	table Lines
+	int SL
+	int SP
+	string AltTxtFont
+	string Voice
+	int width
+	var txtbox
+	
+	void CONSTRUCTOR(table initcrap)
+		CSay("Creating textbox!")
+		for k,v in pairs(initcrap)
+			CSayF("%s %s = %s",type(v),k,tostring(v))
+			self[k] = v
+		end
+		CSay("Done!")
+	end
+	
+	void DESTRUCTOR()
+		if not self.txtbox
+			return
+		end
+		for ibox,ilnk in Box.List.Each
+			if ibox==self.txtbox 
+				ilnk.UnLink()
+			end
+		end
+	end
+	
+	void Show()
+		self.txtbox.Draw()
+	end
+	
+	// link up static shit
+	static table btdata
+	//link btdata = Scenario.btdata
+	static var Current
+	link Portraits = LoadedPortret
+	
+	static void Generate(string file, string tag,int idx,string boxback)
+		//var this
+		var f
+		var t
+		var rec
+		table sb_data
+		int width
+		var CurrentFont
+		TextBox.btdata = Scenario.btdata
+		//this = new TextBox
+		//TextBox.Current = this
+		//--	function RunBoxText(file,tag,idx,boxback)
+		//-- if not ReInit then 
+		//--	Graphics_Init()  
+		//--	ReInit = true
+		//--	This prevents the Text Box to be drawn based on wrong settings.
+		//-- end  
+
+		f = TextBox.btdata[file]
+		if not f then 
+			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
+			error("Boxtext file '"..file.."' has not yet been loaded!") 
+		end
+		t = f[tag]
+		if not t then 
+			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
+			error("Boxtext file '"..file.."' has no tag called '"..tag.."'") 
+		end
+		rec = t[idx]
+		if not rec then 
+			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
+			error("Boxtext file '"..file.."' tag '"..tag.."' does not have a record #"..idx.." (max is "..#t..")") 
+		end
+		sb_data = new TextBox( { ['Header'] = rec.Header, ['PicDir'] = rec.PicDir, ['PicSpc'] = rec.PicSpc, ['Lines'] = {}, ['SL'] = 1, ['SP']=1, ['AltTxtFont'] = rec.AltTxtFont, ['Voice'] = rec.SoundFile   } )
+		TextBox.Current = sb_data
+		width=Screen.Width-__BoxTextTotalWidthMargin //-- standard width, this can be shortened by the portraits popping with the textbox. SW is the screen width, this need to be taken in order.
+		//local ak,txt,cline,spline
+		//local aw,word
+		//local continue
+		if rec.PicRef then
+			// TODO: Proper Image loading
+			//width = width - Image.Width(rec.PicRef)   
+		end
+		if rec.AltTxtFont and rec.AltTxtFont!="" then
+			// CSay("Setting font: "..rec.AltTxtFont,fonts.BoxText[2])
+			CurrentFont = error("No alternate font possibility yet! Code me, please!") //Image.Font(rec.AltTxtFont,fonts.BoxText[2])
+		else
+			CurrentFont = GetFont("BOXTEXT") //setfont("BoxTextContent")
+		end   
+		for ak,txt in ipairs(rec.Lines) do
+			string cline
+			table spline
+			cline = ""
+			//spline = split(Var.S(txt)," ")
+			spline = split(gv.SUB(txt)," ")
+			for aw,word in ipairs(spline) do
+				if CurrentFont.TextWidth(cline..word)>width
+					table.insert(sb_data.Lines,cline)
+					cline = ""
+				end
+				cline = cline .. word .. " "   
+			end
+			if cline~="" then table.insert(sb_data.Lines,cline) end    
+		end
+		sb_data.width=width    
+		sb_data.PicRef=rec.PicRef
+		//-- if tonumber(LC('screen.margin.top')   )~=0 then origin[2] = 25; totalwidth=totalheight-25 end
+		// if tonumber(LC('screen.margin.right') )~=0 then sb_data.width=sb_data.width-25 end
+		// if tonumber(LC('screen.margin.left') )~=0 then sb_data.width=sb_data.width-25 end
+		//-- Voice acting, if available
+		if sb_data.Voice and JCR_EntryExists(sb_data.Voice) 		
+			// This is all LAURA, but NALA must be handled differently, so let's comment this out... for now!
+			// if Audio.Playing('BOXTEXTCHANNEL')~=0 then Audio.Stop('BOXTEXTCHANNEL') end
+			// Audio.Load(sb_data.Voice,'BOXTEXTVOICE')
+			// Audio.Play("BOXTEXTVOICE","BOXTEXTCHANNEL")
+		else
+			sb_data.Voice=nil;
+		end
+		
+		do
+			int h
+			h = (#sb_data.Lines*(__BoxTextFontSize+2))+50
+			sb_data.txtbox = new Box(0,Screen.Height-h,Screen.Width,h)
+		end
+	end
+
 end
 
 
@@ -65,6 +210,7 @@ group FlowBoxText
 	int Num
 	string Scen
 	string ReturnFlow
+	table btdata
 	
 	void CONSTRUCTOR()
 		InitScenario()
@@ -74,12 +220,15 @@ group FlowBoxText
 		self.ReturnFlow = RF or CurrentFlow()
 		self.Num = ANum or 1
 		GoToFlow("BOXTEXT")
+		TextBox.Generate(trim(AScen),trim(ATag),ANum,RF)
 	end
 	
 end
 
 
 global void BUB_Draw()
+	LuaDoString(trim(FlowBoxText.ReturnFlow),"BoxText_Back()","BoxText Background Call")
+	TextBox.Current.Show()
 end
 
 global void BUB_Update()

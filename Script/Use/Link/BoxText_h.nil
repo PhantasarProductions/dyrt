@@ -53,7 +53,7 @@ group TrueBoxTextGroup
 
 	void Load(string Scenario,string File)
 		CWriteLine(sprintf("Loading scenario %s from file %s",Scenario,File),180,0,255)
-		BTExe("Scenario.LoadData(\"%s\",\"%s\", false)",Trim(File),Trim(Scenario))
+		BTExe(sprintf("Scenario.LoadData(\"%s\",\"%s\", false)",Trim(Scenario),Trim(File)))
 	end
 
 	void CallMe(string Scenario,string Tag,ReturnFlow,Num)
@@ -61,7 +61,7 @@ group TrueBoxTextGroup
 			error("Bold thing to call the BoxText while the flow's not even been loaded, let alone any scenario file!")
 		end
 		CSayF("Boxtext request! Scen=%s; Tag=%s",Scenario,Tag)
-		LuaDoString("FLOW_BOXTEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 0),"Chain to flow: BOXTEXT")
+		LuaDoString("FLOW_BOXTEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 1),"Chain to flow: BOXTEXT")
 		GoToFlow("BOXTEXT")
 	end
 
@@ -71,8 +71,8 @@ end
 // But for now, this will do ;)
 global table BoxText
 setmetatable(BoxText,{
-	['__call'] = delegate(t,infinity) 
-			return TrueBoxTextGroup.CallMe(infinity) 
+	['__call'] = void(t,infinity) 
+			TrueBoxTextGroup.CallMe(infinity) 
 		end,
 	['__index'] = var(t,string k)
 			return TrueBoxTextGroup[k] 

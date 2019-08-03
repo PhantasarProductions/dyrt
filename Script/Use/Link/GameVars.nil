@@ -74,7 +74,13 @@ gvmeta.__newindex = void(t,k,v)
 	error("GameVars Type Indexes are READ-ONLY so you cannot assign any data to type "+k+"!")
 end
 
-gvmeta.__index = table(t,k)
+#say Subber
+string Subber(string str)
+	LuaDoString("GAMEVARS","varSub(\""..str.."\")")
+	return popCOMM()
+end
+#say "VarMetaIndex"
+gvmeta.__index = var(t,k)
 	LoadSubVar()
 	switch k:upper()
 		case "BOOL" "B" "&" "BOOLEAN" "BOOLE" "GEORGEBOOLE"
@@ -84,9 +90,11 @@ gvmeta.__index = table(t,k)
 		case "STRING" "S" "$" "CHAR*"
 			return gvstring
 		case "DONE"
-			return Done		
+			return Done
+		case "SUB"
+			return Subber
 		default
-			error("Unknown GameVar type "+k)
+			error("Unknown GameVar type "..k)
 	end
 	cd_garbage = cd_garbage - 1
 	if cd_garbage<=0

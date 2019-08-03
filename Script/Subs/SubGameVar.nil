@@ -19,8 +19,11 @@
 // End License Information
 
 
+
+#say "Loading GameVar"
 bool GAMEVARSCRIPT = true
 
+#say "GV: Importing libraries"
 #use "Libs/tables"
 #use "Libs/strings"
 
@@ -31,6 +34,7 @@ table varAll
 table varType
 table varDef
 
+#say "GV: predefs"
 // I'll do this in "pure" Lua.
 // NIL inevitably comes with a few limitations, and the code below is just one of them
 // (still doesn't outrank the benefits, so...)
@@ -40,6 +44,7 @@ varType = { Bool=varBool,String=varString,Num=varNum }
 varDef = { Bool=false, String="",Num=0 }
 #endpure
 
+#say "GV: Clear"
 global void varClear(bool onlydefs)
 	for Type,v in pairs(varType) 
 		table temp
@@ -55,6 +60,7 @@ global void varClear(bool onlydefs)
 end
 
 
+#say "GV: Get"
 global void varGet(string vType,string vName)
 	var v
 	v = varType[vType][vName]
@@ -62,15 +68,18 @@ global void varGet(string vType,string vName)
 	SuperGlobal.VarCommunicate = tostring(v)
 end
 
+#say "GV: Set"
 global void varSet(string vType,string vName, vValue)
 	varType[vType][vName] = vValue
 end
 
+#say "GV: Done"
 global void varDone(string vName)
 	varGet("Bool",vName)
 	varSet("Bool",vName,true)
 end
 
+#say "GV: Serialize"
 global void varSerialize()
 	string ret
 	ret = "// Booleans\n"
@@ -82,10 +91,32 @@ global void varSerialize()
 		ret = ret + sprintf("gv.Num[\"%s\"] = %s\n",SafeString(k),v)
 	end
 	ret = ret + "\n//Strings\n"
-	for k,v in spairs(varNum)
+	for k,v in spairs(varString)
 		ret = ret + sprintf("gv.String[\"%s\"] = \"%s\"\n",SafeString(k),SafeString(v))
 	end
 	SuperGlobal.VarCommunicate = ret
 end
 
+#say "GV: Sub"
+global void varSub(string str) 
+	//-- Sub means "substitute"
+	#say "GV: Sub.Init!"
+	string ret 
+	ret = str
+	#say "GV: Sub.Boolean"
+	for k,v in spairs(varBool)
+		ret = replace(ret,"&"..k,tostring(v))
+	end
+	#say "GV: Sub.Num"
+	for k,v in spairs(varNum)
+		ret = replace(ret,"%"..k,tostring(v))
+	end
+	#say "GV: Sub.String"
+	for k,v in spairs(varString)
+		ret = replace(ret,"$"..k,v)
+	end
+	#say "GV: Sub.VarCommunicate"
+	SuperGlobal.VarCommunicate = ret
+end
 
+#say "GV: Compiling!"

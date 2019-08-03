@@ -43,6 +43,7 @@
 
 :Prologue_Start
 	; Normally this many scenarios are not needed
+	call BoxText.Load,"Scenario/EN/GENSCEN/CH1/STARTGAME","PROLOGUE_START"
 	call BoxText,"PROLOGUE_START","A"
 	call BoxText,"PROLOGUE_START","INT"
 	call BoxText,"PROLOGUE_START","B"
