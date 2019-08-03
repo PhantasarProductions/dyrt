@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FlowBoxText.nil
-// Version: 19.08.03
+// Version: 19.08.04
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -38,8 +38,10 @@
 
 
 
+
 #use "script/use/anyway"
 #use "script/use/boxes"
+#use "script/use/boxpics"
 #use "libs/strings"
 #use "libs/Scenario"
 
@@ -87,6 +89,14 @@ class TextBox
 	int width
 	var txtbox
 	
+	get int boxheight
+		return self.txtbox.h
+	end
+	
+	get int boxy
+		return Screen.Height - self.boxheight
+	end
+	
 	void CONSTRUCTOR(table initcrap)
 		CSay("Creating textbox!")
 		for k,v in pairs(initcrap)
@@ -112,6 +122,9 @@ class TextBox
 		
 		//-- NOTE TO SELF: Use BoxPic.nil in order to show the portratis
 		//-- That will save a lot of RAM, Bugs AND Frustration!
+		__white
+		BoxPic(20,self.boxy+math.floor(self.boxheight/2),self.PicDir,self.PicSpc,"center")
+		// CSayF("DEBUG: y:%4d; h:%4d; c:%4d",self.boxy,self.boxheight,self.boxy+math.floor(self.boxheight/2))
 	end
 	
 	// link up static shit
@@ -202,6 +215,7 @@ class TextBox
 		do
 			int h
 			h = (#sb_data.Lines*(__BoxTextFontSize+2))+50
+			if h<150 then h=150 end
 			sb_data.txtbox = new Box(0,Screen.Height-h,Screen.Width,h)
 		end
 	end
@@ -240,6 +254,7 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 end
+
 
 
 

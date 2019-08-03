@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/BoxPics.nil
-// Version: 19.08.03
+// Version: 19.08.04
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,19 +36,28 @@
 // End License Information
 
 
+
 #use "libs/strings"
 
 table pics
 
-global void BoxPic(int x, int y,string Char,Spec)	
+global void BoxPic(int x, int y,string Char,Spec,valign)	
 	string file
 	string tag
 	file = sprintf("GFX/BoxPic/%s/%s.png",Char,Spec or "General")
 	tag = sprintf("%s.%s",Char,Spec or "GENERAL"):upper()
 	pics[tag] = pics[tag] or LoadImage(file,tag)
-	pics[tag].Draw(x,y-pics[tag].Height)
+	switch valign
+		case "top"
+			pics[tag].Draw(x,y)
+		case "center"
+			pics[tag].Draw(x,y-(pics[tag].Height/2))
+		default
+			pics[tag].Draw(x,y-pics[tag].Height)
+	end
 end
 
 return BoxPic
+
 
 
