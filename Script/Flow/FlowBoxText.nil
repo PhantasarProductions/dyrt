@@ -108,6 +108,8 @@ class TextBox
 	
 	void Show()
 		self.txtbox.Draw()
+		//-- NOTE TO SELF: Use BoxPic.nil in order to show the portratis
+		//-- That will save a lot of RAM, Bugs AND Frustration!
 	end
 	
 	// link up static shit
