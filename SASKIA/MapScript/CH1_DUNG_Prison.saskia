@@ -44,14 +44,16 @@
 
 :Prologue_Start
 	; Normally this many scenarios are not needed
-	call BoxText.Load,"Scenario/EN/GENSCEN/CH1/STARTGAME","PROLOGUE_START"
+	call CSay,"Time to start our story!"
+	call BoxText.Load,"GENSCEN/CH1/STARTGAME","PROLOGUE_START"
 	call BoxText,"PROLOGUE_START","A"
 	call BoxText,"PROLOGUE_START","INT"
 	call BoxText,"PROLOGUE_START","B"
 	call BoxText,"PROLOGUE_START","C"
 	; It's best NOT to put any other command except for "end" after a call to chainmap...
 	; Otherwise conflicts might occur!
-	call ChainMap,"CH1_HUB_IRRAHOME","Irravonia_Prologue"
+	call CSay,"Let's chain to Irravonia's home!"
+	call Field.ChainMap,"ch1_hub_irravoniahome","Prologue","GANG"
 end
 
 :From_World
