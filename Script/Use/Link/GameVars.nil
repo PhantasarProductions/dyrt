@@ -160,11 +160,11 @@ setmetatable(gvbool,gvmetabool)
 
 // String Metatable
 gvmetastring.__newindex = void(t,string k, string v)
-	LuaDoString("GAMEVARS",sprintf("varSet(\"String\",\"%s\",\"%s\")",SafeString(k:upper()), SafeString(v)))
+	LuaDoString("GAMEVARS",sprintf("varSet(\"String\",\"%s\",\"%s\")",trim(SafeString(k:upper())), SafeString(v)))
 end
 
 gvmetastring.__index =string(t, string k)
-	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\")",SafeString(k:upper())))
+	LuaDoString("GAMEVARS",sprintf("varGet(\"String\",\"%s\")",trim(SafeString(k:upper()))))
 	return popCOMM() or ""
 end
 
@@ -172,7 +172,7 @@ gvmetabool.__call=boolean(t, string k)
 	return gvbool[k]
 end
 
-setmetatable(gvbool,gvmetabool)
+setmetatable(gvstring,gvmetastring)
 
 
 // Inc
