@@ -90,8 +90,12 @@ MetaNames.__call = void(t,lang)
 		switch k
 			case "PostScyndi" "PreScyndi"
 				gv.String.Scyndi = Names.PreScyndi
+				gv.String.SCYNDI = Names.PreScyndi
+				CSayF("For now Scyndi will be called %s as her new name will be chosen later, after all",gv.String.SCYNDI)
 			default
+				gv.String[k:upper()] = Names[k]
 				gv.String[k] = Names[k]
+				CSayF("$%s = %s",k:upper(),gv.String[k:upper()])
 		end
 	end
 end
