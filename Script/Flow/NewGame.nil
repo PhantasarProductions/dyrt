@@ -325,6 +325,7 @@ class Stage_Language
 	void update()
 		if Mouse.HitLeft and NG_Lang.hover
 			__lang = NG_Lang.hover.code
+			Names()
 			stage = stage + 1
 		end
 	end
