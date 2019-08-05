@@ -36,17 +36,26 @@
 // End License Information
 
 
-
+#say "Loading: BoxPics.nil"
 #use "libs/strings"
 
+var PicUnknown
 table pics
+
+PicUnknown = LoadIfNew('GFX/BoxPic/Unknown/General.png','BoxPicUnknown')
 
 global void BoxPic(int x, int y,string Char,Spec,valign)	
 	string file
 	string tag
 	file = sprintf("GFX/BoxPic/%s/%s.png",Char,Spec or "General")
 	tag = sprintf("%s.%s",Char,Spec or "GENERAL"):upper()
-	pics[tag] = pics[tag] or LoadImage(file,tag)
+	if not pics[tag]	
+		if not JCR_EntryExists(file)
+			pics[tag] = pics[tag] or PicUnknown
+		else
+			pics[tag] = pics[tag] or LoadImage(file,tag)
+		end
+	end
 	switch valign
 		case "top"
 			pics[tag].Draw(x,y)
