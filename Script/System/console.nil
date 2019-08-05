@@ -21,6 +21,7 @@
 
 
 #use "libs/strings"
+#use "script/use/anyway"
 
 // This group is called by the console, whenever it's used to type commands
 // that are not by default in the engine itself.
@@ -42,6 +43,21 @@ group ConsoleCommands
 		CWriteLine(sprintf("Screen size: %4dx%4d",Screen.Width,Screen.Height),math.random(0,255),math.random(0,255),math.random(0,255))
 	end
 	
+	void VARS()
+		string serie
+		table spl
+		serie = gv()
+		spl = split(serie,"\n")
+		for i,line in ipairs(spl)
+			int r
+			int g
+			int b
+			g = math.floor( (i/#spl) * 255 )
+			r = 255-g
+			b = math.abs( math.sin(i) * 25 )
+			CWriteLine(line,r,g,b)
+		end
+	end
 
 end
 
