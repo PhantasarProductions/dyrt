@@ -54,7 +54,7 @@ group TrueBoxTextGroup
 
 	void Load(string Scenario,string File)
 		CWriteLine(sprintf("Loading scenario %s from file %s",Scenario,File),180,0,255)
-		BTExe(sprintf("Scenario.LoadData(\"%s\",\"%s\", false)",Trim(Scenario),Trim(File)))
+		BTExe(sprintf("Scenario.LoadData(\"%s\",\"%s\", false)",Trim("Scenario/"..__lang.."/"..Scenario),Trim(File)))
 	end
 
 	void CallMe(string Scenario,string Tag,ReturnFlow,Num)

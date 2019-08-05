@@ -44,9 +44,11 @@
 #use "script/use/boxpics"
 #use "libs/strings"
 #use "libs/Scenario"
+#use "libs/DarkText"
 
-#macro __BoxTextTotalWidthMargin 100
+#macro __BoxTextTotalWidthMargin 225
 #macro __BoxTextFontSize 25
+#macro __BoxText_MinX 200
 
 
 table LoadedPortret
@@ -118,13 +120,39 @@ class TextBox
 	end
 	
 	void Show()
+	
+		var Font
+		
+		Font = GetFont("BOXTEXT")
+		
 		self.txtbox.Draw()
 		
-		//-- NOTE TO SELF: Use BoxPic.nil in order to show the portratis
-		//-- That will save a lot of RAM, Bugs AND Frustration!
 		__white
 		BoxPic(20,self.boxy+math.floor(self.boxheight/2),self.PicDir,self.PicSpc,"center")
-		// CSayF("DEBUG: y:%4d; h:%4d; c:%4d",self.boxy,self.boxheight,self.boxy+math.floor(self.boxheight/2))
+		// CSayF("DEBUG: y:%4d; h:%4d; c:%4d",self.boxy,self.boxheight,self.boxy+math.floor(self.boxheight/2)) // debug! Must be commented out in distributions!!!
+		
+		Color(255,180,0)
+		DarkText.Font(Font,self.Header,__BoxText_MinX,self.boxy+10)
+		
+		__white
+		for i,l in ipairs(self.Lines)
+			int p
+			if i<self.SL
+				p = #l
+			elseif i==self.SL
+				p = self.SP
+				self.SP++
+				if self.SP>=#l
+					self.SP=1
+					self.SL++
+				end
+			else
+				p=0
+			end
+			if p>0
+				DarkText.Font(Font,Left(l,p),__BoxText_MinX,(self.boxy+35)+(i*21))
+			end
+		end
 	end
 	
 	// link up static shit
@@ -166,7 +194,7 @@ class TextBox
 			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
 			error("Boxtext file '"..file.."' tag '"..tag.."' does not have a record #"..idx.." (max is "..#t..")") 
 		end
-		sb_data = new TextBox( { ['Header'] = rec.Header, ['PicDir'] = rec.PicDir, ['PicSpc'] = rec.PicSpc, ['Lines'] = {}, ['SL'] = 1, ['SP']=1, ['AltTxtFont'] = rec.AltTxtFont, ['Voice'] = rec.SoundFile   } )
+		sb_data = new TextBox( { ['Header'] = gv.Sub(rec.Header), ['PicDir'] = rec.PicDir, ['PicSpc'] = rec.PicSpc, ['Lines'] = {}, ['SL'] = 1, ['SP']=1, ['AltTxtFont'] = rec.AltTxtFont, ['Voice'] = rec.SoundFile   } )
 		TextBox.Current = sb_data
 		width=Screen.Width-__BoxTextTotalWidthMargin //-- standard width, this can be shortened by the portraits popping with the textbox. SW is the screen width, this need to be taken in order.
 		//local ak,txt,cline,spline
@@ -213,10 +241,13 @@ class TextBox
 		end
 		
 		do
+			CSay("Calculating box size")
 			int h
 			h = (#sb_data.Lines*(__BoxTextFontSize+2))+50
 			if h<150 then h=150 end
+			CSayF("Creating a box that is %d pixels high",h)
 			sb_data.txtbox = new Box(0,Screen.Height-h,Screen.Width,h)
+			CSayF("So far so good!")
 		end
 	end
 
@@ -238,8 +269,19 @@ group FlowBoxText
 	void InitBTFlow(string AScen, string ATag, RF, ANum)
 		self.ReturnFlow = RF or CurrentFlow()
 		self.Num = ANum or 1
+		self.Scen = AScen
+		self.Tag = ATag
 		GoToFlow("BOXTEXT")
 		TextBox.Generate(trim(AScen),trim(ATag),ANum,RF)
+	end
+	
+	void Next()
+		self.Num++
+		if self.Num>#TextBox.btdata[trim(self.Scen)][trim(self.Tag)]
+			GoToFlow(trim(replace(self.ReturnFlow,"FLOW_","")))
+		else
+			TextBox.Generate(trim(self.Scen),trim(self.Tag),self.Num,self.ReturnFlow)
+		end
 	end
 	
 end
@@ -248,11 +290,18 @@ end
 global void BUB_Draw()
 	LuaDoString(trim(FlowBoxText.ReturnFlow),"BoxText_Back()","BoxText Background Call")
 	TextBox.Current.Show()
+	__white
+	Mouse.Show()
 end
 
 global void BUB_Update()
 	// debug
 	Dev.ConCheck()
+	
+	// Click and move on to the next, or return to the correct flow
+	if Mouse.HitLeft or Keyboard.Name=="Enter" or Keyboard.Name=="Space"
+		FlowBoxText.Next()
+	end
 end
 
 
