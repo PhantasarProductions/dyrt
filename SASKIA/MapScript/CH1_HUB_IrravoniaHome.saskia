@@ -1,0 +1,28 @@
+
+:Prologue
+	;Technically this script is all that required this room, as the 
+	;player will NEVER enter this place again.
+	
+	;It's no problem that "PROLOGUE_START" gets overridden now
+	;That scenario is no longer needed, and this way the memory
+	;will also be cleaned up. SASKIA runs in Lua after all and
+	;Lua features a GARBAGE collector
+	call BoxText.Load,"GENSCEN/CH1/STARTIRRAVONIA","PROLOGUE_START"
+	
+	;And Let's fire things up
+	;Shouldn't be needed, but just to make sure
+	mov "GANG",FieldMap.Kthura.Layer
+	call BoxText,"PROLOGUE_START","I"
+	mov "HUISKAMER",FieldMap.Kthura.Layer
+	call BoxText,"PROLOGUE_START","J"
+	mov "GANG",FieldMap.Kthura.Layer
+	call FieldMap.Kthura.Kill,"Irravonia",false
+	call BoxText,"PROLOGUE_START","K"
+	
+	;And lastly let's chain to the forest
+	call FieldMap.ChainMap,"CH1_DUNG_XENORBUSHES","Prologue"
+	
+:OnLoad
+	end
+	
+
