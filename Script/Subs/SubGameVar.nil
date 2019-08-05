@@ -64,36 +64,47 @@ end
 #say "GV: Get"
 global void varGet(string vType,string vName)
 	var v
-	v = varType[vType][vName]
-	if v==nil then v=varDef[vType] end
+	v = varType[trim(vType)][trim(vName)]
+	if v==nil then v=varDef[trim(vType)] end
 	SuperGlobal.VarCommunicate = tostring(v)
 end
 
 #say "GV: Set"
 global void varSet(string vType,string vName, vValue)
-	varType[vType][vName] = vValue
+	varType[trim(vType)][trim(vName)] = trim(tostring(vValue))
 end
 
 #say "GV: Done"
 global void varDone(string vName)
-	varGet("Bool",vName)
-	varSet("Bool",vName,true)
+	varGet("Bool",trim(vName))
+	varSet("Bool",trim(vName),true)
 end
 
 #say "GV: Serialize"
 global void varSerialize()
+	// None of the pures where needed, but as .NET keeps coming up with
+	// Nonsensical "out of memory" errors, I'll have to force my way past
+	// things, and since the code would be the same in both Lua and NIL
+	// Well, who cares anyway....
 	string ret
 	ret = "// Booleans\n"
+	#say "GV: Serialize -> Bool shit"
 	for k,v in spairs(varBool)
-		ret = ret + sprintf("gv.Bool[\"%s\"] = %s\n",SafeString(k),v)
+		#pure
+		ret = ret .. sprintf("gv.Bool[\""..SafeString(k).."\"] = %s\n",v)
+		#endpure
 	end
-	ret = ret + "\n//Numbers\n"
+	ret = ret .. "\n// Numbers\n"
+	#say "GV: Serialize -> Numbering issues"
 	for k,v in spairs(varNum)
-		ret = ret + sprintf("gv.Num[\"%s\"] = %s\n",SafeString(k),v)
+		#pure
+		ret = ret .. sprintf("gv.Num[\""..SafeString(k).."\"] = %s\n",v)
+		#endpure
 	end
-	ret = ret + "\n//Strings\n"
+	ret = ret .. "\n// Strings\n"
+	#say "GV: Serialize -> Nobody pulls my strings"
 	for k,v in spairs(varString)
-		ret = ret + sprintf("gv.String[\"%s\"] = \"%s\"\n",SafeString(k),SafeString(v))
+		ret = ret .. "gv.String[\"" .. SafeString(k) .. "\"] = \"" .. SafeString(v) .. "\"\n"
 	end
 	SuperGlobal.VarCommunicate = ret
 end
