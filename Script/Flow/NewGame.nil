@@ -346,6 +346,7 @@ void StartGame()
 	//Field.LoadMap("CH1_DUNG_Prison","Prologue_Start") // Debug ONLY!
 	GoToFlow("FIELD")
 	KillFlow("NEWGAME")
+	Mouse.Sleeping=false
 end
 
 
@@ -365,6 +366,7 @@ class Stage_StartGame
 	end
 	
 	void update()
+		Mouse.Sleeping=true
 		if self.CD<=0
 			StartGame()
 		end
