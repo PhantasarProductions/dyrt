@@ -17,10 +17,12 @@
 	call BoxText,"PROLOGUE_START","J"
 	mov "GANG",FieldMap.Kthura.Layer
 	call FieldMap.Kthura.Kill,"Irravonia",false
+	call GoToSleep,4000
+	mov "HUISKAMER",FieldMap.Kthura.Layer
 	call BoxText,"PROLOGUE_START","K"
 	
 	;And lastly let's chain to the forest
-	call FieldMap.ChainMap,"CH1_DUNG_XENORBUSHES","Prologue"
+	call Field.ChainMap,"CH1_DUNG_XENORBUSHES","Prologue"
 	
 :OnLoad
 	end
