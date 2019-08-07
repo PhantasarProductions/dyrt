@@ -1,0 +1,46 @@
+#use "Script/Use/Anyway"
+
+group Vaak
+
+	int MaxTime
+	int TickTime
+	string RetFlow
+	
+	void Close()
+		Mouse.Sleeping=false
+		GoToFlow(trim(replace(self.RetFlow,"FLOW_","")))
+	end
+
+	void Update()
+		if self.TickTime<0 
+			self.TickTime=0
+		else
+			self.TickTime = self.TickTime + BubbleTimer.Update 
+		end
+		if self.TickTime >= self.MaxTime
+			self.Close()
+		end
+	end
+	
+	void Draw()
+		LuaDoString(trim(self.Retlow),"assert(Sleep_Back or BoxTextBack,\"No sleep callback in flow `"..self.RetFlow.."`. Please set Sleep_Back or BoxText_Back as void function!\"); (Sleep_Back or BoxText_Back)()","BoxText Background Call")
+		Mouse.Show()
+	end
+	
+	void Init(int Time,string ReturnFlow)
+		assert(Time>0 and Time==math.floor(Time),"Sleeping time must be an integer greater than 0")
+		self.TickTime  = -1 // safety precaution!
+		self.MaxTime   = Time
+		self.RetFlow   = ReturnFlow
+		Mouse.Sleeping = true
+	end
+	
+end
+
+// Dirty code! Straight out of the toilet!
+// It stinks like shit, but I suppose it does what it has to do :P
+global delegate BUB_Update
+BUB_Update = Vaak.Update
+
+global delegate BUB_Draw
+BUB_Draw = Vaak.Draw

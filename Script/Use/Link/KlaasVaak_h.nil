@@ -1,0 +1,8 @@
+global void GoToSleep(int TimeInMS,ReturnFlow)
+	CWriteLine(sprintf("Time has been set to %sms! Let's go to sleep",TimeInMS),80,20,140)
+	if not StateExists("FLOW_SLEEP")
+		CSay("Loading flow: FLOW_SLEEP")
+		LoadFlow("SLEEP","Script/Flow/KlaasVaak.nil")
+	end
+	LuaDoString("FLOW_SLEEP",sprintf("Vaak.Init(%d,Trim('%s'))",TimeInMS,ReturnFlow or CurrentFlow()),"Call flow: SLEEP")
+end
