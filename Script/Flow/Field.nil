@@ -50,7 +50,105 @@ global bool FLOW_FIELD = true
 SASKIA.LoadFunction = string(string File2Load)
 	return JCR_GetString(File2Load)
 end
+
+class Fader
+	// kind 1 = Text
+	// kind 2 = Image
+	readonly int kind
+	readonly var show
+	int stage = 1
+	int alpha = 0
+	int timer = 1000
+	int ID
+	static int IDauto = 0
+	readonly int x
+	readonly int y
+	static var Font
+	static table Lijst
 	
+	void CONSTRUCTOR(obj)
+		assert(obj,"Can't create a fader based on nothing at all!")
+		if type(obj)=="string"
+			Fader.Font = Fader.Font or LoadImageFont("Fonts/Scribish.30.jfbf")
+			self.show = Font.Text(obj)
+		elseif type(obj)=="table"
+			string clname
+			assert(obj[".classname"],"Table given doesn't appear to be a class I can use to create a fader with!")
+			
+			switch clname
+				case "TImage" "TGraphText"
+					switch clname
+						case "TGraphText"
+							self.kind=1
+						case "TImage"
+							self.kind=2
+					end
+					self.show=obj
+					self.x = math.floor(Screen.Width /2)-math.floor(obj.Width /2)
+					self.y = math.floor(Screen.Height/2)-math.floor(obj.Height/2)
+				default
+					error(sprintf("Class '%s' is not eligible for a basis to create a fader",clname))
+			end
+		end
+		Fader.Lijst[ #Fader.Lijst + 1 ] = self
+		Fader.IDauto++
+		self.ID = Fader.IDauto
+		CSayF("Shader #%d created",self.ID)
+	end
+	
+	void DESTRUCTOR()
+		CSayF("Shader #%d destroyed",self.ID)
+	end
+	
+	static void Run()
+		var Current
+		Current = Fader.Lijst[1]
+		if not Current
+			return
+		end
+		clname=Current[".classname"]
+		switch Current.stage
+			case 1
+				Current.alpha++
+				if Current.alpha>=255
+					Current.alpha=255
+					Current.stage = 2
+				end
+			case 2
+				Current.timer--
+				if Current.timer<=0
+					Current.stage = 3
+				end
+			case 3
+				Current.alpha--
+				if	Current.alpha<=0
+					Current.alpha=0
+					Current.stage=4
+				end
+			case 4
+				for i=2,#Fader.Lijst+1 
+					// +1 is to make sure the "nil" with which the list ends moves one spot down, effectively killing the last record!
+					Fader.Lijst[i-1]=Fader.Lijst[i]
+				end
+			default
+				error(sprintf("Unknown fader stage #%d",Current.stage))
+		end
+		GraphColor.Red   = Current.alpha
+		GraphColor.Green = Current.alpha
+		GraphColor.Blue  = Current.alpha
+		GraphColor.Alpha = Current.alpha
+		// This set up looks awkward, but I did it this way, to easily add more possibilities if they are required
+		string clname
+		clname = Current[".classname"]
+		switch clname
+			case "TImage" "TGraphText"
+				Current.show.Draw(Current.x,Current.y)
+			default
+				error("?HUH HUH HUH?")
+		end
+		Current = nil;
+	end
+end
 
 group FieldMap
 	
