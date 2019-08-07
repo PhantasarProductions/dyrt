@@ -23,6 +23,7 @@
 
 #say "Init script is being loaded!!"
 #macro skiptomenu true
+#macro __showtime true
 
 
 CSay("")
@@ -31,6 +32,8 @@ CSay("Join us on our travel to Dyrt!");
 CSay("")
 
 global void Bubble_Init()
+	BubbleTimer.ShowTime = __showtime
+
 	// Only put in for debugging as having to see the intro all the time will become bothersome sooner or later!
 	if skiptomenu
 		CSay("Quick forward to main menu!")
@@ -55,7 +58,8 @@ global void Bubble_Init()
 	
 	// Mouse pointer
 	CSay("Load the mouse pointer!!")
-	Mouse.Pointer ="GFX/Alg/Mouse.png"
+	Mouse.Pointer      = "GFX/Alg/Mouse.png"
+	Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
 	
 	// Let's rock, and roll!!!
 	CSay("Time to start the flow!")
