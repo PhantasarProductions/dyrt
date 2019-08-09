@@ -164,6 +164,19 @@ group FieldMap
 	var Kthura
 	var Saskia
 	
+	get int ScrollX
+		return self.Kthura.ScrollX
+	end
+	set int ScrollX
+		self.Kthura.ScrollX=value
+	end
+	get int ScrollY
+		return self.Kthura.ScrollY
+	end
+	set int ScrollY
+		self.Kthura.ScrollY=value
+	end
+	
 end
 
 string fieldleader
@@ -177,7 +190,7 @@ group FlowField
 	
 	void UpdatePlayerTex()
 		if self.Map.Kthura.Actor.Player.Exists
-			self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(fieldleader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
+			self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
 		end
 	end
 	
@@ -189,7 +202,7 @@ group FlowField
 		if (not fieldleader) or fieldleader == "" or (not found)
 			fieldleader = RPG.Party[1]
 		end
-		self.UpdatePlayerTex()
+		//self.UpdatePlayerTex()
 		
 		return fieldleader
 	end
@@ -280,15 +293,16 @@ group FlowField
 		if altwind
 			self.Map.Kthura.Actor.Player.Wind=altwind
 		end
+		self.UpdatePlayerTex()
 	end
 	
 	void DoAutoScroll()
-		if not self.Map.Kthura.Actor.Player
+		if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
 			return
 		end
 		 
-		self.Map.Scroll.X = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
-		self.Map.Scroll.Y = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
+		self.Map.ScrollX = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
+		self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
 	end
 	
 end
@@ -310,6 +324,7 @@ global void BUB_Draw()
 	Party.ShowBar()
 	
 	// Show Mouse
+	__white
 	Mouse.Show()
 end
 

@@ -41,7 +41,8 @@
 
 :Prologue
 	; Spawn little Irravonia
-	call FlowField.SpawnPlayer
+	call FlowField.SpawnPlayer,"Start"
+	
 	; Start Chapter Fader + Dungeon Fader
 	call Fader,LoadImage("Gfx/Chapter/1.png")
 	call Fader,"Xenor Bushes"

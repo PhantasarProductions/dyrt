@@ -72,9 +72,9 @@ group Field
 	void SpawnPlayer(string spot,altwind)
 		if altwind
 			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
-			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\",\"%s\")",spot,altwind))
+			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\",\"%s\")",trim(spot),altwind))
 		else
-			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\")",spot))
+			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\")",trim(spot)))
 		end
 	end
 	
