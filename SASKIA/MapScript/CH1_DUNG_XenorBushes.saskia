@@ -3,10 +3,13 @@
 	end
 
 :Prologue
+	; Spawn little Irravonia
+	call FlowField.SpawnPlayer
 	; Start Chapter Fader + Dungeon Fader
-	call new Fader,LoadImage("Gfx/Chapter/1.png")
-	call new Fader,"Xenor Bushes"
-	call BoxText,"PROLOGUE_START","STARTIRRA"
+	call Fader,LoadImage("Gfx/Chapter/1.png")
+	call Fader,"Xenor Bushes"
+	; Irravonia's final speech, before the game really begins
+	call BoxText,"PROLOGUE_START","IRRA"
 	end
 
 :OnLoad

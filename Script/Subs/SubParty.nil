@@ -44,6 +44,8 @@
 #use "libs/strings"
 #say "= Importing: libs/DarkText"
 #use "libs/DarkText"
+#say "= Importing: libs/roman"
+#use "libs/roman"
 #say "= Importing in-game stuff"
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
@@ -113,6 +115,12 @@ group SubParty
 
 	table StatSubs
 	table BarBoxes
+	
+	table JustLeveled
+	
+	get int LevelCap
+		return gv.Num.LevelCap
+	end
 	
 	#say "= Constructor"
 	void CONSTRUCTOR()
@@ -250,6 +258,12 @@ group SubParty
 	
 	#say "= Char box"
 	void Char(int num)
+		// Chartag
+		string CharTag
+		int level
+		var font
+		font = GetFont("BOXTEXT")
+		CharTag = RPG.Party[num]
 		// Box
 		self.BarBoxes[num] = self.BarBoxes[num] or new Box( (num-1)*math.floor((Screen.Width-32)/4),Screen.Height-128,math.floor((Screen.Width-32)/4),128 )
 		self.BarBoxes[num]["Draw"]()
@@ -260,6 +274,22 @@ group SubParty
 			for i=1,#Bars 
 				self.PointsBar(RPG.Party[num],num,i)
 			end
+			self.JustLeveled[CharTag] = self.JustLeveled[CharTag] or 0
+			level = RPG.Char(CharTag).Stat("Level").Value
+			if self.JustLeveled[CharTag]>0
+				Color(math.random(0,255),math.random(0,255),math.random(0,255))
+			elseif CharTag=="Kirana" or CharTag=="Shanda"
+				Color(180,0,255)
+				// Kirana and Shanda will as guest characters NOT level up!
+				// The blue color will indicate this... in a way... ;)
+			elseif level>self.LevelCap
+				Color(255,0,0)
+			elseif level==self.LevelCap
+				Color(255,180,0)
+			else
+				__white
+			end
+			DarkText.Font(font,roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
 		end
 	end
 	

@@ -52,9 +52,34 @@ group Map
 	link Script = MapScript
 end
 
+string leader
+
 group Field
 
 	link Map = Map
+	
+	get string Leader
+		bool found
+		for i=1,8
+			found = found or (RPG.Party[i]==leader)
+		end
+		if (not leader) or leader == "" or (not found)
+			leader = RPG.Party[1]
+		end
+		
+		return leader
+	end
+	
+	set string Leader
+		int i
+		repeat
+			i++
+			if i>8
+				error("Leader cannot be a non-existent character!")
+			end
+		until RPG.Party[i]==value
+		leader = value
+	end
 
 	void LoadMap(string MapFile)
 		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
@@ -65,7 +90,15 @@ group Field
 		SaskiaLabel = Trim(SaskiaLabel)
 		CSayF("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel)
 		FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
-		
+	end
+	
+	void SpawnPlayer(string spot,altwind)
+		if altwind
+			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
+			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\",\"%s\")",spot,altwind))
+		else
+			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\")",spot))
+		end
 	end
 	
 end	

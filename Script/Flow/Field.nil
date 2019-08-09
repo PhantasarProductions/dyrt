@@ -70,11 +70,13 @@ class Fader
 		assert(obj,"Can't create a fader based on nothing at all!")
 		if type(obj)=="string"
 			Fader.Font = Fader.Font or LoadImageFont("Fonts/Scribish.30.jfbf")
-			self.show = Font.Text(obj)
+			self.show = Fader.Font.Text(obj)
+			self.x = math.floor(Screen.Width /2)-math.floor(self.show.Width /2)
+			self.y = math.floor(Screen.Height/2)-math.floor(self.show.Height/2)
 		elseif type(obj)=="table"
 			string clname
 			assert(obj[".classname"],"Table given doesn't appear to be a class I can use to create a fader with!")
-			
+			clname=obj[".classname"]
 			switch clname
 				case "TImage" "TGraphText"
 					switch clname
@@ -93,11 +95,11 @@ class Fader
 		Fader.Lijst[ #Fader.Lijst + 1 ] = self
 		Fader.IDauto++
 		self.ID = Fader.IDauto
-		CSayF("Shader #%d created",self.ID)
+		CSayF("Fader #%d created",self.ID)
 	end
 	
 	void DESTRUCTOR()
-		CSayF("Shader #%d destroyed",self.ID)
+		CSayF("Fader #%d destroyed",self.ID)
 	end
 	
 	static void Run()
@@ -106,30 +108,36 @@ class Fader
 		if not Current
 			return
 		end
-		clname=Current[".classname"]
+		string clname
+		clname=Current.show[".classname"]
 		switch Current.stage
 			case 1
 				Current.alpha++
 				if Current.alpha>=255
 					Current.alpha=255
 					Current.stage = 2
+					CSayF("Fader #%d gone to stage 2",Current.ID)
 				end
 			case 2
 				Current.timer--
+				Fader.Font.DrawText(sprintf("Fader #%d; Timer: %3d",Current.ID,Current.timer),5,75)
 				if Current.timer<=0
 					Current.stage = 3
+					CSayF("Fader #%d gone to stage 3",Current.ID)
 				end
 			case 3
 				Current.alpha--
 				if	Current.alpha<=0
 					Current.alpha=0
 					Current.stage=4
+					CSayF("Fader #%d gone to stage 4, where it will be prepared for destruction!",Current.ID)
 				end
 			case 4
 				for i=2,#Fader.Lijst+1 
 					// +1 is to make sure the "nil" with which the list ends moves one spot down, effectively killing the last record!
 					Fader.Lijst[i-1]=Fader.Lijst[i]
 				end
+				CSayF("Fader #%d has been removed from the list, and will eventually be caught by the garbage collector!",Current.ID)
 			default
 				error(sprintf("Unknown fader stage #%d",Current.stage))
 		end
@@ -138,13 +146,12 @@ class Fader
 		GraphColor.Blue  = Current.alpha
 		GraphColor.Alpha = Current.alpha
 		// This set up looks awkward, but I did it this way, to easily add more possibilities if they are required
-		string clname
-		clname = Current[".classname"]
 		switch clname
 			case "TImage" "TGraphText"
 				Current.show.Draw(Current.x,Current.y)
+				GraphColor.Alpha = 255
 			default
-				error("?HUH HUH HUH?")
+				error("?HUH HUH HUH?\nImpossible to have class "..clname.."\n\nHow the fuck did this get past the first check!\n\nMust be a bug! Please report!")
 		end
 		Current = nil;
 	end
@@ -158,9 +165,46 @@ group FieldMap
 	
 end
 
+string leader
+
+
 group FlowField
+
+	bool AutoScroll = true
 	
 	link Map = FieldMap
+	
+	void UpdatePlayerTex()
+		if self.Map.Kthura.Player.Exists
+			self.Map.Kthura.Player.Texture = "gfx/actors/heroes/"..trim(leader).."."..trim(self.Map.Kthura.Player.Wind)..".jpbf"
+		end
+	end
+	
+	get string Leader
+		bool found
+		for i=1,8
+			found = found or (RPG.Party[i]==leader)
+		end
+		if (not leader) or leader == "" or (not found)
+			leader = RPG.Party[1]
+		end
+		self.UpdatePlayerTex()
+		
+		return leader
+	end
+	
+	set string Leader
+		int i
+		repeat
+			i++
+			if i>8
+				error("Leader cannot be a non-existent character!")
+			end
+		until RPG.Party[i]==value
+		leader = value
+		self.UpdatePlayerTex()
+	end
+
 	
 	void LoadMap(string MapFile,Layer)
 		CSayF("Loading Map: %s",MapFile)
@@ -214,6 +258,7 @@ group FlowField
 
 	void DrawScreen()
 		FieldMap.Kthura.Draw()
+		Fader.Run()
 	end
 
 
@@ -229,6 +274,22 @@ group FlowField
 		FieldMap.Kthura.Layer = Layer
 	end
 	
+	void SpawnPlayer(string spot,altwind)
+		self.Map.Kthura.Player.Spawn(spot)
+		if altwind
+			self.Map.Kthura.Player.Wind=altwind
+		end
+	end
+	
+	void DoAutoScroll()
+		if not self.Map.Kthura.Player
+			return
+		end
+		 
+		self.Map.Scroll.X = self.Map.Kthura.Player.X - (Screen.Width /2)
+		self.Map.Scroll.Y = self.Map.Kthura.Player.Y - (Screen.Height/2)
+	end
+	
 end
 
 global void BoxText_Back()
@@ -237,12 +298,18 @@ end
 
 
 global void BUB_Draw()
+	// AutoScroll
+	FlowField.DoAutoScroll()
+	
 	// This function will draw the screen minus the character bar
 	// That way it can be easily called from BoxText and maybe a few other functions
 	FlowField.DrawScreen()
 	
 	// Character screen
 	Party.ShowBar()
+	
+	// Show Mouse
+	Mouse.Show()
 end
 
 
