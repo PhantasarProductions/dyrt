@@ -184,7 +184,7 @@ group FlowField
 	get string Leader
 		bool found
 		for i=1,8
-			found = found or (RPG.Party[i]==leader)
+			found = found or (RPG.Party[i]==fieldleader)
 		end
 		if (not fieldleader) or fieldleader == "" or (not found)
 			fieldleader = RPG.Party[1]
@@ -202,7 +202,7 @@ group FlowField
 				error("Leader cannot be a non-existent character!")
 			end
 		until RPG.Party[i]==value
-		fielleader = value
+		fieldleader = value
 		self.UpdatePlayerTex()
 	end
 
