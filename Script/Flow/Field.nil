@@ -166,7 +166,7 @@ group FieldMap
 	
 end
 
-string leader
+string fieldleader
 
 
 group FlowField
@@ -177,7 +177,7 @@ group FlowField
 	
 	void UpdatePlayerTex()
 		if self.Map.Kthura.Player.Exists
-			self.Map.Kthura.Player.Texture = "gfx/actors/heroes/"..trim(leader).."."..trim(self.Map.Kthura.Player.Wind)..".jpbf"
+			self.Map.Kthura.Player.Texture = "gfx/actors/heroes/"..trim(fieldleader).."."..trim(self.Map.Kthura.Player.Wind)..".jpbf"
 		end
 	end
 	
@@ -186,12 +186,12 @@ group FlowField
 		for i=1,8
 			found = found or (RPG.Party[i]==leader)
 		end
-		if (not leader) or leader == "" or (not found)
-			leader = RPG.Party[1]
+		if (not fieldleader) or fieldleader == "" or (not found)
+			fieldleader = RPG.Party[1]
 		end
 		self.UpdatePlayerTex()
 		
-		return leader
+		return fieldleader
 	end
 	
 	set string Leader
@@ -202,7 +202,7 @@ group FlowField
 				error("Leader cannot be a non-existent character!")
 			end
 		until RPG.Party[i]==value
-		leader = value
+		fielleader = value
 		self.UpdatePlayerTex()
 	end
 

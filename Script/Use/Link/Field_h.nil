@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.08.09
+// Version: 19.07.31
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -39,7 +39,6 @@
 
 
 
-
 void FieldCheck()
 	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
 end
@@ -53,34 +52,11 @@ group Map
 	link Script = MapScript
 end
 
-string leader
 
 group Field
 
 	link Map = Map
 	
-	get string Leader
-		bool found
-		for i=1,8
-			found = found or (RPG.Party[i]==leader)
-		end
-		if (not leader) or leader == "" or (not found)
-			leader = RPG.Party[1]
-		end
-		
-		return leader
-	end
-	
-	set string Leader
-		int i
-		repeat
-			i++
-			if i>8
-				error("Leader cannot be a non-existent character!")
-			end
-		until RPG.Party[i]==value
-		leader = value
-	end
 
 	void LoadMap(string MapFile)
 		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
@@ -103,7 +79,6 @@ group Field
 	end
 	
 end	
-
 
 
 
