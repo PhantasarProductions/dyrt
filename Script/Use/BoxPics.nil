@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/BoxPics.nil
-// Version: 19.08.04
+// Version: 19.08.09
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 #say "Loading: BoxPics.nil"
 #use "libs/strings"
 
@@ -67,6 +68,7 @@ global void BoxPic(int x, int y,string Char,Spec,valign)
 end
 
 return BoxPic
+
 
 
 
