@@ -176,8 +176,8 @@ group FlowField
 	link Map = FieldMap
 	
 	void UpdatePlayerTex()
-		if self.Map.Kthura.Player.Exists
-			self.Map.Kthura.Player.Texture = "gfx/actors/heroes/"..trim(fieldleader).."."..trim(self.Map.Kthura.Player.Wind)..".jpbf"
+		if self.Map.Kthura.Actor.Player.Exists
+			self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(fieldleader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
 		end
 	end
 	
@@ -276,19 +276,19 @@ group FlowField
 	end
 	
 	void SpawnPlayer(string spot,altwind)
-		self.Map.Kthura.Player.Spawn(spot)
+		self.Map.Kthura.Actor.Player.Spawn(spot)
 		if altwind
-			self.Map.Kthura.Player.Wind=altwind
+			self.Map.Kthura.Actor.Player.Wind=altwind
 		end
 	end
 	
 	void DoAutoScroll()
-		if not self.Map.Kthura.Player
+		if not self.Map.Kthura.Actor.Player
 			return
 		end
 		 
-		self.Map.Scroll.X = self.Map.Kthura.Player.X - (Screen.Width /2)
-		self.Map.Scroll.Y = self.Map.Kthura.Player.Y - (Screen.Height/2)
+		self.Map.Scroll.X = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
+		self.Map.Scroll.Y = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
 	end
 	
 end
