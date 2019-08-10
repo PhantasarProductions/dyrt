@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.08.09
+; version: 19.08.11
 ; End License Information
+
 
 :BIG_MAMA
 	call error,"The boss has not yet been scripted"
@@ -53,4 +54,5 @@
 
 :OnLoad
 	end
+
 

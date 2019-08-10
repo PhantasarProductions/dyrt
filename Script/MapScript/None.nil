@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/MapScript/None.nil
-// Version: 19.08.09
+// Version: 19.08.11
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 #say "Map Script - None!"
 group MScript
 	
@@ -50,5 +51,6 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
+
 
 
