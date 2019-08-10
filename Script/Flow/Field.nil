@@ -296,11 +296,12 @@ group FlowField
 		self.UpdatePlayerTex()
 	end
 	
-	void DoAutoScroll()
-		if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
-			return
+	void DoAutoScroll(force)
+		if not force
+			if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
+				return
+			end
 		end
-		 
 		self.Map.ScrollX = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
 		self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
 	end

@@ -42,6 +42,7 @@
 :Prologue
 	; Spawn little Irravonia
 	call FlowField.SpawnPlayer,"Start"
+	call FlowField.DoAutoScroll,true
 	
 	; Start Chapter Fader + Dungeon Fader
 	call Fader,LoadImage("Gfx/Chapter/1.png")
