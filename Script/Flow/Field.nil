@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.08.11
+// Version: 19.08.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 global bool FLOW_FIELD = true
 
@@ -396,6 +397,7 @@ group ConsoleCommands
 		CWriteLine(sprintf("Grid player position is: (%5d,%5d)",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)),r,g,b)
 	end
 end
+
 
 
 
