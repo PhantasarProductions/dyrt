@@ -35,19 +35,14 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
-
-
-
 global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
-//#use "Script/Use/Link/Music"
 #use "libs/saskia"
 #use "libs/strings"
 #use "libs/tables"
+
+#macro __player FlowField.Map.Kthura.Actor.Player
 
 SASKIA.LoadFunction = string(string File2Load)
 	return JCR_GetString(File2Load)
@@ -189,6 +184,8 @@ group FlowField
 	
 	link Map = FieldMap
 	
+	string WalkArrival
+	
 	void UpdatePlayerTex()
 		if self.Map.Kthura.Actor.Player.Exists
 			self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
@@ -272,7 +269,15 @@ group FlowField
 	end
 
 	void DrawScreen()
+		// Take care of actor (if one is there)
+		if __player.Exists
+			self.UpdatePlayerTex()
+		end
+	
+		// Draw Map
 		FieldMap.Kthura.Draw()
+		
+		// Fader
 		Fader.Run()
 	end
 
@@ -336,7 +341,32 @@ global void BUB_Update()
 	Dev.ConCheck()
 	
 	// SASKIA Cycle
-	SASKIA.Cycle()
+	if SASKIA.Cycle()
+		// Will break off this function call if actual SASKIA sessions
+		// are still open. This to prevent conflicts with the walk engine
+		// and such
+		return
+	end
+	
+	if Mouse.Y<Screen.Height-128 and Mouse.HitLeft
+		if false
+			// Todo: Here I'll handle stuff like clickable objects
+			// As none exist at this moment of the game's creation
+			// I've set this to "if false" to make sure this content
+			// is always skipped for now, but that the 'just walk' part
+			// can already be scripted
+		else 
+			// When all options are gone, let's just walk
+			int wtx
+			int wty
+			wtx = FlowField.Map.Kthura.ScrollX + Mouse.X
+			wty = FlowField.Map.Kthura.ScrollY + Mouse.Y
+			CSayF("Player has requested to walk to (%d,%d)",wtx,wty)
+			FlowField.Map.Kthura.Actor.Player.WalkTo(wtx,wty)
+			FlowField.WalkArrival = ""
+		end
+		
+	end
 
 end
 
@@ -355,6 +385,16 @@ group ConsoleCommands
 		end
 	end
 	
+	void MYPOS()
+		int r
+		int g
+		int b
+		r = math.random(0,255)
+		g = math.random(0,255)
+		b = math.floor(255-((r+g)/2))
+		CWriteLine(sprintf("Pure player position is: (%5d,%5d)",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y),r,g,b)
+		CWriteLine(sprintf("Grid player position is: (%5d,%5d)",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)),r,g,b)
+	end
 end
 
 
