@@ -43,6 +43,7 @@ class Box
 	
 	static var Back
 	static var List
+	static bool NeverList
 	
 	int x
 	int y
@@ -51,6 +52,7 @@ class Box
 	int ix
 	int iy
 	bool Kill
+	bool DontList
 	
 	void Draw()
 		__white
@@ -81,10 +83,13 @@ class Box
 	end
 	
 	
-	void CONSTRUCTOR(int ax,int ay,int aw, int ah, aix, aiy)
+	void CONSTRUCTOR(int ax,int ay,int aw, int ah, aix, aiy,dontlist)
 		// Create what we don't have on the first time
 		self.Back = self.Back or TImage.Obtain("MENUBACK")
-		self.List = self.List or new TLinkedList
+		if not(dontlist or self.NeverList)
+			self.List = self.List or new TLinkedList
+		end
+		self.DontList = dontlist or self.NeverList
 		
 		// Create the box itself
 		self.x=ax
@@ -97,7 +102,9 @@ class Box
 		self.iy = aiy or -(ay % self.Back.Height)
 		
 		// Add to the list
-		self.List.AddLast(self)
+		if not $DontList
+			self.List.AddLast(self)
+		end
 		
 		// Debug notice
 		CWriteLine(sprintf("Created new box at (%d,%d); format %dx%d; Insert(%d,%d)",ax,ay,aw,ah,self.ix,self.iy),180,255,0)

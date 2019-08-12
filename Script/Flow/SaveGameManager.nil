@@ -35,21 +35,134 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-delegate BUB_Draw
-delegate BUB_Update
-delegate BUB_Arrive
+#use "script/use/anyway"
+#use "script/use/boxes"
+#use "libs/linkedlist"
 
-group SG
+#macro __GameName Dyrt.NET
 
+global delegate BUB_Draw
+global delegate BUB_Update
+global delegate BUB_Arrive
+global delegate BUB_Load
+
+class SG
+	
+	static string mode
+	static var ZijBalk
+	
+	static var List
+	static int HighID
+	
+	static table Pics
+	static table PicImages
+	static bool PicsInitDone
+	
+	static var BigNumbers
+	static var Font
+	
+	int ID
+	string Location
+	int Skill
+	string Language
+	string Time
+	table PartyNames
+	table PartyLevels
+	static int ScrollY
+	var SlotBox
+	
+	void CONSTRUCTOR()
+		self.List = self.List or new TLinkedList // Should already be done, but to make sure!
+		self.List.AddLast(self)
+		//self.HighID++
+		//self.ID = self.HighID
+		// Init Pics
+		if not self.PicsInitDone
+			table TruePics
+			int MaxPics
+			TruePics = { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+			MaxPics = #TruePics
+			setmetatable(self.Pics,{
+				["__index"] = string(t,int i)
+					int modulo
+					modulo = i % MaxPics
+					if modulo == 0 then modulo = MaxPics end
+					return TruePics[modulo]
+				end,
+				["__newindex"] = void(t,i,v)
+					error("SGData.Pics happens to be readonly and therefore no data may be assigned to it!")
+				end
+			})
+			self.PicsInitDone = true
+		end
+	end
+
+	// Action
+	
 
 	// Callbacks
-	void Draw()
+	static void Draw()
+		__white
+		// Originally these numbers were used in the ECN bar, but as I don't plan
+		// To get that one back, I decided to use these numbers for THIS purpose :)		
+		SG.BigNumbers = SG.BigNumbers or LoadImageFont("Fonts/ECN.jfbf")
+		// Let's first draw the slots
+		int Y
+		for item in SG.List.Each
+			if item.ID>=0 or SG.mode == "SAVE"
+				item.SlotBox.y = Y - SG.ScrollY
+				item.SlotBox.Draw()
+				if item.ID>=0
+					string Pic
+					Pic = self.Pics[item.ID]
+					$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s.png",Pic))
+					$PicImages[Pic].Draw(5, (item.SlotBox.y+64)-($PicImages[Pic].Height/2))
+					GraphColor.Alpha = 100
+					self.BigNumbers.DrawText( tostring(item.ID) , 120, item.SlotBox.y+20 )
+					GraphColor.Alpha = 255
+				end
+				self.Font.DrawText(item.Location,122,item.SlotBox.y+20)
+			end
+		end
+		// And now the sidebar
+		$ZijBalk.Draw()
 	end
 
-	void Update()
+	static void Update()
+		// debug
+		Dev.ConCheck()
 	end
 
-	void Arrive()
+	static void Arrive()
+		CSayF("Arrived in the save game manager with mode '%s'",$mode)
+	end
+	
+	static void Load()
+		CSay("Welcome to the save game manager! I need to configure some things first")
+		Box.NeverList = true
+		CSay("= Side Bar")
+		SG.ZijBalk = new Box(Screen.Width-40,0,40,Screen.Height)
+		CSay("= Create list of slots")
+		SG.List = new TLinkedList
+		CSay("= Check directory file: Save/__GameName.Directory")
+		if BubSave.Exists("Save/__GameName.Directory")
+			// TODO: Load the directory file
+		else
+			CWriteLine("NOTE: The __GameName.Directory file does not yet exist! If no savegames have been made before this is normal",255,0,0)
+		end
+		CSay("= Create NewGame slot for the creation of a new save game file")
+		var NewGame
+		NewGame = new SG
+		with NewGame
+			$ID = -1 // Marks a new savegame file
+			$Location = "<< CREATE NEW FILE >>"
+			$SlotBox = new Box(0,0,Screen.Width-40,128)
+		end
+		CSay("= Add this slot to the list!")
+		SG.List.AddLast(NewGame)
+		CSay("= Obtain font!")
+		SG.Font = GetFont("BOXTEXT")
+		CSay("All done, let's move on to the next step!")
 	end
 end
 
@@ -57,4 +170,4 @@ end
 BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
-
+BUB_Load=SG.Load

@@ -178,6 +178,23 @@ end
 
 string fieldleader
 
+group SGLink
+
+	void LoadSGFlow()
+		if not StateExists("FLOW_SG")
+			CSay("Loading flow: FLOW_SG")
+			LoadFlow("SG","Script/Flow/SaveGameManager.nil")
+		end
+	end
+	
+	void OpenSG()
+		self.LoadSGFlow()
+		LuaDoString("FLOW_SG","SG.mode = 'SAVE'","SGMode => SAVE")
+		GoToFlow("SG")
+	end
+
+end
+
 
 group FlowField
 
@@ -395,6 +412,21 @@ group ConsoleCommands
 		b = math.floor(255-((r+g)/2))
 		CWriteLine(sprintf("Pure player position is: (%5d,%5d)",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y),r,g,b)
 		CWriteLine(sprintf("Grid player position is: (%5d,%5d)",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)),r,g,b)
+	end
+	
+	void SAVE(A)
+		if type(A)!="string"
+			CWriteLine("NO WAY, JOSE! Save needs a string parameter!",255,0,0)
+			return
+		end
+		switch A:upper()
+			case "SPOT"
+				SGLink.OpenSG();
+			case "DIR" "LS"
+				CWriteLine("Debug save directory overview not yet available!",255,0,0)
+			default
+				CWriteLine("Debug save not yet available!",255,0,0)
+		end
 	end
 end
 
