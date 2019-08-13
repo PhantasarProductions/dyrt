@@ -359,6 +359,9 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 	
+	// Time
+	Time.Update()
+	
 	// SASKIA Cycle
 	if SASKIA.Cycle()
 		// Will break off this function call if actual SASKIA sessions

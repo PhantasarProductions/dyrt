@@ -52,6 +52,8 @@ global delegate BUB_Load
 
 class SG
 	
+	static var SmallFont
+	static table SkillNames
 	static string mode
 	static var ZijBalk
 	
@@ -233,7 +235,11 @@ class SG
 				else
 					__white
 				end
-				self.Font.DrawText(item.Location,122,item.SlotBox.y+20)
+				$Font.DrawText(item.Location,122,item.SlotBox.y+20)
+				if item.ID>=0
+					$SmallFont.DrawText(sprintf("Lang: %s; %s",item.Language,$SkillNames[item.Skill]),122,item.SlotBox.y+45)
+					$SmallFont.DrawText(sprintf("Time: %s",item.Time),122,item.SlotBox.y+65)
+				end
 			end
 			Y = Y + 128
 		end
@@ -291,7 +297,13 @@ class SG
 		SG.Font = GetFont("BOXTEXT")
 		CSay("= Dupe removal")
 		SG.List.RemoveDupes()
-		CSay("All done, let's move on to the next step!")
+		CSay("= Small Font")
+		$SmallFont = LoadImageFont("Fonts/Coolvetica.12.jfbf")
+		CSay("= Skill Names")
+		$SkillNames[1] = "Easy mode"
+		$SkillNames[2] = "Casual mode"
+		$SkillNames[3] = "Hard mode"
+		CSay("All done, let's move on to the next step!")		
 	end
 end
 
