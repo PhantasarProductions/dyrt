@@ -38,6 +38,7 @@
 
 
 
+
 #use "script/use/anyway"
 #use "script/use/boxes"
 #use "libs/linkedlist"
@@ -90,8 +91,8 @@ class SG
 			setmetatable(self.Pics,{
 				["__index"] = string(t,int i)
 					int modulo
-					modulo = i % MaxPics
-					if modulo == 0 then modulo = MaxPics end
+					modulo = (i % MaxPics)+1
+					//if modulo == 0 then modulo = MaxPics end
 					return TruePics[modulo]
 				end,
 				["__newindex"] = void(t,i,v)
@@ -106,9 +107,15 @@ class SG
 	static void Update_Boxes()
 		string output
 		for item in SG.List.Each
-			output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\n",item.ID,item.Location,item.Language,item.Time)
-			for i=1,8
-				output = output .. sprintf("CharTag.%d:%s\nCharPic.%d:%s\n",i,$PartyNames[i],i,$PartyPics[i])
+			if item.ID>=0
+				output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\n",item.ID,item.Location,item.Language,item.Time)
+				with item
+					for i=1,8
+						if $PartyNames[i] and $PartyNames[i]!=""
+							output = output .. sprintf("CharTag.%d:%s\nCharPic.%d:%s\n",i,$PartyNames[i],i,$PartyLevels[i])
+						end
+					end
+				end
 			end
 		end
 		output = output .. sprintf("HighID:%d",$HighID)
@@ -141,6 +148,7 @@ class SG
 	
 	void Perform_Save()
 		int myID
+		bool NewSlot
 		myID = $ID
 		CSay("Prepare to save!")
 		if myID<0
@@ -149,6 +157,7 @@ class SG
 			$ID=myID
 			$HighID++
 			CSayF("= ID is now %d",$ID)
+			NewSlot=true
 		end
 		CSay("= Base configuration!")
 		$Location = Field.MapData.Title
@@ -158,9 +167,9 @@ class SG
 		$PartyLevels = {}
 		CSay("= Character outline")
 		for i=1,8
-			if RPG.Party[i]!=""
+			if RPG.Party[i] and RPG.Party[i]!=""
 				$PartyNames[i] = RPG.Party[i]
-				$PartyLevels[i] = RPG.Char($PartyNames[i]).Stat("Level").Value
+				$PartyLevels[i] = RPG.Char(RPG.Party[i]).Stat("Level").Value
 			end
 		end
 		CSay("= Grab the time!")
@@ -169,6 +178,15 @@ class SG
 		$SaveData("Save/__GameName.%d",$ID)
 		CSay("= Updating directory!")
 		$Update_Boxes()
+		if NewSlot
+			var newitem
+			newitem = new SG
+			with newitem
+				$ID=-10
+				$Location = "<< Create New File >>"
+				$SlotBox = new Box(0,0,Screen.Width-40,128)
+			end
+		end
 	end
 	
 	void Perform_Load()
@@ -203,7 +221,7 @@ class SG
 				if item.ID>=0
 					string Pic
 					Pic = self.Pics[item.ID]
-					$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s.png",Pic))
+					$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s/General.png",Pic))
 					$PicImages[Pic].Draw(5, (item.SlotBox.y+64)-($PicImages[Pic].Height/2))
 					GraphColor.Alpha = 100
 					self.BigNumbers.DrawText( tostring(item.ID) , 120, item.SlotBox.y+20 )
@@ -217,6 +235,7 @@ class SG
 				end
 				self.Font.DrawText(item.Location,122,item.SlotBox.y+20)
 			end
+			Y = Y + 128
 		end
 		// And now the sidebar
 		$ZijBalk.Draw()
@@ -264,11 +283,14 @@ class SG
 			$ID = -1 // Marks a new savegame file
 			$Location = "<< CREATE NEW FILE >>"
 			$SlotBox = new Box(0,0,Screen.Width-40,128)
+			CSayF("= 'NEW FILE' slot created as %d",$ID)
 		end
 		CSay("= Add this slot to the list!")
 		SG.List.AddLast(NewGame)
 		CSay("= Obtain font!")
 		SG.Font = GetFont("BOXTEXT")
+		CSay("= Dupe removal")
+		SG.List.RemoveDupes()
 		CSay("All done, let's move on to the next step!")
 	end
 end
@@ -278,6 +300,7 @@ BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
 BUB_Load=SG.Load
+
 
 
 
