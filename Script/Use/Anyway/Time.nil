@@ -1,5 +1,5 @@
 // License Information:
-// src/Tricky Script/Script/Use/Link/Field_h.nil
+// src/Tricky Script/Script/Use/Anyway/Time.nil
 // Version: 19.08.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
@@ -36,66 +36,46 @@
 // End License Information
 
 
-void FieldCheck()
-	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
-end
+#use "libs/strings"
+#use "Script/Use/Link/GameVars.nil"
 
-void FLD_Exe(string do_it)
-	FieldCheck()
-	LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
-end
+group ModuleTime
 
-group Map
-	link Script = MapScript
-	readonly table Data
-end
-
-group Field
-
-	link Map = Map
+	// These links are connected to a 'inter-state' system
+	// Due to that everything that gets modified in this group will
+	// affect ALL states
 	
-
-	void LoadMap(string MapFile)
-		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
-	end
-
-	void ChainMap(string MapFile,string SaskiaLabel)
-		MapFile = Trim(MapFile)
-		SaskiaLabel = Trim(SaskiaLabel)
-		CSayF("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel)
-		FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
+	link Hours = gv.Int.PlayTime_Hours
+	link Minutes = gv.Int.PlayTime_Minutes
+	link Seconds = gv.Int.PlayTime_Seconds
+	link Old = gv.String.PlayTime_Old
+	
+	void Reset_Old()
+		$Old = os.date()
 	end
 	
-	void SpawnPlayer(string spot,altwind)
-		if altwind
-			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
-			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\",\"%s\")",trim(spot),altwind))
-		else
-			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\")",trim(spot)))
+	void Update()
+		if $Old == os.date()
+			return
 		end
-	end
-	
-	link MapData = Map.Data
-	
-	void CONSTRUCTOR()
-		setmetatable(self.MapData,{
-			['__newindex'] = void(t,string k,string v)
-				FLD_Exe("FlowField.Map.Kthura.Data[\""..SafeString(k) .."\"] = \""..SafeString(v) .."\"")
-			end,
-			['__index'] = string(t,string k)
-				FieldCheck()
-				return LuaGetString("FLOW_FIELD","FlowField.Map.Kthura.Data[\""..SafeString(k) .."\"]","Getting Map Meta Data")
-			end,
-			['__call'] = string(t,string k)
-				return $MapData[k]
+		$Seconds++
+		if ($Seconds>=60)
+			$Seconds = $Seconds - 60
+			$Minutes++
+			if ($Minutes>=60)
+				$Minutes = $Minutes - 60
+				$Hours++
 			end
-		})
+		end
+		$Old = os.date()
 	end
 	
-end	
+	get string PlayTime
+		return sprintf("%5d:%02d:%02d",$Hours,$Minutes,$Seconds)
+	end
+	
+end
 
-
-
-
+return ModuleTime
 
 

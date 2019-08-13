@@ -36,6 +36,8 @@
 // End License Information
 
 
+
+
 #use "script/use/anyway"
 #use "script/use/boxes"
 #use "libs/linkedlist"
@@ -61,6 +63,8 @@ class SG
 	
 	static var BigNumbers
 	static var Font
+	
+	static var Hover
 	
 	int ID
 	string Location
@@ -99,6 +103,88 @@ class SG
 	end
 
 	// Action
+	static void Update_Boxes()
+		string output
+		for item in SG.List.Each
+			output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\n",item.ID,item.Location,item.Language,item.Time)
+			for i=1,8
+				output = output .. sprintf("CharTag.%d:%s\nCharPic.%d:%s\n",i,$PartyNames[i],i,$PartyPics[i])
+			end
+		end
+		output = output .. sprintf("HighID:%d",$HighID)
+		while not BubSave.SaveString(output,"Save/__GameName.Directory",true)
+			string antwoord
+			antwoord = FailureBox("Saving the directory data failed.\nThis data is essential, as bad stuff can happen when this data is not in sync with the savegame files!\n- Do you have write permissions to the folder where this data is saved\n-Do you have write permissions over the file itself?\n- It's also possible there was a little 'hardware hiccup', in that case just try it again!\n- Is the devide on which you store save games still in fully operational state?\nTry to find that out, please!")
+			switch antwoord
+				case "Abort"
+					error("Error saving savegame directory")
+				case "Ignore"
+					Annoy("I'll try to continue like nothing happened, but be prepared for some permanent damage, and awkward behavior from the savegame directory in the future")
+					GoToFlow("FIELD")
+					break
+				case "Retry"
+					Annoy("Alright, let's try that again!")
+				default
+					// This should never be possible, but just in case!
+					// I've seen crazier things, after all :P
+					error("Unknown answer from failurebox!") 				
+			end
+		end		
+	end
+	
+	static void SaveData(string File)
+		// The reason I put this in a separate function is actually for 
+		// my own needs alone, and not those of the player. In order to
+		// make debugging easier, I'll require tons of savegames, which
+		// I can more easily set up by doing it like this!
+	end
+	
+	void Perform_Save()
+		int myID
+		myID = $ID
+		CSay("Prepare to save!")
+		if myID<0
+			CSay("= Generating new ID")
+			myID = $HighID
+			$ID=myID
+			$HighID++
+			CSayF("= ID is now %d",$ID)
+		end
+		CSay("= Base configuration!")
+		$Location = Field.MapData.Title
+		$Skill = __skill
+		$Language = __lang
+		$PartyNames = {}
+		$PartyLevels = {}
+		CSay("= Character outline")
+		for i=1,8
+			if RPG.Party[i]!=""
+				$PartyNames[i] = RPG.Party[i]
+				$PartyLevels[i] = RPG.Char($PartyNames[i]).Stat("Level").Value
+			end
+		end
+		CSay("= Grab the time!")
+		$Time = Time.PlayTime
+		CSay("= Saving")
+		$SaveData("Save/__GameName.%d",$ID)
+		CSay("= Updating directory!")
+		$Update_Boxes()
+	end
+	
+	void Perform_Load()
+		error("Loading has not yet been implemented!")
+	end
+	
+	void Perform_Delete()
+		if $ID<0
+			// $ID being lower than zero would mean this is the 'create new savegame' slot
+			// Since that slot means the file does not exist, it's completely senseless
+			// to even try to delete that (plus it will result in crashses too), so let's
+			// butt out, before that happens, shall we?
+			return
+		end
+		error("Deleting has not yet been implemented!")
+	end
 	
 
 	// Callbacks
@@ -109,6 +195,7 @@ class SG
 		SG.BigNumbers = SG.BigNumbers or LoadImageFont("Fonts/ECN.jfbf")
 		// Let's first draw the slots
 		int Y
+		$Hover = nil;
 		for item in SG.List.Each
 			if item.ID>=0 or SG.mode == "SAVE"
 				item.SlotBox.y = Y - SG.ScrollY
@@ -122,16 +209,35 @@ class SG
 					self.BigNumbers.DrawText( tostring(item.ID) , 120, item.SlotBox.y+20 )
 					GraphColor.Alpha = 255
 				end
+				if Mouse.X<Screen.Width-40 and Mouse.Y>item.SlotBox.y and Mouse.Y<item.SlotBox.y+128
+					$Hover = item
+					Color(255,180,0)
+				else
+					__white
+				end
 				self.Font.DrawText(item.Location,122,item.SlotBox.y+20)
 			end
 		end
 		// And now the sidebar
 		$ZijBalk.Draw()
+		
+		// Mouse Pointer
+		__white
+		Mouse.Show()
 	end
 
 	static void Update()
 		// debug
 		Dev.ConCheck()
+		
+		if Mouse.HitLeft 
+			if $Hover
+				switch $mode:upper()
+					case "SAVE"
+						$Hover.Perform_Save()
+				end
+			end
+		end
 	end
 
 	static void Arrive()
@@ -172,4 +278,6 @@ BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
 BUB_Load=SG.Load
+
+
 

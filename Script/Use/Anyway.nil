@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway.nil
-// Version: 19.08.09
+// Version: 19.08.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -47,6 +47,7 @@
 #use "Script/Use/Anyway/HaveMusic.nil"
 #use "Script/Use/Anyway/LanguageSettings.nil"
 #use "Script/Use/Anyway/MapScript_h.nil"
+#use "Script/Use/Anyway/Time.nil"
 #use "Script/Use/Link/BoxText_h.nil"
 #use "Script/Use/Link/Field_h.nil"
 #use "Script/Use/Link/GameVars.nil"
