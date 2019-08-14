@@ -301,7 +301,6 @@ group FlowField
 		Fader.Run()
 	end
 
-
 	void ChainMap(string MapFile,string SaskiaLabel,Layer)
 		MapFile = trim(MapFile)
 		SaskiaLabel = trim(SaskiaLabel)

@@ -43,6 +43,8 @@
 #use "libs/linkedlist"
 #use "libs/BuildData"
 
+#macro __GameName Dyrt.NET
+
 // Headconfirm
 CSay("Setting up MainMenu")
 
@@ -59,6 +61,8 @@ var CopyFont
 var CopyText
 var Logo
 
+int NOCLICK=15
+
 #say "MainMenu: Define them"
 CSay("Define Menu Items")
 MenuItems = new TLinkedList
@@ -72,6 +76,26 @@ MidXLogo = Logo.Width/2
 Background = TImage.Obtain("MENUBACK")
 CopyFont = LoadImageFont(FONT_Blitz)
 CopyText = CopyFont.Text("(c) "..BuildData.Copyright[2019].." Jeroen P. Broks")
+
+
+#say "SGLink"
+group SGLink
+
+	void LoadSGFlow()
+		if not StateExists("FLOW_SG")
+			CSay("Loading flow: FLOW_SG")
+			LoadFlow("SG","Script/Flow/SaveGameManager.nil")
+		end
+	end
+	
+	void OpenSG()
+		self.LoadSGFlow()
+		LuaDoString("FLOW_SG","SG.mode = 'LOAD'","SGMode => LOAD")
+		GoToFlow("SG")
+	end
+
+end
+
 
 
 #say "Let's set up the menu item action functions!"
@@ -96,6 +120,7 @@ end
 void NewGamePlus()	
 	StartNewGame(true)
 end
+
 
 
 #say "MainMenu: class MenuItem"
@@ -195,7 +220,7 @@ end
 new MenuItem("New Game",NewGame,true)
 new MenuItem("New Game+",NewGamePlus,false)
 new MenuItem("New Game: True Abyss",NOTHINGYET,false)
-new MenuItem("Continue a game",NOTHINGYET,false)
+new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
 new MenuItem("Encyclopedia",NOTHINGYET,true)
 new MenuItem("Jukebox",NOTHINGYET,true)
 new MenuItem("Websites",NOTHINGYET,true)
@@ -246,6 +271,10 @@ void ComeIntoAction()
 end
 
 global void BUB_Update()
+	if NOCLICK>0
+		NOCLICK--
+		return
+	end
 	switch Keyboard.Name
 		case "Down"
 			MenuItem.Next()

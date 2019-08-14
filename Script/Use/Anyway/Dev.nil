@@ -33,6 +33,14 @@ class ClassDevelopment
 			GoConsole()
 		end
 	end
+	
+	void Log(infinity)
+		table params
+		params = { infinity }
+		for i,p in ipairs(params)
+			CWriteLine(string.format("DEBUG %05d> %s",i,p),200,190,120)
+		end
+	end
 
 end
 

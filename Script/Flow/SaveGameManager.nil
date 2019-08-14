@@ -111,7 +111,7 @@ class SG
 		string output
 		for item in SG.List.Each
 			if item.ID>=0
-				output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\n",item.ID,item.Location,item.Language,item.Time)
+				output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\nSkill:%d",item.ID,item.Location,item.Language,item.Time,item.Skill)
 				with item
 					for i=1,8
 						if $PartyNames[i] and $PartyNames[i]!=""
@@ -279,7 +279,59 @@ class SG
 		SG.List = new TLinkedList
 		CSay("= Check directory file: Save/__GameName.Directory")
 		if BubSave.Exists("Save/__GameName.Directory")
-			// TODO: Load the directory file
+			CSay("= Since it exists! Let's load it!")
+			table sgdirLines
+			sgdirLines = BubSave.LoadLines("Save/__GameName.Directory")
+			CSay("= Got it, let's not break it all down!")
+			CSay(type(sgdirLines))
+			var NSG
+			for i,line in ipairs(sgdirLines)
+				Dev.Log(sprintf("line %i > %s",i,line))
+				table sp
+				string cmd
+				string para
+				sp = { "","" }
+				int p = 1
+				if trim(line)!=""
+					for j=1,#line
+						string ch
+						ch = Mid(line,j,1)
+						if ch==":" and p!=2
+							p=2
+						else
+							sp[p] = sp[p] .. ch
+						end
+					end				
+					cmd=sp[1]
+					para=sp[2]
+					switch cmd
+						case "NEW"
+							NSG = new SG
+							NSG.ID = tonumber(para);
+							NSG.SlotBox = new Box(0,0,Screen.Width-40,128)
+						case "Location"
+							NSG.Location = para
+						case "Language"
+							NSG.Language = para
+						case "Time"
+							NSG.Time = para
+						case "Skill"
+							NSG.Skill = tonumber(para) or 2
+						case "CharTag.1" "CharTag.2" "CharTag.3" "CharTag.4" "CharTag.5" "CharTag.6" "CharTag.7" "CharTag.8"
+							int idx
+							idx = tonumber(Right(cmd,1))
+							NSG.PartyNames[idx] = para
+						case "CharPic.1" "CharPic.2" "CharPic.3" "CharPic.4" "CharPic.5" "CharPic.6" "CharPic.7" "CharPic.8"
+							int idx
+							idx = tonumber(Right(cmd,1))
+							NSG.PartyLevels[idx] = tonumber(para) or 1
+						case "HighID"
+							SG.HighID = tonumber(para)
+						default
+							error("Unknown directory command: "..cmd.." in line "..i.."\n\nMessed with the savegame directory file?")
+					end
+				end
+			end
 		else
 			CWriteLine("NOTE: The __GameName.Directory file does not yet exist! If no savegames have been made before this is normal",255,0,0)
 		end
