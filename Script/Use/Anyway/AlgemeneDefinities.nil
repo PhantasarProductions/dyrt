@@ -52,6 +52,9 @@
 #macro __black Color(  0,  0,  0)
 #macro __amber Color(255,180,  0)
 #macro __skyblue Color(0,180,180)
+#macro __red Color(255,0,0)
+#macro __green Color(0,255,0)
+#macro __blue Color(0,0,255)
 
 #macro __lang gv.String.Lang
 #macro __skill gv.Int.Skill
