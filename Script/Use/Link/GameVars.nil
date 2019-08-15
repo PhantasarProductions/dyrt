@@ -18,9 +18,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
 // This is a safety pre-caution
 #accept GAMEVARSCRIPT
 if GAMEVARSCRIPT then return end

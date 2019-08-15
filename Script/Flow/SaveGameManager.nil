@@ -108,7 +108,7 @@ class SG
 		string output
 		for item in SG.List.Each
 			if item.ID>=0
-				output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\nSkill:%d",item.ID,item.Location,item.Language,item.Time,item.Skill)
+				output = output .. sprintf("NEW:%d\nLocation:%s\nLanguage:%s\nTime:%s\nSkill:%d\n",item.ID,item.Location,item.Language,item.Time,item.Skill)
 				with item
 					for i=1,8
 						if $PartyNames[i] and $PartyNames[i]!=""
@@ -144,6 +144,34 @@ class SG
 		// my own needs alone, and not those of the player. In order to
 		// make debugging easier, I'll require tons of savegames, which
 		// I can more easily set up by doing it like this!
+		
+		// Start
+		var jsg
+		jsg = BubSave.StartJCRSave(File)
+		jsg.Hash = false // NALA uses its own method for this!
+		
+		// RPG Party Data
+		jsg.XTRA = {['CMD']="RPGParty",['PARA']="Party"}
+		
+		// Map and Player Actor data
+		jsg.Serial=false
+		jsg["Data/Field"] = LuaGetString("FLOW_FIELD","FlowField.SGData","Grab Field Data for SaveGame")
+		jsg.Serial=true
+		
+		
+		// GameVars
+		jsg.Serial=false
+		jsg["Data/GameVars"] = gv()
+		jsg.Serial=true
+		
+		// Security
+		if BubSave.SaveXtra("ZZZZZ")
+			jsg.Xtra = {['CMD']="ZZZZZ",['PARA']=""}
+		end
+		
+		// Finalize
+		jsg.close = true
+		
 	end
 	
 	void Perform_Save()
@@ -175,7 +203,7 @@ class SG
 		CSay("= Grab the time!")
 		$Time = Time.PlayTime
 		CSay("= Saving")
-		$SaveData("Save/__GameName.%d",$ID)
+		$SaveData(sprintf("Save/__GameName.%d",$ID))
 		CSay("= Updating directory!")
 		$Update_Boxes()
 		if NewSlot
@@ -322,9 +350,28 @@ class SG
 			$ScrollDown()
 		end
 	end
+	
+	static bool dbefore
 
 	static void Arrive()
 		CSayF("Arrived in the save game manager with mode '%s'",$mode)
+		if $mode=="SAVE" and (not $dbefore)
+			CSay("= Create NewGame slot for the creation of a new save game file")
+			var NewGame
+			NewGame = new SG
+			with NewGame
+				$ID = -1 // Marks a new savegame file
+				$Location = "<< CREATE NEW FILE >>"
+				$SlotBox = new Box(0,0,Screen.Width-40,128)
+				CSayF("= 'NEW FILE' slot created as %d",$ID)
+			end
+			CSay("= Add this slot to the list!")
+			SG.List.AddLast(NewGame)
+			CSay("= Dupe removal")
+			SG.List.RemoveDupes()
+			$dbefore=true
+		end
+
 	end
 	
 	static void Load()
@@ -391,19 +438,6 @@ class SG
 			end
 		else
 			CWriteLine("NOTE: The __GameName.Directory file does not yet exist! If no savegames have been made before this is normal",255,0,0)
-		end
-		CSay("= Create NewGame slot for the creation of a new save game file")
-		var NewGame
-		if $mode=="SAVE"
-			NewGame = new SG
-			with NewGame
-				$ID = -1 // Marks a new savegame file
-				$Location = "<< CREATE NEW FILE >>"
-				$SlotBox = new Box(0,0,Screen.Width-40,128)
-				CSayF("= 'NEW FILE' slot created as %d",$ID)
-			end
-			CSay("= Add this slot to the list!")
-			SG.List.AddLast(NewGame)
 		end
 		CSay("= Obtain font!")
 		SG.Font = GetFont("BOXTEXT")

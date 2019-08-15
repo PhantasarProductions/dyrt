@@ -159,6 +159,9 @@ class Fader
 end
 
 group FieldMap
+
+	string LoadedMap
+	// var CurrentLayer
 	
 	link Script = MapScript
 	var Kthura
@@ -240,6 +243,7 @@ group FlowField
 
 	
 	void LoadMap(string MapFile,Layer)
+		$Map.LoadedMap=MapFile
 		CSayF("Loading Map: %s",MapFile)
 		CSay ("= Kthura")
 		var kth
@@ -330,6 +334,24 @@ group FlowField
 		end
 		self.Map.ScrollX = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
 		self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
+	end
+	
+	get string SGData
+		string ret
+		// Map + Layer
+		CSay("SGData.Map")
+		ret = ret .. sprintf("FlowField.LoadMap('%s','%s')\n",trim(FlowField.Map.LoadedMap),trim(FlowField.Map.Kthura.Layer))
+		// Scroll values
+		CSay("SGData.Scroll")
+		ret = ret .. sprintf("FlowField.Map.ScrollX = %10d\n",$Map.ScrollX)
+		ret = ret .. sprintf("FlowField.Map.ScrollY = %10d\n",$Map.ScrollY)
+		// Player Location	
+		CSay("SGData.Player")
+		ret = ret .. sprintf("FlowField.Map.Kthura.Actor.Player.CoordSpawn(%6d,%6d,'%s')\n",self.Map.Kthura.Actor.Player.X,self.Map.Kthura.Actor.Player.Y,trim(self.Map.Kthura.Actor.Player.Wind))
+		CSay("SGData.Leader")
+		ret = ret .. sprintf("FlowField.Loader = '%s'\n",trim($Leader))
+		CSay("SGData.Done")
+		return ret
 	end
 	
 end
