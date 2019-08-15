@@ -38,6 +38,7 @@
 #use "script/use/anyway"
 #use "script/use/boxes"
 #use "libs/linkedlist"
+#use "libs/roman"
 
 #macro __GameName Dyrt.NET
 
@@ -59,6 +60,7 @@ class SG
 	static table Pics
 	static table PicImages
 	static bool PicsInitDone
+	static table lvlPic
 	
 	static var BigNumbers
 	static var Font
@@ -67,7 +69,7 @@ class SG
 	
 	int ID
 	string Location
-	int Skill
+	int Skill = 2
 	string Language
 	string Time
 	table PartyNames
@@ -219,6 +221,7 @@ class SG
 				if item.ID>=0
 					string Pic
 					Pic = self.Pics[item.ID]
+					__white
 					$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s/General.png",Pic))
 					$PicImages[Pic].Draw(5, (item.SlotBox.y+64)-($PicImages[Pic].Height/2))
 					GraphColor.Alpha = 100
@@ -235,6 +238,24 @@ class SG
 				if item.ID>=0
 					$SmallFont.DrawText(sprintf("Lang: %s; %s",item.Language,$SkillNames[item.Skill]),122,item.SlotBox.y+45)
 					$SmallFont.DrawText(sprintf("Time: %s",item.Time),122,item.SlotBox.y+65)
+				end
+				__white
+				for i=1,8
+					with item
+						string TAG
+						int LVL
+						int x
+						int y
+						TAG = $PartyNames[i]
+						LVL = $PartyLevels[i]
+						if TAG and TAG!=""
+							$lvlPic[TAG] = $lvlPic[TAG] or LoadImage(sprintf("gfx/actors/heroes/%s.South.jpbf/00000000.png",TAG))
+							x = (($SlotBox.x+$SlotBox.w)-(50*8))+i*40
+							y = ($SlotBox.y+20)
+							$lvlPic[TAG].Draw(x-($lvlPic[TAG].Width/2),y)
+							$SmallFont.DrawText(roman(LVL),x,y+60,2)
+						end
+					end
 				end
 			end
 			Y = Y + 128
