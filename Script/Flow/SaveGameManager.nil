@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 19.08.14
+// Version: 19.08.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -247,10 +248,37 @@ class SG
 		end
 		// And now the sidebar
 		$ZijBalk.Draw()
+		__white
+		if $ScrollY>0
+			Arrow.Up.Draw($ZijBalk.x+3,$ZijBalk.y+3)
+		end
+		if $List.Last and $List.Last.MyObject.SlotBox.y+128>Screen.Height
+			Arrow.Down.Draw($ZijBalk.x+4,($ZijBalk.y+$ZijBalk.h)-35)
+		end
 		
 		// Mouse Pointer
 		__white
 		Mouse.Show()
+	end
+	
+	static void ScrollUp()
+		if $ScrollY>0
+			$ScrollY--
+		end
+	end
+	
+	static void ScrollDown()
+		var lastbox		
+		if not $List.Last
+			return
+		end
+		lastbox = $List.Last.MyObject		
+		//CSayF("DEBUG: ID = %03d; y = %04d; y+128 = %04d; Screen Height: %04d",lastbox.ID,lastbox.SlotBox.y,lastbox.SlotBox.y+128,Screen.Height)
+		//CSayF("DEBUG: %4d < %4d ??? ",$ScrollY,(lastbox.SlotBox.y+128)-Screen.Height)
+		//if $ScrollY<(lastbox.SlotBox.y+128)-Screen.Height
+		if (lastbox.SlotBox.y+128)>Screen.Height
+			$ScrollY++
+		end
 	end
 
 	static void Update()
@@ -264,6 +292,20 @@ class SG
 						$Hover.Perform_Save()
 				end
 			end
+		end
+		if Mouse.HeldLeft
+			if Mouse.X>$ZijBalk.x
+				if Mouse.Y<$ZijBalk.y+40
+					$ScrollUp()
+				elseif Mouse.Y>($ZijBalk.y+$ZijBalk.h)-40
+					$ScrollDown()
+				end
+			end
+		end
+		if Keyboard.Held("Up") 
+			$ScrollUp()
+		elseif Keyboard.Held("Down")
+			$ScrollDown()
 		end
 	end
 
@@ -338,15 +380,17 @@ class SG
 		end
 		CSay("= Create NewGame slot for the creation of a new save game file")
 		var NewGame
-		NewGame = new SG
-		with NewGame
-			$ID = -1 // Marks a new savegame file
-			$Location = "<< CREATE NEW FILE >>"
-			$SlotBox = new Box(0,0,Screen.Width-40,128)
-			CSayF("= 'NEW FILE' slot created as %d",$ID)
+		if $mode=="SAVE"
+			NewGame = new SG
+			with NewGame
+				$ID = -1 // Marks a new savegame file
+				$Location = "<< CREATE NEW FILE >>"
+				$SlotBox = new Box(0,0,Screen.Width-40,128)
+				CSayF("= 'NEW FILE' slot created as %d",$ID)
+			end
+			CSay("= Add this slot to the list!")
+			SG.List.AddLast(NewGame)
 		end
-		CSay("= Add this slot to the list!")
-		SG.List.AddLast(NewGame)
 		CSay("= Obtain font!")
 		SG.Font = GetFont("BOXTEXT")
 		CSay("= Dupe removal")
@@ -366,6 +410,7 @@ BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
 BUB_Load=SG.Load
+
 
 
 

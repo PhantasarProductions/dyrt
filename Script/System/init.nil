@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/System/init.nil
 // init
-// version: 19.08.09
+// version: 19.08.15
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -17,6 +17,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -53,6 +54,8 @@ global void Bubble_Init()
 	// UI
 	LoadImage("GFX/Alg/Next.png","NEXT")
 	LoadImage("GFX/Alg/Prev.png","PREV")
+	LoadImage("GFX/Alg/Up.png","UP")
+	LoadImage("GFX/Alg/Down.png","DOWN")
 	
 	// BoxText Font
 	LoadImageFont("Fonts/Coolvetica.20.jfbf","BOXTEXT")
@@ -66,6 +69,7 @@ global void Bubble_Init()
 	CSay("Time to start the flow!")
 	StartFlow()
 end
+
 
 
 

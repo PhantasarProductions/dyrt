@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 19.08.14
+// Version: 19.08.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -93,4 +94,23 @@ end
 
 //--SASKIA_CHAT = CSayF
 
+
+group Arrow
+	readonly var Next
+	readonly var Prev
+	readonly var Up
+	readonly var Down
+	get var Left
+		return $Next
+	end
+	get var Right
+		return $Right
+	end
+	
+	void CONSTRUCTOR()
+		for i,k in ipairs({"Next","Prev","Up","Down"})
+			self[k]=TImage.Obtain(k:upper())
+		end
+	end
+end
 
