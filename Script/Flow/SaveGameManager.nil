@@ -35,13 +35,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
-
-
-
-
 #use "script/use/anyway"
 #use "script/use/boxes"
 #use "libs/linkedlist"
@@ -117,7 +110,7 @@ class SG
 				with item
 					for i=1,8
 						if $PartyNames[i] and $PartyNames[i]!=""
-							output = output .. sprintf("CharTag.%d:%s\nCharPic.%d:%s\n",i,$PartyNames[i],i,$PartyLevels[i])
+							output = output .. sprintf("CharTag.%d:%s\nCharLvl.%d:%s\n",i,$PartyNames[i],i,$PartyLevels[i])
 						end
 					end
 				end
@@ -364,7 +357,7 @@ class SG
 							int idx
 							idx = tonumber(Right(cmd,1))
 							NSG.PartyNames[idx] = para
-						case "CharPic.1" "CharPic.2" "CharPic.3" "CharPic.4" "CharPic.5" "CharPic.6" "CharPic.7" "CharPic.8"
+						case "CharLvl.1" "CharLvl.2" "CharLvl.3" "CharLvl.4" "CharLvl.5" "CharLvl.6" "CharLvl.7" "CharLvl.8"
 							int idx
 							idx = tonumber(Right(cmd,1))
 							NSG.PartyLevels[idx] = tonumber(para) or 1
