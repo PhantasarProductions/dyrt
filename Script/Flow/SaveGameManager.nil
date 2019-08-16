@@ -119,7 +119,7 @@ class SG
 				end
 			end
 		end
-		output = output .. sprintf("HighID:%d",$HighID)
+		output = output .. sprintf("HighID:%d\nScrollY:%d\n",$HighID,$ScrollY)
 		while not BubSave.SaveString(output,"Save/__GameName.Directory",true)
 			string antwoord
 			antwoord = FailureBox("Saving the directory data failed.\nThis data is essential, as bad stuff can happen when this data is not in sync with the savegame files!\n- Do you have write permissions to the folder where this data is saved\n-Do you have write permissions over the file itself?\n- It's also possible there was a little 'hardware hiccup', in that case just try it again!\n- Is the devide on which you store save games still in fully operational state?\nTry to find that out, please!")
@@ -432,6 +432,8 @@ class SG
 							NSG.PartyLevels[idx] = tonumber(para) or 1
 						case "HighID"
 							SG.HighID = tonumber(para)
+						case "ScrollY"
+							SG.ScrollY = tonumber(para)
 						default
 							error("Unknown directory command: "..cmd.." in line "..i.."\n\nMessed with the savegame directory file?")
 					end
