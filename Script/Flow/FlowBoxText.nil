@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FlowBoxText.nil
-// Version: 19.08.13
+// Version: 19.08.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 #use "script/use/anyway"
@@ -295,11 +296,16 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 	
+	// Time
+	Time.Update()
+
+	
 	// Click and move on to the next, or return to the correct flow
 	if Mouse.HitLeft or Keyboard.Name=="Enter" or Keyboard.Name=="Space"
 		FlowBoxText.Next()
 	end
 end
+
 
 
 
