@@ -210,6 +210,7 @@ group FlowField
 	link Map = FieldMap
 	
 	string WalkArrival
+	var SFont
 	
 	void UpdatePlayerTex()
 		if self.Map.Kthura.Actor.Player.Exists
@@ -337,6 +338,15 @@ group FlowField
 		self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
 	end
 	
+	void FieldStats()
+		int Y
+		int YMin = 20
+		Y = (Screen.Height-128)-YMin
+		$SFont = $SFont or LoadImageFont("Fonts/Blitz.jfbf")
+		$SFont.DrawText("Phantasar Play-Time: "..Time.PhantasarTime,5,Y) Y = Y - YMin
+		$SFont.DrawText("    Earth Play-Time: "..Time.PlayTime,5,Y) Y = Y - YMin
+	end
+	
 	get string SGData
 		string ret
 		// Map + Layer
@@ -371,6 +381,7 @@ global void BUB_Draw()
 	FlowField.DrawScreen()
 	
 	// Character screen
+	FlowField.FieldStats()
 	Party.ShowBar()
 	
 	// Show Mouse

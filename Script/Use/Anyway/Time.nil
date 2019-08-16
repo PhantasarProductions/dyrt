@@ -50,8 +50,21 @@ group ModuleTime
 	link Seconds = gv.Int.PlayTime_Seconds
 	link Old = gv.String.PlayTime_Old
 	
+	int vectas
+	int millos
+	
 	void Reset_Old()
 		$Old = os.date()
+	end
+	
+	void UpdatePhantasarTime()
+		number Millo = 4.320;
+		int secondspassed
+		int TotalMillos
+		secondspassed = $Seconds + ($Minutes * 60) + ($Hours * 60 * 60);
+		TotalMillos = math.floor((secondspassed/Millo)+0.5);  //' Calculate the total ammount of millos today
+		$vectas = math.floor(TotalMillos/1000)
+		$millos = TotalMillos % 1000
 	end
 	
 	void Update()
@@ -67,11 +80,28 @@ group ModuleTime
 				$Hours++
 			end
 		end
+		$UpdatePhantasarTime()
 		$Old = os.date()
 	end
 	
 	get string PlayTime
 		return sprintf("%5d:%02d:%02d",$Hours,$Minutes,$Seconds)
+	end
+	
+	get string PhantasarTime
+		string ret
+		if $vectas==1 
+			ret = "    1 vecta"
+		elseif $vectas>1
+			ret = sprintf("%5d vectas",$vectas)
+		end
+		if $vectas>0 and $millos>0 then ret = ret.."; " end
+		if $millos==1
+			ret = ret .. "  1 millo"
+		elseif $millos>0
+			ret = ret .. sprintf("%3d millos",$millos)
+		end
+		return ret
 	end
 	
 end
