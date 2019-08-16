@@ -48,6 +48,11 @@
 	; Start Chapter Fader + Dungeon Fader
 	call Fader,LoadImage("Gfx/Chapter/1.png")
 	call Fader,"Xenor Bushes"
+	
+	; Start the game with a number of apples in your inventory based on your skill
+	mov 12 / gv.Number.skill,Inventory.ITM_APPLE
+	mov 6 / gv.Number.skill,Inventory.ITM_ANTIDOTE
+	
 	; Irravonia's final speech, before the game really begins
 	call BoxText,"PROLOGUE_START","IRRA"
 	end

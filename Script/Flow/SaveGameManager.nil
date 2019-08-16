@@ -155,17 +155,19 @@ class SG
 		
 		// RPG Party Data
 		jsg.XTRA = {['CMD']="RPGParty",['PARA']="Party"}
+
+		// don't serialize yourself, this is more delicate than that!
+		jsg.Serial=false
 		
 		// Map and Player Actor data
-		jsg.Serial=false
 		jsg["Data/Field"] = LuaGetString("FLOW_FIELD","FlowField.SGData","Grab Field Data for SaveGame")
-		jsg.Serial=true
-		
+	
 		
 		// GameVars
-		jsg.Serial=false
 		jsg["Data/GameVars"] = gv()
-		jsg.Serial=true
+		
+		// Inventory
+		jsg["Data/Inventory"] = Inventory()
 		
 		// Security
 		if BubSave.SaveXtra("ZZZZZ")

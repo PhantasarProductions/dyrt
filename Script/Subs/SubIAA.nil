@@ -1,0 +1,45 @@
+#use "Script/Use/Anyway.nil"
+#use "libs/tables"
+#use "libs/strings"
+
+table trueInventory
+
+quickmeta group SubInventory
+	index
+		assert(type(key)=="string","Illegal inventory key")
+		return trueInventory[key] or 0
+	end
+	
+	newindex
+		assert(type(key)=="string","Illegal inventory key")
+		assert(type(value)=="number" and math.floor(value)==value and value>=0,"Illegal inventory number of items!")
+		key = trim(key)
+		if key=="*CLEAR*"
+			// Dirty, yet safe and quick
+			trueInventory = {}
+		elseif value==0
+			trueInventory[key]=nil;
+		else
+			trueInventory[key]=value
+		end
+	end
+	
+	call
+		string ret = "Inventory['*CLEAR*']=1\n\n"
+		for k,v in spairs(trueInventory)
+			ret = ret .. "Inventory['"..k.."'] = "..v.."\n"
+		end
+	end
+	
+	len
+		int count = 0
+		for k,v in pairs(trueInventory)
+			count++
+		end
+		return count
+	end
+end
+
+#pure
+Inventory = SubInventory
+#endpure

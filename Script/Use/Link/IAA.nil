@@ -1,0 +1,37 @@
+void LoadSubIAA()
+	if not StateExists("IAA")
+		CSay("Loading sub: IAA")
+		LoadState("GAMEVARS","Script/Subs/SubIAA.nil")
+	end
+end
+
+
+
+
+quickmeta group Inventory
+	newindex
+		LoadSubIAA()
+		LuaDoString("SubInventory['"..key.."'] = "..value,"Index inventory!")
+	end
+	
+	index
+		LoadSubIAA()
+		return LuaGetNumber("SubInventory['"..key.."']")
+	end
+	
+	call
+		LoadSubIAA()
+		return LuaGetString("SubInventory()")
+	end
+	
+	len
+		LoadSubIAA()
+		return LuaGetNumber("#SubInventory")
+	end
+	
+	gc
+		CSay("This link inventory group has been destroyed")
+		CSay("Please make sure this can only happen in the IAA state!")
+	end
+end
+
