@@ -38,6 +38,7 @@
 
 
 
+
 #use "script/use/anyway"
 #use "script/use/boxes"
 #use "libs/linkedlist"
@@ -155,6 +156,9 @@ class SG
 		
 		// RPG Party Data
 		jsg.XTRA = {['CMD']="RPGParty",['PARA']="Party"}
+		
+		// Swap Data
+		jsg.XTRA = {['CMD']="Swap", ['PARA']="Swap"}
 
 		// don't serialize yourself, this is more delicate than that!
 		jsg.Serial=false
@@ -469,6 +473,7 @@ BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
 BUB_Load=SG.Load
+
 
 
 

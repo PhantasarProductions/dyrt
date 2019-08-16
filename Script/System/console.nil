@@ -59,6 +59,30 @@ group ConsoleCommands
 			CWriteLine(line,r,g,b)
 		end
 	end
+	
+	void SWAPDIR()
+		table d
+		d = Swap.Keys
+		CWriteLine("Swap dir:",180,0,255)
+		for i,k in ipairs(d)
+			int r
+			int g
+			int b
+			r = math.floor( (i/#d)*255)
+			g = 255-r
+			b = 0
+			CWriteLine(k,r,g,b)
+		end
+		if #d==1
+			CSayF("%09d swap entry found!",1)
+		else
+			CSayF("%09d swap entries found!",#d)
+		end
+	end
+	
+	void SHOWSWAP(string s)
+		CSay(Swap.Data[s])
+	end
 
 end
 

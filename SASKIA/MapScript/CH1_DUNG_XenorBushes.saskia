@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.08.11
+; version: 19.08.16
 ; End License Information
+
 
 
 :BIG_MAMA
@@ -41,6 +42,9 @@
 	end
 
 :Prologue
+	; Group the first 6 actions together
+	group 6
+
 	; Spawn little Irravonia
 	call FlowField.SpawnPlayer,"Start"
 	call FlowField.DoAutoScroll,true
@@ -56,8 +60,11 @@
 	; Irravonia's final speech, before the game really begins
 	call BoxText,"PROLOGUE_START","IRRA"
 	end
+	
+	; Of course, I should've put everything put in above in the NIL script, but what the HECK! :P
 
 :OnLoad
 	end
+
 
 
