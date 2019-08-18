@@ -54,7 +54,7 @@ end
 var ret
 
 if (DEVELOPMENT) then
-	ret = ClassDevelopment.NEW()
+	ret = new ClassDevelopment
 else
 	table fake
 	table fakemeta
