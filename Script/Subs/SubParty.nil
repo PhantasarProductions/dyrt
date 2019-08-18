@@ -66,11 +66,11 @@ class PartyBar
 	
 	void CONSTRUCTOR(string ATag,int AR,int AG,int AB)
 		self.Font     = self.Font or LoadImageFont("Fonts/Party.jfbf")
-		self.Tag     = ATag
-		self.R       = AR
-		self.G       = AG
-		self.B       = AB
-		self.TagIcon = LoadImage(sprintf("gfx/PartyBar/%s.png",ATag))
+		self.Tag      = ATag
+		self.R        = AR
+		self.G        = AG
+		self.B        = AB
+		self.TagIcon  = LoadImage(sprintf("gfx/PartyBar/%s.png",ATag))
 	end
 	
 end
@@ -118,6 +118,8 @@ group SubParty
 	table BarBoxes
 	
 	table JustLeveled
+	
+	int SelectedChar
 	
 	get int LevelCap
 		return gv.Num.LevelCap
@@ -257,6 +259,19 @@ group SubParty
 		self.BarBoxes[num]["Draw"]()
 	end
 	
+	// Unfortunately Lua has no support for static variables, 
+	// so neither has NIL
+	int SinCount
+	void SinAlpha()
+		number RAD
+		$SinCount++
+		if $SinCount>=360
+			$SinCount = $SinCount-360
+		end
+		RAD = math.pi * SinCount / 180.0;
+		GraphColor.Alpha = math.abs(math.floor( (math.sin(RAD)*255) ) )
+	end
+	
 	#say "= Char box"
 	void Char(int num)
 		// Chartag
@@ -271,7 +286,11 @@ group SubParty
 		__white
 		if RPG.Party[num] and RPG.Party[num]!=""
 			// Portrait
+			if num==$SelectedChar
+				SinAlpha()
+			end
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
+			GraphColor.Alpha
 			for i=1,#Bars 
 				self.PointsBar(RPG.Party[num],num,i)
 			end
