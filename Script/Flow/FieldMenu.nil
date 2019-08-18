@@ -1,4 +1,15 @@
 group Flow_FieldMenu
+
+	table situations
+	
+	void CONSTRUCTOR()
+		$situations = { 
+			["FIELD"] = {},
+			["COMBAT_ITEMS"] = {},
+			["COMBAT_ABILITIES"] = {},
+			["SHOP"] = {}
+	end
+
 end
 
 
@@ -11,6 +22,7 @@ with Flow_FieldMenu
 	end
 	
 	global void BUB_Update()
+		Dev.ConCheck()
 	end
 	
 end
