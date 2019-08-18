@@ -60,6 +60,7 @@
 
 #macro __lang gv.String.Lang
 #macro __skill gv.Int.Skill
+#macro __cash gv.Int.Cash
 
 
 

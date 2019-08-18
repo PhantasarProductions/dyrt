@@ -25,7 +25,7 @@
 
 #say "Init script is being loaded!!"
 #macro skiptomenu true
-#macro __showtime true
+#macro __showtime false
 
 
 CSay("")

@@ -71,6 +71,9 @@ class SG
 	
 	static var Hover
 	
+	static int LeaveCount
+	static string Leave
+	
 	int ID
 	string Location
 	int Skill = 2
@@ -173,6 +176,9 @@ class SG
 		// Inventory
 		jsg["Data/Inventory"] = Inventory()
 		
+		// Abilities
+		jsg["Data/MasteredAbilities"] = AbilitiesMastered()
+		
 		// Security
 		if BubSave.SaveXtra("ZZZZZ")
 			jsg.Xtra = {['CMD']="ZZZZZ",['PARA']=""}
@@ -224,10 +230,41 @@ class SG
 				$SlotBox = new Box(0,0,Screen.Width-40,128)
 			end
 		end
+		$LeaveCount=3
+		$Leave="FIELD"
 	end
 	
-	void Perform_Load()
-		error("Loading has not yet been implemented!")
+	void Perform_Load(string file)
+		table Xtra
+		var LoadStuff
+		CSayF("Loading: %s",file)
+		if BubSave.LoadXtra("ZZZZZ")
+			CSay("= This file will be verified");
+			Xtra[#Xtra+1] = {['CMD']="ZZZZZ",['PARA']=""}
+		end
+		Xtra[#Xtra+1] = {['CMD']="SWAP",["PARA"]="SWAP"}
+		Xtra[#Xtra+1] = {['CMD']="RPGPARTY", ["PARA"]="Party"}
+		CSay("= Reading file, and handling NALA core data!")
+		LoadStuff = BubSave.LoadFromJCR(file, false, Xtra)
+		if LoadStuff==nil then
+			Notify("Loading the game has failed!")
+			return
+		end
+		CSay("= Loading FIELD data")
+		LoadFlow("FIELD","Script/Flow/Field.nil")
+		LuaDoString("FLOW_FIELD",LoadStuff["Data/Field"])
+		CSay("= Loading GAMEVAR data")
+		gvClearAll()
+		//assert(NIL.Load(LoadStuff["Data/GameVars"],"Game Variables"))
+		LuaDoString("FLOW_SG",NIL.Translate(LoadStuff["Data/GameVars"]) , "Game Variables")
+		CSay("= Loading inventory")
+		//assert(NIL.Load(LoadStuff["Data/Inventory"],"Inventory"))
+		LuaDoString("FLOW_SG",LoadStuff["Data/Inventory"],"Inventory") // Dirty code straight from hell, but hopefully this does something
+		CSay("= Loading lists of mastered abilities")
+		LoadState("IAA","Script/Subs/SubIAA.nil")
+		LuaDoString("IAA",LoadStuff["Data/MasteredAbilities"],"Mastered Abilities")
+		GoToFlow("FIELD")
+		//error("Loading has not yet been implemented!")
 	end
 	
 	void Perform_Delete()
@@ -339,12 +376,24 @@ class SG
 		// Time
 		Time.Update()
 		
+		// Leave
+		if $LeaveCount>0
+			Mouse.Sleep=true
+			$LeaveCount--
+			if $LeaveCount<=0
+				GoToFlow($Leave)
+				Mouse.Sleep=false
+			end
+			return
+		end
 		
 		if Mouse.HitLeft 
 			if $Hover
 				switch $mode:upper()
 					case "SAVE"
 						$Hover.Perform_Save()
+					case "LOAD"
+						$Hover.Perform_Load(sprintf("Save/__GameName.%d",$Hover.ID))
 				end
 			end
 		end

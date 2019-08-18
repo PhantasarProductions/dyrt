@@ -361,6 +361,8 @@ void StartGame()
 	KillFlow("NEWGAME")
 	StartChat("Wake the mouse!")
 	Mouse.Sleeping=false
+	StartChat("Set the cash")
+	__cash = 900 / (__skill*(10^(__skill-1)))
 	StartChat("Carry it all over to the game now!")
 end
 

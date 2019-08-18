@@ -78,7 +78,16 @@ quickmeta group SubInventory
 	end
 end
 
+// No need for complicated meta stuff
+global table SubAbilitiesMastered
+
+// This will override the settings in the IAA linker file
+// This is loaded first, but as '#pure' uses pure Lua code NIL will
+// never know I did this. Please note, NEVER do this yourself unless 
+// you know what you doing! This is pretty dirty code!
 #pure
 Inventory = SubInventory
 #endpure
+
+
 

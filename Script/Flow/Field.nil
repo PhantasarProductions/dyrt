@@ -346,6 +346,15 @@ group FlowField
 		$SFont = $SFont or LoadImageFont("Fonts/Blitz.jfbf")
 		$SFont.DrawText("Phantasar Play-Time: "..Time.PhantasarTime,5,Y) Y = Y - YMin
 		$SFont.DrawText("    Earth Play-Time: "..Time.PlayTime,5,Y) Y = Y - YMin
+		switch __cash
+			case 0
+				$SFont.DrawText("You don't have any money, right now!",5,Y)
+			case 1
+				$SFont.DrawText(sprintf("Cash: %9d shilder",1) ,5,Y)
+			default
+				$SFont.DrawText(sprintf("Cash: %9d shilders",__cash) ,5,Y)
+		end
+		Y = Y - YMin
 	end
 	
 	get string SGData
@@ -361,7 +370,7 @@ group FlowField
 		CSay("SGData.Player")
 		ret = ret .. sprintf("FlowField.Map.Kthura.Actor.Player.CoordSpawn(%6d,%6d,'%s')\n",self.Map.Kthura.Actor.Player.X,self.Map.Kthura.Actor.Player.Y,trim(self.Map.Kthura.Actor.Player.Wind))
 		CSay("SGData.Leader")
-		ret = ret .. sprintf("FlowField.Loader = '%s'\n",trim($Leader))
+		ret = ret .. sprintf("FlowField.Leader = '%s'\n",trim($Leader))
 		CSay("SGData.Done")
 		return ret
 	end

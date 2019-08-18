@@ -72,4 +72,41 @@ quickmeta group Inventory
 	end
 end
 
+string CA_CHAR
+quickmeta group CharAbilitiesMastered
+	newindex
+		assert(CA_CHAR=="","Illegal meta group call!")
+		assert(type(value)=="boolean","Boolean value expected!")
+		LoadSubIAA()
+		if value==true
+			LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s)\"] = true",CA_CHAR,key) )
+		else
+			LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s) = nil",CA_CHAR,key) )
+		end
+		CA_CHAR=""
+	end
+	
+	index
+		assert(CA_CHAR=="","Illegal meta group call!")
+		bool ret
+		ret = LuaGetBool(sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s)\"] == true",CA_CHAR,key) )
+		CA_CHAR=""
+		return ret
+	end
+end
 
+quickmeta group AbilitiesMastered
+	index
+		assert(CA_CHAR!="","Cyclic Abilities Mastered Call!")
+		CA_CHAR=key
+		LoadSubIAA()
+		LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"] = SubAbilitiesMastered[\"trim(%s)\"] or {}",key,key),"IAA:ABIL:CreateCharIfNeeded")
+		return CharAbilitiesMastered
+	end
+	newindex
+		error("New indexes cannot be created in Abilities Mastered!")
+	end
+	call
+		return LuaGetString("IAA","NIL.LuaSerialize(\"SubAbilitiesMastered\",SubAbilitiesMastered)")
+	end
+end
