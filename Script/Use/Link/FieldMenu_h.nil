@@ -1,1 +1,32 @@
 // Let's link it all!
+
+
+// This particular header communicates with this file, but due to the 
+// order in which my ANYWAY generator works, this file always comes first
+// causing errors in the process
+#use "Script/Use/Link/Party_h.nil"
+
+void LMenu()
+	if not StateExists("FLOW_FIELDMENU")
+		LoadFlow("FIELDMENU","Script/Flow/FieldMenu.nil")
+	end
+end
+
+global void GoMenu(char,string situation)
+	LMenu()
+	switch type(char)
+		case "number"
+			Party.SelectedCharacter = char
+		case "string"
+			int i=0
+			repeat
+				if i>8
+					error(sprintf("Character %s not in party",char))
+				end
+				i++
+			until char==RPG.Party[i]
+			Party.SelectedCharacter = i
+	end
+	LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.situation = trim(\"%s\")",situation))
+	GoToFlow("FIELDMENU")
+end

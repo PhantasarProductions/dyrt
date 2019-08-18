@@ -433,9 +433,15 @@ global void BUB_Update()
 			FlowField.Map.Kthura.Actor.Player.WalkTo(wtx,wty)
 			FlowField.WalkArrival = ""
 		end
-		
 	end
+	
+	Party.Click()
 
+end
+
+
+global void PartyClick(int num)
+	GoMenu(num,"Field")
 end
 
 

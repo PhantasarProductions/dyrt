@@ -65,6 +65,20 @@ group Party
 	void ShowBar()
 		PtExe("SubParty.CharBar()")
 	end
+	
+	set int SelectedCharacter
+		PtExe(sprintf("SubParty.SelectedChar = %d",value))
+	end
+	
+	get int SelectedCharacter
+		LoadSub()
+		return LuaGetInt("PARTY","SubParty.SelectedChar")
+	end
+	
+	void Click()
+		LoadSub()
+		PtExe("SubParty.Click()")
+	end
 
 end
 

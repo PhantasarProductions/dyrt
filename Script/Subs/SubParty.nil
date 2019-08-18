@@ -120,6 +120,7 @@ group SubParty
 	table JustLeveled
 	
 	int SelectedChar
+	int Hover
 	
 	get int LevelCap
 		return gv.Num.LevelCap
@@ -268,7 +269,7 @@ group SubParty
 		if $SinCount>=360
 			$SinCount = $SinCount-360
 		end
-		RAD = math.pi * SinCount / 180.0;
+		RAD = math.pi * $SinCount / 180.0;
 		GraphColor.Alpha = math.abs(math.floor( (math.sin(RAD)*255) ) )
 	end
 	
@@ -290,7 +291,7 @@ group SubParty
 				SinAlpha()
 			end
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
-			GraphColor.Alpha
+			GraphColor.Alpha = 255
 			for i=1,#Bars 
 				self.PointsBar(RPG.Party[num],num,i)
 			end
@@ -310,11 +311,16 @@ group SubParty
 				__white
 			end
 			DarkText.Font(font,roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
+			// Hover Detection
+			if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
+				$Hover=num
+			end
 		end
 	end
 	
 	#say "= Entire bar"	
 	void CharBar()
+		$Hover=0
 		for i=1,8
 			switch i
 				case 1 2 3 4
@@ -322,6 +328,12 @@ group SubParty
 				case 5 6 7 8
 					self.BackChar(i)
 			end
+		end
+	end
+	
+	void Click()
+		if Mouse.HitLeft and $Hover>0
+			LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
 		end
 	end
 

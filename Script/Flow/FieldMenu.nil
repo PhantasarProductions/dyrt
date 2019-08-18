@@ -1,13 +1,18 @@
+#use "Script/Use/Anyway"
+
+
 group Flow_FieldMenu
 
 	table situations
+	string situation
 	
 	void CONSTRUCTOR()
-		$situations = { 
+		self.situations = { 
 			["FIELD"] = {},
 			["COMBAT_ITEMS"] = {},
 			["COMBAT_ABILITIES"] = {},
 			["SHOP"] = {}
+		}
 	end
 
 end
