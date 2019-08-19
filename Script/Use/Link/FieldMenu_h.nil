@@ -27,6 +27,6 @@ global void GoMenu(char,string situation)
 			until char==RPG.Party[i]
 			Party.SelectedCharacter = i
 	end
-	LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.situation = trim(\"%s\")",situation))
+	LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.situation = trim(\"%s\")",situation:upper()))
 	GoToFlow("FIELDMENU")
 end

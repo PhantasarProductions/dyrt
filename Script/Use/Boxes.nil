@@ -77,7 +77,7 @@ class Box
 	static void DrawAll()
 		for ibox,lnk in Box.List.Each
 			ibox.Draw()
-			if ibox.kill 
+			if ibox.Kill 
 				lnk.UnLink()
 			end
 		end

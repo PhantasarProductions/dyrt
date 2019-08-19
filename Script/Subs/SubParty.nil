@@ -288,7 +288,7 @@ group SubParty
 		if RPG.Party[num] and RPG.Party[num]!=""
 			// Portrait
 			if num==$SelectedChar
-				SinAlpha()
+				$SinAlpha()
 			end
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
 			GraphColor.Alpha = 255
