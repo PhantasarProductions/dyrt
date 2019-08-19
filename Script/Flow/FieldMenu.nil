@@ -1,4 +1,8 @@
 #use "Script/Use/Anyway"
+#use "Script/Use/Boxes"
+#use "libs/tables"
+
+#macro __TopBarHeight 55
 
 
 group Flow_FieldMenu
@@ -6,13 +10,44 @@ group Flow_FieldMenu
 	table situations
 	string situation
 	
+	var TopBox
+	
 	void CONSTRUCTOR()
+	
+		void ToggleHelp()
+			__autohelp = not __autohelp
+		end
+	
+		table help
+		help = { ['IconFile'] = "Help", ['Action'] = ToggleHelp, ['Help']="Toggles help text on/off", ['NoTab']=true}
+	
+		// situations
 		self.situations = { 
-			["FIELD"] = {},
-			["COMBAT_ITEMS"] = {},
-			["COMBAT_ABILITIES"] = {},
-			["SHOP"] = {}
+			["FIELD"] = { ["MenuItems"] = {}, ["Return"] = "FIELD" },
+			["COMBAT_ITEMS"] = {["MenuItems"] = {}},
+			["COMBAT_ABILITIES"] = {["MenuItems"] = {}},
+			["SHOP"] = {["MenuItems"] = {}}
 		}
+		for k,t in pairs(self.situations)
+			t.MenuItems[#t.MenuItems+1] = tablecopy(help)
+			int width
+			width = (Screen.Width / #t.MenuItems)
+			for i,item in pairs(t.MenuItems)
+				item.x = ((i*width)-math.floor(width/2)-24)
+			end
+		end
+		
+		// ScreenBoxes
+		self.TopBox = new Box(0,0,Screen.Width,__TopBarHeight)
+	end
+	
+	void ItemBar()
+		assert($situations[$situation],sprintf("Situation %s unknown!",$situation) )
+		for item in each($situations[$situation].MenuItems)
+			item.Icon = item.Icon or LoadIfNew(sprintf("GFX/MenuItems/%s.png",item.IconFile),sprintf("MENUITEM_%s",item.IconFile:upper() ) )
+			assert(item.Icon,sprintf("Icon for %s not present!",item.IconFile) )
+			item.Icon.Draw(item.x,4)
+		end
 	end
 
 end
@@ -24,6 +59,14 @@ end
 with Flow_FieldMenu
 
 	global void BUB_Draw()
+		// Draw all the boxes
+		Box.DrawAll()
+		
+		// Item bar
+		$ItemBar()
+		
+		// Party Sub
+		Party.ShowBar()
 	end
 	
 	global void BUB_Update()
