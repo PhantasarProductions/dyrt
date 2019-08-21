@@ -1,6 +1,8 @@
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
+#use "Script/Use/BoxPics"
 #use "libs/tables"
+#use "libs/DarkText"
 
 #macro __TopBarHeight 55
 
@@ -10,26 +12,57 @@ group Flow_FieldMenu
 	table situations
 	string situation
 	
+	var BigFont
+	
 	var TopBox
+	var LeftBox
+	var RightBox
+	
+	link CharNum = Party.SelectedCharacter
+	get string CharTag 
+		//CSayF("Getting Chartag %d!",$CharNum)
+		return RPG.Party[$CharNum]
+	end
+	
+	void BasePanel(ubox)
+		var ch
+		//CSay("...")
+		//CSay("CHARTAG = "..$CharTag)
+		ch = RPG.Char($CharTag)
+		ubox = ubox or $LeftBox
+		BoxPic(ubox.x+10,ubox.y+10,$CharTag,"GENERAL","top")
+		__amber
+		DarkText.Font($BigFont,ch.Name,ubox.x+125, ubox.y+15)
+	end
 	
 	void CONSTRUCTOR()
 	
+		CSay("Constructing Field menu!")
+	
+		CSay("= void ToggleHelp")
 		void ToggleHelp()
 			__autohelp = not __autohelp
 		end
-	
+		
+		CSay("= Help table")
 		table help
 		help = { ['IconFile'] = "Help", ['Action'] = ToggleHelp, ['Help']="Toggles help text on/off", ['NoTab']=true}
-	
+		
+		CSay("= Situation definitions!")
 		// situations
 		self.situations = { 
 			["FIELD"] = { ["MenuItems"] = {}, ["Return"] = "FIELD" },
 			["COMBAT_ITEMS"] = {["MenuItems"] = {}},
 			["COMBAT_ABILITIES"] = {["MenuItems"] = {}},
 			["SHOP"] = {["MenuItems"] = {}}
+			["BANK"] = {["MenuItems"] = {} }
 		}
+		
+		CSay("= Configuring Situation Data!")
 		for k,t in pairs(self.situations)
+			CSayF("Situation %s has %d menu items (help not counted)",k,#t.MenuItems)
 			t.MenuItems[#t.MenuItems+1] = tablecopy(help)
+			CSayF("Situation %s has %d menu items (help included)",k,#t.MenuItems)
 			int width
 			width = (Screen.Width / #t.MenuItems)
 			for i,item in pairs(t.MenuItems)
@@ -38,13 +71,24 @@ group Flow_FieldMenu
 		end
 		
 		// ScreenBoxes
+		CSay("= Creating work boxes")
 		self.TopBox = new Box(0,0,Screen.Width,__TopBarHeight)
+		self.LeftBox = new Box(0,__TopBarHeight,math.floor(Screen.Width/2),(Screen.Height-128)-__TopBarHeight)
+		self.RightBox = new Box(math.floor(Screen.Width/2),__TopBarHeight,math.floor(Screen.Width/2),(Screen.Height-128)-__TopBarHeight)
+		
+		// Fonts
+		CSay("= Import font")
+		self.BigFont = GetFont("BIGTEXT")
+		assert(self.BigFont,"Font import failed!")
+		CSay("= Construction of field menu done!")
 	end
 	
 	void ItemBar()
 		assert($situations[$situation],sprintf("Situation %s unknown!",$situation) )
+		__white
 		for item in each($situations[$situation].MenuItems)
-			item.Icon = item.Icon or LoadIfNew(sprintf("GFX/MenuItems/%s.png",item.IconFile),sprintf("MENUITEM_%s",item.IconFile:upper() ) )
+			$situations[$situation].citem = $situations[$situation].citem or item
+			item.Icon = item.Icon or LoadIfNew(sprintf("GFX/MenuIcons/%s.png",item.IconFile),sprintf("MENUITEM_%s",item.IconFile:upper() ) )
 			assert(item.Icon,sprintf("Icon for %s not present!",item.IconFile) )
 			item.Icon.Draw(item.x,4)
 		end
@@ -59,14 +103,41 @@ end
 with Flow_FieldMenu
 
 	global void BUB_Draw()
+		bool bd_debug = false
+		void dchat(string msg)
+			if bd_debug
+				CSay("DEBUG BUB_DRAW:> "..msg)
+			end
+		end
+	
 		// Draw all the boxes
+		dchat("Boxes")
 		Box.DrawAll()
 		
 		// Item bar
+		dchat("Itembar")
 		$ItemBar()
 		
 		// Party Sub
+		dchat("Party")
 		Party.ShowBar()
+		
+		// Left Tab
+		dchat("Left panel")
+		if $situations[$situation].citem.LeftBox
+			dchat("= Custom")
+			$situations[$situation].citem.LeftBox($LeftBox)
+		else
+			dchat("= base")
+			$BasePanel($LeftBox)
+		end
+		
+		// Show Mouse
+		dchat("Mouse")
+		__white
+		Mouse.Show()
+		
+		dchat("Done")
 	end
 	
 	global void BUB_Update()
