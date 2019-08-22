@@ -88,10 +88,18 @@ group Flow_FieldMenu
 		CSay("= Situation definitions!")
 		// situations
 		self.situations = { 
-			["FIELD"] = { ["MenuItems"] = {}, ["Return"] = "FIELD" },
+			["FIELD"] = { 
+				["MenuItems"] = { 
+					{ ["IconFile"]="Status", ["Right"]="Status", ["Help"]="Shows all statistics and data" },
+					{ ["IconFile"]="Items", ["Right"]="Items", ["Help"]="Shows your inventory" },
+					{ ["IconFile"]="Abilities", ["Right"]="Abilities", ["Help"]="Shows a character's abilities (if they actually got them)" },
+					{ ["IconFile"]="Trophies", ["Right"]="Trophies", ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
+				}, 
+				["Return"] = "FIELD" 
+			},
 			["COMBAT_ITEMS"] = {["MenuItems"] = {}},
 			["COMBAT_ABILITIES"] = {["MenuItems"] = {}},
-			["SHOP"] = {["MenuItems"] = {}}
+			["SHOP"] = {["MenuItems"] = {} },
 			["BANK"] = {["MenuItems"] = {} }
 		}
 		
