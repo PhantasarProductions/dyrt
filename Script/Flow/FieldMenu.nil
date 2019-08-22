@@ -51,10 +51,13 @@ group Flow_FieldMenu
 	string situation
 	
 	var BigFont
+	var Font
 	
 	var TopBox
 	var LeftBox
 	var RightBox
+	
+	table BaseStats
 	
 	link CharNum = Party.SelectedCharacter
 	get string CharTag 
@@ -62,15 +65,66 @@ group Flow_FieldMenu
 		return RPG.Party[$CharNum]
 	end
 	
+	string strstat(string chtag,string stat)
+		if chtag=="Shanda"
+			return "???"
+		end
+		if chtag=="Kirana"
+			switch stat
+				case "Strength"
+					return "Weak"
+				case "Defense"
+					return "Fragile"
+				case "Intelligence"
+					return "Dumb"
+				case "Resistance"
+					return "Awful"
+				case "Agility"
+					return "Fast (if afraid)"
+				case "Accuracy"
+					return "Miss"
+				case "Evasion"
+					return "Hard to miss"
+				default
+					return "Terrible"
+			end
+		end
+		string ch 
+		int s 
+		ch = RPG.Char(chtag)
+		s = ch.Stat("END_"..stat).Value
+		return sprintf("%5d",s)
+	end
+	
 	void BasePanel(ubox)
 		var ch
 		//CSay("...")
 		//CSay("CHARTAG = "..$CharTag)
+		__white
 		ch = RPG.Char($CharTag)
 		ubox = ubox or $LeftBox
 		BoxPic(ubox.x+10,ubox.y+10,$CharTag,"GENERAL","top")
 		__amber
 		DarkText.Font($BigFont,ch.Name,ubox.x+125, ubox.y+15)
+		for i,s in ipairs($BaseStats)
+			__white
+			DarkText.Font($Font,s,ubox.x+10,(ubox.y+120)+(i*15))
+			__amber
+			DarkText.Font($Font,$strstat($CharTag,s),(ubox.x+ubox.w)-10,(ubox.y+120)+(i*15),1)
+		end
+	end
+	
+	void NotYetImplemented(ubox)
+		int cx
+		int cy
+		cx = ubox.x+(ubox.w/2)
+		cy = ubox.h+(ubox.h/2)
+		__red
+		DarkText.Font($BigFont,"The requested feature has",cx,cy-25,2)
+		DarkText.Font($BigFont,"not yet been implemented!",cx,cy+25,2)
+	end
+	
+	void Status()
 	end
 	
 	void CONSTRUCTOR()
@@ -91,7 +145,7 @@ group Flow_FieldMenu
 		self.situations = { 
 			["FIELD"] = { 
 				["MenuItems"] = { 
-					{ ["IconFile"]="Status", ["Right"]="Status", ["Help"]="Shows all statistics and data" },
+					{ ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" },
 					{ ["IconFile"]="Items", ["Right"]="Items", ["Help"]="Shows your inventory" },
 					{ ["IconFile"]="Abilities", ["Right"]="Abilities", ["Help"]="Shows a character's abilities (if they actually got them)" },
 					{ ["IconFile"]="Trophies", ["Right"]="Trophies", ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
@@ -123,10 +177,16 @@ group Flow_FieldMenu
 		self.RightBox = new Box(math.floor(Screen.Width/2),__TopBarHeight,math.floor(Screen.Width/2),(Screen.Height-128)-__TopBarHeight)
 		
 		// Fonts
-		CSay("= Import font")
+		CSay("= Import Big font")
 		self.BigFont = GetFont("BIGTEXT")
 		assert(self.BigFont,"Font import failed!")
+		CSay("= Import Normal font")
+		self.Font = GetFont("BOXTEXT")
+		assert(self.BigFont,"Font import failed!")
 		CSay("= Construction of field menu done!")
+		
+		// Base Stats
+		self.BaseStats = { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
 	end
 	
 	void ItemBar()
@@ -170,12 +230,22 @@ with Flow_FieldMenu
 		
 		// Left Tab
 		dchat("Left panel")
-		if $situations[$situation].citem.LeftBox
+		if type($situations[$situation].citem.Left)=="function"
 			dchat("= Custom")
-			$situations[$situation].citem.LeftBox($LeftBox)
+			$situations[$situation].citem.Left($LeftBox)
 		else
 			dchat("= base")
 			$BasePanel($LeftBox)
+		end
+		
+		// Right Tab
+		dchat("Right panel")
+		if type($situations[$situation].citem.Right)=="function"
+			dchat("= Custom")
+			$situations[$situation].citem.Right($RightBox)
+		else
+			dchat("= base")
+			$NotYetImplemented($RightBox)
 		end
 		
 		// Show Mouse
