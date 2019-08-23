@@ -189,7 +189,7 @@ group SubParty
 					// Alright, move along, there's nothing to see here!
 				elseif cmd:upper()=="LEVEL"
 					chklevel = tonumber(para) or 0
-				elseif cmd:upper()=="STAT.EXPERIENCE"
+				elseif cmd:upper()=="STAT.EXPERIENCE" and chklevel==level
 					int exp
 					exp = tonumber(para) or 0
 					if pureexp
