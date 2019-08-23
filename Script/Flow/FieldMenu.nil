@@ -133,7 +133,7 @@ group Flow_FieldMenu
 		if level>=__levelcap or $CharTag=="Kirana" or $CharTag=="Shanda"
 			__red
 			DarkText.Font($Font,"---",(ubox.x+ubox.w)-10,xy,1)
-			if CharTag=="Kirana" or CharTag=="Shanda"
+			if $CharTag=="Kirana" or $CharTag=="Shanda"
 				__skyblue
 			elseif level==__levelcap
 				__ember
