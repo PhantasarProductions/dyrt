@@ -47,6 +47,7 @@
 #use "libs/tables"
 #use "libs/DarkText"
 #use "libs/Roman"
+#use "libs/DateTime"
 
 #macro __TopBarHeight 55
 
@@ -55,6 +56,8 @@ group Flow_FieldMenu
 
 	table situations
 	string situation
+	
+	var ItemHover
 	
 	var BigFont
 	var Font
@@ -225,13 +228,21 @@ group Flow_FieldMenu
 	end
 	
 	void ItemBar()
+		$ItemHover = nil;
 		assert($situations[$situation],sprintf("Situation %s unknown!",$situation) )
 		__white
 		for item in each($situations[$situation].MenuItems)
 			$situations[$situation].citem = $situations[$situation].citem or item
+			if $situations[$situation].citem == item and Now.Second % 2 == 0
+				GraphColor.Alpha=100
+			end
 			item.Icon = item.Icon or LoadIfNew(sprintf("GFX/MenuIcons/%s.png",item.IconFile),sprintf("MENUITEM_%s",item.IconFile:upper() ) )
 			assert(item.Icon,sprintf("Icon for %s not present!",item.IconFile) )
 			item.Icon.Draw(item.x,4)
+			if Mouse.X>item.x and Mouse.Y>4 and Mouse.X<item.x+48 and Mouse.Y<52
+				$ItemHover=item
+			end
+			GraphColor.Alpha=255
 		end
 	end
 
@@ -270,7 +281,7 @@ with Flow_FieldMenu
 			$situations[$situation].citem.Left($LeftBox)
 		else
 			dchat("= base")
-			$BasePanel($LeftBox)
+			$BasePanel($LeftBox)			
 		end
 		
 		// Right Tab
@@ -293,6 +304,15 @@ with Flow_FieldMenu
 	
 	global void BUB_Update()
 		Dev.ConCheck()
+		
+		if $ItemHover and Mouse.HitLeft
+			if $ItemHover.Action
+				$ItemHover.Action()
+			end
+			if not $ItemHover.NoTab
+				$situations[$situation].citem = $ItemHover
+			end
+		end
 	end
 	
 end
