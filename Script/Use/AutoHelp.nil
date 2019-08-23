@@ -1,0 +1,49 @@
+var Font
+
+global void ShowAutoHelp(HelpText)
+
+	Font = GetFont("BoxText")
+	
+	if not __autohelp
+		return
+	end
+	
+	int l
+	bool more
+	int y
+	int h
+	switch type(HelpText)
+		case "string"
+			l=1
+			more=false
+		case "table"
+			l=#HelpText
+			more=true
+		default
+			error("Invalid HelpText argument!")
+		end
+	end
+	
+	y = 0
+	h = l * 20
+	if Mouse.Y<h+20
+		y = Screen.Height - h
+	end
+	
+	GraphColor.Alpha = 100
+	__black
+	Rect(0,y,Screen.Width,h)
+	GraphColor.Alpha = 255
+	
+	__white
+	for i=1,l
+		string display
+		if more
+			display = HelpText[i]
+		else
+			display = HelpText
+		end
+		Font.DrawText(display,5,y+((i-1)*20) )
+	end
+	
+end
