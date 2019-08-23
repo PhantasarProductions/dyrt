@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 19.08.21
+// Version: 19.08.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -158,12 +159,12 @@ group SubParty
 		var ch
 		ch = RPG.CreateChar(tag)
 		NIL.Use("Script/Char/Create/"..tag..".nil")
-		self.SetLevelStats(tag,level)
+		self.SetLevelStats(tag,level,true)
 		CSayF("Created new character: %s",tag)
 	end
 	
 	#say "= Set level stats"
-	void SetLevelStats(string tag, int level)
+	void SetLevelStats(string tag, int level,pureexp)
 		var ch
 		table lines
 		bool levelfound = false
@@ -187,6 +188,14 @@ group SubParty
 					// Alright, move along, there's nothing to see here!
 				elseif cmd:upper()=="LEVEL"
 					chklevel = tonumber(para) or 0
+				elseif cmd:upper()=="STAT.EXPERIENCE"
+					int exp
+					exp = tonumber(para) or 0
+					if pureexp
+						ch.Stat("Experience").Value=exp
+					else
+						ch.Stat("Experience").Value=ch.Stat("Experience").Value+exp
+					end
 				elseif Left(cmd,5):upper()=="STAT." and chklevel==level
 					levelfound=true
 					table splitmore
@@ -252,7 +261,25 @@ group SubParty
 		// Points
 		DarkText.Font(PartyBar.Font,tostring(pnt.Have),x+w,y-20,1,0)
 	end
-
+	
+	void BigPointsBar(string Ch, int num, int x, int y, int w)
+		var bar
+		var pnt				
+		bar = Bars[num]
+		pnt = RPG.Char(Ch).Points(bar.Tag)
+		if pnt.Maximum==0 then return end
+		bar.Char = Ch
+		// bar back
+		Color(100,100,100)
+		Rect(x,y,w,5)
+		// bar color + bar
+		Color(bar.R,bar.G,bar.B)
+		Rect(x,y,math.floor( (pnt.Have/pnt.Maximum) * w ), 5 )
+		// Icon
+		bar.TagIcon.Draw(x-30,y-20)
+		// Points
+		DarkText.Font(PartyBar.Font,sprintf("%5d / %5d",pnt.Have,pnt.Maximum),x+w,y-20,1,0)
+	end
 	
 	#say "= Back Char"
 	void BackChar(int num)
@@ -343,6 +370,7 @@ end
 
 CSay(tostring(SubParty))
 #say "Compiling Party Sub!"
+
 
 
 
