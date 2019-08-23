@@ -130,7 +130,7 @@ group Flow_FieldMenu
 		level = ch.Stat("Level").Value
 		DarkText.Font($Font,"EXP to next level:",ubox.x+10,xy)
 		DarkText.Font($Font,"Level:",ubox.x+10,xy+20)
-		if level>=__levelcap or CharTag=="Kirana" or CharTag=="Shanda"
+		if level>=__levelcap or $CharTag=="Kirana" or $CharTag=="Shanda"
 			__red
 			DarkText.Font($Font,"---",(ubox.x+ubox.w)-10,xy,1)
 			if CharTag=="Kirana" or CharTag=="Shanda"
