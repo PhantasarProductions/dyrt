@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.08.21
+// Version: 19.08.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -43,12 +43,14 @@
 
 
 
+
 global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
 #use "libs/saskia"
 #use "libs/strings"
 #use "libs/tables"
+#use "libs/Roman"
 
 #macro __player FlowField.Map.Kthura.Actor.Player
 
@@ -357,6 +359,8 @@ group FlowField
 				$SFont.DrawText(sprintf("Cash: %9d shilders",__cash) ,5,Y)
 		end
 		Y = Y - YMin
+		$SFont.DrawText("Level Cap: "..Roman(__levelcap),5,Y)
+		Y = Y - YMin
 	end
 	
 	get string SGData
@@ -486,6 +490,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 
