@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 19.08.21
+// Version: 19.08.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -43,6 +43,7 @@
 
 
 
+
 #use "libs/strings"
 
 #macro DEVELOPMENT true
@@ -64,6 +65,7 @@
 #macro __skill gv.Int.Skill
 #macro __cash gv.Int.Cash
 #macro __autohelp gv.Bool.AutoHelp
+#macro __levelcap gv.Num.LevelCap
 
 
 class MidScreen
@@ -116,6 +118,7 @@ group Arrow
 		end
 	end
 end
+
 
 
 
