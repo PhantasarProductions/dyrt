@@ -38,6 +38,9 @@
 
 
 
+
+
+
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
@@ -136,10 +139,10 @@ group Flow_FieldMenu
 			if $CharTag=="Kirana" or $CharTag=="Shanda"
 				__skyblue
 			elseif level==__levelcap
-				__ember
+				__amber
 			end
 		else
-			__ember
+			__amber
 			DarkText.Font($Font,ch.Stat("Experience").Value,(ubox.x+ubox.w)-10,xy,1)
 			__green
 		end
@@ -293,6 +296,9 @@ with Flow_FieldMenu
 	end
 	
 end
+
+
+
 
 
 
