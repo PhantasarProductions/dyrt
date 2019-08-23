@@ -37,6 +37,7 @@
 
 
 
+
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
@@ -126,7 +127,7 @@ group Flow_FieldMenu
 		end
 		xy = xy + 30
 		__white
-		level = RPG.Char(CharTag).Stat("Level").Value
+		level = ch.Stat("Level").Value
 		DarkText.Font($Font,"EXP to next level:",ubox.x+10,xy)
 		DarkText.Font($Font,"Level:",ubox.x+10,xy+20)
 		if level>=__levelcap or CharTag=="Kirana" or CharTag=="Shanda"
@@ -292,6 +293,7 @@ with Flow_FieldMenu
 	end
 	
 end
+
 
 
 
