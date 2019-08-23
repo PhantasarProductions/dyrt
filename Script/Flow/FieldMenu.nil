@@ -162,7 +162,30 @@ group Flow_FieldMenu
 		DarkText.Font($BigFont,"not yet been implemented!",cx,cy+25,2)
 	end
 	
-	void Status()
+	void Status(ubox)
+		var ch
+		int x
+		int y
+		int w
+		x = ubox.x
+		y = ubox.y
+		w = ubox.w
+		ch = RPG.Char($CharTag)
+		ch.Points("SKILLLVL0").Minimum = 1
+		for i=0,4
+			if ch.Points("SKILLLVL"..i).Have>0
+				int ty
+				ty = (y+10)+(i*20)
+				Color(100,100,100)
+				Rect(x+10,ty+10,w-20,10)
+				__red
+				Rect(x+10,ty+10,math.floor( (ch.Points("SKILLEXP"..i).Have/ch.Points("SKILLEXP"..i).Maximum) * (w-20) ), 10 )
+				__white
+				DarkText.Font($Font,ch.Data["SKILL"..i],x+10, ty)
+				__amber
+				DarkText.Font($Font,Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty)
+			end
+		end
 	end
 	
 	void CONSTRUCTOR()
