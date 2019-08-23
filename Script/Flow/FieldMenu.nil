@@ -42,6 +42,7 @@
 #use "Script/Use/BoxPics"
 #use "libs/tables"
 #use "libs/DarkText"
+#use "libs/Roman"
 
 #macro __TopBarHeight 55
 
@@ -99,6 +100,9 @@ group Flow_FieldMenu
 	
 	void BasePanel(ubox)
 		var ch
+		int m=3
+		int xy
+		int level
 		//CSay("...")
 		//CSay("CHARTAG = "..$CharTag)
 		__white
@@ -107,12 +111,38 @@ group Flow_FieldMenu
 		BoxPic(ubox.x+10,ubox.y+10,$CharTag,"GENERAL","top")
 		__amber
 		DarkText.Font($BigFont,ch.Name,ubox.x+125, ubox.y+15)
+		if __skill==3 
+			m=2
+		end
+		for i=1,m
+			LuaDoString("PARTY",sprintf("SubParty.BigPointsBar(trim(\"%s\"), %d, %d, %d, %d)",$CharTag,i,ubox.x+125,ubox.y+40+(i*20),ubox.w-150))
+		end
 		for i,s in ipairs($BaseStats)
 			__white
-			DarkText.Font($Font,s,ubox.x+10,(ubox.y+120)+(i*15))
+			xy = (ubox.y+120)+(i*15)
+			DarkText.Font($Font,s,ubox.x+10,xy)
 			__amber
-			DarkText.Font($Font,$strstat($CharTag,s),(ubox.x+ubox.w)-10,(ubox.y+120)+(i*15),1)
+			DarkText.Font($Font,$strstat($CharTag,s),(ubox.x+ubox.w)-10,xy,1)
 		end
+		xy = xy + 30
+		__white
+		level = RPG.Char(CharTag).Stat("Level").Value
+		DarkText.Font($Font,"EXP to next level:",ubox.x+10,xy)
+		DarkText.Font($Font,"Level:",ubox.x+10,xy+20)
+		if level>=__levelcap or CharTag=="Kirana" or CharTag=="Shanda"
+			__red
+			DarkText.Font($Font,"---",(ubox.x+ubox.w)-10,xy,1)
+			if CharTag=="Kirana" or CharTag=="Shanda"
+				__skyblue
+			elseif level==__levelcap
+				__ember
+			end
+		else
+			__ember
+			DarkText.Font($Font,ch.Stat("Experience").Value,(ubox.x+ubox.w)-10,xy,1)
+			__green
+		end
+		DarkText.Font($Font,Roman(ch.Stat("Level").Value),(ubox.x+ubox.w)-10,xy+20,1)
 	end
 	
 	void NotYetImplemented(ubox)
