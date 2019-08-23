@@ -2,7 +2,7 @@ var Font
 
 global void ShowAutoHelp(HelpText)
 
-	Font = GetFont("BoxText")
+	Font = GetFont("BOXTEXT")
 	
 	if not __autohelp
 		return
@@ -20,14 +20,13 @@ global void ShowAutoHelp(HelpText)
 			l=#HelpText
 			more=true
 		default
-			error("Invalid HelpText argument!")
-		end
+			error("Invalid HelpText argument!")		
 	end
 	
 	y = 0
 	h = l * 20
 	if Mouse.Y<h+20
-		y = Screen.Height - h
+		y = Screen.Height - (h + 128)
 	end
 	
 	GraphColor.Alpha = 100

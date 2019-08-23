@@ -44,6 +44,7 @@
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
+#use "Script/Use/AutoHelp"
 #use "libs/tables"
 #use "libs/DarkText"
 #use "libs/Roman"
@@ -264,6 +265,7 @@ group Flow_FieldMenu
 			item.Icon.Draw(item.x,4)
 			if Mouse.X>item.x and Mouse.Y>4 and Mouse.X<item.x+48 and Mouse.Y<52
 				$ItemHover=item
+			ShowAutoHelp(item.Help or "No help text available")
 			end
 			GraphColor.Alpha=255
 		end
@@ -335,6 +337,16 @@ with Flow_FieldMenu
 			if not $ItemHover.NoTab
 				$situations[$situation].citem = $ItemHover
 			end
+		end
+		
+		Party.Click()
+	end
+	
+	global void PartyClick(int num)
+		if num==$CharNum
+			GoToFlow($situations[$situation].Return)
+		else
+			$CharNum = num
 		end
 	end
 	

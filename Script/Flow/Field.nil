@@ -398,6 +398,7 @@ global void BUB_Draw()
 	
 	// Character screen
 	FlowField.FieldStats()
+	Party.SelectedCharacter=0
 	Party.ShowBar()
 	
 	// Show Mouse
