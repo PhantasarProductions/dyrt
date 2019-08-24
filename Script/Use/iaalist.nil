@@ -1,0 +1,8 @@
+// Generated list!
+table ret
+ret[#ret+1]="ITM_ANTIDOTE"
+ret[#ret+1]="ITM_APPLE"
+ret[#ret+1]="EQW_YOUNGIRRAVONIA_TWIG"
+
+
+return ret
