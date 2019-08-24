@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/IAA.nil
-// Version: 19.08.18
+// Version: 19.08.24
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 void LoadSubIAA()
@@ -112,3 +113,25 @@ quickmeta group AbilitiesMastered
 	end
 end
 
+table LoadedItems
+void CleanLoadedItems()
+	LoadItems = {}
+end
+
+quickmeta group Item
+	index
+		string k
+		k = key:upper()
+		switch k
+			case "CLEAR" "CLEAN"
+				return CleanLoadedItems
+			default
+				LoadedItems[k] = LoadedItems[k] or NIL.Use("Script/Data/IAA/"..k..".nil")
+				return LoadedItems[k]
+		end
+end
+
+global function EachItem()
+	LoadSubIAA()
+	
+end

@@ -190,6 +190,17 @@ group Flow_FieldMenu
 		end
 	end
 	
+	void GenHelp(table item)
+	end
+	
+	int ItemScrollY = 0
+	var ItemHover
+	void Items(ubox)
+			int y 
+			y = -ItemScrollY
+			
+	end
+	
 	void CONSTRUCTOR()
 	
 		CSay("Constructing Field menu!")
@@ -209,9 +220,9 @@ group Flow_FieldMenu
 			["FIELD"] = { 
 				["MenuItems"] = { 
 					{ ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" },
-					{ ["IconFile"]="Items", ["Right"]="Items", ["Help"]="Shows your inventory" },
-					{ ["IconFile"]="Abilities", ["Right"]="Abilities", ["Help"]="Shows a character's abilities (if they actually got them)" },
-					{ ["IconFile"]="Trophies", ["Right"]="Trophies", ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
+					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" },
+					{ ["IconFile"]="Abilities", ["Right"]=nil, ["Help"]="Shows a character's abilities (if they actually got them)" },
+					{ ["IconFile"]="Trophies", ["Right"]=nil, ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
 				}, 
 				["Return"] = "FIELD" 
 			},

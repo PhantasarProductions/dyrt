@@ -37,6 +37,7 @@ mc ItemType
 @i Weapon
 @i Armor
 @i Jewel
+@i Key
 int BuyPrice
 bool Sellable
 
@@ -149,6 +150,30 @@ int BuffAgility
 int BuffAccuracy
 int BuffEvasion
 
+[Page:Equipment]
+bool EqEric
+bool EqIrravonia
+bool EqBrendor
+bool EqScyndi
+bool EqRebecca
+bool EqDernor
+bool EqMerya
+bool EqAziella
+bool EqYoungIrravonia
+bool EqShanda
+bool EqKirana
+strike
+int EQP_Strength
+int EQP_Defense
+int EQP_Intelligence
+int EQP_Resistance
+int EQP_Agility
+int EQP_Accuracy
+int EQP_Evasion
+
+[Allow:ItemType {} Weapon,Armor,Jewel]
+Page:Equipment
+
 [Page:XtraAct]
 info "Charge" means that in the next turn the character who cast this can only do the move referred to in here.
 string Charge
@@ -174,6 +199,83 @@ string SpellAniArgument
 # Also adding comments here is pretty senseless!
 # Data last generated 24/8/2019
 
+
+Rec: EQW_YOUNGIRRAVONIA_TWIG
+	AP_Cost = 0
+	Attack = 0
+	AttackStat = Intelligence
+	AttackType = Magical
+	BlockSilence = FALSE
+	BuffAccuracy = 0
+	BuffAgility = 0
+	BuffDefense = 0
+	BuffEvasion = 0
+	BuffIntelligence = 0
+	BuffResistance = 0
+	BuffStrength = 0
+	BuyPrice = 100
+	CauseDeath = FALSE
+	CauseDestruction = FALSE
+	CauseDisease = FALSE
+	CauseExhaustion = FALSE
+	CauseFear = FALSE
+	CauseParalysis = FALSE
+	CausePoison = FALSE
+	CauseSilence = FALSE
+	CauseSleep = FALSE
+	CauseZombie = FALSE
+	Charge = 
+	COM2ACT = 10
+	CureDeath = FALSE
+	CureDestruction = FALSE
+	CureDisease = FALSE
+	CureExhaustion = FALSE
+	CureFear = FALSE
+	CureParalysis = FALSE
+	CurePoison = FALSE
+	CureSilence = FALSE
+	CureSleep = FALSE
+	CureZombie = FALSE
+	DefenseStat = Resistance
+	Description = Not much of a weapon, eh?
+	Discriminate = FALSE
+	EffectArgument = 
+	EffectFunction = 
+	EffectScript = 
+	Element = None
+	EqAziella = FALSE
+	EqBrendor = FALSE
+	EqDernor = FALSE
+	EqEric = FALSE
+	EqIrravonia = FALSE
+	EqKirana = FALSE
+	EqMerya = FALSE
+	EQP_Accuracy = 1
+	EQP_Agility = 1
+	EQP_Defense = 1
+	EQP_Evasion = 1
+	EQP_Intelligence = 1
+	EQP_Resistance = 1
+	EQP_Strength = 1
+	EqRebecca = FALSE
+	EqScyndi = FALSE
+	EqShanda = FALSE
+	EqYoungIrravonia = TRUE
+	Heal = 0
+	HealStat = Intelligence
+	HealType = Absolute
+	HP_Cost = 0
+	Icon = Auto
+	ItemType = Weapon
+	MoveRepeat = 0
+	MoveRepeatSpeed = 0
+	Name = Twig
+	Sellable = FALSE
+	SpellAniArgument = 
+	SpellAniFunction = 
+	SpellAniScript = 
+	Target = Auto
+	Type = Item
 
 Rec: ITM_ANTIDOTE
 	AP_Cost = 0
