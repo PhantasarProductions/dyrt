@@ -1,8 +1,8 @@
 // Generated list!
-table ret
-ret[#ret+1]="ITM_ANTIDOTE"
-ret[#ret+1]="ITM_APPLE"
-ret[#ret+1]="EQW_YOUNGIRRAVONIA_TWIG"
+table itemret
+itemret[#itemret+1]="ITM_ANTIDOTE"
+itemret[#itemret+1]="ITM_APPLE"
+itemret[#itemret+1]="EQW_YOUNGIRRAVONIA_TWIG"
 
 
-return ret
+return itemret

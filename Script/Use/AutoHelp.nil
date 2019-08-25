@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/AutoHelp.nil
-// Version: 19.08.24
+// Version: 19.08.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 var Font
 
@@ -83,4 +84,5 @@ global void ShowAutoHelp(HelpText)
 	end
 	
 end
+
 

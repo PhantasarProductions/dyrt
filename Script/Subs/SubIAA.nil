@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubIAA.nil
-// Version: 19.08.18
+// Version: 19.08.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 
 
+#say "Translating: SubIAA.nil"
 #use "Script/Use/Anyway.nil"
 #use "libs/tables"
 #use "libs/strings"
@@ -45,20 +46,25 @@ table trueInventory
 quickmeta group SubInventory
 	index
 		assert(type(key)=="string","Illegal inventory key")
-		return trueInventory[key] or 0
+		//CSay(NIL.LuaSerialize("Inventory",trueInventory))
+		return trueInventory[trim(key:upper())] or 0
 	end
 	
 	newindex
 		assert(type(key)=="string","Illegal inventory key")
 		assert(type(value)=="number" and math.floor(value)==value and value>=0,"Illegal inventory number of items!")
-		key = trim(key)
+		key = trim(key):upper()
 		if key=="*CLEAR*"
 			// Dirty, yet safe and quick
 			trueInventory = {}
+			CSay("Clear inventory!")
 		elseif value==0
+			CSayF("Item %s has been removed from the inventory!",key)
 			trueInventory[key]=nil;
 		else
+			CSayF("Item %s is now set to %d",key,value)
 			trueInventory[key]=value
+			CSay(NIL.LuaSerialize("Inventory",trueInventory))
 		end
 	end
 	
@@ -89,6 +95,7 @@ global table SubAbilitiesMastered
 #pure
 Inventory = SubInventory
 #endpure
+
 
 
 

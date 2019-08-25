@@ -262,7 +262,7 @@ class SG
 		//assert(NIL.Load(LoadStuff["Data/Inventory"],"Inventory"))
 		LuaDoString("FLOW_SG",LoadStuff["Data/Inventory"],"Inventory") // Dirty code straight from hell, but hopefully this does something
 		CSay("= Loading lists of mastered abilities")
-		LoadState("IAA","Script/Subs/SubIAA.nil")
+		if not StateExists("IAA") then LoadState("IAA","Script/Subs/SubIAA.nil") end
 		LuaDoString("IAA",LoadStuff["Data/MasteredAbilities"],"Mastered Abilities")
 		GoToFlow("FIELD")
 		//error("Loading has not yet been implemented!")
