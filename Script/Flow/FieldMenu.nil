@@ -100,6 +100,12 @@ group Flow_FieldMenu
 		return sprintf("%5d",s)
 	end
 	
+	void Quit()
+		if Yes("Do you really want to quit?")
+			Bye()
+		end
+	end
+	
 	void BasePanel(ubox)
 		var ch
 		int m=3
@@ -292,7 +298,8 @@ group Flow_FieldMenu
 					{ ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" },
 					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" },
 					{ ["IconFile"]="Abilities", ["Right"]=nil, ["Help"]="Shows a character's abilities (if they actually got them)" },
-					{ ["IconFile"]="Trophies", ["Right"]=nil, ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
+					{ ["IconFile"]="Trophies", ["Right"]=nil, ["Help"]="Overview of achievements you can obtain, and how to obtain them" },
+					{ ['IconFile'] = "Exit", ['Action'] = self.Quit, ['Help']="Quit the game", ['NoTab']=true}
 				}, 
 				["Return"] = "FIELD" 
 			},
