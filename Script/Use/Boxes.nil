@@ -56,6 +56,14 @@ class Box
 	bool Kill
 	bool DontList
 	
+	get int ex
+		return $w+$x
+	end
+	
+	get int ey
+		return $h+$y
+	end
+	
 	void Draw()
 		__white
 		int wd = 5

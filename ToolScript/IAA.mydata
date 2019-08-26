@@ -44,6 +44,7 @@ bool Sellable
 [default]
 BuyPrice=100
 ItemType=Consumable
+Sellable=TRUE
 
 [Allow:Type = Item]
 !PAGE:Ability
@@ -585,7 +586,7 @@ Rec: ITM_MEDICINE
 	Target = Auto
 	Type = Item
 
-Rec: JWL_YOUNGIRRAVONIA_BEADNECKLESS
+Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	AP_Cost = 0
 	Attack = 0
 	AttackStat = Intelligence
@@ -654,7 +655,7 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLESS
 	ItemType = Consumable
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Wooden beads neclace
+	Name = Wooden beads necklace
 	Sellable = FALSE
 	SpellAniArgument = 
 	SpellAniFunction = 

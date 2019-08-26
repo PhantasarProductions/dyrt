@@ -145,6 +145,28 @@ group Flow_FieldMenu
 			__green
 		end
 		DarkText.Font($Font,Roman(ch.Stat("Level").Value),(ubox.x+ubox.w)-10,xy+20,1)
+		__white
+		DarkText.Font($Font,"Weapon",(ubox.x+10),(ubox.ey-70))
+		DarkText.Font($Font,"Armor",(ubox.x+10),(ubox.ey-50))
+		DarkText.Font($Font,"Jewelry",(ubox.x+10),(ubox.ey-30))
+		__amber
+		DarkText.Font($Font,Item[ch.Data.Weapon].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-70)
+		DarkText.Font($Font,Item[ch.Data.Armor].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-50)
+		if ch.Data.Jewel==""
+			DarkText.Font($Font,"---",(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
+		else
+			DarkText.Font($Font,Item[ch.Data.Jewel].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
+		end
+		if Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-70 and Mouse.Y<ubox.ey-50 
+			$InvItemHover = Item[ch.Data.Weapon]
+			$GenIAAHelp()
+		elseif Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-50 and Mouse.Y<ubox.ey-30 
+			$InvItemHover = Item[ch.Data.Armor]
+			$GenIAAHelp()
+		elseif Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-30 and Mouse.Y<ubox.ey-10 
+			$InvItemHover = Item[ch.Data.Jewel]
+			$GenIAAHelp()
+		end
 	end
 	
 	void NotYetImplemented(ubox)
@@ -201,7 +223,7 @@ group Flow_FieldMenu
 		Help[#Help+1] = $InvItemHover.Name
 		Help[#Help+1] = $InvItemHover.Description
 		with HV
-			if $Heal>0 
+			if $Heal and $Heal>0 
 				switch $HealType
 					case "Absolute"
 						Help[#Help+1]=sprintf("Heals %d HP",$Heal)
@@ -218,7 +240,7 @@ group Flow_FieldMenu
 			if prefixed(k,"Cause") and v
 				Help[#Help+1]="Causes "..Right(k,#k-5)
 			elseif prefixed(k,"Cure") and v
-				Help[#Help+1]="Cures "..Right(k,#k-5)
+				Help[#Help+1]="Cures "..Right(k,#k-4)
 			end
 		end
 	end
