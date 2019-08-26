@@ -35,14 +35,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
-
-
-
-
-
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
@@ -190,28 +182,69 @@ group Flow_FieldMenu
 			end
 		end
 	end
+		
+	int InvItemScrollY = 0
+	var InvItemHover
+	var InvItemList
+	var InvItemLastHelp
 	
-	void GenHelp(table item)
+	void GenIAAHelp()
+		var Help		
+		var HV
+		HV = self.InvItemHover
+		if $InvItemLastHelp and $InvItemLastHelp.Hover==$InvItemHover 
+			ShowAutoHelp($InvItemLastHelp.Help)
+			return
+		end
+		$InvItemLastHelp = { ['Hover'] = $InvItemHover, ['Help'] = {} }
+		Help = $InvItemLastHelp.Help
+		Help[#Help+1] = $InvItemHover.Name
+		Help[#Help+1] = $InvItemHover.Description
+		with HV
+			if $Heal>0 
+				switch $HealType
+					case "Absolute"
+						Help[#Help+1]=sprintf("Heals %d HP",$Heal)
+					case "Percent"
+						Help[#Help+1]=sprintf("Heals %d%% of max HP",$Heal)
+					case "Stat"
+						Help[#Help+1]=sprintf("Heals several HP. Modifier based on %s",$HealStat)
+					default
+						Help[#Help+1]=sprintf("Unknown healing specifier! You've likely encountered a bug: %s",$HealType)
+				end
+			end
+		end
+		for k,v in spairs($InvItemHover)
+			if prefixed(k,"Cause") and v
+				Help[#Help+1]="Causes "..Right(k,#k-5)
+			elseif prefixed(k,"Cure") and v
+				Help[#Help+1]="Cures "..Right(k,#k-5)
+			end
+		end
 	end
 	
-	int ItemScrollY = 0
-	var ItemHover
-	var ItemList
 	void Items(ubox)
 		int y 
-		y = -$ItemScrollY
-		$ItemList = $ItemList or NIL.Use("Script/Use/iaalist.nil")
+		y = -$InvItemScrollY
+		$InvItemList = $InvItemList or NIL.Use("Script/Use/iaalist.nil")
 		//Viewport(ubox.x,ubox.y,ubox.w,ubox.h) // Microsoft messed this up! Cool, huh?
-		for itemtag in each($ItemList)
+		$InvItemHover = nil;
+		for itemtag in each($InvItemList)
 			if Inventory[itemtag]>0
 				if y>=0 and y+35<ubox.h 
 					__white
 					DarkText.Font($Font,Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5,ubox.y+y)
 					__amber
 					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
+					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
+						$InvItemHover = Item[itemtag]						
+					end
 				end
 				y = y + 20
 			end
+		end
+		if $InvItemHover
+			$GenIAAHelp()
 		end
 		//Viewport()
 	end
@@ -364,6 +397,7 @@ with Flow_FieldMenu
 			if not $ItemHover.NoTab
 				$situations[$situation].citem = $ItemHover
 			end
+			//CSay(NIL.LuaSerialize("Clicked Menu Item",$ItemHover))
 		end
 		
 		Party.Click()

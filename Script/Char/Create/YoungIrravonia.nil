@@ -43,7 +43,10 @@ var yi
 yi = RPG.GetChar("YoungIrravonia")
 yi.Name = Names.Irravonia
 
-yi.Data["SKILL0"] = "Twig twitching"
+yi.Data.SKILL0 = "Twig twitching"
+yi.Data.Weapon = "EQW_YOUNGIRRAVONIA_TWIG"
+yi.Data.Armor  = "EQA_YOUNGIRRAVONIA_DRESS"
+yi.Data.Jewel  = "JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 
 CSay("Young Irravonia Configured")
 
