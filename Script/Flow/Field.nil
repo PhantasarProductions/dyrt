@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.08.24
+// Version: 19.08.28
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,15 +36,6 @@
 // End License Information
 
 
-
-
-
-
-
-
-
-
-
 global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
@@ -52,11 +43,85 @@ global bool FLOW_FIELD = true
 #use "libs/strings"
 #use "libs/tables"
 #use "libs/Roman"
+#use "libs/LinkedList"
 
 #macro __player FlowField.Map.Kthura.Actor.Player
 
 SASKIA.LoadFunction = string(string File2Load)
 	return JCR_GetString(File2Load)
+end
+
+class Clickables
+	static var List
+	static var Map
+	
+	readonly string Tag
+	readonly string Layer
+	readonly string ArriveState
+	readonly string ArriveFunction
+	readonly table ArriveParam
+	readonly string ArriveSASKIA
+	readonly int WalkToX
+	readonly int WalkToY
+	
+	void CONSTRUCTOR(string Tag,int x, int y,string Arrive,infinity)
+		CSayF("= Converting object with tag %s into a clickable",Tag)
+		table sAr
+		string aSt
+		string aFn
+		self.List = self.List or new TLinkedList()
+		self.List.AddLast(self)
+		self.WalkToX = x
+		self.WalkToY = y
+		self.Tag = Tag
+		self.ArriveParam = { infinity }
+		if Arrive==""
+			return
+		end
+		sAr = split(Arrive,":")
+		if #sAr==1			
+			self.ArriveFunction=Arrive
+			return
+		end
+		switch sAr[1]:upper()
+			case "SASKIA"
+				self.ArriveSASKIA = sAr[2]
+			default
+				self.ArriveState = sAr[1]
+				self.ArriveFunction = sAr[2]
+		end
+	end
+	
+	static void Massacre()
+		Clickables.List = Clickables.List or LinkedList()
+		Clickables.List.Clear()
+	end
+	
+	static var Clicked(int x, int y)
+		var M
+		M = $Map
+		with M
+			for cl in Clickables.List.Each
+				$Obj = cl.Tag
+				//-- if cl.Layer==$Layer and 
+				switch $ObjString.Kind
+					case "Zone" "TiledArea"
+						if x>$ObjInt.x and x<$ObjInt.x+$ObjInt.w and y>$ObjInt.y and y<$ObjInt.y+$ObjInt.h
+							return cl
+						end
+					case "Obstacle"
+						int hw
+						hw = math.floor($ObjInt.ObjectWidth/2)
+						if x>$ObjInt.x-hw and x<$ObjInt.x+hw and y>$ObjInt.y-$ObjInt.ObjectHeight and y<$ObjInt.y
+							return cl
+						end
+					default
+						error("Unknown object kind ("..$ObjString.Kind..") as clickable!")				
+				end
+			end
+		end
+		return nil;
+	end
 end
 
 class Fader
@@ -253,6 +318,8 @@ group FlowField
 	void LoadMap(string MapFile,Layer)
 		$Map.LoadedMap=MapFile
 		CSayF("Loading Map: %s",MapFile)
+		CSay ("= Clearing clickables")
+		Clickables.Massacre();
 		CSay ("= Kthura")
 		var kth
 		kth = new Kthura(MapFile)
@@ -280,6 +347,27 @@ group FlowField
 		self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
 		self.Map.Saskia.Start("OnLoad")
 		
+		CSay("= Compiling auto-clickables")
+		Clickables.Map = kth
+		for Lay in kth.EachLayer
+			CSayF("= Clickables on Layer %s",Lay)
+			for Tag in kth.EachTag(Lay)
+				table s
+				s = split(Tag,"_")
+				switch s[1]
+					// "SAVEPOT" was the result of a bug in the Kthura editor script
+					// Fixed now, but a few maps can still suffer from that!
+					case "SAVEPOT" "SAVESPOT"
+						kth.Obj=Tag					
+						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, "FieldFlow.SaveSpot" ,s[2])
+					case "TRAVEL"
+						kth.Obj=Tag					
+						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, "FieldFlow.TravelEmblem" ,Tag)
+				end
+			end
+		end
+		
+		
 		string pref
 		string rest
 		if Mid(kth.Data.Music,4,1)==":"
@@ -294,6 +382,7 @@ group FlowField
 					error("Unknown alternate music direction: "..pref)
 			end
 		else
+			CSayF("= Music: %s",kth.Data.Music)
 			Music.Play(kth.Data.Music)
 		end
 		if Layer
@@ -424,12 +513,17 @@ global void BUB_Update()
 	end
 	
 	if Mouse.Y<Screen.Height-128 and Mouse.HitLeft
-		if false
+		var clobj
+		clobj = Clickables.Clicked(FlowField.Map.Kthura.ScrollX + Mouse.X,FlowField.Map.Kthura.ScrollY + Mouse.Y)
+		if clobj
 			// Todo: Here I'll handle stuff like clickable objects
 			// As none exist at this moment of the game's creation
 			// I've set this to "if false" to make sure this content
 			// is always skipped for now, but that the 'just walk' part
 			// can already be scripted
+			CSayF("Clicked '%s', so going into alternate action!",clobj.Tag)
+			CSayF("As a result player should walk to (%d,%d)",clobj.WalkToX,clobj.WalkToY)
+			FlowField.Map.Kthura.Actor.Player.WalkTo(clobj.WalkToX,clobj.WalkToY)
 		else 
 			// When all options are gone, let's just walk
 			int wtx
@@ -492,6 +586,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 
