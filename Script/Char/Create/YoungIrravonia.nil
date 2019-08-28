@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.07.29
+// version: 19.08.28
 // End License Information
+
 
 
 #use "Script/Use/AnyWay"
@@ -49,5 +50,6 @@ yi.Data.Armor  = "EQA_YOUNGIRRAVONIA_DRESS"
 yi.Data.Jewel  = "JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 
 CSay("Young Irravonia Configured")
+
 
 
