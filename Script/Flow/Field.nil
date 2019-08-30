@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.08.28
+// Version: 19.08.30
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,8 @@
 // End License Information
 
 
+
+
 global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
@@ -44,6 +46,9 @@ global bool FLOW_FIELD = true
 #use "libs/tables"
 #use "libs/Roman"
 #use "libs/LinkedList"
+
+// Requires linked list, so I need this to be last!
+#use "Script/Use/MiniMessages"
 
 #macro __player FlowField.Map.Kthura.Actor.Player
 
@@ -266,6 +271,14 @@ group FieldMap
 		self.Kthura.ScrollY=value
 	end
 	
+	var ToMapCoords(int x, int y)
+		return x+$ScrollX,y+$ScrollY
+	end
+	
+	var FromMapCoords(int x,int y)
+		return x-$ScrollX,y-$ScrollY
+	end
+	
 end
 
 string fieldleader
@@ -363,6 +376,19 @@ group FlowField
 	end
 	
 	void TravelEmblem(string tag)
+		var kth
+		int mx
+		int my
+		kth = FieldMap.Kthura
+		kth.Obj=tag
+		//mx,my = FieldMap.FromMapCoords(kth.ObjInt.X,kth.ObjInt.Y)
+		mx = kth.ObjInt.X - FieldMap.ScrollX
+		my = kth.ObjInt.Y - FieldMap.ScrollY
+		__travellevel++
+		__levelcap = __levelcap + (6-__skill)
+		new MiniMsg(mx,my-20,"Traveler's Emblem Found",200,255,100)
+		new MiniMsg(mx,my   ,sprintf("Traveler's level increased to: %s",Roman(__travellevel)),240,210,80)
+		new MiniMsg(mx,my+29,sprintf("Level cap increased to: %s",Roman(__levelcap)),100,200,255)
 	end
 
 	
@@ -502,6 +528,7 @@ group FlowField
 		Y = Y - YMin
 		$SFont.DrawText("Level Cap: "..Roman(__levelcap),5,Y)
 		Y = Y - YMin
+		$SFont.DrawText("Traveler's level: "..Roman(__travellevel),5,Y)
 	end
 	
 	get string SGData
@@ -541,6 +568,9 @@ global void BUB_Draw()
 	FlowField.FieldStats()
 	Party.SelectedCharacter=0
 	Party.ShowBar()
+	
+	// Mini Messages (must be last before the mouse, which must be the very last)
+	MiniMsg.DrawAll()
 	
 	// Show Mouse
 	__white
@@ -674,7 +704,18 @@ group ConsoleCommands
 				CWriteLine("Debug save not yet available!",255,0,0)
 		end
 	end
+	
+	void MINIMESSAGES()
+		int c
+		CSayF("Number of active minimessages: %d",#MiniMsg.List)
+		for msg,lnk in MiniMsg.List.Each
+			c++
+			CSayF("%5d: (%d,%d) CD:%d/%d >> %s",c,msg.X,msg.Y,msg.CD1,msg.CD2,msg.msg)
+		end
+	end
 end
+
+
 
 
 
