@@ -46,7 +46,7 @@ table pics
 
 PicUnknown = LoadIfNew('GFX/BoxPic/Unknown/General.png','BoxPicUnknown')
 
-global void BoxPic(int x, int y,string Char,Spec,valign)
+global void BoxPic(int x, int y,string Char,Spec,valign) 
 	string file
 	string tag
 	file = sprintf("GFX/BoxPic/%s/%s.png",Char,Spec or "General")
