@@ -51,6 +51,14 @@ SASKIA.LoadFunction = string(string File2Load)
 	return JCR_GetString(File2Load)
 end
 
+var XPand(t, i)
+	i = i or 1
+	if t[i] ~= nil then
+		return t[i], XPand(t, i + 1)
+	end
+end
+
+
 class Clickables
 	static var List
 	static var Map
@@ -59,12 +67,13 @@ class Clickables
 	readonly string Layer
 	readonly string ArriveState
 	readonly string ArriveFunction
+	readonly delegate ArriveDelegate
 	readonly table ArriveParam
 	readonly string ArriveSASKIA
 	readonly int WalkToX
 	readonly int WalkToY
 	
-	void CONSTRUCTOR(string Tag,int x, int y,string Arrive,infinity)
+	void CONSTRUCTOR(string Tag,int x, int y,Arrive,infinity)
 		CSayF("= Converting object with tag %s into a clickable",Tag)
 		table sAr
 		string aSt
@@ -75,9 +84,14 @@ class Clickables
 		self.WalkToY = y
 		self.Tag = Tag
 		self.ArriveParam = { infinity }
-		if Arrive==""
+		if Arrive==nil or Arrive==""
 			return
 		end
+		if type(Arrive)=='function'
+			self.ArriveDelegate = Arrive
+			return
+		end
+		assert( type(Arrive)=="string","Arrive must be string or delegate, but I got "..type(Arrive) )
 		sAr = split(Arrive,":")
 		if #sAr==1			
 			self.ArriveFunction=Arrive
@@ -280,7 +294,8 @@ group FlowField
 	
 	link Map = FieldMap
 	
-	string WalkArrival
+	var WalkArrival	
+	table WalkArrivalParams
 	var SFont
 	
 	void UpdatePlayerTex()
@@ -312,6 +327,42 @@ group FlowField
 		until RPG.Party[i]==value
 		fieldleader = value
 		self.UpdatePlayerTex()
+	end
+	
+	void SaveSpot(string col)
+		for i=1,8
+			if RPG.Party[i] and RPG.Party[i]!=""
+				string ch
+				ch=RPG.Party[i]
+				switch col:upper()			
+					case "RED"
+						if __skill!=3
+							RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
+						end
+						if __skill==1
+							RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
+						end
+					case "GREEN"
+						if __skill!=3
+							RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
+							RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
+						end
+					case "BLUE"
+						RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
+						RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
+						gv.String.RespawnRoom = $Map.LoadedMap
+						gv.String.Layer = $Map.Layer
+						gv.Int.RespawnX = self.Map.Kthura.Actor.Player.X
+						gv.Int.RespawnY = self.Map.Kthura.Actor.Player.Y
+					default
+						error("Unknown savegame color code: "..col)
+				end
+			end
+		end
+		SGLink.OpenSG()
+	end
+	
+	void TravelEmblem(string tag)
 	end
 
 	
@@ -359,10 +410,10 @@ group FlowField
 					// Fixed now, but a few maps can still suffer from that!
 					case "SAVEPOT" "SAVESPOT"
 						kth.Obj=Tag					
-						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, "FieldFlow.SaveSpot" ,s[2])
+						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.SaveSpot ,s[2])
 					case "TRAVEL"
 						kth.Obj=Tag					
-						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, "FieldFlow.TravelEmblem" ,Tag)
+						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, FlowField.TravelEmblem ,Tag)
 				end
 			end
 		end
@@ -524,6 +575,16 @@ global void BUB_Update()
 			CSayF("Clicked '%s', so going into alternate action!",clobj.Tag)
 			CSayF("As a result player should walk to (%d,%d)",clobj.WalkToX,clobj.WalkToY)
 			FlowField.Map.Kthura.Actor.Player.WalkTo(clobj.WalkToX,clobj.WalkToY)
+			if clobj.ArriveDelegate
+				CSay("And we need to attach a delegate!")
+				FlowField.WalkArrival = clobj.ArriveDelegate
+				FlowField.WalkArrivalParams = clobj.ArriveParam
+			elseif clobj.ArriveFunction!=""
+				CSayF("Function string \"%f\" attached!",clobj.ArriveFunction)
+				FlowField.WalkArrival = clobj.ArriveFunction
+			else
+				CSay("No function links in this clickabke!")
+			end
 		else 
 			// When all options are gone, let's just walk
 			int wtx
@@ -532,8 +593,24 @@ global void BUB_Update()
 			wty = FlowField.Map.Kthura.ScrollY + Mouse.Y
 			CSayF("Player has requested to walk to (%d,%d)",wtx,wty)
 			FlowField.Map.Kthura.Actor.Player.WalkTo(wtx,wty)
-			FlowField.WalkArrival = ""
+			FlowField.WalkArrival = nil;
 		end
+	end
+		
+	if (not FlowField.Map.Kthura.Actor.Player.Walking) 
+		//and (FlowField.WalkArrival) and (FlowField.WalkArrival!="")
+		switch type(FlowField.WalkArrival)
+			case "nil"
+				//CSay("No walk arrival set, so let it be!")
+			case "string"
+				error("WalkArrival string feature not yet implemented!")
+			case "function"
+				CSay("Walk arrival is a delegate, so let's call it!")
+				FlowField.WalkArrival(XPand(FlowField.WalkArrivalParams))
+			default
+				error("Invalid WalkArrival type: "..type(FlowField.WalkArrival))			
+		end
+		FlowField.WalkArrival = nil;
 	end
 	
 	Party.Click()
@@ -564,11 +641,23 @@ group ConsoleCommands
 		int r
 		int g
 		int b
+		string wing = ""
 		r = math.random(0,255)
 		g = math.random(0,255)
 		b = math.floor(255-((r+g)/2))
-		CWriteLine(sprintf("Pure player position is: (%5d,%5d)",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y),r,g,b)
-		CWriteLine(sprintf("Grid player position is: (%5d,%5d)",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)),r,g,b)
+		if FlowField.Map.Kthura.Actor.Player.Walking
+			wing = "Walking!"
+		end
+		switch type(FlowField.WalkArrival)
+			case "string"
+				wing = sprintf("%s Arrival function call attached: %s", wing,FlowField.WalkArrive)
+			case "function"
+				wing = sprintf("%s Arrival delegate call attached!",wing)
+			case "nil"
+				wing =sprintf("%s No arrival data!",wing)
+		end
+		CWriteLine(sprintf("Pure player position is: (%5d,%5d) %s",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y,wing),r,g,b)
+		CWriteLine(sprintf("Grid player position is: (%5d,%5d) %s",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32),wing),r,g,b)
 	end
 	
 	void SAVE(A)

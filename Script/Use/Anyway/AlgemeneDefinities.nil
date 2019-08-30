@@ -68,6 +68,8 @@
 #macro __levelcap gv.Num.LevelCap
 
 
+
+
 class MidScreen
 	static int x
 	static int y
