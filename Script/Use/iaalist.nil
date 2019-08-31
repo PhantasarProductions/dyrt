@@ -5,6 +5,7 @@ itemret[#itemret+1]="ITM_APPLE"
 itemret[#itemret+1]="ITM_MEDICINE"
 itemret[#itemret+1]="EQW_YOUNGIRRAVONIA_TWIG"
 itemret[#itemret+1]="EQA_YOUNGIRRAVONIA_DRESS"
+itemret[#itemret+1]="JWL_EMERALD"
 itemret[#itemret+1]="JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 
 
