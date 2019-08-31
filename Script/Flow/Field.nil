@@ -43,7 +43,7 @@
 global bool FLOW_FIELD = true
 
 #use "Script/Use/Anyway"
-#use "Script/Use/Specific/Field"
+#use "Script/Use/Specific/Field" as XFIELDX
 #use "libs/saskia"
 #use "libs/strings"
 #use "libs/tables"
@@ -437,6 +437,8 @@ group FlowField
 			f = assert(NIL.Load(Swap.Data[m]))
 			f()
 		end
+		CSay("= Zone Action")
+		ZoneAction.Reset()
 		CSay("= NIL Script")
 		do
 			string MapScriptFile 

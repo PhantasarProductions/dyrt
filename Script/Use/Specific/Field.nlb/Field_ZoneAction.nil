@@ -35,4 +35,46 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "Libs/LinkedList"
 
+class ZoneAction
+
+	static table List
+	
+	static void NextRoom()
+		error("No Next Room Function yet! Needs to be scripted!")
+	end
+	
+	static void PrevRoom()
+		error("No Prev Room Function yet! Needs to be scripted!")
+	end
+	
+	static void Reset()
+		$List = $List or {}
+		$List.Enter = $List.Enter or new TLinkedList
+		$List.Leave = $List.Leave or new TLinkedList
+		$List.Cycle = $List.Cycle or new TLinkedList
+		for k,v in pairs($List) 
+			v.Clear()
+		end
+		new ZoneAction("Enter","Next",ZoneAction.NextRoom)
+		new ZoneAction("Enter","Prev",ZoneAction.PrevRoom)
+	end
+	
+	string ActEvent
+	string ActZone
+	table ActParams
+	var Act
+	
+	void CONSTRUCTOR(string Event,string Zone,AAct,infinity)
+		self.ActEvent = Event
+		self.ActZone = Zone
+		self.Act = AAct
+		self.ActParams = { infinity }
+		CSayF("%s event created in zone %s",Event,Zone)
+	end
+	
+	void DESTRUCTOR()
+		CSayF("%s event disposed in zone %s",self.ActEvent,self.ActZone)
+	end
+end
