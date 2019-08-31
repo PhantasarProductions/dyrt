@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.08.30
+// version: 19.08.31
 // End License Information
+
 
 #use "Libs/DarkText"
 
@@ -108,7 +109,7 @@ class MiniMsg
 	
 	void Draw()
 		int oldx
-		int oldy		
+		int oldy
 		oldx = $X
 		oldy = $Y
 		if $CD1<=0
@@ -143,4 +144,5 @@ class MiniMsg
 		end
 	end
 end
+
 

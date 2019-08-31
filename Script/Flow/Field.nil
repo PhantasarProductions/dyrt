@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.08.30
+// Version: 19.08.31
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -121,21 +122,24 @@ class Clickables
 		M = $Map
 		with M
 			for cl in Clickables.List.Each
-				$Obj = cl.Tag
-				//-- if cl.Layer==$Layer and 
-				switch $ObjString.Kind
-					case "Zone" "TiledArea"
-						if x>$ObjInt.x and x<$ObjInt.x+$ObjInt.w and y>$ObjInt.y and y<$ObjInt.y+$ObjInt.h
-							return cl
-						end
-					case "Obstacle"
-						int hw
-						hw = math.floor($ObjInt.ObjectWidth/2)
-						if x>$ObjInt.x-hw and x<$ObjInt.x+hw and y>$ObjInt.y-$ObjInt.ObjectHeight and y<$ObjInt.y
-							return cl
-						end
-					default
-						error("Unknown object kind ("..$ObjString.Kind..") as clickable!")				
+				// Crash prevention for once an object was removed!
+				if $HasTag(cl.Tag)
+					$Obj = cl.Tag
+					//-- if cl.Layer==$Layer and 
+					switch $ObjString.Kind
+						case "Zone" "TiledArea"
+							if x>$ObjInt.x and x<$ObjInt.x+$ObjInt.w and y>$ObjInt.y and y<$ObjInt.y+$ObjInt.h
+								return cl
+							end
+						case "Obstacle"
+							int hw
+							hw = math.floor($ObjInt.ObjectWidth/2)
+							if x>$ObjInt.x-hw and x<$ObjInt.x+hw and y>$ObjInt.y-$ObjInt.ObjectHeight and y<$ObjInt.y
+								return cl
+							end
+						default
+							error("Unknown object kind ("..$ObjString.Kind..") as clickable!")				
+					end
 				end
 			end
 		end
@@ -279,6 +283,22 @@ group FieldMap
 		return x-$ScrollX,y-$ScrollY
 	end
 	
+	void Kill(string tag,permanent)
+		string m
+		m = "MAPCHANGES."..FieldMap.LoadedMap
+		if permanent
+			Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..tag.."\")\n"
+			CSay("Permanent kill, object tagged: "..tag)
+		else	
+			CSay("Temporary kill, object tagged: "..tag)
+		end
+		$Kthura.Kill(tag)
+	end
+	
+	void PermaKill(string tag)
+		$Kill(tag,true)
+	end
+	
 end
 
 string fieldleader
@@ -389,6 +409,7 @@ group FlowField
 		new MiniMsg(mx,my-20,"Traveler's Emblem Found",200,255,100)
 		new MiniMsg(mx,my   ,sprintf("Traveler's level increased to: %s",Roman(__travellevel)),240,210,80)
 		new MiniMsg(mx,my+29,sprintf("Level cap increased to: %s",Roman(__levelcap)),100,200,255)
+		FieldMap.PermaKill(tag)
 	end
 
 	
@@ -406,7 +427,14 @@ group FlowField
 			CSay("= Fail!")
 		end
 		FieldMap.Kthura = kth
-		
+		do
+			CSay("= Map changes")
+			string m
+			delegate f
+			m = "MAPCHANGES."..FieldMap.LoadedMap
+			f = assert(NIL.Load(Swap.Data[m]))
+			f()
+		end
 		CSay("= NIL Script")
 		do
 			string MapScriptFile 
@@ -714,6 +742,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 
