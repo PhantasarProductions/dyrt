@@ -148,7 +148,7 @@ group Flow_FieldMenu
 			end
 		else
 			__amber
-			DarkText.Font($Font,ch.Stat("Experience").Value,(ubox.x+ubox.w)-10,xy,1)
+			DarkText.Font($Font,tostring(ch.Stat("Experience").Value),(ubox.x+ubox.w)-10,xy,1)
 			__green
 		end
 		DarkText.Font($Font,Roman(ch.Stat("Level").Value),(ubox.x+ubox.w)-10,xy+20,1)
