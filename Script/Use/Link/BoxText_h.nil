@@ -85,6 +85,8 @@ setmetatable(BoxText,{
 })
 
 
-
+global void MapText(string Tag, infinity)
+	BoxText("MAP",Tag,infinity)
+end
 
 

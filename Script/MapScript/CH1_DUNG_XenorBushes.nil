@@ -1,6 +1,6 @@
 // License Information:
-// src/Tricky Script/Script/Use/Anyway/MapScript_h.nil
-// Version: 19.07.29
+// src/Tricky Script/Script/MapScript/None.nil
+// Version: 19.08.11
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,50 +36,31 @@
 // End License Information
 
 
-#use "libs/strings"
+#say "Map Script - Xenor Bushes!"
+#use "Script/Use/Anyway"
 
-
-global table MapScript
-
-void StartSaskia(string script,string label)
-	error("SASKIA start not yet implemented!")
-end
-
-
-table MapMeta
-MapMeta = {
-	['__newindex'] = void()
-		error("MapScript values cannot be defined");
-	end,
+group MScript
 	
-	['__index'] = delegate(t,lk)
-		string k 
-		k = lk:upper()
-		switch k
-			case "SASKIA"
-				return void(string label)
-					StartSaskia("MAP",label)
-				end
-			default
-				assert(StateExists("MAP"),"Map script call, but no map script was loaded!")
-				#pure
-				return function(...)
-					local args = {...}
-					local parm = "";
-					for i,a in ipairs(args) do
-						if (i>1) then parm = parm ..", " end
-						parm = parm .. a
-					end
-					LuaDoString("MAP",sprintf("MScript.%s(%s)",k,parm),"LINK: MapScript")
-				end
-				#endpure
-				// Pure code was needed as I couldn't yet get NIL to support '...'
-		end
+	void TUTORTRAVELEMBLEM()
+		CSay("Tutorial! Traveler's Emblems!")
+		Map.StopWalking()
+		Map.Kill("Tutor_Travel",true)
+		MapText("TUTORIAL_TRAVELEMBLEM")
 	end
-}
+	
+	void CONSTRUCTOR()
+		CSay("Init Zone Action")
+		Map.ZA_Enter("Tutor_Travel","TutorTravelEmblem")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
 
-setmetatable ( MapScript, MapMeta )
-
-return MapScript
 
 

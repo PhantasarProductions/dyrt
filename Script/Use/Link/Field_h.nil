@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "libs/strings"
 
 void FieldCheck()
 	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
@@ -48,12 +49,79 @@ end
 group Map
 	link Script = MapScript
 	readonly table Data
+	
+	void ZA_New(string event,string zone,string Action,infinity)
+		string params
+		string actiondelegate
+		table ActSplit
+		ActSplit = split(Action,":")
+		for i,v in pairs {infinity}
+			if i>1 
+				params = params .. ", "
+			end
+			switch type(v)
+				case 'string'
+					params = params .. '"'..SafeString(v)..'"'
+				case 'number' 'boolean'
+					params = params .. tostring(v)
+				default
+					error(sprintf("ZA_New(): Type '"..type(v).."' (parameter #%d) cannot be transferred through this linking routing!",i))
+			end
+		end
+		assert(#ActSplit>0,"Action error in ZA_New")
+		if #ActSplit==1
+			ActSplit[2] = ActSplit[1]
+			ActSplit[1] = "MAPSCRIPT"
+		end
+		switch ActSplit[1]:upper()
+			case "MAPSCRIPT"
+				actiondelegate = sprintf("MapScript.%s",ActSplit[2])
+			case "SASKIA"
+				actiondelegate = sprintf("MapScript.SASKIA")
+				if params!=""
+					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
+				end
+				params = ActSplit[2]
+			default
+				error("I don't know how to handle: %s",ActSplit[1])				
+		end
+		if params==""
+			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
+		else
+			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
+		end
+	end
+	
+	void ZA_Enter(string zone, string action,infinity)
+		$ZA_New("Enter",zone,action,infinity)
+	end
+	
+	void ZA_Leave(string zone, string action,infinity)
+		$ZA_New("Leave",zone,action,infinity)
+	end
+
+	void ZA_Cycle(string zone, string action,infinity)
+		$ZA_Cycle("Leave",zone,action,infinity)
+	end
+	
+	void Kill(string objtag, perma)
+		FLD_Exe(sprintf("FieldMap.Kill(trim(\"%s\"),%s)",objtag,tostring(perma==true)))
+	end
+	
+	void StopWalking()
+		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
+	end
+	
+
 end
 
 group Field
 
 	link Map = Map
-	
+
+	link ZA_Enter = Map.ZA_Enter
+	link ZA_Leave = Map.ZA_Leave
+	link ZA_Cycle = Map.ZA_Cycle
 
 	void LoadMap(string MapFile)
 		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
@@ -76,6 +144,10 @@ group Field
 	end
 	
 	link MapData = Map.Data
+	
+	void StopWalking()
+		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
+	end
 	
 	void CONSTRUCTOR()
 		setmetatable(self.MapData,{

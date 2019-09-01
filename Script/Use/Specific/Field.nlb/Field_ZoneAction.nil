@@ -36,6 +36,15 @@
 // End License Information
 
 #use "Libs/LinkedList"
+#accept FlowField
+
+var ZAXPand(t, i)
+	i = i or 1
+	if t[i] ~= nil then
+		return t[i], ZAXPand(t, i + 1)
+	end
+end
+
 
 class ZoneAction
 
@@ -57,6 +66,7 @@ class ZoneAction
 		for k,v in pairs($List) 
 			v.Clear()
 		end
+		
 		new ZoneAction("Enter","Next",ZoneAction.NextRoom)
 		new ZoneAction("Enter","Prev",ZoneAction.PrevRoom)
 	end
@@ -66,11 +76,48 @@ class ZoneAction
 	table ActParams
 	var Act
 	
+	get string ActType
+		return type($Act)
+	end
+	
+	bool WasInZone
+	bool WordtInZone
+	
+	static table CheckDels
+	
+	static void InitCheckDels()
+		if $CheckDels.Enter 
+			return
+		end
+		$CheckDels.Enter = { ['Was'] = false, ['Wordt'] = true  }
+		$CheckDels.Leave = { ['Was'] = true,  ['Wordt'] = false }
+		$CheckDels.Cycle = { ['Was'] = true,  ['Wordt'] = true  }
+	end
+	
+	static void CheckAll()
+		for Event,ZoneList in pairs($List)
+			for Zone in ZoneList.Each
+				Zone.WordtInZone = FlowField.Map.Kthura.Actor.Player.IsInZone(Zone.ActZone)
+				if Zone.WordtInZone == $CheckDels[Event].Wordt and Zone.WasInZone == $CheckDels[Event].Was
+					switch Zone.ActType
+						case "function" "delegate"
+							Zone.Act(ZAXPand(Zone.ActParams))
+						default
+							error("No action setup yet for ActType: "..Zone.ActType)
+					end
+				end
+				Zone.WasInZone = Zone.WordtInZone
+			end
+		end
+	end
+	
 	void CONSTRUCTOR(string Event,string Zone,AAct,infinity)
+		self.InitCheckDels()
 		self.ActEvent = Event
 		self.ActZone = Zone
 		self.Act = AAct
 		self.ActParams = { infinity }
+		self.List[Event].AddLast(self)
 		CSayF("%s event created in zone %s",Event,Zone)
 	end
 	

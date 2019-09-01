@@ -439,6 +439,17 @@ group FlowField
 		end
 		CSay("= Zone Action")
 		ZoneAction.Reset()
+		CSay("= Map Text")
+		do
+			string scenfile
+			scenfile = "Scenario/"..__lang.."/Maps/"..MapFile
+			if JCR_EntryExists(scenfile)
+				CWriteLine("= Scenario 'MAP' >> "..scenfile,180,255,0)
+				BoxText.Load("Maps/"..MapFile,"MAP")
+			else
+				CWriteLine("= WARNING! Scenario \""..scenfile.."\" not found!",255,0,0)
+			end
+		end
 		CSay("= NIL Script")
 		do
 			string MapScriptFile 
@@ -624,6 +635,9 @@ global void BUB_Update()
 		// and such
 		return
 	end
+	
+	// Zone Checking
+	ZoneAction.CheckAll()
 	
 	if Mouse.Y<Screen.Height-128 and Mouse.HitLeft
 		var clobj

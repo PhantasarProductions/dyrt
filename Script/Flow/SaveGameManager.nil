@@ -252,13 +252,13 @@ class SG
 			Notify("Loading the game has failed!")
 			return
 		end
-		CSay("= Loading FIELD data")
-		LoadFlow("FIELD","Script/Flow/Field.nil")
-		LuaDoString("FLOW_FIELD",LoadStuff["Data/Field"])
 		CSay("= Loading GAMEVAR data")
 		gvClearAll()
 		//assert(NIL.Load(LoadStuff["Data/GameVars"],"Game Variables"))
 		LuaDoString("FLOW_SG",NIL.Translate(LoadStuff["Data/GameVars"]) , "Game Variables")
+		CSay("= Loading FIELD data")
+		LoadFlow("FIELD","Script/Flow/Field.nil")
+		LuaDoString("FLOW_FIELD",LoadStuff["Data/Field"])
 		CSay("= Loading inventory")
 		//assert(NIL.Load(LoadStuff["Data/Inventory"],"Inventory"))
 		LuaDoString("FLOW_SG",LoadStuff["Data/Inventory"],"Inventory") // Dirty code straight from hell, but hopefully this does something
