@@ -417,7 +417,42 @@ group FlowField
 	end
 	
 	void Treasure(string Tag,string ItemTag,PermaKill)
-		error("Treasures not yet supported! Come back later!")
+		static var chaching
+		int mx
+		int my
+		var kth
+		kth = FieldMap.Kthura
+		mx = kth.ObjInt.X - FieldMap.ScrollX
+		my = kth.ObjInt.Y - FieldMap.ScrollY
+		ItemTag = ItemTag:upper()
+		if prefixed(ItemTag,"CASH:")
+			int foundcash 
+			foundcash = tonumber(split(ItemTag,":")[2]) or 1
+			string shild = "shilders"
+			if foundcash == 1 
+				shild = 'shilder'
+			end
+			if __cash > (300000000 / __skill)
+				new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
+				return
+			end
+			chaching = chaching or LoadAudio("SFX/Treasure/ChaChing.wav")
+			chaching.Play()
+			__cash = __cash + foundcash
+			new MiniMsg(mx,my,sprintf("Obtained: %d %s",foundcash, shild),0,180,255)
+			$Map.Kill(Tag,PermaKill!=false)
+		else
+			string iname
+			iname = Item[ItemTag].Name
+			if Inventory[ItemTag]<__itemcap
+				Inventory[ItemTag]++
+				new MiniMsg(mx,my,sprintf("Obtained: %s", iname),180,0,255)
+				$Map.Kill(Tag,PermaKill!=false)
+			else
+				new MiniMsg(mx,my,sprintf("OVERLOADED: %s",iname, iname),255,0,0)
+			end
+		end
+		// error("Treasures not yet supported! Come back later!")
 	end
 
 	
