@@ -414,6 +414,10 @@ group FlowField
 		new MiniMsg(mx,my+29,sprintf("Level cap increased to: %s",Roman(__levelcap)),100,200,255)
 		FieldMap.PermaKill(tag)
 	end
+	
+	void Treasure(string Tag,string ItemTag,PermaKill)
+		error("Treasures not yet supported! Come back later!")
+	end
 
 	
 	void LoadMap(string MapFile,Layer)
@@ -468,6 +472,26 @@ group FlowField
 		self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
 		self.Map.Saskia.Start("OnLoad")
 		
+		table RandomTreasure
+		CSay("= Compiling random treasures")
+		for sklist=__skill,3
+			string trline
+			table tritems
+			table tritembreak
+			trline = kth.Data[sprintf("Treasure_skill%d",sklist)]
+			tritems = split(trline,";")
+			for item in each(tritems)
+				string name
+				int num
+				tritembreak = split(item,",")
+				name = tritembreak[1]
+				num = tonumber(tritembreak[2]) or 1
+				for i=1,num
+					RandomTreasure[#RandomTreasure+1]=name
+				end
+			end
+		end
+		
 		CSay("= Compiling auto-clickables")
 		Clickables.Map = kth
 		for Lay in kth.EachLayer
@@ -484,6 +508,21 @@ group FlowField
 					case "TRAVEL"
 						kth.Obj=Tag					
 						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, FlowField.TravelEmblem ,Tag)
+					case "RANDOMTREASURE"
+						kth.Obj=Tag
+						if kth.ObjString.Kind=="$RandomTreasure" 
+							if math.random(1,__skill^__skill)==1
+								kth.ObjString.Kind="Obstacle"
+								kth.ObjString.Texture='gfx/PickUps/Bag.png'
+								new Clickables(Tag,kth.ObjInt.x,kth.ObjInt.y,FlowField.Treasure,Tag,RandomTreasure[math.random(1,#RandomTreasure)],__skill==3 or (__skill==1 and math.random(1,2)==1))
+							else
+								// Preventing any future conflicts, but the spot is still usable for later!
+								kth.Kill(Tag)
+							end
+						else
+							CSayF("= Invalid Random Treasure \"%s\"! Ignored!",Tag)
+						end
+					
 				end
 			end
 		end

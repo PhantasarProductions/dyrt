@@ -113,6 +113,13 @@ group Map
 		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
 	end
 	
+	void WalkTo(A,B,C)
+		if type(A)=="string"
+			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(trim(\"%s\"))",A))
+		else
+			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(%d,%d,%s)",A,B,tostring(C!=false)))
+		end
+	end
 
 end
 

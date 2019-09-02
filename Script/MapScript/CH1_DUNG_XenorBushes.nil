@@ -49,9 +49,19 @@ group MScript
 		MapText("TUTORIAL_TRAVELEMBLEM")
 	end
 	
+	void DONTGOBACK()
+		if gv.Bool.DONE_YoungIrravonia_Complete
+			return
+		end
+		Map.StopWalking()
+		Map.WalkTo("Start")
+		MapText("DONTGOBACK")
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Init Zone Action")
 		Map.ZA_Enter("Tutor_Travel","TutorTravelEmblem")
+		Map.ZA_Enter("DONTGOBACK","DONTGOBACK")
 	end
 	
 	void Draw()
