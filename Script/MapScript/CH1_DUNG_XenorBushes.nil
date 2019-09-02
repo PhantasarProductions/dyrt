@@ -37,6 +37,7 @@
 
 
 
+
 #say "Map Script - Xenor Bushes!"
 #use "Script/Use/Anyway"
 
@@ -72,6 +73,7 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
+
 
 
 
