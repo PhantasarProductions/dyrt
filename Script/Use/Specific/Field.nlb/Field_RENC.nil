@@ -1,11 +1,21 @@
 group RENC
 	
 	var Swords
+	int MapTravelLevel
+	int MaxEncounters
+	int IncRate
 	
 	void CONSTRUCTOR()
 		self.Swords = LoadImage("gfx/RENC/Swords.png")
 	end
 	
+	void Recalc()
+	end
 	
+	void Reset(int MapTLevel,MaxE)
+		int XEnc
+		
+		$MaxEncounters = (MaxE or 5) + XEnc
+	end
 
 end
