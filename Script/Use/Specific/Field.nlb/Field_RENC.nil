@@ -23,9 +23,9 @@ group RENC
 		self.gx = Screen.Width + 25
 		self.gy = Screen.Height - 128 - 100 - 20
 		setmetatable(self.bcol,{
-			["__index"] = var()
+			["__index"] = var(myself,int key)
 				number r
-				r = math.ceil(key/MaxRate)*4)
+				r = math.ceil(key/$MaxRate)*4)
 				switch r
 					case 0 1
 						return 255,0,0
