@@ -1,0 +1,11 @@
+group RENC
+	
+	var Swords
+	
+	void CONSTRUCTOR()
+		self.Swords = LoadImage("gfx/RENC/Swords.png")
+	end
+	
+	
+
+end
