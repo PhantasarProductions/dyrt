@@ -688,6 +688,9 @@ global void BUB_Draw()
 	Party.SelectedCharacter=0
 	Party.ShowBar()
 	
+	// Random Encounter Gauge
+	RENC.Gauge
+	
 	// Mini Messages (must be last before the mouse, which must be the very last)
 	MiniMsg.DrawAll()
 	
