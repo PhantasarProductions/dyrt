@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.09.02
+// Version: 19.09.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 #macro FieldFlow FlowField
@@ -702,6 +703,10 @@ end
 
 
 global void BUB_Update()
+	static int eox
+	static int eoy
+	bool Acted = false
+	
 	// debug
 	Dev.ConCheck()
 	
@@ -717,7 +722,7 @@ global void BUB_Update()
 	end
 	
 	// Zone Checking
-	ZoneAction.CheckAll()
+	Acted = ZoneAction.CheckAll()
 	
 	if Mouse.Y<Screen.Height-128 and Mouse.HitLeft
 		var clobj
@@ -763,10 +768,21 @@ global void BUB_Update()
 			case "function"
 				CSay("Walk arrival is a delegate, so let's call it!")
 				FlowField.WalkArrival(XPand(FlowField.WalkArrivalParams))
+				Acted = true
 			default
 				error("Invalid WalkArrival type: "..type(FlowField.WalkArrival))			
 		end
 		FlowField.WalkArrival = nil;
+	elseif not Acted
+		int enx
+		int eny
+		enx = math.floor(FlowField.Map.Kthura.Actor.Player.X/32)
+		eny = math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)
+		if enx!=eox and eny!=eoy
+			Renc.RencCheck()
+		end
+		eox=enx
+		eoy=eny
 	end
 	
 	Party.Click()
@@ -840,6 +856,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 

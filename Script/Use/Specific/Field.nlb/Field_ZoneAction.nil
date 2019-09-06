@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_ZoneAction.nil
-// Version: 19.09.02
+// Version: 19.09.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -96,7 +97,8 @@ class ZoneAction
 		$CheckDels.Cycle = { ['Was'] = true,  ['Wordt'] = true  }
 	end
 	
-	static void CheckAll()
+	static bool CheckAll()
+		bool ret = false
 		for Event,ZoneList in pairs($List)
 			for Zone in ZoneList.Each
 				Zone.WordtInZone = FlowField.Map.Kthura.Actor.Player.IsInZone(Zone.ActZone)
@@ -104,6 +106,7 @@ class ZoneAction
 					switch Zone.ActType
 						case "function" "delegate"
 							Zone.Act(ZAXPand(Zone.ActParams))
+							ret=true
 						default
 							error("No action setup yet for ActType: "..Zone.ActType)
 					end
@@ -111,6 +114,7 @@ class ZoneAction
 				Zone.WasInZone = Zone.WordtInZone
 			end
 		end
+		return ret
 	end
 	
 	void CONSTRUCTOR(string Event,string Zone,AAct,infinity)
@@ -127,5 +131,6 @@ class ZoneAction
 		CSayF("%s event disposed in zone %s",self.ActEvent,self.ActZone)
 	end
 end
+
 
 
