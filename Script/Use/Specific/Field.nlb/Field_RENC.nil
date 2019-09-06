@@ -1,6 +1,8 @@
 #use "libs/xmath"
 #use "libs/tables"
 
+#accept FlowField
+
 group RENC
 	
 	var Swords
@@ -52,7 +54,7 @@ group RENC
 	
 	void CompileFoeList()
 		var kth
-		kth = FieldFlow.Map.Kthura
+		kth = FlowField.Map.Kthura
 		$Foes = {}
 		for i=1,__skill
 			string FoeLine
@@ -71,9 +73,9 @@ group RENC
 	
 	void CompileAllowLayer()
 		table ban
-		ban = split(FieldFlow.Map.Kthura.Data.NoEncFloors,",")
+		ban = split(FlowField.Map.Kthura.Data.NoEncFloors,",")
 		$AllowLayer = {}
-		for L in FieldFlow.Map.Kthura.EachLayer
+		for L in FlowField.Map.Kthura.EachLayer
 			$AllowLayer[L] = true
 		end
 		for L in each(ban)
