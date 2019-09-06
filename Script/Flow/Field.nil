@@ -778,8 +778,8 @@ global void BUB_Update()
 		int eny
 		enx = math.floor(FlowField.Map.Kthura.Actor.Player.X/32)
 		eny = math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)
-		if enx!=eox and eny!=eoy
-			Renc.RencCheck()
+		if enx!=eox or eny!=eoy
+			RENC.RencCheck()
 		end
 		eox=enx
 		eoy=eny
@@ -830,6 +830,7 @@ group ConsoleCommands
 		end
 		CWriteLine(sprintf("Pure player position is: (%5d,%5d) %s",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y,wing),r,g,b)
 		CWriteLine(sprintf("Grid player position is: (%5d,%5d) %s",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32),wing),r,g,b)
+		CWriteLine(sprintf("Enounter Rate: %d/%d",RENC.Rate,RENC.MaxRate),r,g,b)
 	end
 	
 	void SAVE(A)

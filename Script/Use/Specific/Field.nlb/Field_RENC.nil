@@ -47,7 +47,7 @@ group RENC
 	int MaxEncounters
 	int Encounters
 	int DecRate
-	int Rate
+	table RoomRate
 	int MaxRate
 	int RecalcMaxE
 	
@@ -58,6 +58,14 @@ group RENC
 
 	table Foes
 	table AllowLayer
+
+	get int Rate
+		return self.RoomRate[FlowField.Map.Kthura.Layer] or 0
+	end
+	
+	set int Rate
+		self.RoomRate[FlowField.Map.Kthura.Layer] = value
+	end
 	
 	get bool AutEncOn
 		return #self.Foes>0 and $AllowLayer[FieldFlow.Map.Kthura.Layer]
@@ -86,7 +94,7 @@ group RENC
 		end
 		$MaxEncounters = $RecalcMaxE + XEnc
 		$DecRate = 1 + XEnc
-		$Rate = 20
+		$MaxRate = 40
 	end
 	
 	void CompileFoeList()
@@ -114,8 +122,10 @@ group RENC
 		$AllowLayer = {}
 		for L in FlowField.Map.Kthura.EachLayer
 			$AllowLayer[L] = true
+			$RoomRate[L]=$MaxRate
 		end
 		for L in each(ban)
+			$RoomRate[L] = 0
 			$AllowLayer[L] = false
 		end
 	end
