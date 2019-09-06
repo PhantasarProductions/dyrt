@@ -1,4 +1,5 @@
 #use "libs/xmath"
+#use "libs/tables"
 
 group RENC
 	
@@ -9,55 +10,85 @@ group RENC
 	int DecRate
 	int Rate
 	int MaxRate
+	int RecalcMaxE
 	
 	int gx 
 	int gy
 	int gdeg
 	bool ManEncOn = true
-	bool AutEncOn = true
+
+	table Foes
+	table AllowLayer
 	
-	readonly table bcol
+	get bool AutEncOn
+		return #self.Foes>0 and $AllowLayer[FieldFlow.Map.Kthura.Layer]
+	end
+	
+	get bool ManEncOff
+		return not self.ManEncOn;
+	end
+	
+	set bool ManEncOff
+		self.ManEncOn = not value;
+	end
+	
+	//readonly delegate bcol
 	
 	void CONSTRUCTOR()
 		self.Swords = LoadImage("gfx/RENC/Swords.png")
 		self.gx = Screen.Width + 25
 		self.gy = Screen.Height - 128 - 100 - 20
-		setmetatable(self.bcol,{
-			["__index"] = var(myself,int key)
-				number r
-				r = math.ceil(key/$MaxRate)*4)
-				switch r
-					case 0 1
-						return 255,0,0
-					case 2
-						return 255,180,0
-					case 3
-						return 0,255,0
-					default
-						return 0,0,255
-				end
-			end,
-			['__newindex'] = void()
-				error("Read-Only value overwritten!")
-			end
-		})
 	end
 	
 	void Recalc()
 		int XEnc
-		if ($MapTravelLevel>__travellevel + (3-__skill)
+		if $MapTravelLevel>__travellevel + (3-__skill)
 			XEnc = ($MapTravelLevel - ( __travellevel + (3-__skill) )) * __skill
 		end
-		$MaxEncounters = (MaxE or 5) + XEnc
+		$MaxEncounters = $RecalcMaxE + XEnc
 		$DecRate = 1 + XEnc
 		$Rate = 20
 	end
 	
+	void CompileFoeList()
+		var kth
+		kth = FieldFlow.Map.Kthura
+		$Foes = {}
+		for i=1,__skill
+			string FoeLine
+			table ListFoes			
+			FoeLine = kth.Data[sprintf("Foes_Skill%d",i)]
+			ListFoes = split(FoeLine,";")
+			for FoeItm in each(ListFoes)
+				table sFoeItm
+				sFoeItm = split(FoeItm,",")
+				for num = 1 , tonumber( sFoeItm[2] ) or 1
+					$Foes[#self.Foes+1] = sFoeItm[1]
+				end
+			end
+		end
+	end
+	
+	void CompileAllowLayer()
+		table ban
+		ban = split(FieldFlow.Map.Kthura.Data.NoEncFloors,",")
+		$AllowLayer = {}
+		for L in FieldFlow.Map.Kthura.EachLayer
+			$AllowLayer[L] = true
+		end
+		for L in each(ban)
+			$AllowLayer[L] = false
+		end
+	end
+	
 	void Reset(int MapTLevel,MaxE)
+		$RecalcMaxE = MaxE or 5
 		$MapTravelLevel = MapTLevel
 		$Recalc()
 		$Encounters = $MaxEncounters
 		$ManEncOn = true
+		$CompileFoeList()
+		$CompileAllowLayer()
 	end
 	
 	void Gauge()
@@ -66,13 +97,14 @@ group RENC
 		int b
 		number s
 		number bar
-		if AutEncOn and $gx > Screen.Width-50
+		number rgauge
+		if $AutEncOn and $gx > Screen.Width-50
 			$gx--
-		elseif (not AutEncon) and $gs < Screen.Width + 25
+		elseif (not $AutEncOn) and $gs < Screen.Width + 25
 			$g++
 		end
-		if ManEncOff
-			GraphColor = 100
+		if $ManEncOff
+			GraphColor.Alpha = 100
 		end
 		__white
 		Rect($gx-1,$gy-1,12,102)
@@ -82,15 +114,30 @@ group RENC
 		if $gdeg>=360
 			$gdeg = $gdeg - 360
 		end
-		r,g,b = $bcol[$Rate]		
-		bar = math.floor( ($Rate/$MaxRate) * 100)
-		for ix=0,10
+		//r,g,b = $bcol($Rate)
+		rgauge = math.ceil(($Rate/self.MaxRate)*4)
+		switch rgauge
+			case 0 1
+				r,g,b = 255,0,0
+			case 2
+				r,g,b = 255,180,0
+			case 3
+				r,g,b = 0,255,0
+			default
+				r,g,b = 0,0,255
+		end
+		bar = math.floor( ($Encounters/$MaxEncounters) * 100)
+		for ix=0,9
 			// math.sin counts in radians, but for this particular calcuation I need degrees, and xmath.sin counts in that.
-			s = math.abs(xmath.sin(ix+$gdeg))
+			s = math.abs(xmath.sin((ix*15)+$gdeg))
 			Color(math.ceil(s*r),math.ceil(s*g),math.ceil(s*b))
 			// Cheap way to draw a straight line. No need to use Bresenham here, as that would slow things down in THIS particular case.
 			Rect($gx+ix,$gy+(100-bar),1,bar)
 		end
+		__white
+		$Swords.Draw($gx-11,$gy-16)
+		GraphColor.Alpha = 255
+		
 	end
-
+	
 end

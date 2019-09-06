@@ -454,7 +454,6 @@ group FlowField
 		end
 		// error("Treasures not yet supported! Come back later!")
 	end
-
 	
 	void LoadMap(string MapFile,Layer)
 		$Map.LoadedMap=MapFile
@@ -470,6 +469,8 @@ group FlowField
 			CSay("= Fail!")
 		end
 		FieldMap.Kthura = kth
+		CSay("= RENC Data!")
+		RENC.Reset(tonumber(kth.Data.Travel_Level))
 		do
 			CSay("= Map changes")
 			string m
@@ -689,7 +690,7 @@ global void BUB_Draw()
 	Party.ShowBar()
 	
 	// Random Encounter Gauge
-	RENC.Gauge
+	RENC.Gauge()
 	
 	// Mini Messages (must be last before the mouse, which must be the very last)
 	MiniMsg.DrawAll()
