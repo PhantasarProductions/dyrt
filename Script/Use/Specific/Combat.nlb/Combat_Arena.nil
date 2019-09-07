@@ -1,0 +1,13 @@
+group Arena
+
+	var argr
+
+	void Load(string arenascript, infinity)
+		argr = NIL.Use("Script/Use/Specific/CombatModules/Arena/%s.nil",arenascript)
+		assert(argr,"Loading the arena script failed!")
+		if (#{infinity})>0
+			argr.StartConfig(infinity)
+		end
+	end
+
+end
