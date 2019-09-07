@@ -20,7 +20,7 @@ module Forest_Template_Module
 		for i,Enum in ipairs {"Tree","Floor","Sky","Cloud"}
 			LoadComm[Enum]=i
 		end
-		texsky = {R=0,G=210,B=225}
+		self.texsky = {R=0,G=210,B=225}
 	end
 		
 
@@ -90,9 +90,18 @@ module Forest_Template_Module
 			int num
 			num = math.random(0,5)
 			for i=1,num
-				$clouds[#self.clouds]={ ['X']=math.rand(1,Screen.Y), ['Y'] = math.random(10,RelPos.Y[300]), ['Tex']=$texclouds[random(1,#self.texclouds)] }
+				$clouds[#self.clouds+1]={ ['X']=math.rand(1,Screen.Y), ['Y'] = math.random(10,RelPos.Y[300]), ['Tex']=$texclouds[random(1,#self.texclouds)] }
 			end
 		end
+	end
+	
+	void Draw()
+		Color(self.texsky.R,self.texsky.G,self.texsky.B)
+		Rect(0,0,Screen.Width,Screen.Height)
+		for cloud in each($clouds)
+			cloud.Tex.Draw(cloud.X,cloud.Y)
+		end
+		
 	end
 
 end
