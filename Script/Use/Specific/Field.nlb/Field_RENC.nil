@@ -35,9 +35,11 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
+#use "Script/Use/StartCombatMod"
 #use "libs/xmath"
 #use "libs/tables"
+#use "libs/strings"
+#use "libs/Collections"
 
 #accept FlowField
 
@@ -51,6 +53,7 @@ group RENC
 	table RoomRate
 	int MaxRate
 	int RecalcMaxE
+	var MaxFoes
 	
 	int gx 
 	int gy
@@ -86,6 +89,19 @@ group RENC
 		self.Swords = LoadImage("gfx/RENC/Swords.png")
 		self.gx = Screen.Width + 25
 		self.gy = Screen.Height - 128 - 100 - 20
+		self.MaxFoes = new MArray("int",3+1,4+1)
+		self.MaxFoes.SetValue(1,1,1)
+		self.MaxFoes.SetValue(2,1,2)
+		self.MaxFoes.SetValue(3,1,2)
+		self.MaxFoes.SetValue(1,2,2)
+		self.MaxFoes.SetValue(2,2,3)
+		self.MaxFoes.SetValue(3,2,4)
+		self.MaxFoes.SetValue(1,3,3)
+		self.MaxFoes.SetValue(2,3,5)
+		self.MaxFoes.SetValue(1,3,6)
+		self.MaxFoes.SetValue(1,4,6)
+		self.MaxFoes.SetValue(2,4,9)
+		self.MaxFoes.SetValue(3,4,12)
 	end
 	
 	void Recalc()
@@ -153,7 +169,40 @@ group RENC
 			return
 		end
 		if $Rate<=1 or math.random(1,$Rate)<__skill
-			error("Random encounter cannot yet start!")
+			var kth
+			kth = FlowField.Map.Kthura
+			StartCombat.StartSession()
+			StartCombat.Arena = kth.Data.Arena
+			if kth.Data.EncounterTune==""
+				table lm
+				lm = split(FlowField.Map.LoadedMap,"_")
+				switch lm[1]
+					case "CH1"
+						StartCombat.Music = "Music/Combat/Random/Chapter1.wav"
+					case "CH2"
+						StartCombat.Music = "Music/Combat/Random/Chapter2.wav"
+					case "CH3"
+						StartCombat.Music = "Music/Combat/Random/Chapter3.wav"
+					case "CH4"
+						StartCombat.Music = "Music/Combat/Random/Chapter4.wav"
+					default
+						StartCombat.Music = sprintf("Music/Combat/Random/Chapter%d.wav",math.random(1,4))
+				end
+			end
+			int numfoe
+			int numchars
+			for i=1,8
+				if RPG.Party[i] and RPG.Party[i]!=""
+					numchars++
+				end
+			end
+			repeat
+				numfoe = math.random(1,self.MaxFoes.GetValue(__skill,numchars))
+			until math.random(0,numfoe)<=__skill
+			for i=1,numfoe
+				StartCombat.Foe[i] = $Foes[math.random(1,#self.Foes)]
+			end
+			error("Random encounter cannot yet start!!!!")
 		end
 	end
 	

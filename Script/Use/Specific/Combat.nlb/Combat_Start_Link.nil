@@ -1,0 +1,15 @@
+// Start Modes
+// 0 = Normal
+// 1 = Pre-Emptive Strike
+// 2 = Ambushed
+
+group Combat_Start
+	table Foe
+	string Arena
+	string Music
+	int StartMode = 0
+end
+
+
+global void LetsGetReadyToRumble()
+end

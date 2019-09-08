@@ -35,14 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
 #macro FieldFlow FlowField
-
-
-
-
 
 global bool FLOW_FIELD = true
 
@@ -69,7 +62,6 @@ var XPand(t, i)
 		return t[i], XPand(t, i + 1)
 	end
 end
-
 
 class Clickables
 	static var List

@@ -96,12 +96,20 @@ module Forest_Template_Module
 	end
 	
 	void Draw()
+		// sky
 		Color(self.texsky.R,self.texsky.G,self.texsky.B)
 		Rect(0,0,Screen.Width,Screen.Height)
 		for cloud in each($clouds)
 			cloud.Tex.Draw(cloud.X,cloud.Y)
 		end
-		
+		// floor
+		__white
+		$texfloor = $texfloor or LoadImage("GFX/Textures/Road/Grass1.png")
+		$texfloor.Tile(0,RelPos.Y[500],RelPos.X[1000],RelPos.Y[500])
+		// trees
+		for tree in each($Trees)
+			tree.Tex.Draw(tree.x - (tree.Tex.Width/2),tree.y - (tree.Tex.Height))
+		end
 	end
 
 end

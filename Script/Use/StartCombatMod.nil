@@ -1,0 +1,84 @@
+#use "libs/strings"
+
+void CombatLoaded()
+	assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
+end
+
+string qv(v)
+	switch type(v)
+		case "string"
+			return '"'..SafeString(v)..'"'
+		case "number" "boolean"
+			return tostring(v)
+		case "table"
+			string r = "{"
+			for k2,v2 in pairs(v)
+				if r!="{"
+					r = r ..", "
+				end
+				assert(type(k2)!="table","To tables for key allowed!")
+				r = r .. "["..qv(k2).."] = "..qv(v2)
+			end
+			return r
+		case "nil"
+			return "nil"
+		default
+			error("Cannot process type "..type(v))
+	end
+end
+
+quickmeta group StartCombatFoe
+	newindex
+		CombatLoaded()
+		LuaDoString("FLOW_COMBAT","Combat_Start.Foe["..key.."] = "..qv(value))
+	end
+end
+
+quickmeta group StartCombat
+
+	newindex
+		CombatLoaded()
+		LuaDoString("FLOW_COMBAT","Combat_Start['"..key.."'] = "..qv(value),"COMBATSTART.NI."..key)
+	end
+	
+	index
+		assert(type(key)=="string","String expected!")
+		if key!="StartSession"
+			CombatLoaded()
+		end
+		switch key
+			case "StartSession"
+				return void()
+					assert(not StateExists("FLOW_COMBAT"),"There's already an open combat session!")
+					CSay("Starting combat session!")
+					LoadFlow("FLOW_COMBAT","Script/Flow/Combat.nil")
+				end
+			case "Ready"
+				error("Entering combat not possible, yet!")
+			case "Foe" "Enemy"
+				return StartCombatFoe
+			default
+				return void(infinity)
+					string wrk
+					wrk = "Combat_Start['"..key.."']("
+					for i,v in ipairs{infinity}
+						if i>1
+							wrk = wrk .. ", "
+						end
+						wrk = wrk .. qv(v)
+					end
+					wrk = wrk ..")"
+					LuaDoString("FLOW_COMBAT",wrk,"COMBATSTART.N."..key)
+				end
+		end
+	end
+	
+	len
+		return math.random(1,1000)
+	end
+	
+	tostring
+		return "Begin the madness!"
+	end
+
+end
