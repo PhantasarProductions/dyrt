@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 module Arena_SparForest
 
 	var Forest
@@ -49,4 +50,5 @@ module Arena_SparForest
 		$Forest.Draw()
 	end
 end
+
 

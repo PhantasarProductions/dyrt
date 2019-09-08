@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 #use "Script/Use/StartCombatMod"
 #use "libs/xmath"
 #use "libs/tables"
@@ -203,7 +204,7 @@ group RENC
 			for i=1,numfoe
 				StartCombat.Foe[i] = $Foes[math.random(1,#self.Foes)]
 			end
-			error("Random encounter cannot yet start!!!!")
+			StartCombat.Ready()
 		end
 	end
 	
@@ -256,6 +257,7 @@ group RENC
 	end
 	
 end
+
 
 
 

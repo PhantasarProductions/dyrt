@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 #use "libs/strings"
 
 void CombatLoaded()
@@ -119,4 +120,5 @@ quickmeta group StartCombat
 	end
 
 end
+
 
