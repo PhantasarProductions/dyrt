@@ -37,11 +37,7 @@ void MsExe(command)
 	LuaDoString("MUSIC",command,"Call sub: MUSIC") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
 end
 
-#pure
-local
-#endpure
-
-class ClassMusic
+module ClassMusic
 
 	void Play(string file)
 		MsExe(string.format("MUS_Play(\"%s\")",file))
@@ -62,6 +58,5 @@ class ClassMusic
 end
 
 
-return ClassMusic.NEW()
 
 

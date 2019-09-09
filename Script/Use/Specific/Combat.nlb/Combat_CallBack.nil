@@ -35,6 +35,8 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "Script/Use/Anyway"
+
 
 class Stage
 	readonly delegate Update
@@ -57,7 +59,6 @@ class Stage
 		self.Draw = a_Draw or NOTHING
 		self.Stages[n:upper()] = self
 	end
-	
 	
 end
 

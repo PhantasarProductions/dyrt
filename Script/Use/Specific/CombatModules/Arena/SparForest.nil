@@ -41,8 +41,8 @@ module Arena_SparForest
 	var Forest
 
 	void CONSTRUCTOR()
-		self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Templates/Forest")
-		self.Forest.LoadTex("GFX/Textures/Trees/SPAR.png",Forest.LoadComm.Cloud,"gfx/Textures/Sky/cloud.png")		
+		self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
+		self.Forest.LoadTex("GFX/Textures/Trees/SPAR.png",self.Forest.LoadComm.Cloud,"gfx/Textures/Sky/cloud.png")
 		self.Forest.Generate()
 	end
 	

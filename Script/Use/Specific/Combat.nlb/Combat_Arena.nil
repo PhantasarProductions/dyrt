@@ -35,13 +35,14 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "Libs/strings"
 
 group Arena
 
 	var argr
 
 	void Load(string arenascript, infinity)
-		$argr = NIL.Use("Script/Use/Specific/CombatModules/Arena/%s.nil",arenascript)
+		$argr = NIL.Use(sprintf("Script/Use/Specific/CombatModules/Arena/%s.nil",arenascript))
 		assert($argr,"Loading the arena script failed!")
 		if (#{infinity})>0
 			$argr.StartConfig(infinity)

@@ -41,6 +41,9 @@
 // 1 = Pre-Emptive Strike
 // 2 = Ambushed
 
+#use "Script/Use/Anyway"
+#use "libs/strings"
+
 group Combat_Start
 	table Foe
 	string Arena
@@ -48,8 +51,45 @@ group Combat_Start
 	int StartMode = 0
 end
 
+global void DChat(string k)
+	static int r = 255
+	int g
+	static int b = 0
+	if b%2==0
+		--r
+	else 
+		r++
+	end	
+	if r>=255
+		b++
+		r=255
+	elseif r<=0
+		b++
+		r=0
+	end
+	g = 255-r
+	if b>=256
+		b=0
+	end
+	CWriteLine(k,r,g,b)
+end
+
+global void DChatF(string k, infinity)
+	DChat(sprintf(k,infinity))
+end
 
 global void LetsGetReadyToRumble()
+	with Combat_Start
+		DChatF("Loading arena: %s",$Arena)
+		Arena.Load($Arena)
+		DChatF("Loading music: %s",$Music)
+		Music.Play($Music)
+		
+		// TODO: Compile Foes
+		
+		GoToFlow("Combat")
+		Stage.Current = Stage.Stages.IDLE
+	end
 end
 
 

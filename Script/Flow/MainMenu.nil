@@ -279,6 +279,7 @@ void ComeIntoAction()
 end
 
 global void BUB_Update()
+	math.random(1,10) // just a measure to make sure the randomizer is always different!
 	if NOCLICK>0
 		NOCLICK--
 		return

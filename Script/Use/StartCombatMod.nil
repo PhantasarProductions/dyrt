@@ -92,7 +92,10 @@ quickmeta group StartCombat
 					LoadFlow("FLOW_COMBAT","Script/Flow/Combat.nil")
 				end
 			case "Ready"
-				error("Entering combat not possible, yet!")
+				return void()
+					CombatLoaded()
+					LuaDoString("FLOW_COMBAT","LetsGetReadyToRumble()","Let's get ready to rumble!")
+				end
 			case "Foe" "Enemy"
 				return StartCombatFoe
 			default
