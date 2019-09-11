@@ -1,5 +1,7 @@
 group Stage_IDLE
 
+	readonly bool MouseSleep = true
+
 	void CONSTRUCTOR()
 		Stage.Stages.IDLE=self
 	end

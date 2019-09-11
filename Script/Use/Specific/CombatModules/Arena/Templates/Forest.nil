@@ -76,7 +76,7 @@ module Forest_Template_Module
 						case 3
 							error("Expected color table")
 						case 4
-							self.texclouds[#self.texclouds]=LoadImage(v)
+							self.texclouds[#self.texclouds+1]=LoadImage(v)
 						default
 							error("Unknown string situation!")
 					end
@@ -99,57 +99,74 @@ module Forest_Template_Module
 	
 	void Generate()
 		with self
-		table temptrees
-		int y 
-		y = RelPos.Y[500]
-		string tag
-		for x = 0,Screen.Width,4
-			int r
-			string tex
-			r = math.random(1,4)
-			switch r
-				case 1
-					if y>RelPos.Y[400]
-						--y
-					end
-				case 2
-					if y<RelPos.Y[600]
-						++y
-					end
+			table temptrees
+			int y 
+			y = RelPos.Y[550]
+			string tag
+			for x = 0,Screen.Width,12
+				int r
+				string tex
+				r = math.random(1,12)
+				switch r
+					case 1
+						if y>RelPos.Y[530]
+							--y
+						end
+					case 2
+						if y<RelPos.Y[600]
+							++y
+						end
+					case 3 4
+						if y>RelPos.Y[530]
+							y = y - 5
+						end
+					case 5 6
+						if y<RelPos.Y[600]
+							y = y + 5
+						end
+				end
+				tag = sprintf("%5d_%5d",y,x)
+				temptrees[tag] = { ['X'] = x, ['Y'] = y, ['Tex'] = self.textrees[math.random(1,#self.textrees)] }
 			end
-			tag = sprintf("%5d_%5d",y,x)
-			temptrees[tag] = { ['X'] = x, ['Y'] = y, ['Tex'] = self.textrees[math.random(1,#self.textrees)] }
-		end
-		// This set up has been done to make sure trees with a higher Y will take be more dominant, otherwise "3D issues" (as far as you can call them that) will surely arise!
-		$trees={}
-		for _,tree in spairs(temptrees)
-			self.trees[#self.trees+1]=tree
-		end
-		self.clouds={}
-		if #self.texclouds>0
-			int num
-			num = math.random(0,5)
-			for i=1,num
-				self.clouds[#self.clouds+1]={ ['X']=math.rand(1,Screen.Y), ['Y'] = math.random(10,RelPos.Y[300]), ['Tex']=self.texclouds[math.random(1,#self.texclouds)] }
+			// This set up has been done to make sure trees with a higher Y will take be more dominant, otherwise "3D issues" (as far as you can call them that) will surely arise!
+			$trees={}
+			for _,tree in spairs(temptrees)
+				self.trees[#self.trees+1]=tree
 			end
-		end
+			self.clouds={}
+			if #self.texclouds>0
+				int num
+				num = math.random(1,5)
+				for i=1,num
+					self.clouds[#self.clouds+1]={ ['X']=math.random(1,Screen.Width), ['Y'] = math.random(10,RelPos.Y[300]), ['Tex']=self.texclouds[math.random(1,#self.texclouds)] }
+				end
+			end
 		end
 	end
 	
 	void Draw()
+		static bool debugrel = false
+		int HalfY
+		HalfY = tonumber(sprintf("%d",RelPos.Y[500])) or 100
+		if not debugrel
+			CSayF("Relpos 500 = %d",HalfY) //RelPos.Y[500])
+			debugrel=true
+		end
 		// sky
 		Color(self.texsky.R,self.texsky.G,self.texsky.B)
 		Rect(0,0,Screen.Width,Screen.Height)
+		__white
 		for cloud in each(self.clouds)
 			cloud.Tex.Draw(cloud.X,cloud.Y)
 		end
 		// floor
 		__white
 		self.texfloor = self.texfloor or LoadImage("GFX/Textures/Road/Grass1.png")
-		self.texfloor.Tile(0,RelPos.Y[500],RelPos.X[1000],RelPos.Y[500])
+		self.texfloor.Tile(0,HalfY,Screen.Width,HalfY)
+		//self.texfloor.Tile(0,539,Screen.Width,539) // DEBUG! Not usable, since screen heights can differ!
 		// trees
-		for tree in each(self.Trees)
-			tree.Tex.Draw(tree.x - (tree.Tex.Width/2),tree.y - (tree.Tex.Height))
+		for tree in each(self.trees)
+			tree.Tex.Draw(tree.X - (tree.Tex.Width/2),tree.Y - (tree.Tex.Height))
 		end
 	end
 
