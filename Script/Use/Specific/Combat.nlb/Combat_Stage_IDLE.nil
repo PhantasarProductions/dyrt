@@ -1,0 +1,13 @@
+group Stage_IDLE
+
+	void CONSTRUCTOR()
+		Stage.Stages.IDLE=self
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
