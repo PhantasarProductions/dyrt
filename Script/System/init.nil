@@ -27,7 +27,7 @@
 
 
 #say "Init script is being loaded!!"
-#macro skiptomenu true
+#macro skiptomenu false
 #macro __showtime false
 
 
@@ -46,6 +46,15 @@ global void Bubble_Init()
 		LoadFlow("MAINMENU","Script/Flow/MainMenu.nil")
 		CSay("Chain to Main Menu")
 		GoToFlow("MAINMENU")
+	else
+		CSay("Compiling: Introduction.nil")
+		LoadFlow("INTRO","Script/Flow/Introduction.nil")
+		CSay("Chain to the introduction")
+		GoToFlow("INTRO")
+		StartFlow()
+		return
+		// The rest will be loaded in the intro now, and this allows me
+		// to make the loading not appear like the system has crashed!
 	end
 	
 	// Background
