@@ -41,6 +41,7 @@
 
 
 
+
 #say "MainMenu: Use commands"
 #use "script/use/anyway"
 #use "libs/linkedlist"
@@ -72,7 +73,7 @@ MenuItems = new TLinkedList
 
 #say "Load assets"
 CSay('Load font: FONT_MainMenu')
-ItemFont  = LoadImageFont(FONT_MainMenu)
+ItemFont  = GetFont("MAINMENU")
 Logo = LoadImage("GFX/Alg/Dyrt_Logo.png")
 int MidXLogo
 MidXLogo = Logo.Width/2
@@ -303,6 +304,7 @@ end
 // Confirm
 CSay("MainMenu should be successfully loaded")
 #say "MainMenu:Translation done!"
+
 
 
 

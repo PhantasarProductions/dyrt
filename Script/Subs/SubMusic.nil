@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubMusic.nil
 // SubMusic
-// version: 19.08.01
+// version: 19.09.12
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -17,6 +17,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -60,7 +61,7 @@ global void MUS_Play(string file,dontloop)
 	end
 	curplaying = newmus
 	if dontloop
-		curplaying.instance = curplaying.resource.Play()
+		curplaying.instance = curplaying.resource.IPlay()
 	else
 		curplaying.instance = curplaying.resource.Loop()
 	end
@@ -95,6 +96,7 @@ end
 
 
 init()
+
 
 
 

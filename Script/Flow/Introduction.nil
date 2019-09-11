@@ -32,9 +32,8 @@
 // 
 // **********************************************
 // 
-// version: 19.09.11
+// version: 19.09.12
 // End License Information
-
 
 
 // Dirty code straight from the toilet!
@@ -107,6 +106,7 @@ group Loading
 		new Loader("ImageFont","Fonts/Coolvetica.20.jfbf","BOXTEXT")
 		new Loader("ImageFont","Fonts/Coolvetica.35.jfbf","BIGTEXT")
 		new Loader("ImageFont","Fonts/Blitz.jfbf","SYSFONT")
+		new Loader("ImageFont",FONT_MainMenu,"MAINMENU")
 		
 		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
 		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
@@ -154,13 +154,77 @@ group Loading
 end
 
 group Show
-	void CONSTRUCTOR()		
+	table What2Show
+	int stage
+	int stagetime
+	int sec 
+	
+	void MakeMe()
+		table W
+		var F
+		W = self.What2Show
+		F = GetFont("MAINMENU")
+		W[1] = LoadImage("GFX/Alg/Phantasar_Productions.png")
+		W[2] = LoadImage("GFX/Alg/Presents.png")
+		W[3] = F.Text("A game by: Jeroen P. Broks")
+		W[4] = F.Text("With help of: Man of Steel")
+		W[5] = F.Text("And: Widzy")
+		W[6] = LoadImage("GFX/Alg/Dyrt_Logo.png")
+	end
+	
+	void CONSTRUCTOR()
+		self.stage = 0
+		self.sec = os.time()
 	end
 	
 	void Draw()
+		if self.stage==0
+			self.MakeMe()
+			self.stage=1
+		end
+		var W
+		W = self.What2Show[self.stage]
+		assert(W,"Nothing on stage index "..self.stage.." (stage time: "..self.stagetime..")")
+		W.Draw((Screen.Width/2)-math.floor(W.Width/2),(Screen.Height/2)-math.floor(W.Height/2))
 	end
 	
 	void Update()
+		if self.stage==0
+			return
+		end
+		int s
+		s = os.time()
+		if (s!=self.sec) and (self.stage<#self.What2Show)
+			self.stagetime++
+			self.stage = math.floor(self.stagetime/#self.What2Show+1)
+			if self.stage<1
+				self.stage=1
+			end
+			self.sec=s
+		end
+	end
+end
+
+group Chain
+
+	int CountDown=10
+
+	void DoLoad()
+		LoadFlow("MAINMENU","Script/Flow/MainMenu.nil")
+		GoToFlow("MAINMENU")
+		KillFlow("INTRO")
+	end
+	
+	void Draw()
+		Loading.Loading.Draw((Screen.Width/2)-(Loading.Loading.Width/2),(Screen.Height/2)-(Loading.Loading.Width/2))
+		--self.CountDown
+	end
+	
+	void Update()
+		if self.CountDown>0
+			return
+		end
+		self.DoLoad()
 	end
 end
 
@@ -168,18 +232,63 @@ end
 group Introduction
 
 	var Current
+	var ContText
+	int r = 255
+	int g = 0
+	int b = 1
+	bool buttonhover
 
 	void Draw()
 		self.Current.Draw()
-		if self.Current!=Loading
+		if self.Current!=Loading and self.Current!=Chain
+			int x
+			int y
+			int w
+			int h
+			self.ContText = self.ContText or GetFont("MAINMENU").Text("Continue")
+			x = (Screen.Width/2)-math.floor(self.ContText.Width/2)
+			y = math.floor(Screen.Height*0.80)
+			w = self.ContText.Width
+			h = self.ContText.Height
+			$buttonhover = Mouse.X>x and Mouse.X<x+w and Mouse.Y>y and Mouse.Y<y+h
+			__black
+			Rect(x-4,y-4,w+8,h+8)
+			Color(self.r,self.g,self.b)
+			Rect(x-2,y-2,w+6,h+6,"line")
+			Color(self.g,self.r,255-self.b)
+			self.ContText.Draw(x,y)
+			if (self.b%2==0)
+				self.r++
+				if $r>=255
+					self.b++
+					self.r=255
+				end
+			else
+				self.r--
+				if $r<=0
+					self.b++
+					self.r=0
+				end
+			end
+			if self.b>=255
+				self.b=0
+			end
+			self.g=255-self.r
 			__white
 			Mouse.Show()
+			// GetFont("MAINMENU").DrawText("Mouse: ("..Mouse.X..","..Mouse.Y..")",0,0)
+		else 
+			$buttonhover=false
 		end
 	end
 	
 	void Update()
 		if DEVELOPMENT and Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
 			GoConsole()
+		end
+		if $buttonhover and Mouse.HitLeft
+			self.Current = Chain
+			return
 		end
 		self.Current.Update()
 	end
@@ -190,4 +299,6 @@ group Introduction
 		self.Current = Loading
 	end
 end
+
+
 
