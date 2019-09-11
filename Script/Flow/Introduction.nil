@@ -1,0 +1,23 @@
+
+// Dirty code straight from the toilet!
+#accept BUB_Draw
+#accept BUB_Update
+
+
+
+
+
+group Introduction
+
+
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+	void CONSTRUCTOR()
+		BUB_Draw = Draw
+		BUB_Update = Update
+	end
+end
