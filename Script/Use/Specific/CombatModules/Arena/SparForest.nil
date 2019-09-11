@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/Arena/SparForest.nil
-// Version: 19.09.08
+// Version: 19.09.11
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 module Arena_SparForest
 
 	var Forest
@@ -51,5 +52,6 @@ module Arena_SparForest
 		self.Forest.Draw()
 	end
 end
+
 
 
