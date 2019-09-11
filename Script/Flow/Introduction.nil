@@ -1,23 +1,193 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Flow/Introduction.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 19.09.11
+// End License Information
+
+
 
 // Dirty code straight from the toilet!
 #accept BUB_Draw
 #accept BUB_Update
 
+#accept Introduction
+#accept Show
+
+#use "script/use/anyway"
+#use "Libs/LinkedList"
+#use "Libs/Strings"
 
 
+class Loader
 
+	static var List
+	static int Max
+	
+	readonly string What
+	readonly string File
+	readonly string Tag
+	readonly int id
+	int drawn
+	
+	void Run()
+		CSayF("%4d/%4d: Loading %s '%s' to reference:%s",self.id,self.Max,self.What,self.File,self.Tag)
+		switch self.What
+			case "Image"
+				LoadImage(self.File,self.Tag)
+			case "ImageFont"
+				LoadImageFont(self.File,self.Tag)
+			case "MousePointer"
+				Mouse[self.Tag]=self.File
+			case "InstantTune"
+				Music.Play("Music/StartUp/Introduction.wav",true)
+			default
+				error(sprintf("%d: Loader.What = \"%s\"; File = \"%s\"; Tag=\"%s\": Can't load unknown phenomenon %s",self.id,self.What,self.File,self.Tag,self.What))
+		end		
+	end
+	
+	void CONSTRUCTOR(string awhat,string afile, string atag)
+		self.What = awhat
+		self.File = afile
+		self.Tag  = atag
+		self.List.AddLast(self)
+		self.Max  = self.List.Count
+		self.id   = self.Max
+	end
 
-group Introduction
+end
 
+group Loading
+	void CONSTRUCTOR()
+		Loader.List = new TLinkedList
+		// Message banners
+		new Loader("Image","GFX/Alg/Loading.png","LOADING")
 
+		// Background
+		new Loader("Image","GFX/Alg/MenuBack.png","MENUBACK")
+	
+	
+		// UI
+		new Loader("Image","GFX/Alg/Next.png","NEXT")
+		new Loader("Image","GFX/Alg/Prev.png","PREV")
+		new Loader("Image","GFX/Alg/Up.png","UP")
+		new Loader("Image","GFX/Alg/Down.png","DOWN")
+	
+		// BoxText Font
+		new Loader("ImageFont","Fonts/Coolvetica.20.jfbf","BOXTEXT")
+		new Loader("ImageFont","Fonts/Coolvetica.35.jfbf","BIGTEXT")
+		new Loader("ImageFont","Fonts/Blitz.jfbf","SYSFONT")
+		
+		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
+		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
+		new Loader("MousePointer","GFX/Alg/Mouse.png","Pointer")
+		new Loader("MousePointer","GFX/Alg/Mouse_Sleep.png","SleepPointer")
+		
+		new Loader("InstantTune","","")
+	end
+	
+	var Loading	
+	
+	var CLink
+	get var Obj
+		return self.CLink.MyObject
+	end
+	
+	void Update()
+		self.CLink = self.CLink or Loader.List.First
+		if $Obj.drawn<4
+			return
+		end
+		self.Obj.Run()
+		self.CLink = self.CLink.Next
+		if not self.CLink
+			Introduction.Current = Show
+		end
+	end
+	
+	void Draw()
+		int g
+				
+		if (not self.Loading) and ImageLoaded("LOADING")
+			self.Loading =  TImage.Obtain("LOADING")
+		elseif self.Loading
+			__white
+			self.Loading.Draw((Screen.Width/2)-(self.Loading.Width/2),(Screen.Height/2)-(self.Loading.Width/2))
+		end
+		Color(70,70,70)
+		Rect(0,Screen.Height-10,Screen.Width,10)
+		g = math.floor( (self.Obj.id/self.Obj.Max) * 255)
+		Color(255-g,g,0)
+		Rect(0,Screen.Height-10,math.floor ((self.Obj.id/self.Obj.Max) * Screen.Width),10)
+		$Obj.drawn++
+	end
+end
+
+group Show
+	void CONSTRUCTOR()		
+	end
+	
 	void Draw()
 	end
 	
 	void Update()
 	end
+end
+
+
+group Introduction
+
+	var Current
+
+	void Draw()
+		self.Current.Draw()
+		if self.Current!=Loading
+			__white
+			Mouse.Show()
+		end
+	end
+	
+	void Update()
+		if DEVELOPMENT and Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
+			GoConsole()
+		end
+		self.Current.Update()
+	end
 	
 	void CONSTRUCTOR()
-		BUB_Draw = Draw
-		BUB_Update = Update
+		BUB_Draw = self.Draw
+		BUB_Update = self.Update
+		self.Current = Loading
 	end
 end
+

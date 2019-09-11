@@ -20,6 +20,7 @@
 
 
 
+
 #accept MUSICSCRIPT
 
 if MUSICSCRIPT then return nil end
@@ -40,8 +41,8 @@ end
 
 module ClassMusic
 
-	void Play(string file)
-		MsExe(string.format("MUS_Play(\"%s\")",file))
+	void Play(string file,dontloop)
+		MsExe(string.format("MUS_Play('%s',%s)",file,tostring(dontloop==true)))
 	end
 
 	void Stop()
@@ -57,6 +58,7 @@ module ClassMusic
 	end
 
 end
+
 
 
 
