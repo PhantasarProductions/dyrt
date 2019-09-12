@@ -37,16 +37,77 @@
 
 
 #use "Libs/strings"
+#use "Libs/RelPos"
+
+class ActPos
+	readonly int x
+	readonly int y
+	readonly static table Spot
+	void CONSTRUCTOR(string tag,int setx, int sety,real)
+		if real!=true
+			self.x=RelPos.X[setx]
+			self.y=RelPos.Y[sety]
+		else
+			self.x=setx
+			self.y=sety
+		end
+		self.Spot[tag]=self
+	end
+end
+
 
 group Arena
 
 	var argr
+	
+	void DefActCoords(MyArena)
+		int CountHero
+		int CountFoe
+		
+		// Yes 4! The backrow (pos 5 till 8) are never part of the battle and thus not relevant.
+		// And when you want back row characters in a front row character is removed, so why bother!
+		for i=1,4
+			if RPG.Party[i] and RPG.Party[i]!=""
+				CountHero++
+			end
+		end
+		
+		switch CountHero
+			case 1
+				new ActPos("HERO1",800,700)
+			case 2
+				new ActPos("HERO1",800,650)
+				new ActPos("HERO2",850,750)
+			case 3
+				new ActPos("HERO1",800,667)
+				new ActPos("HERO2",825,733)
+				new ActPos("HERO3",850,800)
+			case 4
+				for i=0,3
+					new ActPos(sprintf("HERO%d",i+1,800+(i*25),600+(i*26)))
+				end
+			default
+				error(sprintf("Unknown number of heroes to deal with (%d)",CountHero))
+		end
+		
+		for i=0,23
+			int x
+			int y
+			x = (math.floor(i/3)*50)+1
+			y = ((i%3)*50)+700
+		end
+	end
 
 	void Load(string arenascript, infinity)
 		$argr = NIL.Use(sprintf("Script/Use/Specific/CombatModules/Arena/%s.nil",arenascript))
 		assert($argr,"Loading the arena script failed!")
 		if (#{infinity})>0
 			$argr.StartConfig(infinity)
+		end
+		if $argr[".hasmember"]("SetCoords")
+			$argr.SetCoords()
+		else
+			$DefActCoords()
 		end
 	end
 	
