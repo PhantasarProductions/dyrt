@@ -44,6 +44,8 @@ class Fighter
 	int TempY
 	bool UseTemp = false
 	
+	var Char
+	
 	get int X
 		if self.UseTemp
 			return self.TempX

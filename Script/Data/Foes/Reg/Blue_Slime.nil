@@ -1,14 +1,17 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:34:53 AM
+// Generated: 9/13/2019 12:43:54 AM
 
 var foeret
 foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))
-foeret.FoeID = Foe.LoadFoeIDfoeret.Description = "Pretty lazy and overall good for nothing"
+foeret.FoeID = Foe.LoadFoeID
+foeret.Char = RPG.CreateChar(foeret.Tag)
+foeret.Description = "Pretty lazy and overall good for nothing"
 foeret.Fatal["Darkness"] = false
 foeret.Fatal["Earth"] = false
 foeret.Fatal["Flame"] = false
 foeret.Fatal["Frost"] = false
 foeret.Fatal["Light"] = false
+foeret.Fatal["Physical"] = false
 foeret.Fatal["Thunder"] = false
 foeret.Fatal["Water"] = false
 foeret.Fatal["Wind"] = false
