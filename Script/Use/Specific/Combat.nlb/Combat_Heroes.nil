@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 #use "libs/xmath"
 #use "libs/strings"
 
@@ -140,5 +141,6 @@ class Hero extends Fighter
 		end
 	end
 end
+
 
 

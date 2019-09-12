@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 // This is just the debug section.
 // "zorg" means "care" in Dutch.
 
@@ -66,4 +67,5 @@ group ConsoleCommands
 	end
 	
 end
+
 
