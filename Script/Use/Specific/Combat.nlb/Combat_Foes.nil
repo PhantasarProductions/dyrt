@@ -45,6 +45,7 @@ class Foe extends Fighter
 
 	// Foe specific data
 	table AI_Moves
+	string AI_Module
 	table Fatal
 	int Experience
 	var Image
