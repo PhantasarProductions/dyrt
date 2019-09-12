@@ -1,5 +1,5 @@
 // License Information:
-// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Arena.nil
+// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZorgCentrum.nil
 // Version: 19.09.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
@@ -35,97 +35,35 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+// This is just the debug section.
+// "zorg" means "care" in Dutch.
 
-
-
-#use "Libs/strings"
-#use "Libs/RelPos"
-
-class ActPos
-	readonly int x
-	readonly int y
-	readonly static table Spot
-	get int X
-		return self.x
+void ViewFighter(string aTeam,string aTag, data)
+	int g
+	string d
+	table ds
+	d = data[".dump"]
+	ds = split(d,"\n")
+	for i,l in ipairs(ds)
+		g = math.floor( (i/#ds)*180 )
+		CWriteLine(l,255,g,0)
 	end
-	get int Y
-		return self.y
-	end
-	void CONSTRUCTOR(string tag,int setx, int sety,real)
-		if real!=true
-			self.x=RelPos.X[setx]
-			self.y=RelPos.Y[sety]
-		else
-			self.x=setx
-			self.y=sety
-		end
-		self.Spot[tag]=self
-	end
+	CSayF("%s should appear on spot (%d,%d)   (Screen Format %dx%d)",data.Tag,data.X,data.Y,Screen.Width,Screen.Height)
 end
 
-
-group Arena
-
-	var argr
-	
-	void DefActCoords(MyArena)
-		int CountHero
-		int CountFoe
-		
-		// Yes 4! The backrow (pos 5 till 8) are never part of the battle and thus not relevant.
-		// And when you want back row characters in a front row character is removed, so why bother!
-		for i=1,4
-			if RPG.Party[i] and RPG.Party[i]!=""
-				CountHero++
-			end
-		end
-		
-		switch CountHero
-			case 1
-				new ActPos("HERO1",800,700)
-			case 2
-				new ActPos("HERO1",800,650)
-				new ActPos("HERO2",850,750)
-			case 3
-				new ActPos("HERO1",800,667)
-				new ActPos("HERO2",825,733)
-				new ActPos("HERO3",850,800)
-			case 4
-				for i=0,3
-					new ActPos(sprintf("HERO%d",i+1,800+(i*25),600+(i*26)))
-				end
-			default
-				error(sprintf("Unknown number of heroes to deal with (%d)",CountHero))
-		end
-		
-		for i=0,23
-			int x
-			int y
-			x = (math.floor(i/3)*50)+1
-			y = ((i%3)*50)+700
-		end
-	end
-
-	void Load(string arenascript, infinity)
-		$argr = NIL.Use(sprintf("Script/Use/Specific/CombatModules/Arena/%s.nil",arenascript))
-		assert($argr,"Loading the arena script failed!")
-		if (#{infinity})>0
-			$argr.StartConfig(infinity)
-		end
-		if $argr[".hasmember"]("SetCoords")
-			$argr.SetCoords()
-		else
-			$DefActCoords()
+group ConsoleCommands
+	void HEROES()
+		CSay("Data about: HEROES")
+		CSay(NIL.LuaSerialize(tostring(Fighter.Team),Fighter.Team))
+		for tag,data in spairs(Fighter.Team.Hero)
+			ViewFighter("Hero","Tag",data)
 		end
 	end
 	
-	void Draw()
-		self.argr.Draw()
+	void FIGHTERS()
+		// FOES()
+		$HEROES()
 	end
-
+	
 end
-
-
-
-
 

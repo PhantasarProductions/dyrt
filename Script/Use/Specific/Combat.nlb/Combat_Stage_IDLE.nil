@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Stage_IDLE.nil
-// Version: 19.09.11
+// Version: 19.09.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,7 +36,8 @@
 // End License Information
 
 
-group Stage_IDLE
+
+group Stage_IDLE extends Stage
 
 	readonly bool MouseSleep = true
 
@@ -51,5 +52,6 @@ group Stage_IDLE
 	end
 	
 end
+
 
 

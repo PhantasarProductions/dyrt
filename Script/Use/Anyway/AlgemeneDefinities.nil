@@ -60,7 +60,7 @@
 #macro __levelcap gv.Num.LevelCap
 #macro __travellevel gv.num.TravelLevel
 
-
+#macro __solidview SetAlpha(255)
 
 
 class MidScreen

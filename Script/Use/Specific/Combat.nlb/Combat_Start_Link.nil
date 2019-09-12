@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Start_Link.nil
-// Version: 19.09.11
+// Version: 19.09.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -81,10 +82,14 @@ end
 
 global void LetsGetReadyToRumble()
 	with Combat_Start
+		// Arena and Music
 		DChatF("Loading arena: %s",$Arena)
 		Arena.Load($Arena)
 		DChatF("Loading music: %s",$Music)
 		Music.Play($Music)
+		
+		// Compile Heroes
+		Hero.CompileAll()
 		
 		// TODO: Compile Foes
 		
@@ -92,6 +97,7 @@ global void LetsGetReadyToRumble()
 		Stage.Current = Stage.Stages.IDLE
 	end
 end
+
 
 
 

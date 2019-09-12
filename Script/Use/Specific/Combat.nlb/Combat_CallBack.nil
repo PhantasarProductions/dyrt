@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_CallBack.nil
-// Version: 19.09.11
+// Version: 19.09.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,7 +36,12 @@
 // End License Information
 
 
+#use "libs/tables"
+
 #use "Script/Use/Anyway"
+
+#accept Fighter
+
 
 
 class Stage
@@ -81,6 +86,13 @@ global void BUB_Draw()
 		Arena.Draw()
 	end
 	
+	// Draw Fighters
+	for groupname,groupitself in pairs(Fighter.Team)
+		for team,member in spairs(groupitself)
+			member.Draw()
+		end
+	end
+	
 	// Character bar
 	Party.SelectedCharacter=0
 	Party.ShowBar()
@@ -90,5 +102,6 @@ global void BUB_Draw()
 	Mouse.Sleeping = Stage.Current[".hasmember"]("MouseSleep") and Stage.Current.MouseSleep==true
 	Mouse.Show()
 end
+
 
 
