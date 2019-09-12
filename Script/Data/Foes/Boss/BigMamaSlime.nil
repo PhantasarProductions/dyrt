@@ -1,0 +1,33 @@
+// GENERATED NIL SCRIPT!
+// Generated: 9/13/2019 12:09:36 AM
+
+var foeret
+foeret = new Foe
+foeret.Description = "A very big slime, and mother to many slimes.\nOnly a skilled warrior even stands a chance!"
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BigMamaSlime.png")
+switch __skill	case 1
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+	case 2
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+	case 3
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+	default
+		error("Unknown skill "..__skill)
+end
+
+return foeret

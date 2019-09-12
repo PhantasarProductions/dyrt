@@ -1,0 +1,60 @@
+// GENERATED NIL SCRIPT!
+// Generated: 9/13/2019 12:09:36 AM
+
+var foeret
+foeret = new Foe
+foeret.Description = "Pretty lazy and overall good for nothing"
+foeret.Fatal["Darkness"] = false
+foeret.Fatal["Earth"] = false
+foeret.Fatal["Flame"] = false
+foeret.Fatal["Frost"] = false
+foeret.Fatal["Light"] = false
+foeret.Fatal["Thunder"] = false
+foeret.Fatal["Water"] = false
+foeret.Fatal["Wind"] = false
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Blue_Slime.png")
+if not Foe.Oversoul
+	foeret.Experience = 4
+end
+switch __skill	case 1
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+	case 2
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+	case 3
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="BTY_LAZINESS"
+	default
+		error("Unknown skill "..__skill)
+end
+
+return foeret

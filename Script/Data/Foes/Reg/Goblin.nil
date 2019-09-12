@@ -1,0 +1,42 @@
+// GENERATED NIL SCRIPT!
+// Generated: 9/13/2019 12:09:36 AM
+
+var foeret
+foeret = new Foe
+foeret.Description = "Overall... very very stupid!\nThey are like... Me king... you dead!\n"
+foeret.Fatal["Darkness"] = false
+foeret.Fatal["Earth"] = false
+foeret.Fatal["Flame"] = false
+foeret.Fatal["Frost"] = false
+foeret.Fatal["Light"] = false
+foeret.Fatal["Phyiscal"] = false
+foeret.Fatal["Thunder"] = false
+foeret.Fatal["Water"] = false
+foeret.Fatal["Wind"] = false
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Goblin.png")
+if not Foe.Oversoul
+	foeret.Experience = 5
+end
+if Foe.Oversoul
+	foeret.Experience = 15
+end
+switch __skill	case 1
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+	case 2
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+	case 3
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+	default
+		error("Unknown skill "..__skill)
+end
+
+return foeret
