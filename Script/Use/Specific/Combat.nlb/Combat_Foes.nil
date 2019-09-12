@@ -38,14 +38,18 @@
 
 class Foe extends Fighter
 
+	// Parameters all Foe data scripts respond to
 	static bool LoadOversoul
-	static string FoeTag
+	static string LoadFoeTag
+	static int LoadFoeID
 
+	// Foe specific data
 	table AI_Moves
 	table Fatal
 	int Experience
 	var Image
 	string Description
+	int FoeID
 	
 
 end
