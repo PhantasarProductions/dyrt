@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 #use "libs/tables"
 
 #use "Script/Use/Anyway"
@@ -102,6 +103,7 @@ global void BUB_Draw()
 	Mouse.Sleeping = Stage.Current[".hasmember"]("MouseSleep") and Stage.Current.MouseSleep==true
 	Mouse.Show()
 end
+
 
 
 
