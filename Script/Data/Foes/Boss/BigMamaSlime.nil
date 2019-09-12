@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:51:34 AM
+// Generated: 9/13/2019 1:00:56 AM
 
 var foeret
 foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))
@@ -9,6 +9,7 @@ foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A very big slime, and mother to many slimes.\nOnly a skilled warrior even stands a chance!"
 foeret.Fatal["Physical"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BigMamaSlime.png")
+foeret.Boss = true
 switch __skill	case 1
 		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
 		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"

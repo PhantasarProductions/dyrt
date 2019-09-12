@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:51:34 AM
+// Generated: 9/13/2019 1:00:56 AM
 
 var foeret
 foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))
@@ -19,6 +19,7 @@ foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Blue_Slime.png")
 if not Foe.Oversoul
 	foeret.Experience = 4
 end
+foeret.Boss = false
 switch __skill	case 1
 		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
 		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
