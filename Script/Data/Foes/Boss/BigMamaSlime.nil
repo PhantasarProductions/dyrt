@@ -1,10 +1,11 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:48:29 AM
+// Generated: 9/13/2019 12:51:34 AM
 
 var foeret
 foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
+foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A very big slime, and mother to many slimes.\nOnly a skilled warrior even stands a chance!"
 foeret.Fatal["Physical"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BigMamaSlime.png")

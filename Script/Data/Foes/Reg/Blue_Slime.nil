@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:48:29 AM
+// Generated: 9/13/2019 12:51:34 AM
 
 var foeret
 foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))

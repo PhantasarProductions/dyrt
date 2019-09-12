@@ -1,11 +1,12 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:48:29 AM
+// Generated: 9/13/2019 12:51:35 AM
 
 var foeret
 foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
+foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Overall... very very stupid!\nThey are like... Me king... you dead!\n"
 foeret.Fatal["Darkness"] = false
 foeret.Fatal["Earth"] = false

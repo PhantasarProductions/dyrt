@@ -51,6 +51,7 @@ class Foe extends Fighter
 	var Image
 	string Description
 	int FoeID
+	bool AllowOversoul
 	
 
 end
