@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 12:59:22 PM
+// Generated: 9/13/2019 1:08:42 PM
 
 //var foeret
 #pure
@@ -110,10 +110,10 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_Hp").Value=5
-	foeret.Char.Stat("BUFF_Hp").Value=0
-	foeret.Char.Stat( "END_Hp").Value=0
-	foeret.Char.Stat( "END_Hp").Script="SUM:BASE_Hp,BUFF_Hp"
+	foeret.Char.Stat("BASE_HP").Value=5
+	foeret.Char.Stat("BUFF_HP").Value=0
+	foeret.Char.Stat( "END_HP").Value=0
+	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
 	foeret.Char.Stat("BASE_Intelligence").Value=4
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
@@ -170,5 +170,9 @@ switch __skill
 	default
 		error("Unknown skill "..__skill)
 end
+
+foeret.Char.Points("HP",true).MaxCopy="END_HP"
+foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+
 
 return foeret
