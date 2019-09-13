@@ -68,6 +68,7 @@ class Foe extends Fighter
 	end
 	
 	void Draw()
+		self.Image.Draw(self.X,self.Y)
 	end
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
