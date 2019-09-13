@@ -69,6 +69,10 @@ class Fighter
 		return self.SpotY
 	end
 	
+	get int Agility
+		return self.Char.Stat("END_Agility").Value
+	end
+	
 	static table Team
 	
 	abstract void Draw()

@@ -282,6 +282,10 @@ group FieldMap
 		return x-$ScrollX,y-$ScrollY
 	end
 	
+	get int TravelLevel
+		return tonumber(Kthura.Data.Travel_Level) or 1
+	end
+	
 	void Kill(string tag,permanent)
 		string m
 		m = "MAPCHANGES."..FieldMap.LoadedMap

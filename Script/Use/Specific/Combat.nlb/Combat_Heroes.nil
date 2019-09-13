@@ -131,6 +131,7 @@ class Hero extends Fighter
 		var myhero
 		myhero = new Hero(tag)
 		myhero.Heroes[#myhero.Heroes+1] = myhero
+		myhero.Char = RPG.Char(tag)
 	end
 	
 	static void CompileAll()

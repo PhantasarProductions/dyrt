@@ -36,7 +36,6 @@
 // End License Information
 
 
-
 group Stage_IDLE extends Stage
 
 	readonly bool MouseSleep = true

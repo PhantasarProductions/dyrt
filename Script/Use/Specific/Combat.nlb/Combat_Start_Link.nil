@@ -46,6 +46,8 @@
 #use "Script/Use/Anyway"
 #use "libs/strings"
 
+#accept CombatTime
+
 group Combat_Start
 	table Foe
 	string Arena
@@ -95,6 +97,9 @@ global void LetsGetReadyToRumble()
 		for i,d in pairs($Foe)
 			Foe.Compile(i,d)
 		end
+		
+		// Calculate gauge speed order
+		CombatTime.CalcSpeed()
 		
 		GoToFlow("Combat")
 		Stage.Current = Stage.Stages.IDLE

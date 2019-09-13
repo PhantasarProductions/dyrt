@@ -101,6 +101,11 @@ group Loading
 		new Loader("Image","GFX/Alg/Prev.png","PREV")
 		new Loader("Image","GFX/Alg/Up.png","UP")
 		new Loader("Image","GFX/Alg/Down.png","DOWN")
+		
+		// Combat UI
+		new Loader("Image","GFX/Combat/UI/TimeGauge.png","COMBAT_TIMEGAUGE")
+		new Loader("Image","gfx/combat/ui/GaugePointFoe.png","COMBAT_TIMEPOINTFOE")
+		new Loader("Image","gfx/combat/ui/PointFoe.png","COMBAT_TIMEPOINTFOE")
 	
 		// BoxText Font
 		new Loader("ImageFont","Fonts/Coolvetica.20.jfbf","BOXTEXT")

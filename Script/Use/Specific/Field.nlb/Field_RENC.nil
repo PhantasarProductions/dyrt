@@ -204,6 +204,31 @@ group RENC
 			for i=1,numfoe
 				StartCombat.Foe[i] = "Reg/"..$Foes[math.random(1,#self.Foes)]
 			end
+			// Ambush or not?
+			do
+				int AmbushRollParty
+				int AmbushRollMap
+				AmbushRollParty = math.random(0,__travellevel)
+				AmbushRollMap   = math.random(0,FieldMap.TravelLevel)
+				switch __skill
+					case 1
+						if AmbushRollParty>=AmbushRollMap
+							StartCombat.StartMode=1
+						end
+					case 2
+						if AmbushRollParty>AmbushRollMap and math.random(0,__travellevel)>math.random(0,FieldMap.TravelLevel*2)
+							StartCombat.StartMode=1
+						elseif AmbushRollParty<AmbushRollMap and math.random(0,__travellevel)<math.random(0,FieldMap.TravelLevel)
+							StartCombat.StartMode=2
+						end
+					case 3
+						if AmbushRollParty<=AmbushRollMap+2
+							StartCombat.StartMode=2
+						end
+					default
+						error("Unknown skill") // Should never be possible, BUT, ya never know!
+				end
+			end
 			StartCombat.Ready()
 		end
 	end
