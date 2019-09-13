@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.09.12
+// Version: 19.09.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 
 
+
 class Fighter
 
 	int SpotX
@@ -45,6 +46,14 @@ class Fighter
 	bool UseTemp = false
 	
 	var Char
+	
+	get string Name
+		return self.Char.Name
+	end
+	
+	set string Name
+		self.Char.Name=value
+	end
 	
 	get int X
 		if self.UseTemp
@@ -80,6 +89,7 @@ class Fighter
 	end
 	
 end
+
 
 
 

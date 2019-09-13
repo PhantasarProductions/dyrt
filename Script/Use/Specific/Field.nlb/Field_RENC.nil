@@ -202,7 +202,7 @@ group RENC
 				numfoe = math.random(1,self.MaxFoes.GetValue(__skill,numchars))
 			until math.random(0,numfoe)<=__skill
 			for i=1,numfoe
-				StartCombat.Foe[i] = $Foes[math.random(1,#self.Foes)]
+				StartCombat.Foe[i] = "Reg/"..$Foes[math.random(1,#self.Foes)]
 			end
 			StartCombat.Ready()
 		end

@@ -91,7 +91,10 @@ global void LetsGetReadyToRumble()
 		// Compile Heroes
 		Hero.CompileAll()
 		
-		// TODO: Compile Foes
+		// Compile Foes
+		for i,d in pairs($Foe)
+			Foe.Compile(i,d)
+		end
 		
 		GoToFlow("Combat")
 		Stage.Current = Stage.Stages.IDLE

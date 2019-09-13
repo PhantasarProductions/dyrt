@@ -36,6 +36,9 @@
 // End License Information
 
 
+#use "Script/Use/Anyway"
+
+
 class Foe extends Fighter
 
 	// Parameters all Foe data scripts respond to
@@ -57,6 +60,26 @@ class Foe extends Fighter
 	bool AllowOversoul
 	bool Boss
 	
+	void Init()
+	end
+	
+	string GetTeamName()
+		return "Foe"
+	end
+	
+	void Draw()
+	end
+	
+	
+	static void Compile(int num, string FoeFile,FoeOversoul)
+		var myFoe		
+		Foe.LoadFoeTag = sprintf("FOE%d",num)
+		Foe.LoadOversoul = FoeOversoul==true
+		Foe.LoadFoeID = num
+		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
+		myFoe = NIL.Use("Script/Data/Foes/"..FoeFile)		
+	end
+	
 
 end
 
@@ -67,3 +90,4 @@ Foe.StatSubs = {
 			"END_"            // End result when all other fields have been added together
 		}
 // EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
+
