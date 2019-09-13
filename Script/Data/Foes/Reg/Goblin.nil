@@ -1,13 +1,8 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 1:08:42 PM
+// Generated: 9/13/2019 4:10:01 PM
 
-//var foeret
-#pure
-local foeret
-#endpure
-#accept foeret
-
-
+do
+var foeret
 foeret = new Foe(string.format("FOE%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
@@ -32,46 +27,46 @@ if Foe.LoadOversoul
 	foeret.Experience = 15
 end
 foeret.Name="Goblin"
-	foeret.Char.Stat("BASE_RESIST_Elem_Darkness").Value=-8
-	foeret.Char.Stat("BUFF_RESIST_Elem_Darkness").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Darkness").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Darkness").Script="SUM:BASE_RESIST_Elem_Darkness,BUFF_RESIST_Elem_Darkness"
-	foeret.Char.Stat("BASE_RESIST_Elem_Earth").Value=-4
-	foeret.Char.Stat("BUFF_RESIST_Elem_Earth").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Earth").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Earth").Script="SUM:BASE_RESIST_Elem_Earth,BUFF_RESIST_Elem_Earth"
-	foeret.Char.Stat("BASE_RESIST_Elem_Flame").Value=-1
-	foeret.Char.Stat("BUFF_RESIST_Elem_Flame").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Flame").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Flame").Script="SUM:BASE_RESIST_Elem_Flame,BUFF_RESIST_Elem_Flame"
-	foeret.Char.Stat("BASE_RESIST_Elem_Frost").Value=-6
-	foeret.Char.Stat("BUFF_RESIST_Elem_Frost").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Frost").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Frost").Script="SUM:BASE_RESIST_Elem_Frost,BUFF_RESIST_Elem_Frost"
-	foeret.Char.Stat("BASE_RESIST_Elem_Light").Value=-7
-	foeret.Char.Stat("BUFF_RESIST_Elem_Light").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Light").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Light").Script="SUM:BASE_RESIST_Elem_Light,BUFF_RESIST_Elem_Light"
-	foeret.Char.Stat("BASE_RESIST_Elem_Magical").Value=-20
-	foeret.Char.Stat("BUFF_RESIST_Elem_Magical").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Magical").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Magical").Script="SUM:BASE_RESIST_Elem_Magical,BUFF_RESIST_Elem_Magical"
-	foeret.Char.Stat("BASE_RESIST_Elem_Physical").Value=-10
-	foeret.Char.Stat("BUFF_RESIST_Elem_Physical").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Physical").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Physical").Script="SUM:BASE_RESIST_Elem_Physical,BUFF_RESIST_Elem_Physical"
-	foeret.Char.Stat("BASE_RESIST_Elem_Thunder").Value=-5
-	foeret.Char.Stat("BUFF_RESIST_Elem_Thunder").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Thunder").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Thunder").Script="SUM:BASE_RESIST_Elem_Thunder,BUFF_RESIST_Elem_Thunder"
-	foeret.Char.Stat("BASE_RESIST_Elem_Water").Value=-3
-	foeret.Char.Stat("BUFF_RESIST_Elem_Water").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Water").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Water").Script="SUM:BASE_RESIST_Elem_Water,BUFF_RESIST_Elem_Water"
-	foeret.Char.Stat("BASE_RESIST_Elem_Wind").Value=-2
-	foeret.Char.Stat("BUFF_RESIST_Elem_Wind").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Wind").Value=0
-	foeret.Char.Stat( "END_RESIST_Elem_Wind").Script="SUM:BASE_RESIST_Elem_Wind,BUFF_RESIST_Elem_Wind"
+foeret.Char.Stat("BASE_RESIST_Elem_Darkness").Value=-8
+foeret.Char.Stat("BUFF_RESIST_Elem_Darkness").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Darkness").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Darkness").Script="SUM:BASE_RESIST_Elem_Darkness,BUFF_RESIST_Elem_Darkness"
+foeret.Char.Stat("BASE_RESIST_Elem_Earth").Value=-4
+foeret.Char.Stat("BUFF_RESIST_Elem_Earth").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Earth").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Earth").Script="SUM:BASE_RESIST_Elem_Earth,BUFF_RESIST_Elem_Earth"
+foeret.Char.Stat("BASE_RESIST_Elem_Flame").Value=-1
+foeret.Char.Stat("BUFF_RESIST_Elem_Flame").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Flame").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Flame").Script="SUM:BASE_RESIST_Elem_Flame,BUFF_RESIST_Elem_Flame"
+foeret.Char.Stat("BASE_RESIST_Elem_Frost").Value=-6
+foeret.Char.Stat("BUFF_RESIST_Elem_Frost").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Frost").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Frost").Script="SUM:BASE_RESIST_Elem_Frost,BUFF_RESIST_Elem_Frost"
+foeret.Char.Stat("BASE_RESIST_Elem_Light").Value=-7
+foeret.Char.Stat("BUFF_RESIST_Elem_Light").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Light").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Light").Script="SUM:BASE_RESIST_Elem_Light,BUFF_RESIST_Elem_Light"
+foeret.Char.Stat("BASE_RESIST_Elem_Magical").Value=-20
+foeret.Char.Stat("BUFF_RESIST_Elem_Magical").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Magical").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Magical").Script="SUM:BASE_RESIST_Elem_Magical,BUFF_RESIST_Elem_Magical"
+foeret.Char.Stat("BASE_RESIST_Elem_Physical").Value=-10
+foeret.Char.Stat("BUFF_RESIST_Elem_Physical").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Physical").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Physical").Script="SUM:BASE_RESIST_Elem_Physical,BUFF_RESIST_Elem_Physical"
+foeret.Char.Stat("BASE_RESIST_Elem_Thunder").Value=-5
+foeret.Char.Stat("BUFF_RESIST_Elem_Thunder").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Thunder").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Thunder").Script="SUM:BASE_RESIST_Elem_Thunder,BUFF_RESIST_Elem_Thunder"
+foeret.Char.Stat("BASE_RESIST_Elem_Water").Value=-3
+foeret.Char.Stat("BUFF_RESIST_Elem_Water").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Water").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Water").Script="SUM:BASE_RESIST_Elem_Water,BUFF_RESIST_Elem_Water"
+foeret.Char.Stat("BASE_RESIST_Elem_Wind").Value=-2
+foeret.Char.Stat("BUFF_RESIST_Elem_Wind").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Wind").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Wind").Script="SUM:BASE_RESIST_Elem_Wind,BUFF_RESIST_Elem_Wind"
 foeret.Boss = false
 
 
@@ -166,3 +161,5 @@ foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
 
 
 return foeret
+
+end
