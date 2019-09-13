@@ -42,6 +42,9 @@ class Foe extends Fighter
 	static bool LoadOversoul
 	static string LoadFoeTag
 	static int LoadFoeID
+	
+	// SubStats
+	static table StatSubs 
 
 	// Foe specific data
 	table AI_Moves
@@ -57,4 +60,10 @@ class Foe extends Fighter
 
 end
 
-
+// Dirty, but functional!
+Foe.StatSubs = {
+			"BASE_",          // Base stat, defined by level
+			"BUFF_",          // Stat buffs (negative numbers can be used for debuffs)
+			"END_"            // End result when all other fields have been added together
+		}
+// EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
