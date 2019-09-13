@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.09.12
+// version: 19.09.14
 // End License Information
+
 
 
 // Dirty code straight from the toilet!
@@ -304,6 +305,7 @@ group Introduction
 		self.Current = Loading
 	end
 end
+
 
 
 
