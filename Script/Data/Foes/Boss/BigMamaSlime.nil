@@ -1,14 +1,21 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 9:38:43 AM
+// Generated: 9/13/2019 12:59:22 PM
 
-var foeret
-foeret = new Foe(string.format("FOE%d",Foe>loadFoeID))
+//var foeret
+#pure
+local foeret
+#endpure
+#accept foeret
+
+
+foeret = new Foe(string.format("FOE%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A very big slime, and mother to many slimes.\nOnly a skilled warrior even stands a chance!"
 foeret.Fatal["Physical"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BigMamaSlime.png")
+foeret.Name="Big Mama Slime"
 	foeret.Char.Stat("BASE_RESIST_Elem_Darkness").Value=100
 	foeret.Char.Stat("BUFF_RESIST_Elem_Darkness").Value=0
 	foeret.Char.Stat( "END_RESIST_Elem_Darkness").Value=0
@@ -142,27 +149,28 @@ else
 end
 
 // Skill specific
-switch __skill	case 1
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+switch __skill
+	case 1
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	case 2
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	case 3
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
-		foeret.AI_moves[#foeret.AI_moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	default
 		error("Unknown skill "..__skill)
 end
