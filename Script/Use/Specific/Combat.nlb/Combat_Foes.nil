@@ -70,14 +70,19 @@ class Foe extends Fighter
 	void Draw()
 	end
 	
-	
 	static void Compile(int num, string FoeFile,FoeOversoul)
 		var myFoe		
 		Foe.LoadFoeTag = sprintf("FOE%d",num)
 		Foe.LoadOversoul = FoeOversoul==true
 		Foe.LoadFoeID = num
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
-		myFoe = NIL.Use("Script/Data/Foes/"..FoeFile)		
+		myFoe = NIL.Use("Script/Data/Foes/"..FoeFile)
+		if num<24
+			myFoe.SpotX = ActPos.Spot[myFoe.Tag].x
+			myFoe.SpotY = ActPos.Spot[myFoe.Tag].y
+		else
+			error("Foe spot randomizer not yet properly set up!")
+		end
 	end
 	
 

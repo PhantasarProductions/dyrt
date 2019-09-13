@@ -103,6 +103,7 @@ group Arena
 			int y
 			x = (math.floor(i/3)*50)+1
 			y = ((i%3)*50)+700
+			new ActPos(sprintf("FOE%d",i+1),x,y)
 		end
 	end
 
