@@ -1,0 +1,35 @@
+#use "libs/collections"
+#use "libs/tables"
+#use "libs/strings"
+
+group CombatTime
+
+	table GaugeSpeed
+	
+	void CalcSpeed()
+		var order 
+		$GaugeSpeed = {}
+		order = NewMap("int","table")
+		for nameteam,team in pairs(Fighter.Team)
+			for tag,member in pairs(team)
+				table w
+				//CSay("?")
+				//order[member.Agility] = order[member.Agility] or {}
+				//CSay("!")
+				w = order[member.Agility]
+				w[#w+1] = tag
+			end
+		end
+		int c
+		int i
+		c = order.__MAP_COUNT
+		for agl,memtab in order.__MAP_SORTEDPAIRS
+			i++
+			for memtag in each(memtab)
+				$GaugeSpeed[memtag] = math.ceil( (i/c)*250 )
+				CSayF("%s is set to gaugespeed %d",memtag,$GaugeSpeed[memtag])
+			end
+		end
+	end
+	
+end
