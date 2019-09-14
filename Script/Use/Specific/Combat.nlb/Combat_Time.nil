@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+
 #use "libs/collections"
 #use "libs/tables"
 #use "libs/strings"
@@ -89,4 +90,5 @@ group CombatTime
 	end
 	
 end
+
 

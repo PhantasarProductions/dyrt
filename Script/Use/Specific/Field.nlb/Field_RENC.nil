@@ -38,6 +38,7 @@
 
 
 
+
 #use "Script/Use/StartCombatMod"
 #use "libs/xmath"
 #use "libs/tables"
@@ -284,6 +285,7 @@ group RENC
 	end
 	
 end
+
 
 
 
