@@ -37,6 +37,7 @@
 
 
 
+
 #macro FieldFlow FlowField
 
 global bool FLOW_FIELD = true
@@ -284,7 +285,7 @@ group FieldMap
 	end
 	
 	get int TravelLevel
-		return tonumber(Kthura.Data.Travel_Level) or 1
+		return tonumber(self.Kthura.Data.Travel_Level) or 1
 	end
 	
 	void Kill(string tag,permanent)
@@ -856,6 +857,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 

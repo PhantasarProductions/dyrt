@@ -37,6 +37,7 @@
 
 
 
+
 // Dirty code straight from the toilet!
 #accept BUB_Draw
 #accept BUB_Update
@@ -106,7 +107,12 @@ group Loading
 		// Combat UI
 		new Loader("Image","GFX/Combat/UI/TimeGauge.png","COMBAT_TIMEGAUGE")
 		new Loader("Image","gfx/combat/ui/GaugePointFoe.png","COMBAT_TIMEPOINTFOE")
-		new Loader("Image","gfx/combat/ui/PointFoe.png","COMBAT_TIMEPOINTFOE")
+		new Loader("Image","gfx/combat/ui/GaugePointFoe.png","COMBAT_TIMEPOINTFOE")
+		
+		// Hero pointers
+		for _,ch in ipairs {"Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}
+			new Loader("Image",sprintf("gfx/combat/ui/GaugeIcons/%s.png",ch),sprintf("COMBAT_GAUGE_%s",ch))
+		end
 	
 		// BoxText Font
 		new Loader("ImageFont","Fonts/Coolvetica.20.jfbf","BOXTEXT")
@@ -305,6 +311,7 @@ group Introduction
 		self.Current = Loading
 	end
 end
+
 
 
 

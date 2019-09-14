@@ -36,6 +36,7 @@
 // End License Information
 
 
+#use "libs/tables"
 
 
 class Fighter
@@ -47,6 +48,7 @@ class Fighter
 	bool UseTemp = false
 	
 	var Char
+	int GaugePosition
 	
 	get string Name
 		return self.Char.Name
@@ -84,6 +86,30 @@ class Fighter
 		return self.GetTeamName()
 	end
 	
+	static delegate ForAll()
+		int iteridx = 0
+		table iter
+		for TeamTag,TeamTable in spairs(self.Team)
+			for MemTag,MemData in spairs(TeamTable)
+				// No data! Very important as the Lua garbage collector
+				// Has a bug when multi-references through tables are there
+				iter[#iter+1] = { ['Team'] = TeamTag, ['Member'] = MemTag } 
+			end
+		end
+		#pure
+		return function()
+		#endpure
+			iteridx++
+			#pure
+			if iter[iteridx] then
+				return iter[iteridx].Team,iter[iteridx].Member,self.Team[iter[iteridx].Team][iter[iteridx].Member]
+			else
+				return nil,nil,nil;
+			end
+		end
+		#endpure
+	end
+	
 	final void CONSTRUCTOR(string aTag)
 		self.Tag=aTag
 		self.Team = Fighter.Team // As a result of a bug with statics in extendable classes, this will have to make sure the right class is always there!
@@ -94,6 +120,7 @@ class Fighter
 	end
 	
 end
+
 
 
 

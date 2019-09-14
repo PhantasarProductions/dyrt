@@ -43,6 +43,18 @@ group CombatTime
 
 	table GaugeSpeed
 	
+	int gauge_Y
+	int gauge_X = 50
+	readonly int gauge_base_y=100
+	readonly int gauge_base_X=50
+	
+	var ImgGauge
+	
+	void CONSTRUCTOR()
+		self.ImgGauge = TImage.Obtain('COMBAT_TIMEGAUGE')
+		self.gauge_Y = -500
+	end
+	
 	void CalcSpeed()
 		var order 
 		$GaugeSpeed = {}
@@ -67,6 +79,13 @@ group CombatTime
 				CSayF("%s is set to gaugespeed %d",memtag,$GaugeSpeed[memtag])
 			end
 		end
+	end
+	
+	void DrawGauge()
+		if self.gauge_Y<self.gauge_base_y
+			self.gauge_Y++
+		end
+		self.ImgGauge.Draw(self.gauge_X,self.gauge_Y)
 	end
 	
 end

@@ -39,6 +39,7 @@
 
 
 
+
 // Start Modes
 // 0 = Normal
 // 1 = Pre-Emptive Strike
@@ -101,11 +102,38 @@ global void LetsGetReadyToRumble()
 		
 		// Calculate gauge speed order
 		CombatTime.CalcSpeed()
+		for iteam,itag,ifight in Fighter.ForAll()
+			switch Combat_Start.StartMode
+				case 0
+					ifight.GaugePosition=math.random(0,9500)
+				case 1
+					switch iteam
+						case "Hero"
+							ifight.GaugePosition=math.random(8000,9500)
+						case "Foe"
+							ifight.GaugePosition=math.random(0,4000)
+						default
+							error("Unknown team: "..iteam)
+					end
+				case 2
+					switch iteam
+						case "Hero"
+							ifight.GaugePosition=math.random(0,4000)
+						case "Foe"
+							ifight.GaugePosition=math.random(8000,9500)
+						default
+							error("Unknown team: "..iteam.."!")
+					end
+			end
+			CSayF("(StartMode %d): In team %s, member %s starts at position %d",Combat_Start.StartMode,iteam,itag,ifight.GaugePosition)
+		end
+		
 		
 		GoToFlow("Combat")
 		Stage.Current = Stage.Stages.IDLE
 	end
 end
+
 
 
 
