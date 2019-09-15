@@ -49,10 +49,27 @@ group CombatTime
 	readonly int gauge_base_y=100
 	readonly int gauge_base_X=50
 	
+	get int gauge_x
+		return gauge_X
+	end
+	set int gauge_x
+		gauge_X = value
+	end
+	get int gauge_Y
+		return gauge_y
+	end
+	set int gauge_y
+		gauge_Y = value
+	end
+	
 	var ImgGauge
+	var ImgPointHero
+	var ImgPointFoe
 	
 	void CONSTRUCTOR()
 		self.ImgGauge = TImage.Obtain('COMBAT_TIMEGAUGE')
+		self.ImgPointHero = TImage.Obtain('COMBAT_TIMEPOINTHERO')
+		self.ImgPointFoe  = TImage.Obtain('COMBAT_TIMEPOINTFOE' )
 		self.gauge_Y = -500
 	end
 	
@@ -86,7 +103,35 @@ group CombatTime
 		if self.gauge_Y<self.gauge_base_y
 			self.gauge_Y++
 		end
-		self.ImgGauge.Draw(self.gauge_X,self.gauge_Y)
+		self.ImgGauge.XDraw(self.gauge_X,self.gauge_Y)
+		// This code was used in the original Dyrt game... Useless here
+		// (No NIL can handle these line, that ain't the problem)
+		// as the underlying code is completely different, but it DOES 
+		// allow me some "peeking"
+		// if CombatTime.Heroes[ak]<=10000 then gx = (CombatTime.Heroes[ak]/10000)*327 Image.Color(0,0,255) else gx = (((CombatTime.Heroes[ak]-10000)/10000)*72)+328; Image.Color(255,0,0) end
+		// Image.Draw("C_HTPoint",gx,0)
+		// Image.Color(255,255,255)   
+		// Image.Draw(CombatTimePic[ch],gx,-25)
+		for iteam,imember,ifighter in Fighter.ForAll()
+			int gx
+			int dx
+			if ifighter.GaugePosition<=10000 
+				gx = (ifighter.GaugePosition/10000)*327 
+				Color(0,0,255) 
+			else 
+				gx = (((ifighter.GaugePosition-10000)/10000)*72)+328
+				Color(255,0,0) 
+			end
+			dx = gx + $gauge_x
+			switch iteam
+				case "Hero"
+					self.ImgPointHero.XDraw(dx,self.gauge_Y-25)
+				case "Foe"
+					self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
+				default
+					error("UNKNOWN GAUGE POINTER!")
+			end
+		end
 	end
 	
 end
