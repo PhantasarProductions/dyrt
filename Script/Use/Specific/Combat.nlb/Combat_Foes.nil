@@ -68,6 +68,17 @@ class Foe extends Fighter
 		return "Foe"
 	end
 	
+	get string Letter
+		assert(self.FoeID>=0,"Negative Foe Number!")
+		if self.FoeID<=26
+			return string.char(64+self.FoeID)
+		elseif self.FoeID<=701
+			return string.char(64+math.floor(self.FoeID/26))..string.char(65+(self.FoeID%26))
+		end
+		return "?"
+	end
+
+	
 	void Draw()
 		self.Image.Draw(self.X,self.Y)
 	end

@@ -39,6 +39,7 @@
 #use "libs/collections"
 #use "libs/tables"
 #use "libs/strings"
+#use "libs/DarkText"
 
 group CombatTime
 
@@ -50,27 +51,32 @@ group CombatTime
 	readonly int gauge_base_X=50
 	
 	get int gauge_x
-		return gauge_X
+		return self.gauge_X
 	end
+	
 	set int gauge_x
-		gauge_X = value
+		self.gauge_X = value
 	end
-	get int gauge_Y
-		return gauge_y
+	
+	get int gauge_y
+		return self.gauge_Y
 	end
 	set int gauge_y
-		gauge_Y = value
+		self.gauge_Y = value
 	end
 	
 	var ImgGauge
 	var ImgPointHero
 	var ImgPointFoe
+	table ImgGaugeIcon
+	var FontGauge
 	
 	void CONSTRUCTOR()
 		self.ImgGauge = TImage.Obtain('COMBAT_TIMEGAUGE')
 		self.ImgPointHero = TImage.Obtain('COMBAT_TIMEPOINTHERO')
 		self.ImgPointFoe  = TImage.Obtain('COMBAT_TIMEPOINTFOE' )
 		self.gauge_Y = -500
+		self.FontGauge = GetFont("SYSFONT")
 	end
 	
 	void CalcSpeed()
@@ -125,9 +131,15 @@ group CombatTime
 			dx = gx + $gauge_x
 			switch iteam
 				case "Hero"
-					self.ImgPointHero.XDraw(dx,self.gauge_Y-25)
+					self.ImgPointHero.XDraw(dx,self.gauge_Y)
+					self.ImgGaugeIcon[imember] = self.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
+					__white
+					self.ImgGaugeIcon[imember].XDraw(dx,self.gauge_y-25)
 				case "Foe"
 					self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
+					__white
+					DarkText.Font(self.FontGauge,ifighter.Letter,dx,self.gauge_Y+40,1,0)
+					
 				default
 					error("UNKNOWN GAUGE POINTER!")
 			end

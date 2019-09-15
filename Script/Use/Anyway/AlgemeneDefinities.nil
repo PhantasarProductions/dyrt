@@ -106,7 +106,7 @@ group Arrow
 		return $Next
 	end
 	get var Right
-		return $Right
+		return $Prev
 	end
 	
 	void CONSTRUCTOR()
