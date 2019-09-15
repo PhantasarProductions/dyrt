@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.09.14
+// version: 19.09.15
 // End License Information
+
 
 
 
@@ -316,6 +317,7 @@ group Introduction
 		self.Current = Loading
 	end
 end
+
 
 
 
