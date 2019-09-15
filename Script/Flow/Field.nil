@@ -419,6 +419,7 @@ group FlowField
 	
 	void Treasure(string Tag,string ItemTag,PermaKill)
 		static var chaching
+		static var getitem
 		int mx
 		int my
 		var kth
@@ -448,6 +449,8 @@ group FlowField
 			if Inventory[ItemTag]<__itemcap
 				Inventory[ItemTag]++
 				new MiniMsg(mx,my,sprintf("Obtained: %s", iname),180,0,255)
+				getitem = getitem or GetAudio("GETITEM")
+				getitem.Play()
 				$Map.Kill(Tag,PermaKill!=false)
 			else
 				new MiniMsg(mx,my,sprintf("OVERLOADED: %s",iname, iname),255,0,0)

@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#accept CombatTime
 
 
 group Stage_IDLE extends Stage
@@ -49,6 +50,7 @@ group Stage_IDLE extends Stage
 	end
 	
 	void Update()
+		CombatTime.UpdateGauge()
 	end
 	
 end

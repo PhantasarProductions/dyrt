@@ -72,6 +72,8 @@ class Loader
 				Mouse[self.Tag]=self.File
 			case "InstantTune"
 				Music.Play("Music/StartUp/Introduction.wav",true)
+			case "Audio"
+				LoadAudio("SFX/Treasure/Item.wav","GETITEM")
 			default
 				error(sprintf("%d: Loader.What = \"%s\"; File = \"%s\"; Tag=\"%s\": Can't load unknown phenomenon %s",self.id,self.What,self.File,self.Tag,self.What))
 		end		
@@ -119,6 +121,9 @@ group Loading
 		new Loader("ImageFont","Fonts/Coolvetica.35.jfbf","BIGTEXT")
 		new Loader("ImageFont","Fonts/Blitz.jfbf","SYSFONT")
 		new Loader("ImageFont",FONT_MainMenu,"MAINMENU")
+		
+		// Audio
+		new Loader("Audio","SFX/Treasure/Item.wav","GETITEM")
 		
 		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
 		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
