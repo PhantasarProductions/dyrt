@@ -78,6 +78,11 @@ class Fighter
 	
 	static table Team
 	
+	bool StatusAltAI()
+		// TODO: The real code please!
+		return false
+	end
+	
 	abstract void Draw()
 	abstract string GetTeamName()
 	abstract void Init()
