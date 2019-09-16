@@ -79,7 +79,7 @@ class Fighter
 	
 	static table Team
 	
-	bool StatusAltAI()
+	bool StatusAltAI(string AltAI)
 		// TODO: The real code please!
 		return false
 	end
