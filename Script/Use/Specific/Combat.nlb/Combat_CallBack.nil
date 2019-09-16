@@ -57,10 +57,10 @@ class Stage
 	void NOTHING()
 	end
 	
-	void Go(string n)
+	static void Go(string n)
 		n = n:upper()
-		assert($Stages[n],"No stage labelled '"..n.."' is known")
-		$Current = $Stages[n]
+		assert(Stage.Stages[n],"No stage labelled '"..n.."' is known")
+		Stage.Current = Stage.Stages[n]
 	end
 	
 	void CONSTRUCTOR(string n, a_Update,a_Draw)

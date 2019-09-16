@@ -146,6 +146,8 @@ group CombatTime
 		end
 	end
 	
+	var signal
+	
 	void UpdateGauge()
 		for iteam,imember,ifighter in Fighter.ForAll()
 			if ifighter.GaugePosition<10000
@@ -155,6 +157,13 @@ group CombatTime
 				end
 			elseif ifighter.GaugePosition == 10000
 				// TODO: Link to AI or to Player Input
+				if ifighter.StatusAltAI("")
+				elseif iteam=="Hero"
+					Stage.Go("PlayerInput")
+					self.signal = self.signal or GetAudio("COMBATSIGNAL")
+					self.signal.Play()
+				elseif iteam=="Foe"
+				end
 			else
 				error("No action setup yet!")
 			end

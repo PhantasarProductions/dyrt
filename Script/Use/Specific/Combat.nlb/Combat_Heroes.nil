@@ -151,7 +151,7 @@ end
 group Stage_PlayerInput extends Stage
 
 	void CONSTRUCTOR()
-		Stage.Stages.PlayerInput=self
+		Stage.Stages.PLAYERINPUT=self
 	end
 	
 	void Draw()

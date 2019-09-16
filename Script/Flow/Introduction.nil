@@ -74,7 +74,7 @@ class Loader
 			case "InstantTune"
 				Music.Play("Music/StartUp/Introduction.wav",true)
 			case "Audio"
-				LoadAudio("SFX/Treasure/Item.wav","GETITEM")
+				LoadAudio(self.File,self.Tag)
 			default
 				error(sprintf("%d: Loader.What = \"%s\"; File = \"%s\"; Tag=\"%s\": Can't load unknown phenomenon %s",self.id,self.What,self.File,self.Tag,self.What))
 		end		
@@ -125,6 +125,7 @@ group Loading
 		
 		// Audio
 		new Loader("Audio","SFX/Treasure/Item.wav","GETITEM")
+		new Loader("Audio","SFX/Combat/Signal.Wav","COMBATSIGNAL")
 		
 		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
 		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
