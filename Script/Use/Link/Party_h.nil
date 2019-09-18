@@ -67,6 +67,14 @@ group Party
 		PtExe("SubParty.CharBar()")
 	end
 	
+	set string SelectedCharacterTag
+		for i=1,8
+			if RPG.Party[i]==value
+				self.SelectedCharacter=i
+			end
+		end
+	end
+	
 	set int SelectedCharacter
 		PtExe(sprintf("SubParty.SelectedChar = %d",value))
 	end
