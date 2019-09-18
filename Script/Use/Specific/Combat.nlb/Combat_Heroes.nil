@@ -45,6 +45,8 @@
 #use "libs/strings"
 #use "script/use/BoxPics"
 
+
+
 class Hero extends Fighter
 	
 	table Heroes
@@ -162,7 +164,7 @@ group Stage_PlayerInput extends Stage
 	
 	void Draw()
 		self.ImgMenu.Draw(Screen.Width/2,(Screen.Height-128)/2)
-		BoxPic((Screen.Width/2)-100,(Screen.Height-128)/2,self.CharTag)
+		BoxPic((Screen.Width/2)-100,(Screen.Height-128)/2,self.CharTag,nil,"top")
 		Party.SelectedCharacterTag = self.CharTag
 	end
 	

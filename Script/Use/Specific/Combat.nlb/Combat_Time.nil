@@ -161,7 +161,7 @@ group CombatTime
 				if ifighter.StatusAltAI("")
 				elseif iteam=="Hero"
 					Stage.Go("PlayerInput")
-					stage.Current.CharTag = imember
+					Stage.Current.CharTag = imember
 					self.signal = self.signal or GetAudio("COMBATSIGNAL")
 					self.signal.Play()
 				elseif iteam=="Foe"
