@@ -163,7 +163,7 @@ group Stage_PlayerInput extends Stage
 	void Draw()
 		self.ImgMenu.Draw(Screen.Width/2,(Screen.Height-128)/2)
 		BoxPic((Screen.Width/2)-100,(Screen.Height-128)/2,self.CharTag)
-		Party.SelectedCharacterTag = CharTag
+		Party.SelectedCharacterTag = self.CharTag
 	end
 	
 	void Update()
