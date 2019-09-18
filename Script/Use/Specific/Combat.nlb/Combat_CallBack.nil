@@ -96,6 +96,9 @@ global void BUB_Draw()
 		end
 	end
 	
+	// Stage specific Draw
+	Stage.Current.Draw()
+	
 	// Time gauge
 	CombatTime.DrawGauge()
 	

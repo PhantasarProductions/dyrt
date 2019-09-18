@@ -111,6 +111,7 @@ group Loading
 		new Loader("Image","GFX/Combat/UI/TimeGauge.png","COMBAT_TIMEGAUGE")
 		new Loader("Image","gfx/combat/ui/GaugePointHero.png","COMBAT_TIMEPOINTHERO")
 		new Loader("Image","gfx/combat/ui/GaugePointFoe.png" ,"COMBAT_TIMEPOINTFOE")
+		new Loader("Image","gfx/Combat/UI/InputMenu.png","COMBAT_INPUTMENU")
 		
 		// Hero pointers
 		for _,ch in ipairs {"Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}

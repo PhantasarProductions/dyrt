@@ -150,11 +150,16 @@ end
 
 group Stage_PlayerInput extends Stage
 
+	var ImgMenu
+	string CharTag
+
 	void CONSTRUCTOR()
 		Stage.Stages.PLAYERINPUT=self
+		self.ImgMenu = TImage.Obtain("COMBAT_INPUTMENU")
 	end
 	
 	void Draw()
+		self.ImgMenu.Draw(Screen.Width/2,(Screen.Height-128)/2)
 	end
 	
 	void Update()
