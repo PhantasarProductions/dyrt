@@ -41,6 +41,7 @@
 
 
 
+
 #use "libs/xmath"
 #use "libs/strings"
 #use "script/use/BoxPics"
@@ -172,5 +173,6 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
 
 
