@@ -32,8 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 19.09.18
+// version: 19.09.19
 // End License Information
+
 
 
 
@@ -113,6 +114,8 @@ group Loading
 		new Loader("Image","gfx/combat/ui/GaugePointHero.png","COMBAT_TIMEPOINTHERO")
 		new Loader("Image","gfx/combat/ui/GaugePointFoe.png" ,"COMBAT_TIMEPOINTFOE")
 		new Loader("Image","gfx/Combat/UI/InputMenu.png","COMBAT_INPUTMENU")
+		new Loader("Image","gfx/Combat/UI/Cursor_true.png","COMBAT_INPUTCURSOR_true")
+		new Loader("Image","gfx/Combat/UI/Cursor_false.png","COMBAT_INPUTCURSOR_false")
 		
 		// Hero pointers
 		for _,ch in ipairs {"Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}
@@ -207,6 +210,7 @@ group Show
 		W = self.What2Show[self.stage]
 		assert(W,"Nothing on stage index "..self.stage.." (stage time: "..self.stagetime..")")
 		W.Draw((Screen.Width/2)-math.floor(W.Width/2),(Screen.Height/2)-math.floor(W.Height/2))
+		
 	end
 	
 	void Update()
@@ -320,6 +324,7 @@ group Introduction
 		self.Current = Loading
 	end
 end
+
 
 
 

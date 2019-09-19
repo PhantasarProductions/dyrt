@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 19.09.18
+// Version: 19.09.19
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 
 
 
@@ -153,6 +154,8 @@ end
 class InputMenuItem
 	
 	static var List
+	static var Hover
+	static table Cursor
 	
 	int x
 	int y
@@ -167,12 +170,11 @@ class InputMenuItem
 		self.x = ax
 		self.y = ay
 		self.action = aaction
-		self.allowed = allowed
+		self.allowed = aallowed
 		self.List = self.List or new TLinkedList
 		self.List.AddLast(self)
 		End_Combat.Add(self.Clean)
 	end
-	
 	
 	
 end
@@ -183,22 +185,76 @@ group Stage_PlayerInput extends Stage
 
 	var ImgMenu
 	string CharTag
+	
+	bool AlwaysTrue()
+		return true
+	end
+	
+	bool AllowSwitch()
+		return RPG.Party[5]!=nil and RPG.Party[5]!=""
+	end
+	
+	void StartAbility()
+	end
+	
+	void StartItem()
+	end
+	
+	void StartAttack()
+	end
+	
+	void StartGuard()
+	end
+	
+	void StartSwitch()
+	end
 
 	void CONSTRUCTOR()
 		Stage.Stages.PLAYERINPUT=self
 		self.ImgMenu = TImage.Obtain("COMBAT_INPUTMENU")
+		
+		// Abilities
+		new InputMenuItem( 52,  0,self.StartAbility,self.AlwaysTrue)
+		
+		// Items
+		new InputMenuItem(  0, 52,self.StartItem,self.AlwaysTrue)
+		
+		// Attack
+		new InputMenuItem( 52, 52,self.StartAttack,self.AlwaysTrue)
+		
+		// Guard
+		new InputMenuItem(104, 52,self.StartGuard,self.AlwaysTrue)
+		
+		// Switch
+		new InputMenuItem( 52,104,self.StartSwitch,self.AllowSwitch)
+		
+		InputMenuItem.Cursor[true] = TImage.Obtain("COMBAT_INPUTCURSOR_true")
+		InputMenuItem.Cursor[false] = TImage.Obtain("COMBAT_INPUTCURSOR_false")
+		
 	end
 	
 	void Draw()
-		self.ImgMenu.Draw(Screen.Width/2,(Screen.Height-128)/2)
-		BoxPic((Screen.Width/2)-100,(Screen.Height-128)/2,self.CharTag,nil,"top")
+		int mx
+		int my
+		mx =  Screen.Width/2
+		my = (Screen.Height-128)/2
+		self.ImgMenu.Draw(mx,(Screen.Height-128)/2)
+		BoxPic((Screen.Width/2)-100,my,self.CharTag,nil,"top")
 		Party.SelectedCharacterTag = self.CharTag
+		InputMenuItem.Hover = nil;
+		for item in InputMenuItem.List.Each
+			if Mouse.X>item.x+mx and Mouse.Y>item.y+my and Mouse.X<item.x+52+mx and Mouse.Y<item.y+52+my
+				InputMenuItem.Hover = item
+				InputMenuItem.Cursor[item.allowed()].XDraw(mx+item.x,my+item.y)
+			end
+		end
 	end
 	
 	void Update()
 	end
 
 end
+
 
 
 
