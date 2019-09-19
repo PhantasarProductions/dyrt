@@ -1,0 +1,1 @@
+group End_Combat	table List		void Add(delegate v)		self.List[#self.List]=v	end		void EndIt()		int cnt		cnt = #self.List		for i=1,cnt			self.List[i]()			self.List[i]=nil;		end	end	end
