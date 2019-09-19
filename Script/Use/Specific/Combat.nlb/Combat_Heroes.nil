@@ -150,6 +150,32 @@ class Hero extends Fighter
 	end
 end
 
+class InputMenuItem
+	
+	static var List
+	
+	int x
+	int y
+	delegate action
+	delegate allowed
+	
+	void Clean()
+		self.List.Clear()
+	end
+	
+	void CONSTRUCTOR(int ax, int ay, delegate aaction, delegate aallowed)
+		self.x = ax
+		self.y = ay
+		self.action = aaction
+		self.allowed = allowed
+		self.List = self.List or new TLinkedList
+		self.List.AddLast(self)
+		End_Combat.Add(self.Clean)
+	end
+	
+	
+	
+end
 
 
 
