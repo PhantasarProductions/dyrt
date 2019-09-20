@@ -45,6 +45,7 @@
 
 #use "libs/xmath"
 #use "libs/strings"
+#use "script/use/Anyway"
 #use "script/use/BoxPics"
 
 
@@ -179,6 +180,31 @@ class InputMenuItem
 	
 end
 
+group Stage_SelectTarget extends Stage
+
+	var Item
+	var Ch
+	string ItemTag
+	string CharTag
+
+	void CONSTRUCTOR()
+		Stage.Stages.SELECTTARGET = self
+	end
+	
+	void ComeToMe(string aCharTag,string aItemTag)
+		self.CharTag = aCharTag
+		self.ItemTag = aItemTag
+		self.Item = _G.Item[aItemTag]
+		self.Ch = RPG.Char(aCharTag)
+		Stage.Go("SELECTTARGET")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+end
 
 
 group Stage_PlayerInput extends Stage
@@ -201,6 +227,7 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartAttack()
+		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,RPG.Char(self.CharTag).Data.Weapon)
 	end
 	
 	void StartGuard()
@@ -251,6 +278,9 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void Update()
+		if InputMenuItem.Hover and Mouse.HitLeft
+			InputMenuItem.Hover.action()
+		end
 	end
 
 end
