@@ -35,8 +35,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
 #use "Script/Use/Anyway"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
