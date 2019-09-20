@@ -35,15 +35,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
-
-
-
-
-
-
 #use "libs/xmath"
 #use "libs/strings"
 #use "script/use/Anyway"
@@ -285,6 +276,7 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
 
 
 
