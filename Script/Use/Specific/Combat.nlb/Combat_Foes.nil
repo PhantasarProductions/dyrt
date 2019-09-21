@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.09.15
+// Version: 19.09.21
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -78,7 +78,14 @@ class Foe extends Fighter
 		end
 		return "?"
 	end
-
+	
+	bool PosHover(int ax,int ay)
+		return ax>=self.X and ay>=self.Y and ax<=self.X+self.Image.Width and ay<=self.Y+self.Image.Height
+	end
+	
+	void Icon(int dx,int dy)
+		DarkText.Font(CombatTime.GaugeFont,Letter..".",dx,dy)
+	end
 	
 	void Draw()
 		self.Image.Draw(self.X,self.Y)
@@ -109,6 +116,7 @@ Foe.StatSubs = {
 			"END_"            // End result when all other fields have been added together
 		}
 // EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
+
 
 
 

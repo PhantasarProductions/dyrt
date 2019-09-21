@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.09.20
+// Version: 19.09.21
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -85,6 +85,8 @@ class Fighter
 	abstract void Draw()
 	abstract string GetTeamName()
 	abstract void Init()
+	abstract bool PosHover(int x,int y)
+	abstract void Icon(int dx,int dy)
 	readonly string Tag
 	final get string TeamName
 		return self.GetTeamName()
@@ -124,6 +126,7 @@ class Fighter
 	end
 	
 end
+
 
 
 

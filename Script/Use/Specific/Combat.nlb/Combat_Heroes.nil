@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 19.09.20
+// Version: 19.09.21
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -119,6 +119,16 @@ class Hero extends Fighter
 		end
 	end
 	
+	void Icon(int dx,int dy)
+		CombatTime.ImgGaugeIcon[self.CharTag].XDraw(dx,dy+15)
+	end
+	
+	bool PosHover(int ax,int ay)
+		var Img
+		Img = self.Pics[Houding]
+		return ax>=self.X and ay>=self.Y and ax<=self.X+Img.Width and ay<=self.Y+Img.Height
+	end
+	
 	void Init()
 		var spot
 		spot = ActPos.Spot[sprintf("HERO%d",self.SpotNum)]
@@ -178,6 +188,8 @@ group Stage_SelectTarget extends Stage
 	var Ch
 	string ItemTag
 	string CharTag
+	table targetted
+	bool wrongteam
 
 	void CONSTRUCTOR()
 		Stage.Stages.SELECTTARGET = self
@@ -192,9 +204,48 @@ group Stage_SelectTarget extends Stage
 	end
 	
 	void Draw()
+		for tag,fight in pairs(self.targetted)
+			__white
+			fight.Icon(fight.X+40,fight.Y+20)
+			DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
+		end
 	end
 	
 	void Update()
+		tableclear(self.targetted)
+		bool gotone
+		string gotteam
+		self.wrongteam=false
+		for iteam,imember,ifighter in Fighter.ForAll()
+			bool gotcha
+			switch Item.Target
+				case "EV"
+					gotcha=true
+				case "OS"
+					gotcha=imember==self.CharTag
+				case "AF" "AA"
+					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
+						for iteam2,imember2,ifighter2
+							if iteam2==iteam and imember2!=imember 
+								self.targetted[imember2]=ifighter2
+								gotcha=true
+								self.wrongteam = Right(iteam,1)!=Left(Item.Target,1)
+							end
+						end
+					end
+				case "1F" "1A"
+					gotcha = (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
+					if gotcha 
+						self.wrongteam = Right(iteam,1)!=Left(Item.Target,1)
+					end
+				default
+					error("Unknown target type: "..Item.Target)
+			end
+			if gotcha
+				gotone = true;
+				self.targetted[imember]=ifighter
+			end
+		end
 	end
 end
 
@@ -276,6 +327,7 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
 
 
 
