@@ -35,11 +35,10 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
+#use "libs/DarkText"
 #use "Script/Use/Anyway"
 
+#accept CombatTime
 
 class Foe extends Fighter
 
@@ -84,7 +83,7 @@ class Foe extends Fighter
 	end
 	
 	void Icon(int dx,int dy)
-		DarkText.Font(CombatTime.GaugeFont,Letter..".",dx,dy)
+		DarkText.Font(CombatTime.GaugeFont,self.Letter..".",dx,dy)
 	end
 	
 	void Draw()

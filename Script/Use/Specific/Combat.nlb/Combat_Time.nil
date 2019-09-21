@@ -70,6 +70,10 @@ group CombatTime
 	table ImgGaugeIcon
 	var FontGauge
 	
+	get var GaugeFont
+		return self.FontGauge
+	end
+	
 	void CONSTRUCTOR()
 		self.ImgGauge = TImage.Obtain('COMBAT_TIMEGAUGE')
 		self.ImgPointHero = TImage.Obtain('COMBAT_TIMEPOINTHERO')

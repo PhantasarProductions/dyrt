@@ -40,7 +40,7 @@
 #use "script/use/Anyway"
 #use "script/use/BoxPics"
 
-
+#accept CombatTime
 
 class Hero extends Fighter
 	
@@ -49,6 +49,7 @@ class Hero extends Fighter
 	string Houding = "IDLE"
 	int Frame = 0
 	table Pics
+	string CharTag
 	
 	bool Leaving = false
 	
@@ -125,7 +126,7 @@ class Hero extends Fighter
 	
 	bool PosHover(int ax,int ay)
 		var Img
-		Img = self.Pics[Houding]
+		Img = self.Pics[self.Houding]
 		return ax>=self.X and ay>=self.Y and ax<=self.X+Img.Width and ay<=self.Y+Img.Height
 	end
 	
@@ -143,6 +144,7 @@ class Hero extends Fighter
 		myhero = new Hero(tag)
 		myhero.Heroes[#myhero.Heroes+1] = myhero
 		myhero.Char = RPG.Char(tag)
+		myhero.CharTag = tag
 	end
 	
 	static void CompileAll()
@@ -218,28 +220,28 @@ group Stage_SelectTarget extends Stage
 		self.wrongteam=false
 		for iteam,imember,ifighter in Fighter.ForAll()
 			bool gotcha
-			switch Item.Target
+			switch self.Item.Target
 				case "EV"
 					gotcha=true
 				case "OS"
 					gotcha=imember==self.CharTag
 				case "AF" "AA"
 					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
-						for iteam2,imember2,ifighter2
+						for iteam2,imember2,ifighter2 in Fighter.ForAll()
 							if iteam2==iteam and imember2!=imember 
 								self.targetted[imember2]=ifighter2
 								gotcha=true
-								self.wrongteam = Right(iteam,1)!=Left(Item.Target,1)
+								self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
 							end
 						end
 					end
 				case "1F" "1A"
 					gotcha = (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
 					if gotcha 
-						self.wrongteam = Right(iteam,1)!=Left(Item.Target,1)
+						self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
 					end
 				default
-					error("Unknown target type: "..Item.Target)
+					error("Unknown target type: "..self.Item.Target)
 			end
 			if gotcha
 				gotone = true;
@@ -270,7 +272,7 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartAttack()
-		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,RPG.Char(self.CharTag).Data.Weapon)
+		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,Item[RPG.Char(self.CharTag).Data.Weapon].Equip_Attack)
 	end
 	
 	void StartGuard()
