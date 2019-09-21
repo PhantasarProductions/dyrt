@@ -53,6 +53,10 @@ class Hero extends Fighter
 	
 	bool Leaving = false
 	
+	get bool ShowHP
+		return true
+	end
+	
 	get int JI_MODX
 		//int OUTX
 		if self.JumpIn>0
@@ -210,6 +214,21 @@ group Stage_SelectTarget extends Stage
 			__white
 			fight.Icon(fight.X+40,fight.Y+20)
 			DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
+			if __skill<3 or fight.GetTeamName()=="Hero"
+				Color(100,100,100)
+				Rect(fight.X+80,fight.Y+40,100,18)
+				if fight.ShowHP
+					number rate
+					int green
+					rate = self.Ch.Points("HP").Have / self.Ch.Points("HP").Maximum
+					green = math.floor(255*rate)
+					Color(255-green,green,0)
+					Rect(fight.X+80,fight.Y+40,math.floor(100*rate),18)
+				else
+					__white
+					DarkText.Font(CombatTime.FontGauge,"?",fight.X+80+50,fight.Y+40,2,0)
+				end
+			end
 		end
 	end
 	

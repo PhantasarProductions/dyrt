@@ -60,6 +60,20 @@ class Foe extends Fighter
 	int FoeID
 	bool AllowOversoul
 	bool Boss
+	string FromFile
+	
+	get bool ShowHP
+		switch __skill
+			case 1
+				return true
+			case 2
+				return gv.Int[sprintf('Defeated_%s',self.FromFile)]>0
+			case 3
+				return false
+			default
+				error("Four skills or more?")
+		end
+	end
 	
 	void Init()
 	end
@@ -97,6 +111,7 @@ class Foe extends Fighter
 		Foe.LoadFoeID = num
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
 		myFoe = NIL.Use("Script/Data/Foes/"..FoeFile)
+		myFoe.FromFile = FoeFile:upper()
 		if num<24
 			myFoe.SpotX = ActPos.Spot[myFoe.Tag].x
 			myFoe.SpotY = ActPos.Spot[myFoe.Tag].y

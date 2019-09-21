@@ -112,6 +112,7 @@ group CombatTime
 		if self.gauge_Y<self.gauge_base_y
 			self.gauge_Y++
 		end
+		__white
 		self.ImgGauge.XDraw(self.gauge_X,self.gauge_Y)
 		// This code was used in the original Dyrt game... Useless here
 		// (No NIL can handle these line, that ain't the problem)
