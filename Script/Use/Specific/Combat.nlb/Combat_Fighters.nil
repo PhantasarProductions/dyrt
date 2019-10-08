@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.09.21
+// Version: 19.10.08
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -128,6 +128,7 @@ class Fighter
 	end
 	
 end
+
 
 
 
