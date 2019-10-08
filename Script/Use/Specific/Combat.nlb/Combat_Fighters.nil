@@ -76,6 +76,7 @@ class Fighter
 	end
 	
 	static table Team
+	static table ByTag
 	
 	bool StatusAltAI(string AltAI)
 		// TODO: The real code please!
@@ -122,6 +123,7 @@ class Fighter
 		self.Team[self.TeamName] = self.Team[self.TeamName] or {}
 		self.Team[self.TeamName][aTag] = self
 		CSay("= Added to team: "..self.TeamName.."/"..tostring(self.Team))
+		self.ByTag[atag]=self
 		self.Init()
 	end
 	
