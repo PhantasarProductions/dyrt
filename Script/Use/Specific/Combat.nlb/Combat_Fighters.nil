@@ -48,6 +48,8 @@ class Fighter
 	
 	var Char
 	int GaugePosition
+	int NextActSpeed
+	var NextAct
 	
 	get string Name
 		return self.Char.Name

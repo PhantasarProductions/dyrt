@@ -82,3 +82,17 @@ class Actions
 	
 end
 
+group Stage_Action extends Stage
+
+	void Draw()
+	end
+	
+	void Update()
+	end
+
+	void CONSTRUCTOR()
+		Stage.Stages.ACTION = self
+	end
+
+end
+
