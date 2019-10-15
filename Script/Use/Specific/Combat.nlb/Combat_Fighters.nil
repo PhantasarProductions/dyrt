@@ -120,12 +120,13 @@ class Fighter
 	end
 	
 	final void CONSTRUCTOR(string aTag)
+		self.ByTag = Fighter.ByTag // static variables do not seem to transfer so well... I must fix that!
 		self.Tag=aTag
 		self.Team = Fighter.Team // As a result of a bug with statics in extendable classes, this will have to make sure the right class is always there!
 		self.Team[self.TeamName] = self.Team[self.TeamName] or {}
 		self.Team[self.TeamName][aTag] = self
 		CSay("= Added to team: "..self.TeamName.."/"..tostring(self.Team))
-		self.ByTag[atag]=self
+		self.ByTag[aTag]=self
 		self.Init()
 	end
 	

@@ -270,13 +270,13 @@ group Stage_SelectTarget extends Stage
 		end
 		
 		// Cancel?
-		if Mouse.HitRight or Keyboard.KeyCode=="Escape"
+		if Mouse.HitRight or Keyboard.Code=="Escape"
 			Stage.Go("PLAYERINPUT")
 			return
 		end
 		
 		// Confirmed
-		if gotone and (Mouse.HitLeft or Keyboard.KeyCode=="Space" or Keyboard.KeyCode=="Enter" or Keyboard.KeyCode=="Return")
+		if gotone and (Mouse.HitLeft or Keyboard.Code=="Space" or Keyboard.Code=="Enter" or Keyboard.Code=="Return")
 			// Configure next action
 			CSayF("Starting up linking requested action!")
 			table crap
@@ -289,10 +289,14 @@ group Stage_SelectTarget extends Stage
 			end
 			// Character into action position
 			var MyHero
-			MyHero = Fighter.ByTag(crap.ExeTag)
+			MyHero = Fighter.ByTag[crap.ExeTag]
+			if not MyHero
+				CSay(NIL.LuaSerialize("Fighter.ByTag",Fighter.ByTag))
+				error(sprintf("No data found on fighter tag '%s'!",crap.ExeTag))
+			end
 			MyHero.GaugePosition = 10001
 			MyHero.NextActSpeed = self.Item.COM2ACT
-			MyHero.NextAct = new Action(crap)
+			MyHero.NextAct = new Actions(crap)
 			// Continue the battle flow
 			Stage.Go("IDLE")
 		end

@@ -38,6 +38,13 @@
 #use "libs/tables"
 #use "libs/strings"
 
+#accept Fighter
+
+// This may look a bit odd, but it prevents errors
+// I really need a kind of forwarding thing in here, I suppose
+#use "Script/Use/Specific/Combat.nlb/Combat_Arena.nil" 
+#use "Script/Use/Specific/Combat.nlb/Combat_CallBack.nil" 
+
 class Actions
 
 	// Executor
@@ -63,7 +70,7 @@ class Actions
 		
 		// Krekwakwou?
 		void Want(string field)
-			assert(data[Field]!=nil and data[Field]!="",sprintf("There was no data for Actions field '%s'",field))
+			assert(data[field]!=nil and data[field]!="",sprintf("There was no data for Actions field '%s'",field))
 		end
 		Want("ExeTag")
 		Want("ActTag")
