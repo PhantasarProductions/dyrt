@@ -125,7 +125,7 @@ group Stage_Action extends Stage
 		var Icon
 		self.Act = Act
 		assert(Act,"No action!")
-		self.Action = Act
+		self.Action = Action_Announce
 		Stage.Go("ACTION")
 		self.Action=Action_Announce
 		if not prefixed(Act.ExeTag,"FOE_")
