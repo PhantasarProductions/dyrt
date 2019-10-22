@@ -40,6 +40,7 @@
 
 #accept Fighter
 #accept Combat_Message
+#accept Stage_Action
 
 // This may look a bit odd, but it prevents errors
 // I really need a kind of forwarding thing in here, I suppose
