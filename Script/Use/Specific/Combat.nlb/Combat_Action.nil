@@ -75,12 +75,12 @@ class Actions
 			assert(data[field]!=nil and data[field]!="",sprintf("There was no data for Actions field '%s'",field))
 		end
 		Want("ExeTag")
-		Want("ActTag")
+		Want("ActTag")	
 		assert( 
 			(data.TargetTags or data.Targets) and 
 			(not (data.TargetTags and data.Targets) ),
 			"Invalid input for action targets")
-		
+		self.Act=Item[data.ActTag]
 		// Configure targets
 		if not data.Targets
 			for tar in each(data.TargetTags)
