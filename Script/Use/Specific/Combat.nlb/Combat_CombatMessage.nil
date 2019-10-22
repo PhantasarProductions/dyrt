@@ -44,9 +44,10 @@ group Combat_Message
 	var Font
 	
 	void Show()
-		if MessageCountDown<=0
+		if self.MessageCountDown<=0
 			return
 		end
+		self.MessageCountDown--
 		self.Box.Draw()
 	end
 	
