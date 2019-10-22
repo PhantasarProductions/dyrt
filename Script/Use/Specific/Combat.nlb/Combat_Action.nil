@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 19.10.15
+// Version: 19.10.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -39,6 +39,7 @@
 #use "libs/strings"
 
 #accept Fighter
+#accept Combat_Message
 
 // This may look a bit odd, but it prevents errors
 // I really need a kind of forwarding thing in here, I suppose
@@ -89,12 +90,48 @@ class Actions
 	
 end
 
-group Stage_Action extends Stage
-
+group Action_PreMove
 	void Draw()
 	end
 	
 	void Update()
+	end
+end
+
+group Action_Announce
+	
+	int CountDown = 6
+	
+	void Draw()
+	end
+	
+	void Update()
+		self.CountDown--
+		if self.CountDown<=0
+			self.CountDown=6
+			Stage_Action.Stage=Action_PreMove
+		end
+	end
+end
+
+group Stage_Action extends Stage
+
+	var Action
+	var Stage
+		
+	void ComeToMe(Act)
+		assert(Act,"No action!")
+		self.Action = Act
+		Stage.Go("ACTION")
+		self.Action=Action_Announce
+	end
+
+	void Draw()
+		self.Stage.Draw()
+	end
+	
+	void Update()
+		self.Stage.Update()
 	end
 
 	void CONSTRUCTOR()
@@ -102,5 +139,6 @@ group Stage_Action extends Stage
 	end
 
 end
+
 
 

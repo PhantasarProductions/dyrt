@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 19.10.15
+// Version: 19.10.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -381,6 +381,7 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
 
 
 

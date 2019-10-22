@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_CallBack.nil
-// Version: 19.09.20
+// Version: 19.10.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -99,6 +99,9 @@ global void BUB_Draw()
 	// Time gauge
 	CombatTime.DrawGauge()
 	
+	// Combat Messages (if there are any)
+	Combat_Message.Show()
+	
 	// Character bar
 	Party.SelectedCharacter=0
 	Party.ShowBar()
@@ -108,6 +111,7 @@ global void BUB_Draw()
 	Mouse.Sleeping = Stage.Current[".hasmember"]("MouseSleep") and Stage.Current.MouseSleep==true
 	Mouse.Show()
 end
+
 
 
 
