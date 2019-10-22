@@ -56,19 +56,19 @@ group Combat_Message
 		__white
 		self.MessageText.Draw(Screen.Width/2,55,2,0)
 		if self.MessageIcon
-			BoxPic(25,45,self.MessageIcon,nil,"top")
+			BoxPic(25,25,self.MessageIcon,nil,"top")
 		end
 	end
 	
 	void Msg(string Msg,Icon)
 		self.Message = Msg
 		self.MessageIcon = Icon or ""
-		self.MessageCountDown = 40
+		self.MessageCountDown = 160
 		self.MessageText = self.Font.Text(Msg)
 	end
 	
 	void CONSTRUCTOR()
-		self.Box=new Box(0,50,Screen.Width,40)
+		self.Box=new Box(0,50,Screen.Width,45)
 		self.Font = GetFont("BIGTEXT")
 	end
 end
