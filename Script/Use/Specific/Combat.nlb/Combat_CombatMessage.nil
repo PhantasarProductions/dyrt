@@ -34,7 +34,10 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
+#use "script/use/anyway"
 #use "script/use/boxes"
+#use "script/use/BoxPics"
 
 group Combat_Message
 	string Message
@@ -42,6 +45,7 @@ group Combat_Message
 	int MessageCountDown
 	var Box
 	var Font
+	var MessageText
 	
 	void Show()
 		if self.MessageCountDown<=0
@@ -49,12 +53,18 @@ group Combat_Message
 		end
 		self.MessageCountDown--
 		self.Box.Draw()
+		__white
+		self.MessageText(Screen.Width/2,55,2,0)
+		if self.MessageIcon
+			BoxPic(25,45,self.MessageIcon,nil,"top")
+		end
 	end
 	
 	void Msg(string Msg,Icon)
 		self.Message = Msg
 		self.MessageIcon = Icon or ""
 		self.MessageCountDown = 40
+		self.MessageText = self.Font.Text(Msg)
 	end
 	
 	void CONSTRUCTOR()
@@ -62,4 +72,5 @@ group Combat_Message
 		self.Font = ObtainFont("BIGFONT")
 	end
 end
+
 
