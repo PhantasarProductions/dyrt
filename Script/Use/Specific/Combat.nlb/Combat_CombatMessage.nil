@@ -69,7 +69,7 @@ group Combat_Message
 	
 	void CONSTRUCTOR()
 		self.Box=new Box(0,50,Screen.Width,40)
-		self.Font = GetFont("BIGFONT")
+		self.Font = GetFont("BIGTEXT")
 	end
 end
 
