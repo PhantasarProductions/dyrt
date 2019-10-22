@@ -68,8 +68,8 @@ group Combat_Message
 	end
 	
 	void CONSTRUCTOR()
-		self.Box(0,50,Screen.Width,40)
-		self.Font = ObtainFont("BIGFONT")
+		self.Box=new Box(0,50,Screen.Width,40)
+		self.Font = GetFont("BIGFONT")
 	end
 end
 
