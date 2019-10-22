@@ -132,6 +132,7 @@ group Stage_Action extends Stage
 			Icon = Act.ExeTag
 		end
 		Combat_Message.Msg(Act.Act.Name,Icon)
+		self.Stage = Action_Announce
 	end
 
 	void Draw()

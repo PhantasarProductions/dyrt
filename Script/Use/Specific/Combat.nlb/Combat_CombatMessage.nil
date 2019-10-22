@@ -54,7 +54,7 @@ group Combat_Message
 		self.MessageCountDown--
 		self.Box.Draw()
 		__white
-		self.MessageText(Screen.Width/2,55,2,0)
+		self.MessageText.Draw(Screen.Width/2,55,2,0)
 		if self.MessageIcon
 			BoxPic(25,45,self.MessageIcon,nil,"top")
 		end
