@@ -41,7 +41,7 @@
 
 #accept Fighter
 #accept CombatTime
-
+#accept Combat_Message
 
 
 class Stage
