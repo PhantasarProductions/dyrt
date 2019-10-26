@@ -119,11 +119,11 @@ group Action_PreMove
 	end
 	
 	void Update()
-		if skiptimer>0
-			skiptimer--
+		if $skiptimer>0
+			$skiptimer--
 			return
 		end
-		skiptimer=16
+		$skiptimer=16
 		if prefixed(self.Action.ExeTag,"FOE_")
 		else
 			if self.Action.Executor.Frame>=self.Action.Executor.Pics[self.Action.Executor.Houding]
@@ -186,6 +186,7 @@ group Stage_Action extends Stage
 	end
 
 end
+
 
 
 
