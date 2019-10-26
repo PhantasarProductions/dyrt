@@ -107,7 +107,7 @@ group Action_PreMove
 	int skiptimer = 16
 
 	get var Action
-		return Stage_Action.Action
+		return Stage_Action
 	end
 	
 	get var Act
@@ -186,11 +186,4 @@ group Stage_Action extends Stage
 	end
 
 end
-
-
-
-
-
-
-
 
