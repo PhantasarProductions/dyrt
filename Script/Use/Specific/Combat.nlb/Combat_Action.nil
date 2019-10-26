@@ -132,7 +132,7 @@ group Action_PreMove
 				self.Act.Executor.Frame=0
 				Stage_Action.Stage = Action_SpellAni
 			else 
-				self.Action.Executor.Frame++
+				self.Act.Executor.Frame++
 			end
 		end
 	end
@@ -188,7 +188,6 @@ group Stage_Action extends Stage
 	end
 
 end
-
 
 
 
