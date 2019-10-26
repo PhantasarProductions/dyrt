@@ -82,7 +82,7 @@ class Hero extends Fighter
 		if self.JumpIn<=0
 			return self.SpotY
 		end
-		return math.floor( self.SpotY - (xmath.sin(self.JumpIn)*25) )
+		return math.floor( self.SpotY - math.abs(xmath.sin(self.JumpIn)*50) )
 	end
 	
 	get int SpotNum

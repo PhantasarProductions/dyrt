@@ -75,7 +75,7 @@ class Actions
 			assert(data[field]!=nil and data[field]!="",sprintf("There was no data for Actions field '%s'",field))
 		end
 		Want("ExeTag")
-		Want("ActTag")	
+		Want("ActTag")
 		assert( 
 			(data.TargetTags or data.Targets) and 
 			(not (data.TargetTags and data.Targets) ),
@@ -88,7 +88,12 @@ class Actions
 			end
 		end
 		// Executor
-		self.Executor = Fighter.ByTag[data.ExeTag]		
+		self.Executor = Fighter.ByTag[data.ExeTag]
+		// Act
+		self.Act = Item[data.ActTag]
+		
+		// Debug
+		CSayF("ACTION Created:\n%s",self[".dump"])
 	end
 	
 end
@@ -127,9 +132,11 @@ group Action_PreMove
 		end
 		$skiptimer=16
 		if prefixed(self.Act.ExeTag,"FOE_")
-		else
+		else			
+			self.Act.Executor.Houding = self.Act.Act.Stance
+			self.Act.Executor.AutoLoadPic()
 			if self.Act.Executor.Frame>=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames
-				self.Act.Executor.Frame=0
+				self.Act.Executor.Frame=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames-1
 				Stage_Action.Stage = Action_SpellAni
 			else 
 				self.Act.Executor.Frame++
