@@ -91,11 +91,48 @@ class Actions
 	
 end
 
-group Action_PreMove
-	void Draw()
+group Action_SpellAni
+void Draw()
+		
 	end
 	
 	void Update()
+	end
+end
+
+group Action_PreMove
+
+	int Jump = 0
+	bool Jumping = false
+	int skiptimer = 16
+
+	get Action
+		return Stage_Action.Action
+	end
+	
+	get Act
+		return self.Action.Act
+	end
+
+	void Draw()
+		
+	end
+	
+	void Update()
+		if skiptimer>0
+			skiptimer--
+			return
+		end
+		skiptimer=16
+		if prefixed(self.Action.ExeTag,"FOE_")
+		else
+			if self.Action.Executor.Frame>=self.Action.Executor.Pics[self.Action.Executor.Houding]
+				self.Action.Executor.Frame=0
+				Stage_Action.Stage = Action_SpellAni
+			else 
+				self.Action.Executor.Frame++
+			end
+		end
 	end
 end
 
@@ -111,6 +148,7 @@ group Action_Announce
 		if self.CountDown<=0
 			self.CountDown=6
 			Stage_Action.Stage=Action_PreMove
+			Action_PreMove.Jump = 0
 		end
 	end
 end
