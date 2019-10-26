@@ -106,11 +106,11 @@ group Action_PreMove
 	bool Jumping = false
 	int skiptimer = 16
 
-	get Action
+	get var Action
 		return Stage_Action.Action
 	end
 	
-	get Act
+	get var Act
 		return self.Action.Act
 	end
 
