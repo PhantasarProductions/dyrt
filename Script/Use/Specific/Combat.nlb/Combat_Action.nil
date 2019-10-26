@@ -124,10 +124,10 @@ group Action_PreMove
 			return
 		end
 		$skiptimer=16
-		if prefixed(self.Action.ExeTag,"FOE_")
+		if prefixed(self.Act.ExeTag,"FOE_")
 		else
-			if self.Action.Executor.Frame>=self.Action.Executor.Pics[self.Action.Executor.Houding]
-				self.Action.Executor.Frame=0
+			if self.Act.Executor.Frame>=self.Act.Executor.Pics[self.Act.Executor.Houding]
+				self.Act.Executor.Frame=0
 				Stage_Action.Stage = Action_SpellAni
 			else 
 				self.Action.Executor.Frame++
@@ -186,6 +186,7 @@ group Stage_Action extends Stage
 	end
 
 end
+
 
 
 
