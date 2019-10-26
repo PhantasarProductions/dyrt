@@ -87,6 +87,8 @@ class Actions
 				self.Targets[#self.Targets+1] = Fighter.ByTag[tar]
 			end
 		end
+		// Executor
+		self.Executor = Fighter.ByTag[data.ExeTag]		
 	end
 	
 end
@@ -186,4 +188,6 @@ group Stage_Action extends Stage
 	end
 
 end
+
+
 
