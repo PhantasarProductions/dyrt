@@ -100,10 +100,13 @@ end
 
 group Action_SpellAni
 void Draw()
-		
+		// TODO: Execute NIL script if applicable
+		// TODO: Execute SASKIA script if applicable
 	end
 	
 	void Update()
+		// TODO: Check if no more spellani scripts are running, either SASKIA or NIL
+		
 	end
 end
 
