@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.10.28
+// Version: 19.10.30
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,12 +36,31 @@
 // End License Information
 
 #use "libs/tables"
+#use "Script/Use/Specific/Combat.nlb/Combat_Hurt.nil"
 
 group Execution
 
 	void TrueExec(Action,Target)
+		// Before we begin
 		bool hit
 		assert(Action,"Execution.TrueExec(): I need action and a target!")
+		// Accuracy Check
+		
+		// Cure status changes (must after accuracy check be first always).
+		
+		// Calculate attack and damage
+		
+		// Calculate healing
+		
+		// Buffs/Debufss
+		
+		// Cause status changes (must always be the last before the hit check)
+		
+		// If not hit, make note of a miss
+		if not hit
+			new Hurt("Miss",Tar.Tag,127,127,127)
+		end
+		
 	end
 
 	void Exec(Action)
@@ -52,4 +71,5 @@ group Execution
 	end
 
 end
+
 
