@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Hurt.nil
-// Version: 19.10.28
+// Version: 19.10.30
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,4 +34,82 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
+#use "libs/LinkedList"
+#use "libs/xmath"
+#use "libs/DarkText"
+
+class Hurt
+
+	static var List
+	static var Font
+	
+	int R
+	int G
+	int B
+	string msg
+	var gtxt
+	int x
+	int y
+	int wait
+	int kill = 60
+	
+	void CONSTRUCTOR(msg,tag_x,r_y,g_r,b_g,_b,crashitboys)
+		assert(msg,"No message! That hurts!")
+		assert(not crashitboys,"Too many parameters... that hurts")
+		self.msg=tostring(msg)
+		self.gtxt = self.Font.Text(self.msg)
+		switch type(tag_x)
+			case "string"
+				assert(not(_b or crashitboys),"Too many parameters... that hurts")
+				self.x = Fighter.ByTag(tag_x).X
+				self.y = Fighter.ByTag(tag_x).Y
+				self.R = tonumber(r_y) or 255
+				self.G = tonumber(g_r) or 255
+				self.B = tonumber(b_g) or 255
+			case "number"
+				assert(tonumber(r_y),"No valid y... that hurts")
+				self.x = tag_x
+				self.y = tonumber(r_y)
+				self.R = tonumber(g_r) or 255
+				self.G = tonumber(b_g) or 255
+				self.B = tonumber( _b) or 255
+			default
+				assert("Not understood the input... that hurts")
+		end
+		for H in self.List.Each
+			if xmath.Pythagoras(self.x,self.y,H.x,H.y)<20
+				self.wait = 25 + H.wait
+			end
+		end
+		self.List.AddLast(self)
+	end
+	
+	void Draw(ListLink)
+		if self.wait>0
+			self.wait--
+			return
+		end
+		Color(self.R,self.G,self.B)
+		DarkText.Text(self.gtxt,self.x,self.y)
+		self.y--
+		if ListLink
+			$kill--
+			if $kill<=0 
+				ListLink.Unlink()
+			end
+		end
+	end
+	
+	static void DrawAll()
+		for H,L in self.List.Each
+			H.Draw(L)
+		end
+	end
+
+end
+
+Hurt.List = new TLinkedList
+Hurt.Font = GetFont("SYSFONT")
+
 
