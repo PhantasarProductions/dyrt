@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.10.30
+// Version: 19.11.01
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -52,8 +52,9 @@ group Execution
 		delegate rand
 		int base
 		int adie
-		int defbb
+		int defb
 		int ddie
+		int totaldef
 		int totaldmg
 		int dmg
 		int enddmg
@@ -102,6 +103,7 @@ group Execution
 		end
 		
 		TarChar.Points("HP").Have.Dec(enddmg)
+		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,TarChar.Points("HP").Have)
 	end
 
 	void TrueExec(Action,Target)
@@ -155,5 +157,7 @@ group Execution
 	end
 
 end
+
+
 
 
