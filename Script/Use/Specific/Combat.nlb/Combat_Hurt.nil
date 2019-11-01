@@ -39,6 +39,9 @@
 #use "libs/xmath"
 #use "libs/DarkText"
 
+
+#accept Fighter
+
 class Hurt
 
 	static var List
@@ -62,8 +65,8 @@ class Hurt
 		switch type(tag_x)
 			case "string"
 				assert(not(_b or crashitboys),"Too many parameters... that hurts")
-				self.x = Fighter.ByTag(tag_x).X
-				self.y = Fighter.ByTag(tag_x).Y
+				self.x = Fighter.ByTag[tag_x].X
+				self.y = Fighter.ByTag[tag_x].Y
 				self.R = tonumber(r_y) or 255
 				self.G = tonumber(g_r) or 255
 				self.B = tonumber(b_g) or 255
@@ -96,7 +99,7 @@ class Hurt
 		if ListLink
 			$kill--
 			if $kill<=0 
-				ListLink.Unlink()
+				ListLink.UnLink()
 			end
 		end
 	end

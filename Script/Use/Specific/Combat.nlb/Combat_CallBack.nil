@@ -43,6 +43,7 @@
 #accept CombatTime
 #accept Combat_Message
 
+#accept Hurt
 
 class Stage
 	readonly delegate Update
@@ -101,6 +102,9 @@ global void BUB_Draw()
 	
 	// Combat Messages (if there are any)
 	Combat_Message.Show()
+	
+	// Hurt messages (if there are any)
+	Hurt.DrawAll()
 	
 	// Character bar
 	Party.SelectedCharacter=0

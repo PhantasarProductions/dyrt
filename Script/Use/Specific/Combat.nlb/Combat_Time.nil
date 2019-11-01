@@ -102,7 +102,7 @@ group CombatTime
 		for agl,memtab in order.__MAP_SORTEDPAIRS
 			i++
 			for memtag in each(memtab)
-				$GaugeSpeed[memtag] = math.ceil( (i/c)*250 )
+				$GaugeSpeed[memtag] = math.ceil( (i/c)*50 )
 				CSayF("%s is set to gaugespeed %d",memtag,$GaugeSpeed[memtag])
 			end
 		end

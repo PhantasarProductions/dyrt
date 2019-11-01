@@ -41,6 +41,7 @@
 #accept Fighter
 #accept Combat_Message
 #accept Stage_Action
+#accept Execution
 
 // This may look a bit odd, but it prevents errors
 // I really need a kind of forwarding thing in here, I suppose
@@ -98,10 +99,27 @@ class Actions
 	
 end
 
+group Action_Exe
+	void Draw()
+	end
+	
+	void Update()
+		var F
+		F = Stage_Action.Act.Executor
+		Execution.Exec(Stage_Action.Act)
+		F.GaugePosition = 0
+		F.Frame = 0
+		F.Houding = "IDLE"
+		F.NextAct = nil
+		Stage.Go("IDLE")
+	end
+end
+
 group Action_SpellAni
 void Draw()
 		// TODO: Execute NIL script if applicable
 		// TODO: Execute SASKIA script if applicable
+		Stage_Action.Stage = Action_Exe
 	end
 	
 	void Update()
@@ -138,11 +156,10 @@ group Action_PreMove
 		else			
 			self.Act.Executor.Houding = self.Act.Act.Stance
 			self.Act.Executor.AutoLoadPic()
+			self.Act.Executor.Frame++
 			if self.Act.Executor.Frame>=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames
 				self.Act.Executor.Frame=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames-1
 				Stage_Action.Stage = Action_SpellAni
-			else 
-				self.Act.Executor.Frame++
 			end
 		end
 	end

@@ -58,7 +58,7 @@ group Execution
 		
 		// If not hit, make note of a miss
 		if not hit
-			new Hurt("Miss",Tar.Tag,127,127,127)
+			new Hurt("Miss",Target.Tag,127,127,127)
 		end
 		
 	end
