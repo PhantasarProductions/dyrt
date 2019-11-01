@@ -36,6 +36,7 @@
 // End License Information
 
 #use "libs/tables"
+#use "libs/strings"
 #use "Script/Use/Specific/Combat.nlb/Combat_Hurt.nil"
 
 group Execution
@@ -45,16 +46,62 @@ group Execution
 		return false
 	end
 
-	void Attack()
-
-local base = Combat_Stat(TGROUP,TACTOR,abl.AttackStat); CSay("AttackStat = "..abl.AttackStat); CSay("base = "..base)
-if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
-local adie = rand(1,base/2)
-local defb = Combat_Stat(TACT["TargetGroup"],target,abl.DefenseStat)
-local ddie = rand(1,defb/5)
-local totaldmg = base + adie
-local totaldef = defb + ddie
-local dmg = round(totaldmg-totaldef); if dmg<1 then dmg=1 end
+	void Attack(Exe,Tar,Act)
+	
+		// declarations
+		delegate rand
+		int base
+		int adie
+		int defbb
+		int ddie
+		int totaldmg
+		int dmg
+		int enddmg
+		bool fatal
+		number elmod
+		
+		var TarChar
+		TarChar = RPG.Char(Tar.Tag)
+		
+		// Calculate damage
+		rand = math.random
+		base = math.ceil(RPG.Char(Exe.Tag).Stat(sprintf("END_%s",Act.AttackStat).Value)*(Act.Attack/100))
+		// local base = Combat_Stat(TGROUP,TACTOR,abl.AttackStat); CSay("AttackStat = "..abl.AttackStat); CSay("base = "..base)
+		// if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
+		adie = rand(1,base/2)
+		defb = RPG.Char(Tar.Tag).Stat(sprintf("END_%s",Act.DefenseStat).Value) //Combat_Stat(TACT["TargetGroup"],target,abl.DefenseStat)
+		ddie = rand(1,defb/5)
+		totaldmg = base + adie
+		totaldef = defb + ddie
+		dmg = round(totaldmg-totaldef); if dmg<1 then dmg=1 end
+		
+		// Modify by attack type
+		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.AttackType]
+		enddmg = dmg - (math.floor(dmg * (TarChar.Stat(sprintf("END_RESIST_Elem_%s",Act.AttackType)).Value/100)))
+		
+		// Modify by element type
+		fatal = fatal or ( prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.Element] )
+		elmod = TarChar.Stat(sprintf("END_RESIST_Elem_%s",Act.Element)).Value
+		enddmg = dmg - (math.floor(dmg * (elmod/100)))
+		
+		// Show what damage done
+		if fatal
+			enddmg = TarChar.Points("HP").Have
+			new Hurt("Death",255,0,0)
+		elseif enddmg<0
+			new Hurt(enddmg,0,255,0)
+		elseif elmod<0
+			new Hurt(enddmg,255,0,0)
+		elseif elmod=100
+			enddmg = 0
+			new Hurt("Immune",255,180,0)
+		elseif elmod>0
+			new Hurt(enddmg,255,180,0)
+		else
+			new Hurt(enddmg)
+		end
+		
+		TarChar.Points("HP").Have.Dec(enddmg)
 	end
 
 	void TrueExec(Action,Target)
@@ -71,17 +118,21 @@ local dmg = round(totaldmg-totaldef); if dmg<1 then dmg=1 end
 		if AccuracyCheck and (not self.Helpless(Target))
 			int acc
 			int eva
-			acc = math.random(1,RPG.Char(ExeTag).Stat("END_Accuracy")
-			eva - math.random(1,RPG.Char(TarTag).Stat("END_Evasion")
+			acc = math.random(1,RPG.Char(ExeTag).Stat("END_Accuracy"))
+			eva - math.random(1,RPG.Char(TarTag).Stat("END_Evasion")/5)
 			if eva>acc
 				new Hurt("Miss",Target.Tag,127,127,127)
 				return
-			end
+			end			
 		end
 		
 		// Cure status changes (must after accuracy check be first always).
 		
 		// Calculate attack and damage
+		if Action.Attack>0
+			Attack(Executor,Target,Action)
+			hit = true
+		end
 		
 		// Calculate healing
 		
