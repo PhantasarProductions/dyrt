@@ -40,11 +40,44 @@
 
 group Execution
 
+	bool Helpless(Target)
+		// TODO: Render helpless if status changes ask for that!
+		return false
+	end
+
+	void Attack()
+
+local base = Combat_Stat(TGROUP,TACTOR,abl.AttackStat); CSay("AttackStat = "..abl.AttackStat); CSay("base = "..base)
+if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
+local adie = rand(1,base/2)
+local defb = Combat_Stat(TACT["TargetGroup"],target,abl.DefenseStat)
+local ddie = rand(1,defb/5)
+local totaldmg = base + adie
+local totaldef = defb + ddie
+local dmg = round(totaldmg-totaldef); if dmg<1 then dmg=1 end
+	end
+
 	void TrueExec(Action,Target)
 		// Before we begin
 		bool hit
+		var Executor
+		string TarTag
+		string ExeTag
+		TarTag=Target.Tag
+		ExeTag=Executor.Tag
+		Executor = Action.Executor
 		assert(Action,"Execution.TrueExec(): I need action and a target!")
 		// Accuracy Check
+		if AccuracyCheck and (not self.Helpless(Target))
+			int acc
+			int eva
+			acc = math.random(1,RPG.Char(ExeTag).Stat("END_Accuracy")
+			eva - math.random(1,RPG.Char(TarTag).Stat("END_Evasion")
+			if eva>acc
+				new Hurt("Miss",Target.Tag,127,127,127)
+				return
+			end
+		end
 		
 		// Cure status changes (must after accuracy check be first always).
 		
