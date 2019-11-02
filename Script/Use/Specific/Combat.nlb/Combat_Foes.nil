@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.09.21
+// Version: 19.11.02
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -112,6 +112,7 @@ class Foe extends Fighter
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
 		myFoe = NIL.Use("Script/Data/Foes/"..FoeFile)
 		myFoe.FromFile = FoeFile:upper()
+		myFoe.Char = RPG.Char(Foe.LoadFoeTag)
 		if num<24
 			myFoe.SpotX = ActPos.Spot[myFoe.Tag].x
 			myFoe.SpotY = ActPos.Spot[myFoe.Tag].y
@@ -130,6 +131,7 @@ Foe.StatSubs = {
 			"END_"            // End result when all other fields have been added together
 		}
 // EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
+
 
 
 

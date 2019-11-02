@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.10.22
+// Version: 19.11.02
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -50,6 +50,9 @@ class Fighter
 	int GaugePosition
 	int NextActSpeed
 	var NextAct
+	
+	table StatusChangesRealTable
+	table StatusChanges
 	
 	get string Name
 		return self.Char.Name
@@ -127,10 +130,74 @@ class Fighter
 		self.Team[self.TeamName][aTag] = self
 		CSay("= Added to team: "..self.TeamName.."/"..tostring(self.Team))
 		self.ByTag[aTag]=self
+		self.StatusChanges = setmetatable({},{
+			["__index"] = var(s,string k)
+				switch k:upper()
+					case "DEATH" "FALLEN"
+						if self.Char.Points("HP").Have==0
+							return CStatus.Death
+						else
+							return nil;
+						end
+					case "EACH"
+						int i=0
+						return var()
+							string k
+							var v
+							repeat
+								i++
+								if i>#Combat_Status.SN
+									return nil,nil;
+								end
+								k = Combat_Status.SN[i]
+								v = CStatus[k]
+								if v
+									return k,v
+								end
+							forever
+						end
+					default
+						return self.Char.StatusChangesRealTable[k]
+				end
+			end,
+			["__newindex"] = void(s,string k,v)
+				k = k:upper()
+				assert(k!="EACH","Cannot use EACH when defining")
+				switch k
+					case "DEATH" "FALLEN"
+						if v and self.Char.Points("HP").Have>0
+							self.Char.Points("HP").Have = 0
+							new Hurt("Death",self.Tag,255,0,0)
+						elseif self.Char.Points("HP").Have == 0
+							self.Char.Points("HP").Have = 1
+							new Hurt("Revive",self.Tag,255,0,0)
+						end
+					default
+						if v
+							self.Char.StatusChangesRealTable[k] = CStatus[k]
+							new Hurt("Revive",self.Tag,255,100,100)
+						else
+							self.Char.StatusChangesRealTable[k] = nil;
+							new Hurt("Revive",self.Tag,180,255,000)
+						end
+				end
+			end,
+			["__tostring"] = string(s)
+				string ret
+				for k,_ in s.Each
+					if ret!=""
+						ret = ret .. "; "
+					end
+					ret = ret .. k
+				end
+				return ret
+			end
+		})
 		self.Init()
 	end
 	
 end
+
 
 
 
