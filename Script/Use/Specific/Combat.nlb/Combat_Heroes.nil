@@ -228,6 +228,19 @@ group Stage_SelectTarget extends Stage
 					__white
 					DarkText.Font(CombatTime.FontGauge,"?",fight.X+80+50,fight.Y+40,2,0)
 				end
+				__white
+				bool hstat
+				int ystat
+				ystat = fight.Y+60
+				for sk,_ in fight.StatusChanges.Each
+					hstat = true
+					DarkText.Font(CombatTime.FontGauge,sk,fight.X+80,ystat)
+					ystat = ystat + 20
+				end
+				if not hstat
+					Color(180,255,0)
+					DarkText.Font(CombatTime.FontGauge,"Status: Okay",fight.X+80,ystat)
+				end
 			end
 		end
 	end

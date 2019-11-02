@@ -150,7 +150,7 @@ class Fighter
 									return nil,nil;
 								end
 								k = Combat_Status.SN[i]
-								v = CStatus[k]
+								v = self.StatusChanges[k]
 								if v
 									return k,v
 								end

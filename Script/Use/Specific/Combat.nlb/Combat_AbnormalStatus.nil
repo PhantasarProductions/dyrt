@@ -39,7 +39,7 @@
 
 table trstatus
 
-void NOTHING(f)
+void DO_NOTHING(f)
 end
 
 
@@ -61,12 +61,12 @@ class Combat_Status
 	static table SN
 	
 	void CONSTRUCTOR(string name,table junk)
-		self.Draw = NOTHING
-		self.PreTurn = NOTHING
+		self.Draw = DO_NOTHING
+		self.PreTurn = DO_NOTHING
 		for s,v in pairs(junk)
 			self[s] = v
 		end
-		self.S[name:toupper()] = self
+		self.S[name:upper()] = self
 		self.SN[#self.SN+1] = name
 	end
 	
@@ -74,18 +74,17 @@ end
 
 setmetatable(Combat_Status.S,{
 	["__index"] = var(s,string key)
-		key=key:toupper()
+		key=key:upper()
 		assert(trstatus[key],sprintf("Status '%s' does not exist",key))
 		return trstatus[key]
 	end,
 	["__newindex"] = var(s,string key,st)
-		key=key:toupper()
+		key=key:upper()
 		assert(st and type(st)=="table" and st[".classname"]=="Combat_Status",sprintf("Whatever you set for '%s', it's not valid as a status change",key))
 		trstatus[key] = st
 	end
 })
-
-table CStatus
+global table CStatus
 CStatus = Combat_Status.S
 
 
@@ -94,9 +93,9 @@ new Combat_Status("Death",{
 	["Defeated"] = true,
 	["UntargetableFoe"] = true,
 	["Draw"] = void(f)
-		end
+		end,
 	["Caused"] = void(f)
-		end
+		end,
 	["Cured"] = void(f)
 		end	
 })
