@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 9/13/2019 4:10:01 PM
+// Generated: 11/6/2019 4:54:29 PM
 
 do
 var foeret
@@ -8,7 +8,7 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
-foeret.Description = "Overall... very very stupid!\nThey are like... Me king... you dead!\n"
+foeret.Description = "Overall... very very stupid!\nThey are like... Me king... you dead!\nShouldn't be a real problem, right?\n"
 foeret.Fatal["Darkness"] = false
 foeret.Fatal["Earth"] = false
 foeret.Fatal["Flame"] = false
@@ -24,7 +24,11 @@ if not Foe.LoadOversoul
 	foeret.Experience = 5
 end
 if Foe.LoadOversoul
-	foeret.Experience = 15
+	if __skill==3
+		foeret.Experience = 0
+	else
+		foeret.Experience = 15
+	end
 end
 foeret.Name="Goblin"
 foeret.Char.Stat("BASE_RESIST_Elem_Darkness").Value=-8
@@ -129,7 +133,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=10
+	foeret.Char.Stat("BASE_Strength").Value=11
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
