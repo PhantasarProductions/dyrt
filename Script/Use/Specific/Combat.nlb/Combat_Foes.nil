@@ -61,6 +61,8 @@ class Foe extends Fighter
 	bool AllowOversoul
 	bool Boss
 	string FromFile
+	int Cash
+	table Drop
 	
 	get bool ShowHP
 		switch __skill

@@ -1,5 +1,5 @@
 // License Information:
-// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Death.nil
+// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
 // Version: 19.11.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
@@ -144,6 +144,7 @@ new Combat_Status("Fallen",{
 	["Cured"] = void(f)
 		end	
 })
+
 
 
 
