@@ -52,6 +52,10 @@ class Hero extends Fighter
 	string CharTag
 	int EXP_Rate
 	
+	get number fEXP_Rate
+		return EXP_Rate/100
+	end
+	
 	bool Leaving = false
 	
 	get bool ShowHP
