@@ -57,6 +57,7 @@ void EnemyDeathFade(f)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
 	if dF.X==0
+		
 		// Experience points (if applicable)
 		for tag,hero in pairs(Fighters.Team.Heros)
 			int Exp 
@@ -72,8 +73,46 @@ void EnemyDeathFade(f)
 				end
 			end
 		end
-		// Item or money drops
 		
+		// Item or money drops
+		bool okdrop
+		if f.Drop and #f.Drop>0
+			int r
+			r = math.random(1,#f.Drop)
+			switch type(f.Drop[r])
+				case "number"
+					if __cash<(900000000/__skill)
+						okdrop=true
+						LoadAudio("SFX/Treasure/ChaChing.wav").Play()
+						__cash = __cash + f.Drop[r]
+						if f.Drop[r]==1
+							new Hurt("Dropped 1 __onecurrency",tag,255,255,0)
+						else
+							new Hurt(sprintf("Dropped %d __currency",f.Drop[r]),f.Tag,255,255,0)
+						end
+					end
+				case "string"
+					string itag
+					itag = f.Drop[r]
+					if Inventory[itag]<Iventory.__CAP__
+						Inventory[itag]++
+						okdrop=true
+						new Hurt(sprintf("Dropped %s",Item[itag]),f.Tag,255,255,0)
+					end
+				default
+					error("Invalid item drop!")
+			end
+		end
+		if (not okdrop) and  __cash<(900000000/__skill)						
+			LoadAudio("SFX/Treasure/ChaChing.wav").Play()
+			__cash = __cash + f.Cash
+			if f.Cash==1
+				new Hurt("Dropped 1 __onecurrency!",tag,255,255,0)
+			else
+				new Hurt(sprintf("Dropped %d __currency!",f.Cash),f.Tag,255,255,0)
+			end
+		end
+
 	end
 end
 

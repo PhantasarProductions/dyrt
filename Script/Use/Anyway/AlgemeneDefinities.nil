@@ -62,7 +62,7 @@
 #macro __solidview SetAlpha(255)
 
 // This must be used IN string!
-#macro __currencyone Shilder
+#macro __onecurrency Shilder
 #macro __currency Shilders
 
 
