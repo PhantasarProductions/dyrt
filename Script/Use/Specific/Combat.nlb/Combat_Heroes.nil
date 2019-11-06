@@ -50,6 +50,7 @@ class Hero extends Fighter
 	int Frame = 0
 	table Pics
 	string CharTag
+	int EXP_Rate
 	
 	bool Leaving = false
 	
@@ -140,6 +141,14 @@ class Hero extends Fighter
 		self.JumpIn = self.JumpIn + (#self.Heroes*45)
 		self.SpotX = spot.X
 		self.SpotY = spot.Y
+		switch __skill
+			case 1
+				self.EXP_Rate = math.rand(200,250)
+			case 2
+				self.EXP_Rate = 100
+			case 3
+				self.EXP_Rate = math.rand(25,75)
+		end
 	end
 	
 	static void Compile(string tag)
