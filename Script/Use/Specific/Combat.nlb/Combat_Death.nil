@@ -57,6 +57,7 @@ void EnemyDeathFade(f)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
 	if dF.X==0
+		
 	end
 end
 
@@ -73,6 +74,15 @@ new Combat_Status("Fallen",{
 				DeadPlayer(f)
 			end
 		end,
+	["AltExperience"] = int(f,int exp)
+		switch __skill
+			case 1
+				return exp
+			case 2
+				return math.floor(exp/2)
+			case 3
+				return 0
+		end
 	["Caused"] = void(f)
 		end,
 	["Cured"] = void(f)
