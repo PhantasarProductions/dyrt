@@ -123,28 +123,30 @@ group CombatTime
 		// Image.Color(255,255,255)   
 		// Image.Draw(CombatTimePic[ch],gx,-25)
 		for iteam,imember,ifighter in Fighter.ForAll()
-			int gx
-			int dx
-			if ifighter.GaugePosition<=10000 
-				gx = (ifighter.GaugePosition/10000)*327 
-				Color(0,0,255) 
-			else 
-				gx = (((ifighter.GaugePosition-10000)/10000)*72)+328
-				Color(255,0,0) 
-			end
-			dx = gx + $gauge_x
-			switch iteam
-				case "Hero"
-					self.ImgPointHero.XDraw(dx,self.gauge_Y)
-					self.ImgGaugeIcon[imember] = self.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
-					__white
-					self.ImgGaugeIcon[imember].XDraw(dx,self.gauge_y-25)
-				case "Foe"
-					self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
-					__white
-					DarkText.Font(self.FontGauge,ifighter.Letter,dx,self.gauge_Y+40,1,0)
-				default
-					error("UNKNOWN GAUGE POINTER!")
+			if fighter.GaugePosition>=0
+				int gx
+				int dx
+				if ifighter.GaugePosition<=10000 
+					gx = (ifighter.GaugePosition/10000)*327 
+					Color(0,0,255) 
+				else 
+					gx = (((ifighter.GaugePosition-10000)/10000)*72)+328
+					Color(255,0,0) 
+				end
+				dx = gx + $gauge_x
+				switch iteam
+					case "Hero"
+						self.ImgPointHero.XDraw(dx,self.gauge_Y)
+						self.ImgGaugeIcon[imember] = self.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
+						__white
+						self.ImgGaugeIcon[imember].XDraw(dx,self.gauge_y-25)
+					case "Foe"
+						self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
+						__white
+						DarkText.Font(self.FontGauge,ifighter.Letter,dx,self.gauge_Y+40,1,0)
+					default
+						error("UNKNOWN GAUGE POINTER!")
+				end
 			end
 		end
 	end
@@ -153,7 +155,15 @@ group CombatTime
 	
 	void UpdateGauge()
 		for iteam,imember,ifighter in Fighter.ForAll()
-			if ifighter.GaugePosition<10000
+			bool offgauge
+			for _,s in ifighter.StatusChanges.Each
+				offgauge = offgauge or s.OffGauge
+			end
+			if offgauge 
+				if ifighter.GaugePosition>-100
+					ifighter.GaugePosition = ifighter.GaugePosition - 25
+				end
+			elseif ifighter.GaugePosition<10000
 				ifighter.GaugePosition = ifighter.GaugePosition + $GaugeSpeed[imember]
 				if ifighter.GaugePosition>10000
 					ifighter.GaugePosition = 10000
