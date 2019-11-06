@@ -7,3 +7,9 @@ If you wanna keep track of what I do you can check my commits here or follow my 
 
 
 This (not yet complete) [Game Jolt Page](https://gamejolt.com/games/Dyrt_NET/426296) may soon show more details, or go to the [site](https://tricky.gamejolt.io/dyrt_NET)
+
+
+
+# NIL Language
+
+This entire game has been written in the [NIL Programming Langauge](https://github.com/jpbubble/NIL-isn-t-Lua), which is a bit of an extention to Lua. The engine is the NALA engine.
