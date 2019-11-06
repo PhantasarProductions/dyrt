@@ -145,7 +145,7 @@ class Hero extends Fighter
 			case 1
 				self.EXP_Rate = math.rand(200,250)
 			case 2
-				self.EXP_Rate = 100
+				self.EXP_Rate = math.rand(100,125)
 			case 3
 				self.EXP_Rate = math.rand(25,75)
 		end
