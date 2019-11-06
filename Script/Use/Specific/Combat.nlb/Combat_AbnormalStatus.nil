@@ -87,6 +87,9 @@ end
 setmetatable(Combat_Status.S,{
 	["__index"] = var(s,string key)
 		key=key:upper()
+		if key=="DEATH"
+			key='FALLEN'
+		end
 		assert(trstatus[key],sprintf("Status '%s' does not exist",key))
 		return trstatus[key]
 	end,

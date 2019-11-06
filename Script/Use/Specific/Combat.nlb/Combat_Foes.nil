@@ -122,7 +122,7 @@ class Foe extends Fighter
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
 		var myFoe		
-		Foe.LoadFoeTag = sprintf("FOE%d",num)
+		Foe.LoadFoeTag = sprintf("FOE_%d",num)
 		Foe.LoadOversoul = FoeOversoul==true
 		Foe.LoadFoeID = num
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)

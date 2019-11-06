@@ -1,9 +1,9 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/6/2019 9:05:44 PM
+// Generated: 11/6/2019 10:18:32 PM
 
 do
 var foeret
-foeret = new Foe(string.format("FOE%d",Foe.LoadFoeID))
+foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
