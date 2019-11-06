@@ -1,0 +1,17 @@
+group Stage_IDLE extends Stage
+
+	readonly bool MouseSleep = true
+
+	void CONSTRUCTOR()
+		Stage.Stages.VICTORY=self
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+		
+	end
+	
+end
+
