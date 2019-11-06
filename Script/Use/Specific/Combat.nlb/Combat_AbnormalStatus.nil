@@ -105,6 +105,30 @@ CStatus = Combat_Status.S
 
 
 
+group Defeated
+
+	bool Team(string TeamTag)
+		bool AnyStatus = false
+		bool Defeated = true
+		for tag,fight in pairs(Fighter.Team[TeamTag])
+			bool chardefeated = false
+			for _,s in fight.StatusChanges.Each
+				chardefeated = chardefeated or s.Defeated
+			end
+			Defeated = Defeated and chardefeated
+		end
+		return AnyStatus and Defeated
+	end
+	
+	get bool Hero
+		return Team('Hero')
+	end
+	
+	get bool Foe
+		return Team('Foe')
+	end
+	
+end
 
 
 

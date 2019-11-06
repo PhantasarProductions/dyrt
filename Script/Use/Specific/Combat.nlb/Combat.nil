@@ -49,6 +49,7 @@
 #use "Script/Use/Specific/Combat.nlb/Combat_Hurt.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_Main.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_Stage_IDLE.nil"
+#use "Script/Use/Specific/Combat.nlb/Combat_Stage_Victory.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_Start_Link.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_Time.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil"
