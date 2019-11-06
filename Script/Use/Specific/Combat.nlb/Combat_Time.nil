@@ -123,7 +123,7 @@ group CombatTime
 		// Image.Color(255,255,255)   
 		// Image.Draw(CombatTimePic[ch],gx,-25)
 		for iteam,imember,ifighter in Fighter.ForAll()
-			if fighter.GaugePosition>=0
+			if ifighter.GaugePosition>=0
 				int gx
 				int dx
 				if ifighter.GaugePosition<=10000 
