@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.11.02
+// Version: 19.11.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -101,7 +101,21 @@ class Foe extends Fighter
 	end
 	
 	void Draw()
-		self.Image.Draw(self.X,self.Y)
+		delegate overdraw
+		for status in self.StatusChanges.Each
+			if status.Draw 
+				if status.OverDraw
+					overdraw = status.Draw
+				else
+					status.Draw(self)
+				end
+			end
+		end
+		if overdraw
+			overdraw(self)
+		else
+			self.Image.Draw(self.X,self.Y)
+		end
 	end
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
@@ -131,6 +145,7 @@ Foe.StatSubs = {
 			"END_"            // End result when all other fields have been added together
 		}
 // EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
+
 
 
 
