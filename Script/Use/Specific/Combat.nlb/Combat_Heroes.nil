@@ -147,11 +147,11 @@ class Hero extends Fighter
 		self.SpotY = spot.Y
 		switch __skill
 			case 1
-				self.EXP_Rate = math.rand(200,250)
+				self.EXP_Rate = math.random(200,250)
 			case 2
-				self.EXP_Rate = math.rand(100,125)
+				self.EXP_Rate = math.random(100,125)
 			case 3
-				self.EXP_Rate = math.rand(25,75)
+				self.EXP_Rate = math.random(25,75)
 		end
 	end
 	
