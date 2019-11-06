@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/6/2019 4:54:29 PM
+// Generated: 11/6/2019 6:06:57 PM
 
 do
 var foeret
@@ -19,6 +19,14 @@ foeret.Fatal["Thunder"] = false
 foeret.Fatal["Water"] = false
 foeret.Fatal["Wind"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Blue_Slime.png")
+foeret.Cash = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Apple"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Apple"
 if not Foe.LoadOversoul
 	foeret.Experience = 4
 end

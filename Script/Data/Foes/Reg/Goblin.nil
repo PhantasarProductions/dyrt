@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/6/2019 4:54:29 PM
+// Generated: 11/6/2019 6:06:57 PM
 
 do
 var foeret
@@ -20,6 +20,18 @@ foeret.Fatal["Thunder"] = false
 foeret.Fatal["Water"] = false
 foeret.Fatal["Wind"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Goblin.png")
+foeret.Cash = 2
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Apple"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Apple"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Antidote"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 if not Foe.LoadOversoul
 	foeret.Experience = 5
 end
