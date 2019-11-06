@@ -51,7 +51,7 @@ void EnemyDeathFade(f)
 	dF = DeadEnemies[tag]
 	if dF.X==0
 		return
-	end
+	end // get out!
 	dF.X--
 	dF.Y++
 	SetScale(dF.X,dF.Y)
@@ -65,15 +65,15 @@ void EnemyDeathFade(f)
 			Exp = dF.Experience
 			for S in hero.StatusChanges.Each
 				Exp = S.AltExperience(hero,S)
-			end
+			end // for S
 			Exp = math.ceil(Exp*hero.fEXP_Rate)
 			if hero.Char.Stat("Level")<__levelcap
 				hero.Char.Stat("Experience").Value = hero.Char.Stat("Experience").Value - Exp
 				if Party.CharSpot(tag)<5
 					new Hurt(sprintf("Experience %d",Exp),tag,255,255,0)
-				end
-			end
-		end
+				end // in range of screen check
+			end // if not on cap
+		end // for
 		
 		// Item or money drops
 		bool okdrop
@@ -95,15 +95,15 @@ void EnemyDeathFade(f)
 				case "string"
 					string itag
 					itag = f.Drop[r]
-					if Inventory[itag]<Iventory.__CAP__
+					if Inventory[itag]<Inventory.__CAP__
 						Inventory[itag]++
 						okdrop=true
 						new Hurt(sprintf("Dropped %s",Item[itag]),f.Tag,255,255,0)
 					end
 				default
 					error("Invalid item drop!")
-			end
-		end
+			end // switch
+		end // Drop check
 		if (not okdrop) and  __cash<(900000000/__skill)						
 			LoadAudio("SFX/Treasure/ChaChing.wav").Play()
 			__cash = __cash + f.Cash
@@ -112,10 +112,9 @@ void EnemyDeathFade(f)
 			else
 				new Hurt(sprintf("Dropped %d __currency!",f.Cash),f.Tag,255,255,0)
 			end
-		end
-
-	end
-end
+		end // Cash if no other drop
+	end // if X scale zero
+end // void
 
 
 new Combat_Status("Fallen",{
@@ -131,14 +130,15 @@ new Combat_Status("Fallen",{
 			end
 		end,
 	["AltExperience"] = int(f,int exp)
-		switch __skill
-			case 1
-				return exp
-			case 2
-				return math.floor(exp/2)
-			case 3
-				return 0
-		end
+			switch __skill
+				case 1
+					return exp
+				case 2
+					return math.floor(exp/2)
+				case 3
+					return 0
+			end
+		end,
 	["Caused"] = void(f)
 		end,
 	["Cured"] = void(f)
