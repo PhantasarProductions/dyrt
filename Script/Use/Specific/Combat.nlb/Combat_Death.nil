@@ -57,6 +57,7 @@ void EnemyDeathFade(f)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
 	if dF.X==0
+		// Experience points (if applicable)
 		for tag,hero in pairs(Fighters.Team.Heros)
 			int Exp 
 			Exp = dF.Experience
@@ -71,6 +72,8 @@ void EnemyDeathFade(f)
 				end
 			end
 		end
+		// Item or money drops
+		
 	end
 end
 
@@ -101,6 +104,7 @@ new Combat_Status("Fallen",{
 	["Cured"] = void(f)
 		end	
 })
+
 
 
 
