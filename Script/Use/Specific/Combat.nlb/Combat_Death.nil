@@ -46,7 +46,7 @@ void EnemyDeathFade(f)
 	string tag
 	var dF
 	tag = f.Tag
-	DeadEnemies[tag] = DeadEnemies[tag] or {X=1000,Y=1000}
+	DeadEnemies[tag] = DeadEnemies[tag] or {['X']=1000,['Y']=1000}
 	dF = DeadEnemies[tag]
 	if dF.X==0
 		return

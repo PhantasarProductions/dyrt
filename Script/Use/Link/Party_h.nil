@@ -82,7 +82,7 @@ group Party
 	
 	int CharSpot(string tag)
 		for i=1,8
-			if RPG.Party[i]==value
+			if RPG.Party[i]==tag
 				return i
 			end
 		end
