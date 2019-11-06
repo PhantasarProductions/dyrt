@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_AbnormalStatus.nil
-// Version: 19.11.02
+// Version: 19.11.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -48,6 +48,7 @@ class Combat_Status
 	bool OffGauge
 	bool Defeated
 	bool UntargetableFoe
+	bool OverDraw
 	
 	
 	// All delegates should be void functions with a Fighter object parameter for the fighter
@@ -88,16 +89,7 @@ global table CStatus
 CStatus = Combat_Status.S
 
 
-new Combat_Status("Death",{
-	["OffGauge"] = true,
-	["Defeated"] = true,
-	["UntargetableFoe"] = true,
-	["Draw"] = void(f)
-		end,
-	["Caused"] = void(f)
-		end,
-	["Cured"] = void(f)
-		end	
-})
+
+
 
 
