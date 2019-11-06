@@ -53,8 +53,8 @@ void EnemyDeathFade(f)
 	if dF.X==0
 		return
 	end // get out!
-	dF.X = dF.X - 2
-	dF.Y = dF.Y + 3
+	dF.X = dF.X - 4
+	dF.Y = dF.Y + 5
 	SetScale(dF.X,dF.Y)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
@@ -68,7 +68,7 @@ void EnemyDeathFade(f)
 				Exp = S.AltExperience(hero,S)
 			end // for S
 			Exp = math.ceil(Exp*hero.fEXP_Rate)
-			if hero.Char.Stat("Level")<__levelcap
+			if hero.Char.Stat("Level").Value<__levelcap
 				hero.Char.Stat("Experience").Value = hero.Char.Stat("Experience").Value - Exp
 				if Party.CharSpot(tag)<5
 					new Hurt(sprintf("Experience %d",Exp),tag,255,255,0)
