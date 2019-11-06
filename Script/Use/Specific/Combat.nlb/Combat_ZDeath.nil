@@ -53,17 +53,17 @@ void EnemyDeathFade(f)
 	if dF.X==0
 		return
 	end // get out!
-	dF.X--
-	dF.Y++
+	dF.X = dF.X - 2
+	dF.Y = dF.Y + 3
 	SetScale(dF.X,dF.Y)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
 	if dF.X==0
 		
 		// Experience points (if applicable)
-		for tag,hero in pairs(Fighter.Team.Heros)
+		for tag,hero in pairs(Fighter.Team.Hero)
 			int Exp 
-			Exp = dF.Experience
+			Exp = f.Experience
 			for S in hero.StatusChanges.Each
 				Exp = S.AltExperience(hero,S)
 			end // for S
