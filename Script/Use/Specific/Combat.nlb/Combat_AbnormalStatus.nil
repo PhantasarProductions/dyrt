@@ -42,6 +42,10 @@ table trstatus
 void DO_NOTHING(f)
 end
 
+int REG_EXP(f, int exp)
+	return exp
+end
+
 
 class Combat_Status
 	
@@ -58,18 +62,25 @@ class Combat_Status
 	delegate Caused
 	delegate Cured
 	
+	// Must be int with fighter object for the fighter and an int parameter for the experience point you'd normally get
+	// int(f,int exp)
+	delegate AltExperience
+	
 	static table S
 	static table SN
 	
 	void CONSTRUCTOR(string name,table junk)
 		self.Draw = DO_NOTHING
 		self.PreTurn = DO_NOTHING
+		self.AltExperience = REG_EXP
 		for s,v in pairs(junk)
 			self[s] = v
 		end
 		self.S[name:upper()] = self
 		self.SN[#self.SN+1] = name
 	end
+	
+	
 	
 end
 
