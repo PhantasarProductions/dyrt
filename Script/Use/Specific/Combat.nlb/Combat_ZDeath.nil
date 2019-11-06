@@ -44,7 +44,7 @@ void DeadPlayer(f)
 end
 
 void EnemyDeathFade(f)
-	error("I find your lack of obedience disturbing!") // debug!
+	// error("I find your lack of obedience disturbing!") // debug!
 	string tag
 	var dF
 	tag = f.Tag
