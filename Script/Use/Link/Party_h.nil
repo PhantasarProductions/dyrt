@@ -80,6 +80,15 @@ group Party
 		return LuaGetInt("PARTY","SubParty.SelectedChar")
 	end
 	
+	int CharSpot(string tag)
+		for i=1,8
+			if RPG.Party[i]==value
+				return i
+			end
+		end
+		return -1
+	end
+
 	void Click()
 		LoadSub()
 		PtExe("SubParty.Click()")
