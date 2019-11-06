@@ -39,6 +39,9 @@
 
 table DeadEnemies
 
+void DeadPlayer(f)
+end
+
 void EnemyDeathFade(f)
 end
 
@@ -49,7 +52,11 @@ new Combat_Status("Fallen",{
 	["UntargetableFoe"] = true,
 	["OverDraw"] = true,
 	["Draw"] = void(f)
-			if 
+			if prefixed(f.Tag,"FOE")
+				EnemyDeathFade(f)
+			else
+				DeadPlayer(f)
+			end
 		end,
 	["Caused"] = void(f)
 		end,
