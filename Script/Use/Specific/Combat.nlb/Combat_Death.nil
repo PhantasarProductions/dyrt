@@ -35,7 +35,13 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "libs/strings"
+
 table DeadEnemies
+
+void EnemyDeathFade(f)
+end
+
 
 new Combat_Status("Fallen",{
 	["OffGauge"] = true,
@@ -43,7 +49,7 @@ new Combat_Status("Fallen",{
 	["UntargetableFoe"] = true,
 	["OverDraw"] = true,
 	["Draw"] = void(f)
-			
+			if 
 		end,
 	["Caused"] = void(f)
 		end,
