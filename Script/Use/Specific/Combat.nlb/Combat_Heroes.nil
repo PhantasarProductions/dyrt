@@ -53,7 +53,7 @@ class Hero extends Fighter
 	int EXP_Rate
 	
 	get number fEXP_Rate
-		return EXP_Rate/100
+		return self.EXP_Rate/100
 	end
 	
 	bool Leaving = false

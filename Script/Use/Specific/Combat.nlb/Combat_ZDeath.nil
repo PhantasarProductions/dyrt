@@ -36,6 +36,7 @@
 // End License Information
 
 #use "libs/strings"
+#accept Fighter
 
 table DeadEnemies
 
@@ -59,7 +60,7 @@ void EnemyDeathFade(f)
 	if dF.X==0
 		
 		// Experience points (if applicable)
-		for tag,hero in pairs(Fighters.Team.Heros)
+		for tag,hero in pairs(Fighter.Team.Heros)
 			int Exp 
 			Exp = dF.Experience
 			for S in hero.StatusChanges.Each
