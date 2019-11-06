@@ -43,6 +43,21 @@ void DeadPlayer(f)
 end
 
 void EnemyDeathFade(f)
+	string tag
+	var dF
+	tag = f.Tag
+	DeadEnemies[tag] = DeadEnemies[tag] or {X=1000,Y=1000}
+	dF = DeadEnemies[tag]
+	if dF.X==0
+		return
+	end
+	dF.X--
+	dF.Y++
+	SetScale(dF.X,dF.Y)
+	f.Image.XDraw(f.X,f.Y)
+	SetScale(1000,1000)
+	if dF.X==0
+	end
 end
 
 
