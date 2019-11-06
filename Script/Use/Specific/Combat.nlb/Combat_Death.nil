@@ -63,6 +63,13 @@ void EnemyDeathFade(f)
 			for S in hero.StatusChanges.Each
 				Exp = S.AltExperience(hero,S)
 			end
+			Exp = math.ceil(Exp*hero.fEXP_Rate)
+			if hero.Char.Stat("Level")<__levelcap
+				hero.Char.Stat("Experience").Value = hero.Char.Stat("Experience").Value - Exp
+				if Party.CharSpot(tag)<5
+					new Hurt(sprintf("Experience %d",Exp),tag,255,255,0)
+				end
+			end
 		end
 	end
 end
