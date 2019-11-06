@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 19.09.20
+// Version: 19.11.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -61,6 +61,10 @@
 
 #macro __solidview SetAlpha(255)
 
+// This must be used IN string!
+#macro __currencyone Shilder
+#macro __currency Shilders
+
 
 class MidScreen
 	static int x
@@ -112,6 +116,7 @@ group Arrow
 		end
 	end
 end
+
 
 
 
