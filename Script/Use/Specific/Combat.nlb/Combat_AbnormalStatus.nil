@@ -116,6 +116,7 @@ group Defeated
 			bool chardefeated = false
 			for _,s in fight.StatusChanges.Each
 				chardefeated = chardefeated or s.IsDefeated
+				AnyStatus = true
 			end
 			cDefeated = cDefeated and chardefeated
 		end
@@ -123,11 +124,11 @@ group Defeated
 	end
 	
 	get bool Hero
-		return Team('Hero')
+		return $Team('Hero')
 	end
 	
 	get bool Foe
-		return Team('Foe')
+		return $Team('Foe')
 	end
 	
 end

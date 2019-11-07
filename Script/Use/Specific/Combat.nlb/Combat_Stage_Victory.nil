@@ -38,12 +38,13 @@ group Stage_VICTORY extends Stage
 
 	readonly bool MouseSleep = true
 
-	int YW_Y = -100
+	int YW_Y 
 	var YW
 
 	void CONSTRUCTOR()
 		Stage.Stages.VICTORY=self
-		self.YW = TImage.Obtain("COMBAT_YOUWIN")
+		self.YW   = TImage.Obtain("COMBAT_YOUWIN")
+		self.YW_Y = -100
 	end
 	
 	void Draw()
