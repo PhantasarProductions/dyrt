@@ -118,6 +118,8 @@ Bars[3] = new PartyBar("VIT",255,180,0)
 #say "= Starting group!"
 group SubParty
 
+	var AudioLevelUp
+	
 	table StatSubs
 	table BarBoxes
 	
@@ -139,6 +141,7 @@ group SubParty
 			"EQUIP_",         // Calculated whenever equipment changes
 			"END_"            // End result when all other fields have been added together
 		}
+		self.AudioLevelUp = GetAudio("sfx/party/levelup.wav")
 	end
 	
 	string SubCollecto(string stat)
@@ -326,7 +329,7 @@ group SubParty
 				self.PointsBar(RPG.Party[num],num,i)
 			end
 			self.JustLeveled[CharTag] = self.JustLeveled[CharTag] or 0
-			level = RPG.Char(CharTag).Stat("Level").Value
+			level = RPG.Char(CharTag).Stat("Level").Value			
 			if self.JustLeveled[CharTag]>0
 				Color(math.random(0,255),math.random(0,255),math.random(0,255))
 			elseif CharTag=="Kirana" or CharTag=="Shanda"
@@ -339,6 +342,15 @@ group SubParty
 				Color(255,180,0)
 			else
 				__white
+				if RPG.Char(CharTag).Stat("Experience").Value<=0
+					// int ondernul
+					// ondernul = RPG.Char(CharTag).Stat("Experience").Value
+					RPG.Char(CharTag).Stat("Level").Value++
+					level =  RPG.Char(CharTag).Stat("Level").Value
+					self.JustLeveled[CharTag] = 2500
+					SetLevelStats(CharTag,level)
+					SubParty.AudLevelUp.Play()
+				end
 			end
 			DarkText.Font(font,roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
 			// Hover Detection
