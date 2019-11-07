@@ -137,6 +137,13 @@ class Foe extends Fighter
 		end
 	end
 	
+	static void TotalMassacre()
+		for ch in RPG.EachChar
+			if prefixed(ch,"FOE") 
+				RPG.KillChar(ch)
+			end
+		end
+	end
 
 end
 
