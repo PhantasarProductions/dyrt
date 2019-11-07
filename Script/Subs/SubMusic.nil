@@ -28,6 +28,9 @@ global bool MUSICSCRIPT=true
 #use "script/use/anyway"
 
 
+
+table pushed
+
 var stacked
 
 class TMusic
@@ -57,7 +60,11 @@ global void MUS_Play(string file,dontloop)
 	if curplaying and curplaying.filename==file then return end
 	newmus = new TMusic(file)
 	if curplaying
-		curplaying.instance.Stop()	
+		if pushed[curplaying]
+			curplaying.instance.Pause()
+		else
+			curplaying.instance.Stop()	
+		end
 	end
 	curplaying = newmus
 	if dontloop
@@ -75,7 +82,9 @@ end
 
 global void MUS_Push()
 	assert(curplaying,"I cannot push when no music is loaded!")
+	assert(not pushed[curplaying],"Can't push the same music instance twice!")
 	stacked.Value = curplaying
+	pushed[curplaying]=true
 end
 
 global void MUS_Pop()
@@ -87,6 +96,7 @@ global void MUS_Pop()
 		popped.instance.Resume()
 	end
 	curplaying = popped	
+	pushed[popped]=nil;
 end
 
 
@@ -96,6 +106,7 @@ end
 
 
 init()
+
 
 
 
