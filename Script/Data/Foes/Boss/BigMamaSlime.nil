@@ -1,7 +1,8 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/6/2019 10:18:31 PM
+// Generated: 11/7/2019 10:59:54 PM
 
 do
+var retfunc()
 var foeret
 foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
@@ -176,4 +177,7 @@ foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
 
 return foeret
 
+end
+
+return retfunc
 end

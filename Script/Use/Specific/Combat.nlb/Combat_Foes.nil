@@ -121,12 +121,14 @@ class Foe extends Fighter
 	end
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
-		var myFoe		
+		var myFoe
+		var myFoeUse
 		Foe.LoadFoeTag = sprintf("FOE_%d",num)
 		Foe.LoadOversoul = FoeOversoul==true
 		Foe.LoadFoeID = num
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
-		myFoe = NIL.Use("Script/Data/Foes/"..FoeFile)
+		myFoeUse = NIL.Use("Script/Data/Foes/"..FoeFile);
+		myFoe = myFoeUse()
 		myFoe.FromFile = FoeFile:upper()
 		myFoe.Char = RPG.Char(Foe.LoadFoeTag)
 		if num<24
