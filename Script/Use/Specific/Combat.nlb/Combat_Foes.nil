@@ -141,6 +141,7 @@ class Foe extends Fighter
 		for ch in RPG.EachChar
 			if prefixed(ch,"FOE") 
 				RPG.KillChar(ch)
+				CSayF("Removed %s",ch)
 			end
 		end
 	end
