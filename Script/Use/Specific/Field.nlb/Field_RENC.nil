@@ -163,9 +163,12 @@ group RENC
 	end
 	
 	void RencCheck()
+		if $Encounters<=0
+			return
+		end
 		int ORate
 		ORate = $Rate
-		--$Rate
+		--$Rate		
 		if $Rate<1
 			$Rate=1	
 		end
@@ -232,6 +235,8 @@ group RENC
 						error("Unknown skill") // Should never be possible, BUT, ya never know!
 				end
 			end
+			$Rate = $MaxRate
+			$Encounters--
 			StartCombat.Ready()
 		end
 	end
