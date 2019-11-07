@@ -127,6 +127,7 @@ group Loading
 		new Loader("Audio","SFX/Treasure/Item.wav","GETITEM")
 		new Loader("Audio","SFX/Combat/Signal.Wav","COMBATSIGNAL")
 		new Loader("Audio","Music/Original/Victory.wav","VICTORY_TUNE")
+		new Loader("Audio","SFX/Party/LevelUp.Wav","LEVELUP")
 		
 		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
 		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
