@@ -199,9 +199,9 @@ class Fighter
 end
 
 
-
-
-
+#pure
+Defeated.F = Fighter
+#endpure
 
 
 

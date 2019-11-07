@@ -120,7 +120,7 @@ end // void
 
 new Combat_Status("Fallen",{
 	["OffGauge"] = true,
-	["Defeated"] = true,
+	["IsDefeated"] = true,
 	["UntargetableFoe"] = true,
 	["OverDraw"] = true,
 	["Draw"] = void(f)

@@ -76,6 +76,12 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 	
+	
+	// Victory Check
+	if Defeated.Foe
+		Stage.Go("VICTORY")
+	end
+	
 	Stage.Current.Update()
 end
 
