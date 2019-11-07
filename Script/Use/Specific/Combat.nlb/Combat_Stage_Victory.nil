@@ -34,17 +34,25 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
+#macro VICTIME 9
+
 group Stage_VICTORY extends Stage
 
 	readonly bool MouseSleep = true
 
 	int YW_Y 
 	var YW
+	var VicTune
+	bool VicTuneStarted
+	string old
+	int ChainTime
 
 	void CONSTRUCTOR()
 		Stage.Stages.VICTORY=self
 		self.YW   = TImage.Obtain("COMBAT_YOUWIN")
 		self.YW_Y = -100
+		self.VicTune = GetAudio("VICTORY_TUNE")
 	end
 	
 	void Draw()
@@ -56,7 +64,24 @@ group Stage_VICTORY extends Stage
 	end
 	
 	void Update()
-		
+		string tijd
+		if not self.VicTuneStarted
+			Music.Stop()
+			self.VicTune.Play()
+			self.VicTuneStarted = true
+		end
+		tijd = os.date()
+		if $old==""
+			$old = tijd
+		elseif tijd!=$old
+			$old = tijd
+			$ChainTime++
+		end
+		if $ChainTime>=VICTIME
+			Music.Pop()
+			GoToFlow("FIELD")
+			KillFlow("COMBAT")
+		end
 	end
 	
 end

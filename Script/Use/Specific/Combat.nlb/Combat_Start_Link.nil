@@ -89,6 +89,8 @@ global void LetsGetReadyToRumble()
 		// Arena and Music
 		DChatF("Loading arena: %s",$Arena)
 		Arena.Load($Arena)
+		DChatF("Pushing Music!")
+		Music.Push()
 		DChatF("Loading music: %s",$Music)
 		Music.Play($Music)
 		

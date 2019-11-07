@@ -49,13 +49,13 @@ var curplaying
 
 
 void init()
-	stacked = stack.NEW()
+	stacked = new TStack
 end
 
 global void MUS_Play(string file,dontloop)
 	var newmus
 	if curplaying and curplaying.filename==file then return end
-	newmus = TMusic.NEW(file)
+	newmus = new TMusic(file)
 	if curplaying
 		curplaying.instance.Stop()	
 	end
@@ -83,10 +83,10 @@ global void MUS_Pop()
 	popped = stacked.Value
 	if not popped then return end
 	if curplaying and curplaying.filename!=popped.filename
-		curplaying.Stop()
-		popped.Play()
+		curplaying.instance.Stop()
+		popped.instance.Resume()
 	end
-	curplaying = stacked.Value	
+	curplaying = popped	
 end
 
 

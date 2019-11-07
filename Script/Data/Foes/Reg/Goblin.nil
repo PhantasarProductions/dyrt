@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/6/2019 10:18:32 PM
+// Generated: 11/7/2019 1:58:38 AM
 
 do
 var foeret
@@ -25,9 +25,9 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Apple"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Apple"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "Antidote"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Apple"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Apple"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Antidote"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1

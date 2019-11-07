@@ -50,11 +50,11 @@ module ClassMusic
 	end
 
 	void Push()
-		MsExe("MUS_Push")
+		MsExe("MUS_Push()")
 	end
 
 	void Pop()
-		MsExe("MUS_Pop")
+		MsExe("MUS_Pop()")
 	end
 
 end
