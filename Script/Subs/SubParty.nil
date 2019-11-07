@@ -348,7 +348,7 @@ group SubParty
 					RPG.Char(CharTag).Stat("Level").Value++
 					level =  RPG.Char(CharTag).Stat("Level").Value
 					self.JustLeveled[CharTag] = 2500
-					SetLevelStats(CharTag,level)
+					SubParty.SetLevelStats(CharTag,level)
 					SubParty.AudLevelUp.Play()
 				end
 			end
