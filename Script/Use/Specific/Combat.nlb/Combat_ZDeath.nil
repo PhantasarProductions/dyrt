@@ -99,7 +99,7 @@ void EnemyDeathFade(f)
 					if Inventory[itag]<Inventory.__CAP__
 						Inventory[itag]++
 						okdrop=true
-						new Hurt(sprintf("Dropped %s",Item[itag]),f.Tag,255,255,0)
+						new Hurt(sprintf("Dropped %s",Item[itag].Name),f.Tag,255,255,0)
 					end
 				default
 					error("Invalid item drop!")
