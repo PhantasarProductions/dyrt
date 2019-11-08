@@ -332,6 +332,7 @@ group SubParty
 			level = RPG.Char(CharTag).Stat("Level").Value			
 			if self.JustLeveled[CharTag]>0
 				Color(math.random(0,255),math.random(0,255),math.random(0,255))
+				--self.JustLeveled[CharTag]
 			elseif CharTag=="Kirana" or CharTag=="Shanda"
 				Color(180,0,255)
 				// Kirana and Shanda will as guest characters NOT level up!
