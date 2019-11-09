@@ -77,7 +77,7 @@ module AI_Default
 			switch nitem.Target
 				case "OS"
 					nact.Targets = {foe}
-					GoedGekeur=true
+					GoedGekeurd=true
 				case "1A"
 					nact.Targets = {foes[math.random[#foes]}
 					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
