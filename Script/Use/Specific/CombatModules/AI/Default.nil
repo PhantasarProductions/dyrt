@@ -35,13 +35,89 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "libs/tables"
+#use "libs/strings"
 
 module AI_Default
 
+	
+	
+
 	void Decide(foe)
 		int TimeOut = 10000
+		var act
+		var nact
+		var nitem
+		bool GoedGekeurd
+		
+		table heroes
+		table foes
+
+		
 		assert(#foe.AI_Moves,"There are no moves assigned to foe: "..foe.Tag)
 		
+		for tag,hero in pairs(Fighter.Team.Hero)
+			heroes[#heroes+1]=hero
+		end
+		for tag,ifoe in pairs(Fighter.Team.Foe)
+			foes[#foes+1]=ifoe
+		end
+
+		
+		
+		repeat
+			// start
+			act = foe.AI_Moves[math.random(1,#foe.AI_Moves]
+			nact = {}
+			nitem = Item[act]
+			nact.ActTag = act
+			nact.ExeTag = foe.Tag
+			
+			// target
+			switch nitem.Target
+				case "OS"
+					nact.Targets = {foe}
+					GoedGekeur=true
+				case "1A"
+					nact.Targets = {foes[math.random[#foes]}
+					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+				case "AA"
+					nact.Targets = {}
+					for check in each(foes)
+						if check.Char.Points("HP").Have>0
+							nact.Targets[#nact.Targets+1]=check
+						end
+					end
+					GoedGekeurd = nact.Targets>0
+				case "1F"
+					nact.Targets = {heroes[math.random[#foes]}
+					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+				case "AF"
+					nact.Targets = {}
+					for check in each(heroes)
+						if check.Char.Points("HP").Have>0
+							nact.Targets[#nact.Targets+1]=check
+						end
+					end
+					GoedGekeurd = nact.Targets>0
+				case "EV"
+					nact.Targets = {}
+					for iteam,imember,ifighter in Fighter.ForAll()
+						nact.Targets[#nact.Targets+1]=ifighter
+					end
+					GoedGekeurd = nact.Targets>0
+				default
+					error(sprintf("Unknown target type '%s'!",nitem.Target))
+			end
+			
+			
+			// Time out error. This to prevent infinite loops on bugs.
+			TimeOut--
+			assert(GoedGekeurd or TimeOut>0,"Default AI timeout!")
+		until GoedGekeurd
+		foe.NextAct = new Action(nact)
+		foe.NextActSpeed = nitem.COM2ACT
+		foe.GaugePosition = 10001
 	end
 
 end
