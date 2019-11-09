@@ -67,7 +67,7 @@ module AI_Default
 		
 		repeat
 			// start
-			act = foe.AI_Moves[math.random(1,#foe.AI_Moves]
+			act = foe.AI_Moves[math.random(1,#foe.AI_Moves)]
 			nact = {}
 			nitem = Item[act]
 			nact.ActTag = act
