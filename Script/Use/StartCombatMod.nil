@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/StartCombatMod.nil
-// Version: 19.09.11
+// Version: 19.11.09
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -124,6 +124,7 @@ quickmeta group StartCombat
 	end
 
 end
+
 
 
 
