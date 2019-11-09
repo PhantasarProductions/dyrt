@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/AI/Default.nil
-// Version: 19.09.06
+// Version: 19.11.09
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -121,4 +121,5 @@ module AI_Default
 	end
 
 end
+
 
