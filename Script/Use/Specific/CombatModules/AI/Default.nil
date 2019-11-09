@@ -39,6 +39,8 @@
 module AI_Default
 
 	void Decide(foe)
+		int TimeOut = 10000
+		
 	end
 
 end
