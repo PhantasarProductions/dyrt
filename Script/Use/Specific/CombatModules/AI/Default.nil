@@ -38,5 +38,8 @@
 
 module AI_Default
 
+	void Decide(foe)
+	end
+
 end
 
