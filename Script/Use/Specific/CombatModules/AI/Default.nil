@@ -79,7 +79,7 @@ module AI_Default
 					nact.Targets = {foe}
 					GoedGekeurd=true
 				case "1A"
-					nact.Targets = {foes[math.random[#foes]]}
+					nact.Targets = {foes[math.random(1,#foes)]}
 					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
 				case "AA"
 					nact.Targets = {}
@@ -90,7 +90,7 @@ module AI_Default
 					end
 					GoedGekeurd = nact.Targets>0
 				case "1F"
-					nact.Targets = {heroes[math.random[#foes]]}
+					nact.Targets = {heroes[math.random(1,#foes)]}
 					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
 				case "AF"
 					nact.Targets = {}
