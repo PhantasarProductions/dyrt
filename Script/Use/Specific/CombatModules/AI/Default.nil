@@ -115,7 +115,7 @@ module AI_Default
 			TimeOut--
 			assert(GoedGekeurd or TimeOut>0,"Default AI timeout!")
 		until GoedGekeurd
-		foe.NextAct = new Action(nact)
+		foe.NextAct = new Actions(nact)
 		foe.NextActSpeed = nitem.COM2ACT
 		foe.GaugePosition = 10001
 	end
