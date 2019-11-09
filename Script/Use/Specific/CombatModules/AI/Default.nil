@@ -40,6 +40,7 @@ module AI_Default
 
 	void Decide(foe)
 		int TimeOut = 10000
+		assert(#foe.AI_Moves,"There are no moves assigned to foe: "..foe.Tag)
 		
 	end
 
