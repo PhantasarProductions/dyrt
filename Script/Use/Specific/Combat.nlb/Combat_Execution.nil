@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.11.02
+// Version: 19.11.10
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -156,9 +156,18 @@ group Execution
 		for tar in each(Action.Targets)
 			self.TrueExec(Action,tar)
 		end
+		if not prefixed(Action.Executor.Tag,"FOE_")
+			Action.Executor.Char.Points("AP").Inc(Action.Act.GainAP)
+			for i=0,4
+				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(split(Action.Act[sprintf("GainSkill%dChar",i)],";"),Action.Executor.Tag)
+					Action.Executor.Char.Points(sprintf("SKILLEXP%d",i)).Inc(sprintf("GainSkill%d",i))
+				end
+			end
+		end
 	end
 
 end
+
 
 
 
