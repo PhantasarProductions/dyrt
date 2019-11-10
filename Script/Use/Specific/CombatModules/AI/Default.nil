@@ -90,7 +90,7 @@ module AI_Default
 					end
 					GoedGekeurd = nact.Targets>0
 				case "1F"
-					nact.Targets = {heroes[math.random(1,#foes)]}
+					nact.Targets = {heroes[math.random(1,#heroes)]}
 					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
 				case "AF"
 					nact.Targets = {}
