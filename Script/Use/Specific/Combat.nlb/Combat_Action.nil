@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 19.11.01
+// Version: 19.11.10
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -222,6 +222,7 @@ group Stage_Action extends Stage
 	end
 
 end
+
 
 
 
