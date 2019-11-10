@@ -64,6 +64,20 @@ group Stage_VICTORY extends Stage
 	end
 	
 	void Update()
+		// Vitality
+		if __skill<3 
+			for ch in RPG.EachChar
+				if (not prefixed(ch,"FOE")) 
+					var Chr
+					Chr = RPG.Char(ch)
+					if Chr.Points("HP").Have<Chr.Points("HP").Maximum and Chr.Points("VIT").Have>0
+						Chr.Points("VIT").Have--
+						Chr.Points("HP" ).Have =Chr.Points("HP").Have + math.ceil(Chr.Points("HP").Maximum / (200/__skill))
+					end
+				end
+			end
+		end
+		// Timing
 		string tijd
 		if not self.VicTuneStarted
 			Music.Stop()
