@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/7/2019 10:59:54 PM
+// Generated: 11/10/2019 11:22:38 AM
 
 do
 var retfunc()
@@ -11,6 +11,7 @@ foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A very big slime, and mother to many slimes.\nOnly a skilled warrior even stands a chance!"
 foeret.Fatal["Physical"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BigMamaSlime.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/BIGMAMASLIME.NEGATIVE.PNG")
 foeret.Name="Big Mama Slime"
 foeret.Char.Stat("BASE_RESIST_Elem_Darkness").Value=100
 foeret.Char.Stat("BUFF_RESIST_Elem_Darkness").Value=0

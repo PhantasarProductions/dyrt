@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/7/2019 10:59:54 PM
+// Generated: 11/10/2019 11:22:38 AM
 
 do
 var retfunc()
@@ -20,6 +20,7 @@ foeret.Fatal["Thunder"] = false
 foeret.Fatal["Water"] = false
 foeret.Fatal["Wind"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Blue_Slime.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/BLUE_SLIME.NEGATIVE.PNG")
 foeret.Cash = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
