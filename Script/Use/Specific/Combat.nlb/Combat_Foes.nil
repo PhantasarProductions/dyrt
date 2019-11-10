@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.11.09
+// Version: 19.11.10
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -165,6 +165,7 @@ Foe.StatSubs = {
 			"END_"            // End result when all other fields have been added together
 		}
 // EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
+
 
 
 
