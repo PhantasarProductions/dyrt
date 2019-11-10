@@ -57,6 +57,7 @@ class Foe extends Fighter
 	table Fatal
 	int Experience
 	var Image
+	var ImageNeg
 	string Description
 	int FoeID
 	bool AllowOversoul
@@ -64,6 +65,7 @@ class Foe extends Fighter
 	string FromFile
 	int Cash
 	table Drop
+	int FlickStance = 0
 	
 	get bool ShowHP
 		switch __skill
