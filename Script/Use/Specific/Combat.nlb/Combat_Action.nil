@@ -108,8 +108,10 @@ group Action_Exe
 		F = Stage_Action.Act.Executor
 		Execution.Exec(Stage_Action.Act)
 		F.GaugePosition = 0
-		F.Frame = 0
-		F.Houding = "IDLE"
+		if not prefixed(F.Tag,"FOE_")
+			F.Frame = 0
+			F.Houding = "IDLE"
+		end
 		F.NextAct = nil
 		Stage.Go("IDLE")
 	end
@@ -153,6 +155,11 @@ group Action_PreMove
 		end
 		$skiptimer=16
 		if prefixed(self.Act.ExeTag,"FOE_")
+			self.Act.Executor.FlickStance++
+			if self.Act.Executor.FlickStance>5
+				self.Act.Executor.FlickStance = 0
+				Stage_Action.Stage = Action_SpellAni
+			end
 		else			
 			self.Act.Executor.Houding = self.Act.Act.Stance
 			self.Act.Executor.AutoLoadPic()

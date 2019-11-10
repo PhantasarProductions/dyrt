@@ -57,7 +57,7 @@ class Foe extends Fighter
 	table Fatal
 	int Experience
 	var Image
-	var ImageNeg
+	var Image_Neg
 	string Description
 	int FoeID
 	bool AllowOversoul
@@ -119,7 +119,11 @@ class Foe extends Fighter
 		if overdraw
 			overdraw(self)
 		else
-			self.Image.Draw(self.X,self.Y)
+			if (self.FlickStance % 2 == 1)
+				self.Image_Neg.Draw(self.X,self.Y)
+			else
+				self.Image.Draw(self.X,self.Y)
+			end
 		end
 	end
 	
