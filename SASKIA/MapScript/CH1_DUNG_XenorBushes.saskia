@@ -38,11 +38,14 @@
 
 
 :BIG_MAMA
+	call Map.StopWalking
+	call Map.WalkTo,"BossStop"
 	call MapText,"YOUNG_IRRA_BOSS_A"
 	call MapScript.YoungIrraBossSlimes
 	chk gv.Bool.Victor,NOTHING
 	call MapText,"YOUNG_IRRA_BOSS_B"
-	call error,"The boss has not yet been scripted"
+	call MapScript.YoungIrraBoss
+	call error,"The post-boss has not yet been scripted"
 	end
 
 :Prologue
