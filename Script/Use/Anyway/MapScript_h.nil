@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/MapScript_h.nil
-// Version: 19.09.02
+// Version: 19.11.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -47,6 +47,12 @@ void StartSaskia(string script,string label)
 end
 
 
+// This may look "clunky"  for a NIL script
+// As this should have been done with a quickmeta
+// But that feature didn't exist when I set this up
+// And I am NOT game to do it now anyway, as that is needless work
+// and you won't see the difference, anyway!
+
 table MapMeta
 MapMeta = {
 	['__newindex'] = void()
@@ -82,6 +88,7 @@ MapMeta = {
 setmetatable ( MapScript, MapMeta )
 
 return MapScript
+
 
 
 
