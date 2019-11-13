@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.09.02
+// Version: 19.11.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -85,7 +85,7 @@ group Map
 				end
 				params = ActSplit[2]
 			default
-				error("I don't know how to handle: %s",ActSplit[1])				
+				error(sprintf("I don't know how to handle: %s",ActSplit[1]))
 		end
 		if params==""
 			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
@@ -174,6 +174,7 @@ group Field
 	end
 	
 end	
+
 
 
 
