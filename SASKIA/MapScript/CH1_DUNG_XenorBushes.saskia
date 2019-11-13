@@ -32,12 +32,16 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.08.16
+; version: 19.11.13
 ; End License Information
 
 
 
 :BIG_MAMA
+	call MapText,"YOUNG_IRRA_BOSS_A"
+	call MapScript.YoungIrraBossSlimes
+	chk gv.Bool.Victor,NOTHING
+	call MapText,"YOUNG_IRRA_BOSS_B"
 	call error,"The boss has not yet been scripted"
 	end
 
@@ -65,6 +69,11 @@
 
 :OnLoad
 	end
+
+:NOTHING
+	end
+
+
 
 
 
