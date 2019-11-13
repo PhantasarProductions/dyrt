@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 19.11.06
+// Version: 19.11.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -58,6 +58,7 @@
 #macro __autohelp gv.Bool.AutoHelp
 #macro __levelcap gv.Num.LevelCap
 #macro __travellevel gv.num.TravelLevel
+#macro __victor gv.Bool.Victor
 
 #macro __solidview SetAlpha(255)
 
@@ -116,4 +117,5 @@ group Arrow
 		end
 	end
 end
+
 
