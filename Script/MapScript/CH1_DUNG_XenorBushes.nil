@@ -70,6 +70,16 @@ group MScript
 		StartCombat.Ready()
 	end
 	
+	void YOUNGIRRABOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "SparForest"
+		StartCombat.Foe[1] = "Boss/BigMamaSlime"
+		StartCombat.NoLose = true
+		StartCombat.FoeIDDQD = true
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Init Zone Action")
 		Map.ZA_Enter("Tutor_Travel","TutorTravelEmblem")
