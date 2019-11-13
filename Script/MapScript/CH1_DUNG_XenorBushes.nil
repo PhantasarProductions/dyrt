@@ -40,6 +40,7 @@
 
 #say "Map Script - Xenor Bushes!"
 #use "Script/Use/Anyway"
+#use "Script/Use/StartCombatMod"
 
 group MScript
 	
@@ -59,6 +60,16 @@ group MScript
 		MapText("DONTGOBACK")
 	end
 	
+	void YOUNGIRRABOSSSLIMES()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Random/Chapter1.wav"
+		StartCombat.Arena = "SparForest"
+		for i = 1,__skill+1
+			StartCombat.Foe[i] = "Reg/Blue_Slime"
+		end
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Init Zone Action")
 		Map.ZA_Enter("Tutor_Travel","TutorTravelEmblem")
@@ -74,8 +85,6 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
-
-
 
 
 
