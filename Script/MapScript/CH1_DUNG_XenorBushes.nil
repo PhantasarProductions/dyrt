@@ -63,6 +63,7 @@ group MScript
 		CSay("Init Zone Action")
 		Map.ZA_Enter("Tutor_Travel","TutorTravelEmblem")
 		Map.ZA_Enter("DONTGOBACK","DONTGOBACK")
+		Map.ZA_Enter("YoMama","SASKIA:BIG_MAMA")
 	end
 	
 	void Draw()
