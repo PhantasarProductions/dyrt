@@ -157,10 +157,12 @@ group Execution
 			self.TrueExec(Action,tar)
 		end
 		if not prefixed(Action.Executor.Tag,"FOE_")
+			CSay("After move care!")
 			Action.Executor.Char.Points("AP").Inc(Action.Act.GainAP)
 			for i=0,4
-				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(split(Action.Act[sprintf("GainSkill%dChar",i)],";"),Action.Executor.Tag)
-					Action.Executor.Char.Points(sprintf("SKILLEXP%d",i)).Inc(sprintf("GainSkill%d",i))
+				CSayF("= Skill #%d",i)
+				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(split(Action.Act[sprintf("GainSkill%dChar",i)] or "",";"),Action.Executor.Tag)
+					Action.Executor.Char.Points(sprintf("SKILLEXP%d",i)).Inc(Action.Act[sprintf("GainSkill%d",i)])
 				end
 			end
 		end
