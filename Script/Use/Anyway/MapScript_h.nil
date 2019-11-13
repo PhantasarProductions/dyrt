@@ -43,7 +43,8 @@
 global table MapScript
 
 void StartSaskia(string script,string label)
-	error("SASKIA start not yet implemented!")
+	// error("SASKIA start not yet implemented!")
+	LuaDoString("FLOW_FIELD",sprintf("FlowField.Map.Saskia.Start('%s')",label))
 end
 
 
@@ -88,6 +89,8 @@ MapMeta = {
 setmetatable ( MapScript, MapMeta )
 
 return MapScript
+
+
 
 
 
