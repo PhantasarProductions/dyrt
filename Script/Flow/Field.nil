@@ -605,7 +605,7 @@ group FlowField
 		MapFile = trim(MapFile)
 		SaskiaLabel = trim(SaskiaLabel)
 		CSayF("Loading Map: %s; Starting SASKIA script from label: %s!",MapFile,SaskiaLabel)
-		self.LoadMap(MapFile)
+		self.LoadMap(MapFile,Layer)
 		self.Map.Saskia.Start(SaskiaLabel,Layer)
 	end
 	
