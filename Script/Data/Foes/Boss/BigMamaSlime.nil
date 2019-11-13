@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/10/2019 11:22:38 AM
+// Generated: 11/13/2019 10:36:05 PM
 
 do
 var retfunc()
@@ -7,6 +7,7 @@ var foeret
 foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
+foeret.AI_Module = "Default"
 foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A very big slime, and mother to many slimes.\nOnly a skilled warrior even stands a chance!"
 foeret.Fatal["Physical"] = false
@@ -153,6 +154,11 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
@@ -160,6 +166,11 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
@@ -168,6 +179,11 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	default
 		error("Unknown skill "..__skill)
 end
