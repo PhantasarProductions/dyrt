@@ -55,6 +55,13 @@ group Combat_Start
 	string Arena
 	string Music
 	int StartMode = 0
+	
+	// When set the enemy cannot be defeated
+	bool FoeIDDQD = false
+	
+	// NoLose means that the game will not perform its normal wipe-out
+	// sequence when the player loses a fight!
+	bool NoLose = false
 end
 
 global void DChat(string k)
