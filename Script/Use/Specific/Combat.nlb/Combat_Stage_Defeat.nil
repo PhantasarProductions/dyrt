@@ -63,13 +63,6 @@ group Stage_DEFEAT extends Stage
 	
 	void Update()
 		// Recover
-		for ch in RPG.EachChar
-			if (not prefixed(ch,"FOE")) 
-				var Chr
-				Chr = RPG.Char(ch)
-				Chr.Points("HP" ).Have = Chr.Points("HP").Maximum 			
-			end
-		end
 		// Timing
 		string tijd
 		tijd = os.date()
@@ -80,6 +73,13 @@ group Stage_DEFEAT extends Stage
 			$ChainTime++
 		end
 		if $ChainTime>=DEFTIME
+			for ch in RPG.EachChar
+				if (not prefixed(ch,"FOE")) 
+					var Chr
+					Chr = RPG.Char(ch)
+					Chr.Points("HP" ).Have = Chr.Points("HP").Maximum
+				end
+			end
 			Music.Pop()
 			Foe.TotalMassacre()
 			__victor=false
@@ -94,4 +94,5 @@ group Stage_DEFEAT extends Stage
 
 
 end
+
 
