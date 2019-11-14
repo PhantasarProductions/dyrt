@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.11.13
+; version: 19.11.14
 ; End License Information
 
 
@@ -45,6 +45,11 @@
 	chk not gv.Bool.Victor,NOTHING
 	call MapText,"YOUNG_IRRA_BOSS_B"
 	call MapScript.YoungIrraBoss
+	group 4
+	call Music.Stop
+	call Map.GoToLayer,"DARKNESS","Start"
+	call BoxText.Load,"GENSCEN/CH1/YOUNGIRRAVONIAEND","YOUNGIRRAEND"
+	call BoxText,"YOUNGIRRAEND","DARK"
 	call error,"The post-boss has not yet been scripted"
 	end
 
@@ -75,6 +80,7 @@
 
 :NOTHING
 	end
+
 
 
 
