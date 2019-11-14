@@ -118,12 +118,26 @@ class Hero extends Fighter
 		self.Pics[self.Houding] = LoadImage(f)
 	end
 	
-	void Draw()
+	void Draw()		
 		self.AutoLoadPic()
 		// CSayF("Drawing %s.%s on (%d,%d)",self.Tag,self.Houding,self.X,self.Y) // <-- MUST BE ON COMMENT ALL THE TIME IF NOT IN USE!!!!
 		__white
 		SetAlpha(255)
-		self.Pics[self.Houding].Draw(self.X,self.Y,self.Frame)
+		delegate overdraw
+		for _,status in self.StatusChanges.Each
+			if status.Draw 
+				if status.OverDraw
+					overdraw = status.Draw
+				else
+					status.Draw(self)
+				end
+			end
+		end
+		if overdraw
+			overdraw(self)
+		else
+			self.Pics[self.Houding].Draw(self.X,self.Y,self.Frame)
+		end
 		if self.JumpIn>0
 			self.JumpIn = self.JumpIn - 5
 		end
