@@ -34,6 +34,8 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
+#accept Combat_Start
 #macro DEFTIME 9
 
 group Stage_DEFEAT extends Stage
@@ -65,8 +67,7 @@ group Stage_DEFEAT extends Stage
 			if (not prefixed(ch,"FOE")) 
 				var Chr
 				Chr = RPG.Char(ch)
-				Chr.Points("HP" ).Have = math.ceil(Chr.Points("HP").Maximum 
-				end
+				Chr.Points("HP" ).Have = Chr.Points("HP").Maximum 			
 			end
 		end
 		// Timing
@@ -84,7 +85,7 @@ group Stage_DEFEAT extends Stage
 			__victor=false
 			GoToFlow("FIELD")
 			if not Combat_Start.NoLose
-				error("Wipe-out not yet scripted)
+				error("Wipe-out not yet scripted")
 			end
 			KillFlow("COMBAT")
 		end
