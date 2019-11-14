@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 19.09.11
+// Version: 19.11.14
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -34,12 +34,6 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
-
-
-
-
-
-
 
 
 #say "MainMenu: Use commands"
@@ -231,7 +225,7 @@ new MenuItem("New Game",NewGame,true)
 new MenuItem("New Game+",NewGamePlus,false)
 new MenuItem("New Game: True Abyss",NOTHINGYET,false)
 new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
-new MenuItem("Encyclopedia",NOTHINGYET,true)
+// new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
 new MenuItem("Jukebox",NOTHINGYET,true)
 new MenuItem("Websites",NOTHINGYET,true)
 new MenuItem("Repository & Bug tracker",URL_GitHub,true)
@@ -304,6 +298,7 @@ end
 // Confirm
 CSay("MainMenu should be successfully loaded")
 #say "MainMenu:Translation done!"
+
 
 
 
