@@ -41,6 +41,10 @@
 table DeadEnemies
 
 void DeadPlayer(f)
+	if not f.Pics.Dead
+		f.Pics.Dead = LoadImage( sprintf("GFX/Combat/Fighters/Hero/%s.Dead.png",f.Tag) )
+	end
+	f.Pics.Dead.Draw(f.X,f.Y)
 end
 
 void EnemyDeathFade(f)
