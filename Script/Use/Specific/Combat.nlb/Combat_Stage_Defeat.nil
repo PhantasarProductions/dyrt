@@ -1,0 +1,59 @@
+#macro DEFTIME 9
+
+group Stage_DEFEAT extends Stage
+
+	readonly bool MouseSleep = true
+
+	int YW_Y 
+	var YW
+	string old
+	int ChainTime
+
+	void CONSTRUCTOR()
+		Stage.Stages.DEFEAT=self
+		self.YW   = TImage.Obtain("COMBAT_YOULOSE")
+		self.YW_Y = -100
+	end
+	
+	void Draw()
+		if $YW_Y<Screen.Height/2
+			self.YW_Y++
+		end
+		__white
+		self.YW.Draw( (Screen.Width/2)-(self.YW.Width/2),self.YW_Y )
+	end
+	
+	void Update()
+		// Recover
+		for ch in RPG.EachChar
+			if (not prefixed(ch,"FOE")) 
+				var Chr
+				Chr = RPG.Char(ch)
+				Chr.Points("HP" ).Have = math.ceil(Chr.Points("HP").Maximum 
+				end
+			end
+		end
+		// Timing
+		string tijd
+		tijd = os.date()
+		if $old==""
+			$old = tijd
+		elseif tijd!=$old
+			$old = tijd
+			$ChainTime++
+		end
+		if $ChainTime>=DEFTIME
+			Music.Pop()
+			Foe.TotalMassacre()
+			__victor=false
+			GoToFlow("FIELD")
+			if not Combat_Start.NoLose
+				error("Wipe-out not yet scripted)
+			end
+			KillFlow("COMBAT")
+		end
+	end
+
+
+
+end

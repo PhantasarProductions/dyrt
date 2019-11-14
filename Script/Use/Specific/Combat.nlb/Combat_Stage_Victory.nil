@@ -94,6 +94,7 @@ group Stage_VICTORY extends Stage
 		if $ChainTime>=VICTIME
 			Music.Pop()
 			Foe.TotalMassacre()
+			__victor=true
 			GoToFlow("FIELD")
 			KillFlow("COMBAT")
 		end

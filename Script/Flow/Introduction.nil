@@ -111,6 +111,7 @@ group Loading
 		new Loader("Image","gfx/Combat/UI/Cursor_true.png","COMBAT_INPUTCURSOR_true")
 		new Loader("Image","gfx/Combat/UI/Cursor_false.png","COMBAT_INPUTCURSOR_false")
 		new Loader("Image","gfx/Combat/UI/YouWin.png","COMBAT_YOUWIN")
+		new Loader("Image","gfx/Combat/UI/YouLose.png","COMBAT_YOULOSE")
 		
 		// Hero pointers
 		for _,ch in ipairs {"Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}

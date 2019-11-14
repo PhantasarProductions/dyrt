@@ -80,6 +80,8 @@ global void BUB_Update()
 	// Victory Check
 	if Defeated.Foe
 		Stage.Go("VICTORY")
+	elseif Defeated.Hero
+		Stage.Go("DEFEAT")
 	end
 	
 	Stage.Current.Update()
