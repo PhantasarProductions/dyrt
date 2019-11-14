@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.11.13
+// Version: 19.11.14
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -110,6 +110,22 @@ group Map
 		FLD_Exe(sprintf("FieldMap.Kill(trim(\"%s\"),%s)",objtag,tostring(perma==true)))
 	end
 	
+	void SpawnPlayer(string spot,altwind)
+		if altwind
+			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
+			FLD_Exe(sprintf("FlowField.SpawnPlayer(trim(\"%s\"),\"%s\")",trim(spot),altwind))
+		else
+			FLD_Exe(sprintf("FlowField.SpawnPlayer(trim(\"%s\"))",trim(spot)))
+		end
+	end
+
+	
+	void GoToLayer(string Layer,string Exit,AltWind)
+		$Kill("PLAYER")
+		FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer))
+		$SpawnPlayer(trim(Exit),AltWind)
+	end
+	
 	void StopWalking()
 		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
 	end
@@ -131,6 +147,9 @@ group Field
 	link ZA_Enter = Map.ZA_Enter
 	link ZA_Leave = Map.ZA_Leave
 	link ZA_Cycle = Map.ZA_Cycle
+	
+	link GoToLayer = Map.GoToLayer
+	link SpawnPlayer = Map.SpawnPlayer
 
 	void LoadMap(string MapFile)
 		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
@@ -143,14 +162,6 @@ group Field
 		FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
 	end
 	
-	void SpawnPlayer(string spot,altwind)
-		if altwind
-			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
-			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\",\"%s\")",trim(spot),altwind))
-		else
-			FLD_Exe(sprintf("FlowField.SpawnPlayer(\"%s\")",trim(spot)))
-		end
-	end
 	
 	link MapData = Map.Data
 	
@@ -174,6 +185,7 @@ group Field
 	end
 	
 end	
+
 
 
 
