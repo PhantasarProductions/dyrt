@@ -42,7 +42,7 @@
 	call Map.WalkTo,"BossStop"
 	call MapText,"YOUNG_IRRA_BOSS_A"
 	call MapScript.YoungIrraBossSlimes
-	chk gv.Bool.Victor,NOTHING
+	chk not gv.Bool.Victor,NOTHING
 	call MapText,"YOUNG_IRRA_BOSS_B"
 	call MapScript.YoungIrraBoss
 	call error,"The post-boss has not yet been scripted"
