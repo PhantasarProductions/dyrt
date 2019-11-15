@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_RENC.nil
-// Version: 19.11.09
+// Version: 19.11.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -152,7 +152,18 @@ group RENC
 		end
 	end
 	
+	void NoEncounters()
+		for L in FlowField.Map.Kthura.EachLayer
+			$RoomRate[L] = 0
+			$AllowLayer[L] = false
+		end
+	end
+	
 	void Reset(int MapTLevel,MaxE)
+		if MapTLevel==0
+			$NoEncounters()
+			return
+		end
 		$RecalcMaxE = MaxE or 5
 		$MapTravelLevel = MapTLevel
 		$Recalc()
@@ -250,8 +261,8 @@ group RENC
 		number rgauge
 		if $AutEncOn and $gx > Screen.Width-50
 			$gx--
-		elseif (not $AutEncOn) and $gs < Screen.Width + 25
-			$g++
+		elseif (not $AutEncOn) and $gx < Screen.Width + 25
+			$gx++
 		end
 		if $ManEncOff
 			GraphColor.Alpha = 100
@@ -290,6 +301,7 @@ group RENC
 	end
 	
 end
+
 
 
 
