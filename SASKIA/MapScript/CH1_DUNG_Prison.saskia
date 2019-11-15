@@ -57,6 +57,13 @@
 	call Field.ChainMap,"ch1_hub_irravoniahome","Prologue","GANG"
 end
 
+:End_Irra
+	; End of Irravonia's personal prologue
+	call CSay,"Back to Prison!"
+	call BoxText,"YOUNGIRRAEND","PRISON"
+	call error,"End of script reached!"
+	
+
 :From_World
 	end
 
