@@ -36,7 +36,29 @@
 // End License Information
 
 
+group StartNewPrologue
+
+	void EricIrravonia()
+		int IrraLevel
+		int IrraExp
+		var Irra
+		Irra = RPG.GetChar("YoungIrravonia")
+		IrraLevel = Irra.Stat("Level").Value
+		IrraExperience = Irra.Stat("Experience").Value
+		Party.NewCharacter("Irravonia",IrraLevel)
+		RPG.GetChar("Irravonia").Experience = IrraExperience
+		Party.NewCharacter("Eric",IrraLevel + (3 - __skill))
+		RPG.Party[1] = "Eric"
+		RPG.Party[2] = "Irravonia"
+	end
+
+end
+
+
+
 group MScript
+
+	link ERIC = StartNewPrologue.EricIrravonia
 	
 	void CONSTRUCTOR()
 		CSay("Welcome in jail!")
