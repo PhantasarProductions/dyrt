@@ -139,11 +139,11 @@ group Map
 	end
 	
 	void Hide(string tag)
-		FLD_Exe("FlowMap.Hide('"..tag.."')")
+		FLD_Exe("FieldMap.Hide('"..tag.."')")
 	end
 	
 	void Show(string tag)
-		FLD_Exe("FlowMap.Show('"..tag.."')")
+		FLD_Exe("FieldMap.Show('"..tag.."')")
 	end
 	
 end
