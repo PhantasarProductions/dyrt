@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.07.29
+// version: 19.11.15
 // End License Information
 
 
@@ -52,6 +52,7 @@ for i=0,4
 	Irra.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
 	Irra.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
 end
+
 
 
 

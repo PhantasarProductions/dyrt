@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH1_Hub_EricRebeccaHome.nil
+// src/Tricky Script/Script/Char/Create/Rebecca.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -34,36 +34,19 @@
 // 
 // version: 19.11.15
 // End License Information
+#use "Script/Use/AnyWay"
+var Rebecca
+
+Rebecca = RPG.GetChar("Rebecca")
+Rebecca.Name = Names.Rebeccavonia
+
+Rebecca.Data["SKILL0"] = "Sword Skills"
 
 
-
-#say "Eric & Rebecca welcome you home"
-#use "Script/Use/Anyway"
-
-group MScript
-	
-	void CONSTRUCTOR()
-	end
-	
-	void SHOWTEPHONDAR()
-		Map.Show("NTephondar")
-	end
-	
-	void KILLIRRAEND()
-		Map.Kill("NEric",true)
-		Map.Kill("NRebecca",true)
-		Map.Kill("NJack",true)
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-	end
-	
+for i=0,4
+	Rebecca.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
+	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
 end
-#say "Map Script - Compiling!"
-
 
 
 

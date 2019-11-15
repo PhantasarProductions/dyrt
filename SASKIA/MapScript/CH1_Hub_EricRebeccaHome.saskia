@@ -45,9 +45,17 @@
 	call MapScript.SHOWTEPHONDAR
 	call BoxText,"YOUNGIRRAEND","B"
 	call CSay,"End of scenario B, let's go back to prison!"
+	call MapScript.KILLIRRAEND
 	call Field.ChainMap,"CH1_DUNG_Prison","End_Irra","#999"
 	;call error,"End of script reached! Sorry!"
 	end
 
-:SlaapKop
-	call BoxText "YONGIRRAEND","SLEEPY"
+:Slaapkop
+	call BoxText,"YOUNGIRRAEND","SLEEPY"
+	call Map.WalkTo,"RunEric"
+	call BoxText,"YOUNGIRRAEND","LOVE"
+	Call Field.LoadMap,"CH1_DUNG_XenorBushes_West","BOS"
+	call Map.SpawnPlayer,"Start"
+	;error("End of script")
+	end
+
