@@ -177,6 +177,15 @@ group Field
 		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
 	end
 	
+	get string Leader
+		FieldCheck()
+		return LuaGetString("FLOW_FIELD","FlowField.Leader")
+	end
+	
+	set string Leader
+		FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
+	end
+	
 	void CONSTRUCTOR()
 		setmetatable(self.MapData,{
 			['__newindex'] = void(t,string k,string v)
@@ -191,6 +200,8 @@ group Field
 			end
 		})
 	end
+	
+	
 	
 end	
 
