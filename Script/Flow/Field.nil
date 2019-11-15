@@ -302,11 +302,11 @@ group FieldMap
 	end
 	
 	void Hide(string tag)
-		$Kthura.Hide(tag)
+		$Kthura.HideObject(tag)
 	end
 	
 	void Show(string tag)
-		$Kthura.Show(tag)
+		$Kthura.ShowObject(tag)
 	end
 	
 end

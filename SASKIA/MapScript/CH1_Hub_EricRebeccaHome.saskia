@@ -44,6 +44,7 @@
 		call BoxText,"YOUNGIRRAEND","A"
 	call MapScript.SHOWTEPHONDAR
 	call BoxText,"YOUNGIRRAEND","B"
+	call CSay,"End of scenario B, let's go back to prison!"
 	call Field.ChainMap,"CH1_DUNG_Prison","End_Irra","#999"
 	;call error,"End of script reached! Sorry!"
 	end
