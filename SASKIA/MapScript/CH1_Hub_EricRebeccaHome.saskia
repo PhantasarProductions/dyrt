@@ -51,6 +51,7 @@
 	end
 
 :Slaapkop
+	call Map.Show,"NIrravonia"
 	call BoxText,"YOUNGIRRAEND","SLEEPY"
 	call Map.WalkTo,"RunEric"
 	call BoxText,"YOUNGIRRAEND","LOVE"
