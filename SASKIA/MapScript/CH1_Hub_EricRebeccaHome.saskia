@@ -49,3 +49,5 @@
 	;call error,"End of script reached! Sorry!"
 	end
 
+:SlaapKop
+	call BoxText "YONGIRRAEND","SLEEPY"

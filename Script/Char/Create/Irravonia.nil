@@ -49,8 +49,8 @@ Irra.Data["SKILL3"] = "Water Magic"
 Irra.Data["SKILL4"] = "Earth Magic"
 
 for i=0,4
-	Irra.Points(sprintf("SKILLEXP%d",i)).Have    = 1
-	Irra.Points(sprintf("SKILLLVL%d",i)).Have    = 1
+	Irra.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
+	Irra.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
 end
 
 
