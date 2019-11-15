@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.11.13
+// Version: 19.11.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -301,6 +301,14 @@ group FieldMap
 		$Kill(tag,true)
 	end
 	
+	void Hide(string tag)
+		$Kthura.Hide(tag)
+	end
+	
+	void Show(string tag)
+		$Kthura.Show(tag)
+	end
+	
 end
 
 string fieldleader
@@ -471,7 +479,7 @@ group FlowField
 		end
 		FieldMap.Kthura = kth
 		CSay("= RENC Data!")
-		RENC.Reset(tonumber(kth.Data.Travel_Level))
+		RENC.Reset(tonumber(kth.Data.Travel_Level) or 0)
 		do
 			CSay("= Map changes")
 			string m
@@ -857,6 +865,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 

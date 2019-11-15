@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.11.14
+// Version: 19.11.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -137,7 +137,15 @@ group Map
 			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(%d,%d,%s)",A,B,tostring(C!=false)))
 		end
 	end
-
+	
+	void Hide(string tag)
+		FLD_Exe("FlowMap.Hide('"..tag.."')")
+	end
+	
+	void Show(string tag)
+		FLD_Exe("FlowMap.Show('"..tag.."')")
+	end
+	
 end
 
 group Field
@@ -185,6 +193,7 @@ group Field
 	end
 	
 end	
+
 
 
 
