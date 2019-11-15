@@ -50,7 +50,7 @@ return {
 	
 	-- Wind
 	Breeze     = { Skill_Wind  = 1, Start=true },
-	BlowAway   = { Skill_Wind  = 5S},
+	BlowAway   = { Skill_Wind  = 5},
 	Hurricane  = { Skill_Wind  = 15 },
 	
 	-- Earth
