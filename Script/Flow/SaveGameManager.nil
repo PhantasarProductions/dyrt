@@ -302,7 +302,7 @@ class SG
 					$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s/General.png",Pic))
 					$PicImages[Pic].Draw(5, (item.SlotBox.y+64)-($PicImages[Pic].Height/2))
 					GraphColor.Alpha = 100
-					self.BigNumbers.DrawText( tostring(item.ID) , 120, item.SlotBox.y+20 )
+					self.BigNumbers.DrawText( tostring(item.ID+1) , 120, item.SlotBox.y+20 )
 					GraphColor.Alpha = 255
 				end
 				if Mouse.X<Screen.Width-40 and Mouse.Y>item.SlotBox.y and Mouse.Y<item.SlotBox.y+128
