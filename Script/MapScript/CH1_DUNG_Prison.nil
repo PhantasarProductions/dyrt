@@ -50,6 +50,9 @@ group StartNewPrologue
 		Party.NewCharacter("Eric",IrraLevel + (3 - __skill))
 		RPG.Party[1] = "Eric"
 		RPG.Party[2] = "Irravonia"
+		
+		// We don't need her to take up any memory any more!
+		RPG.KillChar("YoungIrravonia")
 	end
 
 end
