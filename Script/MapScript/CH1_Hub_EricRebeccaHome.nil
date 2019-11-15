@@ -38,6 +38,8 @@
 
 
 #say "Eric & Rebecca welcome you home"
+#use "Script/Use/Anyway"
+
 group MScript
 	
 	void CONSTRUCTOR()
