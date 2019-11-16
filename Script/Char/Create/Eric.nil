@@ -41,6 +41,11 @@ Eric = RPG.GetChar("Eric")
 Eric.Name = Names.Eric
 
 Eric.Data["SKILL0"] = "Sword Skills"
+Eric.Data["SKILL1"] = "Red Dragon Power"
+Eric.Data["SKILL2"] = "White Dragon Power"
+Eric.Data["SKILL3"] = "Green Dragon Power"
+Eric.Data["SKILL4"] = "Black Dragon Power"
+
 
 // The dragon skills will be put in once Eric actually obtains them!
 
