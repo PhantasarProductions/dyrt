@@ -192,7 +192,7 @@ group SubParty
 				if f=="END_"
 					CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(elem))
 					ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))['Script'] = self.SubCollecto(elem)
-
+				end
 			end
 		end
 		
@@ -203,7 +203,7 @@ group SubParty
 				if f=="END_"
 					CSayF("Scripting END_RESIST_Stat_%s => %s",stat, self.SubCollecto(stat))
 					ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))['Script'] = self.SubCollecto(stat)
-
+					end
 			end
 		end
 		
