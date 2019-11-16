@@ -54,5 +54,8 @@ for i=0,4
 end
 
 
+Irra.Data.Weapon = "EQW_IRRAVONIA_WAND_MISSILE"
+Irra.Data.Armor  = "EQA_GIRL_DRESS"
+Irra.Data.Jewel  = "JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 
 

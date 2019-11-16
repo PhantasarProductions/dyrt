@@ -50,5 +50,8 @@ for i=0,4
 end
 
 
+Eric.Data.Weapon = "EQW_ERICREBECCA_SHORTSWORD"
+Eric.Data.Armor  = "EQA_SHIRT"
+Eric.Data.Jewel  = "JWL_BRACERS"
 
 
