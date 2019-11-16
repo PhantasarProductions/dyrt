@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.11.14
+; version: 19.11.16
 ; End License Information
 
 
@@ -47,6 +47,7 @@
 	call MapScript.YoungIrraBoss
 	group 4
 	call Music.Stop
+	call Map.Kill,"YoMama",true
 	call Map.GoToLayer,"DARKNESS","Start"
 	call BoxText.Load,"GENSCEN/CH1/YOUNGIRRAVONIAEND","YOUNGIRRAEND"
 	call BoxText,"YOUNGIRRAEND","DARK"
@@ -81,6 +82,7 @@
 
 :NOTHING
 	end
+
 
 
 
