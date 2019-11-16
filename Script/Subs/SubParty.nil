@@ -35,13 +35,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
-
-
-
-
-
 #say "Loading Party Sub!"
 #say "= Importing: libs/tables"
 #use "libs/tables"
@@ -56,6 +49,34 @@
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
 
+
+table I_ELEM
+table I_STAT
+
+I_ELEM = {
+	"None",
+	"Flame",
+	"Wind",
+	"Water",
+	"Earth",
+	"Frost",
+	"Thunder",
+	"Light",
+	"Darkness"
+}
+
+I_STAT = {
+	"Poison",
+	"Disease",
+	"Silence",
+	"Paralysis",
+	"Sleep",
+	"Exhaustion",
+	"Fear",
+	"Death",
+	"Destruction",
+	"Zombie"
+}
 
 
 class PartyBar
