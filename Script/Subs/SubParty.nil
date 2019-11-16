@@ -179,6 +179,8 @@ group SubParty
 
 	#say "= New Character"
 	void NewCharacter(string tag, int level)
+		tag = trim(tag)
+		CSayF("Creating character %s with level %d",tag,level)
 		tag=trim(tag)
 		assert (level>0,"Level is zero or lower!")
 		table lines
@@ -187,11 +189,13 @@ group SubParty
 		
 		// Basic elemental resistance
 		for elem in each(I_ELEM)
+			CSayF("- Element: %s",elem)
 			for f in each(self.StatSubs)
-				ch.Stat(printf("%s_RESIST_Elem_%s",f,elem)).Value = 0
+				CSayF("= Sub: %s",f)
+				ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem)).Value = 0
 				if f=="END_"
-					CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(elem))
-					ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))['Script'] = self.SubCollecto(elem)
+					CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(sprintf("RESIST_Elem_%s",elem)))
+					ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))['Script'] = self.SubCollecto(sprintf("RESIST_Elem_%s",elem))
 				end
 			end
 		end
@@ -199,10 +203,10 @@ group SubParty
 		// Basic Status Change Resistance
 		for stat in each(I_STAT)
 			for f in each(self.StatSubs)
-				ch.Stat(printf("%s_RESIST_Stat_%s",f,stat)).Value = 0
+				ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat)).Value = 0
 				if f=="END_"
-					CSayF("Scripting END_RESIST_Stat_%s => %s",stat, self.SubCollecto(stat))
-					ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))['Script'] = self.SubCollecto(stat)
+					CSayF("Scripting END_RESIST_Stat_%s => %s",stat, self.SubCollecto(sprintf("RESIST_Stat_%s",stat)))
+					ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))['Script'] = self.SubCollecto(sprintf("RESIST_Stat_%s",stat))
 					end
 			end
 		end
