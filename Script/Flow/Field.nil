@@ -811,6 +811,13 @@ group ConsoleCommands
 		end
 	end
 	
+	void DESTROYMAPSWAP()
+		string m
+		m = "MAPCHANGES."..FieldMap.LoadedMap
+		Swap.Data[m] = "print(\"Everything in this swap file has been destroyed by order of the big killer! So long suckers!\")\n\n"
+		CSayF("Swap file '%s' has been emptied!",m)
+	end
+	
 	void MAPDATA()
 		for k,v in spairs(FlowField.Map.Kthura.Data())
 			CSayF("%25s = %s",k,v)
