@@ -156,6 +156,7 @@ group RENC
 		for L in FlowField.Map.Kthura.EachLayer
 			$RoomRate[L] = 0
 			$AllowLayer[L] = false
+			$Encounters = 200
 		end
 	end
 	
