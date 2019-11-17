@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 19.11.16
+// Version: 19.11.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -61,6 +61,8 @@
 #macro __victor gv.Bool.Victor
 #macro __newgameplus gv.Bool.NewGamePlus
 
+#macro __kills gv.Num.Kills
+
 #macro __solidview SetAlpha(255)
 
 // This must be used IN string!
@@ -118,6 +120,7 @@ group Arrow
 		end
 	end
 end
+
 
 
 

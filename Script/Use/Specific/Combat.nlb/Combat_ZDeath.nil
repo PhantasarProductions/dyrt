@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
-// Version: 19.11.14
+// Version: 19.11.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -63,6 +63,9 @@ void EnemyDeathFade(f)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
 	if dF.X==0
+	
+		// Kills
+		__kills++
 		
 		// Experience points (if applicable)
 		for tag,hero in pairs(Fighter.Team.Hero)
@@ -149,6 +152,7 @@ new Combat_Status("Fallen",{
 	["Cured"] = void(f)
 		end	
 })
+
 
 
 
