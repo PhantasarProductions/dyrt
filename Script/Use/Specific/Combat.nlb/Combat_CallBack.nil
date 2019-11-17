@@ -120,6 +120,7 @@ global void BUB_Draw()
 	
 	// Draw all achievement boxes
 	Achievements.DrawAll()
+	Achievements.Auto()
 
 	
 	// Mouse

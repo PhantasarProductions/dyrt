@@ -84,6 +84,14 @@ group ConsoleCommands
 	void SHOWSWAP(string s)
 		CSay(Swap.Data[s])
 	end
+	
+	void AUTOAWARDCHECK()
+		Achievements.AutoCheck()
+	end
+	
+	void AUTOAWARD()
+		Achievements.Auto(true)
+	end
 
 end
 

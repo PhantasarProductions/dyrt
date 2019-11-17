@@ -724,6 +724,9 @@ global void BUB_Update()
 	// debug
 	Dev.ConCheck()
 	
+	// AutoAchievements
+	Achievements.Auto()
+	
 	// Time
 	Time.Update()
 	

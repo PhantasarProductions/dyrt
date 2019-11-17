@@ -134,7 +134,7 @@ group F_Achievements
 	//void Update()
 	//end
 	
-	//link AchData = AchData
+	link AchData = AchData
 	link Awarded = qmAward
 	link DrawAll = AchBox.DrawAll
 	
@@ -152,6 +152,31 @@ group F_Achievements
 			return
 		end
 		new AchBox(tag)
+	end
+	
+	// This reset feature has to prevent slowdowns
+	int AutoCD      = 4000
+	int AutoCDReset = 4000
+	void Auto(always)
+		if always or $AutoCD==0
+			CSay("Auto achievement timer triggered!")
+			$AutoCD=$AutoCDReset
+			for tag,a in pairs($AchData)
+				if a.ProcessValue!="" 
+					CSayF("Tag '%s'; Wanted gv.Num.%s; Contains %9d; Must be at least: %9d; Awarded: %s",tag,a.ProcessValue,gv.Num[a.ProcessValue],a.ProcessMax,tostring(self.Awarded[tag]))
+					if a.ProcessMax<=gv.Num[a.ProcessValue] and (not self.Awarded[tag])
+						CSay("=> Awarded!")
+						$Award(tag)
+					end
+				end
+			end
+		else
+			$AutoCD--
+		end
+	end
+	
+	void AutoCheck()
+		CSayF("Auto achievement countdown is %4d/%4d",$AutoCD,$AutoCDReset)
 	end
 	
 end
