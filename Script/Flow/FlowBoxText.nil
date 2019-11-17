@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FlowBoxText.nil
-// Version: 19.09.02
+// Version: 19.11.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -287,6 +287,11 @@ end
 global void BUB_Draw()
 	LuaDoString(trim(FlowBoxText.ReturnFlow),"BoxText_Back()","BoxText Background Call")
 	TextBox.Current.Show()
+	
+	// Draw all achievement boxes
+	Achievements.DrawAll()
+
+	
 	__white
 	Mouse.Show()
 end
@@ -304,6 +309,7 @@ global void BUB_Update()
 		FlowBoxText.Next()
 	end
 end
+
 
 
 

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.09.20
+// Version: 19.11.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -408,6 +408,10 @@ with Flow_FieldMenu
 			$NotYetImplemented($RightBox)
 		end
 		
+		// Draw all achievement boxes
+		Achievements.DrawAll()
+
+		
 		// Show Mouse
 		dchat("Mouse")
 		__white
@@ -441,6 +445,7 @@ with Flow_FieldMenu
 	end
 	
 end
+
 
 
 

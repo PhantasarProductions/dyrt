@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 19.11.14
+// Version: 19.11.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -263,6 +263,7 @@ global void BUB_Draw()
 	end
 	MenuItem.UpdateMouse()
 	
+	
 	// Mouse pointer (must be last)
 	__white
 	Mouse.Show()
@@ -298,6 +299,7 @@ end
 // Confirm
 CSay("MainMenu should be successfully loaded")
 #say "MainMenu:Translation done!"
+
 
 
 

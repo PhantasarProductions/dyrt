@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.16
+// version: 19.11.17
 // End License Information
 
 #use "script/use/anyway"
@@ -53,6 +53,7 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
+
 
 
 
