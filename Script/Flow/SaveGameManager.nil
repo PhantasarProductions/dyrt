@@ -242,6 +242,11 @@ class SG
 			CSay("= This game is not set up to contact GJ so let's ignore it all!")
 			return false
 		end
+		if not GameJolt.ByResource("Secu/Sites/GameJolt")
+			Annoy("Your savegame was set up to make use of Game Jolt, however, the data I got from this game do not suppor Game Jolt support.\n\nI will let you go on, but no Game Jolt support will be there, sorry!")
+			gv.Bool.GAMEJOLT = false
+			return false
+		end
 		bool success
 		repeat
 			CSay("Trying to login on Game Jolt!")
@@ -255,7 +260,7 @@ class SG
 			end
 			CSay("= Failed")
 			string antwoord
-			antwoord = FailureBox("Logging in did not work!\n- Did you enter the correct credentials when you started this game?\n- You never changed that after?\n- Are you properly connected to the internet?\n- Are the Game Jolt servers up and running?\nOne of these is likely not in order!")
+			antwoord = FailureBox("Logging in did not work!\n- Did you enter the correct credentials when you started this game?\n  = User: '"..gv.String.GameJolt_User.."'\n  = Token: '"..gv.String.GameJolt_Token.."'\n- You never changed that after?\n- Are you properly connected to the internet?\n- Are the Game Jolt servers up and running?\nOne of these is likely not in order!")
 			switch antwoord
 				case "Abort"
 					CSay("= Login sequence aborted!")

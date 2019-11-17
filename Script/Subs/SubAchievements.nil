@@ -45,7 +45,11 @@ class AchBox
 		//CSay("= WTF? "..tostring(AchData[tag]))
 		assert(AchData[tag],"No achievement named `"..tag.."`")
 		CSay("= Game Jolt Check")
-		GameJolt.Award(tag)
+		if GameJolt.Award(tag)
+			CSay("= Contacting Game Jolt was succesful!")
+		else
+			CSay("= Contacting Game Jolt failed")
+		end
 		CSay("= Configuring Box!")
 		self.Achievement = AchData[tag]
 		self.y = Screen.Height+25
@@ -68,18 +72,18 @@ class AchBox
 	void Draw()
 		self.Box.Draw()
 		Color(255,180,0)
-		self.TxAwarded.Draw(Screen.Width/2,self.y+5,2,2)
+		self.TxAwarded.Draw(Screen.Width/2,self.y+7,2,2)
 		__white
-		self.TxAchName.Draw(Screen.Width/2,self.y+40,2,2)
+		self.TxAchName.Draw(Screen.Width/2,self.y+25,2,2)
 	end
 	
 	static void DrawAll()
-		for ach,lnk in $BoxList.Each
-			$y--
-			$Box.y=$y
+		for ach,lnk in self.BoxList.Each
+			ach.y--
+			ach.Box.y=ach.y
 			ach.Draw()
-			if $y<-100
-				CSayF("Unlinking achievement '%s'",$tag)
+			if ach.y<-100
+				CSayF("Unlinking achievement '%s'",ach.tag)
 				lnk.UnLink()
 			end
 		end
