@@ -35,12 +35,14 @@
 // version: 19.11.16
 // End License Information
 
+#use "script/use/anyway"
 
-
-#say "Map Script - None!"
+#say "Map Script - Xenor Bushes - West!"
 group MScript
 	
 	void CONSTRUCTOR()
+		CSay("Welcome to the Xenor Buses West! Let's make sure YOMAMA has been awarded!")
+		Achievements.Award("YOMAMA")
 	end
 	
 	void Draw()

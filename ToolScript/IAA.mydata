@@ -1256,7 +1256,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 10
+	COM2ACT = 190
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1319,7 +1319,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Missile Wand 
+	Name = Missile Wand
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 

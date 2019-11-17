@@ -50,7 +50,8 @@ Irra.Data["SKILL4"] = "Earth Magic"
 
 for i=0,4
 	Irra.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
-	Irra.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
+	Irra.Points(sprintf("SKILLLVL%d",i),true).Maximum = 10000
+	Irra.Points(sprintf("SKILLLVL%d",i),true).Minimum = 1
 end
 
 

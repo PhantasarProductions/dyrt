@@ -147,7 +147,7 @@ group RENC
 			$RoomRate[L]=$MaxRate
 		end
 		for L in each(ban)
-			$RoomRate[L] = 0
+			$RoomRate[L] = 1000
 			$AllowLayer[L] = false
 		end
 	end
@@ -157,6 +157,8 @@ group RENC
 			$RoomRate[L] = 0
 			$AllowLayer[L] = false
 			$Encounters = 200
+			$MaxEncounters = 200
+			
 		end
 	end
 	
