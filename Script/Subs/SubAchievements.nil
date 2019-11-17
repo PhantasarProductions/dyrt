@@ -1,0 +1,123 @@
+#use "libs/LinkedList"
+#use "libs/strings"
+#use "script/use/anyway"
+#use "script/use/boxes"
+
+var AchData
+
+quickmeta group qmAward
+	
+	index
+		return gv.Bool["AWARDED."..key]
+	end
+	
+	newindex
+		assert(type(value)=="boolean","Achievements awarded table requires boolean values!")
+		gv.Bool["AWARDED."..key] = value
+	end
+	
+end
+
+class AchBox
+
+	//link AchData = AchData
+	static var BoxList
+	static var Font
+	static var TxAwarded
+	link Awarded = qmAward
+	
+	table Achievement
+	int y
+	var Box
+	var TxAchName
+	string tag
+	
+	static void QuickList()
+		for k,v in pairs(AchData)
+			CWriteLine(sprintf("%s %s",type(v),k),255,180,0)
+		end
+	end
+		
+	void CONSTRUCTOR(string tag)
+		tag = trim(tag) 
+		//CWriteLine("Creating achievement box: "..tag,255,180,0) CSay(NIL.LuaSerialize("Achievements",AchData)) CWriteLine("Ok?",180,0,255) // debug line
+		self.QuickList()
+		//CSay("= WTF? "..tostring(AchData[tag]))
+		assert(AchData[tag],"No achievement named `"..tag.."`")
+		CSay("= Game Jolt Check")
+		GameJolt.Award(tag)
+		CSay("= Configuring Box!")
+		self.Achievement = AchData[tag]
+		self.y = Screen.Height+25
+		self.Box = new Box(50,self.y,Screen.Width-100,70)
+		self.TxAchName = self.Font.Text(self.Achievement.Name)
+		self.tag=tag
+		CSay("Listing Box")
+		self.BoxList.AddLast(self)
+		CSay("Registering!")
+		self.Awarded[tag] = true
+		CSayF("Achievement earned: %s",tag)
+	end
+	
+	void DESTRUCTOR()
+		self.Box = nil;
+		self.TxAchName = nil;
+		CSayF("Achievement box for '%s' has been removed from the memory!",self.tag)
+	end
+	
+	void Draw()
+		self.Box.Draw()
+		Color(255,180,0)
+		self.TxAwarded.Draw(Screen.Width/2,self.y+5,2,2)
+		__white
+		self.TxAchName.Draw(Screen.Width/2,self.y+40,2,2)
+	end
+	
+	static void DrawAll()
+		for ach,lnk in $BoxList.Each
+			$y--
+			$Box.y=$y
+			ach.Draw()
+			if $y<-100
+				CSayF("Unlinking achievement '%s'",$tag)
+				lnk.UnLink()
+			end
+		end
+	end
+end
+
+group F_Achievements
+
+	//void Draw()
+	//end
+	
+	//void Update()
+	//end
+	
+	//link AchData = AchData
+	link Awarded = qmAward
+	link DrawAll = AchBox.DrawAll
+	
+	void CONSTRUCTOR()
+		Box.NeverList = true
+		AchBox.BoxList = new TLinkedList
+		AchBox.TxAwarded = GetFont("SYSFONT").Text("Achievement obtained!")
+		AchBox.Font = GetFont("BIGTEXT")
+		AchData = NIL.Use("Script/Data/General/Achievements.nil")
+	end
+	
+	void Award(string tag)
+		tag = tag:upper()
+		if self.Awarded[tag]
+			return
+		end
+		new AchBox(tag)
+	end
+	
+end
+
+//delegate BUB_Draw
+//delegate BUB_Update
+
+//BUB_Draw   = F_Achievements.Draw
+//BUB_Update = F_Achievements.Update
