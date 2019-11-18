@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.11.17
+// Version: 19.11.18
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -277,6 +277,10 @@ group Flow_FieldMenu
 		//Viewport()
 	end
 	
+	void ViewAchievements(ubox)
+		Achievements.Overview(ubox.x,ubox.y,ubox.w,ubox.h)
+	end
+	
 	void CONSTRUCTOR()
 	
 		CSay("Constructing Field menu!")
@@ -298,7 +302,7 @@ group Flow_FieldMenu
 					{ ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" },
 					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" },
 					{ ["IconFile"]="Abilities", ["Right"]=nil, ["Help"]="Shows a character's abilities (if they actually got them)" },
-					{ ["IconFile"]="Trophies", ["Right"]=nil, ["Help"]="Overview of achievements you can obtain, and how to obtain them" },
+					{ ["IconFile"]="Trophies", ["Right"]=self.ViewAchievements, ["Help"]="Overview of achievements you can obtain, and how to obtain them" },
 					{ ['IconFile'] = "Exit", ['Action'] = self.Quit, ['Help']="Quit the game", ['NoTab']=true}
 				}, 
 				["Return"] = "FIELD" 
@@ -445,6 +449,8 @@ with Flow_FieldMenu
 	end
 	
 end
+
+
 
 
 
