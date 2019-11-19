@@ -40,13 +40,13 @@
 var Rebecca
 
 Rebecca = RPG.GetChar("Rebecca")
-Rebecca.Name = Names.Rebeccavonia
+Rebecca.Name = Names.Rebecca
 
 Rebecca.Data["SKILL0"] = "Sword Skills"
 
 for i=0,4
 	Rebecca.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
-	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
+	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Max     = 10000
 	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Minimum = 9 / __skill
 end
 
