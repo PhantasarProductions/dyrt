@@ -34,6 +34,7 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 void GoToWorldMap(string wm)
 	error("Cannot yet go to world map: "..wm.."\nThat entire thing ain't scripted yet!")
 end
@@ -56,4 +57,5 @@ quickmeta group WorldMap
 
 end
 		
+
 
