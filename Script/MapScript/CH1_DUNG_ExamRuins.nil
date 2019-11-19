@@ -34,25 +34,29 @@
 // 
 // version: 19.11.19
 // End License Information
+
+#use "script/use/anyway"
+
 group MScript
 
 	void CreateRebecca()
 		var Rebecca
 		// Create Rebecca, and at the start she'll always be five levels 
 		// higher than her twin brother. She *is* the better warrior after all!
-		Party.NewCharacter("Rebecca",GetChar("Eric").Stat("Level").Value + 5)
+		Party.NewCharacter("Rebecca",RPG.GetChar("Eric").Stat("Level").Value + 5)
 		Rebecca = RPG.GetChar("Rebecca")
 		Rebecca.Stat("BASE__RESIST_Stat_Fear").Value = 99 / __skill
-		Rebecca.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(9 / __skill,66 / __skill)
-		Rebecca.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,99 / __skill)
+		Rebecca.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(math.floor(9 / __skill),66 / __skill)
+		Rebecca.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,math.ceil(99 / __skill))
 		Rebecca.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)
+		self.MUSIC()
 	end
 	
 	void MUSIC()
 		if not Done.IntroRebecca
-			Music("Music/Event/Rebecca.wav")
+			Music.Play("Music/Event/Rebecca.wav")
 		else
-			Music(" Music/Dungeon/ExamRuins.wav")
+			Music.Play("Music/Dungeon/ExamRuins.wav")
 		end
 	end
 	
@@ -63,4 +67,5 @@ group MScript
 	end
 
 end
+
 
