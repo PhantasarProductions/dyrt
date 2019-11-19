@@ -177,7 +177,7 @@ group RENC
 	end
 	
 	void RencCheck()
-		if $Encounters<=0
+		if $Encounters<=0 or (not $AutEncOn)
 			return
 		end
 		int ORate
