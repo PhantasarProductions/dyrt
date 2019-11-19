@@ -82,11 +82,12 @@ MapMeta = {
 				end
 				#endpure
 				// Pure code was needed as I couldn't yet get NIL to support '...'
-		end,
+		end
+	end,
 		
 	['__call'] = void(string f,infinity)
-			self[f](infinity)
-		end
+		self[f](infinity)
+	end
 }
 
 setmetatable ( MapScript, MapMeta )
