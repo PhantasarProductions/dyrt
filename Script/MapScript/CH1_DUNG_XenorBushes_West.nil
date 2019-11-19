@@ -92,7 +92,7 @@ group MScript
 	void EXAM()
 		if not Done.XenorBushesWestDone
 			//error("Chain not working yet")
-			Field.ChainMap("CH1_DUNG_ExamRuins","#001","FirstTime")
+			Field.ChainMap("CH1_DUNG_ExamRuins","FirstTime","#001")
 			Map.SpawnPlayer("Start")
 		else
 			WorldMap.Delisto()

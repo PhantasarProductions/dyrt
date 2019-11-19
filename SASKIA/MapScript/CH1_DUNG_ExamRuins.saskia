@@ -35,15 +35,15 @@
 ; version: 19.11.19
 ; End License Information
 :OnLoad
-	End
+	end
 	
 :FirstTime
 	; First time, first love, oh what a feeling is this
 	; Electricity flows, on the very first kiss
 	group 3
-	mov RPG.Party[1],"Eric"
-	mov RPG.Party[2],"Rebecca"
-	mov Field.Leader,"Eric"
+	mov "Eric",		RPG.Party[1]
+	mov "Rebecca",	RPG.Party[2]
+	mov "Eric",		Field.Leader
 	Call BoxText.Load,"GENSCEN/CH1/STARTEXAM","EXAM_START"
 	; Due to failure in the transfer procedure I'll have to call these
 	; one by one. If it goes wrong again later, I'll have to sort out
@@ -63,6 +63,7 @@
 	call BoxText,"EXAM_START","A12"
 	call BoxText,"EXAM_START","A13"
 	call Map.Kill,"Rebecca",true
+	call MapScript.Music
 	end
 
 

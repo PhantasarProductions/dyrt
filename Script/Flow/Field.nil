@@ -586,7 +586,9 @@ group FlowField
 				case "SAS" 
 					self.Map.Saskia.Start(rest)
 				case "NIL" "MAP"
-					MapScript(rest)
+					CSayF("Music will be called from MapScript.%s",rest)
+					MapScript[rest]()
+					CSay("Music playing?")
 				default
 					error("Unknown alternate music direction: "..pref)
 			end

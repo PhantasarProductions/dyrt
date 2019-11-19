@@ -48,8 +48,7 @@ group MScript
 		Rebecca.Stat("BASE__RESIST_Stat_Fear").Value = 99 / __skill
 		Rebecca.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(math.floor(9 / __skill),66 / __skill)
 		Rebecca.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,math.ceil(99 / __skill))
-		Rebecca.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)
-		self.MUSIC()
+		Rebecca.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)		
 	end
 	
 	void MUSIC()
