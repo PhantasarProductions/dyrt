@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/MapScript_h.nil
-// Version: 19.11.13
+// Version: 19.11.19
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -82,13 +82,17 @@ MapMeta = {
 				end
 				#endpure
 				// Pure code was needed as I couldn't yet get NIL to support '...'
+		end,
+		
+	['__call'] = void(string f,infinity)
+			self[f](inifinity)
 		end
-	end
 }
 
 setmetatable ( MapScript, MapMeta )
 
 return MapScript
+
 
 
 
