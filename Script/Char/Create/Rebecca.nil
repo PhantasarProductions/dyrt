@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.16
+// version: 19.11.19
 // End License Information
 
 #use "Script/Use/AnyWay"
@@ -49,6 +49,7 @@ for i=0,4
 	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
 	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Minimum = 9 / __skill
 end
+
 
 
 
