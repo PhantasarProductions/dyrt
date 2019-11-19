@@ -85,7 +85,7 @@ MapMeta = {
 		end,
 		
 	['__call'] = void(string f,infinity)
-			self[f](inifinity)
+			self[f](infinity)
 		end
 }
 
