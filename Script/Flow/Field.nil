@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.11.18
+// Version: 19.11.19
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -583,9 +583,9 @@ group FlowField
 			pref = string.upper(Left(kth.Data.Music,3))
 			rest = Right(kth.Data.Music,#kth.Data.Music-4)
 			switch pref
-				case "SAS"
+				case "SAS" 
 					self.Map.Saskia.Start(rest)
-				case "NIL"
+				case "NIL" "MAP"
 					MapScript(rest)
 				default
 					error("Unknown alternate music direction: "..pref)
@@ -881,6 +881,7 @@ group ConsoleCommands
 		end
 	end
 end
+
 
 
 
