@@ -126,6 +126,10 @@ group Map
 		$SpawnPlayer(trim(Exit),AltWind)
 	end
 	
+	get string Layer
+		return LuaGetString("FLOW_FIELD","FieldMap.Kthura.Layer")
+	end
+	
 	void StopWalking()
 		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
 	end
