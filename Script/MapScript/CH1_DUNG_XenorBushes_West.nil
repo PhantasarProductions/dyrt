@@ -76,7 +76,7 @@ group MScript
 		
 		// Zone Actions
 		Map.ZA_Enter("Leave_West","WEST")
-		Map.ZA_Enter("To_Exam","EXAM")
+		Map.ZA_Enter("ToExam","EXAM")
 	end
 		
 	// Seems that the wrong direction came in... What the heck, haha!
@@ -91,7 +91,9 @@ group MScript
 		
 	void EXAM()
 		if not Done.XenorBushesWestDone
-			error("Chain not working yet")
+			//error("Chain not working yet")
+			Field.ChainMap("CH1_DUNG_ExamRuins","#001","FirstTime")
+			Map.SpawnPlayer("Start")
 		else
 			WorldMap.Delisto()
 		end
@@ -105,6 +107,7 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
+
 
 
 
