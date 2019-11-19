@@ -194,8 +194,8 @@ group SubParty
 				CSayF("= Sub: %s",f)
 				ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem)).Value = 0
 				if f=="END_"
-					CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(sprintf("RESIST_Elem_%s",elem)))
-					ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))['Script'] = self.SubCollecto(sprintf("RESIST_Elem_%s",elem))
+					CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(sprintf("_RESIST_Elem_%s",elem)))
+					ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))['Script'] = self.SubCollecto(sprintf("_RESIST_Elem_%s",elem))
 				end
 			end
 		end
@@ -205,9 +205,9 @@ group SubParty
 			for f in each(self.StatSubs)
 				ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat)).Value = 0
 				if f=="END_"
-					CSayF("Scripting END_RESIST_Stat_%s => %s",stat, self.SubCollecto(sprintf("RESIST_Stat_%s",stat)))
-					ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))['Script'] = self.SubCollecto(sprintf("RESIST_Stat_%s",stat))
-					end
+					CSayF("Scripting END__RESIST_Stat_%s => %s",stat, self.SubCollecto(sprintf("_RESIST_Stat_%s",stat)))
+					ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))['Script'] = self.SubCollecto(sprintf("_RESIST_Stat_%s",stat))
+				end
 			end
 		end
 		

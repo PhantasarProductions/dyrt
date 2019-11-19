@@ -47,6 +47,37 @@
 #macro __TopBarHeight 55
 
 
+table I_ELEM
+table I_STAT
+
+I_ELEM = {
+//	"None", // invisible
+	"Flame",
+	"Wind",
+	"Water",
+	"Earth",
+	"Frost",
+	"Thunder",
+	"Light",
+	"Darkness"
+}
+
+I_STAT = {
+	"Poison",
+	"Disease",
+	"Silence",
+	"Paralysis",
+	"Sleep",
+	"Exhaustion",
+	"Fear",
+	"Death",
+	"Destruction",
+	"Zombie"
+}
+
+
+
+
 group Flow_FieldMenu
 
 	table situations
@@ -209,6 +240,25 @@ group Flow_FieldMenu
 				DarkText.Font($Font,Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty)
 			end
 		end
+		
+		for i,elem in ipairs(I_ELEM)
+			int ty
+			ty = (y+200)+(i*20)
+			__white
+			DarkText.Font($Font,sprintf("%s resistance",elem),x+10,ty)
+			__amber
+			DarkText.Font($Font,ch.Stat( sprintf("END__RESIST_Elem_%s",elem) ).Value.."%",(x+10)+(w-20),ty,1)
+		end
+
+		for i,stat in ipairs(I_STAT)
+			int ty
+			ty = (y+450)+(i*20)
+			__white
+			DarkText.Font($Font,sprintf("%s resistance",stat),x+10,ty)
+			__amber
+			DarkText.Font($Font,ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value.."%",(x+10)+(w-20),ty,1)
+		end
+		
 	end
 		
 	int InvItemScrollY = 0

@@ -1,0 +1,30 @@
+:OnLoad
+	End
+	
+:FirstTime
+	; First time, first love, oh what a feeling is this
+	; Electricity flows, on the very first kiss
+	group 3
+	mov RPG.Party[1],"Eric"
+	mov RPG.Party[2],"Rebecca"
+	mov Field.Leader,"Eric"
+	Call BoxText.Load,"GENSCEN/CH1/STARTEXAM","EXAM_START"
+	; Due to failure in the transfer procedure I'll have to call these
+	; one by one. If it goes wrong again later, I'll have to sort out
+	; why that happened, but since the other scenarios went well, going
+	; this way takes less time than trying to fix it.
+	call BoxText,"EXAM_START","A1"
+	call BoxText,"EXAM_START","A2"
+	call BoxText,"EXAM_START","A3"
+	call BoxText,"EXAM_START","A4"
+	call BoxText,"EXAM_START","A5"
+	call BoxText,"EXAM_START","A6"
+	call BoxText,"EXAM_START","A7"
+	call BoxText,"EXAM_START","A8"
+	call BoxText,"EXAM_START","A9"
+	call BoxText,"EXAM_START","A10"
+	call BoxText,"EXAM_START","A11"
+	call BoxText,"EXAM_START","A12"
+	call BoxText,"EXAM_START","A13"
+	call Map.Kill,"Rebecca",true
+	end

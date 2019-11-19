@@ -1,0 +1,20 @@
+void GoToWorldMap(string wm)
+	error("Cannot yet go to world map: "..wm.."\nThat entire thing ain't scripted yet!)
+end
+
+quickmeta group WorldMap
+
+	index
+		return void()
+			GoToWorldMap(key)
+		end
+	newindex
+		error("World Map group is READ ONLY!")
+	end
+
+	call
+		GoToWorldMap(infinity)
+	end
+
+end
+		
