@@ -1,5 +1,5 @@
 void GoToWorldMap(string wm)
-	error("Cannot yet go to world map: "..wm.."\nThat entire thing ain't scripted yet!)
+	error("Cannot yet go to world map: "..wm.."\nThat entire thing ain't scripted yet!")
 end
 
 quickmeta group WorldMap
