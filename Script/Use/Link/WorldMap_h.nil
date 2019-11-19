@@ -44,6 +44,8 @@ quickmeta group WorldMap
 		return void()
 			GoToWorldMap(key)
 		end
+	end
+		
 	newindex
 		error("World Map group is READ ONLY!")
 	end
