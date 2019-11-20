@@ -544,6 +544,7 @@ group FlowField
 		Clickables.Map = kth
 		for Lay in kth.EachLayer
 			CSayF("= Clickables on Layer %s",Lay)
+			kth.Layer = Lay
 			for Tag in kth.EachTag(Lay)
 				table s
 				s = split(Tag,"_")
@@ -554,7 +555,7 @@ group FlowField
 						kth.Obj=Tag					
 						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.SaveSpot ,s[2])
 					case "TRAVEL"
-						kth.Obj=Tag					
+						kth.Obj=Tag
 						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, FlowField.TravelEmblem ,Tag)
 					case "RANDOMTREASURE"
 						kth.Obj=Tag
@@ -571,7 +572,25 @@ group FlowField
 						else
 							CSayF("= Invalid Random Treasure \"%s\"! Ignored!",Tag)
 						end
-					
+					case "NPC"
+						int posx  
+						int posy  
+						string spot
+						kth.Obj=Tag
+						posx = kth.ObjInt.x
+						posy = kth.ObjInt.y + 32
+						CSayF("NPC Found on (%4d,%4d) >> %s",kth.ObjInt.x,kth.ObjInt.y,Tag)
+						spot = Tag.."_SPOT"
+						if kth.HasTag(spot)
+							CSayF("Trying to configure as %s was found",spot)
+							posx = kth.ObjX(spot)
+							posy = kth.ObjY(spot)
+						end
+						if prefixed(Tag,"NPC_MT_")
+							new Clickables(Tag, posx, posy, MapText, Tag)
+						else
+							new Clickables(Tag, posx, posy, MapScript[Tag])
+						end
 				end
 			end
 		end

@@ -237,7 +237,7 @@ group Flow_FieldMenu
 				__white
 				DarkText.Font($Font,ch.Data["SKILL"..i],x+10, ty)
 				__amber
-				DarkText.Font($Font,Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty)
+				DarkText.Font($Font,Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty,1)
 			end
 		end
 		

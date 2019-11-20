@@ -44,13 +44,16 @@ Rebecca.Name = Names.Rebecca
 
 Rebecca.Data["SKILL0"] = "Sword Skills"
 
-for i=0,4
-	Rebecca.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
-	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Max     = 10000
-	Rebecca.Points(sprintf("SKILLLVL%d",i),true).Minimum = 9 / __skill
-end
+//for i=0,4
+	Rebecca.Points(sprintf("SKILLEXP%d",0),true).Have    = 1
+	Rebecca.Points(sprintf("SKILLLVL%d",0),true).Max     = 10000
+	Rebecca.Points(sprintf("SKILLLVL%d",0),true).Minimum = 9 / __skill
+//end
 
 
+Rebecca.Data.Weapon = "EQW_ERICREBECCA_SHORTSWORD"
+Rebecca.Data.Armor  = "EQA_SHIRT"
+Rebecca.Data.Jewel  = "JWL_BRACERS"
 
 
 
