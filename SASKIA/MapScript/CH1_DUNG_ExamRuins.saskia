@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.11.19
+; version: 19.11.20
 ; End License Information
 :OnLoad
 	end
@@ -65,5 +65,6 @@
 	call Map.Kill,"Rebecca",true
 	call MapScript.Music
 	end
+
 
 
