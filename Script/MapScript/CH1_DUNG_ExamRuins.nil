@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.19
+// version: 19.11.22
 // End License Information
 
 #use "script/use/anyway"
@@ -59,12 +59,40 @@ group MScript
 		end
 	end
 	
+	void NPC_IRRAVONIA()
+		MapText(sprintf("IRRA_%s",Field.Leader:upper()))
+	end
+	
+	void NPC_ZACK()
+		MapText(sprintf("ZACK_%s",Field.Leader:upper()))
+	end
+	
+	void NPC_SWORDS()
+		MapText(sprintf("SWORDS_%s",Field.Leader:upper()))
+	end
+	
+	void SHOWSECRET()
+		CSay("Let's SHOW the secret!")
+		Map.ShowByLabel("SECRET_1")
+	end
+	
+	void HIDESECRET()
+		CSay("Let's HIDE the secret!")
+		Map.HideByLabel("SECRET_1")
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
 		end
+		Map.ZA_Enter("Enter_SECRET","ShowSecret")
+		Map.ZA_Enter("Leave_SECRET","HideSecret")
+		Map.ZA_Enter( "Hide_SECRET","HideSecret")
 	end
 
 end
+
+
+
 
 
