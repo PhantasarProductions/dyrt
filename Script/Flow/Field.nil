@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.11.19
+// Version: 19.11.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -832,6 +832,9 @@ global void PartyClick(int num)
 	GoMenu(num,"Field")
 end
 
+global void PartyClickAlt(int num)
+	FlowField.Leader = RPG.Party[num]
+end
 
 group ConsoleCommands
 	
@@ -901,7 +904,14 @@ group ConsoleCommands
 			CSayF("%5d: (%d,%d) CD:%d/%d >> %s",c,msg.X,msg.Y,msg.CD1,msg.CD2,msg.msg)
 		end
 	end
+	
+	void BLOCKMAP()
+		ShowBlockMap(FieldMap.Kthura,FieldMap.Kthura.Layer,FieldMap.ScrollX,FieldMap.ScrollY)
+	end
+		
 end
+
+
 
 
 
