@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_ZoneAction.nil
-// Version: 19.09.06
+// Version: 19.11.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -52,13 +52,25 @@ end
 class ZoneAction
 
 	static table List
+
+	static void RoomChange(int inc,string exitpoint)
+		string cLay
+		var nLay
+		cLay = Map.Layer
+		assert(prefixed(cLay,"#"),"Next/Prev only works for rooms prefixed with a #")
+		assert(#cLay==4,"Invalid Next/Prev length!")
+		nLay = tonumber(right(cLay,3))
+		assert(nLay,"Numberic parsing error for Next/Prev ("..cLay..")")
+		FlowField.Map.Kthura.Layer = sprintf("#%03d",nLay + inc)
+		Map.SpawnPlayer(exitpoint)
+	end
 	
 	static void NextRoom()
-		error("No Next Room Function yet! Needs to be scripted!")
+		$RoomChange( 1,"Start")
 	end
 	
 	static void PrevRoom()
-		error("No Prev Room Function yet! Needs to be scripted!")
+		$RoomChange(-1,"Einde")
 	end
 	
 	static void Reset()
@@ -130,7 +142,9 @@ class ZoneAction
 	void DESTRUCTOR()
 		CSayF("%s event disposed in zone %s",self.ActEvent,self.ActZone)
 	end
+	
 end
+
 
 
 
