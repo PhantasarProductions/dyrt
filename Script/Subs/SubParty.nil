@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 19.11.19
+// Version: 19.11.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -427,6 +427,8 @@ group SubParty
 	void Click()
 		if Mouse.HitLeft and $Hover>0
 			LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
+		elseif Mouse.HitRight and $Hover>0
+			LuaDoString(CurrentFlow(),sprintf("if PartyClickAlt then PartyClickAlt(%d) end",$Hover))
 		end
 	end
 
@@ -435,6 +437,7 @@ end
 
 CSay(tostring(SubParty))
 #say "Compiling Party Sub!"
+
 
 
 
