@@ -766,6 +766,7 @@ global void BUB_Update()
 		var clobj
 		clobj = Clickables.Clicked(FlowField.Map.Kthura.ScrollX + Mouse.X,FlowField.Map.Kthura.ScrollY + Mouse.Y)
 		if clobj
+			bool cando
 			// Todo: Here I'll handle stuff like clickable objects
 			// As none exist at this moment of the game's creation
 			// I've set this to "if false" to make sure this content
@@ -773,16 +774,21 @@ global void BUB_Update()
 			// can already be scripted
 			CSayF("Clicked '%s', so going into alternate action!",clobj.Tag)
 			CSayF("As a result player should walk to (%d,%d)",clobj.WalkToX,clobj.WalkToY)
-			FlowField.Map.Kthura.Actor.Player.WalkTo(clobj.WalkToX,clobj.WalkToY)
-			if clobj.ArriveDelegate
-				CSay("And we need to attach a delegate!")
-				FlowField.WalkArrival = clobj.ArriveDelegate
-				FlowField.WalkArrivalParams = clobj.ArriveParam
-			elseif clobj.ArriveFunction!=""
-				CSayF("Function string \"%f\" attached!",clobj.ArriveFunction)
-				FlowField.WalkArrival = clobj.ArriveFunction
+			cando = FlowField.Map.Kthura.Actor.Player.WalkTo(clobj.WalkToX,clobj.WalkToY)
+			if cando
+				CSay("Walk is possible, so let's do it!")
+				if clobj.ArriveDelegate
+					CSay("And we need to attach a delegate!")
+					FlowField.WalkArrival = clobj.ArriveDelegate
+					FlowField.WalkArrivalParams = clobj.ArriveParam
+				elseif clobj.ArriveFunction!=""
+					CSayF("Function string \"%f\" attached!",clobj.ArriveFunction)
+					FlowField.WalkArrival = clobj.ArriveFunction
+				else
+					CSay("No function links in this clickabke!")
+				end
 			else
-				CSay("No function links in this clickabke!")
+				CSay("Walk was not possible, so let's not do it!")
 			end
 		else 
 			// When all options are gone, let's just walk
