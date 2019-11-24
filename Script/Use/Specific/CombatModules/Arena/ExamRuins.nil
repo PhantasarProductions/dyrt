@@ -35,3 +35,22 @@
 // version: 19.11.24
 // End License Information
 
+module Exa_Arena
+
+	var Dung
+	
+	void CONSTRUCTOR()
+		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Dungeon")
+		self.Dung.Wall  = "GFX/Textures/ExamRuins/BackWall2.png"
+		self.Dung.Floor = "GFX/Textures/ExamRuins/Floor2.png"
+		self.Dung.TorchOff = false
+		self.Dung.Init()
+	end
+	
+	void Draw() 
+		self.Dung.Draw()
+	end
+
+end
+
+
