@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.22
+// version: 19.11.24
 // End License Information
 
 #use "script/use/anyway"
@@ -81,6 +81,22 @@ group MScript
 		Map.HideByLabel("SECRET_1")
 	end
 	
+	void LOBBY2EASTSECTION()
+		Map.GoToLayer("#004","From_Lobby")
+	end
+	
+	void EASTSECTION2LOBBY()
+		Map.GoToLayer("#001","From_East")
+	end
+	
+	void ENTERNORTHROOM()
+		Map.GoToLayer("#005","Start")
+	end
+	
+	void LEAVENORTHROOM()
+		Map.GoToLayer("#003","From_North")
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
@@ -88,9 +104,15 @@ group MScript
 		Map.ZA_Enter("Enter_SECRET","ShowSecret")
 		Map.ZA_Enter("Leave_SECRET","HideSecret")
 		Map.ZA_Enter( "Hide_SECRET","HideSecret")
+		
+		Map.ZA_Enter("GoEastJustin","Lobby2EastSection")
+		Map.ZA_Enter("To_Lobby",    "EastSection2Lobby")
+		Map.ZA_Enter("To_North",    "EnterNorthRoom")
+		Map.ZA_Enter("To_South",    "LeaveNorthRoom")
 	end
 
 end
+
 
 
 
