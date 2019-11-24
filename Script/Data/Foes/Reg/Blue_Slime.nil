@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/10/2019 11:22:38 AM
+// Generated: 11/24/2019 7:58:18 PM
 
 do
 var retfunc()
@@ -136,6 +136,11 @@ end
 // Skill specific
 switch __skill
 	case 1
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
@@ -148,6 +153,10 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 2
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
@@ -159,6 +168,9 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 3
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
