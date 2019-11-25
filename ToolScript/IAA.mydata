@@ -321,7 +321,7 @@ Rec: ABL_HERO_IRRAVONIA_BREEZE
 	GainSkill1 = 0
 	GainSkill1All = FALSE
 	GainSkill1Chars = 
-	GainSkill2 = 5
+	GainSkill2 = 95
 	GainSkill2All = TRUE
 	GainSkill2Chars = 
 	GainSkill3 = 0
@@ -416,7 +416,7 @@ Rec: ABL_HERO_IRRAVONIA_FIRE
 	GainSkill0 = 0
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
-	GainSkill1 = 5
+	GainSkill1 = 95
 	GainSkill1All = TRUE
 	GainSkill1Chars = 
 	GainSkill2 = 0
@@ -520,7 +520,7 @@ Rec: ABL_HERO_IRRAVONIA_HEAL
 	GainSkill2 = 0
 	GainSkill2All = FALSE
 	GainSkill2Chars = 
-	GainSkill3 = 25
+	GainSkill3 = 125
 	GainSkill3All = TRUE
 	GainSkill3Chars = 
 	GainSkill4 = 0
@@ -621,7 +621,7 @@ Rec: ABL_HERO_IRRAVONIA_ROCK
 	GainSkill3 = 0
 	GainSkill3All = FALSE
 	GainSkill3Chars = 
-	GainSkill4 = 4
+	GainSkill4 = 95
 	GainSkill4All = TRUE
 	GainSkill4Chars = 
 	Heal = 0
@@ -707,7 +707,7 @@ Rec: ACT_ATTACK
 	EqYoungIrravonia = FALSE
 	GainAP = 6
 	GainEXP = 0
-	GainSkill0 = 15
+	GainSkill0 = 75
 	GainSkill0All = TRUE
 	GainSkill0Chars = 
 	GainSkill1 = 0
@@ -1295,7 +1295,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	EqYoungIrravonia = FALSE
 	GainAP = 5
 	GainEXP = 0
-	GainSkill0 = 10
+	GainSkill0 = 76
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 0
