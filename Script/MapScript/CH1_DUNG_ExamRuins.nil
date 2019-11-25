@@ -97,6 +97,10 @@ group MScript
 		Map.GoToLayer("#003","From_North")
 	end
 	
+	void INITPUZZLE()
+		// TO-DO: Init the puzzle if needed
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
