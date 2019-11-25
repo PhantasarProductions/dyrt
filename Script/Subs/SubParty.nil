@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 19.11.22
+// Version: 19.11.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -283,7 +283,7 @@ group SubParty
 		end
 		for i=0,4
 			CSayF("Configuring Skill #%d",i)
-			ch.Points(sprintf("SKILLEXP%d",i),true).Maximum  = 1000 * (10^__skill)
+			ch.Points(sprintf("SKILLEXP%d",i),true).Maximum  = 100 * (10^__skill)
 			ch.Points(sprintf("SKILLEXP%d",i)     ).Have     = 0
 			ch.Points(sprintf("SKILLLVL%d",i),true).Maximum  = ({1000,250,100})[__skill]
 			if ch.Points(sprintf("SKILLLVL%d",i)     ).Have == 0
@@ -437,6 +437,7 @@ end
 
 CSay(tostring(SubParty))
 #say "Compiling Party Sub!"
+
 
 
 
