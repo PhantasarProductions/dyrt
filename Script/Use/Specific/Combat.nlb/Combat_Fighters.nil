@@ -65,7 +65,6 @@ class Fighter
 	get var Ch
 		return RPG.GetChar(self.Tag)
 	end
-
 	
 	get int X
 		if self.UseTemp
