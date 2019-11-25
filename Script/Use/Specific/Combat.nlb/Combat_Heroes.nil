@@ -212,7 +212,6 @@ class InputMenuItem
 		End_Combat.Add(self.Clean)
 	end
 	
-	
 end
 
 group Stage_SelectTarget extends Stage
