@@ -73,13 +73,15 @@ class Foe extends Fighter
 			case 1
 				return true
 			case 2
-				return gv.Int[sprintf('Defeated_%s',self.FromFile)]>0
+				return Killed[self.FromFile]>0 
+				// gv.Int[sprintf('Defeated_%s',self.FromFile)]>0 // Old setting!
 			case 3
 				return false
 			default
 				error("Four skills or more?")
 		end
 	end
+	
 	
 	void Init()
 	end

@@ -247,7 +247,7 @@ group Stage_SelectTarget extends Stage
 				if fight.ShowHP
 					number rate
 					int green
-					rate = self.Ch.Points("HP").Have / self.Ch.Points("HP").Maximum
+					rate = fight.Ch.Points("HP").Have / fight.Ch.Points("HP").Maximum
 					green = math.floor(255*rate)
 					Color(255-green,green,0)
 					Rect(fight.X+80,fight.Y+40,math.floor(100*rate),18)

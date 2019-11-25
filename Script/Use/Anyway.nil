@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway.nil
-// Version: 19.11.19
+// Version: 19.11.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -45,6 +45,7 @@
 #use "Script/Use/Anyway/Dev.nil"
 #use "Script/Use/Anyway/HaveMusic.nil"
 #use "Script/Use/Anyway/LanguageSettings.nil"
+#use "Script/Use/Anyway/License_to_kill.nil"
 #use "Script/Use/Anyway/MapScript_h.nil"
 #use "Script/Use/Anyway/Time.nil"
 #use "Script/Use/Link/Achievements_h.nil"

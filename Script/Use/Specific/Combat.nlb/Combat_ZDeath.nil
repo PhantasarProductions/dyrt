@@ -66,6 +66,7 @@ void EnemyDeathFade(f)
 	
 		// Kills
 		__kills++
+		Killed[f.FromFile]++
 		
 		// Experience points (if applicable)
 		for tag,hero in pairs(Fighter.Team.Hero)

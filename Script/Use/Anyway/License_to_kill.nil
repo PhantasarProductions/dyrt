@@ -1,0 +1,41 @@
+#use "libs/strings"
+
+quickmeta group Killed
+
+	index 
+		assert(type(key)=="string","String needed for \"Killed\" index! Got "..type(key))
+		string foe
+		foe = replace(key:upper(),"/","_")
+		return gv.Num[sprintf("KILLED_%s",foe)]
+	end
+	
+	newindex
+		assert(type(key)=="string","String needed for \"Killed\" index! Got "..type(key))
+		assert(type(value)=="number","Number needed for \"Killed\" value! Got "..type(value))
+		string foe
+		foe = replace(key:upper(),"/","_")
+		gv.Num[sprintf("KILLED_%s",foe)] = value
+	end
+	
+end
+
+
+quickmeta group Killed4Oversoul
+
+	index 
+		assert(type(key)=="string","String needed for \"Killed\" index! Got "..type(key))
+		string foe
+		foe = replace(key:upper(),"/","_")
+		return gv.Num[sprintf("KILLED_FOR_OVERSOUL_%s",foe)]
+	end
+	
+	newindex
+		assert(type(key)=="string","String needed for \"Killed\" index! Got "..type(key))
+		assert(type(value)=="number","Number needed for \"Killed\" value! Got "..type(value))
+		string foe
+		foe = replace(key:upper(),"/","_")
+		gv.Num[sprintf("KILLED_FOR_OVERSOUL_%s",foe)] = value
+	end
+	
+end
+
