@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.11.07
+// Version: 19.11.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -207,6 +207,7 @@ end
 #pure
 Defeated.F = Fighter
 #endpure
+
 
 
 
