@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 19.11.17
+// Version: 19.11.28
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -336,43 +336,45 @@ class SG
 		for item in SG.List.Each
 			if item.ID>=0 or SG.mode == "SAVE"
 				item.SlotBox.y = Y - SG.ScrollY
-				item.SlotBox.Draw()
-				if item.ID>=0
-					string Pic
-					Pic = self.Pics[item.ID]
+				if item.SlotBox.y>-200 and item.SlotBox.y<Screen.Height+10
+					item.SlotBox.Draw()
+					if item.ID>=0
+						string Pic
+						Pic = self.Pics[item.ID]
+						__white
+						$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s/General.png",Pic))
+						$PicImages[Pic].Draw(5, (item.SlotBox.y+64)-($PicImages[Pic].Height/2))
+						GraphColor.Alpha = 100
+						self.BigNumbers.DrawText( tostring(item.ID+1) , 120, item.SlotBox.y+20 )
+						GraphColor.Alpha = 255
+					end
+					if Mouse.X<Screen.Width-40 and Mouse.Y>item.SlotBox.y and Mouse.Y<item.SlotBox.y+128
+						$Hover = item
+						Color(255,180,0)
+					else
+						__white
+					end
+					$Font.DrawText(item.Location,122,item.SlotBox.y+20)
+					if item.ID>=0
+						$SmallFont.DrawText(sprintf("Lang: %s; %s",item.Language,$SkillNames[item.Skill]),122,item.SlotBox.y+45)
+						$SmallFont.DrawText(sprintf("Time: %s",item.Time),122,item.SlotBox.y+65)
+					end
 					__white
-					$PicImages[Pic] = $PicImages[Pic] or LoadImage(sprintf("gfx/boxpic/%s/General.png",Pic))
-					$PicImages[Pic].Draw(5, (item.SlotBox.y+64)-($PicImages[Pic].Height/2))
-					GraphColor.Alpha = 100
-					self.BigNumbers.DrawText( tostring(item.ID+1) , 120, item.SlotBox.y+20 )
-					GraphColor.Alpha = 255
-				end
-				if Mouse.X<Screen.Width-40 and Mouse.Y>item.SlotBox.y and Mouse.Y<item.SlotBox.y+128
-					$Hover = item
-					Color(255,180,0)
-				else
-					__white
-				end
-				$Font.DrawText(item.Location,122,item.SlotBox.y+20)
-				if item.ID>=0
-					$SmallFont.DrawText(sprintf("Lang: %s; %s",item.Language,$SkillNames[item.Skill]),122,item.SlotBox.y+45)
-					$SmallFont.DrawText(sprintf("Time: %s",item.Time),122,item.SlotBox.y+65)
-				end
-				__white
-				for i=1,8
-					with item
-						string TAG
-						int LVL
-						int x
-						int y
-						TAG = $PartyNames[i]
-						LVL = $PartyLevels[i]
-						if TAG and TAG!=""
-							$lvlPic[TAG] = $lvlPic[TAG] or LoadImage(sprintf("gfx/actors/heroes/%s.South.jpbf/00000000.png",TAG))
-							x = (($SlotBox.x+$SlotBox.w)-(50*8))+i*40
-							y = ($SlotBox.y+20)
-							$lvlPic[TAG].Draw(x-($lvlPic[TAG].Width/2),y)
-							$SmallFont.DrawText(roman(LVL),x,y+60,2)
+					for i=1,8
+						with item
+							string TAG
+							int LVL
+							int x
+							int y
+							TAG = $PartyNames[i]
+							LVL = $PartyLevels[i]
+							if TAG and TAG!=""
+								$lvlPic[TAG] = $lvlPic[TAG] or LoadImage(sprintf("gfx/actors/heroes/%s.South.jpbf/00000000.png",TAG))
+								x = (($SlotBox.x+$SlotBox.w)-(50*8))+i*40
+								y = ($SlotBox.y+20)
+								$lvlPic[TAG].Draw(x-($lvlPic[TAG].Width/2),y)
+								$SmallFont.DrawText(roman(LVL),x,y+60,2)
+							end
 						end
 					end
 				end
@@ -567,6 +569,7 @@ BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
 BUB_Load=SG.Load
+
 
 
 
