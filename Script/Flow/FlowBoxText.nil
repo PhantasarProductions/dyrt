@@ -175,12 +175,13 @@ class TextBox
 		//--	ReInit = true
 		//--	This prevents the Text Box to be drawn based on wrong settings.
 		//-- end  
-
+		CSayF("Generate('%s', '%s', %4d, '%s') -- START!",file, tag, idx, boxback)
 		f = TextBox.btdata[file]
 		if not f then 
 			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
 			error("Boxtext file '"..file.."' has not yet been loaded!") 
 		end
+		tag = tag:upper()
 		t = f[tag]
 		if not t then 
 			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
@@ -191,6 +192,7 @@ class TextBox
 			CSay(NIL.LuaSerialize("btdata",TextBox.btdata))
 			error("Boxtext file '"..file.."' tag '"..tag.."' does not have a record #"..idx.." (max is "..#t..")") 
 		end
+		CSay("= Start sb_data")
 		sb_data = new TextBox( { ['Header'] = gv.Sub(rec.Header), ['PicDir'] = rec.PicDir, ['PicSpc'] = rec.PicSpc, ['Lines'] = {}, ['SL'] = 1, ['SP']=1, ['AltTxtFont'] = rec.AltTxtFont, ['Voice'] = rec.SoundFile   } )
 		TextBox.Current = sb_data
 		width=Screen.Width-__BoxTextTotalWidthMargin //-- standard width, this can be shortened by the portraits popping with the textbox. SW is the screen width, this need to be taken in order.
@@ -207,6 +209,7 @@ class TextBox
 		else
 			CurrentFont = GetFont("BOXTEXT") //setfont("BoxTextContent")
 		end   
+		CSay("= Textwrapping!")
 		for ak,txt in ipairs(rec.Lines) do
 			string cline
 			table spline
@@ -222,12 +225,14 @@ class TextBox
 			end
 			if cline~="" then table.insert(sb_data.Lines,cline) end    
 		end
+		CSay("= Config portrait!")
 		sb_data.width=width    
 		sb_data.PicRef=rec.PicRef
 		//-- if tonumber(LC('screen.margin.top')   )~=0 then origin[2] = 25; totalwidth=totalheight-25 end
 		// if tonumber(LC('screen.margin.right') )~=0 then sb_data.width=sb_data.width-25 end
 		// if tonumber(LC('screen.margin.left') )~=0 then sb_data.width=sb_data.width-25 end
 		//-- Voice acting, if available
+		CSay("= The Voide of Phantasar")
 		if sb_data.Voice and JCR_EntryExists(sb_data.Voice) 		
 			// This is all LAURA, but NALA must be handled differently, so let's comment this out... for now!
 			// if Audio.Playing('BOXTEXTCHANNEL')~=0 then Audio.Stop('BOXTEXTCHANNEL') end
@@ -246,6 +251,7 @@ class TextBox
 			sb_data.txtbox = new Box(0,Screen.Height-h,Screen.Width,h)
 			CSayF("So far so good!")
 		end
+		CSay("= That should do it!")
 	end
 
 end
@@ -267,7 +273,7 @@ group FlowBoxText
 		self.ReturnFlow = RF or CurrentFlow()
 		self.Num = ANum or 1
 		self.Scen = AScen
-		self.Tag = ATag
+		self.Tag = ATag:upper()
 		GoToFlow("BOXTEXT")
 		TextBox.Generate(trim(AScen),trim(ATag),ANum,RF)
 	end
