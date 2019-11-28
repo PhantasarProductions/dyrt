@@ -36,8 +36,19 @@
 // End License Information
 
 #use "script/use/anyway"
+#use "libs/collections"
+#use "libs/Roman"
+
+
+// Since MapScripts have their own VMs or "states", this macro only affects this mapscript
+#macro hier_puzzleopgelost gv.Bool.Done_Die_Puzzle_Exam_Ruins_Solved
+
+
+
 
 group MScript
+
+	var PuzzleCorrect
 
 	void CreateRebecca()
 		var Rebecca
@@ -97,8 +108,55 @@ group MScript
 		Map.GoToLayer("#003","From_North")
 	end
 	
+	void PUZ_BUTTON(x,y)
+		CSay("("..type(x)..':'..tostring(x)..", "..type(y)..":"..tostring(y)..")")
+	end
+	
 	void INITPUZZLE()
-		// TO-DO: Init the puzzle if needed
+		// Puzzle solved or generated? Then get outta here!
+		if hier_puzzleopgelost or self.PuzzleCorrect
+			return
+		end
+		int n 
+		var PC
+		n = math.random(1,6)
+		gv.String.EXAPUZZLESIGN = Roman(n)
+		self.PuzzleCorrect = new MArray("bool",3,3)
+		PC = self.PuzzleCorrect
+		switch n
+			case 1
+				PC.SetValue(1,1,true)
+			case 2
+				PC.SetValue(0,0,true)
+				PC.SetValue(2,2,true)
+			case 3
+				PC.SetValue(0,0,true)
+				PC.SetValue(1,1,true)
+				PC.SetValue(2,2,true)
+			case 4
+				PC.SetValue(0,0,true)
+				PC.SetValue(0,2,true)
+				PC.SetValue(2,0,true)
+				PC.SetValue(2,2,true)
+			case 5
+				PC.SetValue(0,0,true)
+				PC.SetValue(0,2,true)
+				PC.SetValue(2,0,true)
+				PC.SetValue(2,2,true)
+				PC.SetValue(1,1,true)
+			case 6
+				for i=0,2
+					PC.SetValue(0,i,true)
+					PC.SetValue(2,i,true)
+				end 
+			default
+				error("Invalid roll: "..n)
+		end
+		CSayF("Puzzle init roll: %d",n)
+		for x=0,2 do for y=0,2 do
+			CSayF("Activate B%d%d (%d,%d)",x+1,y+1,x,y)
+			Map.Click(sprintf("B%d%d",x+1,y+1),"PUZ_Button",x,y)
+		end end
 	end
 	
 	void CONSTRUCTOR()
@@ -113,6 +171,8 @@ group MScript
 		Map.ZA_Enter("To_Lobby",    "EastSection2Lobby")
 		Map.ZA_Enter("To_North",    "EnterNorthRoom")
 		Map.ZA_Enter("To_South",    "LeaveNorthRoom")
+		
+		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
 	end
 
 end

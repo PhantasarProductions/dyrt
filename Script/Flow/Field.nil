@@ -88,6 +88,7 @@ class Clickables
 		self.WalkToY = y
 		self.Tag = Tag
 		self.ArriveParam = { infinity }
+		CSayF("Clickable %s;\n%s",tostring(Arrive),NIL.LuaSerialize("* Param",self.ArriveParam))
 		if Arrive==nil or Arrive==""
 			return
 		end
@@ -108,6 +109,25 @@ class Clickables
 				self.ArriveState = sAr[1]
 				self.ArriveFunction = sAr[2]
 		end
+	end
+	
+	static void FromTag(string Tag, string func, infinity)
+		int x
+		int y
+		var M
+		M = self.Map
+		if self.Map.HasTag(Tag.."_SPOT")
+			M.Obj = Tag.."_SPOT"
+			x = M.ObjInt.x
+			y = M.ObjInt.y
+		elseif self.Map.HasTag(Tag)
+			M.Obj = Tag
+			x = M.ObjInt.x
+			y = M.ObjInt.y
+		else
+			error("No object \""..Tag.."\" found to turn into a clickable")
+		end
+		new Clickables(Tag,x,y,func,infinity)
 	end
 	
 	static void Massacre()
@@ -136,7 +156,7 @@ class Clickables
 								return cl
 							end
 						default
-							error("Unknown object kind ("..$ObjString.Kind..") as clickable!")				
+							error("Unknown object kind ("..$ObjString.Kind..") as clickable!")
 					end
 				end
 			end
@@ -782,7 +802,8 @@ global void BUB_Update()
 					FlowField.WalkArrival = clobj.ArriveDelegate
 					FlowField.WalkArrivalParams = clobj.ArriveParam
 				elseif clobj.ArriveFunction!=""
-					CSayF("Function string \"%f\" attached!",clobj.ArriveFunction)
+					CSayF("Function string \"%s\" attached!",clobj.ArriveFunction)
+					FlowField.WalkArrivalParams = clobj.ArriveParam
 					FlowField.WalkArrival = clobj.ArriveFunction
 				else
 					CSay("No function links in this clickabke!")
@@ -808,10 +829,14 @@ global void BUB_Update()
 			case "nil"
 				//CSay("No walk arrival set, so let it be!")
 			case "string"
-				error("WalkArrival string feature not yet implemented!")
+				//error("WalkArrival string feature not yet implemented!")
+				CSay(NIL.LuaSerialize("Clickable Arrival script activating!\nArgs",FlowField.WalkArrivalParams))
+				MapScript[FlowField.WalkArrival](XPand(FlowField.WalkArrivalParams))
+				//MapScript[FlowField.WalkArrival](XPand(self.ArriveParam))
 			case "function"
 				CSay("Walk arrival is a delegate, so let's call it!")
 				FlowField.WalkArrival(XPand(FlowField.WalkArrivalParams))
+				//FlowField.WalkArrival(XPand(XPand(self.ArriveParam)))
 				Acted = true
 			default
 				error("Invalid WalkArrival type: "..type(FlowField.WalkArrival))			
