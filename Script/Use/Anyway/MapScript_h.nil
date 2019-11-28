@@ -35,10 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
 #use "libs/strings"
-
 
 global table MapScript
 
@@ -46,7 +43,6 @@ void StartSaskia(string script,string label)
 	// error("SASKIA start not yet implemented!")
 	LuaDoString("FLOW_FIELD",sprintf("FlowField.Map.Saskia.Start('%s')",label))
 end
-
 
 // This may look "clunky"  for a NIL script
 // As this should have been done with a quickmeta
@@ -76,8 +72,25 @@ MapMeta = {
 					local parm = "";
 					for i,a in ipairs(args) do
 						if (i>1) then parm = parm ..", " end
-						parm = parm .. a
+						--[[ This is the ultimate example of how NOT to use NIL :-P
+						#endpure
+						string a
+						string parm
+						int i
+						#pure
+						]]
+						#endpure
+						switch type(a)
+							case "nil" "boolean" "number"
+								parm = parm .. a
+							case "string"
+								parm = parm .. '"'..a..'"'
+							default
+								error("MapScript Chain Invalid Type: "..type(a).." (param #"..i..")")
+						end
+						#pure
 					end
+					CSayF("MapScript.%s(%s)",k,parm)
 					LuaDoString("MAP",sprintf("MScript.%s(%s)",k,parm),"LINK: MapScript")
 				end
 				#endpure
