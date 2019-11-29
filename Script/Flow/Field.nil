@@ -317,6 +317,13 @@ group FieldMap
 		$Kthura.Kill(tag)
 	end
 	
+	void AddSwap(string code)
+		string m
+		m = "MAPCHANGES."..FieldMap.LoadedMap
+		Swap.Data[m] = Swap.Data[m] .. code
+	end
+	
+	
 	void PermaKill(string tag)
 		$Kill(tag,true)
 	end

@@ -182,10 +182,14 @@ group Map
 				case "string"
 					args = args .. '\\"'..v..'\\"'
 				default
-					error("Click cannot linkthrough with arguments of type "..type(v).. " (arg #"..i..")")
+					error("Click cannot linkthrough with arguments of type ".. type(v) .. " (arg #"..i..")")
 			end
 		end
 		FLD_Exe(sprintf("Clickables.FromTag(trim(\"%s\"),trim(\"%s\"), %s)", tag, func, args))
+	end
+	
+	void AddSwap(string code)
+		FLD_Exe("FlowField.Map.AddSwap(\"" .. SafeString(code) .. "\")")
 	end
 	
 	set string Obj
