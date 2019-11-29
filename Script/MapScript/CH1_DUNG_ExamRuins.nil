@@ -39,12 +39,8 @@
 #use "libs/collections"
 #use "libs/Roman"
 
-
 // Since MapScripts have their own VMs or "states", this macro only affects this mapscript
 #macro hier_puzzleopgelost gv.Bool.Done_Die_Puzzle_Exam_Ruins_Solved
-
-
-
 
 group MScript
 
@@ -109,7 +105,41 @@ group MScript
 		Map.GoToLayer("#003","From_North")
 	end
 	
-	void PuzzleCorrect()
+	void CheckPuzzleCorrect()
+		if not(self.PuzzleUser)
+			CSay("CheckPuzzleCorrect(): Nothing set so let's get outta here!")
+			return 
+		end
+		bool check1 = true
+		bool check2 = true
+		for x=0,2		
+			for y=0,2
+				check1 = check1 and (self.PuzzleUser.GetValue(  x,y) == self.PuzzleCorrect.GetValue(x,y))
+				check2 = check2 and (self.PuzzleUser.GetValue(2-y,x) == self.PuzzleCorrect.GetValue(x,y))
+				CSayF("Check(%d,%d) => %s",  x,y,tostring(check1))
+				CSayF("Check(%d,%d) => %s",2-y,x,tostring(check2))
+			end
+		end
+		if check1 or check2
+			hier_puzzleopgelost = true
+			Achievements.Award("PUZ_DIEDIE")
+			string addswapdata = "// Puzzle\n\nFieldMap.Kthura.Layer='#006\'\n\n";
+			for x=0,2	
+				for y=0,2
+					string tex = 'GFX/Textures/JewelButtons/Blue.png'
+					if self.PuzzleUser.GetValue(x,y)
+						tex = 'GFX/Textures/JewelButtons/Green.png'
+					end
+					addswapdata = addswapdata .. sprintf("\tPosition (%d,%d)\n\t\tFieldMap.Kthura.Obj = 'B%d%d'\n\t\tFieldMap.Kthura.ObjString='%s'\n\n",x,y,x+1,y+1,tex)
+				end
+			end
+			addswapdata = "\n\n"
+			Map.AddSwap(addswapdata)
+			Map.Kill("Puz_Deur",true)
+			return 
+		end
+		return
+	end
 	
 	void PUZ_BUTTON(int x,int y)
 		if hier_puzzleopgelost
@@ -125,11 +155,13 @@ group MScript
 			CSayF("Switch (%d,%d)/%s%d turned off",x,y,string.char(x+65),y+1)
 			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Blue.png"
 		end
+		self.CheckPuzzleCorrect()
 	end
 	
 	void INITPUZZLE()
 		// Puzzle solved or generated? Then get outta here!
 		if hier_puzzleopgelost or self.PuzzleCorrect
+			gv.String.EXAPUZZLESIGN = "We all end up, the remains of the day!"
 			return
 		end
 		int n 
