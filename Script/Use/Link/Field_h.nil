@@ -35,8 +35,6 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-
-
 #use "libs/strings"
 
 void FieldCheck()
@@ -46,6 +44,21 @@ end
 void FLD_Exe(string do_it)
 	FieldCheck()
 	LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+end
+
+string FLD_GetString(string vr)
+	FieldCheck()
+	return LuaGetString("FLOW_FIELD",vr)
+end
+
+int FLD_GetInt(string vr)
+	FieldCheck()
+	return LuaGetInt("FLOW_FIELD",vr)
+end
+
+bool FLD_GetBool(string vr)
+	FieldCheck()
+	return LuaGetBool("FLOW_FIELD",vr)
 end
 
 group Map
@@ -136,7 +149,6 @@ group Map
 	void ShowByLabel(string label)		
 		FLD_Exe(sprintf("FlowField.Map.Kthura.ShowByLabel(trim('%s'))",label))
 	end
-
 	
 	void StopWalking()
 		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
@@ -174,6 +186,47 @@ group Map
 			end
 		end
 		FLD_Exe(sprintf("Clickables.FromTag(trim(\"%s\"),trim(\"%s\"), %s)", tag, func, args))
+	end
+	
+	set string Obj
+		FLD_Exe(sprintf("FlowField.Map.Kthura.Obj = trim(\"%s\")",value))
+	end
+	
+	get string Obj
+		return FLD_GetString("FlowField.Map.Kthura.Obj")
+	end
+	
+	table ObjString
+	table ObjInt
+	table ObjBool
+	
+	void CONSTRUCTOR()
+		CSay("Obj linking metatables")
+		setmetatable(self.ObjString,{
+			["__index"] = string(s,string k)
+				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")]",k))
+			end,
+			["__newindex"] = void(s,string k,string v)
+				CSay(sprintf("==> Flow.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+			end
+		})
+		setmetatable(self.ObjInt,{
+			["__index"] = int(s,string k)
+				return FLD_GetInt(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")]",k))
+			end,
+			["__newindex"] = void(s,string k,int v)
+				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %d",k,v))
+			end
+		})
+		setmetatable(self.ObjBool,{
+			["__index"] = boolean(s,string k)
+				return FLD_GetBool(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")]",k))
+			end,
+			["__newindex"] = void(s,string k,bool v)
+				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %s",k,tostring(v)))
+			end
+		})
 	end
 	
 end

@@ -49,6 +49,7 @@
 group MScript
 
 	var PuzzleCorrect
+	var PuzzleUser
 
 	void CreateRebecca()
 		var Rebecca
@@ -108,8 +109,22 @@ group MScript
 		Map.GoToLayer("#003","From_North")
 	end
 	
-	void PUZ_BUTTON(x,y)
+	void PuzzleCorrect()
+	
+	void PUZ_BUTTON(int x,int y)
+		if hier_puzzleopgelost
+			return
+		end
 		CSay("("..type(x)..':'..tostring(x)..", "..type(y)..":"..tostring(y)..")")
+		self.PuzzleUser.SetValue(x,y,not self.PuzzleUser.GetValue(x,y))
+		Map.Obj = sprintf("B%d%d",x+1,y+1)
+		if self.PuzzleUser.GetValue(x,y)
+			CSayF("Switch (%d,%d)/%s%d turned on",x,y,string.char(x+65),y+1)
+			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Green.png"
+		else
+			CSayF("Switch (%d,%d)/%s%d turned off",x,y,string.char(x+65),y+1)
+			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Blue.png"
+		end
 	end
 	
 	void INITPUZZLE()
@@ -122,6 +137,7 @@ group MScript
 		n = math.random(1,6)
 		gv.String.EXAPUZZLESIGN = Roman(n)
 		self.PuzzleCorrect = new MArray("bool",3,3)
+		self.PuzzleUser = new MArray("bool",3,3)
 		PC = self.PuzzleCorrect
 		switch n
 			case 1
