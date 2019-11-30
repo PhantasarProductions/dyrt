@@ -142,6 +142,10 @@ group Map
 		return LuaGetString("FLOW_FIELD","FieldMap.Kthura.Layer")
 	end
 	
+	set string Layer
+		FLD_Exe("FieldMap.Kthura.Layer = \""..value.."\"")
+	end
+	
 	void HideByLabel(string label)
 		FLD_Exe(sprintf("FlowField.Map.Kthura.HideByLabel(trim('%s'))",label))
 	end

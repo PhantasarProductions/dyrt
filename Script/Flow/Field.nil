@@ -491,6 +491,48 @@ group FlowField
 		// error("Treasures not yet supported! Come back later!")
 	end
 	
+	void ThrowSwitch(string Tag)
+		string	_Set
+		string	_NewSet
+		bool	_Perma
+		bool	_Once
+		bool	_Stuck
+		var		Kth		
+		Kth = $Map.Kthura
+		Kth.Obj = Tag
+		_Set   = Kth.ObjData.Set:upper()
+		_Perma = Kth.ObjData.Permanent:upper()=="YES" or Kth.ObjData.Permanent:upper()=="TRUE"
+		_Once  = Kth.ObjData.Once:upper()     =="YES" or Kth.ObjData.Once:upper()     =="TRUE"
+		_Stuck = Kth.ObjData.Stuck:upper()    =="YES" or Kth.ObjData.Stuck:upper()    =="TRUE"
+		if _Stuck
+			BoxText.Load("System/Switch","SYS.SWITCH")
+			BoxText("SYS.SWITCH","STUCK")
+			return
+		end
+		switch _Set
+			case "LEFT" ""
+				_NewSet = "Right"
+			case "RIGHT"
+				_NewSet = "Left"
+			default
+				error("Switch.Set must contain either \"LEFT\" or \"RIGHT\"! Not \"".._Set.."\"!")
+		end
+		Kth.ObjData.Set = _NewSet
+		Kth.ObjString.Texture = "GFX/Textures/Switches/".._NewSet..".png"
+		if _Once
+			Kth.ObjData._Stuck = "YES"
+		end
+		if _Perma and _Once
+			table y
+			string m
+			y[true] ="Yes"
+			y[false]="No"
+			m = "MAPCHANGES."..FieldMap.LoadedMap
+			Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kthura.Obj = \""..Tag.."\";\tFieldMap.Kthura.ObjString.Texture = \""..Kth.ObjString.Texture.."\";\tFieldMap.Kthura.ObjData.Set = '".._NewSet.."'; FieldMap.Kthura.ObjData.Stuck = 'Yes'\n"		
+		end
+		MapScript[Tag]()
+	end
+	
 	void LoadMap(string MapFile,Layer)
 		$Map.LoadedMap=MapFile
 		CSayF("Loading Map: %s",MapFile)
@@ -584,6 +626,9 @@ group FlowField
 					case "TRAVEL"
 						kth.Obj=Tag
 						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, FlowField.TravelEmblem ,Tag)
+					case "SWITCH"
+						kth.Obj=Tag
+						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.ThrowSwitch ,Tag)
 					case "RANDOMTREASURE"
 						kth.Obj=Tag
 						if kth.ObjString.Kind=="$RandomTreasure" 

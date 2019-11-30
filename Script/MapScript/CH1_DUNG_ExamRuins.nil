@@ -207,11 +207,22 @@ group MScript
 		end end
 	end
 	
+	void SWITCH_OPEN_BOSS()
+		Map.Layer="#001"
+		Map.Kill("Deur",true)
+		Map.Layer="#007"
+		MapText("ENDSW_"..Field.Leader:upper())
+	end
+	
+	void TO_BOSS()
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
 		end
 		Map.ZA_Enter("Enter_SECRET","ShowSecret")
+		Map.ZA_Enter( "Show_SECRET","ShowSecret")
 		Map.ZA_Enter("Leave_SECRET","HideSecret")
 		Map.ZA_Enter( "Hide_SECRET","HideSecret")
 		
@@ -219,6 +230,7 @@ group MScript
 		Map.ZA_Enter("To_Lobby",    "EastSection2Lobby")
 		Map.ZA_Enter("To_North",    "EnterNorthRoom")
 		Map.ZA_Enter("To_South",    "LeaveNorthRoom")
+		Map.ZA_Enter("ToBoss",      "ToBoss")
 		
 		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
 	end
