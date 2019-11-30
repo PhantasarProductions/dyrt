@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.29
+// version: 19.11.30
 // End License Information
 
 #use "script/use/anyway"
@@ -214,7 +214,12 @@ group MScript
 		MapText("ENDSW_"..Field.Leader:upper())
 	end
 	
-	void TO_BOSS()
+	void TOBOSS()
+		Map.GoToLayer("#008","Start")
+	end
+	
+	void BOSS2LOBBY()
+		Map.GoToLayer("#001","FromBossSpot")
 	end
 	
 	void CONSTRUCTOR()
@@ -231,11 +236,13 @@ group MScript
 		Map.ZA_Enter("To_North",    "EnterNorthRoom")
 		Map.ZA_Enter("To_South",    "LeaveNorthRoom")
 		Map.ZA_Enter("ToBoss",      "ToBoss")
+		Map.ZA_Enter("ToLobbyFromBoss","Boss2Lobby")
 		
 		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
 	end
 
 end
+
 
 
 
