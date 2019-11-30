@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.11.29
+// Version: 19.11.30
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -367,6 +367,7 @@ group FlowField
 	var WalkArrival	
 	table WalkArrivalParams
 	var SFont
+	var BigNumbers
 	
 	void UpdatePlayerTex()
 		if self.Map.Kthura.Actor.Player.Exists
@@ -739,6 +740,14 @@ group FlowField
 		int Y
 		int YMin = 20
 		Y = (Screen.Height-128)-YMin
+		if prefixed(self.Map.Kthura.Layer,"#")
+			self.BigNumbers = self.BigNumbers or LoadImageFont("Fonts/ECN.jfbf")
+			Color(180,0,255)
+			SetAlpha(100)
+			self.BigNumbers.DrawText(right(self.Map.Kthura.Layer,#self.Map.Kthura.Layer-1),10,Y-120)
+			SetAlpha(255)
+		end
+		__white
 		$SFont = $SFont or LoadImageFont("Fonts/Blitz.jfbf")
 		$SFont.DrawText("Phantasar Play-Time: "..Time.PhantasarTime,5,Y) Y = Y - YMin
 		$SFont.DrawText("    Earth Play-Time: "..Time.PlayTime,5,Y) Y = Y - YMin
@@ -993,6 +1002,8 @@ group ConsoleCommands
 	end
 		
 end
+
+
 
 
 
