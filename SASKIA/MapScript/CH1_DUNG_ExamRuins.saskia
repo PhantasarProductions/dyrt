@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.11.20
+; version: 19.11.30
 ; End License Information
 :OnLoad
 	end
@@ -66,5 +66,9 @@
 	call MapScript.Music
 	end
 
+:Boss
+	Call MapText,"BOSS_"..Field.Leader:upper()
+	call MapScript.StartBoss
+	Call MapScript.PostBoss
 
 

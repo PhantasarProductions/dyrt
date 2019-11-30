@@ -35,6 +35,7 @@
 // version: 19.11.30
 // End License Information
 
+#use "Script/Use/StartCombatMod"
 #use "script/use/anyway"
 #use "libs/collections"
 #use "libs/Roman"
@@ -222,6 +223,20 @@ group MScript
 		Map.GoToLayer("#001","FromBossSpot")
 	end
 	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "ExamRuins"
+		StartCombat.Foe[1] = "Boss/BigTiger"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void POSTBOSS()
+		error("No postboss script yet!")
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
@@ -239,9 +254,12 @@ group MScript
 		Map.ZA_Enter("ToLobbyFromBoss","Boss2Lobby")
 		
 		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
+		
+		Map.ZA_Enter("StartBoss",   "SASKIA:Boss")
 	end
 
 end
+
 
 
 
