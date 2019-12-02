@@ -44,6 +44,11 @@ group MScript
 		CSay("Welcome to the Xenor Buses West! Let's make sure YOMAMA has been awarded!")
 		Achievements.Award("YOMAMA")
 		
+		if not Done.XenorBushesWestFirstTimeWelcome
+			Respawn.Initiated = false
+			// NOTE: This will affect savegames shot before I took this measure, but it's not a big deal!
+		end
+		
 		// Corrections
 		if not Done.InitIrravoniaBaseResistances
 			CSay("Init Irravonia's and Eric's base resistances!")

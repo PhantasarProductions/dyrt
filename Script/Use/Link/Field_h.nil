@@ -136,7 +136,11 @@ group Map
 		$Kill("PLAYER")
 		FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer))
 		$SpawnPlayer(trim(Exit),AltWind)
-	end	
+	end
+	
+	get string MapFile
+		return LuaGetString("FLOW_FIELD","FieldMap.LoadedMap")
+	end
 	
 	get string Layer
 		return LuaGetString("FLOW_FIELD","FieldMap.Kthura.Layer")
@@ -235,6 +239,50 @@ group Map
 				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %s",k,tostring(v)))
 			end
 		})
+	end
+		
+	
+end
+
+group Respawn
+	
+	link Initiated = gv.Bool.Respawn_Initiated
+	link X = gv.Num.Respawn_X
+	link Y = gv.Num.Respawn_Y
+	link Map = gv.String.Respawn_Map
+	link Layer = gv.String.Respawn_Layer
+	
+	void Reset()
+		Map.Obj			= "Player"
+		self.X			= Map.ObjInt.X
+		self.Y			= Map.ObjInt.Y		
+		self.Map		= Map.MapFile
+		self.Layer		= Map.Layer
+		self.Initiated	= true
+	end
+	
+	void AutoSet()
+		if not self.Initiated
+			self.Reset()
+		end
+	end
+	
+	void Wipe()
+		FLD_Exe("SASKIA.Wipe()") // Make sure all SASKIA sessions will terminate!
+		FLD_Exe(sprintf("FlowField.LoadMap(trim(\"%s\"))",self.Map))
+		Map.Layer = self.Layer
+		FLD_Exe(sprintf("FlowField.CoordSpawnPlayer(%4d,%4d)",self.X,self.Y))
+		switch(__skill)
+			case 1
+				__cash--
+				if __cash<0
+					__cash=0
+				end
+			case 2
+				__cash = math.floor(__cash/2)
+			case 3
+				__cash = 0
+		end
 	end
 	
 end

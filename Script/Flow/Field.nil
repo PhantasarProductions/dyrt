@@ -726,6 +726,14 @@ group FlowField
 		self.UpdatePlayerTex()
 	end
 	
+	void CoordSpawnPlayer(int x, int y, wind)
+		wind = wind or "North"
+		assert(type(wind),sprintf("CoordSpawnPlayer(%4d,%4d,'%s'): Wind must be of type string! got %s",x,y,tostring(wind),type(wind)))
+		self.Map.Kthura.Actor.Player.SpawnCoords(x,y)
+		self.Map.Kthura.Actor.Player.Wind=wind
+		self.UpdatePlayerTex()
+	end
+	
 	void DoAutoScroll(force)
 		if not force
 			if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
@@ -825,6 +833,9 @@ global void BUB_Update()
 	
 	// debug
 	Dev.ConCheck()
+	
+	// Make sure respawn is set
+	Respawn.AutoSet()
 	
 	// AutoAchievements
 	Achievements.Auto()

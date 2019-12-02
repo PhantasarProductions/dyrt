@@ -240,6 +240,7 @@ group MScript
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
+			Respawn.Initiated = false
 		end
 		Map.ZA_Enter("Enter_SECRET","ShowSecret")
 		Map.ZA_Enter( "Show_SECRET","ShowSecret")

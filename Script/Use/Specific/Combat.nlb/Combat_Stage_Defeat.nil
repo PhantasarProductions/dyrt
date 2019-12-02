@@ -85,7 +85,8 @@ group Stage_DEFEAT extends Stage
 			__victor=false
 			GoToFlow("FIELD")
 			if not Combat_Start.NoLose
-				error("Wipe-out not yet scripted")
+				//error("Wipe-out not yet scripted")
+				Respawn.Wipe()
 			end
 			KillFlow("COMBAT")
 		end
