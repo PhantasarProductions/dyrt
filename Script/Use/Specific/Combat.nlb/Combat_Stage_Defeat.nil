@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Stage_Defeat.nil
-// Version: 19.11.14
+// Version: 19.12.02
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -95,5 +95,6 @@ group Stage_DEFEAT extends Stage
 
 
 end
+
 
 
