@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 19.11.25
+// Version: 19.12.03
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -221,17 +221,19 @@ group Stage_SelectTarget extends Stage
 	string ItemTag
 	string CharTag
 	table targetted
+	table xdata
 	bool wrongteam
 
 	void CONSTRUCTOR()
 		Stage.Stages.SELECTTARGET = self
 	end
 	
-	void ComeToMe(string aCharTag,string aItemTag)
+	void ComeToMe(string aCharTag,string aItemTag,table xdata)
 		self.CharTag = aCharTag
 		self.ItemTag = aItemTag
 		self.Item = _G.Item[aItemTag]
 		self.Ch = RPG.Char(aCharTag)
+		self.xdata = xdata
 		Stage.Go("SELECTTARGET")
 	end
 	
@@ -319,6 +321,11 @@ group Stage_SelectTarget extends Stage
 			// Configure next action
 			CSayF("Starting up linking requested action!")
 			table crap
+			if self.xdata
+				for k,v in pairs(xdata)
+					crap[k] = v
+				end
+			end
 			crap.ExeTag = self.CharTag
 			crap.ActTag = self.ItemTag
 			crap.Targets = {}
@@ -359,7 +366,11 @@ group Stage_PlayerInput extends Stage
 	void StartAbility()
 	end
 	
+	void ProcessItem(string itm)
+	end
+	
 	void StartItem()
+		GoMenu(self.CharTag,"COMBAT_ITEMS")
 	end
 	
 	void StartAttack()
@@ -420,6 +431,7 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
 
 
 
