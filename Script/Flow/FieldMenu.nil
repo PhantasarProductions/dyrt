@@ -315,7 +315,11 @@ group Flow_FieldMenu
 					__amber
 					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
 					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
-						$InvItemHover = Item[itemtag]						
+						$InvItemHover = Item[itemtag]
+						$ItemHover = $ItemHover or {}
+						$ItemHover.InvItem = $InvItemHover
+						$ItemHover.TagItem = itemtag
+						$ItemHover.Action  = $situations[$situation].ItemAction
 					end
 				end
 				y = y + 20
@@ -323,6 +327,8 @@ group Flow_FieldMenu
 		end
 		if $InvItemHover
 			$GenIAAHelp()
+		else 
+			$ItemHover = nil;
 		end
 		//Viewport()
 	end
@@ -361,7 +367,12 @@ group Flow_FieldMenu
 				["MenuItems"] = {
 					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" }
 				},
-				["Return"] = "COMBAT"
+				["Return"] = "COMBAT",
+				["ItemAction"] = void()
+						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
+						LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveItem=trim('%s')})",self.CharTag,self.ItemHover.TagItem,self.ItemHover.TagItem),"Send Item to Combat FLow!")
+						GoToFlow($situations[$situation].Return)
+					end
 			},
 			["COMBAT_ABILITIES"] = {
 				["MenuItems"] = {
@@ -503,12 +514,13 @@ with Flow_FieldMenu
 	global void PartyClick(int num)
 		if num==$CharNum
 			GoToFlow($situations[$situation].Return)
-		else
+		elseif not prefixed($situation,"COMBAT_")
 			$CharNum = num
 		end
 	end
 	
 end
+
 
 
 
