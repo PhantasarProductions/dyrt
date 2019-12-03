@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.11.13
+// Version: 19.12.03
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -104,9 +104,46 @@ group Execution
 		end
 		
 		TarChar.Points("HP").Dec(enddmg)
+		if gv.Bool.DEBUG_CHEAT_JACKTHERIPPER and ( prefixed(Tar.Tag,"FOE_") )
+			CSay("Killing foe due to the Jack The Ripper mode")
+			TarChar.Points("HP").Have = 0
+		end
 		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,TarChar.Points("HP").Have)
 	end
-
+	
+	void Heal(Exe,Tar,Act)
+		int hvalue
+		var HPTar
+		var ChExe
+		var ChTar
+		ChExe = RPG.Char(Exe.Tag)
+		ChTar = RPG.Char(Tar.Tag)
+		HPTar = RPG.Char(Tar.Tag).Points("HP")
+		switch Act.Act.HealType
+			case "Absolute"
+				hvalue = Act.Act.Heal
+			case "Percent"
+				hvalue = math.ceil( (Act.Act.Heal/100) * HPTar.Maximum )
+			case "Stat"
+				hvalue = math.ceil( (Act.Act.Heal/100) * ChExe.Stat(sprintf("END_%s",Act.Act.HealStat)).Value )
+			default
+				error(sprintf("Heal type %s unknown",Act.Act.HealType))
+		end
+		for _,status in Exe.StatusChanges.Each
+			if status.AltHeal
+				hvalue = status.AltHeal(Exe,hvalue)
+			end
+		end
+		if hvalue==0
+			new Hurt("No effect!",Tar.Tag,255,255,255)
+		elseif hvalue<0
+			new Hurt(hvalue,Tar.Tag,255,255,255)
+		else
+			new Hurt(hvalue,Tar.Tag,0,255,0)
+		end
+		HPTar.Have = HPTar.Have + hvalue
+	end
+	
 	void TrueExec(Action,Target)
 		// Before we begin
 		bool hit
@@ -139,6 +176,10 @@ group Execution
 		end
 		
 		// Calculate healing
+		if Action.Act.Heal>0
+			$Heal(Executor,Target,Action)
+			hit = true
+		end
 		
 		// Buffs/Debufss
 		
@@ -169,6 +210,7 @@ group Execution
 	end
 
 end
+
 
 
 
