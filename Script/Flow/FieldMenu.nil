@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.11.20
+// Version: 19.12.03
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -357,8 +357,18 @@ group Flow_FieldMenu
 				}, 
 				["Return"] = "FIELD" 
 			},
-			["COMBAT_ITEMS"] = {["MenuItems"] = {}},
-			["COMBAT_ABILITIES"] = {["MenuItems"] = {}},
+			["COMBAT_ITEMS"] = {
+				["MenuItems"] = {
+					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" }
+				},
+				["Return"] = "COMBAT"
+			},
+			["COMBAT_ABILITIES"] = {
+				["MenuItems"] = {
+					{ ["IconFile"]="Abilities", ["Right"]=nil, ["Help"]="Shows a character's abilities (if they actually got them)" }
+				},
+				["Return"] = "COMBAT"
+			},
 			["SHOP"] = {["MenuItems"] = {} },
 			["BANK"] = {["MenuItems"] = {} }
 		}
@@ -499,6 +509,7 @@ with Flow_FieldMenu
 	end
 	
 end
+
 
 
 
