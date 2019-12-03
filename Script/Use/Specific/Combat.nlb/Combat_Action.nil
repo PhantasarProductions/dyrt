@@ -109,9 +109,20 @@ group Action_Exe
 	end
 	
 	void Update()
+		bool ok = true
 		var F
 		F = Stage_Action.Act.Executor
-		Execution.Exec(Stage_Action.Act)
+		if Stage_Action.Act.RemoveItem!=""
+			if Inventory[ Stage_Action.Act.RemoveItem ] > 0
+				Inventory[ Stage_Action.Act.RemoveItem ]--
+			else
+				ok = false
+				Combat_Message.Msg("Out of items!")
+			end
+		end
+		if ok
+			Execution.Exec(Stage_Action.Act)
+		end
 		F.GaugePosition = 0
 		if not prefixed(F.Tag,"FOE_")
 			F.Frame = 0
@@ -227,6 +238,7 @@ group Stage_Action extends Stage
 	end
 
 end
+
 
 
 
