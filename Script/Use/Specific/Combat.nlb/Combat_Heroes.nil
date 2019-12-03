@@ -322,7 +322,7 @@ group Stage_SelectTarget extends Stage
 			CSayF("Starting up linking requested action!")
 			table crap
 			if self.xdata
-				for k,v in pairs(xdata)
+				for k,v in pairs(self.xdata)
 					crap[k] = v
 				end
 			end
@@ -431,6 +431,7 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
 
 
 
