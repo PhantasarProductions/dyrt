@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_AbnormalStatus.nil
-// Version: 19.11.07
+// Version: 19.12.03
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -65,6 +65,9 @@ class Combat_Status
 	// Must be int with fighter object for the fighter and an int parameter for the experience point you'd normally get
 	// int(f,int exp)
 	delegate AltExperience
+	
+	// This delegate must be "int(f,int hp)"
+	delegate AltHeal
 	
 	static table S
 	static table SN
@@ -132,6 +135,7 @@ group Defeated
 	end
 	
 end
+
 
 
 
