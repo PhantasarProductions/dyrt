@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 19.11.10
+// Version: 19.12.03
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -59,6 +59,11 @@ class Actions
 	// Action itself
 	string ActTag
 	var Act
+	
+	// Extra data
+	string RemoveItem
+	int RemoveAP
+	bool BlockIfSilenced
 	
 	// Targets
 	table TargetTags
@@ -222,6 +227,7 @@ group Stage_Action extends Stage
 	end
 
 end
+
 
 
 
