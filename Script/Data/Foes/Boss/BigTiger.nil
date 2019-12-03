@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/30/2019 8:08:12 PM
+// Generated: 12/3/2019 8:05:38 PM
 
 do
 var retfunc()
@@ -51,7 +51,7 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=600
+	foeret.Char.Stat("BASE_HP").Value=250
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
