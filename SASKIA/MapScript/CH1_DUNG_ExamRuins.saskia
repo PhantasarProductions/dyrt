@@ -69,6 +69,9 @@
 :Boss
 	Call MapText,"BOSS_"..Field.Leader:upper()
 	call MapScript.StartBoss
+	; please note that all SASKIA scripts get terminated 
+	; if you lose a battle, and due to that no checkups are required 
+	; here. Saves me a lot of trouble!
 	Call MapScript.PostBoss
 
 
