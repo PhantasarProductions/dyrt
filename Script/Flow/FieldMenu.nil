@@ -292,7 +292,7 @@ group Flow_FieldMenu
 						Help[#Help+1]=sprintf("Unknown healing specifier! You've likely encountered a bug: %s",$HealType)
 				end
 			end
-			if $Attack or $Attack>0
+			if $Attack and $Attack>0
 				Help[#Help+1] = sprintf("%s attack, power %3d%% of %s, against target's %s",$AttackType,$Attack,$AttackStat,$DefenseStat)
 				if $Element and $Element!="" and $Element!="None"
 					Help[#Help+1] = sprintf("- Attack based on element %s",$Element)
