@@ -333,6 +333,33 @@ group Flow_FieldMenu
 		//Viewport()
 	end
 	
+	void Abilities(ubox)
+		var abls
+		int y
+		abls = NIL.Use("Script/Char/Ability/"..self.CharTag)
+		y = 5
+		for tag,need in spairs(abls)
+			string stag
+			bool hovering
+			stag = "ABL_HERO_"..self.CharTag.."_"..tag
+			hovering = Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
+			if AbilitiesMastered[self.CharTag][tag]
+				__white
+				DarkText.Font($Font,Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5,ubox.y+y)
+				if Item[stag].AP_Cost and Item[stag].AP_Cost>0
+					Color(0,180,255)
+					DarkText.Font($Font,tostring(Item[stag].AP_Cost),ubox.x+ubox.w-10,ubox.y+y,1)
+				end
+			elseif need.Start
+				AbilitiesMastered[self.CharTag][tag] = true
+			else
+				Color(127,127,127)
+				DarkText.Font($Font,"?????",ubox.x+5,ubox.y+y)
+			end
+			y = y + 20
+		end
+	end
+	
 	void ViewAchievements(ubox)
 		Achievements.Overview(ubox.x,ubox.y,ubox.w,ubox.h)
 	end
@@ -357,7 +384,7 @@ group Flow_FieldMenu
 				["MenuItems"] = { 
 					{ ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" },
 					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" },
-					{ ["IconFile"]="Abilities", ["Right"]=nil, ["Help"]="Shows a character's abilities (if they actually got them)" },
+					{ ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" },
 					{ ["IconFile"]="Trophies", ["Right"]=self.ViewAchievements, ["Help"]="Overview of achievements you can obtain, and how to obtain them" },
 					{ ['IconFile'] = "Exit", ['Action'] = self.Quit, ['Help']="Quit the game", ['NoTab']=true}
 				}, 
