@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.12.02
+// Version: 19.12.04
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -315,6 +315,17 @@ group FieldMap
 			CSay("Temporary kill, object tagged: "..tag)
 		end
 		$Kthura.Kill(tag)
+	end
+	
+	void KillSwap()
+		string m
+		m = "MAPCHANGES."..FieldMap.LoadedMap
+		Swap.Data[m] = "print('Killed')"
+	end
+	
+	void KillSwapMap(string m)
+		m = "MAPCHANGES."..m
+		Swap.Data[m] = "print('Killed by the swap killer!')\n\n"
 	end
 	
 	void AddSwap(string code)
@@ -941,6 +952,20 @@ end
 
 group ConsoleCommands
 	
+	void TAGS()
+		var spl
+		spl = FlowField.Map.Kthura.Tags(FlowField.Map.Kthura.Layer)
+		for i,line in ipairs(spl)
+			int r
+			int g
+			int b
+			g = math.floor( (i/#spl) * 255 )
+			r = 255-g
+			b = math.abs( math.sin(i) * 25 )
+			CWriteLine(line,r,g,b)
+		end
+	end
+	
 	void COUNTOBJECTS()
 		for k,cnt in spairs(FlowField.Map.Kthura.CountObjects())
 			CSayF("%20s:%9d",k,cnt)
@@ -1013,48 +1038,4 @@ group ConsoleCommands
 	end
 		
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
