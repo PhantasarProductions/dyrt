@@ -1,4 +1,13 @@
+int s
+s = __skill
 #pure
 return {
+	 QuickStrike = { Start=true },
+	 Power2x = { Skill_Sword=5 },
+	 Power3x = { Skill_Sword=10*s },
+	 Power4x = { Skill_Sword=15*s },
+	 WarShout = { Skill_Sword=8*(s*s) },
+	 Focus = { Scharum = true },
+	 Power5x = { SealedBoss = true }
 }
 #endpure
