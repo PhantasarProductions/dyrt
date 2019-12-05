@@ -200,6 +200,14 @@ group Map
 		FLD_Exe("FlowField.Map.AddSwap(\"" .. SafeString(code) .. "\")")
 	end
 	
+	void KillSwap(m)
+		if m
+			FLD_Exe("FlowField.Map.KillSwapMap(\"" .. SafeString(m) .. "\")")
+		else
+			FLD_Exe("FlowField.Map.KillSwap()")
+		end
+	end
+	
 	set string Obj
 		FLD_Exe(sprintf("FlowField.Map.Kthura.Obj = trim(\"%s\")",value))
 	end
