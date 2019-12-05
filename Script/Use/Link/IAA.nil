@@ -92,7 +92,7 @@ end
 string CA_CHAR
 quickmeta group CharAbilitiesMastered
 	newindex
-		assert(CA_CHAR=="","Illegal meta group call!")
+		assert(CA_CHAR!="","Illegal meta group call!")
 		assert(type(value)=="boolean","Boolean value expected!")
 		LoadSubIAA()
 		if value==true
@@ -104,9 +104,10 @@ quickmeta group CharAbilitiesMastered
 	end
 	
 	index
-		assert(CA_CHAR=="","Illegal meta group call!")
+		LoadSubIAA()
+		assert(CA_CHAR!="","Illegal meta group call!")
 		bool ret
-		ret = LuaGetBool(sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s)\"] == true",CA_CHAR,key) )
+		ret = LuaGetBool("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s)\"] == true",CA_CHAR,key) )
 		CA_CHAR=""
 		return ret
 	end
@@ -114,8 +115,11 @@ end
 
 quickmeta group AbilitiesMastered
 	index
-		assert(CA_CHAR!="","Cyclic Abilities Mastered Call!")
+		assert(CA_CHAR=="","Cyclic Abilities Mastered Call! ("..CA_CHAR..")")
 		CA_CHAR=key
+		if key=="Yasathar"
+			CA_CHAR="Eric"
+		end
 		LoadSubIAA()
 		LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"] = SubAbilitiesMastered[\"trim(%s)\"] or {}",key,key),"IAA:ABIL:CreateCharIfNeeded")
 		return CharAbilitiesMastered
