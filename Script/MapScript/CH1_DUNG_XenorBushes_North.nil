@@ -41,6 +41,7 @@
 group MScript
 	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("Leave","SOUTH")
 	end
 	
 	void NGPSECRETREMOVE()
@@ -54,6 +55,15 @@ group MScript
 		RPG.Party[2] = "Irravonia"
 		RPG.Party[3] = "Rebecca"
 		Map.SpawnPlayer("Start")
+	end
+	
+	void SOUTH()
+		if not gv.Bool.Chapter1Complete
+			Map.WalkTo("Start")
+			MapText("DONTGO")
+		else
+			WorldMap("Delisto")
+		end
 	end
 	
 	void Draw()
