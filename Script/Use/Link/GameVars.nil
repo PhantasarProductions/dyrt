@@ -76,7 +76,7 @@ end
 
 #say Subber
 string Subber(string str)
-	LuaDoString("GAMEVARS","varSub(\""..str.."\")")
+	LuaDoString("GAMEVARS","varSub(\"".. SafeString(str) .. "\")")
 	return popCOMM()
 end
 #say "VarMetaIndex"
