@@ -151,7 +151,7 @@ Rec: KILL_02500
 Rec: KILL_05000
 	AutoProcess = TRUE
 	Description = Kill 5000 enemies
-	Name = Leerooooooooy Jannnnnnkins
+	Name = Leerooooooooy Jennnnnnkins
 	ProcessMax = 5000
 	ProcessString = {Value} of {Max}
 	ProcessValue = KILLS
@@ -171,6 +171,14 @@ Rec: KILL_12000
 	ProcessMax = 12000
 	ProcessString = {Value} of {Max}
 	ProcessValue = KILLS
+
+Rec: KILL_THE_HIRELING
+	AutoProcess = TRUE
+	Description = Kill a hireling
+	Name = Kill the hireling
+	ProcessMax = 1
+	ProcessString = Kill a hireling
+	ProcessValue = KILLED_REG_BOSS
 
 Rec: PUZ_DIEDIE
 	AutoProcess = FALSE
