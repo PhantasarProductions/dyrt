@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.12.03
+// Version: 19.12.05
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -588,6 +588,7 @@ with Flow_FieldMenu
 	end
 	
 end
+
 
 
 
