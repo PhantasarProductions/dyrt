@@ -38,6 +38,7 @@
 
 
 #say "Map Script - None!"
+#use "script/use/anyway"
 group MScript
 	
 	void CONSTRUCTOR()
