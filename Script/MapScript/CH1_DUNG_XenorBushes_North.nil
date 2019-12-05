@@ -42,6 +42,10 @@ group MScript
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Leave","SOUTH")
+		Map.ZA_Enter("ToDoubline","NORTH")
+		if not Done.FirstTimeInXenorBushesNorth
+			Respawn.Initiated = false
+		end
 	end
 	
 	void NGPSECRETREMOVE()
@@ -63,6 +67,14 @@ group MScript
 			MapText("DONTGO")
 		else
 			WorldMap("Delisto")
+		end
+	end
+	
+	void NORTH()
+		if not gv.Bool.Chapter1Complete
+			Field.LoadMap("CH1_City_Doubline")
+			Map.GoToLayer("DownTown","Start")
+			//Map.SpawnPlayer("Start")
 		end
 	end
 	
