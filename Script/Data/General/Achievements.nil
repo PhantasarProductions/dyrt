@@ -145,7 +145,7 @@ ret = {
 	["KILL_05000"] = {
 		["AutoProcess"] = true,
 		["Description"] = "Kill 5000 enemies",
-		["Name"] = "Leerooooooooy Jannnnnnkins",
+		["Name"] = "Leerooooooooy Jennnnnnkins",
 		["ProcessMax"] = 5000,
 		["ProcessString"] = "{Value} of {Max}",
 		["ProcessValue"] = "KILLS",
@@ -167,6 +167,15 @@ ret = {
 		["ProcessMax"] = 12000,
 		["ProcessString"] = "{Value} of {Max}",
 		["ProcessValue"] = "KILLS",
+
+	},
+	["KILL_THE_HIRELING"] = {
+		["AutoProcess"] = true,
+		["Description"] = "Kill a hireling",
+		["Name"] = "Kill the hireling",
+		["ProcessMax"] = 1,
+		["ProcessString"] = "Kill a hireling",
+		["ProcessValue"] = "KILLED_REG_BOSS",
 
 	},
 	["PUZ_DIEDIE"] = {
