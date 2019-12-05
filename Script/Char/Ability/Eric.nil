@@ -1,4 +1,10 @@
-#pure
-return {
-}
-#endpure
+do
+	int s
+	s = __skill
+
+	#pure
+	return {
+		QuickStrike = { Skill_Sword = 5 * s }
+	}
+	#endpure
+end
