@@ -21,7 +21,6 @@
 
 
 
-
 #use "libs/strings"
 #use "libs/tables"
 #use "script/use/anyway"
@@ -135,7 +134,7 @@ group ConsoleCommands
 				for j = 0 , 4
 					var Chr
 					Chr = RPG.GetChar(RPG.Party[i])
-					Chr.Points(sprintf("SKILLEXP%d",j)).Maximum = (100 * (10^__skill)) * Chr.Points(sprintf("SKILLLVL%d",j)).Have
+					Chr.Points(sprintf("SKILLEXP%d",j)).Maximum = (10 * (10^__skill)) * Chr.Points(sprintf("SKILLLVL%d",j)).Have
 				end
 			end
 		end
