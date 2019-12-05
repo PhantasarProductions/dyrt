@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.05
+// version: 19.12.06
 // End License Information
 do
 	int s
@@ -44,4 +44,5 @@ do
 	}
 	#endpure
 end
+
 
