@@ -37,7 +37,9 @@
 
 
 #pure
-return {
+	
+local
+a = {
 	-- Water
 	Heal       = { Skill_Water = 1, Start=true },
 	Splash     = { Skill_Water = 5 },
@@ -70,8 +72,11 @@ return {
 	Yggdrassil  = { Skill_Water = 65, Skill_Earth = 50 },
 	Mjolnir     = { Skill_Fire  = 65, Skill_Wind = 70 },
 	Vesuvius    = { Skill_Fire  = 75, Skill_Earth = 80 }
-
+	
 }
+	
+return a
+	
 #endpure
 
 
