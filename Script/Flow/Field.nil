@@ -292,6 +292,9 @@ group FieldMap
 	set int ScrollY
 		self.Kthura.ScrollY=value
 	end
+	get string Layer
+		return self.Kthura.Layer
+	end
 	
 	var ToMapCoords(int x, int y)
 		return x+$ScrollX,y+$ScrollY
@@ -432,10 +435,10 @@ group FlowField
 					case "BLUE"
 						RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
 						RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
-						gv.String.RespawnRoom = $Map.LoadedMap
-						gv.String.Layer = $Map.Layer
-						gv.Int.RespawnX = self.Map.Kthura.Actor.Player.X
-						gv.Int.RespawnY = self.Map.Kthura.Actor.Player.Y
+						gv.String.Respawn_Map = $Map.LoadedMap
+						gv.String.Respawn_Layer = $Map.Layer
+						gv.Int.Respawn_X = self.Map.Kthura.Actor.Player.X
+						gv.Int.Respawn_Y = self.Map.Kthura.Actor.Player.Y
 					default
 						error("Unknown savegame color code: "..col)
 				end
