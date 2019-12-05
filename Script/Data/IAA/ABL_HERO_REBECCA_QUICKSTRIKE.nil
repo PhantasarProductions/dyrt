@@ -7,7 +7,7 @@ do
 table ret_ABL_HERO_REBECCA_QUICKSTRIKE
 ret_ABL_HERO_REBECCA_QUICKSTRIKE={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 0,
+	["AP_Cost"] = 10,
 	["Attack"] = 50,
 	["AttackCancel"] = true,
 	["AttackStat"] = "Strength",
