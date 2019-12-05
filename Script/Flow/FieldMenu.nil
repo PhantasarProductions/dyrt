@@ -278,6 +278,7 @@ group Flow_FieldMenu
 		Help = $InvItemLastHelp.Help
 		Help[#Help+1] = $InvItemHover.Name
 		Help[#Help+1] = $InvItemHover.Description
+		
 		with HV
 			if $Heal and $Heal>0 
 				switch $HealType
@@ -289,6 +290,15 @@ group Flow_FieldMenu
 						Help[#Help+1]=sprintf("Heals several HP. Modifier based on %s",$HealStat)
 					default
 						Help[#Help+1]=sprintf("Unknown healing specifier! You've likely encountered a bug: %s",$HealType)
+				end
+			end
+			if $Attack or $Attack>0
+				Help[#Help+1] = sprintf("%s attack, power %3d%% of %s, against target's %s",$AttackType,$Attack,$AttackStat,$DefenseStat)
+				if $Element and $Element!="" and $Element!="None"
+					Help[#Help+1] = sprintf("- Attack based on element %s",$Element)
+				end
+				if $AttackCancel
+					Help[#Help+1] = sprintf("- Cancel effect")
 				end
 			end
 		end
@@ -342,8 +352,17 @@ group Flow_FieldMenu
 			string stag
 			bool hovering
 			stag = "ABL_HERO_"..self.CharTag.."_"..tag
-			hovering = Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
+			hovering = Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+19+ubox.y
 			if AbilitiesMastered[self.CharTag][tag]
+				if hovering
+					//$ItemHover = $ItemHover or {}
+					//$ItemHover.InvItem = $InvItemHover
+					//$ItemHover.TagItem = stag
+					//$ItemHover.Action  = $situations[$situation].AblAction
+					$InvItemHover=Item[stag]
+					$GenIAAHelp()
+					ShowAutoHelp($InvItemLastHelp.Help)
+				end
 				__white
 				DarkText.Font($Font,Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5,ubox.y+y)
 				if Item[stag].AP_Cost and Item[stag].AP_Cost>0
@@ -351,10 +370,32 @@ group Flow_FieldMenu
 					DarkText.Font($Font,tostring(Item[stag].AP_Cost),ubox.x+ubox.w-10,ubox.y+y,1)
 				end
 			elseif need.Start
+				//$ItemHover = nil;
 				AbilitiesMastered[self.CharTag][tag] = true
 			else
 				Color(127,127,127)
 				DarkText.Font($Font,"?????",ubox.x+5,ubox.y+y)
+				//$ItemHover = nil;
+				if hovering
+					table Help
+					Help = {"In order to unlock this ability you need:"}
+					$InvItemLastHelp = { ['Help'] = Help }
+					for k,v in spairs(need)
+						switch k
+							case "Scharum"
+								Help[#Help+1] = "= To defeat Scharum"
+							case "SealedBoss"
+								Help[#Help+1] = "= To defeat a certain sealed boss"
+							case "BoolVar"
+								Help[#Help+1] = "= To have reached a certain spot in the scenario"
+							default
+								if prefixed(k,"Skill_")
+									Help[#Help+1] = "= To have "..right(k,#k-6).." on level ".. Roman(v) .." or higher"
+								end
+						end
+					end
+					ShowAutoHelp(Help)
+				end
 			end
 			y = y + 20
 		end
@@ -497,7 +538,7 @@ with Flow_FieldMenu
 			$situations[$situation].citem.Left($LeftBox)
 		else
 			dchat("= base")
-			$BasePanel($LeftBox)			
+			$BasePanel($LeftBox)
 		end
 		
 		// Right Tab
