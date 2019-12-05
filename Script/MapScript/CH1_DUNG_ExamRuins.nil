@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.02
+// version: 19.12.04
 // End License Information
 
 #use "Script/Use/StartCombatMod"
@@ -234,7 +234,12 @@ group MScript
 	end
 	
 	void POSTBOSS()
-		error("No postboss script yet!")
+		// error("No postboss script yet!")
+		Map.Show("EricPost")
+		Map.Show("ZackPost")
+		Map.WalkTo("RebeccaPost")
+		Field.Leader = "Rebecca"
+		tostring(Done.Done_ExamRuinsCompleted) // Will show nothing, but the trick itself works :P
 	end
 	
 	void CONSTRUCTOR()
@@ -260,6 +265,7 @@ group MScript
 	end
 
 end
+
 
 
 

@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.11.15
+; version: 19.12.04
 ; End License Information
 
 
@@ -65,9 +65,16 @@ end
 	end
 	;call error,"End of script reached!"
 	
+:End_Eric
+	call CSay,"En daar gaan we weer naar de gevangenis!"
+	call BoxText,"EXAM_END","C"
+	Call Map.KillSwap,"CH1_DUNG_XenorBushes_North"
+	call Field.ChainMap,"CH1_DUNG_XenorBushes_North","StartToDoubline","#001"
+	end
 
 :From_World
 	end
+
 
 
 

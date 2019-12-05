@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.03
+; version: 19.12.04
 ; End License Information
+
 :OnLoad
 	end
 	
@@ -73,6 +74,15 @@
 	; if you lose a battle, and due to that no checkups are required 
 	; here. Saves me a lot of trouble!
 	Call MapScript.PostBoss
+	group 2
+	call BoxText.Load,"GENSCEN/CH1/ENDEXAM","EXAM_END"
+	call BoxText,"EXAM_END","A"
+	Call Map.WalkTo,"RebeccaAttack"
+	call Map.Kill,"ActorBoss",true
+	call BoxText,"EXAM_END","B"
+	call Field.ChainMap,"CH1_DUNG_Prison","End_Eric","#999"
+	end
+
 
 
 
