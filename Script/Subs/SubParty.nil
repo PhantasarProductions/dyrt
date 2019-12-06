@@ -138,7 +138,7 @@ Bars[3] = new PartyBar("VIT",255,180,0)
 
 #say "= Starting group!"
 group SubParty
-
+	
 	var AudioLevelUp
 	
 	table StatSubs
