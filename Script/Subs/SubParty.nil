@@ -282,12 +282,16 @@ group SubParty
 			ch.Points(p)['Have'] = ch.Points(p)['Maximum']
 		end
 		for i=0,4
-			CSayF("Configuring Skill #%d",i)
-			ch.Points(sprintf("SKILLEXP%d",i),true).Maximum  = 100 * (10^__skill)
-			ch.Points(sprintf("SKILLEXP%d",i)     ).Have     = 0
-			ch.Points(sprintf("SKILLLVL%d",i),true).Maximum  = ({1000,250,100})[__skill]
-			if ch.Points(sprintf("SKILLLVL%d",i)     ).Have == 0
-				ch.Points(sprintf("SKILLLVL%d",i) ).Have     = 0
+			if not Done[sprintf("SkillSet_%s_%d",tag,i)]
+				CSayF("Configuring Skill #%d",i)
+				ch.Points(sprintf("SKILLEXP%d",i),true).Maximum  = 10 * (10^__skill)
+				ch.Points(sprintf("SKILLEXP%d",i)     ).Have     = 0
+				ch.Points(sprintf("SKILLLVL%d",i),true).Maximum  = ({1000,250,100})[__skill]
+				if ch.Points(sprintf("SKILLLVL%d",i)     ).Have == 0
+					ch.Points(sprintf("SKILLLVL%d",i) ).Have     = 0
+				end
+			else
+				CSayF("Skill $%d already configured! No need to do it again!",i)
 			end
 		end
 	end
