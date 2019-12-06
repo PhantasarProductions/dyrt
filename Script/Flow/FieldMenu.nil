@@ -83,6 +83,10 @@ group Flow_FieldMenu
 	table situations
 	string situation
 	
+	delegate LM_Action
+	var LB_ActionArg
+
+	
 	var ItemHover
 	
 	var BigFont
@@ -574,6 +578,11 @@ with Flow_FieldMenu
 				$situations[$situation].citem = $ItemHover
 			end
 			//CSay(NIL.LuaSerialize("Clicked Menu Item",$ItemHover))
+		end
+		
+		if $LM_Action
+			$LM_Action($LM_ActionArgs)
+			$LM_Action = nil;
 		end
 		
 		Party.Click()
