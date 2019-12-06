@@ -43,6 +43,9 @@ group MScript
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Leave","LEAVE")
+		if not gv.Bool.GagoltonAttacked
+			Map.Kill("NPC_ShopHoer2")
+		end
 	end
 	
 	void LEAVE()
@@ -50,6 +53,17 @@ group MScript
 			Field.LoadMap("CH1_DUNG_XenorBushes_North")
 			Map.GoToLayer("#002","Einde")
 			//Map.SpawnPlayer("Einde")
+		end
+	end
+	
+	void NPC_SHOPHOER()
+		switch Field.Leader
+			case "Eric" "Brendor" "Dernor"
+				MapText("SHOPHOER_MALE")
+			case "Irravonia" "Scyndi" "Rebecca" "Merya" "Aziella" "Kirana"
+				MapText("SHOPHOER_FEMALE")
+			default
+				error("ShopHoer -- Unknown character gender for leader!")
 		end
 	end
 	
@@ -62,6 +76,7 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
+
 
 
 
