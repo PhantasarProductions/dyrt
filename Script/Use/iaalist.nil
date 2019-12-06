@@ -3,6 +3,7 @@ table itemret
 itemret[#itemret+1]="ITM_ANTIDOTE"
 itemret[#itemret+1]="ITM_APPLE"
 itemret[#itemret+1]="ITM_MEDICINE"
+itemret[#itemret+1]="ITM_PHOENIX"
 itemret[#itemret+1]="ITM_POTION"
 itemret[#itemret+1]="EQW_ERICREBECCA_SHORTSWORD"
 itemret[#itemret+1]="EQW_IRRAVONIA_WAND_MISSILE"

@@ -81,7 +81,7 @@ Rec: CH1_SHOPHOER
 	Stock02 = ITM_POTION
 	Stock03 = ITM_ANTIDOTE
 	Stock04 = ITM_MEDICINE
-	Stock05 = 
+	Stock05 = ITM_PHOENIX
 	Stock06 = 
 	Stock07 = 
 	Stock08 = 
