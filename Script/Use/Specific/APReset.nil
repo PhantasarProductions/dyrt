@@ -1,0 +1,55 @@
+#use "libs/strings"
+
+do
+	table r
+	int s
+	s = __skill
+	#pure
+	r = {
+		YoungIrravonia = { 0, 0, 0, 0, 0 },
+		Eric = {2 , 1, 1, 1, 1 },
+		Irravonia =  { 0, 2, 2, 2, 2},
+		Brendor = { 1, 0, 0, 0, 0},
+		Scyndi = { 1, 3, 2, 1, 1},
+		Rebecca = { 4, 0, 0, 0, 0},
+		Dernor = {1, 3, 0, 0, 0},
+		Merya = {2, 2, 0, 0, 0},
+		Aziella = {1.5,1.5,0, 0, 0 },
+		Shanda = {0,0,0,0,0},
+		Kirana = {90/s,90/s,90/s,90/s,90/s}
+		}
+	#endpure
+		
+	void ResetCharAP(string Tag)
+		var ch
+		int tot
+		ch = RPG.GetChar(Tag)
+		for i=0,4
+			tot = tot + math.ceil(ch.Points(sprintf("SKILLLVL%d",i)).Have * r[Tag][i+1])
+		end
+		switch __skill
+			case 1
+				if ch.Points("AP").Have<tot
+					ch.Points("AP").Have=tot
+				end
+			case 2
+				ch.Points("AP").Have=tot
+			case 3
+				if ch.Points("AP").Have>tot
+					ch.Points("AP").Have=tot
+				end
+			default
+				error("Unknown skill for AP resetting")
+		end
+	end
+	
+	void ___APReset()
+		for chi = 1,8
+			if RPG.Party[chi] and RPG.Party[chi]!=""
+				ResetCharAP(RPG.Party[chi])
+			end
+		end
+	end
+	
+	return ___APReset
+end

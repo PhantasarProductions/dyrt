@@ -35,6 +35,8 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "script/use/specific/APReset"
+
 #macro VICTIME 9
 
 group Stage_VICTORY extends Stage
@@ -95,6 +97,7 @@ group Stage_VICTORY extends Stage
 			Music.Pop()
 			Foe.TotalMassacre()
 			__victor=true
+			APReset()
 			GoToFlow("FIELD")
 			KillFlow("COMBAT")
 		end

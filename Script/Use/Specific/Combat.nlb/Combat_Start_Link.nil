@@ -48,6 +48,8 @@
 #use "Script/Use/Anyway"
 #use "libs/strings"
 
+#use "script/use/specific/APReset"
+
 #accept CombatTime
 
 group Combat_Start
@@ -103,6 +105,7 @@ global void LetsGetReadyToRumble()
 		
 		// Compile Heroes
 		Hero.CompileAll()
+		APReset()
 		
 		// Compile Foes
 		for i,d in pairs($Foe)

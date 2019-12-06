@@ -35,6 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
+#use "script/use/specific/APReset"
 #accept Combat_Start
 #macro DEFTIME 9
 
@@ -83,6 +84,7 @@ group Stage_DEFEAT extends Stage
 			Music.Pop()
 			Foe.TotalMassacre()
 			__victor=false
+			APReset()
 			GoToFlow("FIELD")
 			if not Combat_Start.NoLose
 				//error("Wipe-out not yet scripted")
