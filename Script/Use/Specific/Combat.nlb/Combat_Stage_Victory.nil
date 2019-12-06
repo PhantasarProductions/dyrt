@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Stage_Victory.nil
-// Version: 19.11.14
+// Version: 19.12.06
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -104,6 +104,7 @@ group Stage_VICTORY extends Stage
 	end
 	
 end
+
 
 
 
