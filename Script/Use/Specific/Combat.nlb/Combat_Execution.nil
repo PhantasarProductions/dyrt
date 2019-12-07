@@ -207,6 +207,7 @@ group Execution
 				CSayF("= Skill #%d",i)
 				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(split(Action.Act[sprintf("GainSkill%dChar",i)] or "",";"),Action.Executor.Tag)
 					var skp
+					var skl
 					skp = Action.Executor.Char.Points(sprintf("SKILLEXP%d",i))
 					skl = Action.Executor.Char.Points(sprintf("SKILLLVL%d",i))
 					skp.Inc(Action.Act[sprintf("GainSkill%d",i)])
@@ -219,6 +220,9 @@ group Execution
 						R = 255 - (i * 63)
 						G = 255 - R
 						new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("%s's %s level %s",Action.Executor.Char.Name,Action.Executor.Char.Data[sprintf("SKILL%d",i)], Roman(skl.Have)),R,G,0)
+						if skl.Have == skl.Maximum and Action.Executor.Tag!="YoungIrravonia" and Action.Executor.Tag!="Shanda" and Action.Executor.Tag!="Kirana"
+							Achievements.Award(sprintf("SKILL_%d_%s",i,Action.Executor.Tag:upper()))
+						end
 					end
 				end
 			end

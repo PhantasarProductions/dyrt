@@ -38,6 +38,7 @@
 #use "libs/tables"
 
 #use "Script/Use/Anyway"
+#use "Script/Use/MiniMessages"
 
 #accept Fighter
 #accept CombatTime
@@ -110,6 +111,7 @@ global void BUB_Draw()
 	
 	// Combat Messages (if there are any)
 	Combat_Message.Show()
+	MiniMsg.DrawAll()
 	
 	// Hurt messages (if there are any)
 	Hurt.DrawAll()
