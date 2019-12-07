@@ -64,6 +64,8 @@ class Actions
 	string RemoveItem
 	int RemoveAP
 	bool BlockIfSilenced
+	bool AllowLearning
+	bool Learned
 	
 	// Targets
 	table TargetTags
