@@ -477,7 +477,7 @@ Rec: ABL_HERO_IRRAVONIA_HEAL
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 5
+	COM2ACT = 500
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
