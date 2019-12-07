@@ -364,6 +364,7 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartAbility()
+		GoMenu(self.CharTag,"COMBAT_ABILITIES")
 	end
 	
 	void ProcessItem(string itm)

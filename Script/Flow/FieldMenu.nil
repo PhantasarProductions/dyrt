@@ -84,7 +84,7 @@ group Flow_FieldMenu
 	string situation
 	
 	delegate LM_Action
-	var LB_ActionArg
+	var LM_ActionArgs
 
 	
 	var ItemHover
@@ -330,10 +330,16 @@ group Flow_FieldMenu
 					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
 					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
 						$InvItemHover = Item[itemtag]
+						#pure
+						--[[
 						$ItemHover = $ItemHover or {}
 						$ItemHover.InvItem = $InvItemHover
 						$ItemHover.TagItem = itemtag
 						$ItemHover.Action  = $situations[$situation].ItemAction
+						]]
+						#endpure
+						$LM_Action		= $situations[$situation].ItemAction
+						$LM_ActionArgs	= itemtag
 					end
 				end
 				y = y + 20
@@ -366,6 +372,8 @@ group Flow_FieldMenu
 					$InvItemHover=Item[stag]
 					$GenIAAHelp()
 					ShowAutoHelp($InvItemLastHelp.Help)
+					$LM_Action		= $situations[$situation].AblAction
+					$LM_ActionArgs	= stag
 				end
 				__white
 				DarkText.Font($Font,Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5,ubox.y+y)
@@ -440,16 +448,21 @@ group Flow_FieldMenu
 					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" }
 				},
 				["Return"] = "COMBAT",
-				["ItemAction"] = void()
+				["ItemAction"] = void(string TagItem)
 						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
-						LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveItem=trim('%s')})",self.CharTag,self.ItemHover.TagItem,self.ItemHover.TagItem),"Send Item to Combat FLow!")
+						LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveItem=trim('%s')})",self.CharTag,TagItem,TagItem),"Send Item to Combat FLow!")
 						GoToFlow($situations[$situation].Return)
 					end
 			},
 			["COMBAT_ABILITIES"] = {
 				["MenuItems"] = {
-					{ ["IconFile"]="Abilities", ["Right"]=nil, ["Help"]="Shows a character's abilities (if they actually got them)" }
+					{ ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" }
 				},
+				["AblAction"] = void(string TagItem)
+						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
+						LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveAP=%d})",self.CharTag,TagItem,Item[TagItem].AP_Cost or 0),"Send Ability to Combat FLow!")
+						GoToFlow($situations[$situation].Return)
+					end,
 				["Return"] = "COMBAT"
 			},
 			["SHOP"] = {["MenuItems"] = {} },
@@ -580,10 +593,10 @@ with Flow_FieldMenu
 			//CSay(NIL.LuaSerialize("Clicked Menu Item",$ItemHover))
 		end
 		
-		if $LM_Action
+		if $LM_Action and Mouse.HitLeft
 			$LM_Action($LM_ActionArgs)
-			$LM_Action = nil;
 		end
+		$LM_Action = nil;
 		
 		Party.Click()
 	end
