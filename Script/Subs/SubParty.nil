@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 19.11.25
+// Version: 19.12.07
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -441,6 +441,7 @@ end
 
 CSay(tostring(SubParty))
 #say "Compiling Party Sub!"
+
 
 
 
