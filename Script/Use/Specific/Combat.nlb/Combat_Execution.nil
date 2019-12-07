@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.12.03
+// Version: 19.12.07
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -38,7 +38,10 @@
 #use "libs/tables"
 #use "libs/strings"
 #use "libs/xmath"
+#use "libs/Roman"
 #use "Script/Use/Specific/Combat.nlb/Combat_Hurt.nil"
+#use "Script/Use/MiniMessages"
+
 
 group Execution
 
@@ -203,13 +206,27 @@ group Execution
 			for i=0,4
 				CSayF("= Skill #%d",i)
 				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(split(Action.Act[sprintf("GainSkill%dChar",i)] or "",";"),Action.Executor.Tag)
-					Action.Executor.Char.Points(sprintf("SKILLEXP%d",i)).Inc(Action.Act[sprintf("GainSkill%d",i)])
+					var skp
+					skp = Action.Executor.Char.Points(sprintf("SKILLEXP%d",i))
+					skl = Action.Executor.Char.Points(sprintf("SKILLLVL%d",i))
+					skp.Inc(Action.Act[sprintf("GainSkill%d",i)])
+					if skp.Have >= skp.Maximum and skl.Have < skl.Maximum
+						skp.Have = 0
+						skl.Have ++
+						Party.LvUpSound()
+						int R
+						int G
+						R = 255 - (i * 63)
+						G = 255 - R
+						new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("%s's %s level %s",Action.Executor.Char.Name,Action.Executor.Char.Data[sprintf("SKILL%d",i)], Roman(skl.Have)),R,G,0)
+					end
 				end
 			end
 		end
 	end
 
 end
+
 
 
 
