@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Party_h.nil
-// Version: 19.11.06
+// Version: 19.12.07
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -51,6 +51,10 @@ end
 
 group Party
 
+	void LvUpSound()
+		PtExe("SubParty.AudioLevelUp.Play()")
+	end
+
 	void NewCharacter(string tag,int startlevel)
 		PtExe(sprintf("SubParty.NewCharacter(\"%s\",%d)",tag,startlevel))
 	end 
@@ -95,6 +99,7 @@ group Party
 	end
 
 end
+
 
 
 
