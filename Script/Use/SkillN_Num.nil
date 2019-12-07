@@ -1,0 +1,45 @@
+#use "libs/strings"
+
+string SNNCHTAG
+
+#pure
+local
+#endpure
+
+quickmeta group SNN2
+	newindex
+		
+		error("Skill check is read-only!!")
+	end
+	
+	index
+		if type(key)=="number" and key>=0 and key<=4
+			return key
+		end
+		var ch
+		ch = RPG.GetChar(SNNCHTAG)
+		for i=0,5
+			if ch.Points(sprintf("SKILLLVL%d",i)).Have>0 and prefixed(ch.Data(sprintf("SKILL%d",i)),key)
+				return i
+			end
+		end
+	end
+end
+
+#pure
+local
+#endpure
+
+quickmeta group SNN1
+	newindex
+		error("Skill check is read-only!")
+	end
+	
+	index
+		SNNCHTAG = key
+		return SNN2
+	end
+end
+
+
+return SNN1
