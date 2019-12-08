@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_CallBack.nil
-// Version: 19.12.07
+// Version: 19.12.08
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -134,6 +134,7 @@ end
 global void BoxText_Back()
 	BUB_Draw()
 end
+
 
 
 
