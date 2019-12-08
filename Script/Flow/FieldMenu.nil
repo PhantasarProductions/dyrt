@@ -91,6 +91,7 @@ group Flow_FieldMenu
 	
 	var BigFont
 	var Font
+	var BlitzFont
 	
 	var TopBox
 	var LeftBox
@@ -328,6 +329,10 @@ group Flow_FieldMenu
 					DarkText.Font($Font,Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5,ubox.y+y)
 					__amber
 					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
+					if $situations[$situation].ItemSellPrice and Item[itemtag].Sellable
+						Color(0,180,255)
+						DarkText.Font($BlitzFont,sprintf("Sell price: %9d shilders",math.ceil(Item[itemtag].BuyPrice/__skill)),ubox.x+math.floor((ubox.w-40)/2),ubox.y+y+4)
+					end
 					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
 						$InvItemHover = Item[itemtag]
 						#pure
@@ -348,7 +353,7 @@ group Flow_FieldMenu
 		if $InvItemHover
 			$GenIAAHelp()
 		else 
-			$ItemHover = nil;
+			//$ItemHover = nil;
 		end
 		//Viewport()
 	end
@@ -465,7 +470,13 @@ group Flow_FieldMenu
 					end,
 				["Return"] = "COMBAT"
 			},
-			["SHOP"] = {["MenuItems"] = {} },
+			["SHOP"] = {["MenuItems"] = {
+					{ ["IconFile"]="Buy", ["Right"]=nil, ["Help"]="Buy items from this merchant" },
+					{ ["IconFile"]="Sell", ["Right"]=self.Items, ["Help"]="Sells items to this merchant" }
+				} ,
+				["ItemSellPrice"]=true,
+				["Return"]="FIELD"
+			},
 			["BANK"] = {["MenuItems"] = {} }
 		}
 		
@@ -493,8 +504,12 @@ group Flow_FieldMenu
 		assert(self.BigFont,"Font import failed!")
 		CSay("= Import Normal font")
 		self.Font = GetFont("BOXTEXT")
-		assert(self.BigFont,"Font import failed!")
+		assert(self.Font,"Font import failed!")
+		CSay("= Import Sys font")
+		self.BlitzFont = GetFont("SYSFONT")
+		assert(self.BlitzFont,"Font import failed!")
 		CSay("= Construction of field menu done!")
+		
 		
 		// Base Stats
 		self.BaseStats = { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }

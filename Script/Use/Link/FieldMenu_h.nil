@@ -69,4 +69,6 @@ global void GoMenu(char,string situation)
 	GoToFlow("FIELDMENU")
 end
 
-
+global void Merchant(string merc)
+	GoMenu(1,"SHOP")
+end

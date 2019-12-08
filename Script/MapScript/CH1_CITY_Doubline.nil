@@ -59,9 +59,11 @@ group MScript
 	void NPC_SHOPHOER()
 		switch Field.Leader
 			case "Eric" "Brendor" "Dernor"
-				MapText("SHOPHOER_MALE")
+				//MapText("SHOPHOER_MALE")
+				MapScript.SASKIA("ShopHoer_Male")
 			case "Irravonia" "Scyndi" "Rebecca" "Merya" "Aziella" "Kirana"
-				MapText("SHOPHOER_FEMALE")
+				//MapText("SHOPHOER_FEMALE")
+				MapScript.SASKIA("ShopHoer_Female")
 			default
 				error("ShopHoer -- Unknown character gender for leader!")
 		end

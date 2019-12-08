@@ -34,7 +34,24 @@
 ; 
 ; version: 19.12.06
 ; End License Information
+
 :OnLoad
 	End
 
+:ShopHoer_Male
+	Call CSay,"ShopHoer speaking to male"
+	Call MapText,"SHOPHOER_MALE"
+	Call CSay,"About to jump to general"
+	jmp ShopHoer
+	
+:ShopHoer_Female
+	Call CSay,"ShopHoer speaking to female"
+	call MapText,"SHOPHOER_FEMALE"
+	Call CSay,"About to jump to general"
+	jmp ShopHoer
+	
+:ShopHoer
+	call CSay,"Arrived at jump point, now to open the store!"
+	call Merchant,"CH1_SHOPHOER"
+	end
 
