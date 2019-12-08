@@ -2,9 +2,6 @@
 
 string SNNCHTAG
 
-#pure
-local
-#endpure
 
 quickmeta group SNN2
 	newindex
@@ -19,16 +16,13 @@ quickmeta group SNN2
 		var ch
 		ch = RPG.GetChar(SNNCHTAG)
 		for i=0,5
-			if ch.Points(sprintf("SKILLLVL%d",i)).Have>0 and prefixed(ch.Data(sprintf("SKILL%d",i)),key)
+			if ch.Points(sprintf("SKILLLVL%d",i)).Have>0 and prefixed(ch.Data[sprintf("SKILL%d",i)],key)
 				return i
 			end
 		end
 	end
 end
 
-#pure
-local
-#endpure
 
 quickmeta group SNN1
 	newindex

@@ -169,6 +169,79 @@ class Hero extends Fighter
 		end
 	end
 	
+	void CheckLearn(Act)
+		table skl
+		table chrreq
+		skl = NIL.Use("Script/Use/SkillN_Num")
+		chrreq = NIL.Use("Script/Char/Ability/"..self.Tag)
+		for ablk,abl in pairs(chrreq)
+			for k,v in pairs(abl)
+				bool unlock 
+				unlock = not AbilitiesMastered[self.Tag][ablk]
+				switch k
+					case "Start"
+						unlock = false
+					case "Scharum"
+						unlock = unlock and gv.Bool["WON_Scharum_"..self.Tag]
+					case "Bool"
+						unlock = unlock and gv.Bool[v]
+					case "SealedBoss"
+						unlock = false
+						// TODO: Make this possible!
+					default
+						if prefixed(k,"Skill_")
+							var need
+							need = skl[self.Tag][right(k,#k-6)]
+							if need
+								unlock = unlock and self.Char.Points(sprintf("SKILLLVL%s",need)).Have>=v
+							else
+								unlock = false
+								CSay("No skill "..k.."  for character "..self.Tag)
+							end
+						else
+							error("Invalid skill check field! >> "..k)
+						end
+				end
+				if unlock
+					string atag
+					atag = "ABL_HERO_"..self.Tag.."_"..ablk
+					Act.ActTag=atag
+					Act.Act=Item[atag]
+					switch Act.Act.Target
+						case "1A" "OS"
+							Act.Targets = { self }
+						case "1F"
+							CSay("Target fine!")
+						case "AA"
+							Act.Targets = {}
+							for iteam,imember,ifighter in Fighter.ForAll()
+								if iteam=="Hero"
+									Act.Targets[#Act.Targets+1]=ifighter
+								end
+							end
+						case "AF"
+							Act.Targets = {}
+							for iteam,imember,ifighter in Fighter.ForAll()
+								if iteam!="Hero"
+									Act.Targets[#Act.Targets+1]=ifighter
+								end
+							end
+						case "EV"
+							Act.Targets = {}
+							for iteam,imember,ifighter in Fighter.ForAll()
+								Act.Targets[#Act.Targets+1]=ifighter
+							end
+						default
+							error(sprintf("New Ability: Unknown target '%s' in %s",Act.Act.Target,atag))
+					end
+					Act.Learned = true
+					Act.LearnTag = ablk
+					self.NextActSpeed = 9000
+				end
+			end
+		end
+	end
+	
 	static void Compile(string tag)
 		CSayF("Compiling hero '%s' for combat!",tag)
 		var myhero
@@ -343,6 +416,11 @@ group Stage_SelectTarget extends Stage
 			MyHero.GaugePosition = 10001
 			MyHero.NextActSpeed = self.Item.COM2ACT
 			MyHero.NextAct = new Actions(crap)
+			// Learning?
+			if crap.AllowLearning
+				MyHero.CheckLearn(MyHero.NextAct)
+			end
+
 			// Continue the battle flow
 			Stage.Go("IDLE")
 		end
@@ -375,7 +453,7 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartAttack()
-		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,Item[RPG.Char(self.CharTag).Data.Weapon].Equip_Attack)
+		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,Item[RPG.Char(self.CharTag).Data.Weapon].Equip_Attack,{['AllowLearning']=true})
 	end
 	
 	void StartGuard()

@@ -744,7 +744,7 @@ Rec: ABL_HERO_REBECCA_POWER2X
 	SpellAniFunction = 
 	SpellAniScript = 
 	Stance = CAST
-	Target = Auto
+	Target = 1F
 	Type = Ability
 
 Rec: ABL_HERO_REBECCA_POWER3X
@@ -843,7 +843,7 @@ Rec: ABL_HERO_REBECCA_POWER3X
 	SpellAniFunction = 
 	SpellAniScript = 
 	Stance = CAST
-	Target = Auto
+	Target = 1F
 	Type = Ability
 
 Rec: ABL_HERO_REBECCA_POWER4X
@@ -942,7 +942,7 @@ Rec: ABL_HERO_REBECCA_POWER4X
 	SpellAniFunction = 
 	SpellAniScript = 
 	Stance = CAST
-	Target = Auto
+	Target = 1F
 	Type = Ability
 
 Rec: ABL_HERO_REBECCA_POWER5X
@@ -984,7 +984,7 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	CureSleep = FALSE
 	CureZombie = FALSE
 	DefenseStat = Defense
-	Description = People keep on jumping to the wrong conclusion, that 1 + 1 = 5.
+	Description = People keep on jumping to the wrong conclusion, that 1 + 1
 	Discriminate = FALSE
 	EffectArgument = 
 	EffectFunction = 
@@ -1041,7 +1041,7 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	SpellAniFunction = 
 	SpellAniScript = 
 	Stance = CAST
-	Target = Auto
+	Target = 1F
 	Type = Ability
 
 Rec: ABL_HERO_REBECCA_QUICKSTRIKE

@@ -226,6 +226,11 @@ group Execution
 					end
 				end
 			end
+			if Action.Learned
+				AbilitiesMastered[Action.ExeTag][Action.LearnTag] = true
+				CSayF("AbilitiesMastered['%s']['%s'] = true",Action.ExeTag,Action.LearnTag)
+				new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("Learned '%s'!",Action.Act.Name))
+			end
 		end
 	end
 

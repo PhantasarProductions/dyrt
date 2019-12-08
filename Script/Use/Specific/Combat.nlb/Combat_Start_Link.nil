@@ -95,6 +95,10 @@ end
 
 global void LetsGetReadyToRumble()
 	with Combat_Start
+		// Learn text
+		DChatF("Loading Boxtext: New Ability")
+		BoxText.Load("System/NewAbility","NEWABILITY")
+	
 		// Arena and Music
 		DChatF("Loading arena: %s",$Arena)
 		Arena.Load($Arena)

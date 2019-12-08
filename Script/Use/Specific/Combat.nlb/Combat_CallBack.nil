@@ -131,7 +131,9 @@ global void BUB_Draw()
 	Mouse.Show()
 end
 
-
+global void BoxText_Back()
+	BUB_Draw()
+end
 
 
 

@@ -65,6 +65,7 @@ class Actions
 	int RemoveAP
 	bool BlockIfSilenced
 	bool AllowLearning
+	string LearnTag
 	bool Learned
 	
 	// Targets
@@ -222,6 +223,9 @@ group Stage_Action extends Stage
 		self.Action=Action_Announce
 		if not prefixed(Act.ExeTag,"FOE_")
 			Icon = Act.ExeTag
+		end
+		if (Act.Learned)
+			BoxText("NEWABILITY",Act.ExeTag:upper().."1")
 		end
 		Combat_Message.Msg(Act.Act.Name,Icon)
 		self.Stage = Action_Announce
