@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/FieldMenu_h.nil
-// Version: 19.08.22
+// Version: 19.12.09
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -72,3 +72,4 @@ end
 global void Merchant(string merc)
 	GoMenu(1,"SHOP")
 end
+

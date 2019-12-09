@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.06
+; version: 19.12.09
 ; End License Information
 
 :OnLoad
@@ -54,4 +54,5 @@
 	call CSay,"Arrived at jump point, now to open the store!"
 	call Merchant,"CH1_SHOPHOER"
 	end
+
 

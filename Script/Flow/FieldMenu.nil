@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.12.07
+// Version: 19.12.09
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -474,6 +474,10 @@ group Flow_FieldMenu
 					{ ["IconFile"]="Buy", ["Right"]=nil, ["Help"]="Buy items from this merchant" },
 					{ ["IconFile"]="Sell", ["Right"]=self.Items, ["Help"]="Sells items to this merchant" }
 				} ,
+				["ItemAction"] = void(string itemtag)
+						__cash = __cash + math.ceil(Item[itemtag].BuyPrice/__skill)
+						Inventory[itemtag]--
+					end,
 				["ItemSellPrice"]=true,
 				["Return"]="FIELD"
 			},
@@ -625,6 +629,7 @@ with Flow_FieldMenu
 	end
 	
 end
+
 
 
 
