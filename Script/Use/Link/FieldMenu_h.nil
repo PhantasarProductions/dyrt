@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/FieldMenu_h.nil
-// Version: 19.12.09
+// Version: 19.12.10
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -74,4 +74,5 @@ global void Merchant(string merc)
 	LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.CurrentStore = trim(\"%s\"); Flow_FieldMenu.CurrentStock = nil;",merc))
 	GoMenu(1,"SHOP")
 end
+
 
