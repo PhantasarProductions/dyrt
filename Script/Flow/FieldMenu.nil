@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.12.09
+// Version: 19.12.10
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -422,6 +422,20 @@ group Flow_FieldMenu
 		Achievements.Overview(ubox.x,ubox.y,ubox.w,ubox.h)
 	end
 	
+	void PerformBuy(string tag)
+		if Inventory[tag]>=__itemcap
+			CSayF("Cannot buy %s ... Overloaded %2d/%2d",tag,Inventory[tag],__itemcap)
+			return
+		end
+		if __cash<Item[tag].BuyPrice
+			CSayF("Cannot buy %s ... Not enough money (%9d; need %9d)",tag,__cash,Item[tag].BuyPrice)
+			return
+		end
+		CSayF("Buying %s",tag)
+		Inventory[tag]++
+		#- __cash Item[tag].BuyPrice
+	end
+	
 	string CurrentStore
 	var CurrentStock
 	void StoreBuy(ubox)
@@ -445,6 +459,12 @@ group Flow_FieldMenu
 				if hover 
 					idnt = 15
 					Color(120,180,255)
+					$InvItemHover=Item[tag]
+					$GenIAAHelp()
+					ShowAutoHelp($InvItemLastHelp.Help)
+					$LM_Action		= self.PerformBuy
+					$LM_ActionArgs	= tag
+
 				end
 				DarkText.Font($Font,itmd.Name,ubox.x+idnt,y)
 				__amber
@@ -665,6 +685,7 @@ with Flow_FieldMenu
 	end
 	
 end
+
 
 
 
