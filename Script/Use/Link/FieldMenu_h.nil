@@ -70,6 +70,8 @@ global void GoMenu(char,string situation)
 end
 
 global void Merchant(string merc)
+	LMenu()
+	LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.CurrentStore = trim(\"%s\"); Flow_FieldMenu.CurrentStock = nil;",merc))
 	GoMenu(1,"SHOP")
 end
 

@@ -422,6 +422,37 @@ group Flow_FieldMenu
 		Achievements.Overview(ubox.x,ubox.y,ubox.w,ubox.h)
 	end
 	
+	string CurrentStore
+	var CurrentStock
+	void StoreBuy(ubox)
+		var Stock
+		self.CurrentStock = self.CurrentStock or NIL.Use(sprintf("Script/Data/Stores/%s",self.CurrentStore) )
+		Stock = self.CurrentStock // I am lazy!
+		__amber
+		DarkText.Font($Font,Stock.Name,ubox.x+10,ubox.y+10)
+		int y
+		y = ubox.y + 40
+		for i=1,10
+			string tag
+			var itmd
+			bool hover
+			tag = Stock[sprintf("Stock%02d",i)]
+			if tag and tag!="" and tag!="--"
+				int idnt = 10
+				itmd = Item[tag]
+				__white
+				if hover 
+					idnt = 15
+					Color(120,180,255)
+				end
+				DarkText.Font($Font,itmd.Name,ubox.x+idnt,y)
+				#+ y 20
+			end
+		end
+		__white
+		DarkText.Font($BlitzFont,sprintf("Cash: %9d shilders",__cash),ubox.x+5,(ubox.y+ubox.h)-15)
+	end
+	
 	void CONSTRUCTOR()
 	
 		CSay("Constructing Field menu!")
@@ -471,7 +502,7 @@ group Flow_FieldMenu
 				["Return"] = "COMBAT"
 			},
 			["SHOP"] = {["MenuItems"] = {
-					{ ["IconFile"]="Buy", ["Right"]=nil, ["Help"]="Buy items from this merchant" },
+					{ ["IconFile"]="Buy", ["Right"]=self.StoreBuy, ["Help"]="Buy items from this merchant" },
 					{ ["IconFile"]="Sell", ["Right"]=self.Items, ["Help"]="Sells items to this merchant" }
 				} ,
 				["ItemAction"] = void(string itemtag)
