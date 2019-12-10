@@ -439,6 +439,7 @@ group Flow_FieldMenu
 			tag = Stock[sprintf("Stock%02d",i)]
 			if tag and tag!="" and tag!="--"
 				int idnt = 10
+				hover = Mouse.X>ubox.x and Mouse.Y>y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20
 				itmd = Item[tag]
 				__white
 				if hover 
