@@ -446,6 +446,10 @@ group Flow_FieldMenu
 					Color(120,180,255)
 				end
 				DarkText.Font($Font,itmd.Name,ubox.x+idnt,y)
+				__amber
+				DarkText.Font($Font,tostring(Inventory[tag]),(ubox.x+ubox.w)-idnt,y,1)
+				Color(0,180,255)
+				DarkText.Font($BlitzFont,sprintf("Buy price: %9d shilders",Item[tag].BuyPrice),ubox.x+math.floor((ubox.w-40)/2),y)
 				#+ y 20
 			end
 		end
