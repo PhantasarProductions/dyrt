@@ -55,4 +55,8 @@
 	call Merchant,"CH1_SHOPHOER"
 	end
 
+:GoTo_Shanda
+	call MapText,"TOSHANDA_Y"
+	call ChainMap,"CH1_SHANDACASTLE","Shanda","Castle"
+	end
 

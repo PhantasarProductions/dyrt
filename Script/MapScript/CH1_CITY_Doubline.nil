@@ -69,6 +69,19 @@ group MScript
 		end
 	end
 	
+	void NPC_TOSHANDA()
+		if not Done.Done_Doubline_Intro_GoToShanda
+			MapText("TOSHANDA_Q")
+		elseif gv.Bool.Done_Doubline_GoneToShanda
+			MapText("TOSHANDA_D")
+		elseif Yes("Are you ready to go to the Queen of the \"Forgotten Realm\"?")
+			gv.Bool.Done_Doubline.GoneToShanda = true
+			MapScript.SASKIA("GoTo_Shanda")
+		else
+			MapText("TOSHANDA_N")
+		end
+	end
+	
 	
 	void Draw()
 	end
