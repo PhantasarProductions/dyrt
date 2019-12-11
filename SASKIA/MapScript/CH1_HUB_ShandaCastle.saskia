@@ -1,7 +1,7 @@
 ; License Information:
 ; **********************************************
 ; 
-; src/Tricky Script/SASKIA/MapScript/CH1_CITY_Doubline.SASKIA
+; src/Tricky Script/SASKIA/MapScript/CH1_HUB_ShandaCastle.saskia
 ; (c) Jeroen Broks, , All Rights Reserved.
 ; 
 ; This file contains material that is related
@@ -34,30 +34,31 @@
 ; 
 ; version: 19.12.11
 ; End License Information
-
 :OnLoad
-	End
-
-:ShopHoer_Male
-	Call CSay,"ShopHoer speaking to male"
-	Call MapText,"SHOPHOER_MALE"
-	Call CSay,"About to jump to general"
-	jmp ShopHoer
-	
-:ShopHoer_Female
-	Call CSay,"ShopHoer speaking to female"
-	call MapText,"SHOPHOER_FEMALE"
-	Call CSay,"About to jump to general"
-	jmp ShopHoer
-	
-:ShopHoer
-	call CSay,"Arrived at jump point, now to open the store!"
-	call Merchant,"CH1_SHOPHOER"
 	end
+	
+	
+; Strictly speaking this "map" is only a scenario chainhub, however the
+; scenario here will become fully important later in the story.
+;
+; What may take a lot of extra work is the fact that the guest character
+; Shanda will join the party here. 
 
-:GoTo_Shanda
-	call MapText,"TOSHANDA_Y"
-	call Field.ChainMap,"CH1_HUB_SHANDACASTLE","Shanda","Shanda"
+:Shanda
+	group 2
+		mov "Corridor",Map.Layer
+		call MapText,"A"
+	group 2
+		call Map.Kill,"Banthosor"
+		call MapText,"B"
+	group 2
+		mov "Shanda",Map.Layer
+		call MapText,"C"
+	group 4
+		call MapScript.CreateShanda
+		call Field.LoadMap,"CH1_DUNG_ShandaDungeon"
+		call Map.GoToLayer,"#001","Start"
+		mov false,Respawn.Initiated
 	end
 
 

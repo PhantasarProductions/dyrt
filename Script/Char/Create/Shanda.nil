@@ -1,0 +1,19 @@
+#use "Script/Use/AnyWay"
+
+var Shanda
+
+Shanda = RPG.GetChar("Shanda")
+Shanda.Name = Names.Shanda
+
+Shanda.Data["SKILL0"] = "Royal Status"
+
+
+Shanda.Points(sprintf("SKILLEXP%d",0),true).Have    = 1
+Shanda.Points(sprintf("SKILLLVL%d",0),true).Max     = 10000
+Shanda.Points(sprintf("SKILLLVL%d",0),true).Minimum = 9 / __skill
+
+
+Shanda.Data.Weapon = "EQW_SHANDA_ROYALSCEPTRE"
+Shanda.Data.Armor  = "EQA_SHANDA_ROYALDRESS"
+Shanda.Data.Jewel  = "JWL_SHANDA_ROYALRING"
+

@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH1_CITY_Doubline.nil
+// src/Tricky Script/Script/MapScript/CH1_Hub_ShadaCastle.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -34,54 +34,17 @@
 // 
 // version: 19.12.11
 // End License Information
-
-
-
-#say "Map Script - None!"
 #use "script/use/anyway"
 group MScript
 	
+	void CREATESHANDA()
+		Party.NewCharacter("Shanda",30/__skill)
+		RPG.Party[4]="Shanda"
+		CSay("Shanda should have been created and have joined the party!")
+	end
+	
 	void CONSTRUCTOR()
-		Map.ZA_Enter("Leave","LEAVE")
-		if not gv.Bool.GagoltonAttacked
-			Map.Kill("NPC_ShopHoer2")
-		end
 	end
-	
-	void LEAVE()
-		if not gv.Bool.Chapter1Complete
-			Field.LoadMap("CH1_DUNG_XenorBushes_North")
-			Map.GoToLayer("#002","Einde")
-			//Map.SpawnPlayer("Einde")
-		end
-	end
-	
-	void NPC_SHOPHOER()
-		switch Field.Leader
-			case "Eric" "Brendor" "Dernor"
-				//MapText("SHOPHOER_MALE")
-				MapScript.SASKIA("ShopHoer_Male")
-			case "Irravonia" "Scyndi" "Rebecca" "Merya" "Aziella" "Kirana"
-				//MapText("SHOPHOER_FEMALE")
-				MapScript.SASKIA("ShopHoer_Female")
-			default
-				error("ShopHoer -- Unknown character gender for leader!")
-		end
-	end
-	
-	void NPC_TOSHANDA()
-		if not Done.Done_Doubline_Intro_GoToShanda
-			MapText("TOSHANDA_Q")
-		elseif gv.Bool.Done_Doubline_GoneToShanda
-			MapText("TOSHANDA_D")
-		elseif Yes("Are you ready to go to the Queen of the \"Forgotten Realm\"?")
-			gv.Bool.Done_Doubline_GoneToShanda = true
-			MapScript.SASKIA("GoTo_Shanda")
-		else
-			MapText("TOSHANDA_N")
-		end
-	end
-	
 	
 	void Draw()
 	end
@@ -91,9 +54,6 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
-
-
-
 
 
 

@@ -404,14 +404,18 @@ group FlowField
 	
 	set string Leader
 		int i
-		repeat
-			i++
-			if i>8
-				error("Leader cannot be a non-existent character!")
-			end
-		until RPG.Party[i]==value
-		fieldleader = value
-		self.UpdatePlayerTex()
+		if value=="Shanda" or value=="Kirana"
+			CSayF("Cannot put guest character '%s' in the lead",value)
+		else
+			repeat
+				i++
+				if i>8
+					error("Leader cannot be a non-existent character!")
+				end
+			until RPG.Party[i]==value
+			fieldleader = value
+			self.UpdatePlayerTex()
+		end
 	end
 	
 	void SaveSpot(string col)
