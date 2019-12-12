@@ -94,7 +94,8 @@ class Foe extends Fighter
 				if t!=self.Tag and v.FromFile:upper()==self.FromFile:upper() and (not v.Oversoul)
 					Combat_Message.Msg("Oversoul!")
 					self.Compile(self.FoeID,self.FromFile,true)
-					Combat_Time.CalcSpeed()
+					CombatTime.CalcSpeed()
+					
 					return true
 				end
 			end
