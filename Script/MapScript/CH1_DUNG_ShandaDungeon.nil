@@ -45,11 +45,12 @@ group MScript
 		if not Done.Tutorial_DisappearingDungeons_and_guest_characters
 			MapText("STARTTUT")
 		end
+		gv.Bool.AllowOversoul = __skill>=2
 	end
 	
 	void TUTFLY()
 		if not Done.Tutorial_Iravonia_Fly
-			Map.Leader="Irravonia"
+			Field.Leader="Irravonia"
 			MapText("FLY")
 		end
 	end
