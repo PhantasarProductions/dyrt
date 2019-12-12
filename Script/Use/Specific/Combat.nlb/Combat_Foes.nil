@@ -40,6 +40,7 @@
 
 #accept CombatTime
 #accept Combat_Start
+#accept Combat_Message
 
 class Foe extends Fighter
 
@@ -81,6 +82,24 @@ class Foe extends Fighter
 			default
 				error("Four skills or more?")
 		end
+	end
+	
+	get bool GoOversoul
+		if __skill==1
+			// Make sure "Oversoul" will NEVER happen in the easy mode!
+			return false
+		end
+		if Killed4Oversoul[self.FromFile]>10 / (__skill-1)
+			for t,v in pairs(self.Team.Foe)
+				if t!=self.Tag and v.FromFile:upper()==self.FromFile:upper() and (not v.Oversoul)
+					Combat_Message.Msg("Oversoul!")
+					self.Compile(self.FoeID,self.FromFile,true)
+					Combat_Time.CalcSpeed()
+					return true
+				end
+			end
+		end
+		return false
 	end
 	
 	
@@ -142,6 +161,7 @@ class Foe extends Fighter
 		myFoe = myFoeUse()
 		myFoe.FromFile = FoeFile:upper()
 		myFoe.Char = RPG.Char(Foe.LoadFoeTag)
+		myFoe.Oversoul = FoeOversoul
 		if Combat_Start.FoeIDDQD
 			myFoe.Char.Points("HP").Minimum = myFoe.Char.Points("HP").Maximum
 		end

@@ -177,7 +177,9 @@ group CombatTime
 					self.signal = self.signal or GetAudio("COMBATSIGNAL")
 					self.signal.Play()
 				elseif iteam=="Foe"
-					if not ifighter.GoOversoul
+					if ifighter.GoOversoul
+						ifighter.GaugePosition = -1000
+					else
 						ifighter.AI_Data.Decide(ifighter)
 					end
 				end
