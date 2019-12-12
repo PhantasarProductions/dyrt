@@ -1,0 +1,8 @@
+do
+	delegate ret
+	ret = void(int skill)
+		CSay("Nothing here, folks!")
+	end
+	
+	return ret
+end

@@ -1,0 +1,12 @@
+do
+	delegate ret
+	ret = void(int skill)
+		CSay("Go! Rebecca! Go!")
+		lvl = RPG.GetChar("Rebecca").Points("SKILLLVL"..skill).Have
+		if lvl % __skill
+			RPG.GetChar("Rebecca").Stat("PERMPOWERUP_Strength").Value ++ 
+		end
+	end
+	
+	return ret
+end
