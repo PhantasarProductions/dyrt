@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.11.25
+// Version: 19.12.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -143,6 +143,8 @@ class Fighter
 						else
 							return nil;
 						end
+					case "OVERSOUL"
+						return prefixed(self.Tag,"FOE_") and self.Oversoul
 					case "EACH"
 						int i=0
 						return var()
@@ -161,7 +163,7 @@ class Fighter
 							forever
 						end
 					default
-						return self.Char.StatusChangesRealTable[k]
+						return self.StatusChangesRealTable[k]
 				end
 			end,
 			["__newindex"] = void(s,string k,v)
@@ -206,6 +208,7 @@ end
 #pure
 Defeated.F = Fighter
 #endpure
+
 
 
 
