@@ -37,7 +37,7 @@ ret = {
 	["CASH_000005000"] = {
 		["AutoProcess"] = true,
 		["Description"] = "Have 5000+ shilders in cash",
-		["Name"] = "She was hard for the money!",
+		["Name"] = "She works hard for the money!",
 		["ProcessMax"] = 5000,
 		["ProcessString"] = "{Value} of {Max} shilders",
 		["ProcessValue"] = "CASH",
@@ -169,6 +169,15 @@ ret = {
 		["ProcessValue"] = "KILLS",
 
 	},
+	["KILL_GHOST"] = {
+		["AutoProcess"] = true,
+		["Description"] = "Defeat 250 (regular) ghosts",
+		["Name"] = "Who you're gonna call?",
+		["ProcessMax"] = 250,
+		["ProcessString"] = "{Value} of {Max} ghosts busted!",
+		["ProcessValue"] = "KILLED_REG_GHOST",
+
+	},
 	["KILL_ORCS"] = {
 		["AutoProcess"] = true,
 		["Description"] = "Kill 100 (regluar) Orcs",
@@ -184,7 +193,7 @@ ret = {
 		["Name"] = "Kill the hireling",
 		["ProcessMax"] = 1,
 		["ProcessString"] = "Kill a hireling",
-		["ProcessValue"] = "KILLED_REG_BOSS",
+		["ProcessValue"] = "KILLED_REG_HIRELING",
 
 	},
 	["MAXSKILL_0_ERIC"] = {
