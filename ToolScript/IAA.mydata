@@ -279,7 +279,7 @@ Rec: ABL_HERO_IRRAVONIA_BREEZE
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 24
+	COM2ACT = 240
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -378,7 +378,7 @@ Rec: ABL_HERO_IRRAVONIA_FIRE
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 24
+	COM2ACT = 240
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -576,7 +576,7 @@ Rec: ABL_HERO_IRRAVONIA_ROCK
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 24
+	COM2ACT = 240
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
