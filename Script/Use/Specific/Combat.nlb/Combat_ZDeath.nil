@@ -67,7 +67,9 @@ void EnemyDeathFade(f)
 		// Kills
 		__kills++
 		Killed[f.FromFile]++
-		if gv.Bool.AllowOversoul and f.AllowOversoul
+		if f.Oversoul
+			Killed4Oversoul[f.FromFile]=0
+		elseif gv.Bool.AllowOversoul and f.AllowOversoul
 			Killed4Oversoul[f.FromFile]++
 		end
 		
@@ -163,6 +165,7 @@ new Combat_Status("Oversoul",{
 		Color(200,180,255)
 	end
 })
+
 
 
 
