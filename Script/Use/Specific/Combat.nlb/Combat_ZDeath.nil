@@ -162,7 +162,7 @@ new Combat_Status("Oversoul",{
 	["Draw"] = void(f)
 		Color(200,180,255)
 	end
-end
+})
 
 
 
