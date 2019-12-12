@@ -88,8 +88,8 @@ group Arena
 				new ActPos("HERO2",825,733)
 				new ActPos("HERO3",850,800)
 			case 4
-				for i=0,3
-					new ActPos(sprintf("HERO%d",i+1,800+(i*25),600+(i*26)))
+				for i=0,4
+					new ActPos(sprintf("HERO%d",i+1),800+(i*25),600+(i*50))
 				end
 			default
 				error(sprintf("Unknown number of heroes to deal with (%d)",CountHero))
