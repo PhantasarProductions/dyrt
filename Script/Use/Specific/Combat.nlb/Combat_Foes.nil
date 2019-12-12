@@ -162,7 +162,7 @@ class Foe extends Fighter
 		myFoe = myFoeUse()
 		myFoe.FromFile = FoeFile:upper()
 		myFoe.Char = RPG.Char(Foe.LoadFoeTag)
-		myFoe.Oversoul = FoeOversoul
+		myFoe.Oversoul = FoeOversoul==true
 		if Combat_Start.FoeIDDQD
 			myFoe.Char.Points("HP").Minimum = myFoe.Char.Points("HP").Maximum
 		end
