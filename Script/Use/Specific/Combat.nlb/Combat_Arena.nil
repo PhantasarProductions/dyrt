@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Arena.nil
-// Version: 19.11.06
+// Version: 19.12.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -122,6 +122,7 @@ group Arena
 	end
 
 end
+
 
 
 

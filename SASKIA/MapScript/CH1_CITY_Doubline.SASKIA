@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.11
+; version: 19.12.12
 ; End License Information
 
 :OnLoad
@@ -59,5 +59,6 @@
 	call MapText,"TOSHANDA_Y"
 	call Field.ChainMap,"CH1_HUB_SHANDACASTLE","Shanda","Shanda"
 	end
+
 
 

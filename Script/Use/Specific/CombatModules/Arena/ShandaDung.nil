@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/ExamRuins.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/ShandaDung.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.24
+// version: 19.12.12
 // End License Information
 
 module Exa_Arena
@@ -53,5 +53,6 @@ module Exa_Arena
 	end
 
 end
+
 
 

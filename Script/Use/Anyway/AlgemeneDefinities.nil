@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 19.11.17
+// Version: 19.12.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -121,6 +121,7 @@ group Arrow
 		end
 	end
 end
+
 
 
 

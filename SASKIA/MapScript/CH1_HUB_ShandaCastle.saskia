@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.11
+; version: 19.12.12
 ; End License Information
 :OnLoad
 	end
@@ -60,5 +60,6 @@
 		call Map.GoToLayer,"#001","Start"
 		mov false,Respawn.Initiated
 	end
+
 
 
