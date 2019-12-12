@@ -67,6 +67,9 @@ void EnemyDeathFade(f)
 		// Kills
 		__kills++
 		Killed[f.FromFile]++
+		if gv.Bool.AllowOversoul
+			Killed4Oversoul[f.FromFile]++
+		end
 		
 		// Experience points (if applicable)
 		for tag,hero in pairs(Fighter.Team.Hero)
