@@ -41,7 +41,22 @@
 #use "script/use/anyway"
 group MScript
 	
+	void STARTTUTORIAL()
+		if not Done.Tutorial_DisappearingDungeons_and_guest_characters
+			MapText("STARTTUT")
+		end
+	end
+	
+	void TUTFLY()
+		if not Done.Tutorial_Iravonia_Fly
+			Map.Leader="Irravonia"
+			MapText("FLY")
+		end
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("StartTut","STARTTUTORIAL")
+		Map.ZA_Enter("TutFly","TUTFLY")
 	end
 	
 	void Draw()
