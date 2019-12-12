@@ -10,6 +10,12 @@ bool AutoProcess
 string ProcessString
 string ProcessValue
 int ProcessMax
+strike
+bool require_gamejolt
+bool skill_check
+bool skill_1
+bool skill_2
+bool skill_3
 
 [ALLOW:AutoProcess]
 ProcessString
@@ -17,7 +23,10 @@ ProcessValue
 ProcessMax
 
 [Default]
-ProcessString={Value} or {Max}
+ProcessString={Value} of {Max}
+skill_1=true
+skill_2=true
+skill_3=true
 
 
 
