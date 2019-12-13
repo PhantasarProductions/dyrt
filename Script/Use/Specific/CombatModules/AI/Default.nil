@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/AI/Default.nil
-// Version: 19.11.10
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -39,10 +39,7 @@
 #use "libs/strings"
 
 module AI_Default
-
 	
-	
-
 	void Decide(foe)
 		int TimeOut = 10000
 		var act
@@ -52,7 +49,6 @@ module AI_Default
 		
 		table heroes
 		table foes
-
 		
 		assert(#foe.AI_Moves,"There are no moves assigned to foe: "..foe.Tag)
 		
@@ -62,8 +58,6 @@ module AI_Default
 		for tag,ifoe in pairs(Fighter.Team.Foe)
 			foes[#foes+1]=ifoe
 		end
-
-		
 		
 		repeat
 			// start
@@ -126,6 +120,7 @@ module AI_Default
 	end
 
 end
+
 
 
 
