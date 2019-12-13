@@ -37,6 +37,7 @@
 do
 	delegate ret
 	ret = void(int skill)
+		int lvl
 		CSay("Go! Rebecca! Go!")
 		lvl = RPG.GetChar("Rebecca").Points("SKILLLVL"..skill).Have
 		if lvl % __skill
@@ -46,5 +47,3 @@ do
 	
 	return ret
 end
-
-
