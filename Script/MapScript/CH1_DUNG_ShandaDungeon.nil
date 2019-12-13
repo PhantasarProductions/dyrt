@@ -55,6 +55,12 @@ group MScript
 		end
 	end
 	
+	void NPC_TRAVEL()
+		CSay("Fake the travel emblem effect")
+		LuaDoString("FLOW_FIELD","FlowField.TravelEmblem('NPC_Travel')")
+		Map.Kill("NDoor",true)
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("StartTut","STARTTUTORIAL")
 		Map.ZA_Enter("TutFly","TUTFLY")
