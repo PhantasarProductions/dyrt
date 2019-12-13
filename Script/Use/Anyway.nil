@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway.nil
-// Version: 19.11.25
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -58,4 +58,3 @@
 #use "Script/Use/Link/Music.nil"
 #use "Script/Use/Link/Party_h.nil"
 #use "Script/Use/Link/WorldMap_h.nil"
-
