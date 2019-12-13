@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Stage_Victory.nil
-// Version: 19.12.06
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -97,6 +97,7 @@ group Stage_VICTORY extends Stage
 			Music.Pop()
 			Foe.TotalMassacre()
 			__victor=true
+			gv.Int.Victories++
 			APReset()
 			GoToFlow("FIELD")
 			KillFlow("COMBAT")
@@ -104,6 +105,7 @@ group Stage_VICTORY extends Stage
 	end
 	
 end
+
 
 
 
