@@ -79,7 +79,9 @@ void EnemyDeathFade(f)
 			int Exp 
 			Exp = f.Experience
 			for S in hero.StatusChanges.Each
-				Exp = S.AltExperience(hero,S)
+				if S.AltExperience
+					Exp = S.AltExperience(hero,S)
+				end
 			end // for S
 			Exp = math.ceil(Exp*hero.fEXP_Rate)
 			if hero.Char.Stat("Level").Value<__levelcap
@@ -166,14 +168,3 @@ new Combat_Status("Oversoul",{
 		Color(200,180,255)
 	end
 })
-
-
-
-
-
-
-
-
-
-
-
