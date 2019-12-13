@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.12.12
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -85,19 +85,28 @@ class Foe extends Fighter
 	end
 	
 	get bool GoOversoul
-		if __skill==1
+		if __skill==1 or self.Oversoul
 			// Make sure "Oversoul" will NEVER happen in the easy mode!
+			// And an enemy who already went oversoul should not do that again, either.
 			return false
 		end
-		if Killed4Oversoul[self.FromFile]>10 / (__skill-1)
+		CSayF("Check oversoul: File %s; Kills: %2d; Needed: %2d >> %s",self.FromFile,Killed4Oversoul[self.FromFile],(10 / (__skill-1)),tostring(Killed4Oversoul[self.FromFile]>=(10 / (__skill-1))))
+		if Killed4Oversoul[self.FromFile]>=(10 / (__skill-1))			
+			bool go_over = true
+			CSay("= Positive! But are there not other things in order!")
 			for t,v in pairs(self.Team.Foe)
-				if t!=self.Tag and v.FromFile:upper()==self.FromFile:upper() and (not v.Oversoul)
-					Combat_Message.Msg("Oversoul!")
-					self.Compile(self.FoeID,self.FromFile,true)
-					CombatTime.CalcSpeed()
-					
-					return true
+				//if t!=self.Tag and v.FromFile:upper()==self.FromFile:upper() and (not v.Oversoul)
+				if t!=self.Tag
+					go_over = go_over and (not (v.FromFile:upper()==self.FromFile:upper() and v.Oversoul))
+					CSayF("= Same? %s; Oversoul? %s;  Still good? %s",tostring(v.FromFile:upper()==self.FromFile:upper()),tostring(v.Oversoul),tostring(go_over))
 				end
+			end			
+			if go_over
+				CSay("Let's go oversoul!")
+				Combat_Message.Msg("Oversoul!")
+				self.Compile(self.FoeID,self.FromFile,true)
+				CombatTime.CalcSpeed()
+				return true
 			end
 		end
 		return false
@@ -149,11 +158,16 @@ class Foe extends Fighter
 				self.Image.Draw(self.X,self.Y)
 			end
 		end
+		__white
 	end
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
 		var myFoe
 		var myFoeUse
+		if FoeOversoul
+			CSay("Due to an oversoul request let's destroy the old record!")
+			RPG.KillChar(sprintf("FOE_%d",num))
+		end
 		Foe.LoadFoeTag = sprintf("FOE_%d",num)
 		Foe.LoadOversoul = FoeOversoul==true
 		Foe.LoadFoeID = num
@@ -193,6 +207,7 @@ Foe.StatSubs = {
 			"END_"            // End result when all other fields have been added together
 		}
 // EQUIP_ was removed as this is not applicable for foes. Same goes for permanent powerup.
+
 
 
 

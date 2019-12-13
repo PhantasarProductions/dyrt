@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.12.12
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -144,7 +144,9 @@ class Fighter
 							return nil;
 						end
 					case "OVERSOUL"
-						return prefixed(self.Tag,"FOE_") and self.Oversoul
+						if prefixed(self.Tag,"FOE_") and self.Oversoul
+							return CStatus.Oversoul
+						end
 					case "EACH"
 						int i=0
 						return var()
@@ -178,6 +180,8 @@ class Fighter
 							self.Char.Points("HP").Have = 1
 							new Hurt("Revive",self.Tag,255,0,0)
 						end
+					case "OVERSOUL"
+						error("Oversoul is a read-only automated setting in status changes table")
 					default
 						if v
 							self.Char.StatusChangesRealTable[k] = CStatus[k]
@@ -208,6 +212,7 @@ end
 #pure
 Defeated.F = Fighter
 #endpure
+
 
 
 
