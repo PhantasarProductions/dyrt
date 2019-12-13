@@ -35,18 +35,54 @@
 // version: 19.12.13
 // End License Information
 
+#use "libs/strings"
+
 module Irravonia_Personal_Action
 
 	var Img
 	int X
 	int Y
 	
+	void IrraFly(int mix,int miy)
+		CSayF("Irravonia is to fly... Check: (%3d,%3d)!",mix,miy)
+		if FieldMap.Kthura.Blocked(__player.X+(mix*96),__player.Y+(miy*96),true)
+			CWriteLine(sprintf("Request denied. Position (%5d,%5d) is blocked!",__player.X+(mix*96),__player.Y+(miy*96)),255,0,0)
+			return
+		end
+		bool yeah
+		for tag in FieldMap.Kthura.EachTag()
+			if prefixed(tag,"IrraFly_") 
+				yeah = yeah or FieldMap.Kthura.InObj(tag,__player.X+(mix*32),__player.Y+(miy*32))
+			end
+		end
+		if yeah
+			__player.MoveTo(__player.X+(mix*96),__player.Y+(miy*96))
+		end
+	end
+	
 	void Draw()
 		self.Img.Draw(self.X,self.Y)
 	end
 	
-	void Click(int but,int x, int y)
-		
+	bool Click(int but,int x, int y)
+		bool ret
+		ret = x>self.X and y>self.Y and x<self.X+200 and y<self.Y+200
+		if ret
+			// left
+			if x<self.X+25 and y>self.Y+25 and y<self.Y+175
+				self.IrraFly(-1, 0)
+			// right
+			elseif x>self.X-175 and y>self.Y+25 and y<self.Y+175
+				self.IrraFly( 1, 0)
+			// up
+			elseif y<self.Y+25 and x>self.X+25 and x<self.X+175
+				self.IrraFly( 0,-1)
+			// down
+			elseif y>self.Y+175 and x>self.X+25 and x<self.X+175
+				self.IrraFly( 0, 1)
+			end
+		end
+		return ret
 	end
 	
 	void CONSTRUCTOR()

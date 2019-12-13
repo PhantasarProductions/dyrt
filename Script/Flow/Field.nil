@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.12.12
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -832,6 +832,9 @@ global void BUB_Draw()
 	// Random Encounter Gauge
 	RENC.Gauge()
 	
+	// Peronal Action
+	PA[FlowField.Leader].Draw()
+	
 	// Mini Messages (must be last before the mouse, which must be the very last)
 	MiniMsg.DrawAll()
 	
@@ -872,7 +875,9 @@ global void BUB_Update()
 	// Zone Checking
 	Acted = ZoneAction.CheckAll()
 	
-	if Mouse.Y<Screen.Height-128 and Mouse.HitLeft
+	if Mouse.HitLeft and PA[FlowField.Leader].Click(1,Mouse.X,Mouse.Y)
+		CSay("Personal action took over, so ignore the walking requests!")
+	elseif Mouse.Y<Screen.Height-128 and Mouse.HitLeft
 		var clobj
 		clobj = Clickables.Clicked(FlowField.Map.Kthura.ScrollX + Mouse.X,FlowField.Map.Kthura.ScrollY + Mouse.Y)
 		if clobj
@@ -1045,7 +1050,3 @@ group ConsoleCommands
 	end
 		
 end
-
-
-
-
