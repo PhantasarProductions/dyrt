@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.12.12
+// Version: 19.12.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -241,6 +241,7 @@ group Execution
 	end
 
 end
+
 
 
 
