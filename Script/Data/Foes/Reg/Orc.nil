@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/12/2019 6:00:47 PM
+// Generated: 12/13/2019 12:11:14 AM
 
 do
 var retfunc()
@@ -282,8 +282,10 @@ switch __skill
 		error("Unknown skill "..__skill)
 end
 
+CSay('HP Init Start >> '..tostring(true));
 foeret.Char.Points("HP",true).MaxCopy="END_HP"
 foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+CSay('HP Init End');
 
 
 return foeret
