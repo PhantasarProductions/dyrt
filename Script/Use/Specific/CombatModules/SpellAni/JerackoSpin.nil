@@ -1,0 +1,10 @@
+module JS_SpellAni
+
+	void Init()
+	end
+	
+	
+	bool Cycle()
+	end
+	
+end
