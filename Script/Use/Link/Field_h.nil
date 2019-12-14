@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.12.05
+// Version: 19.12.14
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -178,6 +178,13 @@ group Map
 		FLD_Exe("FieldMap.Show('"..tag.."')")
 	end
 	
+	link HideObj = Map.Hide
+	link ShowObj = Map.Show
+	
+	void Cam(int x,int y)
+		FLD_Exe(sprintf("FlowField.Map.ScrollX = %d\nFlowField.Map.ScrollY = %d",x,y))
+	end
+	
 	void Click(string tag, string func, infinity)
 		string args
 		for i,v in ipairs { infinity }
@@ -350,24 +357,4 @@ group Field
 	
 	
 	
-end	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+end
