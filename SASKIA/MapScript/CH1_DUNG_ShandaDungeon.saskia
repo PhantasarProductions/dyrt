@@ -38,3 +38,17 @@
 	end
 
 
+:Blenchy
+	group 2
+	call Map.Cam,0,0
+	call BoxText,"BLENCHY","A"
+	call OnyxBang.Start
+	call Map.ShowObj,"Jeracko"
+:OnyxBang
+	;This should cause a loop until the Bang is over... Hopefully!
+	chk OnyxBang.Going,OnyxBang
+	call BoxText,"BLENCHY","B"
+	group 2
+	call Map.Kill,"Blenchy"
+	call BoxText,"BLENCHY","C"
+	end

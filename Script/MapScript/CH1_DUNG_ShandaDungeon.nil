@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.12
+// version: 19.12.14
 // End License Information
 
 
@@ -61,9 +61,20 @@ group MScript
 		Map.Kill("NDoor",true)
 	end
 	
+	void GOAL()
+		Achievements.Award("PUZ_FLYRAINBOW")
+	end
+	
+	void STARTBLENCHY()
+		BoxText.Load("GenScen/Ch1/Blenchy","BLENCHY")
+		MapScript.SASKIA("Blenchy")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("StartTut","STARTTUTORIAL")
 		Map.ZA_Enter("TutFly","TUTFLY")
+		Map.ZA_Enter("Goal","GOAL")
+		Map.ZA_Enter("StartBlenchy","StartBlenchy")
 	end
 	
 	void Draw()
@@ -74,9 +85,3 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
-
-
-
-
-
-
