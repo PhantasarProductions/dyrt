@@ -54,6 +54,9 @@ class Combat_Status
 	bool UntargetableFoe
 	bool OverDraw
 	
+	bool FearBlock
+	bool SilenceBlock
+	
 	
 	// All delegates should be void functions with a Fighter object parameter for the fighter
 	// Unless explictly stated otherwise!
