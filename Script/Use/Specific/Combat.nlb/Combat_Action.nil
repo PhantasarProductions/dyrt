@@ -137,16 +137,22 @@ group Action_Exe
 end
 
 group Action_SpellAni
-void Draw()
+	
+	var sa_mod
+	
+	void Draw()
 		// TODO: Execute NIL script if applicable
 		// TODO: Execute SASKIA script if applicable
-		Stage_Action.Stage = Action_Exe
+		if (not self.sa_mod) or (self.sa_mod.Cycle(Stage_Action.Act))
+			Stage_Action.Stage = Action_Exe
+		end
 	end
 	
 	void Update()
 		// TODO: Check if no more spellani scripts are running, either SASKIA or NIL
 		
 	end
+	
 end
 
 group Action_PreMove
@@ -177,6 +183,14 @@ group Action_PreMove
 			self.Act.Executor.FlickStance++
 			if self.Act.Executor.FlickStance>5
 				self.Act.Executor.FlickStance = 0
+				Action_SpellAni.sa_mod = nil;
+				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
+					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod.Init(self.Act.Act)
+				else
+					CSay("No spellani, so let's not go for that!")
+				end
 				Stage_Action.Stage = Action_SpellAni
 			end
 		else			
@@ -185,6 +199,14 @@ group Action_PreMove
 			self.Act.Executor.Frame++
 			if self.Act.Executor.Frame>=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames
 				self.Act.Executor.Frame=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames-1
+				Action_SpellAni.sa_mod = nil;
+				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
+					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod.Init(self.Act.Act)
+				else
+					CSay("No spellani, so let's not go for that!")
+				end
 				Stage_Action.Stage = Action_SpellAni
 			end
 		end

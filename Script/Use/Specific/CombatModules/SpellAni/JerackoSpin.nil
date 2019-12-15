@@ -1,5 +1,7 @@
 module JS_SpellAni
 
+	bool DrawOvertake
+
 	void Init()
 	end
 	

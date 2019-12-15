@@ -5,7 +5,7 @@ module Flame_SpellAni
 	bool DrawOvertake
 	var Flame
 	var Audio
-	readonly skipmax = 4
+	readonly int skipmax = 7
 	int skip 
 	int Frame
 	
@@ -31,13 +31,13 @@ module Flame_SpellAni
 			return true
 		end
 		// Draw it all!
-		for tar in act.Targets
-			self.Flame.Draw(tar.X,tar.y,self.Frame)
+		for tar in each(act.Targets)
+			self.Flame.Draw(tar.X,tar.Y,self.Frame)
 		end
 		
 		// Calc results
 		self.skip++
-		if self.skip<skipmax
+		if self.skip<self.skipmax
 			return false
 		end
 		self.Frame++
