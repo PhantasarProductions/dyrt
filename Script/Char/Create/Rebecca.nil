@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.20
+// version: 19.12.16
 // End License Information
 
 #use "Script/Use/AnyWay"
@@ -54,9 +54,3 @@ Rebecca.Data["SKILL0"] = "Sword Skills"
 Rebecca.Data.Weapon = "EQW_ERICREBECCA_SHORTSWORD"
 Rebecca.Data.Armor  = "EQA_SHIRT"
 Rebecca.Data.Jewel  = "JWL_BRACERS"
-
-
-
-
-
-

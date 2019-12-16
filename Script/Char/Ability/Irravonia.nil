@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.05
+// version: 19.12.16
 // End License Information
 
 
@@ -78,7 +78,3 @@ a = {
 return a
 	
 #endpure
-
-
-
-

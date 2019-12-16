@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.16
+// version: 19.12.16
 // End License Information
 #use "Script/Use/AnyWay"
 var Eric
@@ -60,8 +60,3 @@ end
 Eric.Data.Weapon = "EQW_ERICREBECCA_SHORTSWORD"
 Eric.Data.Armor  = "EQA_SHIRT"
 Eric.Data.Jewel  = "JWL_BRACERS"
-
-
-
-
-

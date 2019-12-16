@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.12
+// version: 19.12.16
 // End License Information
 #use "Script/Use/AnyWay"
 
@@ -52,6 +52,3 @@ Shanda.Points(sprintf("SKILLLVL%d",0),true).Minimum = 9 / __skill
 Shanda.Data.Weapon = "EQW_SHANDA_ROYALSCEPTRE"
 Shanda.Data.Armor  = "EQA_SHANDA_ROYALDRESS"
 Shanda.Data.Jewel  = "JWL_SHANDA_ROYALRING"
-
-
-
