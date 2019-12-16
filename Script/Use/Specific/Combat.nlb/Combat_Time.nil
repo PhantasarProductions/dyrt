@@ -1,0 +1,211 @@
+// License Information:
+// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Time.nil
+// Version: 19.12.12
+// Copyright (C)  Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+#use "libs/collections"
+#use "libs/tables"
+#use "libs/strings"
+#use "libs/DarkText"
+
+group CombatTime
+
+	table GaugeSpeed
+	
+	int gauge_Y
+	int gauge_X = 50
+	readonly int gauge_base_y=100
+	readonly int gauge_base_X=50
+	
+	get int gauge_x
+		return self.gauge_X
+	end
+	
+	set int gauge_x
+		self.gauge_X = value
+	end
+	
+	get int gauge_y
+		return self.gauge_Y
+	end
+	set int gauge_y
+		self.gauge_Y = value
+	end
+	
+	var ImgGauge
+	var ImgPointHero
+	var ImgPointFoe
+	table ImgGaugeIcon
+	var FontGauge
+	
+	get var GaugeFont
+		return self.FontGauge
+	end
+	
+	void CONSTRUCTOR()
+		self.ImgGauge = TImage.Obtain('COMBAT_TIMEGAUGE')
+		self.ImgPointHero = TImage.Obtain('COMBAT_TIMEPOINTHERO')
+		self.ImgPointFoe  = TImage.Obtain('COMBAT_TIMEPOINTFOE' )
+		self.gauge_Y = -500
+		self.FontGauge = GetFont("SYSFONT")
+	end
+	
+	void CalcSpeed()
+		var order 
+		$GaugeSpeed = {}
+		order = NewMap("int","table")
+		for nameteam,team in pairs(Fighter.Team)
+			for tag,member in pairs(team)
+				table w
+				//CSay("?")
+				//order[member.Agility] = order[member.Agility] or {}
+				//CSay("!")
+				w = order[member.Agility]
+				w[#w+1] = tag
+			end
+		end
+		int c
+		int i
+		c = order.__MAP_COUNT
+		for agl,memtab in order.__MAP_SORTEDPAIRS
+			i++
+			for memtag in each(memtab)
+				$GaugeSpeed[memtag] = math.ceil( (i/c)*50 )
+				CSayF("%s is set to gaugespeed %d",memtag,$GaugeSpeed[memtag])
+			end
+		end
+	end
+	
+	void DrawGauge()
+		if self.gauge_Y<self.gauge_base_y
+			self.gauge_Y++
+		end
+		__white
+		self.ImgGauge.XDraw(self.gauge_X,self.gauge_Y)
+		// This code was used in the original Dyrt game... Useless here
+		// (No NIL can handle these line, that ain't the problem)
+		// as the underlying code is completely different, but it DOES 
+		// allow me some "peeking"
+		// if CombatTime.Heroes[ak]<=10000 then gx = (CombatTime.Heroes[ak]/10000)*327 Image.Color(0,0,255) else gx = (((CombatTime.Heroes[ak]-10000)/10000)*72)+328; Image.Color(255,0,0) end
+		// Image.Draw("C_HTPoint",gx,0)
+		// Image.Color(255,255,255)   
+		// Image.Draw(CombatTimePic[ch],gx,-25)
+		for iteam,imember,ifighter in Fighter.ForAll()
+			if ifighter.GaugePosition>=0
+				int gx
+				int dx
+				if ifighter.GaugePosition<=10000 
+					gx = (ifighter.GaugePosition/10000)*327 
+					Color(0,0,255) 
+				else 
+					gx = (((ifighter.GaugePosition-10000)/10000)*72)+328
+					Color(255,0,0) 
+				end
+				dx = gx + $gauge_x
+				switch iteam
+					case "Hero"
+						self.ImgPointHero.XDraw(dx,self.gauge_Y)
+						self.ImgGaugeIcon[imember] = self.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
+						__white
+						self.ImgGaugeIcon[imember].XDraw(dx,self.gauge_y-25)
+					case "Foe"
+						self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
+						__white
+						DarkText.Font(self.FontGauge,ifighter.Letter,dx,self.gauge_Y+40,1,0)
+					default
+						error("UNKNOWN GAUGE POINTER!")
+				end
+			end
+		end
+	end
+	
+	var signal
+	
+	void UpdateGauge()
+		for iteam,imember,ifighter in Fighter.ForAll()
+			bool offgauge
+			for _,s in ifighter.StatusChanges.Each
+				offgauge = offgauge or s.OffGauge
+			end
+			if offgauge 
+				if ifighter.GaugePosition>-100
+					ifighter.GaugePosition = ifighter.GaugePosition - 25
+				end
+			elseif ifighter.GaugePosition<10000
+				ifighter.GaugePosition = ifighter.GaugePosition + $GaugeSpeed[imember]
+				if ifighter.GaugePosition>10000
+					ifighter.GaugePosition = 10000
+				end
+			elseif ifighter.GaugePosition == 10000
+				// TODO: Link to AI or to Player Input
+				if ifighter.StatusAltAI("")
+				elseif iteam=="Hero"
+					Stage.Go("PlayerInput")
+					Stage.Current.CharTag = imember
+					self.signal = self.signal or GetAudio("COMBATSIGNAL")
+					self.signal.Play()
+				elseif iteam=="Foe"
+					if ifighter.GoOversoul
+						ifighter.GaugePosition = -1000
+					else
+						ifighter.AI_Data.Decide(ifighter)
+					end
+				end
+			elseif ifighter.GaugePosition < 20000
+				ifighter.GaugePosition = ifighter.GaugePosition + ifighter.NextActSpeed
+				if ifighter.GaugePosition>20000
+					ifighter.GaugePosition = 20000
+				end
+			elseif ifighter.GaugePosition == 20000
+				Stage_Action.ComeToMe(ifighter.NextAct)
+			else
+				error("Invalid gauge position!")
+			end
+		end
+	end
+	
+end
+
+
+
+
+
+
+
+
+
+
+
+

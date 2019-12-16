@@ -1,0 +1,133 @@
+// License Information:
+// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Arena.nil
+// Version: 19.12.12
+// Copyright (C)  Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+#use "Libs/strings"
+#use "Libs/RelPos"
+
+class ActPos
+	readonly int x
+	readonly int y
+	readonly static table Spot
+	get int X
+		return self.x
+	end
+	get int Y
+		return self.y
+	end
+	void CONSTRUCTOR(string tag,int setx, int sety,real)
+		if real!=true
+			self.x=RelPos.X[setx]
+			self.y=RelPos.Y[sety]
+		else
+			self.x=setx
+			self.y=sety
+		end
+		self.Spot[tag]=self
+	end
+end
+
+
+group Arena
+
+	var argr
+	
+	void DefActCoords(MyArena)
+		int CountHero
+		int CountFoe
+		
+		// Yes 4! The backrow (pos 5 till 8) are never part of the battle and thus not relevant.
+		// And when you want back row characters in a front row character is removed, so why bother!
+		for i=1,4
+			if RPG.Party[i] and RPG.Party[i]!=""
+				CountHero++
+			end
+		end
+		
+		switch CountHero
+			case 1
+				new ActPos("HERO1",800,700)
+			case 2
+				new ActPos("HERO1",800,650)
+				new ActPos("HERO2",850,750)
+			case 3
+				new ActPos("HERO1",800,667)
+				new ActPos("HERO2",825,733)
+				new ActPos("HERO3",850,800)
+			case 4
+				for i=0,4
+					new ActPos(sprintf("HERO%d",i+1),800+(i*25),600+(i*50))
+				end
+			default
+				error(sprintf("Unknown number of heroes to deal with (%d)",CountHero))
+		end
+		
+		for i=0,23
+			int x
+			int y
+			x = (math.floor(i/3)*60)+25
+			y = ((i%3)*110)+550
+			new ActPos(sprintf("FOE_%d",i+1),x,y)
+		end
+	end
+
+	void Load(string arenascript, infinity)
+		$argr = NIL.Use(sprintf("Script/Use/Specific/CombatModules/Arena/%s.nil",arenascript))
+		assert($argr,"Loading the arena script failed!")
+		if (#{infinity})>0
+			$argr.StartConfig(infinity)
+		end
+		if $argr[".hasmember"]("SetCoords")
+			$argr.SetCoords()
+		else
+			$DefActCoords()
+		end
+	end
+	
+	void Draw()
+		self.argr.Draw()
+	end
+
+end
+
+
+
+
+
+
+
+
+

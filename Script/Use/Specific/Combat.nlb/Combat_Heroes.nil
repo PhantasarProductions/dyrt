@@ -1,0 +1,533 @@
+// License Information:
+// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
+// Version: 19.12.08
+// Copyright (C)  Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+#use "libs/xmath"
+#use "libs/strings"
+#use "script/use/Anyway"
+#use "script/use/BoxPics"
+
+#accept CombatTime
+
+class Hero extends Fighter
+	
+	table Heroes
+	int JumpIn = 90
+	string Houding = "IDLE"
+	int Frame = 0
+	table Pics
+	string CharTag
+	int EXP_Rate
+	
+	get number fEXP_Rate
+		return self.EXP_Rate/100
+	end
+	
+	bool Leaving = false
+	
+	get bool ShowHP
+		return true
+	end
+	
+	get int JI_MODX
+		//int OUTX
+		if self.JumpIn>0
+			return (Screen.Width+70)-self.SpotX
+		end
+		return 0 
+	end
+	
+	get int X
+		if self.UseTemp
+			return self.TempX
+		end
+		if self.JumpIn<=0
+			return self.SpotX
+		end
+		return math.floor( self.SpotX + ((self.JI_MODX/90)*self.JumpIn) )
+	end
+	
+	get int Y
+		if self.UseTemp
+			return self.TempY
+		end
+		if self.JumpIn<=0
+			return self.SpotY
+		end
+		return math.floor( self.SpotY - math.abs(xmath.sin(self.JumpIn)*50) )
+	end
+	
+	get int SpotNum
+		for i=1,8
+			if RPG.Party[i]==self.Tag
+				return i
+			end
+		end
+		error("Party member "..self.Tag.." not found! Cannot assign a number to them!")
+	end
+	
+	string GetTeamName()
+		return "Hero"
+	end
+	
+	void AutoLoadPic()
+		if self.Pics[self.Houding]
+			return
+		end
+		string f
+		f = sprintf("GFX/Combat/Fighters/Hero/%s.%s",self.Tag,self.Houding)
+		if JCR_EntryExists(f..".png")
+			f = f .. ".png"
+		else
+			f = f .. ".jpbf"
+		end
+		CSayF("Loading Image/Bundle: %s",f)
+		self.Pics[self.Houding] = LoadImage(f)
+	end
+	
+	void Draw()		
+		self.AutoLoadPic()
+		// CSayF("Drawing %s.%s on (%d,%d)",self.Tag,self.Houding,self.X,self.Y) // <-- MUST BE ON COMMENT ALL THE TIME IF NOT IN USE!!!!
+		__white
+		SetAlpha(255)
+		delegate overdraw
+		for _,status in self.StatusChanges.Each
+			if status.Draw 
+				if status.OverDraw
+					overdraw = status.Draw
+				else
+					status.Draw(self)
+				end
+			end
+		end
+		if overdraw
+			overdraw(self)
+		else
+			self.Pics[self.Houding].Draw(self.X,self.Y,self.Frame)
+		end
+		if self.JumpIn>0
+			self.JumpIn = self.JumpIn - 5
+		end
+	end
+	
+	void Icon(int dx,int dy)
+		CombatTime.ImgGaugeIcon[self.CharTag].XDraw(dx,dy+15)
+	end
+	
+	bool PosHover(int ax,int ay)
+		var Img
+		Img = self.Pics[self.Houding]
+		return ax>=self.X and ay>=self.Y and ax<=self.X+Img.Width and ay<=self.Y+Img.Height
+	end
+	
+	void Init()
+		var spot
+		spot = ActPos.Spot[sprintf("HERO%d",self.SpotNum)]
+		self.JumpIn = self.JumpIn + (#self.Heroes*45)
+		self.SpotX = spot.X
+		self.SpotY = spot.Y
+		switch __skill
+			case 1
+				self.EXP_Rate = math.random(200,250)
+			case 2
+				self.EXP_Rate = math.random(100,125)
+			case 3
+				self.EXP_Rate = math.random(25,75)
+		end
+	end
+	
+	void CheckLearn(Act)
+		table skl
+		table chrreq
+		skl = NIL.Use("Script/Use/SkillN_Num")
+		chrreq = NIL.Use("Script/Char/Ability/"..self.Tag)
+		for ablk,abl in pairs(chrreq)
+			for k,v in pairs(abl)
+				bool unlock 
+				unlock = not AbilitiesMastered[self.Tag][ablk]
+				switch k
+					case "Start"
+						unlock = false
+					case "Scharum"
+						unlock = unlock and gv.Bool["WON_Scharum_"..self.Tag]
+					case "Bool"
+						unlock = unlock and gv.Bool[v]
+					case "SealedBoss"
+						unlock = false
+						// TODO: Make this possible!
+					default
+						if prefixed(k,"Skill_")
+							var need
+							need = skl[self.Tag][right(k,#k-6)]
+							if need
+								unlock = unlock and self.Char.Points(sprintf("SKILLLVL%s",need)).Have>=v
+							else
+								unlock = false
+								CSay("No skill "..k.."  for character "..self.Tag)
+							end
+						else
+							error("Invalid skill check field! >> "..k)
+						end
+				end
+				if unlock
+					string atag
+					atag = "ABL_HERO_"..self.Tag.."_"..ablk
+					Act.ActTag=atag
+					Act.Act=Item[atag]
+					switch Act.Act.Target
+						case "1A" "OS"
+							Act.Targets = { self }
+						case "1F"
+							CSay("Target fine!")
+						case "AA"
+							Act.Targets = {}
+							for iteam,imember,ifighter in Fighter.ForAll()
+								if iteam=="Hero"
+									Act.Targets[#Act.Targets+1]=ifighter
+								end
+							end
+						case "AF"
+							Act.Targets = {}
+							for iteam,imember,ifighter in Fighter.ForAll()
+								if iteam!="Hero"
+									Act.Targets[#Act.Targets+1]=ifighter
+								end
+							end
+						case "EV"
+							Act.Targets = {}
+							for iteam,imember,ifighter in Fighter.ForAll()
+								Act.Targets[#Act.Targets+1]=ifighter
+							end
+						default
+							error(sprintf("New Ability: Unknown target '%s' in %s",Act.Act.Target,atag))
+					end
+					Act.Learned = true
+					Act.LearnTag = ablk
+					self.NextActSpeed = 9000
+				end
+			end
+		end
+	end
+	
+	static void Compile(string tag)
+		CSayF("Compiling hero '%s' for combat!",tag)
+		var myhero
+		myhero = new Hero(tag)
+		myhero.Heroes[#myhero.Heroes+1] = myhero
+		myhero.Char = RPG.Char(tag)
+		myhero.CharTag = tag
+	end
+	
+	static void CompileAll()
+		for i=1,8
+			if RPG.Party[i] and RPG.Party[i]!=""
+				self.Compile(RPG.Party[i])
+			end
+		end
+	end
+end
+
+class InputMenuItem
+	
+	static var List
+	static var Hover
+	static table Cursor
+	
+	int x
+	int y
+	delegate action
+	delegate allowed
+	
+	void Clean()
+		self.List.Clear()
+	end
+	
+	void CONSTRUCTOR(int ax, int ay, delegate aaction, delegate aallowed)
+		self.x = ax
+		self.y = ay
+		self.action = aaction
+		self.allowed = aallowed
+		self.List = self.List or new TLinkedList
+		self.List.AddLast(self)
+		End_Combat.Add(self.Clean)
+	end
+	
+end
+
+group Stage_SelectTarget extends Stage
+
+	var Item
+	var Ch
+	string ItemTag
+	string CharTag
+	table targetted
+	table xdata
+	bool wrongteam
+
+	void CONSTRUCTOR()
+		Stage.Stages.SELECTTARGET = self
+	end
+	
+	void ComeToMe(string aCharTag,string aItemTag,table xdata)
+		self.CharTag = aCharTag
+		self.ItemTag = aItemTag
+		self.Item = _G.Item[aItemTag]
+		self.Ch = RPG.Char(aCharTag)
+		self.xdata = xdata
+		Stage.Go("SELECTTARGET")
+	end
+	
+	void Draw()
+		for tag,fight in pairs(self.targetted)
+			__white
+			fight.Icon(fight.X+40,fight.Y+20)
+			DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
+			if __skill<3 or fight.GetTeamName()=="Hero"
+				Color(100,100,100)
+				Rect(fight.X+80,fight.Y+40,100,18)
+				if fight.ShowHP
+					number rate
+					int green
+					rate = fight.Ch.Points("HP").Have / fight.Ch.Points("HP").Maximum
+					green = math.floor(255*rate)
+					Color(255-green,green,0)
+					Rect(fight.X+80,fight.Y+40,math.floor(100*rate),18)
+				else
+					__white
+					DarkText.Font(CombatTime.FontGauge,"?",fight.X+80+50,fight.Y+40,2,0)
+				end
+				__white
+				bool hstat
+				int ystat
+				ystat = fight.Y+60
+				for sk,_ in fight.StatusChanges.Each
+					hstat = true
+					DarkText.Font(CombatTime.FontGauge,sk,fight.X+80,ystat)
+					ystat = ystat + 20
+				end
+				if not hstat
+					Color(180,255,0)
+					DarkText.Font(CombatTime.FontGauge,"Status: Okay",fight.X+80,ystat)
+				end
+			end
+		end
+	end
+	
+	void Update()
+		// Do we have a target?
+		tableclear(self.targetted)
+		bool gotone
+		string gotteam
+		self.wrongteam=false
+		for iteam,imember,ifighter in Fighter.ForAll()
+			bool gotcha
+			switch self.Item.Target
+				case "EV"
+					gotcha=true
+				case "OS"
+					gotcha=imember==self.CharTag
+				case "AF" "AA"
+					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
+						for iteam2,imember2,ifighter2 in Fighter.ForAll()
+							if iteam2==iteam and imember2!=imember 
+								self.targetted[imember2]=ifighter2
+								gotcha=true
+								self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+							end
+						end
+					end
+				case "1F" "1A"
+					gotcha = (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
+					if gotcha 
+						self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+					end
+				default
+					error("Unknown target type: "..self.Item.Target)
+			end
+			if gotcha
+				gotone = true;
+				self.targetted[imember]=ifighter
+			end
+		end
+		
+		// Cancel?
+		if Mouse.HitRight or Keyboard.Code=="Escape"
+			Stage.Go("PLAYERINPUT")
+			return
+		end
+		
+		// Confirmed
+		if gotone and (Mouse.HitLeft or Keyboard.Code=="Space" or Keyboard.Code=="Enter" or Keyboard.Code=="Return")
+			// Configure next action
+			CSayF("Starting up linking requested action!")
+			table crap
+			if self.xdata
+				for k,v in pairs(self.xdata)
+					crap[k] = v
+				end
+			end
+			crap.ExeTag = self.CharTag
+			crap.ActTag = self.ItemTag
+			crap.Targets = {}
+			for tarkey,tarfight in pairs(self.targetted)
+				CSayF("= Executor %s uses move %s on target %s",crap.ExeTag,crap.ActTag,tarkey)
+				crap.Targets[#crap.Targets+1] = tarfight
+			end
+			// Character into action position
+			var MyHero
+			MyHero = Fighter.ByTag[crap.ExeTag]
+			if not MyHero
+				CSay(NIL.LuaSerialize("Fighter.ByTag",Fighter.ByTag))
+				error(sprintf("No data found on fighter tag '%s'!",crap.ExeTag))
+			end
+			MyHero.GaugePosition = 10001
+			MyHero.NextActSpeed = self.Item.COM2ACT
+			MyHero.NextAct = new Actions(crap)
+			// Learning?
+			if crap.AllowLearning
+				MyHero.CheckLearn(MyHero.NextAct)
+			end
+
+			// Continue the battle flow
+			Stage.Go("IDLE")
+		end
+	end
+end
+
+
+group Stage_PlayerInput extends Stage
+
+	var ImgMenu
+	string CharTag
+	
+	bool AlwaysTrue()
+		return true
+	end
+	
+	bool AllowSwitch()
+		return RPG.Party[5]!=nil and RPG.Party[5]!=""
+	end
+	
+	void StartAbility()
+		GoMenu(self.CharTag,"COMBAT_ABILITIES")
+	end
+	
+	void ProcessItem(string itm)
+	end
+	
+	void StartItem()
+		GoMenu(self.CharTag,"COMBAT_ITEMS")
+	end
+	
+	void StartAttack()
+		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,Item[RPG.Char(self.CharTag).Data.Weapon].Equip_Attack,{['AllowLearning']=true})
+	end
+	
+	void StartGuard()
+	end
+	
+	void StartSwitch()
+	end
+
+	void CONSTRUCTOR()
+		Stage.Stages.PLAYERINPUT=self
+		self.ImgMenu = TImage.Obtain("COMBAT_INPUTMENU")
+		
+		// Abilities
+		new InputMenuItem( 52,  0,self.StartAbility,self.AlwaysTrue)
+		
+		// Items
+		new InputMenuItem(  0, 52,self.StartItem,self.AlwaysTrue)
+		
+		// Attack
+		new InputMenuItem( 52, 52,self.StartAttack,self.AlwaysTrue)
+		
+		// Guard
+		new InputMenuItem(104, 52,self.StartGuard,self.AlwaysTrue)
+		
+		// Switch
+		new InputMenuItem( 52,104,self.StartSwitch,self.AllowSwitch)
+		
+		InputMenuItem.Cursor[true] = TImage.Obtain("COMBAT_INPUTCURSOR_true")
+		InputMenuItem.Cursor[false] = TImage.Obtain("COMBAT_INPUTCURSOR_false")
+		
+	end
+	
+	void Draw()
+		int mx
+		int my
+		mx =  Screen.Width/2
+		my = (Screen.Height-128)/2
+		self.ImgMenu.Draw(mx,(Screen.Height-128)/2)
+		BoxPic((Screen.Width/2)-100,my,self.CharTag,nil,"top")
+		Party.SelectedCharacterTag = self.CharTag
+		InputMenuItem.Hover = nil;
+		for item in InputMenuItem.List.Each
+			if Mouse.X>item.x+mx and Mouse.Y>item.y+my and Mouse.X<item.x+52+mx and Mouse.Y<item.y+52+my
+				InputMenuItem.Hover = item
+				InputMenuItem.Cursor[item.allowed()].XDraw(mx+item.x,my+item.y)
+			end
+		end
+	end
+	
+	void Update()
+		if InputMenuItem.Hover and Mouse.HitLeft
+			InputMenuItem.Hover.action()
+		end
+	end
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

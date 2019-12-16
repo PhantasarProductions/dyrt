@@ -1,0 +1,12 @@
+module JS_SpellAni
+
+	bool DrawOvertake
+
+	void Init()
+	end
+	
+	
+	bool Cycle()
+	end
+	
+end

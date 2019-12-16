@@ -1,0 +1,77 @@
+// License Information:
+// src/Tricky Script/Script/Use/Anyway/Dev.nil
+// Dev
+// version: 19.08.21
+// Copyright (C)  Jeroen P. Broks
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+
+
+
+#say "Debug feature class!"
+
+// I am still working for a more elegant way in NIL to do this
+#pure
+local
+#endpure
+
+class ClassDevelopment
+
+	void ConCheck()
+		if Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
+			GoConsole()
+		end
+	end
+	
+	void Log(infinity)
+		table params
+		params = { infinity }
+		for i,p in ipairs(params)
+			CWriteLine(string.format("DEBUG %05d> %s",i,p),200,190,120)
+		end
+	end
+
+end
+
+#say "Only needed to have an empty function"
+void NOTHING()
+end
+
+
+#say "Is this the debug mode, or not?"
+var ret
+
+if (DEVELOPMENT) then
+	ret = new ClassDevelopment
+else
+	table fake
+	table fakemeta
+	fakemeta.__index = var(a,b,c) 
+		return NOTHING
+	end
+	setmetatable(fake,fakemeta)
+	#pure
+	ClassDevelopment=nil;
+	#endpure
+	ret = fake
+end
+
+
+return ret
+
+
+
+

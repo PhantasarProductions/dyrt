@@ -1,0 +1,317 @@
+// License Information:
+// src/Tricky Script/Script/Use/Specific/Field.nlb/Field_RENC.nil
+// Version: 19.11.20
+// Copyright (C)  Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+
+
+
+
+#use "Script/Use/StartCombatMod"
+#use "libs/xmath"
+#use "libs/tables"
+#use "libs/strings"
+#use "libs/Collections"
+
+#accept FlowField
+#accept FieldMap
+
+group RENC
+	
+	var Swords
+	int MapTravelLevel
+	int MaxEncounters
+	int Encounters
+	int DecRate
+	table RoomRate
+	int MaxRate
+	int RecalcMaxE
+	var MaxFoes
+	
+	int gx 
+	int gy
+	int gdeg
+	bool ManEncOn = true
+
+	table Foes
+	table AllowLayer
+
+	get int Rate
+		return self.RoomRate[FlowField.Map.Kthura.Layer] or 0
+	end
+	
+	set int Rate
+		self.RoomRate[FlowField.Map.Kthura.Layer] = value
+	end
+	
+	get bool AutEncOn
+		return #self.Foes>0 and $AllowLayer[FieldFlow.Map.Kthura.Layer]
+	end
+	
+	get bool ManEncOff
+		return not self.ManEncOn;
+	end
+	
+	set bool ManEncOff
+		self.ManEncOn = not value;
+	end
+	
+	//readonly delegate bcol
+	
+	void CONSTRUCTOR()
+		self.Swords = LoadImage("gfx/RENC/Swords.png")
+		self.gx = Screen.Width + 25
+		self.gy = Screen.Height - 128 - 100 - 20
+		self.MaxFoes = new MArray("int",3+1,4+1)
+		self.MaxFoes.SetValue(1,1,1)
+		self.MaxFoes.SetValue(2,1,2)
+		self.MaxFoes.SetValue(3,1,2)
+		self.MaxFoes.SetValue(1,2,2)
+		self.MaxFoes.SetValue(2,2,3)
+		self.MaxFoes.SetValue(3,2,4)
+		self.MaxFoes.SetValue(1,3,3)
+		self.MaxFoes.SetValue(2,3,5)
+		self.MaxFoes.SetValue(1,3,6)
+		self.MaxFoes.SetValue(1,4,6)
+		self.MaxFoes.SetValue(2,4,9)
+		self.MaxFoes.SetValue(3,4,12)
+	end
+	
+	void Recalc()
+		int XEnc
+		if $MapTravelLevel>__travellevel + (3-__skill)
+			XEnc = ($MapTravelLevel - ( __travellevel + (3-__skill) )) * __skill
+		end
+		$MaxEncounters = $RecalcMaxE + XEnc
+		$DecRate = 1 + XEnc
+		$MaxRate = 40
+	end
+	
+	void CompileFoeList()
+		var kth
+		kth = FlowField.Map.Kthura
+		$Foes = {}
+		for i=1,__skill
+			string FoeLine
+			table ListFoes			
+			FoeLine = kth.Data[sprintf("Foes_Skill%d",i)]
+			ListFoes = split(FoeLine,";")
+			for FoeItm in each(ListFoes)
+				table sFoeItm
+				sFoeItm = split(FoeItm,",")
+				for num = 1 , tonumber( sFoeItm[2] ) or 1
+					$Foes[#self.Foes+1] = sFoeItm[1]
+				end
+			end
+		end
+	end
+	
+	void CompileAllowLayer()
+		table ban
+		ban = split(FlowField.Map.Kthura.Data.NoEncFloors,",")
+		$AllowLayer = {}
+		for L in FlowField.Map.Kthura.EachLayer
+			$AllowLayer[L] = true
+			$RoomRate[L]=$MaxRate
+		end
+		for L in each(ban)
+			$RoomRate[L] = 1000
+			$AllowLayer[L] = false
+		end
+	end
+	
+	void NoEncounters()
+		for L in FlowField.Map.Kthura.EachLayer
+			$RoomRate[L] = 0
+			$AllowLayer[L] = false
+			$Encounters = 200
+			$MaxEncounters = 200
+			
+		end
+	end
+	
+	void Reset(int MapTLevel,MaxE)
+		if MapTLevel==0
+			$NoEncounters()
+			return
+		end
+		$RecalcMaxE = MaxE or 5
+		$MapTravelLevel = MapTLevel
+		$Recalc()
+		$Encounters = $MaxEncounters
+		$ManEncOn = true
+		$CompileFoeList()
+		$CompileAllowLayer()
+	end
+	
+	void RencCheck()
+		if $Encounters<=0 or (not $AutEncOn)
+			return
+		end
+		int ORate
+		ORate = $Rate
+		--$Rate		
+		if $Rate<1
+			$Rate=1	
+		end
+		if __skill<3 and math.ceil((ORate/$MaxRate)*4)>=4
+			// If not in hard mode, blue guarantees no encounter
+			return
+		end
+		if $Rate<=1 or math.random(1,$Rate)<__skill
+			var kth
+			kth = FlowField.Map.Kthura
+			StartCombat.StartSession()
+			StartCombat.Arena = kth.Data.Arena
+			if kth.Data.EncounterTune==""
+				table lm
+				lm = split(FlowField.Map.LoadedMap,"_")
+				switch lm[1]
+					case "CH1"
+						StartCombat.Music = "Music/Combat/Random/Chapter1.wav"
+					case "CH2"
+						StartCombat.Music = "Music/Combat/Random/Chapter2.wav"
+					case "CH3"
+						StartCombat.Music = "Music/Combat/Random/Chapter3.wav"
+					case "CH4"
+						StartCombat.Music = "Music/Combat/Random/Chapter4.wav"
+					default
+						StartCombat.Music = sprintf("Music/Combat/Random/Chapter%d.wav",math.random(1,4))
+				end
+			end
+			int numfoe
+			int numchars
+			for i=1,8
+				if RPG.Party[i] and RPG.Party[i]!=""
+					numchars++
+				end
+			end
+			repeat
+				numfoe = math.random(1,self.MaxFoes.GetValue(__skill,numchars))
+			until math.random(0,numfoe)<=__skill
+			for i=1,numfoe
+				StartCombat.Foe[i] = "Reg/"..$Foes[math.random(1,#self.Foes)]
+			end
+			// Ambush or not?
+			do
+				int AmbushRollParty
+				int AmbushRollMap
+				AmbushRollParty = math.random(0,__travellevel)
+				AmbushRollMap   = math.random(0,FieldMap.TravelLevel)
+				switch __skill
+					case 1
+						if AmbushRollParty>=AmbushRollMap
+							StartCombat.StartMode=1
+						end
+					case 2
+						if AmbushRollParty>AmbushRollMap and math.random(0,__travellevel)>math.random(0,FieldMap.TravelLevel*2)
+							StartCombat.StartMode=1
+						elseif AmbushRollParty<AmbushRollMap and math.random(0,__travellevel)<math.random(0,FieldMap.TravelLevel)
+							StartCombat.StartMode=2
+						end
+					case 3
+						if AmbushRollParty<=AmbushRollMap+2
+							StartCombat.StartMode=2
+						end
+					default
+						error("Unknown skill") // Should never be possible, BUT, ya never know!
+				end
+			end
+			$Rate = $MaxRate
+			$Encounters--
+			StartCombat.Ready()
+		end
+	end
+	
+	void Gauge()
+		int r
+		int g
+		int b
+		number s
+		number bar
+		number rgauge
+		if $AutEncOn and $gx > Screen.Width-50
+			$gx--
+		elseif (not $AutEncOn) and $gx < Screen.Width + 25
+			$gx++
+		end
+		if $ManEncOff
+			GraphColor.Alpha = 100
+		end
+		__white
+		Rect($gx-1,$gy-1,12,102)
+		__black
+		Rect($gx,$gy,10,100)
+		$gdeg++
+		if $gdeg>=360
+			$gdeg = $gdeg - 360
+		end
+		//r,g,b = $bcol($Rate)
+		rgauge = math.ceil(($Rate/self.MaxRate)*4)
+		switch rgauge
+			case 0 1
+				r,g,b = 255,0,0
+			case 2
+				r,g,b = 255,180,0
+			case 3
+				r,g,b = 0,255,0
+			default
+				r,g,b = 0,0,255
+		end
+		bar = math.floor( ($Encounters/$MaxEncounters) * 100)
+		for ix=0,9
+			// math.sin counts in radians, but for this particular calcuation I need degrees, and xmath.sin counts in that.
+			s = math.abs(xmath.sin((ix*15)+$gdeg))
+			Color(math.ceil(s*r),math.ceil(s*g),math.ceil(s*b))
+			// Cheap way to draw a straight line. No need to use Bresenham here, as that would slow things down in THIS particular case.
+			Rect($gx+ix,$gy+(100-bar),1,bar)
+		end
+		__white
+		$Swords.Draw($gx-11,$gy-16)
+		GraphColor.Alpha = 255
+	end
+	
+end
+
+
+
+
+
+
+
+
+
+
+
