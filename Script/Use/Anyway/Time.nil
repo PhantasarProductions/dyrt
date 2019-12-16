@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/Time.nil
-// Version: 19.08.16
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -108,6 +108,3 @@ group ModuleTime
 end
 
 return ModuleTime
-
-
-

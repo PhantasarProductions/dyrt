@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.08.09
+// version: 19.12.16
 // End License Information
 
 
@@ -102,8 +102,3 @@ MetaNames.__call = void(t,lang)
 end
 
 setmetatable(Names,MetaNames)
-
-
-
-
-

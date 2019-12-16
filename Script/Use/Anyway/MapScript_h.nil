@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/MapScript_h.nil
-// Version: 19.11.28
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -106,12 +106,3 @@ MapMeta = {
 setmetatable ( MapScript, MapMeta )
 
 return MapScript
-
-
-
-
-
-
-
-
-

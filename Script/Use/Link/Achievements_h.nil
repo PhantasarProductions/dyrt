@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Achievements_h.nil
-// Version: 19.11.17
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -86,5 +86,3 @@ end
 
 global var Trophy
 Trophy = Achievements
-
-

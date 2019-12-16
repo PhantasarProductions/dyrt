@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/HaveMusic.nil
 // A notice there is no music... Automatically overridden when the Dyrt_Music.jcr file is in the same folder as the JCR file this script is in.... Silly, but yet effective :-P
-// version: 19.07.15
+// version: 19.12.16
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -21,6 +21,3 @@
 
 global bool musicavailable = false
 CSay("Music is NOT available")
-
-
-

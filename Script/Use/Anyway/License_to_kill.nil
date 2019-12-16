@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/License_to_kill.nil
-// Version: 19.11.25
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -74,6 +74,3 @@ quickmeta group Killed4Oversoul
 	end
 	
 end
-
-
-

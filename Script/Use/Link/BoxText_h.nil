@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/BoxText_h.nil
-// Version: 19.09.02
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -89,6 +89,3 @@ setmetatable(BoxText,{
 global void MapText(string Tag, infinity)
 	BoxText("MAP",Tag,infinity)
 end
-
-
-
