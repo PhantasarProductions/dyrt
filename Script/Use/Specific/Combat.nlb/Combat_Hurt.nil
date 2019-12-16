@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Hurt.nil
-// Version: 19.11.06
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -114,7 +114,3 @@ end
 
 Hurt.List = new TLinkedList
 Hurt.Font = GetFont("SYSFONT")
-
-
-
-
