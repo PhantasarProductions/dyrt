@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/NewGame.nil
-// Version: 19.08.18
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -432,17 +432,3 @@ end
 global void BUB_Update()
 	stages[stage]['update']()
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-

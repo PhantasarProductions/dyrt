@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/KlaasVaak.nil
-// Version: 19.08.11
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -82,5 +82,3 @@ BUB_Update = Vaak.Update
 
 global delegate BUB_Draw
 BUB_Draw = Vaak.Draw
-
-
