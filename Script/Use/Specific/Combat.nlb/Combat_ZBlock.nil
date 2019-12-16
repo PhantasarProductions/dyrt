@@ -1,7 +1,0 @@
-new Combat_Status("Fear",{
-	['FearBlock'] = true
-})
-
-new Combat_Status("Silence",{
-	['SilenceBlock'] = true
-})
