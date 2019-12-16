@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.13
+// version: 19.12.16
 // End License Information
 
 
@@ -95,8 +95,3 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
-
-
-
-
-

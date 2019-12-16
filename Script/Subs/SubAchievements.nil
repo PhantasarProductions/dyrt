@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 19.11.19
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -227,9 +227,3 @@ end
 
 //BUB_Draw   = F_Achievements.Draw
 //BUB_Update = F_Achievements.Update
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 19.11.28
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -569,20 +569,3 @@ BUB_Draw=SG.Draw
 BUB_Update=SG.Update
 BUB_Arrive=SG.Arrive
 BUB_Load=SG.Load
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

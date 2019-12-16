@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubIAA.nil
-// Version: 19.12.05
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -96,5 +96,3 @@ global table SubAbilitiesMastered
 #pure
 Inventory = SubInventory
 #endpure
-
-
