@@ -1,6 +1,6 @@
 [lic]
 src/Tricky Script/ToolScript/Scenario_Dyrt_NET.GINI
-Version: 19.07.27
+Version: 19.12.16
 Copyright (C)  Jeroen Petrus Broks
 
 ===========================
@@ -51,7 +51,3 @@ LANG2.NAME=Nederlands
 LICENSE=These files and their content are property of Jeroen P. Broks and may NOT be removed without prior WRITTEN permission by the owner
 LZMA=YES
 NOTES=These files and their content are property of Jeroen P. Broks and may NOT be removed without prior WRITTEN permission by the owner
-
-
-
-

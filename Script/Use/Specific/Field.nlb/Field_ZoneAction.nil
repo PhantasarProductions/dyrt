@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_ZoneAction.nil
-// Version: 19.11.22
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -144,7 +144,3 @@ class ZoneAction
 	end
 	
 end
-
-
-
-
