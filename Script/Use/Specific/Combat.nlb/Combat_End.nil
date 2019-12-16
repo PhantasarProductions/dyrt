@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_End.nil
 // ...
-// version: 19.12.06
+// version: 19.12.16
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -38,7 +38,3 @@ group End_Combat
 	end
 	
 end
-
-
-
-

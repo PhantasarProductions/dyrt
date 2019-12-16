@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/IAA.nil
-// Version: 19.12.05
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -151,8 +151,3 @@ quickmeta group Item
 		end
 	end
 end
-
-
-
-
-

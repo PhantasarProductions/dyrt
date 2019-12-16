@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/GameVars.nil
 // Game Vars
-// version: 19.12.05
+// version: 19.12.16
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -195,9 +195,3 @@ donemeta.__newindex = void()
 	error("Done is READ-ONLY!")
 end
 setmetatable(Done,donemeta)
-
-
-
-
-
-

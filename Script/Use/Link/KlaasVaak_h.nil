@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/KlaasVaak_h.nil
-// Version: 19.08.11
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -44,5 +44,3 @@ global void GoToSleep(int TimeInMS,ReturnFlow)
 	end
 	LuaDoString("FLOW_SLEEP",sprintf("Vaak.Init(%d,Trim('%s'))",TimeInMS,ReturnFlow or CurrentFlow()),"Call flow: SLEEP")
 end
-
-

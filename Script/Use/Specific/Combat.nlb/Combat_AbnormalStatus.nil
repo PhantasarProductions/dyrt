@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_AbnormalStatus.nil
-// Version: 19.12.03
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -157,9 +157,3 @@ group Defeated
 	end
 	
 end
-
-
-
-
-
-

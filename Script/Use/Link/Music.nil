@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Music.nil
 // Music link script
-// version: 19.11.07
+// version: 19.12.16
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -58,10 +58,3 @@ module ClassMusic
 	end
 
 end
-
-
-
-
-
-
-

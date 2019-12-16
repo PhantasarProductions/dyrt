@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/SkillN_Num.nil
-// Version: 19.12.09
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -73,5 +73,3 @@ end
 
 
 return SNN1
-
-

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/WorldMap_h.nil
-// Version: 19.11.19
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -56,6 +56,3 @@ quickmeta group WorldMap
 	end
 
 end
-		
-
-

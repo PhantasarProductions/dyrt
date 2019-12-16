@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Party_h.nil
-// Version: 19.12.07
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -99,14 +99,3 @@ group Party
 	end
 
 end
-
-
-
-
-
-
-
-
-
-
-
