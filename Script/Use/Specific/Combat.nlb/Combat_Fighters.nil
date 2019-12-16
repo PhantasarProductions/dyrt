@@ -209,6 +209,12 @@ class Fighter
 end
 
 
+// Is is to tackle a few forwarding issues NIL suffers from
+global var fw_Fighter
+#pure
+fw_Fighter = Fighter
+#endpure
+
 #pure
 Defeated.F = Fighter
 #endpure

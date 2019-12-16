@@ -37,6 +37,9 @@
 
 #use "libs/strings"
 
+
+#accept fw_Fighter
+
 table trstatus
 
 void DO_NOTHING(f)
@@ -74,6 +77,22 @@ class Combat_Status
 	
 	static table S
 	static table SN
+	
+	static bool UnTargetable(string ftag)
+		var ch
+		ch = fw_Fighter.ByTag[ftag]
+		for _,s in pairs(self.SN)
+			// CSayF("Char: %s; status: %s => %s",ftag,s,tostring(ch.StatusChanges[s])) // DEBUG ONLY!
+			if ch.StatusChanges[s]
+				var st
+				st = ch.StatusChanges[s]
+				if st.UntargetableFoe and prefixed(ch.Tag,"FOE_")
+					return true
+				end
+			end
+		end
+		return false
+	end
 	
 	void CONSTRUCTOR(string name,table junk)
 		self.Draw = DO_NOTHING

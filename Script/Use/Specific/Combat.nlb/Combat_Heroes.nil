@@ -312,35 +312,37 @@ group Stage_SelectTarget extends Stage
 	
 	void Draw()
 		for tag,fight in pairs(self.targetted)
-			__white
-			fight.Icon(fight.X+40,fight.Y+20)
-			DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
-			if __skill<3 or fight.GetTeamName()=="Hero"
-				Color(100,100,100)
-				Rect(fight.X+80,fight.Y+40,100,18)
-				if fight.ShowHP
-					number rate
-					int green
-					rate = fight.Ch.Points("HP").Have / fight.Ch.Points("HP").Maximum
-					green = math.floor(255*rate)
-					Color(255-green,green,0)
-					Rect(fight.X+80,fight.Y+40,math.floor(100*rate),18)
-				else
-					__white
-					DarkText.Font(CombatTime.FontGauge,"?",fight.X+80+50,fight.Y+40,2,0)
-				end
+			if not Combat_Status.UnTargetable(tag)
 				__white
-				bool hstat
-				int ystat
-				ystat = fight.Y+60
-				for sk,_ in fight.StatusChanges.Each
-					hstat = true
-					DarkText.Font(CombatTime.FontGauge,sk,fight.X+80,ystat)
-					ystat = ystat + 20
-				end
-				if not hstat
-					Color(180,255,0)
-					DarkText.Font(CombatTime.FontGauge,"Status: Okay",fight.X+80,ystat)
+				fight.Icon(fight.X+40,fight.Y+20)
+				DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
+				if __skill<3 or fight.GetTeamName()=="Hero"
+					Color(100,100,100)
+					Rect(fight.X+80,fight.Y+40,100,18)
+					if fight.ShowHP
+						number rate
+						int green
+						rate = fight.Ch.Points("HP").Have / fight.Ch.Points("HP").Maximum
+						green = math.floor(255*rate)
+						Color(255-green,green,0)
+						Rect(fight.X+80,fight.Y+40,math.floor(100*rate),18)
+					else
+						__white
+						DarkText.Font(CombatTime.FontGauge,"?",fight.X+80+50,fight.Y+40,2,0)
+					end
+					__white
+					bool hstat
+					int ystat
+					ystat = fight.Y+60
+					for sk,_ in fight.StatusChanges.Each
+						hstat = true
+						DarkText.Font(CombatTime.FontGauge,sk,fight.X+80,ystat)
+						ystat = ystat + 20
+					end
+					if not hstat
+						Color(180,255,0)
+						DarkText.Font(CombatTime.FontGauge,"Status: Okay",fight.X+80,ystat)
+					end
 				end
 			end
 		end
@@ -356,13 +358,13 @@ group Stage_SelectTarget extends Stage
 			bool gotcha
 			switch self.Item.Target
 				case "EV"
-					gotcha=true
+					gotcha=not Combat_Status.UnTargetable(ifighter.Tag) //true
 				case "OS"
 					gotcha=imember==self.CharTag
 				case "AF" "AA"
-					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
+					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y) and (not Combat_Status.UnTargetable(ifighter.Tag))
 						for iteam2,imember2,ifighter2 in Fighter.ForAll()
-							if iteam2==iteam and imember2!=imember 
+							if iteam2==iteam and imember2!=imember and (not Combat_Status.UnTargetable(ifighter2.Tag))
 								self.targetted[imember2]=ifighter2
 								gotcha=true
 								self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
@@ -370,7 +372,7 @@ group Stage_SelectTarget extends Stage
 						end
 					end
 				case "1F" "1A"
-					gotcha = (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y)
+					gotcha = (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y) and (not Combat_Status.UnTargetable(ifighter.Tag))
 					if gotcha 
 						self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
 					end
