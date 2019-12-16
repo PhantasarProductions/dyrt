@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.11.24
+// version: 19.12.16
 // End License Information
 
 #use "libs/LinkedList"
@@ -170,4 +170,3 @@ module Arena_Dungeon
 	end
 
 end
-

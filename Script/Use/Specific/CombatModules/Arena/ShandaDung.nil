@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.12
+// version: 19.12.16
 // End License Information
 
 module Exa_Arena
@@ -53,7 +53,3 @@ module Exa_Arena
 	end
 
 end
-
-
-
-

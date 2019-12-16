@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZorgCentrum.nil
-// Version: 19.09.12
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -67,5 +67,3 @@ group ConsoleCommands
 	end
 	
 end
-
-

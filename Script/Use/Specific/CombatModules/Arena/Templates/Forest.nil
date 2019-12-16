@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Templates/Forest.nil
-// Version: 19.09.11
+// Version: 19.12.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -172,6 +172,3 @@ module Forest_Template_Module
 	end
 
 end
-
-
-
