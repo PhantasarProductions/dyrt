@@ -1,0 +1,109 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH1_DUNG_ShandaDungeon.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 19.12.14
+// End License Information
+
+
+
+#say "Map Script - None!" 
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+group MScript
+	
+	void STARTTUTORIAL()
+		if not Done.Tutorial_DisappearingDungeons_and_guest_characters
+			MapText("STARTTUT")
+		end
+		gv.Bool.AllowOversoul = __skill>=2
+	end
+	
+	void TUTFLY()
+		if not Done.Tutorial_Iravonia_Fly
+			Field.Leader="Irravonia"
+			MapText("FLY")
+		end
+	end
+	
+	void NPC_TRAVEL()
+		CSay("Fake the travel emblem effect")
+		LuaDoString("FLOW_FIELD","FlowField.TravelEmblem('NPC_Travel')")
+		Map.Kill("NDoor",true)
+	end
+	
+	void GOAL()
+		Achievements.Award("PUZ_FLYRAINBOW")
+	end
+	
+	void STARTBLENCHY()
+		BoxText.Load("GenScen/Ch1/Blenchy","BLENCHY")
+		MapScript.SASKIA("Blenchy")
+	end
+	
+	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "ShandaDung"
+		StartCombat.Foe[1] = "Reg/Orc"
+		StartCombat.Foe[2] = "Boss/Jeracko"
+		if __skill>1
+			StartCombat.Foe[3] = "Reg/Orc"
+		end
+		if __skill==3
+			for i=4,6
+				StartCombat.Foe[i] = "Reg/Orc"
+			end
+		end
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("StartTut","STARTTUTORIAL")
+		Map.ZA_Enter("TutFly","TUTFLY")
+		Map.ZA_Enter("Goal","GOAL")
+		Map.ZA_Enter("StartBlenchy","StartBlenchy")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"

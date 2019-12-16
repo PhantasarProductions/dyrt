@@ -1,0 +1,102 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH1_CITY_Doubline.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 19.12.12
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+group MScript
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("Leave","LEAVE")
+		if not gv.Bool.GagoltonAttacked
+			Map.Kill("NPC_ShopHoer2")
+		end
+	end
+	
+	void LEAVE()
+		if not gv.Bool.Chapter1Complete
+			Field.LoadMap("CH1_DUNG_XenorBushes_North")
+			Map.GoToLayer("#002","Einde")
+			//Map.SpawnPlayer("Einde")
+		end
+	end
+	
+	void NPC_SHOPHOER()
+		switch Field.Leader
+			case "Eric" "Brendor" "Dernor"
+				//MapText("SHOPHOER_MALE")
+				MapScript.SASKIA("ShopHoer_Male")
+			case "Irravonia" "Scyndi" "Rebecca" "Merya" "Aziella" "Kirana"
+				//MapText("SHOPHOER_FEMALE")
+				MapScript.SASKIA("ShopHoer_Female")
+			default
+				error("ShopHoer -- Unknown character gender for leader!")
+		end
+	end
+	
+	void NPC_TOSHANDA()
+		if not Done.Done_Doubline_Intro_GoToShanda
+			MapText("TOSHANDA_Q")
+		elseif gv.Bool.Done_Doubline_GoneToShanda
+			MapText("TOSHANDA_D")
+		elseif Yes("Are you ready to go to the Queen of the \"Forgotten Realm\"?")
+			gv.Bool.Done_Doubline_GoneToShanda = true
+			MapScript.SASKIA("GoTo_Shanda")
+		else
+			MapText("TOSHANDA_N")
+		end
+	end
+	
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
+
+
+
+
+
+
+
+
+
