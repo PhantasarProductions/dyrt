@@ -1,0 +1,58 @@
+; License Information:
+; **********************************************
+; 
+; src/Tricky Script/SASKIA/MapScript/CH1_DUNG_XenorBushes_North.saskia
+; (c) Jeroen Broks, , All Rights Reserved.
+; 
+; This file contains material that is related
+; to a storyline that is which is strictly
+; copyrighted to Jeroen Broks.
+; 
+; This file may only be used in an unmodified
+; form with an unmodified version of the
+; software this file belongs to.
+; 
+; You may use this file for your study to see
+; how I solved certain things in the creation
+; of this project to see if you find valuable
+; leads for the creation of your own.
+; 
+; Mostly this file comes along with a project
+; that is for most part released under an
+; open source license and that means that if
+; you use that code with this file removed
+; from it, you can use it under that license.
+; Please check out the other files to find out
+; which license applies.
+; This file comes 'as-is' and in no possible
+; way the author can be held responsible of
+; any form of damages that may occur due to
+; the usage of this file
+; 
+; 
+; **********************************************
+; 
+; version: 19.12.05
+; End License Information
+
+:OnLoad
+	end
+
+
+:StartToDoubline
+	mov "#001",Map.Layer
+	Call Map.KillSwap
+	call MapScript.NGPSECRETREMOVE
+	call BoxText,"EXAM_END","D"
+	call Map.Show,"N_Human"
+	call BoxText,"EXAM_END","E"
+	call Map.Kill,"N_Human",true
+	call BoxText,"EXAM_END","EB"
+	call Map.Show,"N_Rebecca"
+	Call BoxText,"EXAM_END","F"
+	call Map.Kill,"N_Rebecca",true
+	call Map.Kill,"N_Eric",true
+	call Map.Kill,"N_Irravonia",true
+	call MapScript.SETSTARTGROUP
+	
+
