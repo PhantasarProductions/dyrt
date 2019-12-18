@@ -68,6 +68,10 @@ group MScript
 		RPG.KillChar("Shanda") // She was only a guest char, and she'll never be in the party again, so why keep her in the memory?
 	end
 	
+	void NPC_MERCHANT()
+		MapScript.SASKIA("Merchant")
+	end
+	
 	void Draw()
 	end
 	

@@ -39,3 +39,9 @@
 	call MapScript.CreateBrendor
 	:OnLoad
 	end
+
+
+:Merchant
+	Call MapScript,"Merchant"
+	Call Merchant,"CH1_Fritz"
+	jmp OnLoad
