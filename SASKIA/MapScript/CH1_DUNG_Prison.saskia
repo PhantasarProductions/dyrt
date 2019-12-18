@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.05
+; version: 19.12.18
 ; End License Information
 
 
@@ -71,15 +71,13 @@ end
 	Call Map.KillSwap,"CH1_DUNG_XenorBushes_North"
 	call Field.ChainMap,"CH1_DUNG_XenorBushes_North","StartToDoubline","#001"
 	end
+	
+	
+:ShandaDone
+	call BoxText,"BLENCHY","E"
+	call Field.ChainMap,"CH1_DUNG_MysteriousCrypt", "StartBrendor", "#000"
+	call Map.GoToLayer, "#000", "Start"
+	end
 
 :From_World
 	end
-
-
-
-
-
-
-
-
-
