@@ -2683,6 +2683,8 @@ Rec: ITM_ANTIDOTE
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
+	Block_Fear = FALSE
+	Block_Silence = FALSE
 	BlockSilence = FALSE
 	BuffAccuracy = 0
 	BuffAgility = 0
@@ -2692,6 +2694,7 @@ Rec: ITM_ANTIDOTE
 	BuffResistance = 0
 	BuffStrength = 0
 	BuyPrice = 25
+	CauseConfusion = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -2704,6 +2707,7 @@ Rec: ITM_ANTIDOTE
 	CauseZombie = FALSE
 	Charge = 
 	COM2ACT = 123
+	CureConfusion = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -2982,6 +2986,8 @@ Rec: ITM_MEDICINE
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
+	Block_Fear = FALSE
+	Block_Silence = FALSE
 	BlockSilence = FALSE
 	BuffAccuracy = 0
 	BuffAgility = 0
@@ -2990,7 +2996,8 @@ Rec: ITM_MEDICINE
 	BuffIntelligence = 0
 	BuffResistance = 0
 	BuffStrength = 0
-	BuyPrice = 100
+	BuyPrice = 200
+	CauseConfusion = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -3002,7 +3009,8 @@ Rec: ITM_MEDICINE
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 200
+	COM2ACT = 300
+	CureConfusion = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = TRUE
@@ -3014,7 +3022,7 @@ Rec: ITM_MEDICINE
 	CureSleep = FALSE
 	CureZombie = FALSE
 	DefenseStat = Resistance
-	Description = Virusses hate this stuff!
+	Description = Created from a recipe said to be written by Weniaria herself
 	Discriminate = FALSE
 	EffectArgument = 
 	EffectFunction = 
@@ -3037,14 +3045,14 @@ Rec: ITM_MEDICINE
 	EqRebecca = FALSE
 	EqScyndi = FALSE
 	EqShanda = FALSE
-	Equip_Attack = 
+	Equip_Attack = ACT_ATTACK
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
-	GainSkill1 = 25
+	GainSkill1 = 250
 	GainSkill1All = FALSE
 	GainSkill1Chars = Merya
 	GainSkill2 = 0
@@ -3070,7 +3078,7 @@ Rec: ITM_MEDICINE
 	SpellAniArgument = 
 	SpellAniFunction = 
 	SpellAniScript = 
-	Stance = ITEM
+	Stance = CAST
 	Target = Auto
 	Type = Item
 
