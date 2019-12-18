@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/System/console.nil
 // Console
-// version: 19.12.16
+// version: 19.12.18
 // Copyright (C)  Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -143,6 +143,11 @@ group ConsoleCommands
 	void JACKTHERIPPER()
 		gv.Bool.DEBUG_CHEAT_JACKTHERIPPER = not gv.Bool.DEBUG_CHEAT_JACKTHERIPPER
 		CSay("Mode Jack The Ripper: "..tostring(gv.Bool.DEBUG_CHEAT_JACKTHERIPPER))
+	end
+	
+	void IDDQD()
+		gv.Bool.DEBUG_CHEAT_IDDQD = not gv.Bool.DEBUG_CHEAT_IDDQD
+		CSay("Mode IDDQD: "..tostring(gv.Bool.DEBUG_CHEAT_IDDQD))
 	end
 
 end
