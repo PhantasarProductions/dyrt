@@ -15,14 +15,10 @@
 ; with basically comes down to the same lack of
 ; restriction the public domain offers. (YAY!)
 ; ***********************************************************
-; Version 19.07.29
+; Version 19.12.18
 ; End License Information
 
 
 :HELLO
 	call print,"Hello World"
 	end
-
-
-
-
