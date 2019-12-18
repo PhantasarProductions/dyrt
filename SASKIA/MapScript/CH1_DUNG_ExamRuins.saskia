@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.05
+; version: 19.12.18
 ; End License Information
 
 :OnLoad
@@ -82,8 +82,3 @@
 	call BoxText,"EXAM_END","B"
 	call Field.ChainMap,"CH1_DUNG_Prison","End_Eric","#999"
 	end
-
-
-
-
-

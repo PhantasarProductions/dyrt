@@ -32,10 +32,8 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.11.16
+; version: 19.12.18
 ; End License Information
 :OnLoad
 	; Yeah nothing here (yet)
 	end
-
-
