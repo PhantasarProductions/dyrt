@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/StartCombatMod.nil
-// Version: 19.12.16
+// Version: 19.12.18
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -73,6 +73,23 @@ quickmeta group StartCombatFoe
 	end
 end
 
+quickmeta group StartCombatFoeRX
+	newindex
+		CombatLoaded()
+		assert(type(key)=="number" and type(value)=="number","Invalid RX key/value")
+		LuaDoString("FLOW_Combat","Combat_Start.RX["..key.."] = "..qv(value))
+	end
+end
+
+quickmeta group StartCombatFoeRY
+	newindex
+		CombatLoaded()
+		assert(type(key)=="number" and type(value)=="number","Invalid RY key/value")
+		LuaDoString("FLOW_Combat","Combat_Start.RY["..key.."] = "..qv(value))
+	end
+end
+
+
 quickmeta group StartCombat
 
 	newindex
@@ -99,6 +116,10 @@ quickmeta group StartCombat
 				end
 			case "Foe" "Enemy"
 				return StartCombatFoe
+			case "RX" "rx" "Rx" "rX"
+				return StartCombatFoeRX
+			case "RY" "ry" "Ry" "rY"
+				return StartCombatFoeRY
 			default
 				return void(infinity)
 					string wrk
