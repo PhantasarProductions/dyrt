@@ -51,7 +51,7 @@ group MScript
 		for chn in each({"Eric","Irravonia","Rebecca"})
 			#+ lvl RPG.GetChar(chn).Stat("Level").Value
 		end
-		#* lvl (1.50 - (__skill * -.25))
+		#+ lvl (lvl*({0.25,0,-0.75})[__skill])
 		var Brendor
 		Party.NewCharacter("Brendor",math.ceil(lvl))
 		Brendor = RPG.GetChar("Brendor")
