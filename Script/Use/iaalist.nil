@@ -18,6 +18,7 @@ itemret[#itemret+1]="EQA_SHIRT"
 itemret[#itemret+1]="EQA_YOUNGIRRAVONIA_DRESS"
 itemret[#itemret+1]="JWL_BRACERS"
 itemret[#itemret+1]="JWL_EMERALD"
+itemret[#itemret+1]="JWL_GOLDENMEDALLION"
 itemret[#itemret+1]="JWL_SHANDA_ROYALRING"
 itemret[#itemret+1]="JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 
