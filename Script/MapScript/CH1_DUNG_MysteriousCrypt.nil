@@ -60,7 +60,7 @@ group MScript
 		Brendor.Stat("BASE__RESIST_Stat_Poison").Value = 99 - (3*__skill)
 		Brendor.Stat("BASE__RESIST_Stat_Disease").Value = 92 - (6*__skill)
 		Brendor.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,math.ceil(99 / __skill))
-		Brendor.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,69 / __skill)
+		Brendor.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,math.ceil(69 / __skill))
 		RPG.Party[1] = "Brendor"
 		RPG.Party[2] = ""
 		RPG.Party[3] = ""

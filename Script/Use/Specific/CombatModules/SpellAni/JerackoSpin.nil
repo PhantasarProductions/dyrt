@@ -65,9 +65,10 @@ class JS_CD
 	end
 
 	void DESTRUCTOR()
-		self.F.SpotX = self.F.OX
-		self.F.SpotY = self.F.OY
+		self.F.SpotX = self.OX
+		self.F.SpotY = self.OY
 		self.Tab[self.F] = nil;
+		CSayF("Jeracko Spin - Cleared: %s",self.F.Tag)
 	end
 	
 end
@@ -82,6 +83,15 @@ module JS_SpellAni
 	int Deg
 	int Spd
 	int Round
+	bool Klaar
+	
+	get int MidX
+		return math.ceil(Screen.W/2)
+	end
+	
+	get int MidY
+		return math.ceil(Screen.H/2)
+	end
 	
 
 	void Init()
@@ -95,9 +105,37 @@ module JS_SpellAni
 		for iteam,imember,ifighter in Fighter.ForAll()
 			new JS_CD(ifighter)
 		end
+		self.Klaar = false
+	end
+	
+	bool RecoverySpots()
+		bool ret = true
+		for F,D in pairs(JS_CD.Tab)
+			if F.SpotX > D.OX
+				F.SpotX --
+				ret = false
+			elseif F.SpotX < D.OX
+				F.SpotX++
+				ret = false
+			end
+			if F.SpotY > D.OY
+				F.SpotY --
+				ret = false
+			elseif F.SpotY < D.OT
+				F.SpotY++
+				ret = false
+			end
+		end
+		if ret
+			self.Clear()
+		end
+		return ret
 	end
 	
 	bool Cycle()
+		if self.Klaar
+			return self.RecoverySpots()
+		end
 		//CSayF("<Jeracko spin cycle>\n%s\n</Jeracko spin cycle>",self[".dump"]) // DEBUG ONLY!!!
 		__black
 		//Rect(0,0,Screen.W,Screen.H)
@@ -108,10 +146,10 @@ module JS_SpellAni
 		//self.Shot.XDraw(math.floor(Screen.W/2),math.floor(Screen.H/2))
 		//CSay("/X") // DEBUG ONLY!
 		for F,D in pairs(JS_CD.Tab)
-			F.Deg++
-			#+ F.Deg self.Spd
-			F.SpotX = math.floor(xmath.sin(F.F.Deg)*300)
-			F.SpotY = math.floor(xmath.cos(F.F.Deg)*300)
+			D.Deg++
+			#+ D.Deg self.Spd
+			F.SpotX = self.MidX+math.floor(xmath.sin(D.Deg)*300)
+			F.SpotY = self.MidY+math.floor(xmath.cos(D.Deg)*300)
 		end
 		#+ self.Deg self.Spd
 		if self.Deg>=360
@@ -123,7 +161,8 @@ module JS_SpellAni
 		elseif self.Round>10 and self.Spd>1
 			self.Spd--
 		end
-		return self.Round>10 and self.Spd==1 and self.Deg==0
+		self.Klaar = self.Round>10 and self.Spd==1 and self.Deg==0
+		return false
 	end
 	
 	void CONSTRUCTOR()

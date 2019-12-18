@@ -35,7 +35,7 @@
 ; version: 19.12.18
 ; End License Information
 
-:StartBredor
+:StartBrendor
 	call MapScript.CreateBrendor
 	:OnLoad
 	end
