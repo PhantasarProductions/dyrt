@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.16
+// version: 19.12.18
 // End License Information
 
 
@@ -78,6 +78,8 @@ group MScript
 		StartCombat.Arena = "ShandaDung"
 		StartCombat.Foe[1] = "Reg/Orc"
 		StartCombat.Foe[2] = "Boss/Jeracko"
+		StartCombat.RX[2] = 50
+		StartCombat.RY[2] = 75
 		if __skill>1
 			StartCombat.Foe[3] = "Reg/Orc"
 		end
