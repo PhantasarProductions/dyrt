@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.12.16
+// Version: 19.12.18
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -69,6 +69,10 @@ class Foe extends Fighter
 	int Cash
 	table Drop
 	int FlickStance = 0
+	
+	get int Height
+		return self.Image.Height
+	end
 	
 	get bool ShowHP
 		switch __skill
