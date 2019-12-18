@@ -32,17 +32,101 @@
 // 
 // **********************************************
 // 
-// version: 19.12.16
+// version: 19.12.18
 // End License Information
+
+#use "libs/tables"
+#use "libs/xmath"
+
+class JS_CD
+	int OX
+	int OY
+	int Deg
+	var F
+	
+	static table Tab
+	
+	static void Clear()
+		table kill
+		for k,v in pairs(self.Tab)
+			kill[#kill+1] = k
+		end
+		for k in each(kill)
+			self.Tab[k] = nil;
+		end
+	end
+	
+	void CONSTRUCTOR(F)
+		self.F = F
+		self.OX = F.SpotX
+		self.OY = F.SpotY
+		self.Deg = math.random(0,360)
+		self.Tab[F] = self
+	end
+
+	void DESTRUCTOR()
+		self.F.SpotX = self.F.OX
+		self.F.SpotY = self.F.OY
+		self.Tab[self.F] = nil;
+	end
+	
+end
+
+
+
 module JS_SpellAni
 
 	bool DrawOvertake
 
+	var Shot
+	int Deg
+	int Spd
+	int Round
+	
+
 	void Init()
+		//CSay("Init: Jeracko Spin!")
+		self.Deg = 0
+		self.Spd = 0
+		self.Round = 0
+		self.Shot = Grab("JERACKOSPIN")
+		self.Shot.HotCenter()
+		//CSay("Init: Jeracko Spin: Done!")
+		for iteam,imember,ifighter in Fighter.ForAll()
+			new JS_CD(ifighter)
+		end
 	end
 	
-	
 	bool Cycle()
+		//CSayF("<Jeracko spin cycle>\n%s\n</Jeracko spin cycle>",self[".dump"]) // DEBUG ONLY!!!
+		__black
+		//Rect(0,0,Screen.W,Screen.H)
+		__white
+		Rotate.Deg = self.Deg
+		//CSayF("<Grabbed>\n%s</Grabbed>",self.Shot[".dump"])
+		//CSay("X") // DEBUG ONLY
+		//self.Shot.XDraw(math.floor(Screen.W/2),math.floor(Screen.H/2))
+		//CSay("/X") // DEBUG ONLY!
+		for F,D in pairs(JS_CD.Tab)
+			F.Deg++
+			#+ F.Deg self.Spd
+			F.SpotX = math.floor(xmath.sin(F.F.Deg)*300)
+			F.SpotY = math.floor(xmath.cos(F.F.Deg)*300)
+		end
+		#+ self.Deg self.Spd
+		if self.Deg>=360
+			#- self.Deg 360
+			self.Round++
+		end
+		if self.Round<9 and self.Spd<12
+			self.Spd++
+		elseif self.Round>10 and self.Spd>1
+			self.Spd--
+		end
+		return self.Round>10 and self.Spd==1 and self.Deg==0
+	end
+	
+	void CONSTRUCTOR()
 	end
 	
 end
