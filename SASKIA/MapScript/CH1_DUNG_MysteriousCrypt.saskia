@@ -42,6 +42,6 @@
 
 
 :Merchant
-	Call MapScript,"Merchant"
+	Call MapText,"Merchant"
 	Call Merchant,"CH1_Fritz"
 	jmp OnLoad
