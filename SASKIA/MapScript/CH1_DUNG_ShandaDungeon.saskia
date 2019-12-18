@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.12
+; version: 19.12.18
 ; End License Information
 :OnLoad
 	end
@@ -52,10 +52,13 @@
 	call Map.Kill,"Blenchy"
 	call BoxText,"BLENCHY","C"
 	call MapScript.StartBoss
-	call BoxText,"BLENCHY","D"
+	call BoxText,"BLENCHY","D" 
 	call OnyxBang.Start
 	call Map.HideObj,"Jeracko"
 :OnyxBang2
 	;This should cause a loop until the Bang is over... Hopefully!
 	chk OnyxBang.Going,OnyxBang2
+	group 2
+	mov 1,Inventory.JWL_GoldenMedallion
+	call Field.ChainMap,"CH1_DUNG_Prison","ShandaDone","#999"
 	end
