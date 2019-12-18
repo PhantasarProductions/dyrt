@@ -1,0 +1,78 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH1_DUNG_MysteriousCrypt.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 19.12.18
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "libs/tables"
+
+group MScript
+	
+	void CONSTRUCTOR()
+	end
+	
+	void CREATEBRENDOR()
+		number lvl = 4 - __skill
+		for chn in each({"Eric","Irravonia","Rebecca"})
+			#+ lvl RPG.GetChar(chn).Stat("Level").Value
+		end
+		#* lvl (1.50 - (__skill * -.25))
+		var Brendor
+		Party.NewCharacter("Brendor",math.ceil(lvl))
+		Brendor = RPG.GetChar("Brendor")
+		Brendor.Stat("BASE__RESIST_Stat_Fear").Value = 99 - (10*__skill)
+		Brendor.Stat("BASE__RESIST_Stat_Exhaustion").Value = 54 / __skill
+		Brendor.Stat("BASE__RESIST_Stat_Poison").Value = 99 - (3*__skill)
+		Brendor.Stat("BASE__RESIST_Stat_Disease").Value = 92 - (6*__skill)
+		Brendor.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,math.ceil(99 / __skill))
+		Brendor.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,69 / __skill)
+		RPG.Party[1] = "Brendor"
+		RPG.Party[2] = ""
+		RPG.Party[3] = ""
+		RPG.Party[4] = ""
+		RPG.KillChar("Shanda") // She was only a guest char, and she'll never be in the party again, so why keep her in the memory?
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
