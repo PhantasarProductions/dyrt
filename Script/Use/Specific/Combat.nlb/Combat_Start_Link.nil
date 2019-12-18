@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Start_Link.nil
-// Version: 19.12.16
+// Version: 19.12.18
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -57,6 +57,8 @@ group Combat_Start
 	string Arena
 	string Music
 	int StartMode = 0
+	table RX
+	table RY
 	
 	// When set the enemy cannot be defeated
 	bool FoeIDDQD = false
@@ -113,7 +115,15 @@ global void LetsGetReadyToRumble()
 		
 		// Compile Foes
 		for i,d in pairs($Foe)
+			var myFoe
 			Foe.Compile(i,d)
+			myFoe = Fighter.ByTag[sprintf("FOE_%d",i)]
+			if $RX[i] and $RX[i]>0
+				myFoe.SpotX = math.ceil(Screen.W*($RX[i]/100))
+			end
+			if $RY[i] and $RY[i]>0
+				myFoe.SpotY = math.ceil(Screen.H*($RY[i]/100)) - myFoe.Height
+			end
 		end
 		
 		// Calculate gauge speed order
