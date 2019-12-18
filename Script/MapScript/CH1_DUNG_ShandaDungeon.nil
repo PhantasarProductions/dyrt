@@ -99,6 +99,10 @@ group MScript
 		Map.ZA_Enter("TutFly","TUTFLY")
 		Map.ZA_Enter("Goal","GOAL")
 		Map.ZA_Enter("StartBlenchy","StartBlenchy")
+		if not Done.Done_ShandaDungRespawnReset
+			Respawn.Initiated = false
+		end
+
 	end
 	
 	void Draw()

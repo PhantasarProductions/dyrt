@@ -44,6 +44,7 @@
 group MScript
 	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("ResetBlue","ResetBlue")
 	end
 	
 	void CREATEBRENDOR()
@@ -70,6 +71,17 @@ group MScript
 	
 	void NPC_MERCHANT()
 		MapScript.SASKIA("Merchant")
+	end
+	
+	void RESETBLUE()
+		if not Done.Done_Init_Brendor_MysteriousCrypt_VeryOwnRespawn
+			Respawn.Initiated = false
+		end
+	end
+	
+	void NPC_SWORDS()
+		#+ Inventory.EQW_ERICREBECCA_SWORD 2
+		Map.Kill("NPC_SWORDS",true)
 	end
 	
 	void Draw()
