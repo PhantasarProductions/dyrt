@@ -121,7 +121,7 @@ module JS_SpellAni
 			if F.SpotY > D.OY
 				F.SpotY --
 				ret = false
-			elseif F.SpotY < D.OT
+			elseif F.SpotY < D.OY
 				F.SpotY++
 				ret = false
 			end
