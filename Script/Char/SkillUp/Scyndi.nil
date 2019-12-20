@@ -1,0 +1,80 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Char/SkillUp/Scyndi.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 19.12.16
+// End License Information
+do
+	delegate ret
+	ret = void(int skill)
+		int lvl
+		lvl = RPG.GetChar("Scyndi").Points("SKILLLVL"..skill).Have
+		CSayF("Well Scyndi! How about we check out skill #%d for ya?",skill)
+		switch skill
+			case 0
+				// Whip
+				RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Agility").Value ++			
+			case 1
+				// Weniaria
+				RPG.GetChar("Scyndi").Stat("PERMPOWERUP_HP").Value ++
+				if lvl % __skill == 0
+					RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Intelligence").Value ++
+					RPG.GetChar("Scyndi").Stat("PERMPOWERUP_HP").Value ++
+				end
+			case 2
+				// Hando Stillor
+				RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Intelligence").Value = RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Intelligence").Value + (lvl % (4 - __skill))
+			case 3
+				// Thrur
+				if lvl % __skill == 0
+					RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Agility").Value ++
+				end
+			case 4
+				// Malabia
+				if lvl % __skill == 0
+					RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Resistance").Value ++
+					RPG.GetChar("Scyndi").Stat("PERMPOWERUP_HP").Value ++
+					if lvl % (__skill^2) == 0
+						RPG.GetChar("Scyndi").Stat("PERMPOWERUP_HP").Value ++
+						if __skill<3
+							RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Intelligence").Value ++
+						end
+					end
+				end
+
+		end
+	
+	end
+	
+	return ret
+end
