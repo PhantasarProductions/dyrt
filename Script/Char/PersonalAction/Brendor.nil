@@ -53,7 +53,7 @@ module Brendor_Personal_Action
 		self.Img.Draw(self.X,self.Y)
 	end
 	
-	void Click(int but,int x, int y)
+	bool Click(int but,int x, int y)
 		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
 			return
 		end
@@ -61,7 +61,7 @@ module Brendor_Personal_Action
 			for i=__player.Y-64,__player.Y
 				if prefixed(tag,"CRACK_") and FieldMap.Kthura.InObj(tag,__player.X,i)
 					self.Crack(tag)
-					return
+					return true
 				end
 			end
 		end
