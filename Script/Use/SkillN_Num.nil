@@ -51,7 +51,7 @@ quickmeta group SNN2
 		end
 		var ch
 		ch = RPG.GetChar(SNNCHTAG)
-		for i=0,5
+		for i=0,4
 			if ch.Points(sprintf("SKILLLVL%d",i)).Have>0 and prefixed(ch.Data[sprintf("SKILL%d",i)],key)
 				return i
 			end
