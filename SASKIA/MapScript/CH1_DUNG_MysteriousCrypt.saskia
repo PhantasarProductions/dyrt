@@ -58,4 +58,7 @@
 	call MapText,"TWISTED"
 	jmp OnLoad
 	
-	
+:EndCrypt
+	call BoxText,"ENDCRYPT","END_A"
+	call Field.ChainMap,"CH1_DUNG_Prison","EndCrypt","#999"
+	jmp OnLoad

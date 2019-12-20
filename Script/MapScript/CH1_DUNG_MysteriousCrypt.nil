@@ -126,6 +126,15 @@ group MScript
 		MapScript.SASKIA("Boss")
 	end
 	
+	void THE_END()
+		if Done.Done_MysteriousCrypt_Completed
+			return
+		end
+		BoxText.Load("GENSCEN/CH1/ENDCRYPT","ENDCRYPT")
+		Map.WalkTo("Fin")
+		MapScript.SASKIA("EndCrypt")
+	end
+	
 	void Draw()
 	end
 	
