@@ -35,8 +35,6 @@
 // version: 19.12.18
 // End License Information
 
-
-
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "libs/tables"
@@ -45,6 +43,7 @@ group MScript
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ResetBlue","ResetBlue")
+		Map.ZA_Enter("TUT_Break","TUT_BREAK")
 	end
 	
 	void CREATEBRENDOR()
@@ -82,6 +81,12 @@ group MScript
 	void NPC_SWORDS()
 		#+ Inventory.EQW_ERICREBECCA_SWORD 2
 		Map.Kill("NPC_SWORDS",true)
+	end
+	
+	void TUT_BREAK()
+		if not Done.Done_Tutorial_Brendor_Break
+			MapText("TUT_BREAK")
+		end		
 	end
 	
 	void Draw()

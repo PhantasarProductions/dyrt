@@ -1,0 +1,30 @@
+#use "libs/tables"
+
+#accept FlowField
+
+global void CrackGeneration()
+	CSay("Compiling Cracks")
+	var kth
+	kth = FlowField.Map.Kthura
+	for Lay in kth.EachLayer
+		CSayF("= Cracks on Layer %s",Lay)
+		kth.Layer = Lay
+		table cracks
+		for Tag in kth.EachTag(Lay)
+			if prefixed(Tag,"CRACK_")
+				cracks[#cracks+1] = right(Tag,#Tag-6)
+			end
+		end
+		for Tag in each(cracks)
+			int Dom
+			kth.Obj = "CRACK_"..Tag
+			Dom = kth.ObjInt.Dominance
+			kth.CreateTiledArea('gfx/MapModification/Crack.png',kth.ObjInt.X,kth.ObjInt.Y,kth.ObjInt.W,kth.ObjInt.H,"TEXCRACK_"..Tag)
+			kth.ObjInt.Dominance --
+			kth.HideByLabel(Tag)
+			kth.Obj = "TEXCRACK_"..Tag
+			kth.ObjInt.Dominance=Dom
+		end
+	kth.Remap()
+	end
+end

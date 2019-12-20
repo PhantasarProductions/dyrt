@@ -34,18 +34,44 @@
 // 
 // version: 19.12.16
 // End License Information
+
+#use "libs/strings"
+
 module Brendor_Personal_Action
 
+	var Img
+	int X
+	int Y
 	
+	void Crack(string tag)
+		FieldMap.Kill(tag,true)
+		FieldMap.Kill("TEX"..tag)
+		FieldMap.Kthura.ShowByLabel(right(tag,#tag-6))
+	end
 	
 	void Draw()
+		self.Img.Draw(self.X,self.Y)
 	end
 	
 	void Click(int but,int x, int y)
+		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
+			return
+		end
+		for tag in FieldMap.Kthura.EachTag()
+			for i=__player.Y-64,__player.Y
+				if prefixed(tag,"CRACK_") and FieldMap.Kthura.InObj(tag,__player.X,i)
+					self.Crack(tag)
+					return
+				end
+			end
+		end
 	end
 	
 	void CONSTRUCTOR()
-		
+		self.Img = LoadImage("GFX/PersAction/Brendor.png")
+		self.X = Screen.Width -300
+		self.Y = Screen.Height-400
+
 	end
 
 end

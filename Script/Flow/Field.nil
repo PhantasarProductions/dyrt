@@ -686,6 +686,8 @@ group FlowField
 			end
 		end
 		
+		CrackGeneration()
+		
 		
 		string pref
 		string rest
