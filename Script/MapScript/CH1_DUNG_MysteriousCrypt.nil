@@ -38,12 +38,35 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "libs/tables"
+#use "Script/Use/StartCombatMod"
+
+void Twisted()
+	MapScript.SASKIA("Twisted")
+end
 
 group MScript
+	
+	delegate SWITCH_SWONE
+	delegate SWITCH_SWTWO
+	// I did NOT forget number three! There's a joke behind this :P
+	delegate SWITCH_SWFOUR
+	delegate SWITCH_SWFIVE
+	delegate SWITCH_SWSIX
+	delegate SWITCH_SWSEVEN
+	delegate SWITCH_SWEIGHT
+	delegate SWITCH_SWNINE
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ResetBlue","ResetBlue")
 		Map.ZA_Enter("TUT_Break","TUT_BREAK")
+		Map.ZA_Enter("BOSS_Scorpion","SASKIA_BOSS")
+		for _,s in pairs {"ONE","TWO","FOUR","FIVE","SIX","SEVEN", "EIGHT", "NINE" }
+			self["SWITCH_SW"..s] = Twisted
+		end
+	end
+	
+	void SWITCH_SWTHREE()
+		Map.Kill("PuzDoor",true)
 	end
 	
 	void CREATEBRENDOR()
@@ -87,6 +110,20 @@ group MScript
 		if not Done.Done_Tutorial_Brendor_Break
 			MapText("TUT_BREAK")
 		end		
+	end
+	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "MysteriousCrypt"
+		StartCombat.Foe[1] = "Boss/Big_Scorpion"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void SASKIA_BOSS()
+		MapScript.SASKIA("Boss")
 	end
 	
 	void Draw()

@@ -45,3 +45,17 @@
 	Call MapText,"Merchant"
 	Call Merchant,"CH1_Fritz"
 	jmp OnLoad
+	
+:Boss
+	chk gv.Bool.Boss_BigScorpion,OnLoad
+	call MapScript.Boss
+	call Map.Kill,"Boss",true
+	mov true,gv.Bool.Boss_BigScorpion
+	jmp OnLoad
+	
+:Twisted
+	call Map.GoToLayer,"#001","Start"
+	call MapText,"TWISTED"
+	jmp OnLoad
+	
+	
