@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.12.16
+// Version: 19.12.21
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -256,6 +256,16 @@ group Map
 		})
 	end
 		
+	get string Leader
+		FieldCheck()
+		return LuaGetString("FLOW_FIELD","FlowField.Leader")
+	end
+	
+	set string Leader
+		FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
+	end
+
+	
 	
 end
 
