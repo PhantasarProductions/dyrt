@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.20
+// version: 19.12.21
 // End License Information
 
 #say "Map Script - None!"
@@ -60,6 +60,7 @@ group MScript
 		Map.ZA_Enter("ResetBlue","ResetBlue")
 		Map.ZA_Enter("TUT_Break","TUT_BREAK")
 		Map.ZA_Enter("BOSS_Scorpion","SASKIA_BOSS")
+		Map.ZA_Enter("EindPunt","The_End")
 		for _,s in pairs {"ONE","TWO","FOUR","FIVE","SIX","SEVEN", "EIGHT", "NINE" }
 			self["SWITCH_SW"..s] = Twisted
 		end
