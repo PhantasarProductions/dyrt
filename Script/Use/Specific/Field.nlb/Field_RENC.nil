@@ -53,7 +53,7 @@ group RENC
 	var Swords
 	int MapTravelLevel
 	int MaxEncounters
-	int Encounters
+	table RoomEncounters
 	int DecRate
 	table RoomRate
 	int MaxRate
@@ -67,7 +67,15 @@ group RENC
 
 	table Foes
 	table AllowLayer
-
+	
+	get int Encounters
+		return self.RoomEncounters[FlowField.Map.Kthura.Layer] or 0
+	end
+	
+	set int Encounters
+		self.RoomEncounters[FlowField.Map.Kthura.Layer] = value
+	end
+	
 	get int Rate
 		return self.RoomRate[FlowField.Map.Kthura.Layer] or 0
 	end
@@ -145,6 +153,7 @@ group RENC
 		for L in FlowField.Map.Kthura.EachLayer
 			$AllowLayer[L] = true
 			$RoomRate[L]=$MaxRate
+			$RoomEncounters[L] = $MaxEncounters
 		end
 		for L in each(ban)
 			$RoomRate[L] = 1000
@@ -156,7 +165,7 @@ group RENC
 		for L in FlowField.Map.Kthura.EachLayer
 			$RoomRate[L] = 0
 			$AllowLayer[L] = false
-			$Encounters = 200
+			$RoomEncounters[L] = 200
 			$MaxEncounters = 200
 			
 		end
