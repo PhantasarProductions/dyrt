@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/21/2019 11:51:18 PM
+// Generated: 12/22/2019 12:17:03 AM
 
 do
 var retfunc()
@@ -146,7 +146,8 @@ foeret.Char.Stat("BASE_RESIST_Status_Zombie").Value=100
 foeret.Char.Stat("BUFF_RESIST_Status_Zombie").Value=0
 foeret.Char.Stat( "END_RESIST_Status_Zombie").Value=0
 foeret.Char.Stat( "END_RESIST_Status_Zombie").Script="SUM:BASE_RESIST_Status_Zombie,BUFF_RESIST_Status_Zombie"
-foeret.StatusChanges.Undead = truefoeret.Boss = false
+foeret.StatusChanges.Undead = true
+foeret.Boss = false
 
 
 // Oversoul specific
@@ -212,7 +213,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=75
+	foeret.Char.Stat("BASE_Strength").Value=76
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"

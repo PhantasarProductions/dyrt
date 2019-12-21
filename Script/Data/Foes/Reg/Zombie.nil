@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/21/2019 11:51:18 PM
+// Generated: 12/22/2019 12:17:03 AM
 
 do
 var retfunc()
@@ -9,7 +9,7 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
-foeret.Description = "BRRAAAAAAINS!"
+foeret.Description = "BRRAAAAAAINS!!"
 foeret.Fatal["Light"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/REG/Zombie.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/ZOMBIE.NEGATIVE.PNG")
@@ -102,7 +102,8 @@ foeret.Char.Stat("BASE_RESIST_Status_Zombie").Value=100
 foeret.Char.Stat("BUFF_RESIST_Status_Zombie").Value=0
 foeret.Char.Stat( "END_RESIST_Status_Zombie").Value=0
 foeret.Char.Stat( "END_RESIST_Status_Zombie").Script="SUM:BASE_RESIST_Status_Zombie,BUFF_RESIST_Status_Zombie"
-foeret.StatusChanges.Undead = truefoeret.Boss = false
+foeret.StatusChanges.Undead = true
+foeret.Boss = false
 
 
 // Oversoul specific
