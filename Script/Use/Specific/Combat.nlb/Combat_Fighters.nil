@@ -185,10 +185,10 @@ class Fighter
 					default
 						if v
 							self.Char.StatusChangesRealTable[k] = CStatus[k]
-							new Hurt("Revive",self.Tag,255,100,100)
+							new Hurt(k,self.Tag,255,100,100)
 						else
 							self.Char.StatusChangesRealTable[k] = nil;
-							new Hurt("Revive",self.Tag,180,255,000)
+							new Hurt("Cure: "..k,self.Tag,180,255,000)
 						end
 				end
 			end,
