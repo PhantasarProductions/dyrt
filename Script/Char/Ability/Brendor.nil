@@ -40,7 +40,7 @@ do
 	#pure
 	return {
 		Charge = { Skill_Hammer=s*5 },
-		HammerSmash = { Skill_Sword=5^s },
+		HammerSmash = { Skill_Hammer=5^s },
 		Focus = { Scharum = true },
 		QuakeStrike = { SealedBoss = true }
 	}
