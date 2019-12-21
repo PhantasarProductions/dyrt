@@ -35,10 +35,14 @@
 // version: 19.12.21
 // End License Information
 
-
+#macro __weniaria_spoken gv.Bool.Done_Scyndi_Prologue_Spoken_To_Weniaria_To_Open_The_Door
+#macro __weniaria_complete gv.Bool.Done_Scyndi_Prologue_Complete
 
 #say "Map Script - None!"
 #use "script/use/anyway"
+
+bool cleaned
+
 group MScript
 	
 	void HS1()
@@ -49,9 +53,55 @@ group MScript
 		Map.ShowByLabel("SECRET_1")
 	end
 	
+	void HUGE()
+		if not Done.Done_Weniaria_Statue_Huge
+			MapText("HUGE")
+		end
+	end
+	
+	void NPC_WENIARIA()
+		if not __weniaria_spoken
+			__weniaria_spoken = true
+			MapText("STATUEEVIL")
+			Map.Kill("WenDeur")
+			return
+		end
+		if not __weniaria_complete
+			MapText("STATUEEVILB")
+			return
+		end
+		MapText("STATUEGENERAL")
+		for i=1,8
+			if RPG.Party[i] and RPG.Party[i]!=""
+				var ch
+				ch = RPG.GetChar(RPG.Party[i])
+				ch.Points("HP").Have = ch.Points("HP").Maximum
+				ch.Points("VIT").Have = ch.Points("VIT").Maximum
+			end
+		end
+	end
+	
+	void SWITCH_SW3()
+		Map.Kill("Deur3",true)
+	end
+	
+	void CLEANUP()
+		if not cleaned
+			if not __weniaria_complete
+				Map.Kill("NPC_Priest")
+				if __weniaria_spoken
+					Map.Kill("WenDeur")
+				end
+			end
+		cleaned = true
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("D_SECRET1","SS1")
 		Map.ZA_Leave("D_SECRET1","HS1")
+		Map.ZA_Enter("HUGE","Huge")
+		Map.ZA_Enter("CleanUp","CleanUp")
 	end
 	
 	void Draw()
