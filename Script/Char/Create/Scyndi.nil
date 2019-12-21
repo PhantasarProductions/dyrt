@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.20
+// version: 19.12.21
 // End License Information
 
 
@@ -40,15 +40,15 @@
 var Scyndi
 
 Scyndi = RPG.GetChar("Scyndi")
-Scyndi.Name = Names.Scyndivonia
+Scyndi.Name = "Seelah Gandra"
 
-Scyndi.Data["SKILL0"] = "Whip Slasing"
+Scyndi.Data["SKILL0"] = "Whip Slashing"
 Scyndi.Data["SKILL1"] = "Weniaria"
 Scyndi.Data["SKILL2"] = "Hando Stillor"
 Scyndi.Data["SKILL3"] = "Thrur"
 Scyndi.Data["SKILL4"] = "Malabia"
 
-for i=0,2
+for i=0,0
 	Scyndi.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
 	Scyndi.Points(sprintf("SKILLLVL%d",i),true).Maximum = 10000
 	Scyndi.Points(sprintf("SKILLLVL%d",i),true).Minimum = 1
