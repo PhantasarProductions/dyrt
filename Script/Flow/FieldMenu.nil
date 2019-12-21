@@ -362,7 +362,9 @@ group Flow_FieldMenu
 	void Abilities(ubox)
 		var abls
 		int y
+		var ch
 		abls = NIL.Use("Script/Char/Ability/"..self.CharTag)
+		ch = RPG.GetChar(self.CharTag)
 		y = 5
 		for tag,need in spairs(abls)
 			string stag
@@ -408,7 +410,15 @@ group Flow_FieldMenu
 								Help[#Help+1] = "= To have reached a certain spot in the scenario"
 							default
 								if prefixed(k,"Skill_")
-									Help[#Help+1] = "= To have "..right(k,#k-6).." on level ".. Roman(v) .." or higher"
+									bool found
+									for i=0,4 do
+										found = found or ch.Points(sprintf("SKILLLVL%d",i)).Have>0 and prefixed(ch.Data[sprintf("SKILL%d",i)],right(k,#k-6))
+									end
+									if found
+										Help[#Help+1] = "= To have "..right(k,#k-6).." on level ".. Roman(v) .." or higher"
+									else
+										Help[#Help+1] = "= ????"
+									end
 								end
 						end
 					end
