@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.20
+; version: 19.12.21
 ; End License Information
 
 
@@ -91,4 +91,4 @@ end
 	call BoxText,"ENDCRYPT","END_B"
 	group 2
 	call Field.ChainMap,"CH1_HUB_Squirrel","Squirrel","A"
-	mov "A",Map.Layer
+	mov "PAPA",Map.Layer
