@@ -3,6 +3,7 @@ table itemret
 itemret[#itemret+1]="ITM_ANTIDOTE"
 itemret[#itemret+1]="ITM_APPLE"
 itemret[#itemret+1]="ITM_BRIMSTONE"
+itemret[#itemret+1]="ITM_HOLYWATER"
 itemret[#itemret+1]="ITM_MEDICINE"
 itemret[#itemret+1]="ITM_PHOENIX"
 itemret[#itemret+1]="ITM_POTION"
