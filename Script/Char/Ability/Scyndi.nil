@@ -36,6 +36,9 @@
 // End License Information
 
 
+int s
+s = __skill
+
 #pure
 	
 local
@@ -51,13 +54,13 @@ a = {
 	Weniaria    = { Skill_Weniaria = 22*s },
 	
 	-- Hando Stillor
-	MentalGym  = { Skill_Hando = 1 },
-	Barrier    = { Skill_Hando = s*2 },
-	Blast      = { Skill_Hando = s*3 },
-	Enlighten  = { Skill_Hando = s*4 },
-	CureSilence= { Skill_Hando = s*5 },
-	Silence    = { Skill_Hando = s*6 },
-	Devastate  = { Skill_Hando = s*7 },
+	MentalGym  = { ["Skill_Hando Stillor"] = 1 },
+	Barrier    = { ["Skill_Hando Stillor"] = s*2 },
+	Blast      = { ["Skill_Hando Stillor"] = s*3 },
+	Enlighten  = { ["Skill_Hando Stillor"] = s*4 },
+	CureSilence= { ["Skill_Hando Stillor"] = s*5 },
+	Silence    = { ["Skill_Hando Stillor"] = s*6 },
+	Devastate  = { ["Skill_Hando Stillor"] = s*7 },
 	
 	-- Thrur
 	Shock      = { Skill_Thrur = 1 },
