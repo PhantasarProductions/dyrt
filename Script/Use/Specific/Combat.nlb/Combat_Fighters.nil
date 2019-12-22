@@ -165,7 +165,7 @@ class Fighter
 							forever
 						end
 					default
-						return self.StatusChangesRealTable[k]
+						return self.StatusChangesRealTable[k:upper()]
 				end
 			end,
 			["__newindex"] = void(s,string k,v)
