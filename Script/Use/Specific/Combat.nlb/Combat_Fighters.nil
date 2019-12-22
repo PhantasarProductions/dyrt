@@ -187,8 +187,10 @@ class Fighter
 							self.StatusChangesRealTable[k] = CStatus[k]
 							new Hurt(k,self.Tag,255,100,100)
 						else
+							if self.StatusChangesRealTable[k]
+								new Hurt("Cure: "..k,self.Tag,180,255,000)
+							end
 							self.StatusChangesRealTable[k] = nil;
-							new Hurt("Cure: "..k,self.Tag,180,255,000)
 						end
 				end
 			end,
