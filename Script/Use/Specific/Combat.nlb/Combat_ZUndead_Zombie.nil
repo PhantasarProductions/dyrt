@@ -37,7 +37,8 @@
 table undead
 
 undead.AltHeal = int(f,int i)
-	// TODO: Negative healing for undead
+	CSay('Negative healing for undead')
+	return -math.abs(i)
 end
 
 

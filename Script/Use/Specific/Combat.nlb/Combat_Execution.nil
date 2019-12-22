@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 19.12.16
+// Version: 19.12.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -132,15 +132,18 @@ group Execution
 			default
 				error(sprintf("Heal type %s unknown",Act.Act.HealType))
 		end
-		for _,status in Exe.StatusChanges.Each
-			if status.AltHeal
+		for sn,status in Tar.StatusChanges.Each
+			if status.AltHeal				
 				hvalue = status.AltHeal(Exe,hvalue)
+				CSayF("AltHeal due to status %s sets the heal value to %d",sn,hvalue)
+			else
+				CSayF("No AltHeal in status %s",sn)
 			end
 		end
 		if hvalue==0
 			new Hurt("No effect!",Tar.Tag,255,255,255)
 		elseif hvalue<0
-			new Hurt(hvalue,Tar.Tag,255,255,255)
+			new Hurt(math.abs(hvalue),Tar.Tag,255,255,255)
 		else
 			new Hurt(hvalue,Tar.Tag,0,255,0)
 		end
