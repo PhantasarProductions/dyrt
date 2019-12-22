@@ -72,12 +72,12 @@ group ConsoleCommands
 			return
 		end
 		var f
-		f = Fighter.ByTag(ftag)
+		f = Fighter.ByTag[ftag]
 		if not f
 			CSayF("No fighter tagged %s",f)
 			return
 		end
-		CSay(NIL.LuaSerialize(f.RealStatusChanges))
+		CSay(NIL.LuaSerialize(sprintf("Status foe %s",ftag),f.StatusChangesRealTable))
 	end
 	
 end
