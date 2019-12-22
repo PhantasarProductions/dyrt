@@ -184,7 +184,7 @@ class Fighter
 						error("Oversoul is a read-only automated setting in status changes table")
 					default
 						if v
-							self.Char.StatusChangesRealTable[k] = CStatus[k]
+							self.StatusChangesRealTable[k] = CStatus[k]
 							new Hurt(k,self.Tag,255,100,100)
 						else
 							self.Char.StatusChangesRealTable[k] = nil;
