@@ -66,4 +66,18 @@ group ConsoleCommands
 		$HEROES()
 	end
 	
+	void FSTATUS(ftag)
+		if (not ftag) or ftag==""
+			CSay("I need a fighter tag")
+			return
+		end
+		var f
+		f = Fighter.ByTag(ftag)
+		if not f
+			CSayF("No fighter tagged %s",f)
+			return
+		end
+		CSay(NIL.LuaSerialize(f.RealStatusChanges))
+	end
+	
 end
