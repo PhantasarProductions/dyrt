@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat.nil
-// Version: 19.12.20
+// Version: 19.12.22
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -56,3 +56,4 @@
 #use "Script/Use/Specific/Combat.nlb/Combat_ZBlock.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZorgCentrum.nil"
+#use "Script/Use/Specific/Combat.nlb/Combat_ZUndead_Zombie.nil"
