@@ -184,8 +184,10 @@ class Fighter
 						error("Oversoul is a read-only automated setting in status changes table")
 					default
 						if v
+							assert(CStatus[k],"No status labelled: "..k)
 							self.StatusChangesRealTable[k] = CStatus[k]
 							new Hurt(k,self.Tag,255,100,100)
+							CSayF("Status %s attached to character: %s",k,self.Tag)
 						else
 							if self.StatusChangesRealTable[k]
 								new Hurt("Cure: "..k,self.Tag,180,255,000)
