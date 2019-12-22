@@ -32,7 +32,27 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.21
+; version: 19.12.22
 ; End License Information
+
 :OnLoad
+	end
+	
+	
+:Boss
+	chk gv.Bool.Done_Scyndi_Boss_Wenaria_Dead,OnLoad
+	call MapScript.StartBoss
+	mov true,gv.Bool.Done_Scyndi_Boss_Wenaria_Dead
+	call Map.Kill,"Boss",true
+	jmp OnLoad
+	
+	
+:Prison
+	call Map.GoToLayer,"#001","Einde"
+	call Map.Kill,"NPC.Priest"
+	call Map.WalkTo,"WenFront"
+	call MapText,"END_A"
+	mov 1,RPG.GetChar("Scyndi").Points("SKILLLVL1").Have 
+	call Field.ChainMap,"CH1_DUNG_Prison","EndPrologue","#999"
+	mov "#999",Map.Layer
 	end

@@ -32,14 +32,16 @@
 // 
 // **********************************************
 // 
-// version: 19.12.21
+// version: 19.12.22
 // End License Information
 
 #macro __weniaria_spoken gv.Bool.Done_Scyndi_Prologue_Spoken_To_Weniaria_To_Open_The_Door
 #macro __weniaria_complete gv.Bool.Done_Scyndi_Prologue_Complete
+#macro __weniaria_boss gv.Bool.Done_Scyndi_Boss_Wenaria_Dead
 
 #say "Map Script - None!"
 #use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
 
 bool cleaned
 
@@ -97,11 +99,33 @@ group MScript
 		end
 	end
 	
+	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Special.Wav"
+		StartCombat.Arena = "Weniaria"
+		StartCombat.Foe[1] = "Boss/ShadowSweeper"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void BOSSBACK()
+		if __weniaria_boss
+			MapScript.SASKIA("Prison")
+		else
+			__weniaria_complete = true
+			Map.GoToLayer("#006","Einde")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("D_SECRET1","SS1")
 		Map.ZA_Leave("D_SECRET1","HS1")
 		Map.ZA_Enter("HUGE","Huge")
 		Map.ZA_Enter("CleanUp","CleanUp")
+		Map.ZA_Enter("ActBoss","SASKIA:Boss")
+		Map.ZA_Enter("BossBack","BossBack")
 	end
 	
 	void Draw()

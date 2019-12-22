@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.21
+; version: 19.12.22
 ; End License Information
 
 
@@ -92,3 +92,26 @@ end
 	group 2
 	call Field.ChainMap,"CH1_HUB_Squirrel","Squirrel","A"
 	mov "PAPA",Map.Layer
+	jmp OnLoad
+	
+:EndPrologue
+	group 3
+	mov "#999",Map.Layer
+	call BoxText.Load,"Maps/CH1_DUNG_Weniaria","Weniaria"
+	call BoxText,"Weniaria","END_B"
+	call Map.Kill,"GevangenisDeur",true
+	call BoxText,"Weniaria","END_C"
+	group 5
+	call Map.Kill,"Start_Eric",true
+	call Map.Kill,"Start_Irravonia",true
+	call Map.Kill,"Start_Brendor",true
+	call Map.Kill,"Start_Scyndi",true
+	call Map.Kill,"Start_Rebecca",true
+	group 5
+	mov "Eric",RPG.Party[1]
+	mov "Irravonia",RPG.Party[2]
+	mov "Brendor",RPG.Party[3]
+	mov "Scyndi",RPG.Party[4]
+	mov "Rebecca",RPG.Party[5]
+	call Map.SpawnPlayer,"EnterCell"
+	end
