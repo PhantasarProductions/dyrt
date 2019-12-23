@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 19.12.16
+// Version: 19.12.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -341,10 +341,26 @@ group SubParty
 	end
 	
 	#say "= Back Char"
+	table BackIco
 	void BackChar(int num)
+		var tag
 		assert(num>4 and num<=8,"Illegal BackChar number")
 		self.BarBoxes[num] = self.BarBoxes[num] or new Box( Screen.Width-32, (Screen.Height-128)+((num-5)*32),32,32 )
 		self.BarBoxes[num]["Draw"]()
+		tag = RPG.Party[num]
+		if (not tag) or tag==""
+			return
+		end
+		__white
+		if num==$SelectedChar
+			$SinAlpha()
+		end
+		self.BackIco[tag] = self.BackIco[tag] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",tag))
+		self.BackIco[tag].XDraw(self.BarBoxes[num].X+22,self.BarBoxes[num].Y+20)
+		GraphColor.Alpha = 255
+		if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
+			$Hover=num
+		end
 	end
 	
 	// Unfortunately Lua has no support for static variables, 
