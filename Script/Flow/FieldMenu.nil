@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.12.21
+// Version: 19.12.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -489,6 +489,64 @@ group Flow_FieldMenu
 		DarkText.Font($BlitzFont,sprintf("Cash: %9d shilders",__cash),ubox.x+5,(ubox.y+ubox.h)-15)
 	end
 	
+	string SwitchHover
+	void JustSwitch()
+		if $SwitchHover==""
+			return
+		end
+		string swp
+		swp = $CharTag
+		int i1
+		int i2
+		for i = 1,8
+			if RPG.Party[i]==swp
+				i1 = i
+			elseif RPG.Party[i]==$SwitchHover
+				i2 = i
+			end
+		end
+		RPG.Party[i2]=swp
+		RPG.Party[i1]=$SwitchHover
+		// TODO: Link back in the case of combat
+	end
+	
+	void Switch(ubox)
+		var sit
+		sit = $situations[$situation]
+		int s_min
+		int s_max
+		s_min = (sit.SwitchRange or {})[1] or 1
+		s_max = (sit.SwitchRange or {})[2] or 8
+		int y 
+		int x 
+		x = ubox.x + 10
+		y = ubox.y + 10
+		$SwitchHover = ""
+		for i = s_min,s_max
+			__white
+			string tag
+			bool allow
+			tag = RPG.Party[i] or ""
+			allow = tag != $CharTag and tag != "" and tag != "Shanda" and tag !="Kirana"
+			if allow
+				GraphColor.Alpha = 255
+				if Mouse.X>x and Mouse.Y>y and Mouse.X<x+100 and Mouse.Y<y+100
+					$LM_Action		 = self.JustSwitch
+					$SwitchHover = tag
+				end
+			else
+				GraphColor.Alpha = 50
+			end
+			BoxPic(x,y,tag,"GENERAL","top")
+			GraphColor.Alpha = 255
+			#+ y 100
+			if y+100 > ubox.y+ubox.h
+				y = ubox.y + 10
+				#+ x 100
+			end
+		end
+	end
+	
 	void CONSTRUCTOR()
 	
 		CSay("Constructing Field menu!")
@@ -510,9 +568,12 @@ group Flow_FieldMenu
 					{ ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" },
 					{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" },
 					{ ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" },
+					{ ["IconFile"]="Switch", ["Right"]=self.Switch, ["Help"]="Switch chacters" },
 					{ ["IconFile"]="Trophies", ["Right"]=self.ViewAchievements, ["Help"]="Overview of achievements you can obtain, and how to obtain them" },
 					{ ['IconFile'] = "Exit", ['Action'] = self.Quit, ['Help']="Quit the game", ['NoTab']=true}
 				}, 
+				["SwitchRange"] = {1,8},
+				["SwitchAction"] = self.JustSwitch,
 				["Return"] = "FIELD" 
 			},
 			["COMBAT_ITEMS"] = {
