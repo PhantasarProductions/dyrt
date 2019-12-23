@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Boxes.nil
-// Version: 19.12.16
+// Version: 19.12.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -63,6 +63,14 @@ class Box
 	
 	get int ey
 		return $h+$y
+	end
+	
+	get int X
+		return self.x
+	end
+	
+	get int Y
+		return self.y
 	end
 	
 	void Draw()
