@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 19.12.20
+// Version: 19.12.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -63,6 +63,7 @@ var XPand(t, i)
 	end
 end
 
+#accept FlowField
 class Clickables
 	static var List
 	static var Map
@@ -86,6 +87,7 @@ class Clickables
 		self.List.AddLast(self)
 		self.WalkToX = x
 		self.WalkToY = y
+		self.Layer = FlowField.Map.Kthura.Layer
 		self.Tag = Tag
 		self.ArriveParam = { infinity }
 		CSayF("Clickable %s;\n%s",tostring(Arrive),NIL.LuaSerialize("* Param",self.ArriveParam))
@@ -141,7 +143,7 @@ class Clickables
 		with M
 			for cl in Clickables.List.Each
 				// Crash prevention for once an object was removed!
-				if $HasTag(cl.Tag)
+				if $HasTag(cl.Tag) and cl.Layer == FlowField.Map.Kthura.Layer
 					$Obj = cl.Tag
 					//-- if cl.Layer==$Layer and 
 					switch $ObjString.Kind
@@ -1050,5 +1052,14 @@ group ConsoleCommands
 	void BLOCKMAP()
 		ShowBlockMap(FieldMap.Kthura,FieldMap.Kthura.Layer,FieldMap.ScrollX,FieldMap.ScrollY)
 	end
-		
+	
+	void LISTCLICKABLES()
+		int i
+		for clk in Clickables.List.Each
+			i++
+			CWriteLine("Clickable #"..i,255,180,0)
+			CSay(clk[".dump"])
+		end
+		CWriteLine("Ok",0,255,255)
+	end
 end
