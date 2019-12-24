@@ -84,10 +84,21 @@ group MScript
 		Map.Kill("LevelDoor",true)
 	end
 	
+	void HIDETRAVEL()
+		Map.HideByLabel("Travel")
+	end
+	
+	void SHOWTRAVEL()
+		Map.ShowByLabel("Travel")
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Welcome in jail!")
 		Map.ZA_Enter("Leave_Cell","LeaveCell")
 		Map.ZA_Enter("ToCell","ToCell")
+		Map.ZA_Enter("HideTravel","HideTravel")
+		Map.ZA_Leave("TravelZone","HideTravel")
+		Map.ZA_Enter("TravelZone","ShowTravel")
 	end
 	
 	void Draw()
