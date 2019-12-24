@@ -3,7 +3,7 @@ License=Property of Jeroen P. Broks. Only viewable for analysis purposes. Should
 OutputNILBase=E:\Projects\Applications\Bubble\Games\The Secrets of Dyrt\src\Tricky Script\Script\Data\General\Achievements
 
 
-[Page:Achievemnts]
+[Page:Achievements]
 string Name
 string Description
 bool AutoProcess
