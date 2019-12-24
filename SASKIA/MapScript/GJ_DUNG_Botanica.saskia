@@ -1,0 +1,4 @@
+:OnLoad
+	Call CSay,"Welcome Game Jolt User"
+	end
+
