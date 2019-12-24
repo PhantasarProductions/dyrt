@@ -222,7 +222,7 @@ group RENC
 			end
 			int numfoe
 			int numchars
-			for i=1,8
+			for i=1,4
 				if RPG.Party[i] and RPG.Party[i]!=""
 					numchars++
 				end
