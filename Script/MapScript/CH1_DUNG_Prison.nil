@@ -66,6 +66,7 @@ group StartNewPrologue
 
 end
 
+bool gj_checked
 
 
 group MScript
@@ -92,6 +93,35 @@ group MScript
 		Map.ShowByLabel("Travel")
 	end
 	
+	void GJ_OPEN()
+		var GJ
+		if (not gv.Bool.GameJolt) or gj_checked
+			return
+		end
+		gj_checked = true
+		GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		if not GJ
+			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+			return
+		end
+		if GJ.ImpureRatio>=18
+			Map.Kill("GameJoltBarrier")
+		end
+	end
+	
+	void AWOPEN()
+		if gj_checked
+			return
+		end
+		Map.Kill("GameJoltBarrier")
+		gj_checked = true
+	end
+	
+	void TO_BOTANICA()
+		Field.LoadMap("GJ_DUNG_Botanica")
+		Map.GoToLayer("#001","Start")
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Welcome in jail!")
 		Map.ZA_Enter("Leave_Cell","LeaveCell")
@@ -99,6 +129,9 @@ group MScript
 		Map.ZA_Enter("HideTravel","HideTravel")
 		Map.ZA_Leave("TravelZone","HideTravel")
 		Map.ZA_Enter("TravelZone","ShowTravel")
+		Map.ZA_Enter("NoBarrier","AWOpen")
+		Map.ZA_Enter("CheckGameJolt","GJ_Open")
+		Map.ZA_Enter("To_Botanica","To_Botanica")
 	end
 	
 	void Draw()
