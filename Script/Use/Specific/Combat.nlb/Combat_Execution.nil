@@ -189,6 +189,14 @@ group Execution
 		
 		// Buffs/Debufss
 		
+		// Effect Script
+		if Action.Act.EffectScript and Action.Act.EffectScript!=""
+			delegate effect
+			effect = NIL.Use("Script/Use/Specific/CombatModules/SpellEffect/"..Action.Act.EffectScript)
+			assert(effect,"Something went wrong in compiling effect: "..Action.Act.EffectScript)
+			hit = effect(Action) or hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
+		end
+		
 		// Cause status changes (must always be the last before the hit check)
 		
 		// If not hit, make note of a miss

@@ -1,0 +1,7 @@
+do
+	bool enothing()
+		return true
+	end
+	
+	return enothing
+end

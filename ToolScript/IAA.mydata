@@ -1938,7 +1938,7 @@ Rec: ABL_HERO_SCYNDI_FIRSTAID
 	Discriminate = FALSE
 	EffectArgument = 
 	EffectFunction = 
-	EffectScript = FirstAidAP
+	EffectScript = FirstAidEXP
 	Element = None
 	EqAziella = FALSE
 	EqBrendor = FALSE
