@@ -1,0 +1,59 @@
+#use "libs/LinkedList"
+
+class TBlaadje
+	int x
+	int y
+	int degrees
+	static var blaadje
+	
+	void Draw()
+		__white
+		Rotate.Deg = self.degrees
+		self.blaadje.XDraw(self.x,self.y)
+		Rotate.Deg = 0
+	end
+	
+	void CONSTRUCTOR(int x,int y)
+		self.x = x
+		self.y = y
+		self.degrees = -math.random(85,95)
+	end
+end
+
+module ARENA_Botanica
+
+	var blaadje
+	var gras
+	var list
+	
+	void CONSTRUCTOR()
+		self.list = new TLinkedList
+		int x 
+		int y 
+		x = -40
+		y = -50
+		int midy
+		midy = math.floor(Screen.H / 2)
+		self.blaadje = LoadIfNew("gfx/Textures/Botanica/Leaf.png","Arena_Blaadje")
+		self.gras = LoadIfNew("GFX/Textures/Road/Grass1.png","Arena_Grasveldje")
+		TBlaadje.blaadje = self.blaadje
+		repeat
+			var blad
+			blad = new TBlaadje(x,y)
+			self.list.AddLast(blad)
+			#- y math.random(70,180)
+			if y<0
+				y = midy
+				#+ x math.random(20,70)
+			end
+		until x>Screen.W
+	end
+	
+	void Draw()
+		self.gras.Tile(0,math.floor(Screen.H/2)-100,Screen.W,math.floor(Screen.H/2)+100)
+		for blad in self.list.Each
+			blad.Draw()
+		end
+	end
+
+end
