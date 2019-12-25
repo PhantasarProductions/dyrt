@@ -46,8 +46,18 @@ group MScript
 		Map.GoToLayer("#001","From_Botanica")
 	end
 	
+	void BACKNEXT()
+		Map.GoToLayer("#002","WayBackStart")
+	end
+	
+	void BACKPREV()
+		Map.GoToLayer("#005","Einde")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ToPrison","ToPrison")
+		Map.ZA_Enter("BackNext","BackNext")
+		Map.ZA_Enter("BackPrev","BackPrev")
 	end
 	
 	void Draw()
