@@ -1965,7 +1965,7 @@ Rec: ABL_HERO_SCYNDI_FIRSTAID
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 0
-	GainSkill1All = FALSE
+	GainSkill1All = TRUE
 	GainSkill1Chars = 
 	GainSkill2 = 0
 	GainSkill2All = FALSE
