@@ -39,6 +39,7 @@
 
 #say "Map Script - None!"
 #use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
 group MScript
 	
 	void TOPRISON()
@@ -54,10 +55,24 @@ group MScript
 		Map.GoToLayer("#005","Einde")
 	end
 	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Special.Wav"
+		StartCombat.Arena = "Botanica"
+		StartCombat.Foe[1] = "Boss/Audrey"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+
+	
+	
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ToPrison","ToPrison")
 		Map.ZA_Enter("BackNext","BackNext")
 		Map.ZA_Enter("BackPrev","BackPrev")
+		Map.ZA_Enter("ABoss","SASKIA:Boss")
 		if not Done.EnterPrisonForReal
 			gv.Bool["RESPAWN_INITIATED"] = false
 		end
