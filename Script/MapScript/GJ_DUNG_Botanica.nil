@@ -58,6 +58,9 @@ group MScript
 		Map.ZA_Enter("ToPrison","ToPrison")
 		Map.ZA_Enter("BackNext","BackNext")
 		Map.ZA_Enter("BackPrev","BackPrev")
+		if not Done.EnterPrisonForReal
+			gv.Bool["RESPAWN_INITIATED"] = false
+		end
 	end
 	
 	void Draw()

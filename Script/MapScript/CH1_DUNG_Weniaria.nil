@@ -126,6 +126,9 @@ group MScript
 		Map.ZA_Enter("CleanUp","CleanUp")
 		Map.ZA_Enter("ActBoss","SASKIA:Boss")
 		Map.ZA_Enter("BossBack","BossBack")
+		if not Done.EnterWeniariaDuringScyndiPrologue
+			gv.Bool["RESPAWN_INITIATED"] = false
+		end
 	end
 	
 	void Draw()

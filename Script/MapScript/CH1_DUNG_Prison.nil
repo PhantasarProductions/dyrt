@@ -75,6 +75,9 @@ group MScript
 	
 	void LEAVECELL()
 		Map.GoToLayer("#006","Einde")
+		if not Done.EnterPrisonForReal
+			gv.Bool["RESPAWN_INITIATED"] = false
+		end		
 	end
 	
 	void TOCELL()
@@ -132,6 +135,10 @@ group MScript
 		Map.ZA_Enter("NoBarrier","AWOpen")
 		Map.ZA_Enter("CheckGameJolt","GJ_Open")
 		Map.ZA_Enter("To_Botanica","To_Botanica")
+		if not Done.EnterPrisonForReal
+			gv.Bool["RESPAWN_INITIATED"] = false
+		end
+
 	end
 	
 	void Draw()
