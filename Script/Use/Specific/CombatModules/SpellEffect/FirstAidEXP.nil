@@ -42,7 +42,7 @@ do
 		if Act.ExeTag=="Scyndi" and Scyndi.Points("SKILLLVL1").Have>0
 			var EXP
 			EXP = Scyndi.Points("SKILLEXP1")
-			#+ EXP.Have math.random(12/__skill,90/__skill)
+			#+ EXP.Have math.random(12/__skill,120/__skill)
 			return true
 		end
 		return false
