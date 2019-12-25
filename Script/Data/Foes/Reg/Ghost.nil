@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/22/2019 12:17:03 AM
+// Generated: 12/25/2019 7:56:45 PM
 
 do
 var retfunc()
@@ -10,14 +10,14 @@ foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Poor soul never put to rest"
-foeret.Fatal["Darkness"] = false
-foeret.Fatal["Earth"] = false
-foeret.Fatal["Flame"] = false
-foeret.Fatal["Frost"] = false
-foeret.Fatal["Light"] = false
-foeret.Fatal["Thunder"] = false
-foeret.Fatal["Water"] = false
-foeret.Fatal["Wind"] = false
+foeret.Fatal["Darkness"] = true
+foeret.Fatal["Earth"] = true
+foeret.Fatal["Flame"] = true
+foeret.Fatal["Frost"] = true
+foeret.Fatal["Light"] = true
+foeret.Fatal["Thunder"] = true
+foeret.Fatal["Water"] = true
+foeret.Fatal["Wind"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Ghost.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/GHOST.NEGATIVE.PNG")
 foeret.Cash = 75

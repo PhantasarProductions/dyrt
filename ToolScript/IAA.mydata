@@ -717,7 +717,7 @@ Rec: ABL_FOE_REDPOLLEN
 	EffectArgument = 
 	EffectFunction = 
 	EffectScript = 
-	Element = None
+	Element = Flame
 	EqAziella = FALSE
 	EqBrendor = FALSE
 	EqDernor = FALSE

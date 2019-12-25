@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/22/2019 12:17:03 AM
+// Generated: 12/25/2019 7:56:45 PM
 
 do
 var retfunc()
@@ -10,7 +10,7 @@ foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "It can do magic\nNever said it was spectecular, though!"
-foeret.Fatal["Frost"] = false
+foeret.Fatal["Frost"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Red_Slime.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/RED_SLIME.NEGATIVE.PNG")
 foeret.Cash = 5

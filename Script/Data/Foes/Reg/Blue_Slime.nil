@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/22/2019 12:17:03 AM
+// Generated: 12/25/2019 7:56:45 PM
 
 do
 var retfunc()
@@ -11,12 +11,12 @@ foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Pretty lazy and overall good for nothing..."
 foeret.Fatal["Darkness"] = false
-foeret.Fatal["Earth"] = false
-foeret.Fatal["Flame"] = false
+foeret.Fatal["Earth"] = true
+foeret.Fatal["Flame"] = true
 foeret.Fatal["Frost"] = false
 foeret.Fatal["Light"] = false
 foeret.Fatal["Physical"] = false
-foeret.Fatal["Thunder"] = false
+foeret.Fatal["Thunder"] = true
 foeret.Fatal["Water"] = false
 foeret.Fatal["Wind"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Blue_Slime.png")

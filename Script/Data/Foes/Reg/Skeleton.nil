@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/22/2019 12:17:03 AM
+// Generated: 12/25/2019 7:56:45 PM
 
 do
 var retfunc()
@@ -10,7 +10,7 @@ foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Shake up my bones!"
-foeret.Fatal["Light"] = false
+foeret.Fatal["Light"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/reg/Skeleton.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/SKELETON.NEGATIVE.PNG")
 foeret.Cash = 5
