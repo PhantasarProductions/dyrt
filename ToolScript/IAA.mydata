@@ -660,7 +660,7 @@ Rec: ABL_FOE_PURPLEPOLLEN
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Red Pollen
+	Name = Purple Pollen
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
