@@ -39,6 +39,7 @@
 
 #say "Map Script - None!"
 #use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
 group MScript
 	
 	void CONSTRUCTOR()
