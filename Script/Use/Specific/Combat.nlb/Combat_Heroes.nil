@@ -252,7 +252,8 @@ class Hero extends Fighter
 	end
 	
 	static void CompileAll()
-		for i=1,8
+		// There's a total of 8, but only the first 4 appear in battle. A new compilation may be done when people use the switch command.
+		for i=1,4
 			if RPG.Party[i] and RPG.Party[i]!=""
 				self.Compile(RPG.Party[i])
 			end
