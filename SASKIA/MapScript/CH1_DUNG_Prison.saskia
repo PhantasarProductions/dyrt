@@ -115,3 +115,19 @@ end
 	mov "Rebecca",RPG.Party[5]
 	call Map.SpawnPlayer,"EnterCell"
 	end
+	
+:Blenchy
+	chk gv.Bool.Chapter1Complete,EndBlenchy
+	call Map.WalkTo,"Start"
+	call Map.Hide,"PLAYER"
+	call Map.ShowByLabel,"Heroes"
+	call MapText,"BLENCHY"
+	call MapScript.BossBlenchy
+	call MapText,"AFTERBLENCHY"
+	mov true,gv.Bool.Chapter1Complete
+	call Achievements.Award,"CHAPTER1"
+	call Kill,"Blenchy",true
+	call Map.HideByLabel,"Heroes"
+	call Map.Show,"PLAYER"
+:EndBlenchy
+	end

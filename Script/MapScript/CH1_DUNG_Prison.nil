@@ -37,6 +37,7 @@
 
 
 #use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
 
 group StartNewPrologue
 
@@ -125,6 +126,17 @@ group MScript
 		Map.GoToLayer("#001","Start")
 	end
 	
+	void BOSSBLENCHY()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Blenchy.Wav"
+		StartCombat.Arena = "ZoraPrison"
+		StartCombat.Foe[1] = "Boss/Blenchy1"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	
 	void CONSTRUCTOR()
 		CSay("Welcome in jail!")
 		Map.ZA_Enter("Leave_Cell","LeaveCell")
@@ -135,10 +147,10 @@ group MScript
 		Map.ZA_Enter("NoBarrier","AWOpen")
 		Map.ZA_Enter("CheckGameJolt","GJ_Open")
 		Map.ZA_Enter("To_Botanica","To_Botanica")
+		Map.ZA_Enter("StartBlenchy","SASKIA:Blenchy")
 		if not Done.EnterPrisonForReal
 			gv.Bool["RESPAWN_INITIATED"] = false
 		end
-
 	end
 	
 	void Draw()
