@@ -36,16 +36,22 @@
 // End License Information
 module Scyndi_Personal_Action
 
-	
+	var Img
+	int X
+	int Y
 	
 	void Draw()
+		self.Img.Draw(self.X,self.Y)
 	end
 	
 	void Click(int but,int x, int y)
 	end
 	
 	void CONSTRUCTOR()
-		
+		self.Img = LoadImage("GFX/PersAction/Scyndi.png")
+		self.X = Screen.Width -300
+		self.Y = Screen.Height-400
+
 	end
 
 end
