@@ -1,0 +1,10 @@
+:OnLoad
+	chk Done.AnnounceChapter2,DungAnnounce
+	call Map.GoToLayer,"#001","Start"
+	call MapText,"A"
+	call Fader,LoadImage("GFX/Chapter/2.png")
+:DungAnnounce
+	call Fader,"Dragon Crack Forest"
+	end
+
+
