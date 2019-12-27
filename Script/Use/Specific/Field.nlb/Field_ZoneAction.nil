@@ -84,6 +84,10 @@ class ZoneAction
 		
 		new ZoneAction("Enter","Next",ZoneAction.NextRoom)
 		new ZoneAction("Enter","Prev",ZoneAction.PrevRoom)
+		new ZoneAction("Enter","Delisto",WorldMap.Delisto)
+		new ZoneAction("Enter","Aeria",WorldMap.Aeria)
+		new ZoneAction("Enter","Dyrt",WorldMap.Dyrt)
+		new ZoneAction("Enter","CatIsland",WorldMap["Cat-Island"])
 	end
 	
 	string ActEvent
