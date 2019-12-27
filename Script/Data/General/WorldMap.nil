@@ -7,6 +7,36 @@ do
 
 table ret
 ret = {
+	["A_BEACH"] = {
+		["AvailableOnStart"] = true,
+		["Kthura"] = "",
+		["Layer"] = "#001",
+		["MarkAsNew"] = false,
+		["Name"] = "Beach",
+		["Start"] = "Start",
+		["World"] = "Aeria",
+
+	},
+	["A_RAYAL"] = {
+		["AvailableOnStart"] = true,
+		["Kthura"] = "",
+		["Layer"] = "#001",
+		["MarkAsNew"] = true,
+		["Name"] = "Rayal City",
+		["Start"] = "Start",
+		["World"] = "Aeria",
+
+	},
+	["A_RAYAL_PALACE"] = {
+		["AvailableOnStart"] = true,
+		["Kthura"] = "",
+		["Layer"] = "#001",
+		["MarkAsNew"] = false,
+		["Name"] = "Rayal Palance",
+		["Start"] = "Start",
+		["World"] = "Aeria",
+
+	},
 	["D_DOUBLINE"] = {
 		["AvailableOnStart"] = true,
 		["Kthura"] = "CH1_City_Doubline",
