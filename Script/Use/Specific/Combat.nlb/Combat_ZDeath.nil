@@ -36,6 +36,7 @@
 // End License Information
 
 #use "libs/strings"
+#use "script/use/minimessages"
 #accept Fighter
 
 table DeadEnemies
@@ -72,6 +73,12 @@ void EnemyDeathFade(f)
 			gv.Int.OversoulKills++
 		elseif gv.Bool.AllowOversoul and f.AllowOversoul
 			Killed4Oversoul[f.FromFile]++
+		end
+		
+		// Magic Stone Drops
+		if gv.Bool.AllowMagicStones and (__kills % (5^__skill))
+			__magicstones++
+			new MiniMsg(10,Screen.H-150,"Magic Stone Dropped!",0,180,255)
 		end
 		
 		// Experience points (if applicable)
