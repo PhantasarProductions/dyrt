@@ -50,9 +50,11 @@ group MScript
 	
 	void LEAVE()
 		if not gv.Bool.Chapter1Complete
-			Field.LoadMap("CH1_DUNG_XenorBushes_North")
+			Field.LoadMap("CH1_DUNG_XenorBushes_North","#002")
 			Map.GoToLayer("#002","Einde")
 			//Map.SpawnPlayer("Einde")
+		else
+			WorldMap.Delisto()
 		end
 	end
 	
