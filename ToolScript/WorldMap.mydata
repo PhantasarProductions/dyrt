@@ -10,7 +10,7 @@ string Layer
 string Start
 mc World
 @i Delisto
-@i Aera
+@i Aeria
 @i Cat-Island
 @i Dyrt
 bool AvailableOnStart
@@ -33,6 +33,33 @@ MarkAsNew=TRUE
 # Also adding comments here is pretty senseless!
 # Data last generated 27/12/2019
 
+
+Rec: A_BEACH
+	AvailableOnStart = TRUE
+	Kthura = 
+	Layer = #001
+	MarkAsNew = FALSE
+	Name = Beach
+	Start = Start
+	World = Aeria
+
+Rec: A_RAYAL
+	AvailableOnStart = TRUE
+	Kthura = 
+	Layer = #001
+	MarkAsNew = TRUE
+	Name = Rayal City
+	Start = Start
+	World = Aeria
+
+Rec: A_RAYAL_PALACE
+	AvailableOnStart = TRUE
+	Kthura = 
+	Layer = #001
+	MarkAsNew = FALSE
+	Name = Rayal Palance
+	Start = Start
+	World = Aeria
 
 Rec: D_DOUBLINE
 	AvailableOnStart = TRUE
