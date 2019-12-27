@@ -53,6 +53,7 @@ group F_WorldMap
 			// earlier settings when the continent is wrong!
 			show = show and v.World==continent
 			if show
+				v.ID = k
 				v.X = x
 				v.Y = y
 				v.GText = self.Font.Text(v.Name)
@@ -107,6 +108,7 @@ group F_WorldMap
 			Field.LoadMap(self.Hover.Kthura,self.Hover.Layer)
 			Map.GoToLayer(self.Hover.Layer,self.Hover.Start)
 			GoToFlow("FIELD")
+			self.NewSpot[self.Hover.ID] = false
 		end
 	end
 	
