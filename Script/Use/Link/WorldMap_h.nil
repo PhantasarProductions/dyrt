@@ -36,8 +36,27 @@
 // End License Information
 
 void GoToWorldMap(string wm)
-	error("Cannot yet go to world map: "..wm.."\nThat entire thing ain't scripted yet!")
+	if not StateExists("FLOW_WORLDMAP")
+		CSay("Loading flow: WORLDMAP")
+		LoadFlow("WORLDMAP","Script/Flow/WorldMap.nil")
+	end
+	LuaDoString("FLOW_WORLDMAP",sprintf("F_WorldMap.Filter(trim('%s'))",wm))
+	Music.Play(sprintf("Music/WorldMap/%s.wav",wm))
+	GoToFlow("WORLDMAP")
 end
+
+quickmeta group WM_UnLocked
+
+	index
+		return gv.Bool["WorldMap_Unlocked_"..key]
+	end
+	
+	newindex
+		return gv.Bool["WorldMap_Unlocked_"..key] = value!=nil and value!=false;
+	end
+	
+end
+
 
 quickmeta group WorldMap
 
