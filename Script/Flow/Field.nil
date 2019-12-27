@@ -555,6 +555,7 @@ group FlowField
 	end
 	
 	void LoadMap(string MapFile,Layer)
+		MapFile = trim(MapFile)
 		$Map.LoadedMap=MapFile
 		CSayF("Loading Map: %s",MapFile)
 		CSay ("= Clearing clickables")
