@@ -52,10 +52,13 @@ quickmeta group WM_UnLocked
 	end
 	
 	newindex
-		return gv.Bool["WorldMap_Unlocked_"..key] = value!=nil and value!=false;
+		gv.Bool["WorldMap_Unlocked_"..key] = value!=nil and value!=false;
 	end
 	
 end
+
+global var WM_Unlocked
+WM_Unlocked = WM_UnLocked
 
 
 quickmeta group WorldMap
