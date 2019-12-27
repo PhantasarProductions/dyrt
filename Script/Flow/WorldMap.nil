@@ -1,39 +1,64 @@
-//#use "libs/tables"
+#use "libs/tables"
 #use "Script/Use/Anyway"
 
 
 #macro WM_STARTY 25
+
+
+quickmeta class qm_new
+
+	index
+		return not gv.Bool["WorldMap_Visited_"..key]
+	end
+	
+	newindex
+		gv.Bool["WorldMap_Visited_"..key] = not value
+	end
+end
 
 group F_WorldMap
 
 	readonly table whole
 	readonly var Font
 	readonly table Unlocked
+	readonly var Background
+	readonly var NewImg
+	readonly table NewSpot
 	
 	table filtered
+	var Caption
+	table Hover
 		
 	
 	void CONSTRUCTOR()
 		self.whole = NIL.Use("Script/Data/General/WorldMap.nil")
 		self.Unlocked = WM_Unlocked
 		self.Font = GetFont("BOXTEXT")
+		self.Background = TImage.Obtain("MENUBACK")
+		self.NewImg = LoadIfNew("gfx/WorldMap/new.png","IMG_NEW")
+		self.NewSpot = new qm_new
 	end
 	
 	void Filter(string continent)
+		self.Caption = self.Font.Text(continent)
 		self.filtered = {}
 		int x = 5
 		int y = WM_STARTY
-		for k,v in pairs(self.whole)
+		for k,v in spairs(self.whole)
+			CSayF("WMFilter: Handing record: %s",k)
 			bool show
 			show = v.AvailableOnStart
 			show = show or self.Unlocked[k]
 			// This one below MUST be and, as it MUST override all
 			// earlier settings when the continent is wrong!
-			show = show and self.World==continent
+			show = show and v.World==continent
 			if show
 				v.X = x
 				v.Y = y
 				v.GText = self.Font.Text(v.Name)
+				if not v.MarkAsNew
+					self.NewSpot[k] = false
+				end
 				#+ y 25
 				if y > Screen.H - 200
 					y = WM_STARTY
@@ -45,9 +70,44 @@ group F_WorldMap
 	end
 	
 	void Draw()
+		// Background! Always comes first
+		__white
+		self.Background.Tile(0,0,Screen.W,Screen.H)
+		
+		// Content
+		__amber
+		self.Hover = nil;
+		self.Caption.Draw(Screen.W/2,4,2,0)
+		for k,v in spairs(self.filtered)
+			int ind = 0
+			__white
+			if self.NewSpot[k]
+				self.NewImg.Draw(v.X,v.Y)
+				#+ ind self.NewImg.Width+2
+			end
+			if Mouse.X>v.X and Mouse.Y>v.Y and Mouse.X<v.X+150 and Mouse.Y<v.Y+20
+				self.Hover=v
+				Color(180,180,255)
+				#+ ind 10
+			end
+			v.GText.Draw(v.X+ind,v.Y)
+		end
+		
+		// Party bar and stuff! Always comes last!
+		__white
+		Party.ShowBar()
+		Achievements.DrawAll()
+		__white
+		Mouse.Show()
 	end
 	
 	void Update()
+		Dev.ConCheck()
+		if Mouse.HitLeft and self.Hover
+			Field.LoadMap(self.Hover.Kthura,self.Hover.Layer)
+			Map.GoToLayer(self.Hover.Layer,self.Hover.Start)
+			GoToFlow("FIELD")
+		end
 	end
 	
 end
