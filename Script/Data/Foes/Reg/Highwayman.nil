@@ -1,0 +1,446 @@
+// GENERATED NIL SCRIPT!
+// Generated: 12/27/2019 7:42:36 PM
+
+do
+var retfunc()
+var foeret
+foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
+foeret.FoeID = Foe.LoadFoeID
+foeret.Char = RPG.CreateChar(foeret.Tag)
+foeret.AI_Module = "Default"
+foeret.AllowOversoul = true and __skill!=1
+foeret.Description = "They watch the forest hoping for\nvictims to rob!"
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/reg/Highwayman.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/HIGHWAYMAN.NEGATIVE.PNG")
+foeret.Cash = 500
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PEPPER"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PEPPER"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PEPPER"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+if not Foe.LoadOversoul
+	foeret.Experience = 200
+end
+if Foe.LoadOversoul
+	if __skill==3
+		foeret.Experience = 0
+	else
+		foeret.Experience = 200
+	end
+end
+foeret.Name="Highwayman"
+foeret.Char.Stat("BASE_RESIST_Status_Death").Value=75
+foeret.Char.Stat("BUFF_RESIST_Status_Death").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Death").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Death").Script="SUM:BASE_RESIST_Status_Death,BUFF_RESIST_Status_Death"
+foeret.Char.Stat("BASE_RESIST_Status_Destruction").Value=95
+foeret.Char.Stat("BUFF_RESIST_Status_Destruction").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Destruction").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Destruction").Script="SUM:BASE_RESIST_Status_Destruction,BUFF_RESIST_Status_Destruction"
+foeret.Char.Stat("BASE_RESIST_Status_Disease").Value=0
+foeret.Char.Stat("BUFF_RESIST_Status_Disease").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Disease").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Disease").Script="SUM:BASE_RESIST_Status_Disease,BUFF_RESIST_Status_Disease"
+foeret.Char.Stat("BASE_RESIST_Status_Poison").Value=0
+foeret.Char.Stat("BUFF_RESIST_Status_Poison").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Poison").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Poison").Script="SUM:BASE_RESIST_Status_Poison,BUFF_RESIST_Status_Poison"
+foeret.Char.Stat("BASE_RESIST_Status_Zombie").Value=80
+foeret.Char.Stat("BUFF_RESIST_Status_Zombie").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Zombie").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Zombie").Script="SUM:BASE_RESIST_Status_Zombie,BUFF_RESIST_Status_Zombie"
+foeret.Boss = false
+
+
+// Oversoul specific
+if Foe.LoadOversoul
+	foeret.Char.Stat("BASE_Accuracy").Value=900
+	foeret.Char.Stat("BUFF_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+	foeret.Char.Stat("BASE_Agility").Value=500
+	foeret.Char.Stat("BUFF_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+	foeret.Char.Stat("BASE_Defense").Value=30
+	foeret.Char.Stat("BUFF_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+	foeret.Char.Stat("BASE_Evasion").Value=250
+	foeret.Char.Stat("BUFF_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+	foeret.Char.Stat("BASE_HP").Value=600
+	foeret.Char.Stat("BUFF_HP").Value=0
+	foeret.Char.Stat( "END_HP").Value=0
+	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+	foeret.Char.Stat("BASE_Intelligence").Value=140
+	foeret.Char.Stat("BUFF_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+	foeret.Char.Stat("BASE_Resistance").Value=40
+	foeret.Char.Stat("BUFF_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+	foeret.Char.Stat("BASE_Strength").Value=130
+	foeret.Char.Stat("BUFF_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+else
+	foeret.Char.Stat("BASE_Accuracy").Value=200
+	foeret.Char.Stat("BUFF_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+	foeret.Char.Stat("BASE_Agility").Value=120
+	foeret.Char.Stat("BUFF_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+	foeret.Char.Stat("BASE_Defense").Value=40
+	foeret.Char.Stat("BUFF_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+	foeret.Char.Stat("BASE_Evasion").Value=25
+	foeret.Char.Stat("BUFF_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+	foeret.Char.Stat("BASE_HP").Value=500
+	foeret.Char.Stat("BUFF_HP").Value=0
+	foeret.Char.Stat( "END_HP").Value=0
+	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+	foeret.Char.Stat("BASE_Intelligence").Value=95
+	foeret.Char.Stat("BUFF_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+	foeret.Char.Stat("BASE_Resistance").Value=40
+	foeret.Char.Stat("BUFF_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+	foeret.Char.Stat("BASE_Strength").Value=95
+	foeret.Char.Stat("BUFF_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+end
+
+// Skill specific
+switch __skill
+	case 1
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ALOEVERA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+	case 2
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ALOEVERA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ALOEVERA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_APPLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+	case 3
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ALOEVERA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ALOEVERA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ALOEVERA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+	default
+		error("Unknown skill "..__skill)
+end
+
+CSay('HP Init Start');
+foeret.Char.Points("HP",true).MaxCopy="END_HP"
+foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+CSay('HP Init End');
+
+
+return foeret
+
+end
+
+return retfunc
+end
