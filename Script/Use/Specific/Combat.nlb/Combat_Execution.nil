@@ -106,6 +106,20 @@ group Execution
 			new Hurt(enddmg,Tar.Tag)
 		end
 		
+		if (not prefixed(Tar.Tag,"FOE_"))
+			number a
+			a = enddmg/TarChar.Points("HP").Maximum
+			switch __skill
+				case 1
+					a = a * 25
+				case 2
+					a = a * 15
+				case 3
+					a = a * 5
+			end
+			TarChar.Points("AP").Inc(math.abs(math.ceil(a)))
+		end
+		
 		TarChar.Points("HP").Dec(enddmg)
 		if gv.Bool.DEBUG_CHEAT_JACKTHERIPPER and ( prefixed(Tar.Tag,"FOE_") )
 			CSay("Killing foe due to the Jack The Ripper mode")
