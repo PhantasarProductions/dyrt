@@ -1,14 +1,15 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/25/2019 7:56:45 PM
+// Generated: 12/27/2019 11:32:46 PM
 
 do
 var retfunc()
 var foeret
+gv.Num["KILLED_FOR_OVERSOUL_REG_BLUE_SLIME"] = 0 // Temp line to fix any damage here!
 foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
-foeret.AllowOversoul = true and __skill!=1
+foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "Pretty lazy and overall good for nothing..."
 foeret.Fatal["Darkness"] = false
 foeret.Fatal["Earth"] = true
