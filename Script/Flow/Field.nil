@@ -790,6 +790,10 @@ group FlowField
 			default
 				$SFont.DrawText(sprintf("Cash: %9d shilders",__cash) ,5,Y)
 		end
+		if gv.Bool.AllowMagicStones
+			#- Y YMin
+			$SFont.DrawText(sprintf("Magic Stones: %6d",__magicstones),5,Y)
+		end
 		Y = Y - YMin
 		$SFont.DrawText("Level Cap: "..Roman(__levelcap),5,Y)
 		Y = Y - YMin
