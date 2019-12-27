@@ -1,0 +1,59 @@
+//#use "libs/tables"
+#use "Script/Use/Anyway"
+
+
+#macro WM_STARTY 25
+
+group F_WorldMap
+
+	readonly table whole
+	readonly var Font
+	readonly table Unlocked
+	
+	table filtered
+		
+	
+	void CONSTRUCTOR()
+		self.whole = NIL.Use("Script/Data/General/WorldMap.nil")
+		self.Unlocked = WM_Unlocked
+		self.Font = GetFont("BOXTEXT")
+	end
+	
+	void Filter(string continent)
+		self.filtered = {}
+		int x = 5
+		int y = WM_STARTY
+		for k,v in pairs(self.whole)
+			bool show
+			show = v.AvailableOnStart
+			show = show or self.Unlocked[k]
+			// This one below MUST be and, as it MUST override all
+			// earlier settings when the continent is wrong!
+			show = show and self.World==continent
+			if show
+				v.X = x
+				v.Y = y
+				v.GText = self.Font.Text(v.Name)
+				#+ y 25
+				if y > Screen.H - 200
+					y = WM_STARTY
+					#+ x 200
+				end
+				self.filtered[k]=v
+			end
+		end
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+
+
+global delegate BUB_Draw
+global delegate BUB_Update
+BUB_Draw = F_WorldMap.Draw
+BUB_Update = F_WorldMap.Update
