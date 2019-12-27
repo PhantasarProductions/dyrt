@@ -61,6 +61,7 @@ group MScript
 		Map.ZA_Enter("TUT_Break","TUT_BREAK")
 		Map.ZA_Enter("BOSS_Scorpion","SASKIA_BOSS")
 		Map.ZA_Enter("EindPunt","The_End")
+		Map.ZA_Enter("MerchantBegone","MerchantBegone")
 		Map.ZA_Enter("Leave","Leave")
 		for _,s in pairs {"ONE","TWO","FOUR","FIVE","SIX","SEVEN", "EIGHT", "NINE" }
 			self["SWITCH_SW"..s] = Twisted
@@ -140,6 +141,13 @@ group MScript
 	void LEAVE()
 		if gv.Bool.Chapter1Complete
 			WorldMap.Delisto()
+		end
+	end
+	
+	void MERCHANTBEGONE()
+		if gv.Bool.Chapter1Complete and (not Done.Killed_MysteriousCrypt_Merchant)
+			Map.Kill("NPC_Merchant",true)
+			CSay("Merchant permanently removed!")
 		end
 	end
 	
