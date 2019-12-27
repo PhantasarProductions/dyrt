@@ -35,5 +35,5 @@
 ; version: 19.12.18
 ; End License Information
 :OnLoad
-	; Yeah nothing here (yet)
+	call Fader,"Xenor Bushes - West"
 	end

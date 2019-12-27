@@ -36,6 +36,7 @@
 ; End License Information
 
 :OnLoad
+	call Fader,"The human city of Doubline"
 	End
 
 :ShopHoer_Male

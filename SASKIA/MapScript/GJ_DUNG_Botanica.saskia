@@ -37,6 +37,7 @@
 
 :OnLoad
 	Call CSay,"Welcome Game Jolt User"
+	call Fader,"Botanica"
 	end
 	
 :Boss

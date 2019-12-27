@@ -36,6 +36,7 @@
 ; End License Information
 
 :OnLoad
+	call Fader,"Xenor Bushes - North"
 	end
 
 

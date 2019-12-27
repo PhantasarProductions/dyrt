@@ -114,6 +114,7 @@ end
 	mov "Scyndi",RPG.Party[4]
 	mov "Rebecca",RPG.Party[5]
 	call Map.SpawnPlayer,"EnterCell"
+	call Fader,"Zoraman Prison"
 	end
 	
 :Blenchy
