@@ -55,7 +55,7 @@ Rec: D_DRAGONCRACKFOREST
 Rec: D_MYSTERIOUSCRYPT
 	AvailableOnStart = TRUE
 	Kthura = CH1_DUNG_MysteriousCrypt
-	Layer = #001
+	Layer = #000
 	MarkAsNew = FALSE
 	Name = Mysterious Crypt
 	Start = Start
@@ -64,7 +64,7 @@ Rec: D_MYSTERIOUSCRYPT
 Rec: D_ZORAMANPRISON
 	AvailableOnStart = TRUE
 	Kthura = CH1_DUNG_Prison
-	Layer = #001
+	Layer = #000
 	MarkAsNew = FALSE
 	Name = Zoraman Prison
 	Start = Start
