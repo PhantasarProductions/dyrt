@@ -37,14 +37,42 @@
 module Rebecca_Personal_Action
 
 	var Img
+	int X
+	int Y
+	
+	get bool Enabled
+		switch __skill
+			case 1
+				return __travellevel >= FieldMap.TravelLevel 
+			case 2
+				return __travellevel > FieldMap.TravelLevel 
+			case 3
+				return __travellevel > FieldMap.TravelLevel + 2
+		end
+	end
+
 	
 	void Draw()
+		if not self.Enabled
+			SetAlpha(100)
+		end
+		self.Img.Draw(self.X,self.Y)
+		SetAlpha(255)
 	end
 	
-	void Click(int but,int x, int y)
+	bool Click(int but,int x, int y)
+		bool ret
+		ret = x>self.X and y>self.Y and x<self.X+200 and y<self.Y+200
+		if ret and self.Enabled
+			RENC.Encounters = 0
+		end
+		return ret
 	end
 	
 	void CONSTRUCTOR()
+		self.Img = LoadImage("GFX/PersAction/Rebecca.png")
+		self.X = Screen.Width -300
+		self.Y = Screen.Height-400
 		
 	end
 
