@@ -39,6 +39,7 @@
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
 #use "Script/Use/AutoHelp"
+#use "Script/Use/EquipRecalc"
 #use "libs/tables"
 #use "libs/DarkText"
 #use "libs/Roman"
@@ -286,6 +287,20 @@ group Flow_FieldMenu
 		Help[#Help+1] = $InvItemHover.Description
 		
 		with HV
+			if $Type=="Item"
+				Help[#Help+1] = "Item type: "..$ItemType
+				for i=1,8 do
+					string c
+					c = RPG.Party[i]
+					if c and c!=""
+						//Help[#Help+1] = "Checking: "..c
+						// Help[#Help+1] = sprintf("Eq%s = %s",c,HV["Eq"..c])
+						if HV["Eq"..c]
+							Help[#Help+1] = "Can be equipped by: "..RPG.GetChar(c).Name
+						end
+					end
+				end
+			end
 			if $Heal and $Heal>0 
 				switch $HealType
 					case "Absolute"
@@ -307,6 +322,7 @@ group Flow_FieldMenu
 					Help[#Help+1] = sprintf("- Cancel effect")
 				end
 			end
+			
 		end
 		for k,v in spairs($InvItemHover)
 			if prefixed(k,"Cause") and v
@@ -547,6 +563,33 @@ group Flow_FieldMenu
 		end
 	end
 	
+	void FieldItemAction(string TagItem)
+		CSayF("%s wants to use %s",$CharTag,TagItem)		
+		var it
+		var ch
+		TagItem = TagItem:upper()
+		it = Item[TagItem]
+		ch = RPG.GetChar($CharTag)
+		switch it.ItemType
+			case "Weapon" "Armor" "Jewel"
+				if not it["Eq"..$CharTag]
+					Annoy(ch.Name.." cannot equip that item")
+					return
+				end
+				Inventory[ch.Data[it.ItemType]]++
+				Inventory[TagItem]--
+				ch.Data[it.ItemType]=TagItem
+				//Annoy("Recalc not yet done!")
+				EquipRecalc($CharTag)
+			case "Consumable"
+			case "Key"
+				Annoy("You cannot use a key item!\n\nThey will be used automatically when needed!")
+			default
+				Annoy("ERROR!\n\nUnknown item type ("..it.ItemType..")!\n\nMost likely a bug! Please report!")
+		end
+
+	end
+	
 	void CONSTRUCTOR()
 	
 		CSay("Constructing Field menu!")
@@ -574,6 +617,7 @@ group Flow_FieldMenu
 				}, 
 				["SwitchRange"] = {1,8},
 				["SwitchAction"] = self.JustSwitch,
+				["ItemAction"] = self.FieldItemAction,
 				["Return"] = "FIELD" 
 			},
 			["COMBAT_ITEMS"] = {
