@@ -50,11 +50,20 @@ group MScript
 		Map.ShowByLabel("Secret")
 	end
 	
+	void EINDE()
+		if Done.Done_DragonCrackForestCompleted
+			WorldMap.Delisto()
+		else
+			MapScript.SASKIA("ToDragonCave")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		CSayF("Let's check how things are with magic stones. So far they were set to %s",tostring(Done.AllowMagicStones))
 		Map.ZA_Enter("HideSecret","HideSecret")
 		Map.ZA_Leave("ShowSecret","HideSecret")
 		Map.ZA_Enter("ShowSecret","ShowSecret")
+		Map.ZA_Enter("EindeOefening","Einde")
 	end
 	
 	void Draw()

@@ -42,3 +42,25 @@
 :DungAnnounce
 	call Fader,"Dragon Crack Forest"
 	end
+	
+:ToDragonCave
+	call Map.GoToLayer,"CRACK","Start"
+	call Map.Hide,"Player"
+	call MapText,"END_A"
+	call Map.HideByLabel,"Hero"
+	call Map.Show,"Crack"
+	call Music.Play,"Music/Original/Panic Stations.wav"
+	call MapText,"END_B"
+	call Field.LoadMap,"CH2_DUNG_RedDragonCave","#001"
+	call Map.GoToLayer,"#001","Start"
+	call Map.Hide,"Player"
+	call BoxText.Load,"MAPS/CH2_DUNG_DRAGONCRACKFOREST","TEMP"
+	call BoxText,"TEMP","END_C"
+	call Map.Kill,"S_Eric",true
+	call Map.Kill,"S_Irravonia",true
+	call Map.Kill,"S_Brendor",true
+	call Map.Kill,"S_Scyndi",true
+	call Map.Kill,"S_Rebecca",true
+	call Map.Show,"Player"
+	mov false,Respawn.Initiated
+	end
