@@ -1,0 +1,3 @@
+:OnLoad
+	call Fader,"Red Dragon's Lair"
+	end
