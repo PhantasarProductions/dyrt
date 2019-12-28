@@ -554,6 +554,58 @@ group FlowField
 		MapScript[Tag]()
 	end
 	
+	void TreasureChest(string Tag)
+		static var chaching
+		static var getitem
+		var kth
+		var dat
+		kth = FieldMap.Kthura
+		kth.Obj = Tag
+		dat = kth.ObjData
+		if kth.ObjString.Texture:upper()=="GFX/TEXTURES/OBJECTS/CHEST_CLOSED.PNG"
+			string ItemTag
+			int mx
+			int my
+			mx = kth.ObjInt.X - FieldMap.ScrollX
+			my = kth.ObjInt.Y - FieldMap.ScrollY
+			ItemTag = dat.Treasure:upper()
+			if prefixed(ItemTag,"CASH:")
+				int foundcash 
+				foundcash = tonumber(split(ItemTag,":")[2]) or 1
+				string shild = "shilders"
+				if foundcash == 1 
+					shild = 'shilder'
+				end
+				if __cash > (300000000 / __skill)
+					new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
+					return
+				end
+				chaching = chaching or LoadAudio("SFX/Treasure/ChaChing.wav")
+				chaching.Play()
+				__cash = __cash + foundcash
+				new MiniMsg(mx,my,sprintf("Obtained: %d %s",foundcash, shild),0,180,255)
+				// $Map.Kill(Tag,PermaKill!=false)
+			else
+				string iname
+				iname = Item[ItemTag].Name
+				if Inventory[ItemTag]<__itemcap
+					Inventory[ItemTag]++
+					new MiniMsg(mx,my,sprintf("Obtained: %s", iname),180,0,255)
+					getitem = getitem or GetAudio("GETITEM")
+					getitem.Play()
+					// $Map.Kill(Tag,PermaKill!=false)
+				else
+					new MiniMsg(mx,my,sprintf("OVERLOADED: %s",iname, iname),255,0,0)
+					return
+				end
+			end
+			kth.ObjString.Texture="GFX/TEXTURES/OBJECTS/CHEST_OPEN.PNG"
+			string m
+			m = "MAPCHANGES."..FieldMap.LoadedMap
+			Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..Tag.."\")\n"
+		end
+	end
+	
 	void LoadMap(string MapFile,Layer)
 		MapFile = trim(MapFile)
 		$Map.LoadedMap=MapFile
@@ -652,8 +704,16 @@ group FlowField
 						kth.Obj=Tag
 						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.ThrowSwitch ,Tag)
 					case "TREASURECHEST"
+						var dat
 						kth.Obj=Tag
-						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.TreasureChest, Tag)
+						dat = kth.ObjData
+						if dat["Skill"..__skill]:upper()!="TRUE" and dat["Skill"..__skill]:upper()!="YES"
+							self.Map.Kill(Tag)
+							CSay("= Removed chest "..Tag.." as it was not allowed in this difficulty setting!")
+						else
+							CSay("= Activated chest "..Tag)
+							new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.TreasureChest, Tag)
+						end
 					case "RANDOMTREASURE"
 						kth.Obj=Tag
 						if kth.ObjString.Kind=="$RandomTreasure" 
