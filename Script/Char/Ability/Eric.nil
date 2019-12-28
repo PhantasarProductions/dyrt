@@ -40,7 +40,15 @@ do
 
 	#pure
 	return {
-		QuickStrike = { Skill_Sword = 5 * s }
+		-- Sword
+		QuickStrike = { Skill_Sword = 5 * s },
+		
+		-- Fire
+		Fire       = { ['Skill_Red Dragon']  = 1 },
+		Fireblasst = { ['Skill_Red Dragon']  = 7*s },
+		Inferno    = { ['Skill_Red Dragon']  = 12*s },
+		Corona     = { ['Skill_Red Dragon']  = 30 + (s*10) }
+		
 	}
 	#endpure
 end
