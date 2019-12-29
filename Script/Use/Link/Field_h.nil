@@ -133,7 +133,8 @@ group Map
 	end
 	
 	void GoToLayer(string Layer,string Exit,AltWind)
-		$Kill("PLAYER")
+		CSayF("Map.GoToLayer('%s','%s','%s');",Layer,Exit,tostring(AltWind))
+		$Kill("PLAYER")		
 		FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer))
 		$SpawnPlayer(trim(Exit),AltWind)
 	end
@@ -365,6 +366,9 @@ group Field
 		})
 	end
 	
-	
-	
 end
+	
+global void UseKettingKaart()
+	FLD_Exe("KettingKaart.Init(FlowField.Map.Kthura)","KettingKaart activation!")
+end
+		

@@ -58,12 +58,14 @@ group MScript
 		end
 	end
 	
+
+	
 	void CONSTRUCTOR()
 		CSayF("Let's check how things are with magic stones. So far they were set to %s",tostring(Done.AllowMagicStones))
 		Map.ZA_Enter("HideSecret","HideSecret")
 		Map.ZA_Leave("ShowSecret","HideSecret")
 		Map.ZA_Enter("ShowSecret","ShowSecret")
-		Map.ZA_Enter("EindeOefening","Einde")
+		Map.ZA_Enter("EindeOefening","Einde")		
 	end
 	
 	void Draw()

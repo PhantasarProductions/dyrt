@@ -37,8 +37,9 @@
 
 
 
-
+#use "Script/Use/Anyway"
 #use "Libs/LinkedList"
+#use "Libs/KettingKaart"
 #accept FlowField
 
 var ZAXPand(t, i)
@@ -48,6 +49,7 @@ var ZAXPand(t, i)
 	end
 end
 
+bool KettingInitDone
 
 class ZoneAction
 
@@ -141,6 +143,15 @@ class ZoneAction
 		self.ActParams = { infinity }
 		self.List[Event].AddLast(self)
 		CSayF("%s event created in zone %s",Event,Zone)
+
+		if not KettingInitDone
+			KettingKaart.ZA_Enter = void(string Zone,Action,infinity)
+				new ZoneAction("Enter",Zone,Action,infinity)
+			end
+			KettingKaart.GoToLayer = Map.GoToLayer
+			KettingInitDone = true
+		end
+
 	end
 	
 	void DESTRUCTOR()
@@ -148,3 +159,4 @@ class ZoneAction
 	end
 	
 end
+
