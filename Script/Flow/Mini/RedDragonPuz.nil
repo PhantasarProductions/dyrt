@@ -1,0 +1,67 @@
+#use "libs/tables"
+
+var IMGUP
+var IMGDOWN
+var CIJFERS
+
+IMGUP = TImage.Obtain("UP")
+IMGDOWN = TImage.Obtain("DOWN")
+CIJFERS = LoadImageFont("Fonts/ECN.jfbf")
+
+class Kleur
+	readonly int R
+	readonly int G
+	readonly int B
+	
+	readonly int Goed
+	
+	int t_waarde
+	
+	get int waarde
+		return t_waarde
+	end
+	
+	set int waarde
+		t_waarde = math.abs(value % 10)
+	end
+	
+	void CONSTRUCTOR(int rood,int groen,int blauw,int goed)
+		self.R = rood
+		self.G = groen
+		self.B = blauw
+		self.Goed = goed
+	end
+	
+	void ZetKleur()
+		Color($R,$G,$B)
+	
+	void DrukAf(int x,int y)
+		self.ZetKleur()
+		CIJFERS.DrawText(toString(waarde))
+	end
+	
+end
+
+var Rood
+var Wit
+var Blauw
+
+Rood  = new Kleur(255,  0,  0,2)
+Wit   = new Kleur(255,255,255,1)
+Blauw = new Kleur(  0,  0,255,9)
+
+int colw
+colw = math.floor(Screen.W/4)
+
+table KleurSet
+KleurSet = { Rood, Wit, Blauw }
+
+global void BUB_Draw()
+	for i,k in pairs(KleurSet)
+		Kleur.DrukAf(i*colw,100)
+	end
+end
+
+
+global void BUB_Update()
+end
