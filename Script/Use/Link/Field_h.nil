@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 19.12.21
+// Version: 19.12.30
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -371,4 +371,3 @@ end
 global void UseKettingKaart()
 	FLD_Exe("KettingKaart.Init(FlowField.Map.Kthura)","KettingKaart activation!")
 end
-		
