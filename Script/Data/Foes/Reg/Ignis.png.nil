@@ -1,0 +1,272 @@
+// GENERATED NIL SCRIPT!
+// Generated: 12/30/2019 11:25:59 AM
+
+do
+var retfunc()
+var foeret
+foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
+foeret.FoeID = Foe.LoadFoeID
+foeret.Char = RPG.CreateChar(foeret.Tag)
+foeret.AI_Module = "Default"
+foeret.AllowOversoul = true and __skill!=1
+foeret.Fatal["Frost"] = true
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Ignis.png.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/IGNIS.NEGATIVE.PNG.NEGATIVE.PNG")
+foeret.Cash = 5
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+if not Foe.LoadOversoul
+	foeret.Experience = 150
+end
+if Foe.LoadOversoul
+	if __skill==3
+		foeret.Experience = 0
+	else
+		foeret.Experience = 600
+	end
+end
+foeret.Name="Ignis.png"
+foeret.Char.Stat("BASE_RESIST_Elem_Flame").Value=80000
+foeret.Char.Stat("BUFF_RESIST_Elem_Flame").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Flame").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Flame").Script="SUM:BASE_RESIST_Elem_Flame,BUFF_RESIST_Elem_Flame"
+foeret.Char.Stat("BASE_RESIST_Elem_Frost").Value=-800000
+foeret.Char.Stat("BUFF_RESIST_Elem_Frost").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Frost").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Frost").Script="SUM:BASE_RESIST_Elem_Frost,BUFF_RESIST_Elem_Frost"
+foeret.Char.Stat("BASE_RESIST_Elem_Physical").Value=5
+foeret.Char.Stat("BUFF_RESIST_Elem_Physical").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Physical").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Physical").Script="SUM:BASE_RESIST_Elem_Physical,BUFF_RESIST_Elem_Physical"
+foeret.Char.Stat("BASE_RESIST_Elem_Thunder").Value=75
+foeret.Char.Stat("BUFF_RESIST_Elem_Thunder").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Thunder").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Thunder").Script="SUM:BASE_RESIST_Elem_Thunder,BUFF_RESIST_Elem_Thunder"
+foeret.Char.Stat("BASE_RESIST_Elem_Water").Value=-100
+foeret.Char.Stat("BUFF_RESIST_Elem_Water").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Water").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Water").Script="SUM:BASE_RESIST_Elem_Water,BUFF_RESIST_Elem_Water"
+foeret.Char.Stat("BASE_RESIST_Elem_Wind").Value=-5
+foeret.Char.Stat("BUFF_RESIST_Elem_Wind").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Wind").Value=0
+foeret.Char.Stat( "END_RESIST_Elem_Wind").Script="SUM:BASE_RESIST_Elem_Wind,BUFF_RESIST_Elem_Wind"
+foeret.Char.Stat("BASE_RESIST_Status_Death").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Death").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Death").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Death").Script="SUM:BASE_RESIST_Status_Death,BUFF_RESIST_Status_Death"
+foeret.Char.Stat("BASE_RESIST_Status_Destruction").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Destruction").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Destruction").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Destruction").Script="SUM:BASE_RESIST_Status_Destruction,BUFF_RESIST_Status_Destruction"
+foeret.Char.Stat("BASE_RESIST_Status_Disease").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Disease").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Disease").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Disease").Script="SUM:BASE_RESIST_Status_Disease,BUFF_RESIST_Status_Disease"
+foeret.Char.Stat("BASE_RESIST_Status_Exhaustion").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Exhaustion").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Exhaustion").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Exhaustion").Script="SUM:BASE_RESIST_Status_Exhaustion,BUFF_RESIST_Status_Exhaustion"
+foeret.Char.Stat("BASE_RESIST_Status_Fear").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Fear").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Fear").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Fear").Script="SUM:BASE_RESIST_Status_Fear,BUFF_RESIST_Status_Fear"
+foeret.Char.Stat("BASE_RESIST_Status_Paralysis").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Paralysis").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Paralysis").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Paralysis").Script="SUM:BASE_RESIST_Status_Paralysis,BUFF_RESIST_Status_Paralysis"
+foeret.Char.Stat("BASE_RESIST_Status_Poison").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Poison").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Poison").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Poison").Script="SUM:BASE_RESIST_Status_Poison,BUFF_RESIST_Status_Poison"
+foeret.Char.Stat("BASE_RESIST_Status_Silence").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Silence").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Silence").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Silence").Script="SUM:BASE_RESIST_Status_Silence,BUFF_RESIST_Status_Silence"
+foeret.Char.Stat("BASE_RESIST_Status_Sleep").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Sleep").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Sleep").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Sleep").Script="SUM:BASE_RESIST_Status_Sleep,BUFF_RESIST_Status_Sleep"
+foeret.Char.Stat("BASE_RESIST_Status_Zombie").Value=100
+foeret.Char.Stat("BUFF_RESIST_Status_Zombie").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Zombie").Value=0
+foeret.Char.Stat( "END_RESIST_Status_Zombie").Script="SUM:BASE_RESIST_Status_Zombie,BUFF_RESIST_Status_Zombie"
+foeret.Boss = false
+
+
+// Oversoul specific
+if Foe.LoadOversoul
+	foeret.Char.Stat("BASE_Accuracy").Value=1000
+	foeret.Char.Stat("BUFF_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+	foeret.Char.Stat("BASE_Agility").Value=25
+	foeret.Char.Stat("BUFF_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+	foeret.Char.Stat("BASE_Defense").Value=200
+	foeret.Char.Stat("BUFF_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+	foeret.Char.Stat("BASE_Evasion").Value=500
+	foeret.Char.Stat("BUFF_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+	foeret.Char.Stat("BASE_HP").Value=50
+	foeret.Char.Stat("BUFF_HP").Value=0
+	foeret.Char.Stat( "END_HP").Value=0
+	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+	foeret.Char.Stat("BASE_Intelligence").Value=200
+	foeret.Char.Stat("BUFF_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+	foeret.Char.Stat("BASE_Resistance").Value=1
+	foeret.Char.Stat("BUFF_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+	foeret.Char.Stat("BASE_Strength").Value=200
+	foeret.Char.Stat("BUFF_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+else
+	foeret.Char.Stat("BASE_Accuracy").Value=100
+	foeret.Char.Stat("BUFF_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+	foeret.Char.Stat("BASE_Agility").Value=10
+	foeret.Char.Stat("BUFF_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+	foeret.Char.Stat("BASE_Defense").Value=100
+	foeret.Char.Stat("BUFF_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+	foeret.Char.Stat("BASE_Evasion").Value=5
+	foeret.Char.Stat("BUFF_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+	foeret.Char.Stat("BASE_HP").Value=125
+	foeret.Char.Stat("BUFF_HP").Value=0
+	foeret.Char.Stat( "END_HP").Value=0
+	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+	foeret.Char.Stat("BASE_Intelligence").Value=87
+	foeret.Char.Stat("BUFF_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+	foeret.Char.Stat("BASE_Resistance").Value=125
+	foeret.Char.Stat("BUFF_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+	foeret.Char.Stat("BASE_Strength").Value=90
+	foeret.Char.Stat("BUFF_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+end
+
+// Skill specific
+switch __skill
+	case 1
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_HEAL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_HEAL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+	case 2
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_HEAL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_HEAL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+	case 3
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_HEAL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_HEAL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BRIMSTONE"
+	default
+		error("Unknown skill "..__skill)
+end
+
+CSay('HP Init Start');
+foeret.Char.Points("HP",true).MaxCopy="END_HP"
+foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+CSay('HP Init End');
+
+
+return foeret
+
+end
+
+return retfunc
+end
