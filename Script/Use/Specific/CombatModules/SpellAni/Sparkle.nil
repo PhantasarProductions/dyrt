@@ -1,0 +1,40 @@
+module SpellAni_Sprakle
+
+	bool DrawOvertake
+	var Glitter
+	var Audio
+	readonly int MaxCycles = 20
+	int Cycles
+	
+	// The difference between a CONSTRUCTOR and the and Init function
+	// Is that CONSTRUCTOR is only automatically loaded when this
+	// module is called fo the first time in a combat.
+	// Init will be called EVERY time a move is being performed.
+	void CONSTRUCTOR()
+		self.Glitter = LoadIfNew("gfx/Combat/SpellAni/Glitter.png","SPELLANI_Glitter")
+		self.Audio = LoadNewAudio("SFX/Combat/SpellAni/Glitter.wav","SPELLANI_Glitter")
+	end	
+
+	void Init(act)
+		self.Cycles = 0
+		self.Audio.Play()
+	end
+	
+	
+	bool Cycle(act)
+		// Count on it!
+		self.Cycles ++
+		
+		// Draw it all!
+		for tar in each(act.Targets)
+			for i=1,35 
+				Color(math.random(0,255),math.random(0,255),math.random(0,255))
+				self.Glitter.Draw(tar.X+math.random(0,32),tar.Y+math.random(1,64))
+			end
+		end
+		__white
+		
+		return self.Cycles>=self.MaxCycles
+	end
+	
+end
