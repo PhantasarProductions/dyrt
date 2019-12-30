@@ -1,0 +1,48 @@
+#use "libs/strings"
+
+module Template_Cave
+
+	var trueWall
+	var trueFloor
+	
+	get var Wall
+		return self.trueWall
+	end
+	
+	set var Wall
+		switch type(value)
+			case "string"
+				self.trueWall = LoadIfNew(value,replace(value,"/","."))
+			case "table"
+				assert(value[".classname"] == "TImage","Invalid value for ArenaTemplate_Cave.Wall")
+				self.trueWall = value
+			default
+				error("Type "..type(value).." invalid for Cave Wall!")
+		end
+	end
+	
+	get var Floor
+		return self.trueFloor
+	end
+	
+	set var Floor
+		switch type(value)
+			case "string"
+				self.trueFloor = LoadIfNew(value,replace(value,"/","."))
+			case "table"
+				assert(value[".classname"] == "TImage","Invalid value for ArenaTemplate_Cave.Floor")
+				self.trueFloor = value
+			default
+				error("Type "..type(value).." invalid for Cave Floor!")
+		end
+	end
+	
+	void Draw()
+		self.Floor.Tile(0,Screen.H/2,Screen.W,Screen.H/2)
+		self.Wall.Tile(0,(Screen.H/2)-50,Screen.W,64)
+	end
+	
+	void CONSTRUCTOR()
+		CSay("Cave template for arena used")
+	end
+end

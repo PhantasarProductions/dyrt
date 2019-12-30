@@ -1,0 +1,15 @@
+module Arena_RedDragon
+
+	var Dung
+	
+	void CONSTRUCTOR()
+		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Cave")
+		self.Dung.Wall  = 'GFX/Textures/RedDragon/N.png'
+		self.Dung.Floor = "GFX/Textures/RedDragon/Floor.png"
+	end
+	
+	void Draw() 
+		self.Dung.Draw()
+	end
+
+end
