@@ -39,6 +39,15 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 group MScript
+	
+	void Panel()
+		MapScript.SASKIA("Puzzle")
+	end
+	
+	link NPC_RED   = MScript.Panel
+	link NPC_WHITE = MScript.Panel
+	link NPC_BLUE  = MScript.Panel
+
 	void NPC_TRAVEL()
 		CSay("Fake the travel emblem effect")
 		LuaDoString("FLOW_FIELD","FlowField.TravelEmblem('NPC_TRAVEL')")

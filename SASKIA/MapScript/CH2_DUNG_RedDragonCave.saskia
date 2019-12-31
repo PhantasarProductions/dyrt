@@ -34,6 +34,20 @@
 ; 
 ; version: 19.12.30
 ; End License Information
+
 :OnLoad
 	call Fader,"Red Dragon's Lair"
+	end
+	
+:Puzzle
+	chk StateExists("FLOW_MINI.REDDRAGONPUZZLE"),PuzLoaded
+	call LoadFlow,"MINI.REDDRAGONPUZZLE","Script/Flow/Mini/RedDragonPuz.nil"
+:PuzLoaded
+	call GoToFlow,"MINI.REDDRAGONPUZZLE"
+	; Please note that the boss fight coming next will be initiated by 
+	; the puzzle script! No need to do so here or to call the MapScript!
+	; And when the boss fails this SASKIA script will be terminated 
+	; anyway
+	call Map.GoToLayer,"#010","Start"
+	mov false,gv.Bool.RESPAWN_INITIATED
 	end
