@@ -1,3 +1,4 @@
+#use "script/use/anyway"
 #use "libs/tables"
 
 var IMGUP
@@ -12,17 +13,31 @@ class Kleur
 	readonly int R
 	readonly int G
 	readonly int B
+	static readonly int upy = 64
+	static readonly int dny = 134
+	static readonly int szy = 32
+	
+	int X
+	int Y
+	
+	get int x
+		return self.X
+	end
+	
+	get int y
+		return self.Y
+	end
 	
 	readonly int Goed
 	
 	int t_waarde
 	
 	get int waarde
-		return t_waarde
+		return self.t_waarde
 	end
 	
 	set int waarde
-		t_waarde = math.abs(value % 10)
+		self.t_waarde = math.abs((value + 10) % 10)
 	end
 	
 	void CONSTRUCTOR(int rood,int groen,int blauw,int goed)
@@ -34,10 +49,25 @@ class Kleur
 	
 	void ZetKleur()
 		Color($R,$G,$B)
+	end
 	
 	void DrukAf(int x,int y)
 		self.ZetKleur()
-		CIJFERS.DrawText(toString(waarde))
+		CIJFERS.DrawText(tostring(self.waarde),x,y,2)
+		__white
+		IMGUP.Draw(x-16,y-self.upy)
+		IMGDOWN.Draw(x-16,y+self.dny)
+		self.X = x
+		self.Y = y
+		
+	end
+		
+	get boolean Up
+		return Mouse.X>self.x-16 and Mouse.X<self.x+16 and Mouse.Y>self.y-self.upy and Mouse.Y<(self.y-self.upy)+32 and Mouse.HitLeft
+	end
+
+	get boolean Down
+		return Mouse.X>self.x-16 and Mouse.X<self.x+16 and Mouse.Y>self.y+self.dny and Mouse.Y< self.y+self.dny+32  and Mouse.HitLeft
 	end
 	
 end
@@ -57,11 +87,32 @@ table KleurSet
 KleurSet = { Rood, Wit, Blauw }
 
 global void BUB_Draw()
+	// The three digits
 	for i,k in pairs(KleurSet)
-		Kleur.DrukAf(i*colw,100)
+		k.DrukAf(i*colw,100)
 	end
+	
+	// Party bar (no further function of that)
+	Party.SelectedCharacter=0
+	Party.ShowBar()
+	
+	// Draw all achievement boxes
+	Achievements.DrawAll()
+	
+	// Show Mouse
+	__white
+	Mouse.Show()
 end
 
 
 global void BUB_Update()
+	Dev.ConCheck()
+	
+	for k in each(KleurSet)
+		if k.Up
+			++ k.waarde
+		elseif k.Down
+			-- k.waarde
+		end
+	end
 end
