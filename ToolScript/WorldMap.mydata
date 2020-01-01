@@ -117,8 +117,8 @@ Rec: D_MYSTERIOUSCRYPT
 
 Rec: D_XENOR
 	AvailableOnStart = FALSE
-	Kthura = 
-	Layer = #001
+	Kthura = CH2_City_Xenor
+	Layer = CITY
 	MarkAsNew = TRUE
 	Name = Xenor
 	Start = Start
