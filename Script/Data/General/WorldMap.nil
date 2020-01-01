@@ -135,8 +135,8 @@ ret = {
 	},
 	["D_XENOR"] = {
 		["AvailableOnStart"] = false,
-		["Kthura"] = "",
-		["Layer"] = "#001",
+		["Kthura"] = "CH2_City_Xenor",
+		["Layer"] = "CITY",
 		["MarkAsNew"] = true,
 		["Name"] = "Xenor",
 		["Start"] = "Start",
