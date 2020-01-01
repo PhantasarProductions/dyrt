@@ -1,4 +1,5 @@
 #use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
 #use "libs/tables"
 
 var IMGUP
@@ -108,11 +109,29 @@ end
 global void BUB_Update()
 	Dev.ConCheck()
 	
+	if Mouse.HitRight
+		Map.WipeSASKIA()
+		GoToFlow("FIELD")
+	end
+	
+	bool goed = true
+	
 	for k in each(KleurSet)
 		if k.Up
 			++ k.waarde
 		elseif k.Down
 			-- k.waarde
 		end
+		goed = goed and k.waarde == k.Goed
+	end
+	
+	if goed
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Special.wav"
+		StartCombat.Arena = "RedDragonCave"
+		StartCombat.Foe[1] = "Boss/RedGuardian"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
 	end
 end
