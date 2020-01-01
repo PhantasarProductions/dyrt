@@ -54,8 +54,35 @@ group MScript
 		Map.Kill("TRAVEL_BARRIER",true)
 	end
 	
+	void DRAGON()
+		RPG.Party[1] = "Eric"
+		for i=2,5
+			RPG.Party[i] = ""
+		end
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Dragon.wav"
+		StartCombat.Arena = "RedDragonCave"
+		StartCombat.Foe[1] = "Boss/RedDragon"
+		StartCombat.NoLose = true
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void RESTOREPARTY()
+		//RPG.Party = {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+			RPG.Party[i] = ch
+		end
+	end
+	
+	void REDDRAGONPOWER()
+		RPG.GetChar("Eric").Points("SKILLLVL1").Have = 1
+	end
+	
+	
 	void CONSTRUCTOR()
 		UseKettingKaart()
+		Map.ZA_Enter("ZA_Dragon","SASKIA:Dragon")
 	end
 	
 	void Draw()

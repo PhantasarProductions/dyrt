@@ -48,6 +48,30 @@
 	; the puzzle script! No need to do so here or to call the MapScript!
 	; And when the boss fails this SASKIA script will be terminated 
 	; anyway
-	call Map.GoToLayer,"#010","Start"
+	call Map.GoToLayer,"#011","Start"
 	mov false,gv.Bool.RESPAWN_INITIATED
+	end
+
+:Dragon
+	call Map.Hide,"Player"
+	call Map.ShowByLabel,"Hero"
+	call MapText,"END_A"
+	call MapScript.Dragon
+	call MapScript.RestoreParty
+	chk not gv.Bool.Victor,Defeat
+	call MapText,"END_B"
+	chk gv.Bool.NewGamePlus,skipPower
+	call MapScript.RedDragonPower
+	:skipPower
+	call Field.LoadMap,"CH2_DUNG_DragonCrackForest"
+	call Map.GoToLayer,"#003","Einde"
+	call BoxText.Load,"MAPS/CH2_DUNG_REDDRAGONCAVE","TEMP"
+	call BoxText,"TEMP","END_C"
+	mov false,gv.Bool.RESPAWN_INITIATED
+	mov true,WM_Unlocked.D_XRoads
+	mov true,WM_Unlocked.D_IskarderiuForest
+	end
+
+:Defeat
+	call Respawn.Wipe
 	end
