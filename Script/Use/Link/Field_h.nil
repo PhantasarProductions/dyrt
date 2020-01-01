@@ -139,6 +139,14 @@ group Map
 		$SpawnPlayer(trim(Exit),AltWind)
 	end
 	
+	void ShowByZone(string zone)
+		FLD_Exe(sprintf("FieldMap.Kthura.ShowByZone(trim(\"%s\"))",zone))
+	end
+	
+	void HideByZone(string zone)
+		FLD_Exe(sprintf("FieldMap.Kthura.HideByZone(trim(\"%s\"))",zone))
+	end
+	
 	get string MapFile
 		return LuaGetString("FLOW_FIELD","FieldMap.LoadedMap")
 	end
