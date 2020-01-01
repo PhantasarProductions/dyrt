@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.16
+// version: 20.01.01
 // End License Information
 
 
@@ -52,7 +52,9 @@ group MScript
 	end
 	
 	void DONTGOBACK()
-		if gv.Bool.DONE_YoungIrravonia_Complete
+		//if gv.Bool.DONE_YoungIrravonia_Complete
+		if gv.Bool.Chapter1Complete
+			WorldMap.Delisto()
 			return
 		end
 		Map.StopWalking()
@@ -85,6 +87,7 @@ group MScript
 		Map.ZA_Enter("Tutor_Travel","TutorTravelEmblem")
 		Map.ZA_Enter("DONTGOBACK","DONTGOBACK")
 		Map.ZA_Enter("YoMama","SASKIA:BIG_MAMA")
+		Map.ZA_Enter("Delisto_2","SASKIA:GetOut")
 	end
 	
 	void Draw()

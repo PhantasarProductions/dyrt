@@ -32,12 +32,16 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.18
+; version: 20.01.01
 ; End License Information
 
-
+:GetOut
+	call CSay,"Map already completed, so let's get back to Delisto in stead!"
+	call WorldMap.Delisto
+	end
 
 :BIG_MAMA
+	chk gv.Bool.Chapter1Complete,GetOut
 	call Map.StopWalking
 	call Map.WalkTo,"BossStop"
 	call MapText,"YOUNG_IRRA_BOSS_A"

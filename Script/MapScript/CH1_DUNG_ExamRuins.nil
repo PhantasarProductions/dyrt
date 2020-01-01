@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.16
+// version: 20.01.01
 // End License Information
 
 #use "Script/Use/StartCombatMod"
@@ -42,6 +42,8 @@
 
 // Since MapScripts have their own VMs or "states", this macro only affects this mapscript
 #macro hier_puzzleopgelost gv.Bool.Done_Die_Puzzle_Exam_Ruins_Solved
+
+bool killed_exit
 
 group MScript
 
@@ -242,6 +244,18 @@ group MScript
 		tostring(Done.Done_ExamRuinsCompleted) // Will show nothing, but the trick itself works :P
 	end
 	
+	void STARTZONE()
+		if not killed_exit
+			if gv.Bool.Chapter1Complete 
+				Map.Kill("Delisto")
+			else
+				Map.Kill("NPC_Irravonia")
+				Map.Kill("NPC_Zack")
+			end
+			killed_exit = true
+		end
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
@@ -261,7 +275,9 @@ group MScript
 		
 		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
 		
-		Map.ZA_Enter("StartBoss",   "SASKIA:Boss")
+		if not gv.Bool.Chapter1Complete
+			Map.ZA_Enter("StartBoss",   "SASKIA:Boss")
+		end
 	end
 
 end

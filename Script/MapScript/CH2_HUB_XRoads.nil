@@ -1,0 +1,34 @@
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+group MScript
+	
+	void SOUTH()
+		WM_Unlocked.D_Frendor = true
+		WM_Unlocked.D_XenorBushes = true
+		WorldMap.Delisto()
+	end
+	
+	void WEST()
+		WM_Unlocked.D_Xenor = true
+		WM_Unlocked.D_XenorBushesNorth = true
+		WM_Unlocked.D_XenorBushesWest = true
+		WM_Unlocked.D_ExamRuins = true
+		WorldMap.Delisto()
+	end
+	
+	void CONSTRUCTOR()
+		// From Original: ExitReveal = { N = {}, S = {'CRYPT','FRENDOR'}, W = {'EXAMRUINS','XENOR','XENORBUSHES','XENORBUSHESNORTH','XENORBUSHESWEST'} }
+		Map.ZA_Enter("Exit_South","South")
+		Map.ZA_Enter("Exit_West","West")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
