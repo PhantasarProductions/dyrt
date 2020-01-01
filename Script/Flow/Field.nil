@@ -891,9 +891,18 @@ global void BoxText_Back()
 end
 
 
+int rmy
+
 global void BUB_Draw()
 	// AutoScroll
 	FlowField.DoAutoScroll()
+	
+	// Dominance remap
+	if math.abs(rmy-__player.Y)>40
+		FlowField.Map.Kthura.RemapDominance()
+		rmy = __player.Y
+	end
+	
 	
 	// This function will draw the screen minus the character bar
 	// That way it can be easily called from BoxText and maybe a few other functions
