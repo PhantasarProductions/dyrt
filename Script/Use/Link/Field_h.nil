@@ -266,7 +266,9 @@ group Map
 		FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
 	end
 
-	
+	void WipeSASKIA()
+		FLD_Exe("SASKIA.Wipe()")
+	end
 	
 end
 
@@ -323,6 +325,8 @@ group Field
 	
 	link GoToLayer = Map.GoToLayer
 	link SpawnPlayer = Map.SpawnPlayer
+	
+	link WipeSASKIA = Map.WipeSASKIA
 
 	void LoadMap(string MapFile)
 		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
