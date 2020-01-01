@@ -246,7 +246,7 @@ group MScript
 	
 	void STARTZONE()
 		if not killed_exit
-			if gv.Bool.Chapter1Complete 
+			if not gv.Bool.Chapter1Complete 
 				Map.Kill("Delisto")
 			else
 				Map.Kill("NPC_Irravonia")
@@ -272,6 +272,8 @@ group MScript
 		Map.ZA_Enter("To_South",    "LeaveNorthRoom")
 		Map.ZA_Enter("ToBoss",      "ToBoss")
 		Map.ZA_Enter("ToLobbyFromBoss","Boss2Lobby")
+		
+		Map.ZA_Enter("StartZone",   "StartZone")
 		
 		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
 		
