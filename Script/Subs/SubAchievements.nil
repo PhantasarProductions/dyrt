@@ -95,6 +95,12 @@ class AchBox
 		self.Box = new Box(50,self.y,Screen.Width-100,70)
 		self.TxAchName = self.Font.Text(self.Achievement.Name)
 		self.tag=tag
+		CSay("= Re-adjusting y")
+		for ab in self.BoxList.Each
+			if ab.y>=self.y-25
+				#+ self.y 150
+			end
+		end
 		CSay("Listing Box")
 		self.BoxList.AddLast(self)
 		CSay("Registering!")
