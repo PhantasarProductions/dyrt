@@ -61,6 +61,7 @@
 #macro __victor gv.Bool.Victor
 #macro __newgameplus gv.Bool.NewGamePlus
 #macro __magicstones gv.Num.MagicStones
+#macro __bank gv.num.MoneyOnBank
 
 #macro __kills gv.Num.Kills
 #macro __oversoulkills gv.Num.OversoulKills
