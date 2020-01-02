@@ -291,7 +291,7 @@ end
 
 
 global void BUB_Draw()
-	LuaDoString(trim(FlowBoxText.ReturnFlow),"BoxText_Back()","BoxText Background Call")
+	LuaDoString(trim(FlowBoxText.ReturnFlow),"BoxText_Back()","BoxText BackGrCall: ("..trim(FlowBoxText.ReturnFlow)..")")
 	TextBox.Current.Show()
 	
 	// Draw all achievement boxes
