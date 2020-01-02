@@ -38,18 +38,19 @@
 :OnLoad
 	call Fader,"The Human City of Xenor"
 	end
-	
 :Mariska
 	call MapText,"MARISKA"
 	call MapText,"MARISKA."..Map.Leader:upper()
 	end
-		
 :Weapons
 	call MapText,"SALVIUS"
 	call Merchant,"CH2_XENORWEAPONS"
 	end
-		
 :Items
 	call MapText,"SHELLEY"
 	call Merchant,"CH2_XENORITEMS"
+	end
+:Bank
+	Call MapText,"DAGOBERT"
+	call GoToBank
 	end

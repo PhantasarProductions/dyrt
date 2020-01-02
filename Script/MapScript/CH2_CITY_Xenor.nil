@@ -87,6 +87,10 @@ group MScript
 		Map.GoToLayer("CITY","Start_Bank")
 	end
 	
+	void NPC_BANK()
+		MapScript.SASKIA("Bank")
+	end
+	
 	void LEAVEBANK()
 		Map.GoToLayer("CITY","NPC_BBank_SPOT")
 	end
