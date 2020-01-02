@@ -383,3 +383,10 @@ end
 global void UseKettingKaart()
 	FLD_Exe("KettingKaart.Init(FlowField.Map.Kthura)","KettingKaart activation!")
 end
+
+global void GoToBank()
+	if not StateExists("FLOW_BANK")
+		LoadFlow("BANK","Script/Flow/Bank.nil")
+	end
+	GoToFlow("BANK")
+end
