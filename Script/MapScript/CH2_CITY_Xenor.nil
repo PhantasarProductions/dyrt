@@ -40,6 +40,7 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 group MScript
+	
 	void SHOWOUTSIDE()
 		Map.ShowByZone("Outside")
 		Map.HideByZone("Store")
@@ -63,7 +64,31 @@ group MScript
 	end
 		
 	void EXIT_STORE()
-		Map.GoToLayer("CITY","NPC_Store_SPOT")
+		Map.GoToLayer("CITY","NPC_Store_SPOT")	
+	end
+	
+	void NPC_GIRL()
+		MapScript.SASKIA("Mariska")
+	end
+	
+	void NPC_WEAPONS()
+		MapScript.SASKIA("Weapons")
+	end
+	
+	void NPC_ITEMS()
+		MapScript.SASKIA("Items")
+	end
+	
+	void NPC_MIRANDA()
+		MapText(sprintf("MIRANDA.%s",Map.Leader:upper()))
+	end
+	
+	void NPC_BBANK()
+		Map.GoToLayer("CITY","Start_Bank")
+	end
+	
+	void LEAVEBANK()
+		Map.GoToLayer("CITY","NPC_BBank_SPOT")
 	end
 	
 	void CONSTRUCTOR()
@@ -72,7 +97,9 @@ group MScript
 		Map.ZA_Enter("Store","ShowStore")
 		
 		Map.ZA_Enter("Exit_Store","Exit_Store")
+		Map.ZA_Enter("LeaveBank","LeaveBank")
 	end
+	
 	
 	void Draw()
 	end
