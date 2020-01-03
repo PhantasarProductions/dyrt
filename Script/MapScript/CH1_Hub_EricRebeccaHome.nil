@@ -55,6 +55,10 @@ group MScript
 		Map.Kill("NJack",true)
 	end
 	
+	void NPC_WENDY()
+		MapScript.SASKIA("Wendy")
+	end
+	
 	void Draw()
 	end
 	

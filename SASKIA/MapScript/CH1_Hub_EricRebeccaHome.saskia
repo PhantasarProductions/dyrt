@@ -59,3 +59,18 @@
 	call Map.SpawnPlayer,"Start"
 	;error("End of script")
 	end
+	
+	
+:Wendy
+	call MapText,"WENDY."..Map.Leader:upper()
+	chk Map.Leader=="Rebecca",WendyUnlock
+	chk gv.Bool.WendySpokenRebecca,WendyStoneTalk
+	end
+	:WendyUnlock
+	mov true,gv.Bool.WendySpokenRebecca
+	jmp WendyStone
+	:WnedyStoneTalk
+	call MapText,"WENDY.STONE"
+	:WendyStone
+	call StoneMaster,"WENDY"
+	end
