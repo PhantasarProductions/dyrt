@@ -61,6 +61,8 @@
 	
 	;And lastly let's chain to the forest
 	call Field.ChainMap,"CH1_DUNG_XENORBUSHES","Prologue"
+	end
+	
 	
 :OnLoad
 	end
