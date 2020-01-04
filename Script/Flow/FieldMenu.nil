@@ -653,7 +653,17 @@ group Flow_FieldMenu
 				["ItemSellPrice"]=true,
 				["Return"]="FIELD"
 			},
-			["BANK"] = {["MenuItems"] = {} }
+			// ["BANK"] = {["MenuItems"] = {} } // unused
+			["STONEMASTER"] = { 
+				["MenuItems"] = {
+					{
+						["IconFile"] = "StoneMaster", 
+						["Left"] = NIL.Use("Script/Use/Specific/StoneMaster").Panel, 
+						["Right"] = self.Status, 
+						["Help"]="Can this stone master help you get better?" 
+					}
+				}
+			}
 		}
 		
 		CSay("= Configuring Situation Data!")

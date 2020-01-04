@@ -74,3 +74,9 @@ global void Merchant(string merc)
 	LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.CurrentStore = trim(\"%s\"); Flow_FieldMenu.CurrentStock = nil;",merc))
 	GoMenu(1,"SHOP")
 end
+
+global void StoneMaster(string master)
+	LMenu()
+	LuaDoString("Flow_FIELDMENU",'NIL.Use("Script/Use/Specific/StoneMaster").csm = trim("'..master..'")',"Stone Master Chain!")
+	GoMenu(1,"STONEMASTER")
+end

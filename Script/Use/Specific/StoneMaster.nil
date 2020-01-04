@@ -1,0 +1,91 @@
+#use "libs/LinkedList"
+
+class SMUpdate
+	
+	link CharTag = Flow_FieldMenu.CharTag
+	
+	
+	string chTag
+	string NameUpdate
+	int skill
+	string Element
+	string StatusChange
+	
+	get delegate Each
+		table lst
+		int i
+		for SMU in self.MyList.Each
+			if SMU.chTag == self.CharTag
+				lst[#lst+1]=SMU
+			end
+		end
+		return var()
+			i++
+			if i>#lst
+				return nil;
+			else
+				return lst[i]
+			end
+		end
+	end
+	
+	void CONSTRUCTOR(string ch)
+		self.chTag = ch
+		self.MyList.AddLast(self)
+	end
+end
+
+class CStoneMaster
+	var MyList
+	static table MyMasters
+	
+	void CONSTRUCTOR()
+		self.MyList = new TLinkedList
+	end
+	
+	void NewSkill(string ch,int sk,string skillname)
+		var NU
+		NU = new SMUpdate
+		NU.skill = 1
+		NU.NameUpdate = skillname
+		self.MyList.AddLast(NU)
+	end
+	
+	void NewElement(string ch,string elem)
+		var NU
+		NU = new SMUpdate
+		NU.Element = elem
+		NU.NameUpdate = sprintf("%s elemental resistance",elem)
+		self.MyList.AddLast(NU)
+	end
+	
+	void NewStatus(string ch,string status)
+		var NU
+		NU = new SMUpdate
+		NU.StatusChange = status
+		NU.NameUpdate = sprintf("%s status resistance",status)
+		self.MyList.AddLast(NU)
+	end
+end
+
+
+module MStoneMaster
+	
+	// osm = old stone master; csm = current stone master
+	string osm
+	string csm
+	
+	link CharTag = Flow_FieldMenu.CharTag
+	
+	get var CUpdates
+		SMUpdate.MyMasters[self.csm] = SMUpdate.MyMasters[self.csm] or NIL.Use("Script/Data/StoneMasters/"..self.csm)
+		return SMUpdate.MyMasters[self.csm]
+	end
+	
+	void Panel(ubox)
+	end
+	
+	void CONSTRUCTOR()
+	end
+	
+end
