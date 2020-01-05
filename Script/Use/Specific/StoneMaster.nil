@@ -143,9 +143,7 @@ class CStoneMaster
 		end
 	end
 	
-
 end
-
 
 module MStoneMaster
 	
@@ -154,6 +152,7 @@ module MStoneMaster
 	string csm
 	var FBig
 	var FTxt
+	var Hover
 	
 	link CharTag = Flow_FieldMenu.CharTag
 	
@@ -162,18 +161,58 @@ module MStoneMaster
 		return CStoneMaster.MyMasters[self.csm]
 	end
 	
+	void Act()
+		if not self.Hover
+			Annoy("Huh? How could the act function activate without hover information?\n\nA bug or is this game hacked?")
+			// Normally this should NEVER be possible, but if it happens, at least the game won't crash now!
+		elseif self.Hover.RequireStones>__magicstones
+			Annoy("Not enough magic stones for that update!")
+			// Normally also never possible, but if it happens, the game will not result into negative magic stones and allow you to cheat!
+		else
+			if Yes(sprintf("You cannot undo this update!\n\nAre you sure you want to make this upgrade for %s?\n\n%s",RPG.GetChar(self.CharTag).Name,self.Hover.UpdateName))
+				#- __magicstones self.Hover.RequireStones
+				if self.Hover.skill>=0
+					delegate su
+					su = NIL.Use("Script/Char/SkillUp/"..self.CharTag)
+					RPG.GetChar(self.CharTag).Points(sprintf("SKILLLVL%d",self.Hover.skill)).Have++
+					RPG.GetChar(self.CharTag).Points(sprintf("SKILLEXP%d",self.Hover.skill)).Have=0
+					su(self.Hover.skill)
+				elseif self.Hover.Element!=""
+					error("Elemental update not yet put in!")
+				elseif self.Hover.StatusChange!=""
+					error("Status Change update not yet put in!")
+				else
+					error("WTF? No update data!")
+				end
+			end
+		end
+	end
+	
 	void Panel(ubox)
 		int y
 		__amber
 		self.FBig.DrawText(self.csm,ubox.x+20,ubox.y+20)
 		y = ubox.y+80
+		self.Hover = nil;
 		for upd in self.CUpdates.Each
 			int indx
 			__white
+			if Mouse.X>ubox.x and Mouse.Y>y and Mouse.X<ubox.x+ubox.w and Mouse.Y<ubox.y+ubox.h
+				Color(125,180,255)
+				if upd.RequireStones>__magicstones
+					Color(255,0,0)
+				else
+					self.Hover = upd
+					Flow_FieldMenu.LM_Action=self.Act
+				end
+				indx = 5
+			end
 			self.FTxt.DrawText(upd.UpdateName,ubox.x+10+indx,y)
 			self.FTxt.DrawText(sprintf("need %4d stones",upd.RequireStones),(ubox.w+ubox.x)-20,y,1)
 			#+ y 25
 		end
+		__white
+		self.FTxt.DrawText(sprintf("Magic Stones: %4d",__magicstones),ubox.x+5,(ubox.y+ubox.h)-30)
 	end
 	
 	void CONSTRUCTOR()
