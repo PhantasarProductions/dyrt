@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.01.02
+// Version: 20.01.05
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -390,5 +390,3 @@ global void GoToBank()
 	end
 	GoToFlow("BANK")
 end
-
-
