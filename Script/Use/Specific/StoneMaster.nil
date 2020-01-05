@@ -61,13 +61,13 @@ class SMUpdate
 		int ret
 		ch = RPG.GetChar(self.chTag)
 		if self.skill>=0
-			#+ ret ch.Points(sprintf("SKILLLVL%d",self.skill)).Have+1
+			ret = ret ch.Points(sprintf("SKILLLVL%d",self.skill)).Have+1
 		end
 		if self.Element!=""
-			#+ ret math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Have + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Have + 1)
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Have + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Have + 1)
 		end
 		if self.StatusChange!=""
-			#+ ret math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Have + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Have+1)
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Have + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Have+1)
 		end
 		switch __skill
 			case 1
