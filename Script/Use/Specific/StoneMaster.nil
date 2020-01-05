@@ -55,13 +55,14 @@ class SMUpdate
 		return self.NameUpdate
 	end
 	
-	
+		
 	get int RequireStones
 		var ch
 		int ret
 		ch = RPG.GetChar(self.chTag)
 		if self.skill>=0
-			ret = ret ch.Points(sprintf("SKILLLVL%d",self.skill)).Have+1
+			ret = ret + ch.Points(sprintf("SKILLLVL%d",self.skill)).Have+1
+			//CSay("Calc from skill "..self.skill.." => "..ret)
 		end
 		if self.Element!=""
 			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Have + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Have + 1)
@@ -69,6 +70,7 @@ class SMUpdate
 		if self.StatusChange!=""
 			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Have + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Have+1)
 		end
+		//CSay(tostring(ret))
 		switch __skill
 			case 1
 				ret = ret * 0.65
@@ -77,7 +79,9 @@ class SMUpdate
 			case 3
 				ret = ret * 2.45
 			end
+		//CSay("Mul: "..tostring(ret))
 		ret = math.ceil(ret) + __skill
+		//CSay("Result: "..ret)
 		return ret
 	end
 	
@@ -100,7 +104,7 @@ class CStoneMaster
 	void NewSkill(string ch,int sk,string skillname)
 		var NU
 		NU = new SMUpdate(ch)
-		NU.skill = 1
+		NU.skill = sk
 		NU.NameUpdate = skillname
 		self.MyList.AddLast(NU)
 	end
