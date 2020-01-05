@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 19.12.29
+// Version: 20.01.05
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -662,7 +662,8 @@ group Flow_FieldMenu
 						["Right"] = self.Status, 
 						["Help"]="Can this stone master help you get better?" 
 					}
-				}
+				},
+				["Return"]="FIELD"
 			}
 		}
 		
