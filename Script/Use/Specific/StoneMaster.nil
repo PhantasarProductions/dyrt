@@ -78,6 +78,7 @@ class SMUpdate
 				ret = ret * 2.45
 			end
 		ret = math.ceil(ret) + __skill
+		return ret
 	end
 	
 	void CONSTRUCTOR(string ch)
