@@ -11,6 +11,79 @@ class SMUpdate
 	string Element
 	string StatusChange
 	
+	set string UpdateName
+		self.NameUpdate = value
+	end
+	
+	get string UpdateName
+		return self.NameUpdate
+	end
+	
+	
+	get int RequireStones
+		var ch
+		int ret
+		ch = RPG.GetChar(self.chTag)
+		if self.skill>=0
+			#+ ret ch.Points(sprintf("SKILLLVL%d",self.skill)).Have+1
+		end
+		if self.Element!=""
+			#+ ret math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Have + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Have + 1)
+		end
+		if self.StatusChange!=""
+			#+ ret math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Have + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Have+1)
+		end
+		switch __skill
+			case 1
+				ret = ret * 0.65
+			case 2
+				ret = ret * 0.99
+			case 3
+				ret = ret * 2.45
+			end
+		ret = math.ceil(ret) + __skill
+	end
+	
+	void CONSTRUCTOR(string ch)
+		self.skill = -1
+		self.chTag = ch
+		//self.MyList.AddLast(self)
+	end
+end
+
+class CStoneMaster
+	link CharTag = Flow_FieldMenu.CharTag
+	var MyList
+	static table MyMasters
+	
+	void CONSTRUCTOR()
+		self.MyList = new TLinkedList
+	end
+	
+	void NewSkill(string ch,int sk,string skillname)
+		var NU
+		NU = new SMUpdate(ch)
+		NU.skill = 1
+		NU.NameUpdate = skillname
+		self.MyList.AddLast(NU)
+	end
+	
+	void NewElement(string ch,string elem)
+		var NU
+		NU = new SMUpdate(ch)
+		NU.Element = elem
+		NU.NameUpdate = sprintf("%s elemental resistance",elem)
+		self.MyList.AddLast(NU)
+	end
+	
+	void NewStatus(string ch,string status)
+		var NU
+		NU = new SMUpdate(ch)
+		NU.StatusChange = status
+		NU.NameUpdate = sprintf("%s status resistance",status)
+		self.MyList.AddLast(NU)
+	end
+	
 	get delegate Each
 		table lst
 		int i
@@ -29,63 +102,42 @@ class SMUpdate
 		end
 	end
 	
-	void CONSTRUCTOR(string ch)
-		self.chTag = ch
-		self.MyList.AddLast(self)
-	end
-end
 
-class CStoneMaster
-	var MyList
-	static table MyMasters
-	
-	void CONSTRUCTOR()
-		self.MyList = new TLinkedList
-	end
-	
-	void NewSkill(string ch,int sk,string skillname)
-		var NU
-		NU = new SMUpdate
-		NU.skill = 1
-		NU.NameUpdate = skillname
-		self.MyList.AddLast(NU)
-	end
-	
-	void NewElement(string ch,string elem)
-		var NU
-		NU = new SMUpdate
-		NU.Element = elem
-		NU.NameUpdate = sprintf("%s elemental resistance",elem)
-		self.MyList.AddLast(NU)
-	end
-	
-	void NewStatus(string ch,string status)
-		var NU
-		NU = new SMUpdate
-		NU.StatusChange = status
-		NU.NameUpdate = sprintf("%s status resistance",status)
-		self.MyList.AddLast(NU)
-	end
 end
 
 
 module MStoneMaster
 	
 	// osm = old stone master; csm = current stone master
-	string osm
+	// string osm
 	string csm
+	var FBig
+	var FTxt
 	
 	link CharTag = Flow_FieldMenu.CharTag
 	
 	get var CUpdates
-		SMUpdate.MyMasters[self.csm] = SMUpdate.MyMasters[self.csm] or NIL.Use("Script/Data/StoneMasters/"..self.csm)
-		return SMUpdate.MyMasters[self.csm]
+		CStoneMaster.MyMasters[self.csm] = CStoneMaster.MyMasters[self.csm] or NIL.Use("Script/Data/StoneMaster/"..self.csm)
+		return CStoneMaster.MyMasters[self.csm]
 	end
 	
 	void Panel(ubox)
+		int y
+		__amber
+		self.FBig.DrawText(self.csm,ubox.x+20,ubox.y+20)
+		y = ubox.y+80
+		for upd in self.CUpdates.Each
+			int indx
+			__white
+			self.FTxt.DrawText(upd.UpdateName,ubox.x+10+indx,y)
+			self.FTxt.DrawText(sprintf("need %4d stones",upd.RequireStones),(ubox.w+ubox.x)-20,y,1)
+			#+ y 25
+		end
 	end
 	
 	void CONSTRUCTOR()
+		self.FBig = GetFont("BIGTEXT")
+		self.FTxt = GetFont("BOXTEXT")
 	end
 	
 end
