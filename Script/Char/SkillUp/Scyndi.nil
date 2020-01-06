@@ -43,7 +43,7 @@ do
 		switch skill
 			case 0
 				// Whip
-				RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Agility").Value ++			
+				RPG.GetChar("Scyndi").Stat("PERMPOWERUP_Agility").Value ++
 			case 1
 				// Weniaria
 				RPG.GetChar("Scyndi").Stat("PERMPOWERUP_HP").Value ++
