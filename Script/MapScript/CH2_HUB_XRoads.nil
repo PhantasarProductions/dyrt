@@ -54,10 +54,16 @@ group MScript
 		WorldMap.Delisto()
 	end
 	
+	void MADHOUSE()
+		Field.LoadMap("CH2_DUNG_MadHouse")
+		Map.GoToLayer("OUTSIDE","Start")
+	end
+	
 	void CONSTRUCTOR()
 		// From Original: ExitReveal = { N = {}, S = {'CRYPT','FRENDOR'}, W = {'EXAMRUINS','XENOR','XENORBUSHES','XENORBUSHESNORTH','XENORBUSHESWEST'} }
 		Map.ZA_Enter("Exit_South","South")
 		Map.ZA_Enter("Exit_West","West")
+		Map.ZA_Enter("Madhouse","MadHouse")
 	end
 	
 	void Draw()

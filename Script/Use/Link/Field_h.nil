@@ -133,9 +133,9 @@ group Map
 	end
 	
 	void GoToLayer(string Layer,string Exit,AltWind)
-		CSayF("Map.GoToLayer('%s','%s','%s');",Layer,Exit,tostring(AltWind))
+		CSayF("Map.GoToLayer('%s','%s','%s');",Layer:upper(),Exit,tostring(AltWind))
 		$Kill("PLAYER")		
-		FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer))
+		FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer:upper()))
 		$SpawnPlayer(trim(Exit),AltWind)
 	end
 	

@@ -42,7 +42,16 @@
 
 group MScript
 	
+	void EXIT()
+		if not gv.Bool.Chapter1Complete
+			return
+		end
+		Field.LoadMap("CH2_City_Xenor")
+		Map.GoToLayer("City","NPC_Sylvertin_SPOT")		
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("Exit","Exit")
 	end
 	
 	void SHOWTEPHONDAR()

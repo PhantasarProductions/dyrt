@@ -1,0 +1,12 @@
+:OnLoad
+	call CSay,"Madhouse!"
+	chk not Done.Noted_OptionalDungeon_MadHouse,Welcome
+	jmp Einde
+	
+:Welcome
+	call MapText,"SECSCE"
+	jmp Einde
+
+
+:Einde
+	end

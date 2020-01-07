@@ -1,0 +1,3 @@
+:OnLoad
+	call Fader,"Eugorvnia Science Facility"
+	end
