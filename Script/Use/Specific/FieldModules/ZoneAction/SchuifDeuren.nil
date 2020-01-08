@@ -61,12 +61,14 @@ module AutomatischeSchuifDeuren
 	
 	void NextRoom()
 		ZoneAction.RoomChange( 1,"Start")
-		self.Schuif("Prev",false)
+		self.Scan()
+		self.Schuif("Prev",true,true)
 	end
 	
 	void PrevRoom()
 		ZoneAction.RoomChange(-1,"Einde")
-		self.Schuif("Next",false)
+		self.Scan()
+		self.Schuif("Next",true,true)
 	end
 	
 	void Schuif(string pn,bool open,instant)
