@@ -67,11 +67,26 @@ class ZoneAction
 		Map.SpawnPlayer(exitpoint)
 	end
 	
+	static var AltNext
+	
+	static void LoadAltNext(string anf)
+		self.AltNext = NIL.Use('Script\Use\Specific\FieldModules\ZoneAction'..anf)
+		self.AltNext.Init() // Required as some setting may have to be reloaded, after all!
+	end
+	
 	static void NextRoom()
+		if self.AltNext and (self.AltNext[".hasmember"]("NextRoom"))
+			self.AltNext.NextRoom()
+			return
+		end
 		$RoomChange( 1,"Start")
 	end
 	
 	static void PrevRoom()
+		if self.AltNext and (self.AltNext[".hasmember"]("PrevRoom"))
+			self.AltNext.PrevRoom()
+			return
+		end
 		$RoomChange(-1,"Einde")
 	end
 	
