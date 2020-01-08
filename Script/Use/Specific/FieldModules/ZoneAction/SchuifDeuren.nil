@@ -1,0 +1,64 @@
+#use "libs/linkedlist"
+#use "libs/tables"
+
+#pure
+local
+#endpure
+class SchuifDeur
+
+	link Kthura = FlowField.Map.Kthura
+
+	bool open
+	readonly int x
+	readonly int y
+	readonly string Richting
+	readonly string Layer
+	readonly string Name
+	
+	readonly static table Lijst
+	
+	void CONSTRUCTOR(string Layer,string NxPv)
+		self.Lijst[Layer..NxPv] = self
+		self.Name = NxPv
+		self.Layer = Layer
+		self.Obj = NxPv
+		self.x = ObjInt.x
+		self.y = ObjInt.y
+		if suffixed(NxPv,"Links")
+			self.Richting = "Links"
+		elseif suffixed(NxPv,"Rechts")
+			self.Richting = "Rechts"
+		else
+			error("Unknown direction name: "..NxPv)
+		end
+	end
+	
+	void DESTRUCTOR()
+		CSay("Schuifdeur entry "..self.Name.." has been removed from memory!")
+	end
+end
+
+module AutomatischeSchuifDeuren
+	
+	readonly table scanlist
+	
+	link Kthura = FlowField.Map.Kthura
+	
+	void CONSTRUCTOR()
+		self.scanlist = {"NextLinks","NextRechts","PrevLinks","PrevRechts"}
+	end
+	
+	void Init()
+		tableclear(SchuifDeur.Lijst)
+		self.Scan()
+	end
+	
+	void Scan()
+		for t in each(self.scanlist)
+			if self.Kthura.HasTag(Kthura.Layer..t) and (not SchuifDeur.Lijst[t])
+				new Schuifdeur(Kthura.Layer,t)
+			end
+		end
+	end
+
+end
