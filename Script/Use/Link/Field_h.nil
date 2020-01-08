@@ -119,6 +119,10 @@ group Map
 		$ZA_Cycle("Leave",zone,action,infinity)
 	end
 	
+	void LoadAltNext(string AN)
+		FLD_Exe(sprintf("ZoneAction.LoadAltNext(trim(\"%s\"))",AN))
+	end
+	
 	void Kill(string objtag, perma)
 		FLD_Exe(sprintf("FieldMap.Kill(trim(\"%s\"),%s)",objtag,tostring(perma==true)))
 	end

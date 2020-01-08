@@ -21,9 +21,9 @@ class SchuifDeur
 		self.Lijst[Layer..NxPv] = self
 		self.Name = NxPv
 		self.Layer = Layer
-		self.Obj = NxPv
-		self.x = ObjInt.x
-		self.y = ObjInt.y
+		self.Kthura.Obj = NxPv
+		self.x = self.Kthura.ObjInt.x
+		self.y = self.Kthura.ObjInt.y
 		if suffixed(NxPv,"Links")
 			self.Richting = "Links"
 		elseif suffixed(NxPv,"Rechts")
@@ -31,6 +31,7 @@ class SchuifDeur
 		else
 			error("Unknown direction name: "..NxPv)
 		end
+		
 	end
 	
 	void DESTRUCTOR()
@@ -46,17 +47,102 @@ module AutomatischeSchuifDeuren
 	
 	void CONSTRUCTOR()
 		self.scanlist = {"NextLinks","NextRechts","PrevLinks","PrevRechts"}
+		new ZoneAction("Enter","SchuifNext",self.OpenNext)
+		new ZoneAction("Enter","SchuifPrev",self.OpenPrev)
+		new ZoneAction("Leave","SchuifNext",self.CloseNext)
+		new ZoneAction("Leave","SchuifPrev",self.ClosePrev)
 	end
 	
 	void Init()
+		CWriteLine("Init Schuifdeuren",180,0,255)
 		tableclear(SchuifDeur.Lijst)
 		self.Scan()
 	end
 	
+	void NextRoom()
+		ZoneAction.RoomChange( 1,"Start")
+		self.Schuif("Prev",false)
+	end
+	
+	void PrevRoom()
+		ZoneAction.RoomChange(-1,"Einde")
+		self.Schuif("Next",false)
+	end
+	
+	void Schuif(string pn,bool open,instant)
+		var dl
+		var dr
+		dl = SchuifDeur.Lijst[self.Kthura.Layer..pn.."Links"]
+		dr = SchuifDeur.Lijst[self.Kthura.Layer..pn.."Rechts"]
+		if dl
+			dl.open = open
+		end
+		if dr
+			dr.open = open
+		end
+		if instant
+			if dl
+				self.Kthura.Obj=dl.Name
+				self.Kthura.ObjInt.x = dl.x-30
+			end
+			if dr
+				self.Kthura.Obj=dr.Name
+				self.Kthura.ObjInt.x = dr.x+30
+			end
+		end
+	end
+	
+	void OpenNext()
+		CSay("NEXT: Open Sesame!")
+		self.Schuif("Next",true)
+	end
+	
+	void CloseNext()
+		CSay("NEXT: Sesam! Sluit u!")
+		self.Schuif("Next",false)
+	end
+	
+	void OpenPrev()
+		self.Schuif("Prev",true)
+	end
+	
+	void ClosePrev()
+		self.Schuif("Prev",false)
+	end
+	
+	void Cycle()
+		// This is the callback function that runs on every game cycle 
+		// to make sure the doors are operating properly when instructed 
+		// to
+		// CSay("Cycle!") // Must be on comment when nog debugging!
+		for tag,deur in pairs(SchuifDeur.Lijst)
+			if deur.Layer==self.Kthura.Layer
+				self.Kthura.Obj=deur.Name
+				switch deur.Richting
+					case "Links"
+						if deur.open and deur.x-31<self.Kthura.ObjInt.X
+							CSay("NEXT: Open links!")
+							self.Kthura.ObjInt.X--
+						elseif (not deur.open) and deur.x>self.Kthura.ObjX(deur.Name)
+							self.Kthura.ObjInt.X++
+						end
+					case "Rechts"
+						if deur.open and deur.x+31>self.Kthura.ObjInt.X
+							CSay("NEXT: Open rechts!")
+							self.Kthura.ObjInt.X++
+						elseif (not deur.open) and deur.x<self.Kthura.ObjX(deur.Name)
+							self.Kthura.ObjInt.X--
+						end
+				end
+			end
+		end
+	end
+	
 	void Scan()
-		for t in each(self.scanlist)
-			if self.Kthura.HasTag(Kthura.Layer..t) and (not SchuifDeur.Lijst[t])
-				new Schuifdeur(Kthura.Layer,t)
+		for t in each(self.scanlist)		
+			if self.Kthura.HasTag(t) and (not SchuifDeur.Lijst[self.Kthura.Layer..t])
+				new SchuifDeur(self.Kthura.Layer,t)
+				CSayF("Registering sliding door: %5s:%s",self.Kthura.Layer,t)
 			end
 		end
 	end

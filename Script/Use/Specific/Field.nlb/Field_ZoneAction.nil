@@ -70,7 +70,7 @@ class ZoneAction
 	static var AltNext
 	
 	static void LoadAltNext(string anf)
-		self.AltNext = NIL.Use('Script\Use\Specific\FieldModules\ZoneAction'..anf)
+		self.AltNext = NIL.Use('Script/Use/Specific/FieldModules/ZoneAction/'..anf)
 		self.AltNext.Init() // Required as some setting may have to be reloaded, after all!
 	end
 	
@@ -91,6 +91,7 @@ class ZoneAction
 	end
 	
 	static void Reset()
+		$AltNext = nil;
 		$List = $List or {}
 		$List.Enter = $List.Enter or new TLinkedList
 		$List.Leave = $List.Leave or new TLinkedList

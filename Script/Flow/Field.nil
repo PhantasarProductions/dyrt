@@ -958,6 +958,9 @@ global void BUB_Update()
 	
 	// Zone Checking
 	Acted = ZoneAction.CheckAll()
+	if ZoneAction.AltNext and ZoneAction.AltNext.Cycle
+		ZoneAction.AltNext.Cycle()
+	end
 	
 	if Mouse.HitLeft and PA[FlowField.Leader].Click(1,Mouse.X,Mouse.Y)
 		CSay("Personal action took over, so ignore the walking requests!")
