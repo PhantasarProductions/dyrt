@@ -177,7 +177,7 @@ module AutomatischeSchuifDeuren
 	end
 	
 	void Scan()
-		for t in each(self.scanlist)		
+		for t in each(self.scanlist)
 			if self.Kthura.HasTag(t) and (not SchuifDeur.Lijst[self.Kthura.Layer..t])
 				new SchuifDeur(self.Kthura.Layer,t)
 				CSayF("Registering sliding door: %5s:%s",self.Kthura.Layer,t)
