@@ -7,7 +7,7 @@ module Arena_Facility
 	void CONSTRUCTOR()
 		self.wall  = LoadIfNew("GFX/Textures/ASTRILOPUPS/Facility/North.png","ARENA_FACILITY_WALL")
 		self.floor = LoadIfNew("GFX/Textures/ASTRILOPUPS/Facility/Floor.png","ARENA_FACILITY_FLOOR")
-		self.y     = math.floor(Screen.H/2)
+		self.y     = math.floor(Screen.H*0.40)
 	end
 	
 	void Draw()
