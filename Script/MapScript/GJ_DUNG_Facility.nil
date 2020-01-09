@@ -42,8 +42,15 @@
 #use "Script/Use/StartCombatMod"
 group MScript
 	
+	void WELCOME()
+		if not Done.Done_Facility_Welcome
+			MapText("WELCOME")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.LoadAltNext("SchuifDeuren")
+		Map.ZA_Enter("WELCOME","WELCOME")
 	end
 	
 	void Draw()
