@@ -36,6 +36,7 @@
 // End License Information
 
 #use "script/use/specific/APReset"
+#accept Combat_Start
 
 #macro VICTIME 9
 
@@ -81,7 +82,7 @@ group Stage_VICTORY extends Stage
 		end
 		// Timing
 		string tijd
-		if not self.VicTuneStarted
+		if (not self.VicTuneStarted) and Combat_Start.Music!="*NONE*"			
 			Music.Stop()
 			self.VicTune.Play()
 			self.VicTuneStarted = true
@@ -94,7 +95,9 @@ group Stage_VICTORY extends Stage
 			$ChainTime++
 		end
 		if $ChainTime>=VICTIME
-			Music.Pop()
+			if Combat_Start.Music!="*NONE*"
+				Music.Pop()
+			end
 			Foe.TotalMassacre()
 			__victor=true
 			gv.Int.Victories++

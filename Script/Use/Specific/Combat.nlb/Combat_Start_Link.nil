@@ -101,13 +101,17 @@ global void LetsGetReadyToRumble()
 		DChatF("Loading Boxtext: New Ability")
 		BoxText.Load("System/NewAbility","NEWABILITY")
 	
-		// Arena and Music
+		// Arena and Music		
 		DChatF("Loading arena: %s",$Arena)
 		Arena.Load($Arena)
-		DChatF("Pushing Music!")
-		Music.Push()
-		DChatF("Loading music: %s",$Music)
-		Music.Play($Music)
+		if $Music=="*NONE*"
+			DChat("No music change!")
+		else
+			DChatF("Pushing Music!")
+			Music.Push()
+			DChatF("Loading music: %s",$Music)
+			Music.Play($Music)
+		end
 		
 		// Compile Heroes
 		Hero.CompileAll()

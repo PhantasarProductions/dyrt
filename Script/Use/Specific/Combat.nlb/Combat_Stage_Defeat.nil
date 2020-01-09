@@ -81,7 +81,9 @@ group Stage_DEFEAT extends Stage
 					Chr.Points("HP" ).Have = Chr.Points("HP").Maximum
 				end
 			end
-			Music.Pop()
+			if Combat_Start.Music!="*NONE*"
+				Music.Pop()
+			end
 			Foe.TotalMassacre()
 			__victor=false
 			APReset()
