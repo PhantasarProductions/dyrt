@@ -1,0 +1,18 @@
+module Arena_Facility
+
+	int y
+	var wall
+	var floor
+	
+	void CONSTRUCTOR()
+		self.wall  = LoadIfNew("GFX/Textures/ASTRILOPUPS/Facility/North.png","ARENA_FACILITY_WALL")
+		self.floor = LoadIfNew("GFX/Textures/ASTRILOPUPS/Facility/Floor.png","ARENA_FACILITY_FLOOR")
+		self.y     = math.floor(Screen.H/2)
+	end
+	
+	void Draw()
+		self.floor.Tile(0,self.y,Screen.W,Screen.H-self.y)
+		self.wall.Tile (0,self.y,Screen.W,96)
+	end
+
+end
