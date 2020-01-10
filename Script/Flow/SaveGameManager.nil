@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 19.12.16
+// Version: 20.01.10
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -360,6 +360,7 @@ class SG
 						$SmallFont.DrawText(sprintf("Time: %s",item.Time),122,item.SlotBox.y+65)
 					end
 					__white
+					bool lastlong = false
 					for i=1,8
 						with item
 							string TAG
@@ -369,11 +370,22 @@ class SG
 							TAG = $PartyNames[i]
 							LVL = $PartyLevels[i]
 							if TAG and TAG!=""
+								int yplus = 0								
 								$lvlPic[TAG] = $lvlPic[TAG] or LoadImage(sprintf("gfx/actors/heroes/%s.South.jpbf/00000000.png",TAG))
 								x = (($SlotBox.x+$SlotBox.w)-(50*8))+i*40
-								y = ($SlotBox.y+20)
+								y = ($SlotBox.y+20)								
 								$lvlPic[TAG].Draw(x-($lvlPic[TAG].Width/2),y)
-								$SmallFont.DrawText(roman(LVL),x,y+60,2)
+								if (lastlong) and $SmallFont.Text(roman(LVL)).Width>32
+									lastlong=false
+									yplus = 20
+								elseif $SmallFont.Text(roman(LVL)).Width>32
+									lastlong=true
+								else
+									lastlong=false
+								end
+								$SmallFont.DrawText(roman(LVL),x,y+60+yplus,2)
+								// $SmallFont.DrawText(tostring($SmallFont.Text(roman(LVL)).Width)..left(tostring(lastlong),1)..tostring(yplus),x,y+80+yplus,2) // debug! Must be on comment when not in use!
+								
 							end
 						end
 					end
