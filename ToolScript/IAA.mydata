@@ -775,7 +775,7 @@ Rec: ABL_FOE_REDPOLLEN
 Rec: ABL_FOE_SHOOT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
-	Attack = 100
+	Attack = 250
 	AttackCancel = FALSE
 	AttackStat = Accuracy
 	AttackType = Physical
@@ -802,7 +802,7 @@ Rec: ABL_FOE_SHOOT
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 10
+	COM2ACT = 500
 	CureConfusion = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
@@ -4650,7 +4650,7 @@ Rec: ITM_BANDAGE
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = Sparkle
 	Stance = CAST
 	Target = 1A
 	Type = Item
