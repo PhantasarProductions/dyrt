@@ -8,7 +8,7 @@ table ret_ABL_FOE_SHOOT
 ret_ABL_FOE_SHOOT={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
-	["Attack"] = 100,
+	["Attack"] = 250,
 	["AttackCancel"] = false,
 	["AttackStat"] = "Accuracy",
 	["AttackType"] = "Physical",
@@ -35,7 +35,7 @@ ret_ABL_FOE_SHOOT={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 10,
+	["COM2ACT"] = 500,
 	["CureConfusion"] = false,
 	["CureDeath"] = false,
 	["CureDestruction"] = false,
