@@ -115,12 +115,26 @@ group Action_Exe
 		bool ok = true
 		var F
 		F = Stage_Action.Act.Executor
-		if Stage_Action.Act.RemoveItem!=""
+		if Stage_Action.Act.RemoveItem and Stage_Action.Act.RemoveItem!="" 
 			if Inventory[ Stage_Action.Act.RemoveItem ] > 0
 				Inventory[ Stage_Action.Act.RemoveItem ]--
 			else
 				ok = false
 				Combat_Message.Msg("Out of items!")
+			end
+		end
+		// if Stage_Action.Act.RemoveAP and Stage_Action.Act.RemoveAP!=""
+		if Stage_Action.Act.RemoveAP and Stage_Action.Act.RemoveAP>0
+			var Ch 
+			var AP 
+			CSayF("Remove AP: %s; Tag: %s",tostring(Stage_Action.Act.RemoveAP),tostring(F.Tag))
+			Ch = RPG.GetChar(F.Tag)
+			AP = Ch.Points("AP")
+			if AP.Have<Stage_Action.Act.RemoveAP
+				Combat_Message.Msg("Out of AP!")
+				ok=false
+			else
+				AP.Inc(0-Stage_Action.Act.RemoveAP)
 			end
 		end
 		if ok
