@@ -82,21 +82,41 @@ void EnemyDeathFade(f)
 		end
 		
 		// Experience points (if applicable)
-		for tag,hero in pairs(Fighter.Team.Hero)
-			int Exp 
-			Exp = f.Experience
-			for S in hero.StatusChanges.Each
-				if S.AltExperience
-					Exp = S.AltExperience(hero,S)
+		//for tag,hero in pairs(Fighter.Team.Hero)
+		for i = 1,8
+			string tag
+			var hero
+			var Char
+			tag = RPG.Party[i]
+			if tag and tag!=""
+				hero = Fighter.Team.Hero[tag]
+				Char = RPG.GetChar(tag)
+				int Exp 
+				Exp = f.Experience
+				if hero
+					for S in hero.StatusChanges.Each
+						if S.AltExperience
+							Exp = S.AltExperience(hero,S)
+						end
+					end // for S
+					Exp = math.ceil(Exp*hero.fEXP_Rate)
+				else
+					switch __skill
+						case 1
+							Exp = math.ceil(Exp * 0.99)
+						case 2
+							Exp = math.ceil(Exp * 0.80)
+						case 3
+							Exp = math.ceil(Exp * 0.25)
+					end
 				end
-			end // for S
-			Exp = math.ceil(Exp*hero.fEXP_Rate)
-			if hero.Char.Stat("Level").Value<__levelcap
-				hero.Char.Stat("Experience").Value = hero.Char.Stat("Experience").Value - Exp
-				if Party.CharSpot(tag)<5
-					new Hurt(sprintf("Experience %d",Exp),tag,255,255,0)
-				end // in range of screen check
-			end // if not on cap
+				if Char.Stat("Level").Value<__levelcap
+					Char.Stat("Experience").Value = Char.Stat("Experience").Value - Exp
+					if Party.CharSpot(tag)<5
+						new Hurt(sprintf("Experience %d",Exp),tag,255,255,0)
+					end // in range of screen check
+				end // if not on cap
+			end // if in party!
 		end // for
 		
 		// Item or money drops
