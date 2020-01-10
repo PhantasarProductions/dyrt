@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/10/2020 12:58:47 AM
+// Generated: 1/10/2020 2:32:04 PM
 
 do
 var retfunc()
@@ -175,7 +175,7 @@ if Foe.LoadOversoul
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=2480
+	foeret.Char.Stat("BASE_HP").Value=600
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
