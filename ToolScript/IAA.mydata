@@ -4317,7 +4317,7 @@ Rec: ITM_ALOEVERA
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 250
-	GainSkill1All = TRUE
+	GainSkill1All = FALSE
 	GainSkill1Chars = Merya
 	GainSkill2 = 0
 	GainSkill2All = FALSE
@@ -4626,7 +4626,7 @@ Rec: ITM_BANDAGE
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 1000
-	GainSkill1All = TRUE
+	GainSkill1All = FALSE
 	GainSkill1Chars = Merya
 	GainSkill2 = 0
 	GainSkill2All = FALSE
@@ -4729,7 +4729,7 @@ Rec: ITM_BRIMSTONE
 	GainSkill0All = TRUE
 	GainSkill0Chars = 
 	GainSkill1 = 60
-	GainSkill1All = TRUE
+	GainSkill1All = FALSE
 	GainSkill1Chars = Merya
 	GainSkill2 = 0
 	GainSkill2All = FALSE
@@ -4832,7 +4832,7 @@ Rec: ITM_HOLYWATER
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 250
-	GainSkill1All = TRUE
+	GainSkill1All = FALSE
 	GainSkill1Chars = Merya
 	GainSkill2 = 0
 	GainSkill2All = FALSE
@@ -4935,7 +4935,7 @@ Rec: ITM_MEDICINE
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 250
-	GainSkill1All = TRUE
+	GainSkill1All = FALSE
 	GainSkill1Chars = Merya
 	GainSkill2 = 0
 	GainSkill2All = FALSE
