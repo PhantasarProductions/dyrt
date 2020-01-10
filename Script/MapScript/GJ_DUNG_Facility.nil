@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.09
+// version: 20.01.10
 // End License Information
 
 
@@ -51,6 +51,7 @@ group MScript
 	void CONSTRUCTOR()
 		Map.LoadAltNext("SchuifDeuren")
 		Map.ZA_Enter("WELCOME","WELCOME")
+		Achievements.Award("GJ_START_FACILITY")
 	end
 	
 	void Draw()
