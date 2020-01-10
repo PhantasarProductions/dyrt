@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/9/2020 8:58:47 PM
+// Generated: 1/10/2020 12:45:57 AM
 
 do
 var retfunc()
@@ -12,8 +12,8 @@ foeret.AllowOversoul = true and __skill!=1
 foeret.Fatal["Frost"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Astrilopup.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/ASTRILOPUP.NEGATIVE.PNG")
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
@@ -463,7 +463,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=75
+	foeret.Char.Stat("BASE_Strength").Value=95
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"

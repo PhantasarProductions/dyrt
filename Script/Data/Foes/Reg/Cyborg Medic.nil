@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/9/2020 8:58:47 PM
+// Generated: 1/10/2020 12:58:47 AM
 
 do
 var retfunc()
@@ -12,26 +12,26 @@ foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Healing is all that matters"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Cyborg Medic.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/CYBORG MEDIC.NEGATIVE.PNG")
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
@@ -208,7 +208,7 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=1248
+	foeret.Char.Stat("BASE_HP").Value=300
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"

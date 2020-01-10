@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/9/2020 8:58:47 PM
+// Generated: 1/10/2020 12:34:06 AM
 
 do
 var retfunc()
@@ -12,10 +12,10 @@ foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Before being captured\nand being coverted into a cyborg\nshe was in charge of a starship"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/REG/Cyborg Captain.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/CYBORG CAPTAIN.NEGATIVE.PNG")
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
