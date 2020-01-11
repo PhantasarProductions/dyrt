@@ -119,6 +119,40 @@ group MScript
 		Map.GoToLayer("#999","NPC_Trans_SPOT")
 	end
 	
+	void TOGAMEJOLTOPVANG()
+		Map.GoToLayer("#999","Start")
+	end
+	
+	void TOMAIN()
+		Map.GoToLayer("#002","FromGameJoltOpvang")
+		if not Done.GJOPVANGBARRIERREMOVEDINMADHOUSE
+			Map.Kill("GJ_Dicht",true)
+		end
+	end
+	
+	void MORGUE()
+		for i=1,8
+			string m
+			m = RPG.Party[i]
+			if m and m!="" and m!="Kirana" 
+				Map.Show("Dead_"..m)
+				CSayF("Showing %s as dead character!",m)
+			end
+		end
+	end
+	
+	void BACKTOSTART()
+		Map.GoToLayer("#001","Start")
+	end
+	
+	void LEAVEHOUSE()
+		Map.GoToLayer("OUTSIDE","NPC_House_SPOT")
+	end
+	
+	void COMPLETE()
+		Achievements.Award("SECDUNG_MADHOUSE")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("GJ_Open","GJ_Open")
 		Map.ZA_Enter("GJ_AlwaysOpen","GJ_AlwaysOpen")
@@ -128,6 +162,12 @@ group MScript
 		end
 		Map.ZA_Enter("OutRechck","RECHECK")
 		Map.ZA_Enter("ToFac1","TOFAC1")
+		Map.ZA_Enter("ToGameJoltOpvang","ToGameJoltOpvang")
+		Map.ZA_Enter("ToMain","ToMain")
+		Map.ZA_Enter("Morgue","Morgue")
+		Map.ZA_Enter("BackToStart","BackToStart")
+		Map.ZA_Enter("LeaveHouse","LeaveHouse")
+		Map.ZA_Enter("Complete","Complete")
 	end
 	
 	void Draw()
