@@ -67,6 +67,20 @@ Rec: BOSS_BLENCHY_1
 	skill_3 = true
 	skill_check = FALSE
 
+Rec: BOSS_CYBERASTRILOPUP
+	AutoProcess = TRUE
+	Description = Defeat the cyberastrilopup
+	hidden = TRUE
+	Name = Resistance is future
+	ProcessMax = 1
+	ProcessString = 
+	ProcessValue = KILLED_REG_CYBERASTRILOPUP
+	require_gamejolt = TRUE
+	skill_1 = true
+	skill_2 = true
+	skill_3 = true
+	skill_check = FALSE
+
 Rec: BOSS_GIANTSCORPION
 	AutoProcess = TRUE
 	Description = Defeat the giant scropion in the mysterious crypt
