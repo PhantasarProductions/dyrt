@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/10/2020 12:45:57 AM
+// Generated: 1/10/2020 11:11:58 PM
 
 do
 var retfunc()
@@ -9,6 +9,7 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
+foeret.Description = "An insect-like alien.\nIt's not very friendly to humans or humanoid beings."
 foeret.Fatal["Frost"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Astrilopup.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/ASTRILOPUP.NEGATIVE.PNG")
