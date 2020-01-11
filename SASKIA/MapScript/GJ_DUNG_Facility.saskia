@@ -37,3 +37,18 @@
 :OnLoad
 	call Fader,"Eugorvnia Science Facility"
 	end
+	
+:CyberPup
+	call MapScript.InitCyber
+	call Map.Kill,"ActivateCyber",true
+	call Map.Kill,"Cyber",true
+	end
+	
+:GoodBye
+	Call MapText,"BYEBYE_"..Map.Leader:upper()
+	chk Yes("Do you want to return to the MadHouse?"),Out
+	end
+:Out
+	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
+	call Map.GoToLayer,"#999","Fac1"
+	end

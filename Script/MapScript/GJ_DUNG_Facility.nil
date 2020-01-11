@@ -40,6 +40,9 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+bool gj_checked = false
+
 group MScript
 	
 	void WELCOME()
@@ -48,16 +51,79 @@ group MScript
 		end
 	end
 	
+	void HIDEGEHEIM()
+		Map.HideByLabel("Geheim")
+	end
+	
+	void SHOWGEHEIM()
+		Map.ShowByLabel("Geheim")
+	end
+	
+	int ogx
+	bool ogo
+	
+	void OPENGEHEIM()
+		self.ogo = true
+	end
+	
+	void INITCYBER()
+		StartCombat.StartSession()
+		StartCombat.Music = "*NONE*"
+		StartCombat.Arena = "Facility"
+		StartCombat.Foe[1] = "Reg/CyberAstrilopup"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void GAMEJOLTNEXT()
+		var GJ
+		if (not gv.Bool.GameJolt) or gj_checked
+			// Yes, even though a GJ account is required to even enter 
+			// the place this check is needed. If your account got
+			// banned over time, the door must remain closed!
+			return
+		end
+		gj_checked = true
+		GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		if not GJ
+			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+			return
+		end
+		if GJ.ImpureRatio>=50
+			CSay("All cool! Opening up the 2nd part!")
+			Map.Kill("GJ_Barrier")
+			LuaDoString("FLOW_FIELD","ZoneAction.AltNext.OpenNext()")
+		end
+	end
+	
+	void NPC_TRANS()
+		MapScript.SASKIA("GoodBye")
+	end
+	
 	void CONSTRUCTOR()
 		Map.LoadAltNext("SchuifDeuren")
 		Map.ZA_Enter("WELCOME","WELCOME")
+		Map.ZA_Enter("OpenGeheim","OpenGeheim")
+		Map.ZA_Enter("HideGeheim","HideGeheim")
+		Map.ZA_Enter("ShowGeheim","ShowGeheim")
 		Achievements.Award("GJ_START_FACILITY")
+		UseKettingKaart()
+		Map.ZA_Enter("ActivateCyber","SASKIA:CyberPup")
+		Map.ZA_Enter("GJ_Open","GameJoltNext")
 	end
 	
 	void Draw()
 	end
 	
 	void Update()
+		if self.ogo and self.ogx<30
+			Map.Obj = "GeheimLinks"
+			--Map.ObjInt.X
+			Map.Obj = "GeheimRechts"
+			++Map.ObjInt.X
+			self.ogx++
+		end
 	end
 	
 end
