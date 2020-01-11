@@ -956,6 +956,11 @@ global void BUB_Update()
 		return
 	end
 	
+	// MapScript Update
+	if StateExists("MAP")
+		LuaDoString("MAP","MScript.Update()","LINK: MapScript.Update()")
+	end
+	
 	// Zone Checking
 	Acted = ZoneAction.CheckAll()
 	if ZoneAction.AltNext and ZoneAction.AltNext.Cycle
