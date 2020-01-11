@@ -35,7 +35,7 @@
 // version: 19.12.21
 // End License Information
 
-
+do
 int s
 s = __skill
 
@@ -85,3 +85,4 @@ a = {
 return a
 	
 #endpure
+end
