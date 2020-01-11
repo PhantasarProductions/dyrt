@@ -86,7 +86,7 @@ group Execution
 		
 		// Modify by element type
 		fatal = fatal or ( prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.Act.Element] )
-		elmod = TarChar.Stat(sprintf("END_RESIST_Elem_%s",Act.Act.Element)).Value
+		elmod = TarChar.Stat(sprintf("END__RESIST_Elem_%s",Act.Act.Element)).Value
 		enddmg = dmg - (math.floor(dmg * (elmod/100)))
 		
 		// Show what damage done

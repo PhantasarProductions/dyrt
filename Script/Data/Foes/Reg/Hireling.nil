@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 12/25/2019 7:56:45 PM
+// Generated: 1/11/2020 11:01:55 PM
 
 do
 var retfunc()
@@ -42,14 +42,14 @@ if Foe.LoadOversoul
 	end
 end
 foeret.Name="Hireling"
-foeret.Char.Stat("BASE_RESIST_Status_Death").Value=80
-foeret.Char.Stat("BUFF_RESIST_Status_Death").Value=0
-foeret.Char.Stat( "END_RESIST_Status_Death").Value=0
-foeret.Char.Stat( "END_RESIST_Status_Death").Script="SUM:BASE_RESIST_Status_Death,BUFF_RESIST_Status_Death"
-foeret.Char.Stat("BASE_RESIST_Status_Zombie").Value=90
-foeret.Char.Stat("BUFF_RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END_RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END_RESIST_Status_Zombie").Script="SUM:BASE_RESIST_Status_Zombie,BUFF_RESIST_Status_Zombie"
+foeret.Char.Stat("BASE__RESIST_Status_Death").Value=80
+foeret.Char.Stat("BUFF__RESIST_Status_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Status_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Status_Death").Script="SUM:BASE__RESIST_Status_Death,BUFF__RESIST_Status_Death"
+foeret.Char.Stat("BASE__RESIST_Status_Zombie").Value=90
+foeret.Char.Stat("BUFF__RESIST_Status_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Status_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Status_Zombie").Script="SUM:BASE__RESIST_Status_Zombie,BUFF__RESIST_Status_Zombie"
 foeret.Boss = false
 
 
