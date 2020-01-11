@@ -131,6 +131,7 @@ module AutomatischeSchuifDeuren
 	end
 	
 	void OpenNext()
+		self.Scan()
 		CSay("NEXT: Open Sesame!")
 		self.Schuif("Next",true)
 	end
@@ -141,6 +142,7 @@ module AutomatischeSchuifDeuren
 	end
 	
 	void OpenPrev()
+		self.Scan()
 		self.Schuif("Prev",true)
 	end
 	
