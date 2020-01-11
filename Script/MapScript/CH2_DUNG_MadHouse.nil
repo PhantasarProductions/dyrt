@@ -42,6 +42,7 @@
 #use "Script/Use/StartCombatMod"
 
 bool gj_checked
+bool gjout_checked
 
 group MScript
 	
@@ -84,10 +85,49 @@ group MScript
 		Map.GoToLayer("#001","Start")
 	end
 	
+	void REMFAC1()
+		CSay(tostring(Done.FacilityPortal1))
+		if not gjout_checked
+			Map.Kill("Bars1")
+			gjout_checked = true
+		end
+	end
+	void REMFAC2()
+		CSay(tostring(Done.FacilityPortal2))
+		if not gjout_checked
+			Map.Kill("Bars2")
+			gjout_checked = true
+		end
+	end
+	void REMFAC3()
+		CSay(tostring(Done.FacilityPortal3))
+		if not gjout_checked
+			Map.Kill("Bars3")
+			gjout_checked = true
+		end
+	end
+	void RECHECK()
+		if (not gjout_checked) and (gv.Bool.GameJolt)
+			for i=1,3
+				self["REMFAC"..i]()
+			end	
+			gjout_checked = true
+		end
+	end
+	void TOFAC1()
+		Field.LoadMap("GJ_DUNG_Facility")
+		Map.GoToLayer("#999","NPC_Trans_SPOT")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("GJ_Open","GJ_Open")
 		Map.ZA_Enter("GJ_AlwaysOpen","GJ_AlwaysOpen")
 		Map.ZA_Enter("GJWARP","GJWARP")
+		for i=1,3
+			Map.ZA_Enter("RemBars"..i,"RemFac"..i)
+		end
+		Map.ZA_Enter("OutRechck","RECHECK")
+		Map.ZA_Enter("ToFac1","TOFAC1")
 	end
 	
 	void Draw()
