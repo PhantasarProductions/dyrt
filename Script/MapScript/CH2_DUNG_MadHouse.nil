@@ -153,6 +153,21 @@ group MScript
 		Achievements.Award("SECDUNG_MADHOUSE")
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.Wav"
+		StartCombat.Arena = "MadHouse"
+		StartCombat.Foe[1] = "Boss/Creep"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void LEAVE()
+		Field.LoadMap("CH2_HUB_XROADS")
+		Map.GoToLayer("XROADS","FromMadhouse")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("GJ_Open","GJ_Open")
 		Map.ZA_Enter("GJ_AlwaysOpen","GJ_AlwaysOpen")
@@ -168,6 +183,8 @@ group MScript
 		Map.ZA_Enter("BackToStart","BackToStart")
 		Map.ZA_Enter("LeaveHouse","LeaveHouse")
 		Map.ZA_Enter("Complete","Complete")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
+		Map.ZA_Enter("Leave","Leave")
 	end
 	
 	void Draw()
