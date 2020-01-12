@@ -1,0 +1,8 @@
+new Combat_Status("Poison",{
+	
+})
+
+
+new Combat_Status("Disease",{
+	
+})
