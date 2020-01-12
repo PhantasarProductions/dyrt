@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Data/General/Achievements.nil
-// Version: 20.01.11
+// Version: 20.01.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -66,6 +66,21 @@ ret = {
 		["ProcessMax"] = 1,
 		["ProcessString"] = "",
 		["ProcessValue"] = "KILLED_BOSS_BLENCHY1",
+		["require_gamejolt"] = false,
+		["skill_1"] = true,
+		["skill_2"] = true,
+		["skill_3"] = true,
+		["skill_check"] = false,
+
+	},
+	["BOSS_CREEP"] = {
+		["AutoProcess"] = true,
+		["Description"] = "Defeat the Creep in the MadHouse",
+		["hidden"] = false,
+		["Name"] = "Jeepers Creepers",
+		["ProcessMax"] = 1,
+		["ProcessString"] = "",
+		["ProcessValue"] = "KILLED_BOSS_CREEP",
 		["require_gamejolt"] = false,
 		["skill_1"] = true,
 		["skill_2"] = true,
