@@ -42,7 +42,10 @@
 :Welcome
 	call MapText,"SECSCE"
 	jmp Einde
-
+:Boss
+	call MapScript.Boss
+	call Map.Kill,"Boss",true
+	jmp Einde
 
 :Einde
 	end
