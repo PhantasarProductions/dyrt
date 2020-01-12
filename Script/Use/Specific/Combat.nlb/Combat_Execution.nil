@@ -188,6 +188,17 @@ group Execution
 		end
 		
 		// Cure status changes (must after accuracy check be first always).
+		for k,v in pairs(Action.Act)
+			if prefixed(k,"Cure") and v
+				string stc
+				stc = right(k,#k-4)
+				if Target.StatusChanges[stc]
+					Target.StatusChanges[stc] = nil;
+					new Hurt("Cure "..stc,180,255,0)
+					hit = true
+				end
+			end
+		end
 		
 		// Calculate attack and damage
 		if Action.Act.Attack>0
@@ -208,10 +219,22 @@ group Execution
 			delegate effect
 			effect = NIL.Use("Script/Use/Specific/CombatModules/SpellEffect/"..Action.Act.EffectScript)
 			assert(effect,"Something went wrong in compiling effect: "..Action.Act.EffectScript)
-			hit = effect(Action) or hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
+			hit = effect(Action,Target) or hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
 		end
 		
 		// Cause status changes (must always be the last before the hit check)
+		for k,v in pairs(Action.Act)
+			if prefixed(k,"Cause") and v
+				string stc
+				stc = right(k,#k-5)
+				if not Target.StatusChanges[stc] and math.random(0,99) >= Target.Char.Stat("END__RESIST_Stat_"..stc).Value
+					Target.StatusChanges[stc] = true
+					new Hurt(stc.."!",255,100,60)
+					hit = true
+				end
+			end
+		end
+
 		
 		// If not hit, make note of a miss
 		if not hit
