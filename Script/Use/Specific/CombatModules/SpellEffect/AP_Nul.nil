@@ -35,10 +35,10 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 do
-	bool Zet_die_AP_maar_op_nul_jongens(Act)
-		Act.Target.Char.Points("AP").Have = 0
+	bool Zet_die_AP_maar_op_nul_jongens(Act,Target)
+		Target.Char.Points("AP").Have = 0
 		return true
 	end
 	
-	return enothing
+	return Zet_die_AP_maar_op_nul_jongens
 end
