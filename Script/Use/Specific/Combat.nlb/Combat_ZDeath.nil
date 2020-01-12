@@ -189,6 +189,22 @@ new Combat_Status("Fallen",{
 		end	
 })
 
+new Combat_Status("Destruction",{
+	["OffGauge"] = true,
+	["IsDefeated"] = true,
+	["UntargetableFoe"] = true,
+	["OverDraw"] = true,
+	["Draw"] = void(f)
+		end,
+	["AltExperience"] = int(f,int exp)
+		end,
+	["Caused"] = void(f)
+			f.Char.Points("HP").Have = 0
+		end,
+	["Cured"] = void(f)
+		end	
+})
+
 
 new Combat_Status("Oversoul",{
 	["Draw"] = void(f)
