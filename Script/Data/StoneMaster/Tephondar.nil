@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_CITY_Frendor.nil
+// src/Tricky Script/Script/Data/StoneMaster/Wendy.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,40 +32,22 @@
 // 
 // **********************************************
 // 
-// version: 20.01.13
+// version: 20.01.05
 // End License Information
 
+#use "libs/tables"
+#use "libs/strings"
 
-
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-group MScript
-	
-	void NPC_FEENALARIA()
-		MapScript.SASKIA("Feenalaria")
-	end
-	
-	void NPC_YANNEE()
-		if Map.Leader=="Irravonia"
-			MapText("YANNEE.IRRA")
-		else
-			MapText("YANNEE.NOTIRRA")
+do
+	var ret
+	ret = new CStoneMaster
+	for e in each({"Flame","Wind","Water","Earth"})
+		for c in each({"Eric","Yasathar","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella"})
+			ret.NewElement(c,e)
+			CSayF("Setting %s resistance for character %s",e,c)
 		end
 	end
 	
-	void NPC_TEPHONDAR()
-		MapScript.SASKIA("Tephondar")
-	end
-	
-	void CONSTRUCTOR()
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-	end
-	
+	CSay("Tephonar has been loaded as a Stone Master")	
+	return ret
 end
-#say "Map Script - Compiling!"

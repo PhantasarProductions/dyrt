@@ -53,3 +53,8 @@
 	:Feena_Stone
 	call StoneMaster,"Feenalaria"
 	end
+	
+:Tephondar
+	call MapText,"TEPHONDAR."..(Map.Leader:upper())
+	call StoneMaster,"Tephondar"
+	end
