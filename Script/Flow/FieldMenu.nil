@@ -340,12 +340,9 @@ group Flow_FieldMenu
 		//Viewport(ubox.x,ubox.y,ubox.w,ubox.h) // Microsoft messed this up! Cool, huh?
 		$InvItemHover = nil;
 		for itemtag in each($InvItemList)
+			int ind = 0
 			if Inventory[itemtag]>0
 				if y>=0 and y+35<ubox.h 
-					__white
-					DarkText.Font($Font,Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5,ubox.y+y)
-					__amber
-					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
 					if $situations[$situation].ItemSellPrice and Item[itemtag].Sellable
 						Color(0,180,255)
 						DarkText.Font($BlitzFont,sprintf("Sell price: %9d shilders",math.ceil(Item[itemtag].BuyPrice/__skill)),ubox.x+math.floor((ubox.w-40)/2),ubox.y+y+4)
@@ -362,7 +359,14 @@ group Flow_FieldMenu
 						#endpure
 						$LM_Action		= $situations[$situation].ItemAction
 						$LM_ActionArgs	= itemtag
+						Color(100,180,255)
+						ind = 5
+					else
+						__white
 					end
+					DarkText.Font($Font,Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5+ind,ubox.y+y)
+					__amber
+					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
 				end
 				y = y + 20
 			end
@@ -383,6 +387,7 @@ group Flow_FieldMenu
 		ch = RPG.GetChar(self.CharTag)
 		y = 5
 		for tag,need in spairs(abls)
+			int ind = 0
 			string stag
 			bool hovering
 			stag = "ABL_HERO_"..self.CharTag.."_"..tag
@@ -398,9 +403,12 @@ group Flow_FieldMenu
 					ShowAutoHelp($InvItemLastHelp.Help)
 					$LM_Action		= $situations[$situation].AblAction
 					$LM_ActionArgs	= stag
+					Color(100,180,255)
+					ind = 5
+				else
+					__white
 				end
-				__white
-				DarkText.Font($Font,Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5,ubox.y+y)
+				DarkText.Font($Font,Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5+ind,ubox.y+y)
 				if Item[stag].AP_Cost and Item[stag].AP_Cost>0
 					Color(0,180,255)
 					DarkText.Font($Font,tostring(Item[stag].AP_Cost),ubox.x+ubox.w-10,ubox.y+y,1)
@@ -409,9 +417,14 @@ group Flow_FieldMenu
 				//$ItemHover = nil;
 				AbilitiesMastered[self.CharTag][tag] = true
 			else
-				Color(127,127,127)
-				DarkText.Font($Font,"?????",ubox.x+5,ubox.y+y)
 				//$ItemHover = nil;
+				if hovering
+					Color(170,170,107)
+					DarkText.Font($Font,"?????",ubox.x+5+5,ubox.y+y)
+				else
+					Color(127,127,127)
+					DarkText.Font($Font,"?????",ubox.x+5,ubox.y+y)
+				end
 				if hovering
 					table Help
 					Help = {"In order to unlock this ability you need:"}
