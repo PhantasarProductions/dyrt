@@ -37,3 +37,19 @@
 :OnLoad
 	call Fader,"The Fairy City of Frendor"
 	end
+	
+:Feenalaria
+	chk gv.Bool.IrraSpoken,Feena_HowDoYouDo
+	chk Map.Leader=="Irravonia",Feena_Irravonia
+	Call MapText,"FEENA.NOTIRRA"
+	end
+	:Feena_HowDoYouDo
+	Call MapText,"FEENA"
+	jmp Feena_Stone
+	:Feena_Irravonia
+	Call MapText,"FEENA.IRRAFIRST"
+	mov true,gv.Bool.IrraSpoken
+	jmp Feena_Stone
+	:Feena_Stone
+	call StoneMaster,"Feenalaria"
+	end
