@@ -68,7 +68,7 @@ class SMUpdate
 			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Value + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Value + 1)
 		end
 		if self.StatusChange!=""
-			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Value+1)
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_Stat_"..self.self.StatusChange).Value+1)
 		end
 		//CSay(tostring(ret))
 		switch __skill
@@ -177,10 +177,10 @@ module MStoneMaster
 					RPG.GetChar(self.CharTag).Points(sprintf("SKILLLVL%d",self.Hover.skill)).Have++
 					RPG.GetChar(self.CharTag).Points(sprintf("SKILLEXP%d",self.Hover.skill)).Have=0
 					su(self.Hover.skill)
-				elseif self.Hover.Element!=""
-					error("Elemental update not yet put in!")
+				elseif self.Hover.Element!=""					
+					RPG.GetChar(self.CharTag).Stat("PERMPOWERUP__RESIST_Elem_"..self.Hover.Element).Value++
 				elseif self.Hover.StatusChange!=""
-					error("Status Change update not yet put in!")
+					RPG.GetChar(self.CharTag).Stat("PERMPOWERUP__RESIST_Stat_"..self.Hover.StatusChange).Value++
 				else
 					error("WTF? No update data!")
 				end
