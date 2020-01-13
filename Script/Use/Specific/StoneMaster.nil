@@ -65,10 +65,10 @@ class SMUpdate
 			//CSay("Calc from skill "..self.skill.." => "..ret)
 		end
 		if self.Element!=""
-			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Have + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Have + 1)
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Value + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Value + 1)
 		end
 		if self.StatusChange!=""
-			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Have + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Have+1)
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_STat_"..self.self.StatusChange).Value+1)
 		end
 		//CSay(tostring(ret))
 		switch __skill
