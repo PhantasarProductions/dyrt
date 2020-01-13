@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/StoneMaster.nil
-// Version: 20.01.05
+// Version: 20.01.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -197,7 +197,7 @@ module MStoneMaster
 		for upd in self.CUpdates.Each
 			int indx
 			__white
-			if Mouse.X>ubox.x and Mouse.Y>y and Mouse.X<ubox.x+ubox.w and Mouse.Y<ubox.y+ubox.h
+			if Mouse.X>ubox.x and Mouse.Y>y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+25
 				Color(125,180,255)
 				if upd.RequireStones>__magicstones
 					Color(255,0,0)
