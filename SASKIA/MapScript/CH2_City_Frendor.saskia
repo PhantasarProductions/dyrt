@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.12
+; version: 20.01.13
 ; End License Information
 :OnLoad
 	call Fader,"The Fairy City of Frendor"
