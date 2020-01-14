@@ -58,3 +58,8 @@
 	call MapText,"TEPHONDAR."..(Map.Leader:upper())
 	call StoneMaster,"Tephondar"
 	end
+	
+:Batonya
+	call MapText,"BATONYA"
+	call Merchant,"CH2_BATONYA"
+	end

@@ -58,7 +58,20 @@ group MScript
 		MapScript.SASKIA("Tephondar")
 	end
 	
+	void NPC_WANDSTORE()
+		Map.GoToLayer("WANDS","Start")
+	end
+	
+	void LEAVEWANDSTORE()
+		Map.GoToLayer("CITY","NPC_WandStore_SPOT")
+	end
+	
+	void NPC_BATONYA()
+		MapScript.SASKIA("Batonya")
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("LeaveWand","LeaveWandStore")
 	end
 	
 	void Draw()
