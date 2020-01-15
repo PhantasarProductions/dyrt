@@ -1,0 +1,4 @@
+:OnLoad
+	Call Fader,"The Elven City Of Iskarderiu"
+	end
+
