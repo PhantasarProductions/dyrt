@@ -34,6 +34,11 @@
 ; 
 ; version: 20.01.15
 ; End License Information
+
 :OnLoad
 	Call Fader,"The Elven City Of Iskarderiu"
 	end
+	
+:NPC_SASKIA_Items
+	Call MapText,"ITEMS"
+	call Merchant,"CH2_ISKA_ITEMS"
