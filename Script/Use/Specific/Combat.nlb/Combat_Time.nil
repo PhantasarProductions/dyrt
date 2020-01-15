@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Time.nil
-// Version: 19.12.16
+// Version: 20.01.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -170,6 +170,7 @@ group CombatTime
 				end
 			elseif ifighter.GaugePosition == 10000
 				// TODO: Link to AI or to Player Input
+				ifighter.PreInput()
 				if ifighter.StatusAltAI("")
 				elseif iteam=="Hero"
 					Stage.Go("PlayerInput")
