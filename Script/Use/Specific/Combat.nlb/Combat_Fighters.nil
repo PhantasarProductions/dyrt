@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 19.12.22
+// Version: 20.01.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -124,6 +124,14 @@ class Fighter
 			end
 		end
 		#endpure
+	end
+	
+	void PreInput()
+		for k,s in self.StatusChanges.Each
+			if s.PreInput
+				s.PreInput(self)
+			end
+		end
 	end
 	
 	final void CONSTRUCTOR(string aTag)
