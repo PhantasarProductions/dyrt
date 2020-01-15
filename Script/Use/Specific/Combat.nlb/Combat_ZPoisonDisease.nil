@@ -34,8 +34,34 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
 new Combat_Status("Poison",{
+	["Draw"] = void(f)
+		Color(0,255,0)
+	end,
 	
+	["PreInput"] = void(f)
+		var HP
+		HP = f.Char.Points("HP")
+		new Hurt("Poison Damage",f.Tag,0,127,0)
+		CSayF("Poison damage for %s!",f.Tag)
+		switch __skill
+			case 1
+				if prefixed(f.Tag,"FOE_")
+					#- HP.Have math.ceil(HP.Maximum/5)
+				else 
+					#- HP.Have math.ceil(HP.Maximum/10)
+				end
+			case 2
+				#- HP.Have math.ceil(HP.Maximum/8)
+			case 3
+				if prefixed(f.Tag,"FOE_")
+					#- HP.Have math.ceil(HP.Maximum/20)
+				else 
+					#- HP.Have math.ceil(HP.Maximum/6)
+				end
+		end
+	end
 })
 
 
