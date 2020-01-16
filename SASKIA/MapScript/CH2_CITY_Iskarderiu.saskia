@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.15
+; version: 20.01.16
 ; End License Information
 
 :OnLoad
@@ -42,3 +42,9 @@
 :NPC_SASKIA_Items
 	Call MapText,"ITEMS"
 	call Merchant,"CH2_ISKA_ITEMS"
+	end
+	
+:NPC_SASKIA_Weapons
+	Call MapText,"WEAPONS"
+	call Merchant,"CH2_ISKA_WEAPONS"
+	end
