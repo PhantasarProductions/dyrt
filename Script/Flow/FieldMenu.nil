@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.01.13
+// Version: 20.01.16
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -486,7 +486,7 @@ group Flow_FieldMenu
 		DarkText.Font($Font,Stock.Name,ubox.x+10,ubox.y+10)
 		int y
 		y = ubox.y + 40
-		for i=1,10
+		for i=1,20
 			string tag
 			var itmd
 			bool hover
