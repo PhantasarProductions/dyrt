@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.27
+; version: 20.01.17
 ; End License Information
 
 :OnLoad
@@ -56,4 +56,9 @@
 	mov 1,RPG.GetChar("Scyndi").Points("SKILLLVL1").Have 
 	call Field.ChainMap,"CH1_DUNG_Prison","EndPrologue","#999"
 	mov "#999",Map.Layer
+	end
+	
+:NPC_SASKIA_Priest
+	call MapText,"FATHER"
+	call StoneMaster,"HindroAstra"
 	end
