@@ -73,6 +73,10 @@
 #macro __currency Shilders
 
 
+// When set to "true" walk requests will be ignored. I will unset this on SpawnPlayer
+#macro __nowalk gv.Bool.NoWalk
+
+
 class MidScreen
 	static int x
 	static int y

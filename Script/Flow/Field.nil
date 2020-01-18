@@ -812,6 +812,7 @@ group FlowField
 	end
 	
 	void SpawnPlayer(string spot,altwind)
+		__nowalk = false
 		self.Map.Kthura.Actor.Player.Spawn(spot)
 		if altwind
 			self.Map.Kthura.Actor.Player.Wind=altwind
@@ -973,7 +974,7 @@ global void BUB_Update()
 	
 	if Mouse.HitLeft and PA[FlowField.Leader].Click(1,Mouse.X,Mouse.Y)
 		CSay("Personal action took over, so ignore the walking requests!")
-	elseif Mouse.Y<Screen.Height-128 and Mouse.HitLeft
+	elseif (Mouse.Y<Screen.Height-128 and Mouse.HitLeft) and (not __nowalk)
 		var clobj
 		clobj = Clickables.Clicked(FlowField.Map.Kthura.ScrollX + Mouse.X,FlowField.Map.Kthura.ScrollY + Mouse.Y)
 		if clobj
