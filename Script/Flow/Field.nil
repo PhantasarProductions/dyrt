@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.01.15
+// Version: 20.01.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -747,6 +747,8 @@ group FlowField
 							end
 							if prefixed(Tag,"NPC_MT_")
 								new Clickables(Tag, posx, posy, MapText, Tag)
+							elseif prefixed(Tag,"NPC_MTC_")
+								new Clickables(Tag, posx, posy, CharText,Tag)
 							elseif prefixed(Tag,"NPC_SASKIA_")
 								new Clickables(Tag, posx, posy, MapScript.SASKIA, Tag)
 							else
