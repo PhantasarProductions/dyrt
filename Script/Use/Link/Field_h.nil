@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.01.09
+// Version: 20.01.18
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -103,7 +103,7 @@ group Map
 		if params==""
 			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
 		else
-			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,'%s')",event,zone,actiondelegate,params))
+			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
 		end
 	end
 	
