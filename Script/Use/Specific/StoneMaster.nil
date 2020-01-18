@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/StoneMaster.nil
-// Version: 20.01.14
+// Version: 20.01.17
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -46,6 +46,12 @@ class SMUpdate
 	int skill
 	string Element
 	string StatusChange
+	get bool CanDo 
+		if self.skill>=0
+			return RPG.GetChar(self.CharTag).Points(sprintf("SKILLLVL%d",self.skill)).Have>0
+		end
+		return true
+	end
 	
 	set string UpdateName
 		self.NameUpdate = value
@@ -169,7 +175,7 @@ module MStoneMaster
 			Annoy("Not enough magic stones for that update!")
 			// Normally also never possible, but if it happens, the game will not result into negative magic stones and allow you to cheat!
 		else
-			if Yes(sprintf("You cannot undo this update!\n\nAre you sure you want to make this upgrade for %s?\n\n%s",RPG.GetChar(self.CharTag).Name,self.Hover.UpdateName))
+			if self.Hover.CanDo and Yes(sprintf("You cannot undo this update!\n\nAre you sure you want to make this upgrade for %s?\n\n%s",RPG.GetChar(self.CharTag).Name,self.Hover.UpdateName))
 				#- __magicstones self.Hover.RequireStones
 				if self.Hover.skill>=0
 					delegate su
@@ -207,8 +213,13 @@ module MStoneMaster
 				end
 				indx = 5
 			end
-			self.FTxt.DrawText(upd.UpdateName,ubox.x+10+indx,y)
-			self.FTxt.DrawText(sprintf("need %4d stones",upd.RequireStones),(ubox.w+ubox.x)-20,y,1)
+			if upd.CanDo
+				self.FTxt.DrawText(upd.UpdateName,ubox.x+10+indx,y)
+				self.FTxt.DrawText(sprintf("need %4d stones",upd.RequireStones),(ubox.w+ubox.x)-20,y,1)
+			else
+				Color(123,123,123)
+				self.FTxt.DrawText("???",ubox.x+10+indx,y)
+			end
 			#+ y 25
 		end
 		__white
