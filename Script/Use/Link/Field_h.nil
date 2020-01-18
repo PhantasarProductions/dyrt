@@ -163,6 +163,10 @@ group Map
 		FLD_Exe("FieldMap.Kthura.Layer = \""..value.."\"")
 	end
 	
+	get string PlayerWind
+		return LuaGetString("FlowField.Map.Kthura.Actor.Player.Wind")
+	end
+	
 	void HideByLabel(string label)
 		FLD_Exe(sprintf("FlowField.Map.Kthura.HideByLabel(trim('%s'))",label))
 	end
@@ -181,6 +185,26 @@ group Map
 		else
 			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(%d,%d,%s)",A,B,tostring(C!=false)))
 		end
+	end
+	
+	void MoveTo(A,B,C)
+		if type(A)=="string"
+			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.MoveTo(trim(\"%s\"))",A))
+		else
+			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.MoveTo(%d,%d,%s)",A,B,tostring(C!=false)))
+		end
+	end
+	
+	get int PlayerX
+		return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.X")
+	end
+	
+	get int PlayerY
+		return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Y")
+	end
+	
+	get string PlayerWind
+		return LuaGetString("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Wind")
 	end
 	
 	void Hide(string tag)
