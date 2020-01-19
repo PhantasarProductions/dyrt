@@ -158,6 +158,9 @@ group CombatTime
 			bool offgauge
 			for _,s in ifighter.StatusChanges.Each
 				offgauge = offgauge or s.OffGauge
+				if s.IDLE
+					s.IDLE(ifighter)
+				end
 			end
 			if offgauge 
 				if ifighter.GaugePosition>-100
