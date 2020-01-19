@@ -149,6 +149,11 @@ group MScript
 			RPG.Party[i] = ch
 		end
 	end
+	
+	void WHITEDRAGONPOWER()
+		RPG.GetChar("Eric").Points("SKILLLVL2").Have = 1
+	end
+
 
 	
 	void CONSTRUCTOR()
