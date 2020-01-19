@@ -194,7 +194,7 @@ group Execution
 				stc = right(k,#k-4)
 				if Target.StatusChanges[stc]
 					Target.StatusChanges[stc] = nil;
-					new Hurt("Cure "..stc,180,255,0)
+					new Hurt("Cure "..stc,Target.Tag,180,255,0)
 					hit = true
 				end
 			end
@@ -204,6 +204,12 @@ group Execution
 		if Action.Act.Attack>0
 			$Attack(Executor,Target,Action)
 			hit = true
+		end
+		
+		// Cancel
+		if Action.Act.AttackCancel and Target.GaugePosition>10000
+			Target.GaugePosition = 0
+			new Hurt("Cancel",Target.Tag,255,255,0)
 		end
 		
 		// Calculate healing
