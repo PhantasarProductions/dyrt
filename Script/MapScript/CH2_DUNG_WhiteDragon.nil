@@ -1,0 +1,135 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH2_DUNG_WhiteDragon.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.01.18
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+
+#macro MaxIce 16
+
+table OnIce
+
+group MScript
+	void SECRETPASSAGE()
+		Map.ShowByZone("SecretPassage")
+	end
+	
+	void HIDESECRET()
+		Map.HideByZone("SecretPassage")
+	end
+	
+	void ICE(string tag)
+		int sx
+		int sy
+		int ex
+		int ey
+		CSay("ICE: "..tag)
+		if self.IceTagsActive>0
+			CSay("Ignore! There still are active tags!")
+			return
+		end
+		OnIce[tag]=true
+		__nowalk=true
+		Map.Obj = tag
+		sx = Map.ObjInt.X
+		sy = Map.ObjInt.Y
+		ex = Map.ObjInt.X + Map.ObjInt.W
+		ey = Map.ObjInt.Y + Map.ObjInt.H
+		Map.StopWalking()
+		switch Map.PlayerWind
+			case "NORTH"
+				Map.MoveTo(Map.PlayerX,sy-3)
+			case "SOUTH"
+				Map.MoveTo(Map.PlayerX,ey+32)
+			case "WEST"
+				CSayF("WEST: Move to (%04d,%04d)",sx-16,Map.PlayerY)
+				Map.MoveTo(sx-16,Map.PlayerY)
+			case "EAST"
+				CSayF("EAST: Move to (%04d,%04d)",ex+16,Map.PlayerY)
+				Map.MoveTo(ex+16,Map.PlayerY)
+			default
+				error("Unknown wind direction for ICE slide: "..Map.PlayerWind)
+		end
+	end
+	
+	get int IceTagsActive
+		int c
+		for t,v in pairs(OnIce)
+			if v
+				CSay("Tag still active: "..t)
+				c++
+			end
+		end
+		CSayF("Tags active: %d",c)
+		return c
+	end
+	
+	void END_ICE(string tag)
+		CSay("End of ice"..tag..";")
+		OnIce[tag]=nil;
+		__nowalk = self.IceTagsActive>0
+	end
+	
+	void GAT()
+		Map.GoToLayer(Map.Layer,"Start")
+		LoadAudio("SFX/General/FallDown.wav").Play()
+	end
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("SecretPassage","SecretPassage")
+		Map.ZA_Enter("HideSecret","HideSecret")
+		Map.ZA_Enter("Reset_Start","Gat")
+		Map.ZA_Enter("GAT2","Gat")
+		Map.ZA_Enter("GAT3","Gat")
+		for i=1,MaxIce
+			string tag
+			tag = sprintf("Ice_%03d",i)
+			Map.ZA_Enter(tag,'ICE',tag)
+			Map.ZA_Leave(tag,'END_ICE',tag)
+		end
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
