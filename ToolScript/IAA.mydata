@@ -8994,7 +8994,7 @@ Rec: JWL_SAPHIRE
 	HealType = Absolute
 	HP_Cost = 0
 	Icon = 
-	ItemType = Consumable
+	ItemType = Jewel
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
