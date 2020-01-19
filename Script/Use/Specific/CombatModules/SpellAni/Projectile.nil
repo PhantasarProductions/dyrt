@@ -1,0 +1,68 @@
+module M_Projectile
+
+	void Init()
+		error("Projectile module should NEVER be used as a stand alone spellani")
+	end
+
+	var PrjImage
+	bool Turn = true
+	bool HotCenter = true
+	number ex
+	number ey
+	number tx
+	number ty
+	number dx
+	number dy
+	number cycles
+	number degrees
+	number x
+	number y
+	
+	void Start(string Image,Exe,Tar,aTurn,aHC)
+		self.Turn = aTurn!=false
+		self.HotCenter = aHC!=false
+		self.PrjImage = LoadIfNew(Image,sprintf("PROJECTILE_%s_%s_%s",replace(Image:upper(),"/","_")),tostring(self.turn),tostring(self.HotCenter))
+		self.ex = Exe.X
+		self.ey = Exe.Y
+		self.tx = Tar.X
+		self.ty = Tar.Y
+		self.x = Exe.X
+		self.y = Exe.Y
+		self.degrees = 0
+		if (self.HotCenter)
+			self.PrjImage.HotCenter()
+		end
+		if math.abs(self.ex-self.tx)>math.abs(self.ey-self.ty)
+			self.dx=1
+			if self.ex>self.tx
+				self.dx=-1
+			end
+			self.dy = (self.ty-self.ey)/self.ex
+			self.cycles=math.abs(self.ex-self.tx)
+		else
+			self.dy=1
+			if self.ey>self.ty
+				self.dy=-1
+			end
+			self.dx = (self.tx-self.ex)/self.eu
+			self.cycles=math.abs(self.ex-self.tx)
+		end
+		// Not the most elegant method, but using Bresenham would get more issues
+	end
+	
+	bool Cycle()
+		--self.cycles
+		if self.cycles<=0
+			return true
+		end
+		#+ self.x self.dx
+		#+ self.y self.dy
+		if self.Turn
+			self.degrees++
+		end
+		Rotate.Deg = self.degrees
+		self.PrjImage.XDraw(self.x,self.y)
+		Rotate.Deg = 0
+	end
+
+end
