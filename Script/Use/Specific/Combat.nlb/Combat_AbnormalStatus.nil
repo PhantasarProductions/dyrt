@@ -68,6 +68,7 @@ class Combat_Status
 	delegate PreInput
 	delegate Caused
 	delegate Cured
+	delegate IDLE
 	
 	// Must be int with fighter object for the fighter and an int parameter for the experience point you'd normally get
 	// int(f,int exp)
