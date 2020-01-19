@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/20/2020 12:01:08 AM
+// Generated: 1/20/2020 12:19:12 AM
 
 do
 var retfunc()
@@ -38,11 +38,11 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2500
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2500
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2500
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 2500
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SAPHIRE"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SAPHIRE"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SAPHIRE"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SAPHIRE"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SAPHIRE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_SAPHIRE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_SAPHIRE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_SAPHIRE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_SAPHIRE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_SAPHIRE"
 if not Foe.LoadOversoul
 	foeret.Experience = 1000
 end
