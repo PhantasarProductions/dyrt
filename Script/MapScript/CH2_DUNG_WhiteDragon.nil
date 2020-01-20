@@ -153,8 +153,11 @@ group MScript
 	void WHITEDRAGONPOWER()
 		RPG.GetChar("Eric").Points("SKILLLVL2").Have = 1
 	end
-
-
+	
+	void LEAVECAVE()
+		Field.LoadMap("CH2_HUB_HiddenBush")
+		Map.GoToLayer("BOS","FromWhite")
+	end
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("SecretPassage","SecretPassage")
@@ -169,6 +172,7 @@ group MScript
 			Map.ZA_Leave(tag,'END_ICE',tag)
 		end
 		Map.ZA_Enter("Dragon","SASKIA_Dragon")
+		Map.ZA_Enter("LeaveCave","LeaveCave")
 	end
 	
 	void Draw()
