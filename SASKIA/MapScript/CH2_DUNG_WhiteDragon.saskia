@@ -60,7 +60,7 @@
 	call MapScript.WhiteDragonPower
 	:skipPower
 	;call Field.LoadMap,"CH2_DUNG_DragonCrackForest"
-	call Map.GoToLayer,"#001","Einde"
+	call Map.GoToLayer,"#000","Einde"
 	;call BoxText.Load,"MAPS/CH2_DUNG_REDDRAGONCAVE","TEMP"
 	;call BoxText,"TEMP","END_C"
 	mov false,gv.Bool.RESPAWN_INITIATED
