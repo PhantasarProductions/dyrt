@@ -1,0 +1,115 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH2_DUNG_GreenDragon.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.01.21
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+#use "libs/strings"
+
+quickmeta group flasks
+	index
+		return gv.Int["GreenDragonFlask"..key]
+	end
+	
+	newindex
+		gv.Int["GreenDragonFlask"..key] = value
+	end
+	
+	len
+		return 5
+	end
+end
+
+void Note(string tag)
+	gv.Int["TEMP_FLASK"] = flasks[right(tag,1)]
+	MapText("NOTE")
+	Map.Kill(tag,true)
+end
+
+group MScript
+	void LEAVECAVE()
+		Field.LoadMap("CH2_HUB_HiddenBush")
+		Map.GoToLayer("BOS","FromGreen")
+	end
+	
+	void GEN_PUZZLE()
+		if not Done.Done_GreenDragon_PuzzleGenerated
+			table poison
+			for i=1,4
+				int p
+				repeat
+					p = math.random(1,4)
+				until not poison[p]
+				poison[p] = i
+			end
+			// please note ipairs may NOT be used here! pairs must do!
+			// The order is not important and ipairs will skip things!
+			for bottle,note in pairs(poison)
+				flasks[note] = bottle
+				CSayF("Bottle #%d is tied to note #%d",bottle,note)
+			end
+		end
+	end
+	
+	void NPC_NOTE1()
+		Note("NPC_Note1")
+	end
+	void NPC_NOTE2()
+		Note("NPC_Note2")
+	end
+	void NPC_NOTE3()
+		Note("NPC_Note3")
+	end
+	void NPC_NOTE4()
+		Note("NPC_Note4")
+	end
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("LeaveCave","LeaveCave")
+		Map.ZA_Enter("Gen_Puzzle","Gen_Puzzle")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
