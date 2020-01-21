@@ -4,7 +4,7 @@
 #macro ForceView true
 #macro spacing 176
 #macro yline 100
-#macro starttijd 64
+#macro starttijd 320
 	
 int speed
 int maxmoves
@@ -89,12 +89,12 @@ group Start
 				skull.Draw(Flessen[i].X+36,yline + 100)
 			end
 		end
-		Rect(0,Screen.H-50,math.floor( (self.Time/starttijd) * Screen.W ),50)
+		Rect(0,Screen.H-50,math.floor( (self.Time / starttijd ) * Screen.W ),50)
 	end 
 	
 	void Update()
-		starttijd--
-		if starttijd<=0
+		self.Time--
+		if self.Time<=0
 			Stage++
 		end
 	end
@@ -103,17 +103,66 @@ end
 	
 group Moving
 	
+	int moves
+	
+	void CONSTRUCTOR()
+		self.moves = maxmoves
+	end
+	
 	void Draw()
 	end 
 	
 	void Update()
+		bool moved
+		for i,fles in ipairs(Flessen)
+			int mbx
+			mbx = i * spacing
+			if fles.x<mbx 
+				#+ fles.x speed
+				if fles.x>mbx
+					fles.x=mbx
+				end
+				moved=true
+			elseif fles.x>mbx 
+				#- fles.x speed
+				if fles.x<mbx
+					fles.x=mbx
+				end
+				moved = true
+			end
+		end
+		if not moved
+			if self.moves<=0
+				Stage++
+				return
+			end
+			int s1
+			int s2
+			var sf
+			repeat
+				s1 = math.random(1,5)
+				s2 = math.random(1,5)
+			until s1!=s2
+			sf = Flessen[s1]
+			Flessen[s1]=Flessen[s2]
+			Flessen[s2]=sf
+			self.moves--
+		end
 	end
 	
 end
 	
 group Ask
 	
+	var MYC
+	
+	void CONSTRUCTOR()
+		self.MYC = GetFont("BIGTEXT").Text("Choose the correct flask!")
+	end
+	
 	void Draw()
+		self.MYC.Draw(math.floor(Screen.W/2),25,2)
+		Mouse.Show()
 	end 
 	
 	void Update()
