@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 1:46:30 AM
+// Generated: 1/21/2020 3:37:40 PM
 
 do
 var retfunc()
@@ -147,22 +147,10 @@ end
 switch __skill
 	case 1
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_SPITVENOM"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_SPITVENOM"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_SPITVENOM"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	default
 		error("Unknown skill "..__skill)
 end

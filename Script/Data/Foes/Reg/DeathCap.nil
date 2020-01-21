@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 1:46:30 AM
+// Generated: 1/21/2020 3:37:40 PM
 
 do
 var retfunc()
@@ -14,6 +14,7 @@ foeret.Fatal["Flame"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/DeathCap.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/DEATHCAP.NEGATIVE.PNG")
 foeret.Cash = 3
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
 if not Foe.LoadOversoul
 	foeret.Experience = 100
 end
@@ -120,23 +121,15 @@ end
 // Skill specific
 switch __skill
 	case 1
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_SPORES"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_SPORES"
 	case 2
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_SPORES"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_SPORES"
 	case 3
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_SPORES"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_SPORES"
 	default
 		error("Unknown skill "..__skill)
 end

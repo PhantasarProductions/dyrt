@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/11/2020 11:01:54 PM
+// Generated: 1/21/2020 3:37:40 PM
 
 do
 var retfunc()
@@ -440,11 +440,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_AZIELLA_CONFUSION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_AZIELLA_CONFUSION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_FIRSTAID"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
@@ -466,10 +461,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_AZIELLA_CONFUSION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_FIRSTAID"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_FIRSTAID"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
@@ -489,9 +480,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_AZIELLA_CONFUSION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_AZIELLA_CONFUSION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_FIRSTAID"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	default

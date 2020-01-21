@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/19/2020 9:56:33 PM
+// Generated: 1/21/2020 3:37:41 PM
 
 do
 var retfunc()
@@ -298,11 +298,6 @@ end
 switch __skill
 	case 1
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
@@ -334,10 +329,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ICICLE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ICICLE"
 	case 3
@@ -349,9 +340,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_PECK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ICICLE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ICICLE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_ICICLE"

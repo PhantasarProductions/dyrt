@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/19/2020 4:15:47 PM
+// Generated: 1/21/2020 3:37:41 PM
 
 do
 var retfunc()
@@ -167,11 +167,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 2
@@ -180,10 +175,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
@@ -191,9 +182,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CLAW"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	default
 		error("Unknown skill "..__skill)
 end
