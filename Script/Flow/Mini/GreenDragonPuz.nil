@@ -1,13 +1,23 @@
 #use "Script/Use/Anyway"
+#use "libs/tables"
 	
-#macro ForceView false
+#macro ForceView true
+#macro spacing 176
+#macro yline 100
+#macro starttijd 64
 	
 int speed
 int maxmoves
+int Stage = 1
 
-var flask = LoadIfNew("GFX/Puzzle/BalletjeBalletje/Flask.png","BalletjeBalletjeFles")
-var skull = LoadIfNew("GFX/Puzzle/BalletjeBalletje/Skull.png","BalletjeBalletjeSchedel")
-var back  = TImage.Obtain("MENUBACK")
+
+var flask
+var skull
+var back
+
+flask = LoadIfNew("GFX/Puzzle/BalletjeBalletje/Flask.png","BalletjeBalletjeFles")
+skull = LoadIfNew("GFX/Puzzle/BalletjeBalletje/Skull.png","BalletjeBalletjeSchedel")
+back  = TImage.Obtain("MENUBACK")
 
 quickmeta group giftig
 	index
@@ -26,9 +36,14 @@ end
 class Fles
 	bool giftig = false
 	int x
+	int movex = 0
+	
+	get int X
+		return self.x
+	end
 	
 	void Draw()
-		flask.Draw(self.x,Screen.H-200)
+		flask.Draw(self.x,yline)
 	end
 	
 	void CONSTRUCTOR(int sx)
@@ -38,10 +53,11 @@ end
 
 table Flessen
 for i=1,5
-	Flessen[i] = new Fles(i*64)
+	Flessen[i] = new Fles(i*spacing)
 end
-for i=1,5
-	Flessen[giftig[i]] = true
+for i=1,4
+	// CSay("???"..i.."\t"..tostring(giftig[i]))
+	Flessen[giftig[i]].giftig = true
 	CSayF("Flesje %d is giftig! Niet drinken dus!",i)
 end
 
@@ -65,12 +81,22 @@ end
 	
 group Start
 
-	int Time = 64
+	int Time = starttijd
 	
 	void Draw()
+		for i=1,5
+			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..i] )
+				skull.Draw(Flessen[i].X+36,yline + 100)
+			end
+		end
+		Rect(0,Screen.H-50,math.floor( (self.Time/starttijd) * Screen.W ),50)
 	end 
 	
 	void Update()
+		starttijd--
+		if starttijd<=0
+			Stage++
+		end
 	end
 	
 end
@@ -107,9 +133,12 @@ end
 	
 table Stages
 Stages = { Start,Moving,Ask,Reveal }
-int Stage = 1
 
 global void BUB_Draw()
+	back.Tile(0,0,Screen.W,Screen.H)
+	for f in each(Flessen)
+		f.Draw()
+	end
 	Stages[Stage].Draw()
 end
 
