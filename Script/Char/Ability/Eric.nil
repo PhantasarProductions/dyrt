@@ -55,6 +55,11 @@ do
 		Blizzard   = { ['Skill_White Dragon'] = 12*s },
 		ZeroKelvin = { ['Skill_White Dragon'] = 30 + (s*10) },
 		
+		-- Green
+		PoisonCloud
+		           = { ["Skill_Green Dragon"] = 1 },
+		NeutPoison = { ["Skill_Green Dragon"] = 1 + s },
+		
 	}
 	#endpure
 end
