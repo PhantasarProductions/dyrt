@@ -1,7 +1,51 @@
 #use "Script/Use/Anyway"
 	
+#macro ForceView false
+	
 int speed
 int maxmoves
+
+var flask = LoadIfNew("GFX/Puzzle/BalletjeBalletje/Flask.png","BalletjeBalletjeFles")
+var skull = LoadIfNew("GFX/Puzzle/BalletjeBalletje/Skull.png","BalletjeBalletjeSchedel")
+var back  = TImage.Obtain("MENUBACK")
+
+quickmeta group giftig
+	index
+		return gv.Int["GreenDragonFlask"..key]
+	end
+	
+	newindex
+		gv.Int["GreenDragonFlask"..key] = value
+	end
+	
+	len
+		return 5
+	end
+end
+
+class Fles
+	bool giftig = false
+	int x
+	
+	void Draw()
+		flask.Draw(self.x,Screen.H-200)
+	end
+	
+	void CONSTRUCTOR(int sx)
+		self.x = sx
+	end
+end
+
+table Flessen
+for i=1,5
+	Flessen[i] = new Fles(i*64)
+end
+for i=1,5
+	Flessen[giftig[i]] = true
+	CSayF("Flesje %d is giftig! Niet drinken dus!",i)
+end
+
+
 	
 switch __skill
 	
@@ -40,7 +84,7 @@ group Moving
 	end
 	
 end
-
+	
 group Ask
 	
 	void Draw()
@@ -70,5 +114,6 @@ global void BUB_Draw()
 end
 
 global void BUB_Update()
+	Dev.ConCheck()
 	Stages[Stage].Update()
 end
