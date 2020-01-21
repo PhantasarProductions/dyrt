@@ -1,0 +1,74 @@
+#use "Script/Use/Anyway"
+	
+int speed
+int maxmoves
+	
+switch __skill
+	
+	case 1
+		speed = 1
+		maxmoves = 5
+	case 2
+		speed = 4
+		maxmoves = 7
+	case 3
+		speed = 8
+		maxmoves = 10
+	default
+		error("Unknown skill __skill")
+	
+end
+	
+group Start
+
+	int Time = 64
+	
+	void Draw()
+	end 
+	
+	void Update()
+	end
+	
+end
+	
+group Moving
+	
+	void Draw()
+	end 
+	
+	void Update()
+	end
+	
+end
+
+group Ask
+	
+	void Draw()
+	end 
+	
+	void Update()
+	end
+	
+end
+
+group Reveal
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+	
+table Stages
+Stages = { Start,Moving,Ask,Reveal }
+int Stage = 1
+
+global void BUB_Draw()
+	Stages[Stage].Draw()
+end
+
+global void BUB_Update()
+	Stages[Stage].Update()
+end
