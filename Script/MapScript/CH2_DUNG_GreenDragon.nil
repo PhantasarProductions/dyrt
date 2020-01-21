@@ -58,7 +58,7 @@ end
 
 void Note(string tag)
 	gv.Int["TEMP_FLASK"] = flasks[right(tag,1)]
-	gv.Bool["GREENDRAGONFLASKMARKED"..flasks[right(tag,1)] = true
+	gv.Bool["GREENDRAGONFLASKMARKED"..flasks[right(tag,1)]] = true
 	MapText("NOTE")
 	Map.Kill(tag,true)
 end
