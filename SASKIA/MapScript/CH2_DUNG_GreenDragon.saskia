@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.21
+; version: 20.01.22
 ; End License Information
+
 :OnLoad
 	call Fader,"Green Dragon's Lair"
 	end
@@ -42,6 +43,7 @@
 	group 2
 		call LoadFlow,"MINI_BALLETJEBALLETJE","Script/Flow/Mini/GreenDragonPuz.nil"
 		call GoToFlow,"MINI_BALLETJEBALLETJE"
+	call Map.Kill,"NPC_SASKIA_Table",true
 	call Map.GoToLayer,"#002","Start"
 	mov false,gv.Bool.RESPAWN_INITIATED
 	end
