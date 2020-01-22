@@ -47,7 +47,7 @@ a = {
 	
 	-- Fire
 	Fire       = { Skill_Fire  = 1, Start=true },
-	Fireblasst = { Skill_Fire  = 15 },
+	Fireblast  = { Skill_Fire  = 15 },
 	Inferno    = { Skill_Fire  = 25 },
 	
 	-- Wind
