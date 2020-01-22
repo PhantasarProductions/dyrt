@@ -108,9 +108,11 @@ global void BUB_Draw()
 	// Draw Fighters
 	for groupname,groupitself in pairs(Fighter.Team)
 		for team,member in spairs(groupitself)
+			__white
 			member.Draw()
 		end
 	end
+	__white
 	
 	// Stage specific Draw
 	Stage.Current.Draw()
