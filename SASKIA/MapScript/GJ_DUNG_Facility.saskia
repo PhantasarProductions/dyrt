@@ -32,10 +32,12 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.11
+; version: 20.01.23
 ; End License Information
 :OnLoad
+	chk Map.Layer=="#013",Nothing
 	call Fader,"Eugorvnia Science Facility"
+:Nothing
 	end
 	
 :CyberPup
