@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/FieldModules/ZoneAction/SchuifDeuren.nil
-// Version: 20.01.11
+// Version: 20.01.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -82,16 +82,17 @@ module AutomatischeSchuifDeuren
 	link Kthura = FlowField.Map.Kthura
 	
 	void CONSTRUCTOR()
+		CSay("Automatische schuifdeuren worden voorbereid!")
 		self.scanlist = {"NextLinks","NextRechts","PrevLinks","PrevRechts"}
-		new ZoneAction("Enter","SchuifNext",self.OpenNext)
-		new ZoneAction("Enter","SchuifPrev",self.OpenPrev)
-		new ZoneAction("Leave","SchuifNext",self.CloseNext)
-		new ZoneAction("Leave","SchuifPrev",self.ClosePrev)
 	end
 	
 	void Init()
 		CWriteLine("Init Schuifdeuren",180,0,255)
 		tableclear(SchuifDeur.Lijst)
+		new ZoneAction("Enter","SchuifNext",self.OpenNext)
+		new ZoneAction("Enter","SchuifPrev",self.OpenPrev)
+		new ZoneAction("Leave","SchuifNext",self.CloseNext)
+		new ZoneAction("Leave","SchuifPrev",self.ClosePrev)
 		self.Scan()
 	end
 	
@@ -142,11 +143,13 @@ module AutomatischeSchuifDeuren
 	end
 	
 	void OpenPrev()
-		self.Scan()
+		CSay("PREV: Open Sesame!")
+		self.Scan()		
 		self.Schuif("Prev",true)
 	end
 	
 	void ClosePrev()
+		CSay("PREV: Sesam! Sluit u!")
 		self.Schuif("Prev",false)
 	end
 	
