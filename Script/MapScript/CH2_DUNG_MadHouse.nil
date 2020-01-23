@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.12
+// version: 20.01.23
 // End License Information
 
 
@@ -175,7 +175,7 @@ group MScript
 		for i=1,3
 			Map.ZA_Enter("RemBars"..i,"RemFac"..i)
 		end
-		Map.ZA_Enter("OutRechck","RECHECK")
+		Map.ZA_Enter("OutRecheck","RECHECK")
 		Map.ZA_Enter("ToFac1","TOFAC1")
 		Map.ZA_Enter("ToGameJoltOpvang","ToGameJoltOpvang")
 		Map.ZA_Enter("ToMain","ToMain")
