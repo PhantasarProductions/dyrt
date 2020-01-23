@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.11
+// version: 20.01.23
 // End License Information
 
 
@@ -101,6 +101,11 @@ group MScript
 		MapScript.SASKIA("GoodBye")
 	end
 	
+	void TOFACILITY2()
+		Field.LoadMap("GJ_DUNG_FACILITY2")
+		Map.GoToLayer("#013","Start")
+	end
+	
 	void CONSTRUCTOR()
 		Map.LoadAltNext("SchuifDeuren")
 		Map.ZA_Enter("WELCOME","WELCOME")
@@ -111,6 +116,7 @@ group MScript
 		UseKettingKaart()
 		Map.ZA_Enter("ActivateCyber","SASKIA:CyberPup")
 		Map.ZA_Enter("GJ_Open","GameJoltNext")
+		Map.ZA_Enter("ToFacility2","ToFacility2")
 	end
 	
 	void Draw()
