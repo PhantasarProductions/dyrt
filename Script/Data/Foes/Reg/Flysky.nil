@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/23/2020 10:18:00 PM
+// Generated: 1/23/2020 11:22:54 PM
 
 do
 var retfunc()
@@ -9,31 +9,31 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
-foeret.Description = "Perhaps it's nice to know that Seelah Gandra calls Irravonia "Flysky" in her own native language.\n\nPerhaps you do now know what "Flysky" means."
+foeret.Description = "Perhaps it's nice to know that Seelah Gandra calls Irravonia 'Flysky' in her own native language.\n\nPerhaps you do now know what 'Flysky' means."
 foeret.Fatal["Earth"] = true
 foeret.Fatal["Frost"] = true
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Flysky.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/FLYSKY.NEGATIVE.PNG")
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
-foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
