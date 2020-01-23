@@ -32,7 +32,39 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.21
+; version: 20.01.23
 ; End License Information
+
 :OnLoad
+	end
+	
+:Lachen
+	call CSay,"WTF?"
+	call MapText,"SHEKKIE_INTRO"
+	call MapText,"SHEKKIE_I_"..(Map.Leader:upper())
+	call Map.Kill,"LaughSheckLock",true
+	end
+	
+:SheckLock
+	call CSay,"Let's do it, Sheck-Lock!"
+	call MapText,"SHEKKIE_A"
+	call MapScript.FightSheckLock
+	call MapText,"SHEKKIE_B"
+	call Map.HideByZone,"Blink"
+	call CSay,"Waste Frame #1"
+	call CSay,"Waste Frame #2"
+	call CSay,"Waste Frame #3"
+	call CSay,"Waste Frame #4"
+	call CSay,"Waste Frame #5"
+	call CSay,"Waste Frame #6"
+	call CSay,"Waste Frame #7"
+	call CSay,"Waste Frame #8"
+	call CSay,"Waste Frame #9"
+	call Map.Kill,"SheckLock"
+	call Map.ShowByZone,"Blink"
+	Call MapText,"SHEKKIE_C"
+	call Map.Kill,"ActSheckLock",true
+	mov true,WM_Unlocked.D_BLACKDRAGON
+	mov true,gv.Bool.DefeatedSheckLock1
+	call WorldMap.Delisto
 	end

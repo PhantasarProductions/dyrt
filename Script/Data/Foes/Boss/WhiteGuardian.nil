@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 3:37:40 PM
+// Generated: 1/22/2020 11:59:21 PM
 
 do
 var retfunc()
@@ -544,7 +544,7 @@ foeret.Char.Stat("BASE__RESIST_Status_Zombie").Value=85
 foeret.Char.Stat("BUFF__RESIST_Status_Zombie").Value=0
 foeret.Char.Stat( "END__RESIST_Status_Zombie").Value=0
 foeret.Char.Stat( "END__RESIST_Status_Zombie").Script="SUM:BASE__RESIST_Status_Zombie,BUFF__RESIST_Status_Zombie"
-foeret.Boss = false
+foeret.Boss = true
 
 
 // Oversoul specific

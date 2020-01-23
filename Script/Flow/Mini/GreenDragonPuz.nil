@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Mini/GreenDragonPuz.nil
-// Version: 20.01.22
+// Version: 20.01.23
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -38,7 +38,7 @@
 #use "Script/Use/StartCombatMod"
 #use "libs/tables"
 	
-#macro ForceView true
+#macro ForceView false
 #macro spacing 176
 #macro yline 100
 #macro starttijd 320

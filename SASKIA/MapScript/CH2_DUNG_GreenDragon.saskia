@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.22
+; version: 20.01.23
 ; End License Information
 
 :OnLoad
@@ -46,4 +46,30 @@
 	call Map.Kill,"NPC_SASKIA_Table",true
 	call Map.GoToLayer,"#002","Start"
 	mov false,gv.Bool.RESPAWN_INITIATED
+	end
+	
+:Dragon
+	call CSay,"Dragon meeting script started"
+	call Map.Hide,"Player"
+	call Map.ShowByLabel,"Hero"
+	call MapText,"DRAGON_A"
+	call MapScript.Dragon
+	call MapScript.RestoreParty
+	chk not gv.Bool.Victor,Defeat
+	call MapText,"DRAGON_B"
+	chk gv.Bool.NewGamePlus,skipPower
+	call MapScript.GreenDragonPower
+	:skipPower
+	;call Field.LoadMap,"CH2_DUNG_DragonCrackForest"
+	call Map.GoToLayer,"#000","Einde"
+	;call BoxText.Load,"MAPS/CH2_DUNG_REDDRAGONCAVE","TEMP"
+	;call BoxText,"TEMP","END_C"
+	mov false,gv.Bool.RESPAWN_INITIATED
+	mov true,gv.Bool.Done_GreenDragonComplete
+	;mov true,WM_Unlocked.D_XRoads
+	;mov true,WM_Unlocked.D_IskarderiuForest
+	end
+	
+:Defeat
+	call Respawn.Wipe
 	end

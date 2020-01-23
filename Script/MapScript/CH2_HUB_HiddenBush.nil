@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.18
+// version: 20.01.23
 // End License Information
 
 
@@ -52,9 +52,38 @@ group MScript
 		Map.GoToLayer("#000","Start")
 	end
 	
+	void LAUGH_SHECKLOCK()
+		MapScript.SASKIA("Lachen")
+	end
+	
+	void SHECKLOCK()
+		MapScript.SASKIA("SheckLock")
+	end
+	
+	void FIGHTSHECKLOCK()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/SheckLock.Wav"
+		StartCombat.Arena = "LoofForest"
+		StartCombat.Foe[1] = "Boss/SheckLock1"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()	
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ToWhite","ToWhite")
 		Map.ZA_Enter("ToGreen","ToGreen")
+		// Map.ZA_Enter("LaughSheckLock","Laugh_SheckLock")
+		if (gv.Bool.Done_WhiteDragonComplete and gv.Bool.Done_GreenDragonComplete) and (not gv.Bool.DefeatedSheckLock1)
+			CSay("Dragons complete, so let's get to Sheck-Lock's encounter!")
+			CSay("= Init: Laugh")
+			Map.ZA_Enter("LaughSheckLock","LAUGH_SHECKLOCK")
+			CSay("= Show: The idiot")
+			Map.Show("SheckLock")
+			CSay("= Init: Action zone")
+			Map.ZA_Enter("ActSheckLock","SheckLock")
+			CSay("= All cool, and over to you!")
+		end
 	end
 	
 	void Draw()

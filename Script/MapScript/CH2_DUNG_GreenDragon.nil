@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.22
+// version: 20.01.23
 // End License Information
 
 
@@ -101,9 +101,39 @@ group MScript
 		Note("NPC_Note4")
 	end
 	
+	void GREENDRAGONPOWER()
+		RPG.GetChar("Eric").Points("SKILLLVL3").Have = 1
+	end
+	
+	void DRAGON()
+		RPG.Party[1] = "Eric"
+		for i=2,5
+			RPG.Party[i] = ""
+		end
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Dragon.wav"
+		StartCombat.Arena = "GreenDragonCave"
+		StartCombat.Foe[1] = "Boss/GreenDragon"
+		StartCombat.NoLose = true
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void SASKIA_DRAGON()
+		MapScript.SASKIA("Dragon")
+	end
+	
+	void RESTOREPARTY()
+		//RPG.Party = {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+			RPG.Party[i] = ch
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("LeaveCave","LeaveCave")
 		Map.ZA_Enter("Gen_Puzzle","Gen_Puzzle")
+		Map.ZA_Enter("SASKIA_Dragon","SASKIA_Dragon")
 	end
 	
 	void Draw()
