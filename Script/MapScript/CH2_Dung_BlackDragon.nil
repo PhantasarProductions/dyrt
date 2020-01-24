@@ -1,0 +1,83 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH2_Dung_BlackDragon.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.01.24
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+group MScript
+	void MUSIC()
+		if not Done.Done_BlackDragon_First_Enter_Music
+			Music.Play("Music/Event/DernorAndMerya.wav")
+		else
+			Music.Play("Music/Dungeon/BlackDragon.wav")
+		end
+	end
+	
+	void TRUESTART()
+		if not Done.Done_BlackDragon_First_Enter_Event
+			Map.GoToLayer("OUTSIDE","Start")
+			Map.HidePlayer()
+			Map.ShowByLabel("START")
+			LuaDoString("FLOW_FIELD","self.Map.Kthura.Actor.ActDernor.Spawn(\"Dernor\"); self.Map.Kthura.Actor.ActMerya.Spawn(\"Merya\");","Spawn Dernor & Merya")
+			LuaDoString("FLOW_FIELD","self.Map.Kthura.Actor.ActDernor.Wind=\"East\"; self.Map.Kthura.Actor.ActMerya.Wind=\"East\";","Wind Dernor & Merya")
+			LuaDoString("FLOW_FIELD","self.Map.Kthura.Actor.ActDernor.Texture = \"gfx/actors/heroes/Dernor.East.jpbf\"; self.Map.Kthura.Merya.ActDenor.Texture = \"gfx/actors/heroes/Merya.East.jpbf\";","Tex Dernor & Merya")
+			MapScript.SASKIA("DernorAndMerya")
+		else
+			Map.GoToLayer("#000","Start")
+		end
+	end
+	
+	void OUTSIDETEXT(string tag)
+		BoxText("BLACKDRAGONOUTSIDE",tag)
+	end
+	
+	void CONSTRUCTOR()
+		BoxText.Load("BLACKDRAGONOUTSIDE","GENSCEN/CH2/DERNORANDMERYA")
+		Map.ZA_Enter("TrueStart","TrueStart")
+		
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
