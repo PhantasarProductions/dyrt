@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.23
+; version: 20.01.24
 ; End License Information
 :OnLoad
 	chk Map.Layer=="#013",Nothing
@@ -77,4 +77,3 @@
 	call Map.Kill,"ExLinks",true
 	call Map.Kill,"ExRechts",true
 	end
-	
