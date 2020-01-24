@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.23
+// version: 20.01.24
 // End License Information
 
 
@@ -109,14 +109,24 @@ group MScript
 	void RECHECK()
 		if (not gjout_checked) and (gv.Bool.GameJolt)
 			for i=1,3
-				self["REMFAC"..i]()
-			end	
+				if gv.Bool["FacilityPortal"..i]
+					self["REMFAC"..i]()
+				end
+			end
 			gjout_checked = true
 		end
 	end
 	void TOFAC1()
 		Field.LoadMap("GJ_DUNG_Facility")
 		Map.GoToLayer("#999","NPC_Trans_SPOT")
+	end
+	void TOFAC2()
+		Field.LoadMap("GJ_DUNG_Facility2")
+		Map.GoToLayer("#018","NPC_Trans_SPOT")
+	end
+	void TOFAC3()
+		Field.LoadMap("GJ_DUNG_Facility3")
+		Map.GoToLayer("#024","NPC_Trans_SPOT")
 	end
 	
 	void TOGAMEJOLTOPVANG()
@@ -177,6 +187,8 @@ group MScript
 		end
 		Map.ZA_Enter("OutRecheck","RECHECK")
 		Map.ZA_Enter("ToFac1","TOFAC1")
+		Map.ZA_Enter("ToFac2","TOFAC2")
+		Map.ZA_Enter("ToFac3","TOFAC3")
 		Map.ZA_Enter("ToGameJoltOpvang","ToGameJoltOpvang")
 		Map.ZA_Enter("ToMain","ToMain")
 		Map.ZA_Enter("Morgue","Morgue")
