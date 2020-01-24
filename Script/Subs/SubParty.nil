@@ -361,6 +361,19 @@ group SubParty
 		if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
 			$Hover=num
 		end
+		string CharTag
+		int level
+		CharTag=tag // Laziness in its purest form, but it saves me a lot of bugs....
+		if RPG.Char(CharTag).Stat("Experience").Value<=0
+			// int ondernul
+			// ondernul = RPG.Char(CharTag).Stat("Experience").Value
+			RPG.Char(CharTag).Stat("Level").Value++
+			level =  RPG.Char(CharTag).Stat("Level").Value
+			self.JustLeveled[CharTag] = 2500
+			SubParty.SetLevelStats(CharTag,level)
+			//SubParty.AudioLevelUp.Play()
+			CSayF("On spot number #%d, character '%s' has gone up to level %04d/%s",num,tag,level,roman(level))
+		end
 	end
 	
 	// Unfortunately Lua has no support for static variables, 
