@@ -125,7 +125,7 @@ group MScript
 		Map.GoToLayer("#018","NPC_Trans_SPOT")
 	end
 	void TOFAC3()
-		Field.LoadMap("GJ_DUNG_Facility3")
+		Field.LoadMap("GJ_DUNG_Facility2")
 		Map.GoToLayer("#024","NPC_Trans_SPOT")
 	end
 	
