@@ -36,3 +36,19 @@
 ; End License Information
 :OnLoad
 	end
+	
+:DernorAndMerya
+	call MapScript.OutSideText,"INTRODERNORMERYA"
+	call MapScript.OutSideText,"INTRODERNORMERYA_B"
+	call FlowField.Map.Kthura.Actor.ActDernor.WalkTo,"GetAway"
+	call FlowField.Map.Kthura.Actor.ActMerya.WalkTo,"GetAway"
+	call MapScript.OutSideText,"INTRODERNORMERYA_C"
+	call Map.Kill,"ActDernor"
+	call Map.Kill,"ActMerya"
+	call Map.HideByLabel,"START"
+	call Map.GoToLayer("#000","Start")
+	end
+
+:Rondomo
+
+:Dragon
