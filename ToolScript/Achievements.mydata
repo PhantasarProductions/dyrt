@@ -335,6 +335,20 @@ Rec: GJ_COMPLETE_BOTANICA
 	skill_3 = true
 	skill_check = FALSE
 
+Rec: GJ_COMPLETE_FACILITY
+	AutoProcess = FALSE
+	Description = Complete the science facility
+	hidden = TRUE
+	Name = I wish I could forget all about the facility
+	ProcessMax = 0
+	ProcessString = {Value} of {Max}
+	ProcessValue = 
+	require_gamejolt = TRUE
+	skill_1 = true
+	skill_2 = true
+	skill_3 = true
+	skill_check = FALSE
+
 Rec: GJ_START_FACILITY
 	AutoProcess = FALSE
 	Description = Find a dungeon which is clearly copied from Star Story
