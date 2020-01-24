@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.23
+// version: 20.01.24
 // End License Information
 
 
@@ -104,6 +104,20 @@ group MScript
 	void TOFACILITY2()
 		Field.LoadMap("GJ_DUNG_FACILITY2")
 		Map.GoToLayer("#013","Start")
+	end
+	
+	void NPC_EXHURU()
+		MapScript.SASKIA("ExHuRU")
+	end
+	
+	void FIGHTEXHURU()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/ExHuRU.wav"
+		StartCombat.Arena = "Facility"
+		StartCombat.Foe[1] = "Boss/ExHuRU"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
 	end
 	
 	void CONSTRUCTOR()
