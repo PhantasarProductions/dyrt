@@ -51,6 +51,30 @@
 	chk Yes("Do you want to return to the MadHouse?"),Out
 	end
 :Out
+	chk Map.Layer=="#999",OutOne
+	chk Map.Layer=="#018",OutTwo
+	chk Map.Layer=="#024",OutThree
+	call error,"I do not know to which exit point to hook from this room! => "..Map.Layer
+	:OutOne
 	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
 	call Map.GoToLayer,"#999","Fac1"
 	end
+	:OutTwo
+	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
+	call Map.GoToLayer,"#999","Fac2"
+	end
+	:OutThree
+	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
+	call Map.GoToLayer,"#999","Fac3"
+	end
+	
+	
+:ExHuRU
+	call MapText,"EX1"
+	call MapScript.FightExHuRU
+	call Map.Show,"Dead_Ex"
+	call Map.Kill,"NPC_ExHuRU",true
+	call Map.Kill,"ExLinks",true
+	call Map.Kill,"ExRechts",true
+	end
+	
