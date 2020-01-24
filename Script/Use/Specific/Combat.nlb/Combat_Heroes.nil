@@ -174,10 +174,10 @@ class Hero extends Fighter
 		table chrreq
 		skl = NIL.Use("Script/Use/SkillN_Num")
 		chrreq = NIL.Use("Script/Char/Ability/"..self.Tag)
+		bool unlock = true
 		for ablk,abl in pairs(chrreq)
 			for k,v in pairs(abl)
-				bool unlock 
-				unlock = not AbilitiesMastered[self.Tag][ablk]
+				unlock = unlock and (not AbilitiesMastered[self.Tag][ablk])
 				switch k
 					case "Start"
 						unlock = false
@@ -193,7 +193,9 @@ class Hero extends Fighter
 							var need
 							need = skl[self.Tag][right(k,#k-6)]
 							if need
+								//CSayF("Checking skill %s on slot %d. Must be %0d and is %0d! ",k,need,v,self.Char.Points(sprintf("SKILLLVL%s",need)).Have)
 								unlock = unlock and self.Char.Points(sprintf("SKILLLVL%s",need)).Have>=v
+								//CSayF("= Unlock is now: %s",tostring(unlock):upper())
 							else
 								unlock = false
 								CSay("No skill "..k.."  for character "..self.Tag)
