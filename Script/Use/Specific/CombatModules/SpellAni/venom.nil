@@ -1,9 +1,17 @@
 module spellani_venom
 	
-	var EXP
+	var EXP	
 	
 	void CONSTRUCTOR()
 		self.EXP = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/LibExplosion")
+	end
+	
+	void Init(act)
+		self.EXP.Init(0,255,0,act.Targets)
+	end
+	
+	bool Cycle()
+		return self.EXP.Cycle()
 	end
 	
 end
