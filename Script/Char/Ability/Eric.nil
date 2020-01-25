@@ -60,6 +60,14 @@ do
 		           = { ["Skill_Green Dragon"] = 1 },
 		NeutPoison = { ["Skill_Green Dragon"] = 1 + s },
 		
+		-- Black
+		Darkness   = { ["Skill_Black Dragon"] = 1 },
+		Void       = { ["Skill_Black Dragon"] = 5*s },
+		Phantom    = { ['Skill_Black Dragon'] = 7*s },
+		DVision    = { ['Skill_Black Dragon'] = 4^s },
+		Evil       = { ['Skill_Black Dragon'] = 30^s },
+		
 	}
 	#endpure
+		
 end
