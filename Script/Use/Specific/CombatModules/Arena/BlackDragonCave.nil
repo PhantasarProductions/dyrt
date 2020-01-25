@@ -40,8 +40,8 @@ module Arena_BlackDragon
 	
 	void CONSTRUCTOR()
 		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Cave")
-		self.Dung.Wall  = 'GFX/Textures/BlackDragon/N.png'
-		self.Dung.Floor = "GFX/Textures/BlackDragon/Floor.png"
+		self.Dung.Wall  = 'GFX/Textures/BlackDragon/W_N.png'
+		self.Dung.Floor = "GFX/Textures/BlackDragon/F.png"
 	end
 	
 	void Draw() 
