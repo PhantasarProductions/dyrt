@@ -155,13 +155,13 @@ class Hero extends Fighter
 	
 	
 	get int Height
-		var Img
+		var Image
 		Image = self.Pics[self.Houding]
 		return Image.Height
 	end
 	
 	get int Width
-		var Img
+		var Image
 		Image = self.Pics[self.Houding]
 		return Image.Width
 	end
