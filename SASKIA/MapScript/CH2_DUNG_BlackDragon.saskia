@@ -40,15 +40,19 @@
 :DernorAndMerya
 	call MapScript.OutSideText,"INTRODERNORMERYA"
 	call MapScript.OutSideText,"INTRODERNORMERYA_B"
-	call FlowField.Map.Kthura.Actor.ActDernor.WalkTo,"GetAway"
-	call FlowField.Map.Kthura.Actor.ActMerya.WalkTo,"GetAway"
+	call FlowField.Map.Kthura.Actor.ActDernor.WalkTo,"LeaveTheRoom"
+	call FlowField.Map.Kthura.Actor.ActMerya.WalkTo,"LeaveTheRoom"
 	call MapScript.OutSideText,"INTRODERNORMERYA_C"
 	call Map.Kill,"ActDernor"
 	call Map.Kill,"ActMerya"
 	call Map.HideByLabel,"START"
-	call Map.GoToLayer("#000","Start")
+	call Map.GoToLayer,"#000","Start"
+	call MapScript.Music
 	end
 
 :Rondomo
+	call error,"Meeting with Rondomo not yet scripted"
+	end
 
 :Dragon
+
