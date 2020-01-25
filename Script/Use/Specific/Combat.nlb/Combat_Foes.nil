@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 19.12.18
+// Version: 20.01.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -72,6 +72,9 @@ class Foe extends Fighter
 	
 	get int Height
 		return self.Image.Height
+	end
+	get int Width
+		return self.Image.Width
 	end
 	
 	get bool ShowHP

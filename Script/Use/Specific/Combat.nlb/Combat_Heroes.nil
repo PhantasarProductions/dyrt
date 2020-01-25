@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.01.24
+// Version: 20.01.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -152,6 +152,20 @@ class Hero extends Fighter
 		Img = self.Pics[self.Houding]
 		return ax>=self.X and ay>=self.Y and ax<=self.X+Img.Width and ay<=self.Y+Img.Height
 	end
+	
+	
+	get int Height
+		var Img
+		Image = self.Pics[self.Houding]
+		return Image.Height
+	end
+	
+	get int Width
+		var Img
+		Image = self.Pics[self.Houding]
+		return Image.Width
+	end
+
 	
 	void Init()
 		var spot
