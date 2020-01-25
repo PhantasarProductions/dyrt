@@ -1,0 +1,36 @@
+module spellani_lib_explosion
+
+	int R = 255
+	int G = 255
+	int B = 255
+	int tijd = 0
+	int frame = 0
+	readonly int skip = 4
+	readonly int explosion
+	var Target
+	
+	void CONSTRUCTOR()
+		self.explosion = LoadIfNew("GFX/Combat/SpellAni/Explosion.jpbf","SPELLANI_EXPLOSION")
+		self.explosion.HotBottomCenter()
+	end
+	
+	void Reset(int R, int G, int B,tar)
+		self.frame = 0
+		self.R = R
+		self.G = G
+		self.B = B
+		self.tijd = 0
+		self.Target = tar
+	end
+	
+	bool Cycle()
+		self.explosion.Draw(self.Target.X+math.ceil(self.Target.Width/2),self.Target.Y+self.Target.Height)
+		self.tijd++
+		if self.tijd>self.skip
+			self.tijd=0
+			self.frame++
+		end
+		return self.frame>16
+	end
+
+end
