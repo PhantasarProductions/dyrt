@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/WorldMap.nil
-// Version: 19.12.27
+// Version: 20.01.25
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -39,6 +39,7 @@
 
 
 #macro WM_STARTY 25
+#macro COLWIDTH 400
 
 
 quickmeta class qm_new
@@ -99,7 +100,7 @@ group F_WorldMap
 				#+ y 25
 				if y > Screen.H - 200
 					y = WM_STARTY
-					#+ x 200
+					#+ x COLWIDTH 
 				end
 				self.filtered[k]=v
 			end
@@ -122,7 +123,7 @@ group F_WorldMap
 				self.NewImg.Draw(v.X,v.Y)
 				#+ ind self.NewImg.Width+2
 			end
-			if Mouse.X>v.X and Mouse.Y>v.Y and Mouse.X<v.X+150 and Mouse.Y<v.Y+20
+			if Mouse.X>v.X and Mouse.Y>v.Y and Mouse.X<v.X+(COLWIDTH-20)  and Mouse.Y<v.Y+20
 				self.Hover=v
 				Color(180,180,255)
 				#+ ind 10
