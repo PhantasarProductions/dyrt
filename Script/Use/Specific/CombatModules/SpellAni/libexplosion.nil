@@ -43,7 +43,7 @@ module spellani_lib_explosion
 	int tijd = 0
 	int frame = 0
 	readonly int skip = 4
-	readonly int explosion
+	readonly var explosion
 	var Targets
 	
 	void CONSTRUCTOR()
