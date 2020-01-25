@@ -82,7 +82,7 @@ module Scyndi_Personal_Action
 			CSayF("Testing (%5d,%5d) Mv(%d,%d) ",wx,wy,X,Y)
 			for tag in FieldMap.Kthura.EachTag()
 				skip = skip or ( prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy) )
-				//CSayF("= Checking zone: %s; For Scyndi and in there: %s; Skip: %s",tag,tostring(prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy)),tostring(skip) )
+				// CSayF("= Checking zone: %s; For Scyndi and in there: %s; Skip: %s",tag,tostring(prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy)),tostring(skip) )
 				if prefixed(tag,"ScyndiHookSpot_") 
 					foundhook = true
 					var m
@@ -109,7 +109,7 @@ module Scyndi_Personal_Action
 							__player.MoveTo(self.HookMoveX,self.HookMoveY-32)
 						elseif Y>0
 							self.HookMoveX = m.ObjInt.X
-							self.HookMoveY = m.ObjInt.Y-16
+							self.HookMoveY = m.ObjInt.Y+16
 							self.HookMove  = true
 							__player.X = self.HookMoveX
 							__player.MoveTo(self.HookMoveX,self.HookMoveY+32)
