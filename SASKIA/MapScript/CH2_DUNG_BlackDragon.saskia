@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.01.24
+; version: 20.01.25
 ; End License Information
 :OnLoad
 	end
@@ -55,4 +55,3 @@
 	end
 
 :Dragon
-
