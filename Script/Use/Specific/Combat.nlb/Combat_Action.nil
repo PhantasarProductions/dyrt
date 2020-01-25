@@ -201,7 +201,7 @@ group Action_PreMove
 				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
 					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
 					Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
-					Action_SpellAni.sa_mod.Init(self.Act.Act)
+					Action_SpellAni.sa_mod.Init(self.Act)
 				else
 					CSay("No spellani, so let's not go for that!")
 				end
@@ -217,7 +217,7 @@ group Action_PreMove
 				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
 					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
 					Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
-					Action_SpellAni.sa_mod.Init(self.Act.Act)
+					Action_SpellAni.sa_mod.Init(self.Act)
 				else
 					CSay("No spellani, so let's not go for that!")
 				end

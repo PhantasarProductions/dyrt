@@ -82,7 +82,7 @@ module AI_Default
 							nact.Targets[#nact.Targets+1]=check
 						end
 					end
-					GoedGekeurd = nact.Targets>0
+					GoedGekeurd = #nact.Targets>0
 				case "1F"
 					int maxheroes
 					maxheroes = #heroes

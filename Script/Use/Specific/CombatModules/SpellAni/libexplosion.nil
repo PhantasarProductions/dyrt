@@ -61,8 +61,9 @@ module spellani_lib_explosion
 	end
 	
 	bool Cycle()
+		Color(self.R,self.G,self.B)
 		for _,Target in pairs(self.Targets)
-			self.explosion.Draw(Target.X+math.ceil(Target.Width/2),Target.Y+Target.Height)
+			self.explosion.Draw(Target.X+math.ceil(Target.Width/2),Target.Y+Target.Height,self.frame)
 		end
 		self.tijd++
 		if self.tijd>self.skip
