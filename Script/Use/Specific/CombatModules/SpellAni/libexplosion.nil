@@ -42,7 +42,7 @@ module spellani_lib_explosion
 	int B = 255
 	int tijd = 0
 	int frame = 0
-	readonly int skip = 4
+	readonly int skip = 2
 	readonly var explosion
 	var Targets
 	
