@@ -1,3 +1,4 @@
+
 module spellani_lib_explosion
 
 	int R = 255
@@ -7,7 +8,7 @@ module spellani_lib_explosion
 	int frame = 0
 	readonly int skip = 4
 	readonly int explosion
-	var Target
+	var Targets
 	
 	void CONSTRUCTOR()
 		self.explosion = LoadIfNew("GFX/Combat/SpellAni/Explosion.jpbf","SPELLANI_EXPLOSION")
@@ -20,11 +21,13 @@ module spellani_lib_explosion
 		self.G = G
 		self.B = B
 		self.tijd = 0
-		self.Target = tar
+		self.Targets = tar
 	end
 	
 	bool Cycle()
-		self.explosion.Draw(self.Target.X+math.ceil(self.Target.Width/2),self.Target.Y+self.Target.Height)
+		for _,Target in pairs(self.Targets)
+			self.explosion.Draw(Target.X+math.ceil(Target.Width/2),Target.Y+Target.Height)
+		end
 		self.tijd++
 		if self.tijd>self.skip
 			self.tijd=0
