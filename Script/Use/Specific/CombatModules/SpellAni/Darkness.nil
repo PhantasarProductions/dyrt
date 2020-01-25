@@ -43,7 +43,7 @@ module spellani_darkness
 	end
 	
 	void Init(act)
-		self.EXP.Init(0,0,0,act.Targets)
+		self.EXP.Reset(0,0,0,act.Targets)
 	end
 	
 	bool Cycle()

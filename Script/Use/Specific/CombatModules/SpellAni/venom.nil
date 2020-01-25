@@ -42,7 +42,7 @@ module spellani_venom
 		self.EXP = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/LibExplosion")
 	end
 	
-	void Init(act)
+	void Reset(act)
 		self.EXP.Init(0,255,0,act.Targets)
 	end
 	
