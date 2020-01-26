@@ -48,7 +48,7 @@ module spellani_lib_explosion
 	
 	void CONSTRUCTOR()
 		self.explosion = LoadIfNew("GFX/Combat/SpellAni/Explosion.jpbf","SPELLANI_EXPLOSION")
-		self.explosion.HotBottomCenter()
+		//self.explosion.HotBottomCenter()
 	end
 	
 	void Reset(int R, int G, int B,tar)
@@ -63,7 +63,7 @@ module spellani_lib_explosion
 	bool Cycle()
 		Color(self.R,self.G,self.B)
 		for _,Target in pairs(self.Targets)
-			self.explosion.Draw(Target.X+math.ceil(Target.Width/2),Target.Y+Target.Height,self.frame)
+			self.explosion.Draw(Target.X+math.ceil(Target.Width/2)-32,Target.Y+Target.Height-64,self.frame)
 		end
 		self.tijd++
 		if self.tijd>self.skip
