@@ -2897,7 +2897,7 @@ Rec: ABL_HERO_ERIC_ICEBLAST
 	Target = AF
 	Type = Ability
 
-Rec: ABL_HERO_ERIC_PHANTON
+Rec: ABL_HERO_ERIC_PHANTOM
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 100
