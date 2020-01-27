@@ -40,7 +40,28 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+#use "Script/Use/MapScript/Memory"
+
 group MScript
+	delegate NPC_MEMORY1
+	delegate NPC_MEMORY2
+	delegate NPC_MEMORY3
+	delegate NPC_MEMORY4
+	delegate NPC_MEMORY5
+	delegate NPC_MEMORY6
+	delegate NPC_MEMORY7
+	delegate NPC_MEMORY8
+	delegate NPC_MEMORY9
+	delegate NPC_MEMORY10
+	delegate NPC_MEMORY11
+	delegate NPC_MEMORY12
+	delegate NPC_MEMORY13
+	delegate NPC_MEMORY14
+	delegate NPC_MEMORY15
+	delegate NPC_MEMORY16
+	
+	link DoneMemory = gv.Bool.Done_BlackDragon_MemoryPuzzle
+	
 	void MUSIC()
 		if not Done.Done_BlackDragon_First_Enter_Music
 			Music.Play("Music/Event/DernorAndMerya.wav")
@@ -68,23 +89,92 @@ group MScript
 	end
 	
 	void LEAVECAVE()
-		if gv.Bool.Chapter3Complete or (not gv.Bool.BlackDragonComplete)
+		if gv.Bool.Chapter3Complete or (not gv.Bool.DoneBlackDragonComplete)
 			WorldMap.Delisto()
 		else
 			MapScript.SASKIA("Rondomo")
 		end
 	end
 	
+	void RESETMEMORY()
+		if self.DoneMemory
+			return
+		end
+		Memory.Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Shanda"})
+	end
+	
+	link MEMORYCYCLE = Memory.Cycle
+	
+	void MemoryPuzzleSolved()
+		LoadAudio("SFX/Puzzle/Solved.wav").Play()
+		MapScript.SASKIA("Guardian")
+	end
+	
+	void KILLMEMORY()
+		for i=1,16
+			Map.Kill("NPC_MEMORY"..i,true)
+		end
+		self.DoneMemory = true
+	end
+		
+	void GUARDIAN()
+		StartCombat.StartSession()
+		StartCombat.Music = "*NONE*"
+		StartCombat.Arena = "BlackDragonCave"
+		StartCombat.Foe[1] = "Boss/BlackGuardian"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+
+	end
+	
+	void DRAGON()
+		RPG.Party[1] = "Eric"
+		for i=2,5
+			RPG.Party[i] = ""
+		end
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Dragon.wav"
+		StartCombat.Arena = "BlackDragonCave"
+		StartCombat.Foe[1] = "Boss/BlackDragon"
+		StartCombat.NoLose = true
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void BLACKDRAGONPOWER()
+		RPG.GetChar("Eric").Points("SKILLLVL4").Have = 1
+	end
+
+	void SASKIA_DRAGON()
+		MapScript.SASKIA("Dragon")
+	end
+	
+	void RESTOREPARTY()
+		//RPG.Party = {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+			RPG.Party[i] = ch
+		end
+	end
+
+	
 	void CONSTRUCTOR()
 		BoxText.Load("GENSCEN/CH2/DERNORANDMERYA","BLACKDRAGONOUTSIDE")
 		Map.ZA_Enter("TrueStart","TrueStart")
 		Map.ZA_Enter("ExitCave","LEAVECAVE")
+		Map.ZA_Enter("MEMORY","ResetMemory")
+		Map.ZA_Enter("Dragon","SASKIA_Dragon")
 	end
+	
+	
 	
 	void Draw()
 	end
 	
 	void Update()
+		if Map.Layer=="#006"
+			Memory.Cycle()
+		end
 	end
 	
 end
