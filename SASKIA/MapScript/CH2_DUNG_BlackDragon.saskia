@@ -49,9 +49,38 @@
 	call Map.GoToLayer,"#000","Start"
 	call MapScript.Music
 	end
+	
+:Guardian
+	call MapScript.Guardian
+		group 3
+		call MapScript.KillMemory
+		call Map.GoToLayer,"#007","Start"
+		mov false,gv.Bool.RESPAWN_INITIATED
+	end
+
 
 :Rondomo
 	call error,"Meeting with Rondomo not yet scripted"
 	end
 
 :Dragon
+	call CSay,"Dragon meeting script started"
+	call Map.Hide,"Player"
+	call Map.ShowByLabel,"Hero"
+	call MapText,"DRAGON_A"
+	call MapScript.Dragon
+	call MapScript.RestoreParty
+	chk not gv.Bool.Victor,Defeat
+	call MapText,"DRAGON_B"
+	chk gv.Bool.NewGamePlus,skipPower
+	call MapScript.BlackDragonPower
+	:skipPower
+	;call Field.LoadMap,"CH2_DUNG_DragonCrackForest"
+	call Map.GoToLayer,"#000","Einde"
+	;call BoxText.Load,"MAPS/CH2_DUNG_REDDRAGONCAVE","TEMP"
+	;call BoxText,"TEMP","END_C"
+	mov false,gv.Bool.RESPAWN_INITIATED
+	mov true,gv.Bool.Done_BlackDragonComplete
+	;mov true,WM_Unlocked.D_XRoads
+	;mov true,WM_Unlocked.D_IskarderiuForest
+	end
