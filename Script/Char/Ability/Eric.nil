@@ -65,7 +65,11 @@ do
 		Void       = { ["Skill_Black Dragon"] = 5*s },
 		Phantom    = { ['Skill_Black Dragon'] = 7*s },
 		DVision    = { ['Skill_Black Dragon'] = 4^s },
-		Evil       = { ['Skill_Black Dragon'] = 30^s },
+		Evil       = { ['Skill_Black Dragon'] = 30*s },
+		Death      = { ['Skill_Black Dragon'] = 14+s },
+		Disintegrate 
+		           = { ['Skill_Black Dragon'] = (s*5)+10 },
+		Gloom      = { ['Skill_Black Dragon'] = s + (s^2) }
 		
 	}
 	#endpure
