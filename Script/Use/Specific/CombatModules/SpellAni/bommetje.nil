@@ -1,3 +1,58 @@
 module SpellAni_Bommetje
-
+	bool DrawOvertake
+	var Bom
+	var Ontplof
+	int x
+	int y
+	int to_x
+	int to_y
+	int fase
+	int plofframe
+	
+	void CONSTRUCTOR()
+		self.Bom     = LoadIfNew("GFX/Combat/SpellAni/SmallBomb.png","SPELLANI_BOMMETJE")
+		self.Ontplof = LoadIfNew("GFX/Combat/SpellAni/Explosion.jpbf","SPELLANI_EXPLOSION")
+	end
+	
+	void Init(act)
+		assert(#act.Targets==1,"Only one target possible!")
+		self.x = act.Executor.x+40
+		self.y = act.Executor.y+60
+		self.to_x = act.Targets[1].x
+		self.to_y = act.Targets[1].y
+		self.fase = 1
+		self.plofframe = 0
+	end
+	
+	bool Cycle(act)
+		switch self.fase
+			case 1
+				// Bommetje omhoog
+				#- self.y 3
+				if self.y<-200
+					self.x = self.to_x
+					self.fase = 2
+				end
+				self.DrawBom()
+				return false
+			case 2
+				// Bommetje omlaag
+				self.y++
+				if self.y>=self.to_y
+					self.fase = 3
+				end
+				self.DrawBom()
+				return false
+			case 3
+				// Bommetje BOEM!
+				Ontplof.Draw(self.x+16,self.y+32,self.plofframe)
+				self.plofframe++
+				return self.plofframe>=16
+		end
+	end
+	
+	void DrawBom()
+		self.Bom.Draw(self.x-math.floor(self.Bom.Width/2),self.y-self.Bom.Height)
+	end
+	
 end
