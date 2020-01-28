@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 3:37:40 PM
+// Generated: 1/28/2020 12:28:49 PM
 
 do
 var retfunc()
@@ -17,10 +17,10 @@ if not Foe.LoadOversoul
 	foeret.Experience = 450
 end
 foeret.Name="Big Tiger"
-foeret.Char.Stat("BASE__RESIST_Status_Fear").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Fear").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Fear").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Fear").Script="SUM:BASE__RESIST_Status_Fear,BUFF__RESIST_Status_Fear"
+foeret.Char.Stat("BASE__RESIST_Stat_Fear").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Script="SUM:BASE__RESIST_Stat_Fear,BUFF__RESIST_Stat_Fear"
 foeret.Boss = true
 
 

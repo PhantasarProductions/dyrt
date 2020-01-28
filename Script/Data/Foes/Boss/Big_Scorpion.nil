@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 3:37:40 PM
+// Generated: 1/28/2020 12:28:49 PM
 
 do
 var retfunc()
@@ -151,18 +151,18 @@ foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=-500
 foeret.Char.Stat("BUFF__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Script="SUM:BASE__RESIST_Elem_Frost,BUFF__RESIST_Elem_Frost"
-foeret.Char.Stat("BASE__RESIST_Status_Death").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Death").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Death").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Death").Script="SUM:BASE__RESIST_Status_Death,BUFF__RESIST_Status_Death"
-foeret.Char.Stat("BASE__RESIST_Status_Poison").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Poison").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Poison").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Poison").Script="SUM:BASE__RESIST_Status_Poison,BUFF__RESIST_Status_Poison"
-foeret.Char.Stat("BASE__RESIST_Status_Zombie").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Zombie").Script="SUM:BASE__RESIST_Status_Zombie,BUFF__RESIST_Status_Zombie"
+foeret.Char.Stat("BASE__RESIST_Stat_Death").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Death").Script="SUM:BASE__RESIST_Stat_Death,BUFF__RESIST_Stat_Death"
+foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
+foeret.Char.Stat("BASE__RESIST_Stat_Zombie").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Script="SUM:BASE__RESIST_Stat_Zombie,BUFF__RESIST_Stat_Zombie"
 foeret.Boss = false
 
 

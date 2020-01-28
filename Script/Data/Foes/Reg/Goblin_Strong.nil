@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 3:37:40 PM
+// Generated: 1/28/2020 12:28:51 PM
 
 do
 var retfunc()
@@ -196,14 +196,14 @@ foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-3
 foeret.Char.Stat("BUFF__RESIST_Elem_Light").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Light").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Light").Script="SUM:BASE__RESIST_Elem_Light,BUFF__RESIST_Elem_Light"
-foeret.Char.Stat("BASE__RESIST_Status_Disease").Value=6
-foeret.Char.Stat("BUFF__RESIST_Status_Disease").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Disease").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Disease").Script="SUM:BASE__RESIST_Status_Disease,BUFF__RESIST_Status_Disease"
-foeret.Char.Stat("BASE__RESIST_Status_Poison").Value=5
-foeret.Char.Stat("BUFF__RESIST_Status_Poison").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Poison").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Poison").Script="SUM:BASE__RESIST_Status_Poison,BUFF__RESIST_Status_Poison"
+foeret.Char.Stat("BASE__RESIST_Stat_Disease").Value=6
+foeret.Char.Stat("BUFF__RESIST_Stat_Disease").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Disease").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Disease").Script="SUM:BASE__RESIST_Stat_Disease,BUFF__RESIST_Stat_Disease"
+foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=5
+foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
 foeret.Boss = false
 
 

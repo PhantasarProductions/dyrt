@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 3:37:40 PM
+// Generated: 1/28/2020 12:28:50 PM
 
 do
 var retfunc()
@@ -116,46 +116,46 @@ foeret.Char.Stat("BASE__RESIST_Elem_Wind").Value=100
 foeret.Char.Stat("BUFF__RESIST_Elem_Wind").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Wind").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Wind").Script="SUM:BASE__RESIST_Elem_Wind,BUFF__RESIST_Elem_Wind"
-foeret.Char.Stat("BASE__RESIST_Status_Death").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Death").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Death").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Death").Script="SUM:BASE__RESIST_Status_Death,BUFF__RESIST_Status_Death"
-foeret.Char.Stat("BASE__RESIST_Status_Destruction").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Destruction").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Destruction").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Destruction").Script="SUM:BASE__RESIST_Status_Destruction,BUFF__RESIST_Status_Destruction"
-foeret.Char.Stat("BASE__RESIST_Status_Disease").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Disease").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Disease").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Disease").Script="SUM:BASE__RESIST_Status_Disease,BUFF__RESIST_Status_Disease"
-foeret.Char.Stat("BASE__RESIST_Status_Exhaustion").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Exhaustion").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Exhaustion").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Exhaustion").Script="SUM:BASE__RESIST_Status_Exhaustion,BUFF__RESIST_Status_Exhaustion"
-foeret.Char.Stat("BASE__RESIST_Status_Fear").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Fear").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Fear").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Fear").Script="SUM:BASE__RESIST_Status_Fear,BUFF__RESIST_Status_Fear"
-foeret.Char.Stat("BASE__RESIST_Status_Paralysis").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Paralysis").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Paralysis").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Paralysis").Script="SUM:BASE__RESIST_Status_Paralysis,BUFF__RESIST_Status_Paralysis"
-foeret.Char.Stat("BASE__RESIST_Status_Poison").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Poison").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Poison").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Poison").Script="SUM:BASE__RESIST_Status_Poison,BUFF__RESIST_Status_Poison"
-foeret.Char.Stat("BASE__RESIST_Status_Silence").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Silence").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Silence").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Silence").Script="SUM:BASE__RESIST_Status_Silence,BUFF__RESIST_Status_Silence"
-foeret.Char.Stat("BASE__RESIST_Status_Sleep").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Sleep").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Sleep").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Sleep").Script="SUM:BASE__RESIST_Status_Sleep,BUFF__RESIST_Status_Sleep"
-foeret.Char.Stat("BASE__RESIST_Status_Zombie").Value=100
-foeret.Char.Stat("BUFF__RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Zombie").Script="SUM:BASE__RESIST_Status_Zombie,BUFF__RESIST_Status_Zombie"
+foeret.Char.Stat("BASE__RESIST_Stat_Death").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Death").Script="SUM:BASE__RESIST_Stat_Death,BUFF__RESIST_Stat_Death"
+foeret.Char.Stat("BASE__RESIST_Stat_Destruction").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Destruction").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Destruction").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Destruction").Script="SUM:BASE__RESIST_Stat_Destruction,BUFF__RESIST_Stat_Destruction"
+foeret.Char.Stat("BASE__RESIST_Stat_Disease").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Disease").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Disease").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Disease").Script="SUM:BASE__RESIST_Stat_Disease,BUFF__RESIST_Stat_Disease"
+foeret.Char.Stat("BASE__RESIST_Stat_Exhaustion").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Exhaustion").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Exhaustion").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Exhaustion").Script="SUM:BASE__RESIST_Stat_Exhaustion,BUFF__RESIST_Stat_Exhaustion"
+foeret.Char.Stat("BASE__RESIST_Stat_Fear").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Script="SUM:BASE__RESIST_Stat_Fear,BUFF__RESIST_Stat_Fear"
+foeret.Char.Stat("BASE__RESIST_Stat_Paralysis").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Paralysis").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Script="SUM:BASE__RESIST_Stat_Paralysis,BUFF__RESIST_Stat_Paralysis"
+foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
+foeret.Char.Stat("BASE__RESIST_Stat_Silence").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Silence").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Silence").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Silence").Script="SUM:BASE__RESIST_Stat_Silence,BUFF__RESIST_Stat_Silence"
+foeret.Char.Stat("BASE__RESIST_Stat_Sleep").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Sleep").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Sleep").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Sleep").Script="SUM:BASE__RESIST_Stat_Sleep,BUFF__RESIST_Stat_Sleep"
+foeret.Char.Stat("BASE__RESIST_Stat_Zombie").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Script="SUM:BASE__RESIST_Stat_Zombie,BUFF__RESIST_Stat_Zombie"
 foeret.Boss = false
 
 

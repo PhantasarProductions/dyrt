@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/21/2020 3:37:41 PM
+// Generated: 1/28/2020 12:28:52 PM
 
 do
 var retfunc()
@@ -25,22 +25,22 @@ if Foe.LoadOversoul
 	end
 end
 foeret.Name="Tiger"
-foeret.Char.Stat("BASE__RESIST_Status_Destruction").Value=50
-foeret.Char.Stat("BUFF__RESIST_Status_Destruction").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Destruction").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Destruction").Script="SUM:BASE__RESIST_Status_Destruction,BUFF__RESIST_Status_Destruction"
-foeret.Char.Stat("BASE__RESIST_Status_Fear").Value=90
-foeret.Char.Stat("BUFF__RESIST_Status_Fear").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Fear").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Fear").Script="SUM:BASE__RESIST_Status_Fear,BUFF__RESIST_Status_Fear"
-foeret.Char.Stat("BASE__RESIST_Status_Sleep").Value=60
-foeret.Char.Stat("BUFF__RESIST_Status_Sleep").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Sleep").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Sleep").Script="SUM:BASE__RESIST_Status_Sleep,BUFF__RESIST_Status_Sleep"
-foeret.Char.Stat("BASE__RESIST_Status_Zombie").Value=80
-foeret.Char.Stat("BUFF__RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Zombie").Value=0
-foeret.Char.Stat( "END__RESIST_Status_Zombie").Script="SUM:BASE__RESIST_Status_Zombie,BUFF__RESIST_Status_Zombie"
+foeret.Char.Stat("BASE__RESIST_Stat_Destruction").Value=50
+foeret.Char.Stat("BUFF__RESIST_Stat_Destruction").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Destruction").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Destruction").Script="SUM:BASE__RESIST_Stat_Destruction,BUFF__RESIST_Stat_Destruction"
+foeret.Char.Stat("BASE__RESIST_Stat_Fear").Value=90
+foeret.Char.Stat("BUFF__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Script="SUM:BASE__RESIST_Stat_Fear,BUFF__RESIST_Stat_Fear"
+foeret.Char.Stat("BASE__RESIST_Stat_Sleep").Value=60
+foeret.Char.Stat("BUFF__RESIST_Stat_Sleep").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Sleep").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Sleep").Script="SUM:BASE__RESIST_Stat_Sleep,BUFF__RESIST_Stat_Sleep"
+foeret.Char.Stat("BASE__RESIST_Stat_Zombie").Value=80
+foeret.Char.Stat("BUFF__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Script="SUM:BASE__RESIST_Stat_Zombie,BUFF__RESIST_Stat_Zombie"
 foeret.Boss = false
 
 
