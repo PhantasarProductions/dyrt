@@ -63,6 +63,13 @@ group Stage_DEFEAT extends Stage
 	end
 	
 	void Update()
+		// Rondomo taunt
+		if gv.Bool.RondomoTaunt
+			gv.Bool.RondomoTaunt=false
+			Achievements.Award("BOSS_RONDOMO_1")
+			Achievements.Award("CHAPTER2")
+			MapScript.OutSideText("RONDOMO_LOST")
+		end
 		// Recover
 		// Timing
 		string tijd
