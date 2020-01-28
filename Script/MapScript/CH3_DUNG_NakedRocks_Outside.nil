@@ -38,9 +38,13 @@
 
 
 #say "Map Script - None!"
+#use "libs/strings"
 #use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+//#use "Script/Use/StartCombatMod"
 group MScript
+	void RANDOMSCYNDI()
+		Map.WalkTo(sprintf("RandomScyndi%d",math.random(1,10)))
+	end
 	
 	void CONSTRUCTOR()
 	end

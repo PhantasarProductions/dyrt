@@ -41,3 +41,29 @@
 ; Scyndi running around in a panic
 :ScyndiStart
 	call MapScript.RandomScyndi
+	call MapText,"START_A"
+	call Fader,LoadImage("GFX/Chapter/3.png")
+	call Fader,"The Naked Rocks"
+	call SASTime.Start,160
+	:rep1
+	chk SASTime.Going,rep1
+	call MapScript.RandomScyndi
+	call MapText,"START_B"
+	call MapScript.RandomScyndi
+	call SASTime.Start,160
+	:rep2
+	chk SASTime.Going,rep2
+	call Map.WalkTo,"Start"
+	call SASTime.Start,160
+	:rep3
+	chk SASTime.Going,rep3
+	call Map.GoToLayer,"#001","Start"
+	call MapText,"START_B"
+	mov false,gv.Bool.RESPAWN_INITIATED
+	move true,Chapter2Complete
+	call "Irravonia",RPG.Party[2]
+	mov 1,RPG.GetChar("Irravonia").Points("HP").Have
+	mov 0,RPG.GetChar("Irravonia").Points("VIT").Have
+	call Map.Kill,"Irravonia",true
+	call CSay,"Chapter 3 has begun!"
+	end
