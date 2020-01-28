@@ -101,7 +101,13 @@
 	jmp Rebecca_Run
 	:Rondomo_Fight
 	call MapScript.RondomoFight
-	call error,"Meeting with Rondomo not yet completely scripted"
+	call LoadMap,"CH3_NakedRocks"
+	call Map.GoToLayer,"#002"
+	mov "Scyndi",RPG.Party[1]
+	mov "",RPG.Party[2]
+	call Map.SpawnPlayer,"Einde"
+	call MapScript.SASKIA,"ScyndiStart"
+	;call error,"Meeting with Rondomo not yet completely scripted"
 	end
 
 :Dragon
