@@ -1,0 +1,35 @@
+module Arena_NROUTSIDE
+
+	var wolk
+	var zee
+	var vloer
+	var kust
+	int midden
+	int kwart
+	
+	table wolken
+	
+	void CONSTRUCTOR()
+		self.wolk = LoadIfNew("gfx/Textures/Sky/cloud.png","ARENA_CLOUD")
+		self.midden = Screen.H/2
+		self.kwart  = Screen.H/4
+		self.zee    = LoadIfNew("GFX/Textures/NRCaves/F_Sea.png","ARENA_NR_SEA")
+		self.vloer  = LoadIfNew("GFX/Textures/NRCaves/F.png","ARENA_NR_FLOOR")
+		self.kust   = LoadIfNew("GFX/Textures/NRCaves/F_Shore.png","ARENA_NR_SHORE")
+		for i=1,5 do
+			self.wolken[i] = { ['x']=math.rand(10,Screen.W-100), ['y'] = math.rand(4,self.kwart-75) }
+		end
+	end
+	
+	void Draw()
+		Color(0,180,255)
+		Rect(0,0,Screen.W,self.midden)
+		__white
+		for i,w in pairs(self.wolken)
+			self.wolk.Draw(w.x,w.y]
+		end
+		self.zee.Tile(0,self.kwart,Screen.W,self.kwart)
+		self.vloer.Tile(0,self.midden,Screen.W,self.midden)
+		self.kust.Tile(0,self.midden,Screen.W,32)
+	end
+end
