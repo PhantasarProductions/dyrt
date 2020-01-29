@@ -42,7 +42,14 @@
 #use "Script/Use/StartCombatMod"
 group MScript
 	
+	void ESCEN()
+		if not Done.Done_Chapter3EnteringNakedRocksCaves
+			MapText("END") // The name "END" is a leftover from the original version.
+		end
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("EnterScenario","ESCEN")
 	end
 	
 	void Draw()
