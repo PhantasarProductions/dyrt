@@ -48,8 +48,21 @@ group MScript
 		end
 	end
 	
+	void NAARZEE()
+		Field.LoadMap("CH3_DUNG_NakedRocks_Outside")
+		Map.GoToLayer("#002","Einde")
+	end
+	
+	void TUTORHOOK()
+		if not Done.Done_CH3_Tutorial_ScyndiHook
+			MapText("HOOK")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("EnterScenario","ESCEN")
+		Map.ZA_Enter("NaarZee","NaarZee")
+		Map.ZA_Enter("TutorHook","TutorHook")
 	end
 	
 	void Draw()
