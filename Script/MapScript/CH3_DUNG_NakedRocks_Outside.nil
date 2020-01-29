@@ -52,9 +52,14 @@ group MScript
 		RPG.GetChar("Irravonia").Points("VIT").Have=0
 		RPG.GetChar("Scyndi").Points("HP").Have=1000000000
 	end
-
+	
+	void NAARBINNEN()
+		Field.LoadMap("CH3_DUNG_NakedRocks")
+		Map.GoToLayer("#003","Start")
+	end
 	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("NaarBinnen","NaarBinnen")
 	end
 	
 	void Draw()
