@@ -53,17 +53,32 @@
 	call SASTime.Start,160
 	:rep2
 	chk SASTime.Going,rep2
-	call Map.WalkTo,"Start"
+	call MapScript.RandomScyndi
 	call SASTime.Start,160
 	:rep3
 	chk SASTime.Going,rep3
+	call MapScript.RandomScyndi
+	call SASTime.Start,160
+	:rep4
+	chk SASTime.Going,rep4
+	call MapScript.RandomScyndi
+	call SASTime.Start,160
+	:rep5
+	chk SASTime.Going,rep5
+	call Map.WalkTo,"Start"
+	call SASTime.Start,160
+	:repfini
+	chk SASTime.Going,repfini
 	call Map.GoToLayer,"#001","Start"
-	call MapText,"START_B"
+	call MapText,"START_C"
+	call CSay,"End scenario"
 	mov false,gv.Bool.RESPAWN_INITIATED
-	move true,Chapter2Complete
-	call "Irravonia",RPG.Party[2]
-	mov 1,RPG.GetChar("Irravonia").Points("HP").Have
-	mov 0,RPG.GetChar("Irravonia").Points("VIT").Have
+	mov true,gv.Bool.Chapter2Complete
+	call CSay,"Start defs done"
+	;call "Irravonia",RPG.Party[2]
+	;call CSay,"Irravonia back in party!"
+	call MapScript.IrravoniaWounded
 	call Map.Kill,"Irravonia",true
+	call CSay,"Wounded and actor removed!"
 	call CSay,"Chapter 3 has begun!"
 	end

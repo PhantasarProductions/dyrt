@@ -46,6 +46,14 @@ group MScript
 		Map.WalkTo(sprintf("RandomScyndi%d",math.random(1,10)))
 	end
 	
+	void IRRAVONIAWOUNDED()
+		RPG.Party[2]="Irravonia"
+		RPG.GetChar("Irravonia").Points("HP").Have=1
+		RPG.GetChar("Irravonia").Points("VIT").Have=0
+		RPG.GetChar("Scyndi").Points("HP").Have=1000000000
+	end
+
+	
 	void CONSTRUCTOR()
 	end
 	

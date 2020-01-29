@@ -1051,6 +1051,21 @@ global void BUB_Update()
 end
 
 
+group SASTime
+	int tme
+	get bool Passed
+		self.tme--
+		return self.tme<=0
+	end
+	get bool Going
+		return not self.Passed
+	end
+	void Start(int frames)
+		self.tme=frames
+	end
+end
+
+
 global void PartyClick(int num)
 	GoMenu(num,"Field")
 end
