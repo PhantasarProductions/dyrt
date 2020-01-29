@@ -17,7 +17,7 @@ module Arena_NROUTSIDE
 		self.vloer  = LoadIfNew("GFX/Textures/NRCaves/F.png","ARENA_NR_FLOOR")
 		self.kust   = LoadIfNew("GFX/Textures/NRCaves/F_Shore.png","ARENA_NR_SHORE")
 		for i=1,5 do
-			self.wolken[i] = { ['x']=math.rand(10,Screen.W-100), ['y'] = math.rand(4,self.kwart-75) }
+			self.wolken[i] = { ['x']=math.random(10,Screen.W-100), ['y'] = math.random(4,self.kwart-75) }
 		end
 	end
 	
@@ -26,7 +26,7 @@ module Arena_NROUTSIDE
 		Rect(0,0,Screen.W,self.midden)
 		__white
 		for i,w in pairs(self.wolken)
-			self.wolk.Draw(w.x,w.y]
+			self.wolk.Draw(w.x,w.y)
 		end
 		self.zee.Tile(0,self.kwart,Screen.W,self.kwart)
 		self.vloer.Tile(0,self.midden,Screen.W,self.midden)
