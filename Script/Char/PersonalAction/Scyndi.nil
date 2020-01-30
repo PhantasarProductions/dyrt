@@ -102,13 +102,13 @@ module Scyndi_Personal_Action
 					m.Obj = tag
 					if math.abs(wx-m.ObjInt.X)<30 and math.abs(wy-m.ObjInt.Y)<30
 						if X<0
-							self.HookMoveX = m.ObjInt.X+32
+							self.HookMoveX = m.ObjInt.X //+16
 							self.HookMoveY = m.ObjInt.Y-16
 							self.HookMove  = true
 							__player.Y = self.HookMoveY
 							__player.MoveTo(self.HookMoveX,self.HookMoveY)
 						elseif X>0
-							self.HookMoveX = m.ObjInt.X-32
+							self.HookMoveX = m.ObjInt.X //+16
 							self.HookMoveY = m.ObjInt.Y-16
 							self.HookMove  = true
 							__player.Y = self.HookMoveY
@@ -118,13 +118,13 @@ module Scyndi_Personal_Action
 							self.HookMoveY = m.ObjInt.Y-16
 							self.HookMove  = true
 							__player.X = self.HookMoveX
-							__player.MoveTo(self.HookMoveX,self.HookMoveY-32)
+							__player.MoveTo(self.HookMoveX,self.HookMoveY+32)
 						elseif Y>0
 							self.HookMoveX = m.ObjInt.X
-							self.HookMoveY = m.ObjInt.Y+16
+							self.HookMoveY = m.ObjInt.Y-16
 							self.HookMove  = true
 							__player.X = self.HookMoveX
-							__player.MoveTo(self.HookMoveX,self.HookMoveY+32)
+							__player.MoveTo(self.HookMoveX,self.HookMoveY-32)
 						end
 					end
 				end
