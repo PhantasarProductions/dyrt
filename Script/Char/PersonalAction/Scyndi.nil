@@ -50,17 +50,29 @@ module Scyndi_Personal_Action
 		self.Img.Draw(self.X,self.Y)
 		Color(255,180,0)
 		if self.HookMove
-			if (self.HookMoveX!=__player.X and self.HookMoveY!=__player.Y) or math.abs(self.HookMoveX-__player.X)<70 or math.abs(self.HookMoveY-__player.Y)<70 
-				self.HookMove = false
-			elseif self.HookMoveX<__player.X
-				Rect(self.HookMoveX,self.HookMoveY,self.HookMoveX-__player.X,1)
-			elseif self.HookMoveX>__player.X
-				Rect(__player.X,self.HookMoveY,__player.X-self.HookMoveX,1)
-			elseif self.HookMoveY<__player.Y
-				Rect(self.HookMove.X,self.HookMove.Y,1,self.HookMoveY-__player.Y)
-			elseif self.HookMoveY>__player.Y
-				Rect(self.HookMove.X,__player.Y,1,__player.Y-self.HookMoveY)
+			int px
+			int py
+			int hx
+			int hy
+			px = (__player.X - FlowField.Map.ScrollX) // + 16
+			py = (__player.Y - FlowField.Map.ScrollY) - 32
+			hx = self.HookMoveX - FlowField.Map.ScrollX //+ 16
+			hy = self.HookMoveY - FlowField.Map.ScrollY //- 16
+			DrawLine(px,py,hx,hy)
+			if not __player.Moving
+				self.HookMove=false
 			end
+//			if (self.HookMoveX!=__player.X and self.HookMoveY!=__player.Y) or math.abs(self.HookMoveX-__player.X)<70 or math.abs(self.HookMoveY-__player.Y)<70 
+//				self.HookMove = false
+//			elseif self.HookMoveX<__player.X
+//				Rect(self.HookMoveX,self.HookMoveY,self.HookMoveX-__player.X,1)
+//			elseif self.HookMoveX>__player.X
+//				Rect(__player.X,self.HookMoveY,__player.X-self.HookMoveX,1)
+//			elseif self.HookMoveY<__player.Y
+//				Rect(self.HookMove.X,self.HookMove.Y,1,self.HookMoveY-__player.Y)
+//			elseif self.HookMoveY>__player.Y
+//				Rect(self.HookMove.X,__player.Y,1,__player.Y-self.HookMoveY)
+//			end
 			__white
 		end
 	end
