@@ -1,0 +1,24 @@
+module Will_Template
+	
+	// Scyndi
+	delegate AfterEnemyAttack
+	
+	// Dernor
+	delegate AfterBeingHurt
+	
+	// Eric, Rebecca
+	delegate AfterAttack
+	
+	// Irravonia, Brendor
+	delegate DamageManipulation
+	
+	// Aziella
+	delegate Targeted
+	
+	// Kirana
+	delegate PreInput
+	
+	// Merya
+	delegate ManipulateItemUsage
+	
+end
