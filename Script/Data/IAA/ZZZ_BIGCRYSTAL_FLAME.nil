@@ -8,7 +8,7 @@ table ret_ZZZ_BIGCRYSTAL_FLAME
 ret_ZZZ_BIGCRYSTAL_FLAME={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
-	["Attack"] = 100,
+	["Attack"] = 150,
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
 	["AttackType"] = "Magical",

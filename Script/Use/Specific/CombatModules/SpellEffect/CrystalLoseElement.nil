@@ -39,10 +39,10 @@ do
 		var f
 		CSay("Charge lost!")
 		f = RPG.GetChar("FOE_1")
-		f.Stat("BASE__RESIST_Elem_"..self.TegenElement).Value=100
-		f.Stat("BASE__RESIST_Elem_"..self.Element).Value=100
-		self.TegenElement = ""
-		self.Element = ""
+		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.TegenElement).Value=100
+		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.Element).Value=100
+		CrystalSettings.TegenElement = ""
+		CrystalSettings.Element = ""
 		return true
 	end
 	

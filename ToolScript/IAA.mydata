@@ -13828,7 +13828,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WIND
 Rec: ZZZ_BIGCRYSTAL_EARTH
 	AccuracyCheck = FALSE
 	AP_Cost = 0
-	Attack = 100
+	Attack = 150
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13950,7 +13950,7 @@ Rec: ZZZ_BIGCRYSTAL_EARTH
 Rec: ZZZ_BIGCRYSTAL_FLAME
 	AccuracyCheck = FALSE
 	AP_Cost = 0
-	Attack = 100
+	Attack = 150
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14072,7 +14072,7 @@ Rec: ZZZ_BIGCRYSTAL_FLAME
 Rec: ZZZ_BIGCRYSTAL_WATER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
-	Attack = 100
+	Attack = 150
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14194,7 +14194,7 @@ Rec: ZZZ_BIGCRYSTAL_WATER
 Rec: ZZZ_BIGCRYSTAL_WIND
 	AccuracyCheck = FALSE
 	AP_Cost = 0
-	Attack = 100
+	Attack = 150
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
