@@ -48,7 +48,7 @@ Merya.Data["SKILL1"] = "Rogue Skills"
 // The dragon skills will be put in once Merya actually obtains them!
 
 //if __newgameplus
-	for i=0,2
+	for i=0,1
 		Merya.Points(sprintf("SKILLEXP%d",i),true).Have    = 17
 		Merya.Points(sprintf("SKILLLVL%d",i),true).Have    = 17
 	end

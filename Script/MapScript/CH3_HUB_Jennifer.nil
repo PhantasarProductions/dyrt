@@ -110,7 +110,7 @@ group MScript
 		Merya.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(0,math.ceil(99 / __skill))
 		Merya.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,66 / __skill)		
 		Merya.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)
-		for i=0,2
+		for i=0,1
 			Merya.Points(sprintf("SKILLEXP%d",i),true).Have    = 17
 			Merya.Points(sprintf("SKILLLVL%d",i),true).Have    = 17
 			Dernor.Points(sprintf("SKILLEXP%d",i),true).Have    = 24 / __skill
