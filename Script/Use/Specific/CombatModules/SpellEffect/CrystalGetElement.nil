@@ -16,10 +16,9 @@ do
 			default
 				error("Unknown element for crystal charge: "..el)
 		end
+		CSayF("Element charge set to : %s",el)
 		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.TegenElement).Value=-(300/__skill)
 		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.Element).Value=200 * __skill
-		CrystalSettings.TegenElement = ""
-		CrystalSettings.Element = ""
 		return true
 	end
 	

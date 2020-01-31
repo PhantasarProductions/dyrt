@@ -36,6 +36,8 @@
 // End License Information
 do
 	bool VerliesCharge()
+		var f
+		CSay("Charge lost!")
 		f = RPG.GetChar("FOE_1")
 		f.Stat("BASE__RESIST_Elem_"..self.TegenElement).Value=100
 		f.Stat("BASE__RESIST_Elem_"..self.Element).Value=100

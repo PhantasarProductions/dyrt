@@ -14064,7 +14064,7 @@ Rec: ZZZ_BIGCRYSTAL_FLAME
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = Falme
+	SpellAniScript = Flame
 	Stance = CAST
 	Target = AF
 	Type = 
