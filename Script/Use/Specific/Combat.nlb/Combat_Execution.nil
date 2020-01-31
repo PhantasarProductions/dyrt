@@ -126,8 +126,8 @@ group Execution
 			TarChar.Points("HP").Have = 0
 		end
 		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,TarChar.Points("HP").Have)
-		if prefixed(TarChar.Tag,"FOE_") and TarChar.AI_Data[".hasmember"]("Hurt")
-			TarChar.AI_Data.Hurt(TarChar,Act.Act.AttacType,enddmg, Act)
+		if prefixed(Tar.Tag,"FOE_") and Tar.AI_Data[".hasmember"]("Hurt")
+			Tar.AI_Data.Hurt(TarChar,Act.Act.AttacType,enddmg, Act)
 		end
 	end
 	
