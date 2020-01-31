@@ -108,6 +108,9 @@ group CrystalSettings
 			f.Stat("BASE__RESIST_Elem_"..self.Element).Value=100
 			self.TegenElement = ""
 			self.Element = ""
+			if foe.GaugePosition >= 10001
+				foe.GaugePosition = 0
+			end
 		end
 	end
 end
