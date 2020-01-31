@@ -355,7 +355,7 @@ group Stage_SelectTarget extends Stage
 					if fight.GaugePosition>=10001
 						Color(0,180,255)
 						DarkText.Font(CombatTime.FontGauge,Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
-						fight.Act.Targets[1].Icon(fight.X+40,ystat)
+						fight.NextAct.Targets[1].Icon(fight.X+40,ystat)
 						#+ ystat 20
 					end
 					__white
