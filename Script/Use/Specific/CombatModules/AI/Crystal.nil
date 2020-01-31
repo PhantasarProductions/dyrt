@@ -45,7 +45,7 @@ group CrystalSettings
 		// Set up base stats for this boss
 		table tst
 		for ch in each { "Scyndi", "Irravonia" }
-			for st in each { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Evasion" }
+			for st in each { "Strength", "Intelligence", "Resistance", "Agility", "Evasion" }
 				tst[st] = (tst[st] or __skill) + RPG.GetChar(ch).Stat("END_"..st).Value
 				CSayF("Char: %s, Stat %s, Total: %4d",ch,st,tst[st])
 			end

@@ -82,7 +82,7 @@ group Execution
 		
 		// Modify by attack type
 		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.Act.AttackType]
-		enddmg = dmg - (math.floor(dmg * (TarChar.Stat(sprintf("END_RESIST_Elem_%s",Act.Act.AttackType)).Value/100)))
+		enddmg = dmg - (math.floor(dmg * (TarChar.Stat(sprintf("END__RESIST_Elem_%s",Act.Act.AttackType)).Value/100)))
 		
 		// Modify by element type
 		fatal = fatal or ( prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.Act.Element] )
@@ -127,7 +127,7 @@ group Execution
 		end
 		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,TarChar.Points("HP").Have)
 		if prefixed(Tar.Tag,"FOE_") and Tar.AI_Data[".hasmember"]("Hurt")
-			Tar.AI_Data.Hurt(TarChar,Act.Act.AttacType,enddmg, Act)
+			Tar.AI_Data.Hurt(Tar,Act.Act.Element,enddmg, Act)
 		end
 	end
 	
