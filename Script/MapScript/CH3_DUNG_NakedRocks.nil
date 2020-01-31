@@ -73,12 +73,19 @@ group MScript
 		StartCombat.Ready()
 	end
 	
+	void JENNIFER()
+		Field.LoadMap("CH3_HUB_Jennifer")
+		Map.GoToLayer("#010","FromCave")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("EnterScenario","ESCEN")
 		Map.ZA_Enter("NaarZee","NaarZee")
 		Map.ZA_Enter("TutorHook","TutorHook")
 		Map.ZA_Enter("ZA_Boss","ZA_Boss")
+		Map.ZA_Enter("ToJennifer","Jennifer")
 	end
+	
 	
 	void Draw()
 	end
