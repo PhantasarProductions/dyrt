@@ -34,9 +34,78 @@
 ; 
 ; version: 20.01.31
 ; End License Information
+
 :OnLoad
 	end
 	
 :Jennifer1
-	call error,"Not yet operational"
+	call MapText,"JEN1A"
+	mov "Irravonia",Map.Leader
+	group 4
+		call Map.Kill,"NPC_OutJennifer",true
+		call Map.GoToLayer,"#011","JenStart"
+		call Map.HideByZone,"House"
+		call MapText,"JEN1B"
+	mov true,gv.Bool.Done_SpokenToJennifer1
+	call Map.ShowByZone,"House"
+	Call MapText,"JEN1C"
+	call Map.WalkTo,"CloseJennifer"
+	call MapText,"JEN1D"
+	call Map.Kill,"Scyndi",true
+	;call error,"Not yet operational"
+	end
+	
+:Rebecca
+	mov "Irravonia",Map.Leader
+	;call ScyndiSpawn
+	call Map.WalkTo,"Irra_End"
+	call CSay,"Frame #1"
+	call CSay,"Frame #2"
+	call CSay,"Frame #3"
+	call CSay,"Frame #4"
+	call CSay,"Frame #5"
+	call CSay,"Frame #6"
+	call CSay,"Frame #7"
+	call CSay,"Frame #8"
+	call CSay,"Frame #9"
+	call CSay,"Frame #10"
+	call CSay,"Frame #11"
+	call CSay,"Frame #12"
+	call CSay,"Frame #13"
+	call CSay,"Frame #14"
+	call CSay,"Frame #15"
+	call CSay,"Frame #16"
+	call CSay,"Frame #17"
+	call CSay,"Frame #18"
+	call CSay,"Frame #19"
+	call CSay,"Frame #20"
+	call CSay,"Frame #20"
+	call CSay,"Frame #21"
+	call CSay,"Frame #22"
+	call CSay,"Frame #23"
+	call CSay,"Frame #24"
+	call CSay,"Frame #25"
+	call CSay,"Frame #26"
+	call CSay,"Frame #27"
+	call CSay,"Frame #28"
+	call CSay,"Frame #29"
+	call CSay,"Frame #30"
+	call CSay,"Frame #30"
+	call CSay,"Frame #30"
+	call CSay,"Frame #31"
+	call CSay,"Frame #32"
+	call CSay,"Frame #33"
+	call CSay,"Frame #34"
+	call CSay,"Frame #35"
+	call CSay,"Frame #36"
+	call CSay,"Frame #37"
+	call CSay,"Frame #38"
+	call CSay,"Frame #39"
+	call CSay,"Frame #40"
+	call FlowField.Map.Kthura.Actor.ActScyndi.WalkTo,"Scyndi_End"
+	call MapText,"REB1A"
+	call MapScript.RebeccaDernorMeryaJoin
+	call Map.HideByLabel,"RebCrew"
+	call Map.Kill,"ActScyndi"
+	call Map.Kill,"NoExit",true
 	end

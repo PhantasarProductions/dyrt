@@ -1,0 +1,132 @@
+// License Information:
+// src/Tricky Script/Script/MapScript/None.nil
+// Version: 19.12.26
+// Copyright (C)  Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+
+#macro RebeccaJoin gv.Bool.SpeakRebeccaDernorAndMeryaAfterSpeakingWithJennifer
+
+group MScript
+	
+	void CAVE()
+		Field.LoadMap("CH3_DUNG_NakedRocks")
+		Map.GoToLayer("#009","Einde")
+	end
+	
+	void NPC_OUTJENNIFER()
+		MapScript.SASKIA("Jennifer1")
+	end
+	
+	void NPC_JENNIFER()
+		if not gv.Bool.JenniferMentionedToHerondo
+			MapText("JEN1E")
+			return
+		end
+		error("Jennifer not yet scripted for this portion of the story line")
+	end
+	
+	void ACTION()
+		WM_Unlocked.D_Jennifer = true
+		WM_Unlocked.D_GrassPlain = true
+		if not gv.Bool.Done_SpokenToJennifer1
+			return
+		end
+		if not RebeccaJoin
+			Map.ShowByLabel("RebCrew")
+		end
+	end
+	
+	void OPEN()
+		Map.Hide("DEURTJE")
+		if not gv.Bool.Done_SpokenToJennifer1
+			return
+		end
+		if not RebeccaJoin
+			MapScript.SASKIA("Rebecca")
+			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Spawn(\"Player\")")
+			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Wind=\"East\";")
+			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Texture = 'gfx/actors/heroes/Scyndi.East.jpbf'")
+			RebeccaJoin = true
+		end 
+	end
+	
+	void CLOSE()
+		Map.Show("DEURTJE")
+	end
+	
+	void REBECCADERNORMERYAJOIN()
+		var Dernor
+		var Merya
+		// Create Dernor
+		Party.NewCharacter("Dernor",RPG.GetChar("Scyndi").Stat("Level").Value + 2)
+		Dernor = RPG.GetChar("Dernor")
+		Dernor.Stat("BASE__RESIST_Stat_Poison").Value = 99 / __skill
+		Dernor.Stat("BASE__RESIST_Stat_Sleep").Value = math.random(math.floor(9 / __skill),66 / __skill)
+		Dernor.Stat("BASE__RESIST_Stat_Disease").Value = math.random(0,math.ceil(99 / __skill))
+		Dernor.Stat("BASE__RESIST_Stat_Zombie").Value = math.random(0,66 / __skill)		
+		// Create Merya
+		Party.NewCharacter("Merya",17)
+		Merya = RPG.GetChar("Merya")
+		Merya.Stat("BASE__RESIST_Stat_Paralysis").Value = 99 / __skill
+		Merya.Stat("BASE__RESIST_Stat_Confusion").Value = 99 / __skill
+		Merya.Stat("BASE__RESIST_Stat_Sleep").Value = math.random(math.floor(9 / __skill),66 / __skill)
+		Merya.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(0,math.ceil(99 / __skill))
+		Merya.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,66 / __skill)		
+		Merya.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)		
+		for i,c in ipairs { "Rebecca", "Dernor", "Merya" }
+			RPG.Party[i+2] = c
+		end
+	end
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("EnterCave","Cave")
+		Map.ZA_Enter("Action","Action")
+		Map.ZA_Enter("Open","Open")
+		Map.ZA_Leave("Open","Close")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
