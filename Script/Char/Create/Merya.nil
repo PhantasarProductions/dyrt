@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.31
+// version: 20.02.01
 // End License Information
 
 #use "Script/Use/AnyWay"
@@ -47,12 +47,12 @@ Merya.Data["SKILL1"] = "Rogue Skills"
 
 // The dragon skills will be put in once Merya actually obtains them!
 
-if __newgameplus
+//if __newgameplus
 	for i=0,2
 		Merya.Points(sprintf("SKILLEXP%d",i),true).Have    = 17
 		Merya.Points(sprintf("SKILLLVL%d",i),true).Have    = 17
 	end
-end
+//end
 
 
 Merya.Data.Weapon = "EQW_Merya_Dagger"
