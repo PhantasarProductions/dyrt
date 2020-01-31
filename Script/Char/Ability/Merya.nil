@@ -41,7 +41,7 @@
 local
 a = {
 	-- Dagger
-	FastDraw       = { Dagger = 25 },
+	FastDraw       = { Skill_Dagger = 25 },
 	
 	-- Rogue
 	Pickpocket     = { Start=true },
