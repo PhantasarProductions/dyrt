@@ -16,7 +16,7 @@ do
 			default
 				error("Unknown element for crystal charge: "..el)
 		end
-		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.TegenElement).Value=-300/__skill
+		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.TegenElement).Value=-(300/__skill)
 		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.Element).Value=200 * __skill
 		CrystalSettings.TegenElement = ""
 		CrystalSettings.Element = ""
