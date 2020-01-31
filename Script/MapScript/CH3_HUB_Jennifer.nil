@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.31
+// version: 20.02.01
 // End License Information
 
 
@@ -109,7 +109,13 @@ group MScript
 		Merya.Stat("BASE__RESIST_Stat_Sleep").Value = math.random(math.floor(9 / __skill),66 / __skill)
 		Merya.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(0,math.ceil(99 / __skill))
 		Merya.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,66 / __skill)		
-		Merya.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)		
+		Merya.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)
+		for i=0,2
+			Merya.Points(sprintf("SKILLEXP%d",i),true).Have    = 17
+			Merya.Points(sprintf("SKILLLVL%d",i),true).Have    = 17
+			Dernor.Points(sprintf("SKILLEXP%d",i),true).Have    = 24 / __skill
+			Dernor.Points(sprintf("SKILLLVL%d",i),true).Have    = 30 / __skill
+		end
 		for i,c in ipairs { "Rebecca", "Dernor", "Merya" }
 			RPG.Party[i+2] = c
 		end
