@@ -34,5 +34,12 @@
 ; 
 ; version: 20.01.29
 ; End License Information
+
 :OnLoad
+	end
+	
+:Crystal
+	call MapScript.Crystal
+	call Map.Kill,"ZA_Boss",true
+	call Map.Kill,"Boss",true
 	end

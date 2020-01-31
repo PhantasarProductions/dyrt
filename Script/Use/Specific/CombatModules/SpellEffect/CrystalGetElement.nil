@@ -1,0 +1,27 @@
+do
+	bool VerkrijgCharge(Act,Target,string el)
+		f = RPG.GetChar("FOE_1")
+		self.Element = el
+		switch el
+			case "Flame"
+				self.TegenElement = "Water"
+			case "Wind"
+				self.TegenElement = "Earth"
+			case "Water"
+				self.TegenElement = "Flame"
+			case "Earth"
+				self.TegenElement = "Wind"
+			default
+				error("Unknown element for crystal charge: "..el)
+		end
+		f.Stat("BASE__RESIST_Elem_"..self.TegenElement).Value=-300/__skill
+		f.Stat("BASE__RESIST_Elem_"..self.Element).Value=200 * __skill
+		self.TegenElement = ""
+		self.Element = ""
+		return true
+	end
+	
+	return VerliesCharge
+end
+
+	

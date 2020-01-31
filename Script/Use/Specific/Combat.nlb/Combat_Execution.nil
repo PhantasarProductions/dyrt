@@ -126,6 +126,9 @@ group Execution
 			TarChar.Points("HP").Have = 0
 		end
 		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,TarChar.Points("HP").Have)
+		if prefixed(TarChar.Tag,"FOE_") and TarChar.AI_Data[".hasmember"]("Hurt")
+			TarChar.AI_Data.Hurt(TarChar,Act.Act.AttacType,enddmg, Act)
+		end
 	end
 	
 	void Heal(Exe,Tar,Act)
@@ -225,7 +228,7 @@ group Execution
 			delegate effect
 			effect = NIL.Use("Script/Use/Specific/CombatModules/SpellEffect/"..Action.Act.EffectScript)
 			assert(effect,"Something went wrong in compiling effect: "..Action.Act.EffectScript)
-			hit = effect(Action,Target) or hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
+			hit = effect(Action,Target,Action.Act.EffectArgument) or hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
 		end
 		
 		// Cause status changes (must always be the last before the hit check)

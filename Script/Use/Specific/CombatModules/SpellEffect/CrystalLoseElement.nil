@@ -1,0 +1,14 @@
+do
+	bool VerliesCharge()
+		f = RPG.GetChar("FOE_1")
+		f.Stat("BASE__RESIST_Elem_"..self.TegenElement).Value=100
+		f.Stat("BASE__RESIST_Elem_"..self.Element).Value=100
+		self.TegenElement = ""
+		self.Element = ""
+		return true
+	end
+	
+	return VerliesCharge
+end
+
+	

@@ -59,10 +59,25 @@ group MScript
 		end
 	end
 	
+	void ZA_BOSS()
+		MapScript.SASKIA("Crystal")
+	end
+	
+	void CRYSTAL()
+		StartCombat.StartSession()
+		StartCombat.Music = "*NONE*"
+		StartCombat.Arena = "NakedRocks"
+		StartCombat.Foe[1] = "Boss/Crystal"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("EnterScenario","ESCEN")
 		Map.ZA_Enter("NaarZee","NaarZee")
 		Map.ZA_Enter("TutorHook","TutorHook")
+		Map.ZA_Enter("ZA_Boss","ZA_Boss")
 	end
 	
 	void Draw()
