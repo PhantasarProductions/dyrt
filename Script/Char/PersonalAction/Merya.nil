@@ -39,12 +39,42 @@ module Merya_Personal_Action
 	var Img
 	int X
 	int Y
+	int Stage = 0
+	int Radius = 0 
+	get int W
+		return self.Img.Width
+	end
+	get int H
+		return self.Img.Height
+	end
+	
+	get int MeryaX
+		return FieldFlow.Map.Kthura.Actor.Player.X - FieldFlor.Map.ScrollX
+	end
+	
+	get int MeryaY
+		return FieldFlow.Map.Kthura.Actor.Player.Y - FieldFlor.Map.ScrollY
+	end
+	
+	void RadarCircle()
+		DrawCircle
+	end
 	
 	void Draw()
 		self.Img.Draw(self.X,self.Y)
+		switch self.Stage
+			case 1 2
+				self.RadarCircle()
+		end
 	end
 	
 	bool Click(int but,int x, int y)
+		if Mouse.X>self.X and Mouse.Y>self.Y and Mouse.X<self.X+self.W and Mouse.Y<self.Y+self.Y
+			self.Stage = 1
+			self.Radius = 0
+			return true
+		end
+		return false		
 	end
 	
 	void CONSTRUCTOR()
