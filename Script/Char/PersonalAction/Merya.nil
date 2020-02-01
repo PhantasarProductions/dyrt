@@ -131,7 +131,7 @@ module Merya_Personal_Action
 		Color(180,0,255)
 		DrawCircle(self.MeryaX,self.MeryaY,self.Radius)
 		self.Radius++
-		if self.Radius>150 and self.Stage=1
+		if self.Radius>150 and self.Stage==1
 			self.Stage=2
 			MeryaScan.Detect()
 		elseif self.Radius>300
@@ -149,8 +149,7 @@ module Merya_Personal_Action
 				self.RadarCircle()
 				MeryaScan.ShowAll()
 			case 3
-				MeryaScan.ShowAll()
-			end
+				MeryaScan.ShowAll()			
 		end
 	end
 	
