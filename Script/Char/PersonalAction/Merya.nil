@@ -35,6 +35,74 @@
 // version: 20.02.01
 // End License Information
 
+#say "Let's load Merya's personal action!"
+#use "libs/linkedlist"
+#use "libs/xmath"
+#use "libs/string"
+
+class MeryaScan
+
+	static var Lijst
+	
+	static void Detect()
+		for punt,schakel in self.Lijst.Each
+			schakel.UnLink()
+		end
+		for Tag in FieldFlow.Map.Kthura.EachTag(Map.Layer)
+			if prefixed(Tag,"MeryaScan_")
+				new MeryaScan(Tag)
+			end
+		end
+	end
+	
+	static void ShowAll()
+		for punt,schakel in self.Lijst.Each
+			punt.Show(schakel)
+		end
+	end
+	
+	int CD
+	int trueX
+	int trueY
+	string Layer
+	
+	get int X
+		return self.trueX - FieldFlow.Map.ScrollX
+	end
+	get int Y 
+		return self.trueY - FieldFlow.Map.ScrollY
+	end
+	
+	get int Radius
+		return self.CD % 64
+	end
+	
+	void CONSTRUCTOR(string tag)
+		number afstand
+		Map.Obj=tag
+		self.trueX = Map.ObjInt.X
+		self.trueY = Map.ObjInt.Y
+		afstand = xmath.Pythagoras(self.trueX,self.trueY,Map.PlayerX,Map.PlayerY)
+		self.CD = math.ceil(320 - afstand)
+		if self.CD<8 
+			self.CD=8
+		end
+		self.Layer = Map.Layer
+		self.Lijst.AddLast(self)
+	end
+	
+	void Show(schakel)
+		Color(180,180,0)
+		DrawCircle(self.X,self.Y,self.Radius)
+		if schakel
+			--self.CD
+			if self.CD<0 or self.Layer!=Map.Layer
+				schakel.UnLink()
+			end
+		end
+	end
+end
+
 module Merya_Personal_Action
 	var Img
 	int X
@@ -49,22 +117,37 @@ module Merya_Personal_Action
 	end
 	
 	get int MeryaX
-		return FieldFlow.Map.Kthura.Actor.Player.X - FieldFlor.Map.ScrollX
+		return FieldFlow.Map.Kthura.Actor.Player.X - FieldFlow.Map.ScrollX
 	end
 	
 	get int MeryaY
-		return FieldFlow.Map.Kthura.Actor.Player.Y - FieldFlor.Map.ScrollY
+		return FieldFlow.Map.Kthura.Actor.Player.Y - FieldFlow.Map.ScrollY
 	end
 	
 	void RadarCircle()
-		DrawCircle
+		Color(180,0,255)
+		DrawCircle(self.MeryaX,self.MeryaY,self.Radius)
+		self.Radius++
+		if self.Radius>150 and self.Stage=1
+			self.Stage=2
+			MeryaScan.Detect()
+		elseif self.Radius>300
+			self.Stage=3
+		end
+		__white
 	end
 	
 	void Draw()
 		self.Img.Draw(self.X,self.Y)
 		switch self.Stage
-			case 1 2
+			case 1 
 				self.RadarCircle()
+			case 2
+				self.RadarCircle()
+				MeryaScan.ShowAll()
+			case 3
+				MeryaScan.ShowAll()
+			end
 		end
 	end
 	
@@ -81,6 +164,7 @@ module Merya_Personal_Action
 		self.Img = LoadImage("GFX/PersAction/Merya.png")
 		self.X = Screen.Width -300
 		self.Y = Screen.Height-400
+		MeryaScan.Lijst = new TLinkedList
 	end
 
 end
