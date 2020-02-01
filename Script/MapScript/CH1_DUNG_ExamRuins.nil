@@ -256,6 +256,9 @@ group MScript
 		end
 	end
 	
+	void Update()
+	end
+	
 	void CONSTRUCTOR()
 		if not Done.CreateRebecca
 			self.CreateRebecca()
