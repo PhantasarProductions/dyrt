@@ -32,20 +32,25 @@
 // 
 // **********************************************
 // 
-// version: 19.12.16
+// version: 20.02.01
 // End License Information
-module Merya_Personal_Action
 
-	
+module Merya_Personal_Action
+	var Img
+	int X
+	int Y
 	
 	void Draw()
+		self.Img.Draw(self.X,self.Y)
 	end
 	
-	void Click(int but,int x, int y)
+	bool Click(int but,int x, int y)
 	end
 	
 	void CONSTRUCTOR()
-		
+		self.Img = LoadImage("GFX/PersAction/Merya.png")
+		self.X = Screen.Width -300
+		self.Y = Screen.Height-400
 	end
 
 end
