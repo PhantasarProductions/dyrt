@@ -66,6 +66,10 @@ MapMeta = {
 				end
 			default
 				assert(StateExists("MAP"),"Map script call, but no map script was loaded!")
+				if prefixed(k,"SASKIA:")
+					MapScript.SASKIA(right(k,#k-7))
+					return
+				end
 				#pure
 				return function(...)
 					local args = {...}

@@ -96,7 +96,8 @@ group Map
 				if params!=""
 					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
 				end
-				params = ActSplit[2]
+				CSay(NIL.LuaSerialize("ActSplit",ActSplit))
+				params = "'"..ActSplit[2].."'"
 			default
 				error(sprintf("I don't know how to handle: %s",ActSplit[1]))
 		end
