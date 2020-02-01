@@ -36,10 +36,12 @@
 // End License Information
 
 #say "Let's load Merya's personal action!"
+
 #use "libs/linkedlist"
 #use "libs/xmath"
-#use "libs/string"
+#use "libs/strings"
 
+#say "Merya Scan class!"
 class MeryaScan
 
 	static var Lijst
@@ -103,6 +105,7 @@ class MeryaScan
 	end
 end
 
+#say "Merya Personal Action Module!"
 module Merya_Personal_Action
 	var Img
 	int X
@@ -161,10 +164,13 @@ module Merya_Personal_Action
 	end
 	
 	void CONSTRUCTOR()
+		CSay("Loading Merya's button!")
 		self.Img = LoadImage("GFX/PersAction/Merya.png")
 		self.X = Screen.Width -300
 		self.Y = Screen.Height-400
+		CSay("Starting up a linked list for found pivots!")
 		MeryaScan.Lijst = new TLinkedList
 	end
 
+#say "End of Merya's personal action module! Let's compile and continue!"
 end
