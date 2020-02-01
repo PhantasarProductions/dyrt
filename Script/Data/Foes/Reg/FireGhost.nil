@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/28/2020 12:28:51 PM
+// Generated: 2/1/2020 11:46:59 PM
 
 do
 var retfunc()
@@ -9,6 +9,7 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
+foeret.Description = "It's fire and it's undead"
 foeret.Fatal["Frost"] = true
 foeret.Fatal["Light"] = true
 foeret.Fatal["Water"] = true
