@@ -5388,8 +5388,8 @@ Rec: ABL_HERO_MERYA_INTIMIDATE
 	AP_Cost = 2
 	Attack = 1
 	AttackCancel = TRUE
-	AttackStat = Intelligence
-	AttackType = Magical
+	AttackStat = Accuracy
+	AttackType = Physical
 	Block_Fear = TRUE
 	Block_Silence = FALSE
 	BlockSilence = FALSE
@@ -5425,7 +5425,7 @@ Rec: ABL_HERO_MERYA_INTIMIDATE
 	CureSilence = FALSE
 	CureSleep = FALSE
 	CureZombie = FALSE
-	DefenseStat = Resistance
+	DefenseStat = Evasion
 	Description = Yikes!
 	Discriminate = FALSE
 	EffectArgument = 
