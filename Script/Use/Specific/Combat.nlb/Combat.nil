@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat.nil
-// Version: 20.01.15
+// Version: 20.02.02
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -60,3 +60,4 @@
 #use "Script/Use/Specific/Combat.nlb/Combat_ZPara.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZPoisonDisease.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZUndead_Zombie.nil"
+#use "Script/Use/Specific/Combat.nlb/Dernor_Charm.nil"
