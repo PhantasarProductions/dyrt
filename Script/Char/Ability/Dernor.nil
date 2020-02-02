@@ -35,23 +35,39 @@
 // version: 20.02.01
 // End License Information
 
-
-#pure
+do
+	int s
+	s = __skill
+	#pure
 	
-local
-a = {
-	-- Nature
-	AAA_Charm       = { Start=true },
+	local gj = gv.Bool.GameJolt
+	local
+	a = {
+		-- Skill_Nature
+		AAA_Charm       = { Start=true },
+		NeutPosion      = { Skill_Nature = 20 },
+		Vitalize        = { Skill_Nature = 40 + (s * 20) },
 	
-	-- Charm
+		-- Charm
+		BloodSucker     = { Charm = { "Bat" } },
+		Claw            = { Charm = { "Tiger","Cheetah","PolarBear" } },
+		Peck            = { Charm = { "Pinguin", "Raven" }, Skill_Nature = 30 + (s*10) },
+		CrocBite        = { Charm = { "Croc" }, Skill_Nature = 10 + (10 * s) },
 	
-	-- Scharum
+		-- Scharum
 	
-	-- Sealed Boss
+		-- Sealed Boss
 	
 	
-}
+	}
 	
-return a
+	if gj then
+		a.PollenRed    = { Charm = {"RedFlower"}, Skill_Nature = 25 }
+		a.PollenBlue   = { Charm = {"BlueFlower"}, Skill_Nature = 25 }
+		a.PollenPurple = { Charm = {"PurpleFlower"}, Skill_Nature = 25 }
+	end
+	
+	return a
 	
 #endpure
+end
