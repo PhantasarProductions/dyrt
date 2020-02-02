@@ -437,6 +437,21 @@ group Flow_FieldMenu
 								Help[#Help+1] = "= To defeat a certain sealed boss"
 							case "BoolVar"
 								Help[#Help+1] = "= To have reached a certain spot in the scenario"
+							case "Charm"
+								if #v==1
+									Help[#Help+1] = "= To charm a "..v[1]
+								else
+									string q
+									for chi,chf in ipairs(v)
+										if chi==#v
+											q = q .. " or "
+										elseif chi!=1
+											q = q .. ", "
+										end
+										q = q .. chf
+									end
+									Help[#Help+1] = "= To charm a "..q
+								end
 							default
 								if prefixed(k,"Skill_")
 									bool found
