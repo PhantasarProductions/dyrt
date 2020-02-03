@@ -211,6 +211,9 @@ new Combat_Status("Gone",{
 	["UntargetableFoe"] = true,
 	["OverDraw"] = true,
 	["Draw"] = void(f)
+			if f.Boss
+				f.StatusChanges.Gone = false;
+			end
 		end,
 	["AltExperience"] = int(f,int exp)
 			return 0
