@@ -389,10 +389,12 @@ group Stage_SelectTarget extends Stage
 				case "AF" "AA"
 					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y) and (not Combat_Status.UnTargetable(ifighter.Tag))
 						for iteam2,imember2,ifighter2 in Fighter.ForAll()
-							if iteam2==iteam and imember2!=imember and (not Combat_Status.UnTargetable(ifighter2.Tag))
-								self.targetted[imember2]=ifighter2
+							if iteam2==iteam and (not Combat_Status.UnTargetable(ifighter2.Tag))
 								gotcha=true
-								self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+								if imember2!=imember
+									self.targetted[imember2]=ifighter2
+									self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+								end
 							end
 						end
 					end
