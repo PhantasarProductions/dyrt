@@ -93,5 +93,9 @@ group Charm
 		return false
 		end
 	end
+	
+	bool Check(string checkabl)
+		return SpellCharm[chkabl]
+	end
 
 end
