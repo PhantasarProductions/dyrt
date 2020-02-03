@@ -37,24 +37,24 @@
 quickmeta group SpellCharmed
 	
 	index
-		if gv.String["Dernor_SpellCharmed_"..key]==""
+		if gv.String["Dernor_SpellCharmed_"..(key:upper())]==""
 			return false;
 		end
-		return gv.String["Dernor_SpellCharmed_"..key]
+		return gv.String["Dernor_SpellCharmed_"..(key:upper())]
 	end
 	
 	newindex
-		gv.String["Dernor_SpellCharmed_"..key] = value
+		gv.String["Dernor_SpellCharmed_"..(key:upper())] = value
 	end
 end
 
 quickmeta group Charmed
 	index 
-		return gv.Bool["Dernor_FoeCharmed"..key]
+		return gv.Bool["Dernor_FoeCharmed"..(key:upper())]
 	end
 	
 	newindex
-		gv.Bool["Dernor_FoeCharmed"..key] = value!=nil and value!=false;
+		gv.Bool["Dernor_FoeCharmed"..(key:upper()] = value!=nil and value!=false;
 	end
 end
 
@@ -67,6 +67,31 @@ group Charm
 	end
 	
 	bool AblCharm(Act,Target)
+		string fname
+		fname = Target.FromFile:upper()
+		// Reject if the enemy is a boss, or already charmed
+		if Target.Boss or Charmed[fname]
+			return false
+		end
+		// Reject if the spell this monster gives has already been given
+		// Accept if not and attach enemy to it
+		for abltag,need in pairs ( self.Abl) 
+			if need.Charm
+				for _,needfoe in pairs(need.Charm)
+					if needfoe:upper()==fname
+						
+						if SpellCharm[abltag]
+							return false
+						end
+						SpellCharm[abltag] = fname
+						Charmed[fname] = true
+						Target.StatusChanges.Gone = true
+						return true
+					end
+				end
+			end
+		return false
+		end
 	end
 
 end
