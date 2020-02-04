@@ -54,7 +54,7 @@ quickmeta group Charmed
 	end
 	
 	newindex
-		gv.Bool["Dernor_FoeCharmed"..(key:upper()] = value!=nil and value!=false;
+		gv.Bool["Dernor_FoeCharmed"..(key:upper())] = value!=nil and value!=false;
 	end
 end
 
@@ -80,10 +80,10 @@ group Charm
 				for _,needfoe in pairs(need.Charm)
 					if needfoe:upper()==fname
 						
-						if SpellCharm[abltag]
+						if SpellCharmed[abltag]
 							return false
 						end
-						SpellCharm[abltag] = fname
+						SpellCharmed[abltag] = fname
 						Charmed[fname] = true
 						Target.StatusChanges.Gone = true
 						return true
@@ -95,7 +95,7 @@ group Charm
 	end
 	
 	bool Check(string checkabl)
-		return SpellCharm[chkabl]
+		return SpellCharmed[checkabl]
 	end
 
 end

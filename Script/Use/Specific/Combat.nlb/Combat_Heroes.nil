@@ -41,6 +41,7 @@
 #use "script/use/BoxPics"
 
 #accept CombatTime
+#accept Charm
 
 class Hero extends Fighter
 	

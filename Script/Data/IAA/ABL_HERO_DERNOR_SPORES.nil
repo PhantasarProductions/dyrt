@@ -4,8 +4,8 @@
 do
 
 
-table ret_ITM_SPORES
-ret_ITM_SPORES={
+table ret_ABL_HERO_DERNOR_SPORES
+ret_ABL_HERO_DERNOR_SPORES={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
 	["Attack"] = 0,
@@ -97,9 +97,9 @@ ret_ITM_SPORES={
 	["GainSkill0"] = 0,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
-	["GainSkill1"] = 60,
-	["GainSkill1All"] = false,
-	["GainSkill1Chars"] = "Merya",
+	["GainSkill1"] = 70,
+	["GainSkill1All"] = true,
+	["GainSkill1Chars"] = "",
 	["GainSkill2"] = 0,
 	["GainSkill2All"] = false,
 	["GainSkill2Chars"] = "",
@@ -128,7 +128,7 @@ ret_ITM_SPORES={
 	["Type"] = "Item",
 }
 
-return ret_ITM_SPORES
+return ret_ABL_HERO_DERNOR_SPORES
 
 
 end
