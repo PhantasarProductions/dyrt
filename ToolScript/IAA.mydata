@@ -2609,7 +2609,7 @@ Rec: ABL_HERO_DERNOR_PECK
 
 Rec: ABL_HERO_DERNOR_SPORES
 	AccuracyCheck = FALSE
-	AP_Cost = 0
+	AP_Cost = 100
 	Attack = 0
 	AttackCancel = FALSE
 	AttackStat = Intelligence
@@ -2637,7 +2637,7 @@ Rec: ABL_HERO_DERNOR_SPORES
 	CauseSleep = FALSE
 	CauseZombie = FALSE
 	Charge = 
-	COM2ACT = 25
+	COM2ACT = 50
 	CureConfusion = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
@@ -2727,7 +2727,7 @@ Rec: ABL_HERO_DERNOR_SPORES
 	SpellAniScript = Venom
 	Stance = CAST
 	Target = AF
-	Type = Item
+	Type = Ability
 
 Rec: ABL_HERO_ERIC_BIOHAZARD
 	AccuracyCheck = FALSE

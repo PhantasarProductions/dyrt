@@ -7,7 +7,7 @@ do
 table ret_ABL_HERO_DERNOR_SPORES
 ret_ABL_HERO_DERNOR_SPORES={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 0,
+	["AP_Cost"] = 100,
 	["Attack"] = 0,
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
@@ -35,7 +35,7 @@ ret_ABL_HERO_DERNOR_SPORES={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 25,
+	["COM2ACT"] = 50,
 	["CureConfusion"] = false,
 	["CureDeath"] = false,
 	["CureDestruction"] = false,
@@ -125,7 +125,7 @@ ret_ABL_HERO_DERNOR_SPORES={
 	["SpellAniScript"] = "Venom",
 	["Stance"] = "CAST",
 	["Target"] = "AF",
-	["Type"] = "Item",
+	["Type"] = "Ability",
 }
 
 return ret_ABL_HERO_DERNOR_SPORES
