@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.03
+// version: 20.02.04
 // End License Information
 quickmeta group SpellCharmed
 	
@@ -68,21 +68,26 @@ group Charm
 	
 	bool AblCharm(Act,Target)
 		string fname
-		fname = Target.FromFile:upper()
+		fname = replace(Target.FromFile:upper(),"REG/","")
 		// Reject if the enemy is a boss, or already charmed
 		if Target.Boss or Charmed[fname]
+			CSayF("Charm rejected: Boss Check: %s; Charmed Check: %s", tostring(Target.Boss), tostring(Charmed[fname]))
 			return false
 		end
 		// Reject if the spell this monster gives has already been given
 		// Accept if not and attach enemy to it
 		for abltag,need in pairs ( self.Abl) 
 			if need.Charm
+				CSayF("Checking for charm %s => %s",abltag,tostring(need.Charm))
 				for _,needfoe in pairs(need.Charm)
+					CSayF("Found: %s; Have: %s ==> match: %s",needfoe,fname,tostring(needfoe:upper()==fname))
 					if needfoe:upper()==fname
-						
+						CSayF("Match %s",fname)
 						if SpellCharmed[abltag]
+							CSay("Charm rejected! Spell charm with same name appears to be executed already => "..abltag)
 							return false
 						end
+						CSay("Charm accepted!")
 						SpellCharmed[abltag] = fname
 						Charmed[fname] = true
 						Target.StatusChanges.Gone = true
@@ -90,8 +95,9 @@ group Charm
 					end
 				end
 			end
-		return false
 		end
+		CSay("Charm rejected! No matches found!")
+		return false
 	end
 	
 	bool Check(string checkabl)
