@@ -1,0 +1,66 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Char/SkillUp/Merya.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.02.04
+// End License Information
+do
+	delegate ret
+	ret = void(int skill)
+		int lvl
+		lvl = RPG.GetChar("Merya").Points("SKILLLVL"..skill).Have
+		CSayF("Well Merya! Let's upgrade with skill %d",skill)
+		switch skill
+			case 0
+				// Dagger
+				if lvl % 40 == 0 or lvl % ((__skill+1)^2)
+					RPG.GetChar("Merya").Stat("PERMPOWERUP_Strength").Value ++
+				end
+				RPG.GetChar("Merya").Stat("PERMPOWERUP_Agility").Value ++
+			case 1
+				// Rogue
+				RPG.GetChar("Merya").Stat("PERMPOWERUP_Agility").Value ++
+				RPG.GetChar("Merya").Stat("PERMPOWERUP_Evansion").Value ++
+				RPG.GetChar("Merya").Stat("PERMPOWERUP_Accuracy").Value ++
+				if __skill!=3 and lvl % (__skill*3)
+					RPG.GetChar("Merya").Stat("PERMPOWERUP_Agility").Value ++
+					RPG.GetChar("Merya").Stat("PERMPOWERUP_Evansion").Value ++
+					RPG.GetChar("Merya").Stat("PERMPOWERUP_Accuracy").Value ++
+					RPG.GetChar("Merya").Stat("PERMPOWERUP_HP").Value ++
+				end
+		end
+	
+	end
+	
+	return ret
+end
