@@ -2121,7 +2121,7 @@ Rec: ABL_HERO_DERNOR_AAA_CHARM
 
 Rec: ABL_HERO_DERNOR_BLOODSUCKER
 	AccuracyCheck = FALSE
-	AP_Cost = 0
+	AP_Cost = 15
 	Attack = 0
 	AttackCancel = FALSE
 	AttackStat = Intelligence
