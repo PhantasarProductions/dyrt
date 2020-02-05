@@ -61,6 +61,10 @@ group MScript
 		Map.HideByZone("MeryaSecret")
 	end
 	
+	void SWITCH_LVL()
+		Map.Kill("LvlBarrier",true)
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("MeryaTutor","MeryaTutor")
 		Map.ZA_Enter("MeryaSecret","ShowSecret")
