@@ -42,7 +42,7 @@
 #use "Script/Use/StartCombatMod"
 #use "libs/strings"
 
-#macro numfloors 2
+#macro numfloors 4
 #macro strfloors 0
 
 group MScript
