@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.02.01
+// Version: 20.02.05
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -206,6 +206,10 @@ group Map
 	
 	get string PlayerWind
 		return LuaGetString("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Wind")
+	end
+	
+	bool HasTag(string tag)
+		return LuaGetBool("FLOW_FIELD","FlowField.Map.Kthura.HasTag('"..tag.."')")
 	end
 	
 	void Hide(string tag)
