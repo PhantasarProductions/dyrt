@@ -1,0 +1,84 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH3_DUNG_Azquakunda.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.02.05
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+#use "libs/strings"
+
+#macro numfloors 2
+#macro strfloors 0
+
+group MScript
+	
+	void MERYATUTOR()
+		if not Done.Done_Tutorial_MeryaScan
+			MapText("MERYASCOUTTUTORIAL")
+		end
+	end
+	
+	void SHOWSECRET()
+		Map.ShowByZone("MeryaSecret")
+	end
+	
+	void HIDESECRET()
+		Map.HideByZone("MeryaSecret")
+	end
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("MeryaTutor","MeryaTutor")
+		Map.ZA_Enter("MeryaSecret","ShowSecret")
+		Map.ZA_Leave("MeryaSecret","HideSecret")
+		for i=strfloors,numfloors
+			Map.Layer = sprintf("#%03d",i)
+			if Map.HasTag("MeryaSecret")
+				Map.HideByZone("MeryaSecret")
+				CSayF("Secret on floor #%03d has been hidden",i)
+			end
+		end
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
