@@ -42,6 +42,8 @@
 #accept Introduction
 #accept Show
 
+#use "script/auto/swapkill"
+
 #use "script/use/anyway"
 #use "Libs/LinkedList"
 #use "Libs/Strings"
