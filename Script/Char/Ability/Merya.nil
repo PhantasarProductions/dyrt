@@ -51,6 +51,7 @@ a = {
 	Poisonstab     = { Skill_Dagger=19, Skill_Rogue=25 },
 	StubStab       = { Skill_Dagger=20, Skill_Rogue=27 },
 	BackStab       = { Skill_Dagger=21, Skill_Rogue=30 },
+	Disembowel     = { Skill_Dagger=35, Skill_Rogue=35 },
 	
 	-- Scharum
 	FollowMe       = { Scharum = true },

@@ -1,0 +1,53 @@
+// Disembowel
+do
+	bool HakkieTakkie(Act,Target)
+		var Exe
+		var ExeHP
+		var TarHP
+		int Bonus = 0
+		int ExeRoll
+		int TarRoll
+		bool TarFoe
+		TarFoe = prefixed(Target.Tag,"FOE_")
+		if TarFoe and Target.Boss
+			return false
+		end
+		Exe = Act.Executor
+		ExeHP = Exe.Points("HP")
+		TarHP = Tar.Points("HP")
+		switch __skill
+			case 1
+				Bonus = math.ceil(ExeHP.Have/25)
+			case 3
+				Bonus = -math.ceil(ExeHP.Have/35)
+		end
+		if TarFoe
+			Bonus = -Bonus
+		end
+		ExeRoll = math.rand(0,ExeHP.Have+Bonus)
+		TarRoll = math.rand(0,TarHP.Have)
+		if ExeRoll<TarRoll
+			TarHP.Have = 1
+			new Hurt("Disemboweled",Target.Tag,255,0,0)
+			return true
+		elseif prefixed(Exe.Tag,"FOE_")
+			return false
+		end
+		number procent
+		procent = math.ceil((ExeRoll/TarRoll)*100)
+		if procent<__skill*10
+			if __skill==3 or (procent<5 and __skill=2)
+				ExeHP.Have = 1
+				new Hurt("Backfired! Killed!",Exe.Tag,255,0,0)
+				return false
+			else
+				ExeHP.Have = 1
+				new Hurt("Backfired! Disemboweled",Exe.Tag,255,0,0)
+				return false
+			end
+		end
+		return false
+	end
+	
+	return HakkieTakkie
+end
