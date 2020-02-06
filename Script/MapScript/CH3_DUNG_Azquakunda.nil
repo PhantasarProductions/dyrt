@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.05
+// version: 20.02.06
 // End License Information
 
 
@@ -42,7 +42,7 @@
 #use "Script/Use/StartCombatMod"
 #use "libs/strings"
 
-#macro numfloors 4
+#macro numfloors 5
 #macro strfloors 0
 
 group MScript
@@ -65,7 +65,14 @@ group MScript
 		Map.Kill("LvlBarrier",true)
 	end
 	
+	void RESETRESPAWN()
+		if not Done.Azquakunda_Respawn_Reset
+			gv.Bool.RESPAWN_INITIATED = false
+		end
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("ResetRespawn","ResetRespawn")
 		Map.ZA_Enter("MeryaTutor","MeryaTutor")
 		Map.ZA_Enter("MeryaSecret","ShowSecret")
 		Map.ZA_Leave("MeryaSecret","HideSecret")
