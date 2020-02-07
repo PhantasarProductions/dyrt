@@ -34,8 +34,20 @@
 ; 
 ; version: 20.02.05
 ; End License Information
+
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
 
 ; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+
+:Rejoin
+	chk Done.Done_Azquakunda_Eric_found,einde
+	call MapText,"Rejoin"
+	mov "Eric",RPG.Party[6]
+	mov "Brendor",RPG.Party[7]
+	call Map.Kill,"EricBarrier",true
+	call Map.Kill,"Eric",true
+	call Map.Kill,"ActBrendor",true
+	:einde
+	end

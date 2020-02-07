@@ -13,8 +13,8 @@ do
 			return false
 		end
 		Exe = Act.Executor
-		ExeHP = Exe.Points("HP")
-		TarHP = Tar.Points("HP")
+		ExeHP = Exe.Char.Points("HP")
+		TarHP = Target.Char.Points("HP")
 		switch __skill
 			case 1
 				Bonus = math.ceil(ExeHP.Have/25)
@@ -24,8 +24,8 @@ do
 		if TarFoe
 			Bonus = -Bonus
 		end
-		ExeRoll = math.rand(0,ExeHP.Have+Bonus)
-		TarRoll = math.rand(0,TarHP.Have)
+		ExeRoll = math.random(0,ExeHP.Have+Bonus)
+		TarRoll = math.random(0,TarHP.Have)
 		if ExeRoll<TarRoll
 			TarHP.Have = 1
 			new Hurt("Disemboweled",Target.Tag,255,0,0)
@@ -36,7 +36,7 @@ do
 		number procent
 		procent = math.ceil((ExeRoll/TarRoll)*100)
 		if procent<__skill*10
-			if __skill==3 or (procent<5 and __skill=2)
+			if __skill==3 or (procent<5 and __skill==2)
 				ExeHP.Have = 1
 				new Hurt("Backfired! Killed!",Exe.Tag,255,0,0)
 				return false
