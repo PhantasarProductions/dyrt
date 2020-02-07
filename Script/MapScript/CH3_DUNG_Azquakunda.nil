@@ -42,7 +42,7 @@
 #use "Script/Use/StartCombatMod"
 #use "libs/strings"
 
-#macro numfloors 7
+#macro numfloors 8
 #macro strfloors 0
 
 group MScript
@@ -71,12 +71,22 @@ group MScript
 		end
 	end
 	
+	void BACKTO001()
+		Map.GoToLayer("#001","From008")
+	end
+	
+	void TO008()
+		Map.GoToLayer("#008","Einde")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ResetRespawn","ResetRespawn")
 		Map.ZA_Enter("MeryaTutor","MeryaTutor")
 		Map.ZA_Enter("MeryaSecret","ShowSecret")
 		Map.ZA_Leave("MeryaSecret","HideSecret")
 		Map.ZA_Enter("FindEric","SASKIA:Rejoin")
+		Map.ZA_Enter("BackTo001","BackTo001")
+		Map.ZA_Enter("To008","To008")
 		for i=strfloors,numfloors
 			Map.Layer = sprintf("#%03d",i)
 			if Map.HasTag("MeryaSecret")
