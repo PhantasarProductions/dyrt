@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 2/8/2020 11:54:47 AM
+// Generated: 2/8/2020 12:20:09 PM
 
 do
 var retfunc()
@@ -8,7 +8,7 @@ foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Aldarus_1st"
-foeret.AllowOversoul = true and __skill!=1
+foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A man of honor! Yet he fights for evil. Why?"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/Aldarus.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/ALDARUS.NEGATIVE.PNG")
@@ -66,11 +66,47 @@ foeret.Boss = true
 
 // Oversoul specific
 if Foe.LoadOversoul
+	foeret.Char.Stat("BASE_Defense").Value=0
+	foeret.Char.Stat("BUFF_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+	foeret.Char.Stat("BASE_Strength").Value=0
+	foeret.Char.Stat("BUFF_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
 else
-	foeret.Char.Stat("BASE_HP").Value=2000
+	foeret.Char.Stat("BASE_Accuracy").Value=10000
+	foeret.Char.Stat("BUFF_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Value=0
+	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+	foeret.Char.Stat("BASE_Agility").Value=1000
+	foeret.Char.Stat("BUFF_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Value=0
+	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+	foeret.Char.Stat("BASE_Defense").Value=1000
+	foeret.Char.Stat("BUFF_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Value=0
+	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+	foeret.Char.Stat("BASE_Evasion").Value=1000
+	foeret.Char.Stat("BUFF_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Value=0
+	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+	foeret.Char.Stat("BASE_HP").Value=5000
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+	foeret.Char.Stat("BASE_Intelligence").Value=12345
+	foeret.Char.Stat("BUFF_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Value=0
+	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+	foeret.Char.Stat("BASE_Resistance").Value=1000
+	foeret.Char.Stat("BUFF_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Value=0
+	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+	foeret.Char.Stat("BASE_Strength").Value=1000
+	foeret.Char.Stat("BUFF_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Value=0
+	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
 end
 
 // Skill specific
