@@ -7,6 +7,7 @@ module Aldarus_AI1
 		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
 		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
 			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Eric").Stat("END_"..st).Value
+			CSayF("%10s = %3d",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value)
 		end
 	end
 
@@ -16,11 +17,14 @@ module Aldarus_AI1
 			case 0 1
 				self.Default.Decide(foe)
 			case 2
-				foe.NextAct = new Actions({ActTag="Act_Attack",Targets={Fighter.Team.Hero.Eric},foe.NextActSpeed = 100,ExeTag=foe.tag})
+				foe.NextAct = new Actions({['ActTag']="Act_Attack",['Targets']={Fighter.Team.Hero.Eric},['ExeTag']=foe.Tag})
+				foe.NextActSpeed = 100
 			case 3
-				foe.NextAct = new Actions({ActTag="ABL_HERO_REBECCA_LAY",Targets={foe},foe.NextActSpeed = 100,ExeTag=foe.tag})
+				foe.NextAct = new Actions({['ActTag']="ABL_HERO_REBECCA_LAY",['Targets']={foe},['ExeTag']=foe.Tag})
+				foe.NextActSpeed = 100
 			case 4
-				foe.NextAct = new Actions({ActTag="ABL_ALDARUSSTRIKE",Targets={Fighter.Team.Hero.Eric},foe.NextActSpeed = 100,ExeTag=foe.tag})
+				foe.NextAct = new Actions({['ActTag']="ABL_ALDARUSSTRIKE",['Targets']={Fighter.Team.Hero.Eric},['ExeTag']=foe.Tag})
+				foe.NextActSpeed = 100
 
 		end
 	end
