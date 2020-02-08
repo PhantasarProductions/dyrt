@@ -41,14 +41,15 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 #use "libs/strings"
+
 group MScript
 	
 	void Z(int z)
 		for i=1,7
 			if z>i
-				Maps.HideByZone(sprintf("Z%02d",i))
+				Map.HideByZone(sprintf("Z%02d",i))
 			else
-				Maps.ShowByZone(sprintf("Z%02d",i))
+				Map.ShowByZone(sprintf("Z%02d",i))
 			end
 		end
 	end
