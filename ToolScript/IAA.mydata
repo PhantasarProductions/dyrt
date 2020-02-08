@@ -10554,7 +10554,7 @@ Rec: EQW_DERNOR_BAT4
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = large Bat
+	Name = Large Bat
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
