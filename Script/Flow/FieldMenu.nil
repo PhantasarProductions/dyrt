@@ -435,7 +435,7 @@ group Flow_FieldMenu
 								Help[#Help+1] = "= To defeat Scharum"
 							case "SealedBoss"
 								Help[#Help+1] = "= To defeat a certain sealed boss"
-							case "BoolVar"
+							case "BoolVar" "NumVar"
 								Help[#Help+1] = "= To have reached a certain spot in the scenario"
 							case "Charm"
 								if #v==1
