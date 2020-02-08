@@ -122,9 +122,7 @@ group MScript
 		StartCombat.NoLose = true
 		StartCombat.FoeIDDQD = false
 		StartCombat.Ready()
-	end
-
-		error("Boss not yet configured")
+		//error("Boss not yet configured")
 	end
 	
 	
