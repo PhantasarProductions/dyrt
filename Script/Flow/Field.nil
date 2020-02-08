@@ -795,6 +795,9 @@ group FlowField
 		// Draw Map
 		FieldMap.Kthura.Draw()
 		
+		// Map Script Draw
+		LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Draw()")
+		
 		// Fader
 		Fader.Run()
 	end
