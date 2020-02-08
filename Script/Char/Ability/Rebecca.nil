@@ -45,7 +45,8 @@ do
 		Power4x = { Skill_Sword=15*s },
 		WarShout = { Skill_Sword=8*(s*s) },
 		Focus = { Scharum = true },
-		Power5x = { SealedBoss = true }
+		Power5x = { SealedBoss = true },
+		Lay    =  { NumVar = {'KILLED_BOSS_ALDARUS3',1} }
 	}
 	#endpure
 end
