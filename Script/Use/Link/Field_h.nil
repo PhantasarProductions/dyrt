@@ -227,6 +227,15 @@ group Map
 		FLD_Exe(sprintf("FlowField.Map.ScrollX = %d\nFlowField.Map.ScrollY = %d",x,y))
 	end
 	
+	get int ScrollX
+		return LuaGetInt('FLOW_FIELD','FlowField.Map.ScrollX')
+	end
+	
+	get int ScrollY
+		return LuaGetInt('FLOW_FIELD','FlowField.Map.ScrollY')
+	end
+		
+	
 	void Click(string tag, string func, infinity)
 		string args
 		for i,v in ipairs { infinity }
@@ -290,10 +299,10 @@ group Map
 		})
 		setmetatable(self.ObjBool,{
 			["__index"] = boolean(s,string k)
-				return FLD_GetBool(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")]",k))
+				return FLD_GetBool(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")]",k))
 			end,
 			["__newindex"] = void(s,string k,bool v)
-				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %s",k,tostring(v)))
+				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")] = %s",k,tostring(v)))
 			end
 		})
 	end
