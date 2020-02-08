@@ -1,0 +1,29 @@
+module Aldarus_AI1
+	
+	var Default
+	int beurt = 0
+	
+	void CONSTRUCTOR()
+		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
+			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Eric").Stat("END_"..st).Value
+		end
+	end
+
+	void Decide(foe)
+		self.beurt++
+		switch self.beurt % 5
+			case 0 1
+				self.Default.Decide(foe)
+			case 2
+				foe.NextAct = new Actions({ActTag="Act_Attack",Targets={Fighter.Team.Hero.Eric},foe.NextActSpeed = 100,ExeTag=foe.tag})
+			case 3
+				foe.NextAct = new Actions({ActTag="ABL_HERO_REBECCA_LAY",Targets={foe},foe.NextActSpeed = 100,ExeTag=foe.tag})
+			case 4
+				foe.NextAct = new Actions({ActTag="ABL_ALDARUSSTRIKE",Targets={Fighter.Team.Hero.Eric},foe.NextActSpeed = 100,ExeTag=foe.tag})
+
+		end
+	end
+	
+	
+end
