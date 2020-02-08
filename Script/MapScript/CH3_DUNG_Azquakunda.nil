@@ -79,6 +79,56 @@ group MScript
 		Map.GoToLayer("#008","Einde")
 	end
 	
+	string cage = "No!"
+	void CAGEDOWN()
+		CSay("Cage down order, received!")
+		Map.Obj="TrapCage"
+		//#- Map.ObjInt.Y Screen.H
+		Map.ObjInt.Y = (0-math.abs(Map.ScrollY))
+		CSayF("Y of scroll is now %d; Y of cage is now %d",Map.ScrollY,Map.ObjInt.Y)
+		self.cage = "DOWN"
+	end
+			
+	void CAGEUP()
+		CSay("Cage Up order, received!")
+		self.cage = "UP"
+	end
+	void ONYXCONFIG()
+		//;mov "OnyxBang",Map.Obj
+		//;mov 223,Map.ObjInt.X
+		//;mov 347,Map.ObjInt.Y
+		Map.Obj = "OnyxBang"
+		Map.ObjInt.X = 223
+		Map.ObjInt.Y = 347
+	end
+	
+	void RESTOREPARTY()
+		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya" }
+			RPG.Party[i] = ch
+		end
+	end
+
+	void BOSS()
+		for i=2,8
+			RPG.Party[i] = ""
+		end
+		RPG.Party[1] = "Eric"
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "Azquakunda"
+		StartCombat.Foe[1] = "Boss/Aldarus"
+		StartCombat.RX[2] = 50
+		StartCombat.RY[2] = 75
+		StartCombat.NoLose = true
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+
+		error("Boss not yet configured")
+	end
+	
+	
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ResetRespawn","ResetRespawn")
 		Map.ZA_Enter("MeryaTutor","MeryaTutor")
@@ -87,6 +137,7 @@ group MScript
 		Map.ZA_Enter("FindEric","SASKIA:Rejoin")
 		Map.ZA_Enter("BackTo001","BackTo001")
 		Map.ZA_Enter("To008","To008")
+		Map.ZA_Enter("StartAldarus","SASKIA:Aldarus")
 		for i=strfloors,numfloors
 			Map.Layer = sprintf("#%03d",i)
 			if Map.HasTag("MeryaSecret")
@@ -96,10 +147,29 @@ group MScript
 		end
 	end
 	
-	void Draw()
+	void Update()
 	end
 	
-	void Update()
+	void Draw()
+		//CSay(Map.Layer)
+		if Map.Layer=="#000"
+			switch self.cage
+				case "DOWN"
+					Map.Obj="TrapCage"
+					Map.ObjBool.Visible=true
+					if Map.ObjInt.Y<256
+						Map.ObjInt.Y++
+						CSayF("Cage on position %3d",Map.ObjInt.Y)
+					end
+				case "UP"
+					Map.Obj="TrapCage"
+					Map.ObjInt.Y--
+					if Map.ObjInt.Y<-Screen.H
+						Map.ObjBool.Visible=false
+						self.cage = "No!"
+					end
+			end
+		end
 	end
 	
 end

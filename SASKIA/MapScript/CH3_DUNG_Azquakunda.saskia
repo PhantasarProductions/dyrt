@@ -49,5 +49,43 @@
 	call Map.Kill,"EricBarrier",true
 	call Map.Kill,"Eric",true
 	call Map.Kill,"ActBrendor",true
-	:einde
+	jmp einde
+	
+:Aldarus
+	chk not gv.Bool.Done_Azquakunda_Eric_found,einde
+	chk gv.Bool.Done_Azquakunda_AldarusDefeated,einde
+	call Map.ShowByLabel,"Hero"
+	mov "Eric",Map.Leader
+	call Map.WalkTo,"EricSpot"
+	call MapScript.CageDown
+	call MapText,"ALDARUS_A"
+	;mov "OnyxBang",Map.Obj
+	;mov 223,Map.ObjInt.X
+	;mov 347,Map.ObjInt.Y
+	call MapScript.OnyxConfig
+	call OnyxBang.Start
+	call Map.ShowObj,"Aldarus"
+	:OnyxBang
+	chk OnyxBang.Going,OnyxBang
+	call MapText,"ALDARUS_B"
+	call MapScript.Boss
+	chk not gv.Bool.Victor,Defeat
+	call MapText,"ALDARUS_C"
+	call OnyxBang.Start
+	call Map.HideObj,"Aldarus"
+	call MapScript.CageUp
+	call OnyxBang.Start
+	:OnyxBang2
+	chk OnyxBang.Going,OnyxBang2
+	call MapText,"ALDARUS_D"
+	mov true,WM_Unlocked.D_Yasathar
+	call MapScript.RestoreParty
+	jmp einde
+
+:Defeat
+	call MapScript.RestoreParty
+	call Respawn.Wipe
+	end
+
+:einde
 	end
