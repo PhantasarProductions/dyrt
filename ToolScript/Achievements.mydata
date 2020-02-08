@@ -39,6 +39,20 @@ skill_3=true
 # Data last generated 8/2/2020
 
 
+Rec: BOSS_ALDARUS1
+	AutoProcess = TRUE
+	Description = Defeat Aldarus in Azquakunda Prison
+	hidden = TRUE
+	Name = En garde, monsieur!
+	ProcessMax = 1
+	ProcessString = 
+	ProcessValue = KILLED_BOSS_ALDARUS
+	require_gamejolt = FALSE
+	skill_1 = true
+	skill_2 = true
+	skill_3 = true
+	skill_check = FALSE
+
 Rec: BOSS_BLACKDRAGON
 	AutoProcess = TRUE
 	Description = Defeat the black guardian

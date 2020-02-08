@@ -7,6 +7,21 @@ do
 
 table ret
 ret = {
+	["BOSS_ALDARUS1"] = {
+		["AutoProcess"] = true,
+		["Description"] = "Defeat Aldarus in Azquakunda Prison",
+		["hidden"] = true,
+		["Name"] = "En garde, monsieur!",
+		["ProcessMax"] = 1,
+		["ProcessString"] = "",
+		["ProcessValue"] = "KILLED_BOSS_ALDARUS",
+		["require_gamejolt"] = false,
+		["skill_1"] = true,
+		["skill_2"] = true,
+		["skill_3"] = true,
+		["skill_check"] = false,
+
+	},
 	["BOSS_BLACKDRAGON"] = {
 		["AutoProcess"] = true,
 		["Description"] = "Defeat the black guardian",
