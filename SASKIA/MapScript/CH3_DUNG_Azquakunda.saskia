@@ -80,9 +80,12 @@
 	call MapText,"ALDARUS_D"
 	mov true,WM_Unlocked.D_Yasathar
 	call MapScript.RestoreParty
+	call Map.HideByLabel,"Hero"
+	mov true,gv.Bool.Done_Azquakunda_AldarusDefeated
 	jmp einde
 
 :Defeat
+	call Map.HideByLabel,"Hero"
 	call MapScript.RestoreParty
 	call Respawn.Wipe
 	end
