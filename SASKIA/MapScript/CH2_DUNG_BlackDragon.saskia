@@ -112,6 +112,10 @@
 	call MapScript.SASKIA,"ScyndiStart"
 	;call error,"Meeting with Rondomo not yet completely scripted"
 	end
+	
+:Defeat
+	call Respawn.Wipe
+	end
 
 :Dragon
 	call CSay,"Dragon meeting script started"
