@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/ZoraPrison.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Azquakunda.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.24
+// version: 20.02.08
 // End License Information
 
 module Exa_Arena
