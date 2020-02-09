@@ -198,8 +198,10 @@ class Hero extends Fighter
 						unlock = false
 					case "Scharum"
 						unlock = unlock and gv.Bool["WON_Scharum_"..self.Tag]
-					case "Bool"
+					case "Bool" "BoolVar"
 						unlock = unlock and gv.Bool[v]
+					case "Num" "NumVar"
+						unlock = unlock and (gv.Num[v[1]]>=v[2])
 					case "SealedBoss"
 						unlock = false
 						// TODO: Make this possible!
