@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/ExamRuins.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Yasathar.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.16
+// version: 20.02.09
 // End License Information
 
 module Yas_Arena
