@@ -1,0 +1,91 @@
+// License Information:
+// src/Tricky Script/Script/MapScript/None.nil
+// Version: 19.12.26
+// Copyright (C)  Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+#use "libs/strings"
+
+// #macro __EMPTY gv.Bool.GagoltonEmpty
+#macro __EMPTY true
+
+group MScript
+	
+	void DELISTO()
+		WorldMap.Delisto()
+	end
+	
+	void GOTO(string tag)
+		string loc
+		loc = replace(tag,"GOTO_","")
+		// That looks awkward above, but replace has a 2nd return and that will spook GoToLayer
+		Map.GoToLayer("TOWN",loc)
+	end
+	
+	void MUSIC()
+		if __EMPTY
+			Music.Play('Music/Cities/Gagolton_Deserted.wav')
+		else
+			Music.Play('Music/Cities/Gagolton_Populated.wav')
+		end
+	end
+	
+	void CONSTRUCTOR()
+			for tag in Map.EachTag
+			if __EMPTY and suffixed(tag,"_DISA")
+				Map.Kill(tag)
+				// Please note that the table used for EachTag won't 
+				// change anymore once the for-loop has begun, so this is safe!
+				CSayF("Removed NPC: %s",tag)
+			elseif prefixed(tag,"GOTO_")
+				Map.ZA_Enter(tag,"GoTo",tag)
+			end
+		end
+		Map.ZA_Enter("Delisto2","Delisto")
+		Map.ZA_Enter("Delisto3","Delisto")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
