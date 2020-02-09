@@ -44,6 +44,16 @@
 
 group MScript
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/MountainKing.wav"
+		StartCombat.Arena = "Yasathar"
+		StartCombat.Foe[1] = "Boss/MountainKing"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
 	void Z(int z)
 		for i=1,7
 			if i>z
@@ -54,9 +64,15 @@ group MScript
 				CSayF("Showing: %d/%d",i,z)
 			end
 		end
+		Map.HideByLabel("Hero")
 		Map.ShowObj("Player")
 		Map.Obj="Player"
 		Map.ObjInt.Dominance=40		
+		if z==7 and not gv.Bool.Defeated_MountainKing
+			Map.ShowByLabel("Hero")
+			Map.HideObj("Player")
+			MapScript.SASKIA("Boss")
+		end
 	end
 	
 	void CONSTRUCTOR()
