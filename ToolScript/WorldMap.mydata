@@ -126,8 +126,8 @@ Rec: D_FRENDOR
 
 Rec: D_GAGOLTON
 	AvailableOnStart = FALSE
-	Kthura = 
-	Layer = #001
+	Kthura = CH3_CITY_Gagolton
+	Layer = TOWN
 	MarkAsNew = TRUE
 	Name = Gagolton
 	Start = Start
