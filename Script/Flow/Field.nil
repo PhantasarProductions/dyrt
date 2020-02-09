@@ -353,6 +353,21 @@ group FieldMap
 		$Kthura.ShowObject(tag)
 	end
 	
+	get string SerieTags
+		string ret = "{"
+		int i = 0
+		for tg in self.Kthura.EachTag()
+			i++
+			CSayF("%05d: %s t = %s",i,type(tg),tostring(tg))
+			if i>1 
+				ret = ret .. ", "
+			end
+			ret = ret .. '"'..tg..'"'
+		end
+		ret = ret .. "}"
+		return ret
+	end
+	
 end
 
 string fieldleader

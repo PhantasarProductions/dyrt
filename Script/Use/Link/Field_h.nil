@@ -168,6 +168,36 @@ group Map
 		return LuaGetString("FlowField.Map.Kthura.Actor.Player.Wind")
 	end
 	
+	get table TagList
+		string temp
+		delegate f
+		//temp = LuaGetString("FLOW_FIELD","NIL.LuaSerialize('temp',FlowField.Map.Kthura.Tags)")
+		//error(temp)
+		temp = "return "..LuaGetString("FLOW_FIELD","FlowField.Map.SerieTags")
+		#pure
+		f = (loadstring or load)(temp)
+		#endpure
+		assert(f,"Tag list not properly acquired!")
+		return f()
+	end
+	
+	get table Tags
+		return self.TagList
+	end
+	
+	get delegate EachTag
+		int i = 0
+		table tags
+		tags = self.TagList
+		return var()
+			i++
+			if not tags[i]
+				return nil;
+			end
+			return tags[i]
+		end
+	end
+	
 	void HideByLabel(string label)
 		FLD_Exe(sprintf("FlowField.Map.Kthura.HideByLabel(trim('%s'))",label))
 	end
