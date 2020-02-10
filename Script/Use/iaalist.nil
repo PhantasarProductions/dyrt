@@ -1,6 +1,7 @@
 // Generated list!
 table itemret
 itemret[#itemret+1]="ITM_ALOEVERA"
+itemret[#itemret+1]="ITM_AMBROSIA"
 itemret[#itemret+1]="ITM_ANTIDOTE"
 itemret[#itemret+1]="ITM_APPLE"
 itemret[#itemret+1]="ITM_BANDAGE"
@@ -63,6 +64,7 @@ itemret[#itemret+1]="EQA_ROBE4"
 itemret[#itemret+1]="EQA_SHANDA_ROYALDRESS"
 itemret[#itemret+1]="EQA_SHIRT"
 itemret[#itemret+1]="EQA_YOUNGIRRAVONIA_DRESS"
+itemret[#itemret+1]="JWL_AQUAMARINE"
 itemret[#itemret+1]="JWL_AURINA"
 itemret[#itemret+1]="JWL_BRACERS"
 itemret[#itemret+1]="JWL_EMERALD"
