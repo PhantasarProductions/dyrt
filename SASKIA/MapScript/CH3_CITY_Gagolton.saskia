@@ -42,3 +42,14 @@
 	call MapText,"ROSETTA"
 	call StoneMaster,"ROSETTA"
 	end
+	
+:Karl
+	call MapText,"KARL"
+	call Merchant,"CH3_KARL"
+	end
+	
+:Kirana
+	mov true,WM_Unlocked.D_Airom
+	call MapText,"Kirana"
+	call Map.Kill,"NPC_Kirana",true
+	end
