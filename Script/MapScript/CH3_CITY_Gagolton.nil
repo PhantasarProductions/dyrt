@@ -42,8 +42,8 @@
 #use "Script/Use/StartCombatMod"
 #use "libs/strings"
 
-// #macro __EMPTY gv.Bool.GagoltonEmpty
-#macro __EMPTY true
+#macro __EMPTY gv.Bool.GagoltonEmpty
+// #macro __EMPTY true
 
 group MScript
 	
@@ -66,6 +66,46 @@ group MScript
 		end
 	end
 	
+	void ENTER(string zone)
+		Map.ShowByZone(zone)
+	end
+	
+	void LEAVE(string zone)
+		Map.HideByZone(zone)
+	end
+	
+	void TOBASEMENT()
+		if __EMPTY
+			Map.GoToLayer("TOWN","Basement")
+		else
+			Map.WalkTo("BasementExit")
+			MapText("GETOUTOFMYLAB")
+		end
+	end
+	
+	void NPC_ROSETTA_DISA()
+		MapScript.SASKIA("Rosetta")
+	end
+	
+	void Guard()
+		MapText("JUGNOENTRY")
+	end
+	
+	get delegate NPC_GUARD_DISA
+		return self.Guard
+	end
+	get delegate NPC_GUARD2_DISA
+		return self.Guard
+	end
+	
+	void NPC_DOG_DISA()
+		if Map.Leader=="Scyndi"
+			MapText("DOG.SCYNDI")
+		else
+			MapText("DOG")
+		end
+	end
+	
 	void CONSTRUCTOR()
 			for tag in Map.EachTag
 			if __EMPTY and suffixed(tag,"_DISA")
@@ -75,10 +115,15 @@ group MScript
 				CSayF("Removed NPC: %s",tag)
 			elseif prefixed(tag,"GOTO_")
 				Map.ZA_Enter(tag,"GoTo",tag)
+			elseif prefixed(tag,"ZONE_")
+				Map.HideByZone(tag)
+				Map.ZA_Enter(tag,"Enter",tag)
+				Map.ZA_Leave(tag,"Leave",tag)
 			end
 		end
 		Map.ZA_Enter("Delisto2","Delisto")
 		Map.ZA_Enter("Delisto3","Delisto")
+		Map.ZA_Enter("ToBasement","ToBasement")
 	end
 	
 	void Draw()
