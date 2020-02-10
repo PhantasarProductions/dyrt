@@ -60,6 +60,7 @@ class SMUpdate
 	get string UpdateName
 		return self.NameUpdate
 	end
+		
 	
 		
 	get int RequireStones
@@ -74,7 +75,7 @@ class SMUpdate
 			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Value + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Value + 1)
 		end
 		if self.StatusChange!=""
-			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_Stat_"..self.self.StatusChange).Value+1)
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_Stat_"..self.StatusChange).Value+1)
 		end
 		//CSay(tostring(ret))
 		switch __skill
