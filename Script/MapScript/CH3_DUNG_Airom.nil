@@ -40,9 +40,26 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+#use "libs/strings"
+
+#macro __SECRETS 4
+
 group MScript
 	
+	void HSECRET(int s)
+		Map.HideByLabel(sprintf("SECRET%d",s))
+	end
+	
+	void SSECRET(int s)
+		Map.ShowByLabel(sprintf("SECRET%d",s))
+	end
+	
 	void CONSTRUCTOR()
+		for i=1,__SECRETS
+			self.HSECRET(i)
+			Map.ZA_Enter(sprintf("ShowSecret%d",i),'SSecret',i)
+			Map.ZA_Enter(sprintf("HideSecret%d",i),'HSecret',i)
+		end
 	end
 	
 	void Draw()
