@@ -34,8 +34,24 @@
 ; 
 ; version: 20.02.11
 ; End License Information
+
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
+	
+:Kirana
+	call Map.ShowByLabel,"Kirana"
+	call MapText,"KIRANA_A"
+	call MapScript.SproutWings
+	call MapText,"KIRANA_B"
+	call Map.FightKirana
+	call MapText,"KRIANA_C"
+	call OnyxBang.Start
+	call Map.Kill,"Kirana",true
+	:OnyxBang
+	chk OnyxBang.Going,OnyxBang
+	call MapText,"KIRANA_D"
+	call Map.Kill,"Boss",true
+	mov true,gv.Bool.GagoltonEmpty
+	call WorldMap.Delisto
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
