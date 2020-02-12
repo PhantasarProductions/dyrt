@@ -54,12 +54,20 @@ group MScript
 		Map.ShowByLabel(sprintf("SECRET%d",s))
 	end
 	
+	void TUTOR_REFILL()
+		if not Done.Done_Tutorial_InfEncounter_Airom
+			MapText("INF_TUTOR")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		for i=1,__SECRETS
 			self.HSECRET(i)
 			Map.ZA_Enter(sprintf("ShowSecret%d",i),'SSecret',i)
 			Map.ZA_Enter(sprintf("HideSecret%d",i),'HSecret',i)
 		end
+		Map.RENC_Inf = true
+		Map.ZA_Enter("Tutor_Refill","Tutor_Refill")
 	end
 	
 	void Draw()
