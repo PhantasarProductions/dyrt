@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.01.31
+// Version: 20.02.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -235,8 +235,13 @@ group Execution
 		for k,v in pairs(Action.Act)
 			if prefixed(k,"Cause") and v
 				string stc
+				string stc2
 				stc = right(k,#k-5)
-				if not Target.StatusChanges[stc] and math.random(0,99) >= Target.Char.Stat("END__RESIST_Stat_"..stc).Value
+				stc2 = stc
+				if stc=="Curse"
+					stc2="Silence"
+				end
+				if not Target.StatusChanges[stc] and math.random(0,99) >= Target.Char.Stat("END__RESIST_Stat_"..stc2).Value
 					Target.StatusChanges[stc] = true
 					new Hurt(stc.."!",255,100,60)
 					hit = true
