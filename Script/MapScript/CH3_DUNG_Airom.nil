@@ -60,6 +60,30 @@ group MScript
 		end
 	end
 	
+	void SPROUTWINGS()
+		int x
+		int y
+		Map.Obj = "Kirana"
+		Map.ObjString.Texture = "gfx/actors/people/Onyx/Kirana.wings.png"
+		x = Map.ObjInt.x
+		y = Map.ObjInt.y
+		Map.Obj = "OnyxBang"
+		Map.Obj.x = x
+		Map.Obj.y = y + 100
+	end
+	
+	void FIGHTKIRANA()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "Airom"
+		StartCombat.Foe[1] = "Boss/Kirana"
+		StartCombat.RX[2] = 50
+		StartCombat.RY[2] = 75
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		for i=1,__SECRETS
 			self.HSECRET(i)
