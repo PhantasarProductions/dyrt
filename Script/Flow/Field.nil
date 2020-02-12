@@ -70,7 +70,7 @@ class Clickables
 	static var Map
 	
 	readonly string Tag
-	readonly string Layer
+	string Layer
 	readonly string ArriveState
 	readonly string ArriveFunction
 	readonly delegate ArriveDelegate
@@ -750,6 +750,7 @@ group FlowField
 							int posx  
 							int posy  
 							string spot
+							var cl
 							kth.Obj=Tag
 							posx = kth.ObjInt.x
 							posy = kth.ObjInt.y + 32
@@ -761,14 +762,15 @@ group FlowField
 								posy = kth.ObjY(spot)
 							end
 							if prefixed(Tag,"NPC_MT_")
-								new Clickables(Tag, posx, posy, MapText, Tag)
+								cl = new Clickables(Tag, posx, posy, MapText, Tag)
 							elseif prefixed(Tag,"NPC_MTC_")
 								new Clickables(Tag, posx, posy, CharText,Tag)
 							elseif prefixed(Tag,"NPC_SASKIA_")
-								new Clickables(Tag, posx, posy, MapScript.SASKIA, Tag)
+								cl = new Clickables(Tag, posx, posy, MapScript.SASKIA, Tag)
 							else
-								new Clickables(Tag, posx, posy, MapScript[Tag])
+								cl = new Clickables(Tag, posx, posy, MapScript[Tag])
 							end
+							cl.Layer = Lay
 						end
 				end
 			end
