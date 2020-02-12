@@ -59,6 +59,8 @@ do
 		PoisonCloud
 		           = { ["Skill_Green Dragon"] = 1 },
 		NeutPoison = { ["Skill_Green Dragon"] = 1 + s },
+		BioHazard  = { ["Skill_Green Dragon"] = 8 },
+		Vitalize   = { ["Skill_Green Dragon"] = 5 * s },
 		
 		-- Black
 		Darkness   = { ["Skill_Black Dragon"] = 1 },
