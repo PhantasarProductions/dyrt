@@ -44,6 +44,7 @@
 #use "libs/tables"
 #use "libs/strings"
 #use "libs/Collections"
+#use "libs/datetime"
 
 #accept FlowField
 #accept FieldMap
@@ -66,6 +67,8 @@ group RENC
 	int gy
 	int gdeg
 	bool ManEncOn = true
+	
+	bool Infinite = false
 
 	table Foes
 	table AllowLayer
@@ -189,6 +192,7 @@ group RENC
 		$ManEncOn = true
 		$CompileFoeList()
 		$CompileAllowLayer()
+		$Infinite = false
 	end
 	
 	void RencCheck()
@@ -238,7 +242,7 @@ group RENC
 			end
 			repeat
 				numfoe = math.random(1,self.MaxFoes.GetValue(__skill,numchars))
-			until math.random(0,numfoe)<=__skill
+			until math.random(0,numfoe)<=__skill and math.random(0,numfoe)<=numchars
 			for i=1,numfoe
 				StartCombat.Foe[i] = "Reg/"..$Foes[math.random(1,#self.Foes)]
 			end
@@ -273,6 +277,21 @@ group RENC
 		end
 	end
 	
+	void InfRefill()
+		int mc 
+		mc = math.ceil(($MapTravelLevel-__travellevel)/__skill)
+		if $MapTravelLevel<=__travellevel or mc==0
+			// mc should never be 0 or in the check, but I've seen
+			// crazier things, so I need this check to be 100% no
+			// division by 0 is possible later!
+			$Encounters=$MaxEncounters
+			return
+		end
+		if $Encounters<$MaxEncounters and Now.SecStamp % mc == 0
+			$Encounters ++
+		end
+	end
+	
 	void Gauge()
 		int r
 		int g
@@ -280,6 +299,9 @@ group RENC
 		number s
 		number bar
 		number rgauge
+		if $Infinite
+			self.InfRefill()
+		end
 		if $AutEncOn and $gx > Screen.Width-50
 			$gx--
 		elseif (not $AutEncOn) and $gx < Screen.Width + 25

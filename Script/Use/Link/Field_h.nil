@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.02.10
+// Version: 20.02.12
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -348,6 +348,14 @@ group Map
 
 	void WipeSASKIA()
 		FLD_Exe("SASKIA.Wipe()")
+	end
+	
+	get bool RENC_Inf
+		return LuaGetBool("FLOW_FIELD","RENC.Infinite")
+	end
+	
+	set bool RENC_Inf
+		FLD_Exe(sprintf("RENC.Infinite = %s",tostring(value)))
 	end
 	
 end
