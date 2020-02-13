@@ -52,9 +52,9 @@ module Rondomo_AI1
 			heroes[#heroes+1]=hero
 		end
 		bool AnyOneFull()
-			bool ret = true
+			bool ret = false
 			for i,h in ipairs(heroes)
-				ret = ret and h.Char.Points("HP").Have==h.Char.Points("HP").Maximum
+				ret = ret or h.Char.Points("HP").Have==h.Char.Points("HP").Maximum
 			end
 			return ret
 		end
