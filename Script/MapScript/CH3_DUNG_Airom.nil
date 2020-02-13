@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.12
+// version: 20.02.13
 // End License Information
 
 
@@ -68,8 +68,8 @@ group MScript
 		x = Map.ObjInt.x
 		y = Map.ObjInt.y
 		Map.Obj = "OnyxBang"
-		Map.Obj.x = x
-		Map.Obj.y = y + 100
+		Map.ObjInt.x = x
+		Map.ObjInt.y = y + 100
 	end
 	
 	void FIGHTKIRANA()
@@ -92,6 +92,7 @@ group MScript
 		end
 		Map.RENC_Inf = true
 		Map.ZA_Enter("Tutor_Refill","Tutor_Refill")
+		Map.ZA_Enter("Boss","SASKIA:Kirana")
 	end
 	
 	void Draw()
