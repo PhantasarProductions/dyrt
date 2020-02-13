@@ -53,6 +53,10 @@ module Forest_Template_Module
 	table texclouds
 	table clouds
 	
+	int CloudR=255
+	int CloudG=255
+	int CloudB=255
+	
 	
 	void CONSTRUCTOR()
 		// I think I need to make a quicker way to do this :P
@@ -156,7 +160,7 @@ module Forest_Template_Module
 		// sky
 		Color(self.texsky.R,self.texsky.G,self.texsky.B)
 		Rect(0,0,Screen.Width,Screen.Height)
-		__white
+		Color(self.CloudR,self.CloudG,self.CloudB)
 		for cloud in each(self.clouds)
 			cloud.Tex.Draw(cloud.X,cloud.Y)
 		end
