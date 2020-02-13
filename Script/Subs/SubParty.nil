@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 20.01.24
+// Version: 20.02.13
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -369,7 +369,7 @@ group SubParty
 			// ondernul = RPG.Char(CharTag).Stat("Experience").Value
 			RPG.Char(CharTag).Stat("Level").Value++
 			level =  RPG.Char(CharTag).Stat("Level").Value
-			self.JustLeveled[CharTag] = 2500
+			self.JustLeveled[CharTag] = 320
 			SubParty.SetLevelStats(CharTag,level)
 			//SubParty.AudioLevelUp.Play()
 			CSayF("On spot number #%d, character '%s' has gone up to level %04d/%s",num,tag,level,roman(level))
@@ -431,7 +431,7 @@ group SubParty
 					// ondernul = RPG.Char(CharTag).Stat("Experience").Value
 					RPG.Char(CharTag).Stat("Level").Value++
 					level =  RPG.Char(CharTag).Stat("Level").Value
-					self.JustLeveled[CharTag] = 2500
+					self.JustLeveled[CharTag] = 320
 					SubParty.SetLevelStats(CharTag,level)
 					SubParty.AudioLevelUp.Play()
 				end
