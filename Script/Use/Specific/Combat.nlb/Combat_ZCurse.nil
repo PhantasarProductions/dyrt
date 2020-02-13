@@ -83,7 +83,7 @@ new Combat_Status("Curse",{
 				end
 			case 9
 				if (isFoe and __skill!=3) or (isHero and __skill!=1)
-					f.Have = 0
+					f.Char.Points("HP").Have = 0
 				end
 			case 10
 				if isHero
