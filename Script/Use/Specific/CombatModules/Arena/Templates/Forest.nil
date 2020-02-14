@@ -57,6 +57,12 @@ module Forest_Template_Module
 	int CloudG=255
 	int CloudB=255
 	
+	int FloorR=255
+	int FloorG=255
+	int FloorB=255
+	
+	var texfloorfile
+	
 	
 	void CONSTRUCTOR()
 		// I think I need to make a quicker way to do this :P
@@ -165,8 +171,8 @@ module Forest_Template_Module
 			cloud.Tex.Draw(cloud.X,cloud.Y)
 		end
 		// floor
-		__white
-		self.texfloor = self.texfloor or LoadImage("GFX/Textures/Road/Grass1.png")
+		Color(self.FloorR,self.FloorG,self.FloorB)
+		self.texfloor = self.texfloor or LoadImage(self.texfloorfile or "GFX/Textures/Road/Grass1.png")
 		self.texfloor.Tile(0,HalfY,Screen.Width,HalfY)
 		//self.texfloor.Tile(0,539,Screen.Width,539) // DEBUG! Not usable, since screen heights can differ!
 		// trees
