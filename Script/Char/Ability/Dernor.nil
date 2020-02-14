@@ -55,6 +55,7 @@ do
 		CrocBite        = { Charm = { "Croc" }, Skill_Nature = 10 + (10 * s) },
 		Spores          = { Charm = { "DeathCap" } },
 		Growl           = { Charm = { "GuardDog" } },
+		Howling         = { Charm = { "Wolf" } },
 	
 		-- Scharum
 	
