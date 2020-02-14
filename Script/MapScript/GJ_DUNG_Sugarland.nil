@@ -40,14 +40,52 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
 group MScript
 	void GAGOLTON()
 		Field.LoadMap("CH3_CITY_GAGOLTON")
 		Map.GoToLayer("TOWN","FromSugarland")
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "*NONE*"
+		StartCombat.Arena = "Sugarland"
+		StartCombat.Foe[1] = "Boss/Turbo Candy"
+		for i=2,__skill+1
+			StartCombat.Foe[i] = "Reg/Candy"
+		end
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void GOBACK()
+		Map.GoToLayer("#002","FromBack")
+		Achievements.Award("GJ_COMPLETE_SUGARLAND")
+	end
+	
+	void GOEIND()
+		Map.GoToLayer("#005","Einde")
+	end
+	
+	void HSECRET()
+		Map.HideByZone("Secret")
+	end
+	
+	void SSECRET()
+		Map.ShowByZone("Secret")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ToGagolton","Gagolton")
+		Map.ZA_Enter("StartBoss","SASKIA:Boss")
+		Map.ZA_Enter("ToEinde","GoEind")
+		Map.ZA_Enter("WayBack","GoBack")
+		Map.Layer="#001"
+		Map.HideByZone("Secret")
+		Map.ZA_Enter("Secret","SSECRET")
+		Map.ZA_Leave("Secret","HSECRET")
 	end
 	
 	void Draw()
