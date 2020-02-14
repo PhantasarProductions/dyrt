@@ -58,8 +58,8 @@ void EnemyDeathFade(f)
 	if dF.X==0
 		return
 	end // get out!
-	dF.X = dF.X - 4
-	dF.Y = dF.Y + 5
+	dF.X = dF.X - 8
+	dF.Y = dF.Y + 11
 	SetScale(dF.X,dF.Y)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
