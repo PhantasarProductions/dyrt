@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.02.08
+// Version: 20.02.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -550,8 +550,21 @@ group Flow_FieldMenu
 			end
 		end
 		RPG.Party[i2]=swp
-		RPG.Party[i1]=$SwitchHover
-		// TODO: Link back in the case of combat
+		RPG.Party[i1]=$SwitchHover		
+	end
+	
+	void CombatSwitch()
+		string swp1
+		string swp2
+		swp1 = $CharTag
+		swp2 = $SwitchHover
+		self.JustSwitch() // This has to be done anyway
+		// And below the link back to combat
+		LuaDoString("FLOW_COMBAT",sprintf("PlayerSwitch.Switch(trim('%s'),trim('%s'))",swp1,swp2))
+		LuaDoString("FLOW_COMBAT","CombatTime.CalcSpeed()")
+		LuaDoString("FLOW_COMBAT","Fighter.ByTag['"..swp2.."'].GaugePosition = 9876")
+		LuaDoString("FLOW_COMBAT",'Stage.Go("IDLE")')
+		GoToFlow("COMBAT")
 	end
 	
 	void Switch(ubox)
@@ -575,7 +588,7 @@ group Flow_FieldMenu
 			if allow
 				GraphColor.Alpha = 255
 				if Mouse.X>x and Mouse.Y>y and Mouse.X<x+100 and Mouse.Y<y+100
-					$LM_Action		 = self.JustSwitch
+					$LM_Action	 =  $situations[$situation].SwitchAction //self.JustSwitch
 					$SwitchHover = tag
 				end
 			else
@@ -682,6 +695,13 @@ group Flow_FieldMenu
 				["Return"]="FIELD"
 			},
 			// ["BANK"] = {["MenuItems"] = {} } // unused
+			["COMBAT_SWITCH"] = {
+				["MenuItems"] = {
+					{ ["IconFile"] = "Switch", ["Right"]=self.Switch, ["Help"]="Switch chacters" }
+				},
+				["SwitchRange"] = {5,8},
+				["SwitchAction"] = self.CombatSwitch,				
+			},
 			["STONEMASTER"] = { 
 				["MenuItems"] = {
 					{

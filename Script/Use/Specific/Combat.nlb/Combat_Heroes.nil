@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.02.09
+// Version: 20.02.15
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -45,7 +45,7 @@
 
 class Hero extends Fighter
 	
-	table Heroes
+	static table Heroes
 	int JumpIn = 90
 	string Houding = "IDLE"
 	int Frame = 0
@@ -145,7 +145,11 @@ class Hero extends Fighter
 	end
 	
 	void Icon(int dx,int dy)
-		CombatTime.ImgGaugeIcon[self.CharTag].XDraw(dx,dy+15)
+		__white
+		string imember
+		imember = self.Tag
+		CombatTime.ImgGaugeIcon[imember] = CombatTime.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
+		CombatTime.ImgGaugeIcon[self.Tag].XDraw(dx,dy+15)
 	end
 	
 	bool PosHover(int ax,int ay)
@@ -264,11 +268,11 @@ class Hero extends Fighter
 		end
 	end
 	
-	static void Compile(string tag)
+	static void Compile(string tag,pos)
 		CSayF("Compiling hero '%s' for combat!",tag)
 		var myhero
 		myhero = new Hero(tag)
-		myhero.Heroes[#myhero.Heroes+1] = myhero
+		myhero.Heroes[pos or #myhero.Heroes+1] = myhero
 		myhero.Char = RPG.Char(tag)
 		myhero.CharTag = tag
 	end
@@ -460,8 +464,25 @@ group Stage_SelectTarget extends Stage
 		end
 	end
 end
-
-
+	
+group PlayerSwitch
+	void Switch(string oud,string nieuw)
+		Fighter.Team.Hero[oud] = nil;
+		//for i,v in ipairs(Hero.Heroes)
+		for i=1,8
+			string v
+			v = RPG.Party[i]
+			CSayF("%d: (%s == %s) >>> %s",i,v,nieuw,tostring(v==nieuw))
+			if v==nieuw
+				var ch
+				ch = new Hero(nieuw,i)
+				ch.Char = RPG.Char(nieuw)
+				//ch.Tag = nieuw
+			end
+		end
+	end
+end
+	
 group Stage_PlayerInput extends Stage
 
 	var ImgMenu
@@ -494,7 +515,9 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartSwitch()
+		GoMenu(self.CharTag,"COMBAT_SWITCH")		
 	end
+	
 
 	void CONSTRUCTOR()
 		Stage.Stages.PLAYERINPUT=self
