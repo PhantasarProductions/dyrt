@@ -622,6 +622,19 @@ group FlowField
 		end
 	end
 	
+	void BlackOrb()
+		var kth
+		int mx
+		int my
+		kth = FieldMap.Kthura
+		kth.Obj = "BlackOrb"
+		mx = kth.ObjInt.X - FieldMap.ScrollX
+		my = kth.ObjInt.Y - FieldMap.ScrollY
+		new MiniMsg(mx,my,"Black Orb found",180,0,255)
+		__orbblack++
+		self.Map.Kill("BlackOrb",true)
+	end
+	
 	void LoadMap(string MapFile,Layer)
 		MapFile = trim(MapFile)
 		$Map.LoadedMap=MapFile
@@ -705,8 +718,12 @@ group FlowField
 			CSayF("= Clickables on Layer %s",Lay)
 			kth.Layer = Lay
 			for Tag in kth.EachTag(Lay)
+				if Tag=="BlackOrb"
+					kth.Obj="BlackOrb"
+					new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y,FlowField.BlackOrb)
+				end
 				table s
-				s = split(Tag,"_")
+				s = split(Tag,"_")				
 				switch s[1]
 					// "SAVEPOT" was the result of a bug in the Kthura editor script
 					// Fixed now, but a few maps can still suffer from that!
@@ -751,6 +768,7 @@ group FlowField
 							int posy  
 							string spot
 							var cl
+							kth.Layer = Lay
 							kth.Obj=Tag
 							posx = kth.ObjInt.x
 							posy = kth.ObjInt.y + 32
@@ -889,6 +907,10 @@ group FlowField
 		$SFont.DrawText("Level Cap: "..Roman(__levelcap),5,Y)
 		Y = Y - YMin
 		$SFont.DrawText("Traveler's level: "..Roman(__travellevel),5,Y)
+		if __orbblack>0
+			Y = Y - YMin
+			$SFont.DrawText(sprintf("Black Orbs: %d",__orbblack),5,Y)
+		end
 	end
 	
 	get string SGData
