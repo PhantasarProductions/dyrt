@@ -57,12 +57,17 @@ group MScript
 		end
 	end
 	
+	void INDIEUNLOCK()
+		WM_Unlocked.D_Independence = true
+	end
+	
 	void CONSTRUCTOR()
 		Map.Layer="#001"
 		Map.HideByZone("Secret")
 		Map.ZA_Enter("Secret","SSECRET")
 		Map.ZA_Leave("Secret","HSECRET")
 		Map.ZA_Enter("TutorBlackOrb","TutorBlackOrb")
+		Map.ZA_Enter("IndieUnlock","IndieUnlock")
 	end
 	
 	void Draw()
