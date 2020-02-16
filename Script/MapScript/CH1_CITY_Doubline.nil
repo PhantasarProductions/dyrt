@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 19.12.27
+// version: 20.02.16
 // End License Information
 
 
@@ -43,7 +43,7 @@ group MScript
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Leave","LEAVE")
-		if not gv.Bool.GagoltonAttacked
+		if not gv.Bool.GagoltonEmpty
 			Map.Kill("NPC_ShopHoer2")
 		end
 	end
@@ -70,6 +70,20 @@ group MScript
 				error("ShopHoer -- Unknown character gender for leader!")
 		end
 	end
+	
+	void NPC_SHOPHOER2()
+		switch Field.Leader
+			case "Eric" "Brendor" "Dernor"
+				//MapText("SHOPHOER2_MALE")
+				MapScript.SASKIA("ShopHoer2_Male")
+			case "Irravonia" "Scyndi" "Rebecca" "Merya" "Aziella" "Kirana"
+				//MapText("SHOPHOER2_FEMALE")
+				MapScript.SASKIA("ShopHoer2_Female")
+			default
+				error("ShopHoer -- Unknown character gender for leader!")
+		end
+	end
+
 	
 	void NPC_TOSHANDA()
 		if not Done.Done_Doubline_Intro_GoToShanda
