@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 19.12.27
+; version: 20.02.16
 ; End License Information
 
 :OnLoad
@@ -55,7 +55,24 @@
 	call CSay,"Arrived at jump point, now to open the store!"
 	call Merchant,"CH1_SHOPHOER"
 	end
-
+	
+:ShopHoer2_Male
+	Call CSay,"ShopHoer speaking to male"
+	Call MapText,"SHOPHOER2_MALE"
+	Call CSay,"About to jump to general"
+	jmp ShopHoer2
+	
+:ShopHoer2_Female
+	Call CSay,"ShopHoer speaking to female"
+	call MapText,"SHOPHOER2_FEMALE"
+	Call CSay,"About to jump to general"
+	jmp ShopHoer2
+	
+:ShopHoer2
+	call CSay,"Arrived at jump point, now to open the store!"
+	call Merchant,"CH3_SHOPHOER2"
+	end
+	
 :GoTo_Shanda
 	call MapText,"TOSHANDA_Y"
 	call Field.ChainMap,"CH1_HUB_SHANDACASTLE","Shanda","Shanda"
