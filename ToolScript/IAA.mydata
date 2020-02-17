@@ -9445,6 +9445,7 @@ Rec: EQA_IRRADRESS3
 	BuffStrength = 0
 	BuyPrice = 375
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -9458,6 +9459,7 @@ Rec: EQA_IRRADRESS3
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -9783,7 +9785,7 @@ Rec: EQA_IRRADRESS5
 	HealType = Absolute
 	HP_Cost = 0
 	Icon = 
-	ItemType = Consumable
+	ItemType = Armor
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
@@ -9907,7 +9909,7 @@ Rec: EQA_IRRADRESS6
 	HealType = Absolute
 	HP_Cost = 0
 	Icon = 
-	ItemType = Consumable
+	ItemType = Armor
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
@@ -10525,7 +10527,7 @@ Rec: EQA_LARMOR6
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Real Leather Armor 
+	Name = Real Leather Armor
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
