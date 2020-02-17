@@ -9323,6 +9323,7 @@ Rec: EQA_IRRADRESS2
 	BuffStrength = 0
 	BuyPrice = 300
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -9336,6 +9337,7 @@ Rec: EQA_IRRADRESS2
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -9729,7 +9731,7 @@ Rec: EQA_IRRADRESS5
 	EqBrendor = FALSE
 	EqDernor = FALSE
 	EqEric = FALSE
-	EqIrravonia = FALSE
+	EqIrravonia = TRUE
 	EqKirana = FALSE
 	EqMerya = FALSE
 	EQP__RESIST_Elem_Darkness = 0
@@ -9853,7 +9855,7 @@ Rec: EQA_IRRADRESS6
 	EqBrendor = FALSE
 	EqDernor = FALSE
 	EqEric = FALSE
-	EqIrravonia = FALSE
+	EqIrravonia = TRUE
 	EqKirana = FALSE
 	EqMerya = FALSE
 	EQP__RESIST_Elem_Darkness = 4
