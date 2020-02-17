@@ -52,6 +52,10 @@ group MScript
 		RPG.GetChar("Scyndi").Name = "Scyndi"
 	end
 	
+	void NPC_TRIXIA()
+		MapText("TRIXIA."..(Map.Leader:upper()))
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Entree","SASKIA:Entree")
 	end
