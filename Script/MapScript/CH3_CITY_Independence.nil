@@ -56,6 +56,17 @@ group MScript
 		MapText("TRIXIA."..(Map.Leader:upper()))
 	end
 	
+	void ROSETTASHOW()
+		for i=1,8
+			string c
+			c = RPG.Party[i]
+			if c and c!="" and c!="Kirana"
+				Map.ShowObj("Ros"..c)
+			end
+		end
+		Map.HideObj('Player')
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Entree","SASKIA:Entree")
 	end
