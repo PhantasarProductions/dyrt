@@ -41,8 +41,19 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 group MScript
+	void SING()
+		var sing
+		sing = LoadAudio("SFX/Scenario/CookSing.wav")
+		sing.Play()
+	end
+	
+	void SCYNDI()
+		gv.String.Scyndi = "Scyndi"
+		RPG.GetChar("Scyndi").Name = "Scyndi"
+	end
 	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("Entree","SASKIA:Entree")
 	end
 	
 	void Draw()
