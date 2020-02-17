@@ -150,3 +150,9 @@
 :FloraTrueStone
 	call StoneMaster,"Flora"
 	end
+
+
+:NPC_SASKIA_Sylia
+	call MapText,"SYLIA"
+	call Merchant,"CH3_SYLIA"
+	end
