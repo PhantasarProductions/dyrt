@@ -122,3 +122,31 @@
 	mov true,WM_Unlocked.D_Marshes
 	;call error,"Rest not yet scripted"
 	end
+	
+:NPC_SASKIA_Rosetta
+:Rosetta
+	chk Done.RosettaSpokenInIndependenceAboutGagolton,RosettaStone
+	call MapScript.RosettaShow
+	call MapText,"ROSETTA_GAGOLTON"
+	call Map.HideByLabel,"Ros"
+	call Map.ShowObj,"Player"
+:RosettaStone
+	call MapText,"ROSETTA"
+	call StoneMaster,"ROSETTA"
+	end
+	
+:NPC_SASKIA_Flora
+:Flora
+	chk gv.Bool.DernorSpokenFlora,FloraStone
+	chk Map.Leader=="Dernor",FloraDernor
+	call MapText,"FLORA.NODERNOR"
+	end
+:FloraDernor
+	call MapText,"FLORA.DERNOR"
+	mov true,gv.Bool.DernorSpokenFlora
+	jmp FloraTrueStone
+:FloraStone
+	call MapText,"FLORA"
+:FloraTrueStone
+	call StoneMaster,"Flora"
+	end
