@@ -58,5 +58,63 @@
 	call Map.ShowByLabel,"Entree"
 	call MapText,"ENTREE"
 	; Party time
-	call error,"Rest not yet scripted"
+	group 4
+	call Map.GoToLayer,"CITYNIGHT","ScrollStart"
+	call Map.HideObj,"Player"
+	mov false,FlowField.AutoScroll
+	call Music.Play,"Music/Cities/Independence_Night.wav"
+	call CSay,"Start Scroller!"
+	call ScenScroll,"ScrollStart","CamPoint"
+	call CSay,"Scroller ended?"
+	call Map.HideByLabel,"VP"
+	call MapText,"PARTY__A"
+	call MapScript.Sing
+	call MapText,"PARTY__B"
+	; Scyndi and Dernor are going to make love
+	mov true,FlowField.AutoScroll
+	group 2
+	call Map.GoToLayer,"BEACHNIGHT","Start"
+	call Music.Play,"Music/Dungeon/NakedRocksOutside.wav"
+	call CSay,"1"
+	call CSay,"2"
+	call CSay,"3"
+	call CSay,"4"
+	call MapText,"NIGHT__A"
+	call Map.ShowByZone,"Scyndi"
+	call MapText,"NIGHT__B"
+	call MapScript.Scyndi
+	call MapText,"NIGHT__C"
+	call Music.Play,"Music/Event/Romance.wav"
+	call MapText,"SEX_A"
+	mov false,FlowField.AutoScroll
+	call ScenScroll,FlowField.Map.ScrollX,FlowField.Map.ScrollY,"Sex"
+	call MapText,"SEX_B"
+	call CSay,"1"
+	call CSay,"2"
+	call CSay,"3"
+	call CSay,"4"
+	call MapText,"SEX_C"
+	call CSay,"1"
+	call CSay,"2"
+	call CSay,"3"
+	call CSay,"4"
+	call MapText,"SEX_D"
+	call Map.HideByZone,"All"
+	call Map.HideObj,"Sky"
+	; Woken by Merya
+	call Music.Play,"Music/Original/Silence.wav"
+	call MapText,"MORNING"
+	; The next day
+	mov true,FlowField.AutoScroll
+	call Music.Play,"Music/Cities/Independence.wav"
+	call Map.GoToLayer,"CITY","FromBeach"
+	call Map.HideObj,"Player"
+	call Map.HideByLabel,"Entree"
+	call Map.ShowByLabel,"LOVE"
+	call MapText,"KLAARVOORVERTREK"
+	call Map.HideByLabel,"LOVE"
+	call Map.ShowObj,"Player"
+	; Unlock the marshes
+	mov true,WM_Unlocked.D_Marshes
+	;call error,"Rest not yet scripted"
 	end
