@@ -66,10 +66,14 @@ do
 	global void BUB_Update()
 		bool hok
 		bool vok
-		#+ cx hs
-		#+ cy vs
 		hok = (hs<0 and cx<ex) or (hs>0 and cx>ex) or (hs==0)
 		vok = (vs<0 and cy<ey) or (vs>0 and cy>ey) or (vs==0)
+		if not hok
+			#+ cx hs
+		end
+		if not vok
+			#+ cy vs
+		end
 		LuaDoString("FLOW_FIELD","FlowField.Map.ScrollX = "..cx)
 		LuaDoString("FLOW_FIELD","FlowField.Map.ScrollY = "..cy)
 		if hok and vok
