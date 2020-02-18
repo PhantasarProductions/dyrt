@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Confusion.nil
-// Version: 20.02.13
+// Version: 20.02.19
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -41,5 +41,4 @@ new Combat_Status("Confusion",{
 	["Draw"] = void(f)
 		
 	end,
-	
-)
+})
