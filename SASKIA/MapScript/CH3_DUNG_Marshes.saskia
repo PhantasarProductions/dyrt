@@ -43,7 +43,7 @@
 	call MapText,"SHECKLOCK"
 	call MapScript.SheckLock
 	group 2
-		call Map.Kill,"Sheck-Lock"
-		call Map.Kill,"StartSheck-Lock"
+		call Map.Kill,"Sheck-Lock",true
+		call Map.Kill,"StartSheck-Lock",true
 	call MapText,"NASHECKLOCK"
 	end
