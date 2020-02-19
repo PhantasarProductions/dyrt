@@ -72,13 +72,17 @@ module ModuleDernorNatureVision
 			number distance
 			number alpha
 			Map.Obj = tag
-			distance = xmath.Pythagoras(PX,PY,Map.ObjInt.X,Map.ObjInt.Y)
-			alpha = math.floor(distance)
-			//CSayF("Player(%4d,%4d); Object %s(%4d,%4d); Distance(%5.2f); Alpha:%04d",PX,PY,tag,Map.ObjInt.X,Map.ObjInt.Y,distance,alpha)
-			if alpha>1000
+			if Map.Leader == "Dernor"
+				distance = xmath.Pythagoras(PX,PY,Map.ObjInt.X,Map.ObjInt.Y)
+				alpha = math.floor(distance)
+				//CSayF("Player(%4d,%4d); Object %s(%4d,%4d); Distance(%5.2f); Alpha:%04d",PX,PY,tag,Map.ObjInt.X,Map.ObjInt.Y,distance,alpha)
+				if alpha>1000
+					alpha = 1000
+				elseif alpha<0
+					alpha = 0
+				end
+			else
 				alpha = 1000
-			elseif alpha<0
-				alpha = 0
 			end
 			if prefixed(tag,"DernVis")
 				Map.ObjInt.Alpha = 1000 - alpha
