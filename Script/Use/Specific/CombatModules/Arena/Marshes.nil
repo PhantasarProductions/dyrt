@@ -40,7 +40,7 @@
 module Arena_Marshes
 
 	var Forest
-
+		
 	void CONSTRUCTOR()
 		self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
 		self.Forest.LoadTex("GFX/Textures/Trees/SoftTree.png",4,"gfx/Textures/Sky/cloud.png")
