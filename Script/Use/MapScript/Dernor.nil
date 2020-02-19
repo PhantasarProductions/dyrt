@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_Marshes.nil
+// src/Tricky Script/Script/Use/MapScript/Dernor.nil
 // (c) Jeroen Broks, , All Rights Reserved.
 // 
 // This file contains material that is related
@@ -34,47 +34,58 @@
 // 
 // version: 20.02.19
 // End License Information
+#use "libs/strings"
+#use "libs/tables"
+#use "libs/xmath"
 
-#macro __LAYERS 1
+module ModuleDernorNatureVision
 
-#say "Map Script - None!"
-#use "script/Use/Anyway"
-#use "Script/Use/StartCombatMod"
-#use "Script/Use/MapScript/Dernor"
-//   "Script/Use/MapScript/Dernor"
-
-group MScript
+	table Objects
 	
-	void SHECKLOCK()
-		StartCombat.StartSession()
-		StartCombat.Music = "Music/Combat/Boss/SheckLock.Wav"
-		StartCombat.Arena = "Marshes"
-		StartCombat.Foe[1] = "Boss/SheckLock2"
-		StartCombat.NoLose = false
-		StartCombat.FoeIDDQD = false
-		StartCombat.Ready()	
+	void Init(int Layers)
+		self.Objects = {}
+		for i=1,Layers
+			string L
+			table LT
+			L = sprintf("#%03d",i)
+			Map.Layer = L
+			self.Objects[L]=LT
+			for tag in Map.EachTag
+				if prefixed(tag,"DernVis") or prefixed(tag,"DernInvis") 
+					LT[#LT+1]=tag
+					CSayF("Added %s (layer %s)",tag,L)
+				end
+			end
+		end
 	end
 	
-	void DERNORTUTORIAL()
-		if not Done.Tutorial_Dernor_NatureView
-			Dernor.Update(Map.Layer)
-			MapText("DERNOR_TUTORIAL")
+	void Update(string L)
+		if not self.Objects[L]
+			return
+		end
+		int PX
+		int PY
+		Map.Obj = "Player"
+		PX = Map.ObjInt.X
+		PY = Map.ObjInt.Y
+		for tag in each(self.Objects[L])
+			number distance
+			number alpha
+			Map.Obj = tag
+			distance = xmath.Pythagoras(PX,PY,Map.ObjInt.X,Map.ObjInt.Y)
+			alpha = math.floor(distance)
+			//CSayF("Player(%4d,%4d); Object %s(%4d,%4d); Distance(%5.2f); Alpha:%04d",PX,PY,tag,Map.ObjInt.X,Map.ObjInt.Y,distance,alpha)
+			if alpha>1000
+				alpha = 1000
+			elseif alpha<0
+				alpha = 0
+			end
+			if prefixed(tag,"DernVis")
+				Map.ObjInt.Alpha = 1000 - alpha
+			else 
+				Map.ObjInt.Alpha = alpha
+			end
 		end
 	end
 
-	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("StartSheck-Lock","SASKIA:SheckLock")
-		Map.ZA_Enter("DernorTutorial","DernorTutorial")
-		Dernor.Init(__LAYERS)
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-		Dernor.Update(Map.Layer)
-	end
-	
 end
-#say "Map Script - Compiling!"
