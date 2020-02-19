@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.13
+// version: 20.02.19
 // End License Information
 
 
@@ -147,7 +147,7 @@ group MScript
 	end
 	
 	void CONSTRUCTOR()
-			for tag in Map.EachTag
+		for tag in Map.EachTag
 			if __EMPTY and suffixed(tag,"_DISA")
 				Map.Kill(tag)
 				// Please note that the table used for EachTag won't 
