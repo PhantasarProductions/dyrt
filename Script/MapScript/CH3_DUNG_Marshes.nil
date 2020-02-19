@@ -52,8 +52,16 @@ group MScript
 		StartCombat.Ready()	
 	end
 	
+	void DERNORTUTORIAL()
+		if not Done.Tutorial_Dernor_NatureView
+			MapText("DERNOR_TUTORIAL")
+		end
+	end
+
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("StartSheck-Lock","SASKIA:SheckLock")
+		Map.ZA_Enter("DernorTutorial","DernorTutorial")
 	end
 	
 	void Draw()
