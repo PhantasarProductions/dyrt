@@ -32,10 +32,10 @@
 // 
 // **********************************************
 // 
-// version: 20.02.19
+// version: 20.02.20
 // End License Information
 
-#macro __LAYERS 1
+#macro __LAYERS 3
 
 #say "Map Script - None!"
 #use "script/Use/Anyway"
