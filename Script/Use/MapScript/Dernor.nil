@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.19
+// version: 20.02.21
 // End License Information
 #use "libs/strings"
 #use "libs/tables"
@@ -41,6 +41,15 @@
 module ModuleDernorNatureVision
 
 	table Objects
+	
+	table distances
+	
+	number Dist(int x1, int y1, int x2, int y2)
+		string t
+		t = sprintf("%4d.%4d.%4d.%4d",x1,y1,x2,y2)
+		self.distances[t] = self.distances[t] or xmath.Pythagoras(x1,y1,x2,y2)
+		return self.distances[t]
+	end
 	
 	void Init(int Layers)
 		self.Objects = {}
@@ -51,9 +60,11 @@ module ModuleDernorNatureVision
 			Map.Layer = L
 			self.Objects[L]=LT
 			for tag in Map.EachTag
-				if prefixed(tag,"DernVis") or prefixed(tag,"DernInvis") 
-					LT[#LT+1]=tag
+				if prefixed(tag,"DernVis") or prefixed(tag,"DernInvis") or prefixed(tag,"VisDern")
+					Map.Obj = tag
+					LT[#LT+1]={ ['tag']=tag, ['show'] = prefixed(tag,"DernVis") or prefixed(tag,"VisDern"), ['x'] = Map.ObjInt.X, ['y'] = Map.ObjInt.Y, ['last'] = 1234  }
 					CSayF("Added %s (layer %s)",tag,L)
+					CSay(NIL.LuaSerialize("data",LT[#LT]))
 				end
 			end
 		end
@@ -68,13 +79,17 @@ module ModuleDernorNatureVision
 		Map.Obj = "Player"
 		PX = Map.ObjInt.X
 		PY = Map.ObjInt.Y
-		for tag in each(self.Objects[L])
+		for o in each(self.Objects[L])
 			number distance
 			number alpha
-			Map.Obj = tag
-			if Map.Leader == "Dernor"
-				distance = xmath.Pythagoras(PX,PY,Map.ObjInt.X,Map.ObjInt.Y)
-				alpha = math.floor(distance)
+			// Map.Obj = tag
+			if math.abs(PX-o.x)>200 or math.abs(PY-o.y)>200
+				alpha = 1000
+				distance = 5000
+			elseif Map.Leader == "Dernor"
+				// distance = xmath.Pythagoras(PX,PY,Map.ObjInt.X,Map.ObjInt.Y)
+				distance = self.Dist(PX,PY,o.x,o.y)
+				alpha = math.floor(distance) * 5
 				//CSayF("Player(%4d,%4d); Object %s(%4d,%4d); Distance(%5.2f); Alpha:%04d",PX,PY,tag,Map.ObjInt.X,Map.ObjInt.Y,distance,alpha)
 				if alpha>1000
 					alpha = 1000
@@ -84,10 +99,16 @@ module ModuleDernorNatureVision
 			else
 				alpha = 1000
 			end
-			if prefixed(tag,"DernVis")
-				Map.ObjInt.Alpha = 1000 - alpha
-			else 
-				Map.ObjInt.Alpha = alpha
+			if o.last!=distance
+				if o.show
+					Map.Obj = o.tag
+					Map.ObjInt.Alpha = 1000 - alpha
+					o.last=distance
+				else 
+					Map.Obj = o.tag
+					Map.ObjInt.Alpha = alpha
+					o.last=distance
+				end
 			end
 		end
 	end
