@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.20
+// version: 20.02.22
 // End License Information
 
 #macro __LAYERS 3
@@ -61,11 +61,42 @@ group MScript
 			MapText("DERNOR_TUTORIAL")
 		end
 	end
-
+	
+	void FIGHTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.Wav"
+		StartCombat.Arena = "Marshes"
+		StartCombat.Foe[1] = "Boss/BigSalamander"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()	
+	end
+	
+	void STARTBOSS()
+		if Map.Leader == "Dernor"
+			if not Map.HasTag("VisDern_Boss")
+				Map.Kill("StartBoss",true) // autofix the damage of an earlier bug!
+				return
+			end
+			Map.StopWalking()
+			Map.WalkTo("VisDern_Boss")
+			MapScript.SASKIA("Boss")
+		else
+			Map.StopWalking()
+			Map.WalkTo("Start")
+			MapText("NOBOSS_"..(Map.Leader:upper()))
+		end
+	end
+	
+	void KILLBOSS()
+		Map.Kill("VisDern_Boss",true)
+		Dernor.Init(__LAYERS)
+	end
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("StartSheck-Lock","SASKIA:SheckLock")
 		Map.ZA_Enter("DernorTutorial","DernorTutorial")
+		Map.ZA_Enter("StartBoss","StartBoss")
 		Dernor.Init(__LAYERS)
 	end
 	

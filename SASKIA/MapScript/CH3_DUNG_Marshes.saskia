@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.02.19
+; version: 20.02.22
 ; End License Information
 
 :OnLoad
@@ -47,3 +47,12 @@
 		call Map.Kill,"StartSheck-Lock",true
 	call MapText,"NASHECKLOCK"
 	end
+	
+:Boss
+	call MapText,"BOSS_DERNOR"
+	call MapScript.FightBoss
+	call Map.Kill,"StartBoss",true
+	call MapScript.KillBoss
+	;call Map.Kill,"VisDern_Boss",true
+	end
+
