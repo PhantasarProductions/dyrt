@@ -35,7 +35,7 @@
 // version: 20.02.22
 // End License Information
 
-#macro __LAYERS 3
+#macro __LAYERS 4
 
 #say "Map Script - None!"
 #use "script/Use/Anyway"
@@ -93,10 +93,24 @@ group MScript
 		Dernor.Init(__LAYERS)
 	end
 	
+	void SCYNDISTILLOR()
+		RPG.GetChar("Scyndi").Points("SKILLLVL2").Have = 1
+	end
+	
+	void ANGEVIN()
+		Music.Play("Music/Event/HandoStillor.Wav")
+	end
+	
+	void OOZE()
+		Music.Play("Music/Dungeon/Marshes.wav")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("StartSheck-Lock","SASKIA:SheckLock")
 		Map.ZA_Enter("DernorTutorial","DernorTutorial")
 		Map.ZA_Enter("StartBoss","StartBoss")
+		Map.ZA_Enter("Angevin","Angevin")
+		Map.ZA_Leave("Angevin","Ooze")
 		Dernor.Init(__LAYERS)
 	end
 	

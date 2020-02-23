@@ -56,3 +56,15 @@
 	;call Map.Kill,"VisDern_Boss",true
 	end
 
+:NPC_SASKIA_HandoStillor
+	chk Done.Marshes_HandoStillor,Niets
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"Heroes"
+	call MapText,"STILLOR_A"
+	call Music.Play,"Music/Original/Silence.wav"
+	call MapText,"STILLOR_B"
+	call MapScript.ScyndiStillor
+	;call Music.Play,"Music/Event/HandoStillor.wav"
+	call WorldMap.Delisto
+:Niets
+	end
