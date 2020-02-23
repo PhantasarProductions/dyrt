@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.02.18
+; version: 20.02.23
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -43,11 +43,11 @@
 
 :EntreeAziella
 	; Not yet been for to the temple? Then let's not even check for Aziella's presence
-	chk not gv.Bool.VisitedHandoStillor,Niks
+	chk not gv.Bool.Marshes_HandoStillor,Niks
 	; Aziella already annouved, then nothing to see here
 	chk Done.EntreeAziellaAnnounced,Niks
-	; Aziella anouncement by Trixia
-	call error,"Aziella arrival event not yet present"
+	; Aziella announcement by Trixia
+	call MapText,"TRIXIATELLSABOUTAZIELLA"
 	end
 
 :Entree

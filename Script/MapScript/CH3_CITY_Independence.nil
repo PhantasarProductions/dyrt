@@ -35,11 +35,13 @@
 // version: 20.02.18
 // End License Information
 
-
+bool beenonbeach
 
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+#use "libs/tables"
+
 group MScript
 	void SING()
 		var sing
@@ -67,8 +69,47 @@ group MScript
 		Map.HideObj('Player')
 	end
 	
+	void TOBEACH()
+		Map.GoToLayer("BEACH","Start")
+	end
+	
+	void TOCITY()
+		Map.GoToLayer("CITY","FromBeach")
+	end
+	
+	void AZ_Remove()
+		for c in each( { "Eric", "Irravonia", "Brendor", "Scyndi", "Rebecca", "Dernor", "Merya" } )
+			Map.Kill("AZ_"..c)
+		end
+	end
+	
+	void AZIELLA()
+		if beenonbeach
+			return
+		end
+		beenonbeach = true
+		Map.HideByZone("Eat At Joes")
+		CSay("Aziella's checkup")
+		if not gv.Bool.EntreeAziellaAnnounced
+			Map.Kill("NPC_Guard")
+			self.AZ_Remove()
+			CSay("Aziella's time has not come, so away with the guard!")
+			return
+		end
+		CSay("Guard should remain, but how about Aziella herself?")
+		if Done.AziellaJoined
+			self.AZ_Remove()
+			CSay("Aziella has already joined, so let's remove the base party and get outta here!")
+			return
+		end
+		CSay("Apparently we gotta make Aziella join the group first!")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Entree","SASKIA:Entree")
+		Map.ZA_Enter("ToBeach","ToBeach")
+		Map.ZA_Enter("ToCity","ToCity")
+		Map.ZA_Enter("Aziella","Aziella")
 	end
 	
 	void Draw()
