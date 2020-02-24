@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Data/General/Achievements.nil
-// Version: 20.02.23
+// Version: 20.02.24
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -486,6 +486,21 @@ ret = {
 		["Description"] = "Complete chapter 2",
 		["hidden"] = false,
 		["Name"] = "The Four Dragons",
+		["ProcessMax"] = 0,
+		["ProcessString"] = "{Value} of {Max}",
+		["ProcessValue"] = "",
+		["require_gamejolt"] = false,
+		["skill_1"] = true,
+		["skill_2"] = true,
+		["skill_3"] = true,
+		["skill_check"] = false,
+
+	},
+	["CHAPTER3"] = {
+		["AutoProcess"] = false,
+		["Description"] = "Complete chapter 3",
+		["hidden"] = false,
+		["Name"] = "People Long Forgotten",
 		["ProcessMax"] = 0,
 		["ProcessString"] = "{Value} of {Max}",
 		["ProcessValue"] = "",

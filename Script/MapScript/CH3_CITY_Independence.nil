@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.23
+// version: 20.02.24
 // End License Information
 
 bool beenonbeach
@@ -83,6 +83,41 @@ group MScript
 		end
 	end
 	
+	void AZ_REMOVE()
+		self.AZ_Remove()
+	end
+	
+	void CreateAziella()
+		int tot
+		int avg
+		int avg2
+		for c in each( { "Eric", "Irravonia", "Brendor", "Scyndi", "Rebecca", "Dernor", "Merya" } )
+			tot = tot + RPG.GetChar(c).Stat("Level").Value			
+		end
+		avg = math.ceil(tot/(6 + __skill))
+		if (avg<30/__skill)
+			avg = 30/__skill
+		end
+		avg2 = math.min(avg,100)
+		// Create Aziella
+		var Aziella
+		Party.NewCharacter("Aziella",avg)
+		Aziella = RPG.GetChar("Aziella")
+		Aziella.Stat("BASE__RESIST_Stat_Poison").Value = avg2
+		Aziella.Stat("BASE__RESIST_Stat_Disease").Value = avg2
+		Aziella.Stat("BASE__RESIST_Stat_Paralysis").Value = avg2
+		Aziella.Stat("BASE__RESIST_Stat_Confusion").Value = avg2
+		Aziella.Stat("BASE__RESIST_Stat_Sleep").Value = math.random(math.floor(9 / __skill),66 / __skill)
+		Aziella.Stat("BASE__RESIST_Stat_Exhaustion").Value = math.random(0,math.ceil(99 / __skill))
+		Aziella.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,96 / __skill)		
+		Aziella.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,66 / __skill)
+		for i=0,1
+			Aziella.Points(sprintf("SKILLEXP%d",i),true).Have    = avg * (30 / __skill)
+			Aziella.Points(sprintf("SKILLLVL%d",i),true).Have    = avg
+		end
+		RPG.Party[8] = "Aziella"
+	end
+	
 	void AZIELLA()
 		if beenonbeach
 			return
@@ -103,6 +138,10 @@ group MScript
 			return
 		end
 		CSay("Apparently we gotta make Aziella join the group first!")
+		self.CreateAziella()
+		Map.GoToLayer("Beach","SpotAziella")
+		Map.Leader = "Aziella"
+		MapScript.SASKIA("Aziella")
 	end
 	
 	void CONSTRUCTOR()

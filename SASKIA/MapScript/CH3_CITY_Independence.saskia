@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.02.23
+; version: 20.02.24
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -155,4 +155,26 @@
 :NPC_SASKIA_Sylia
 	call MapText,"SYLIA"
 	call Merchant,"CH3_SYLIA"
+	end
+	
+:Aziella
+	call MapText,"AZIELLA_FIRSTSEEN"
+	call Map.WalkTo,"Spot_Dernor"
+	call MapText,"AZIELLA_DERNOR"
+	call Map.WalkTo,"Spot_Scyndi"
+	call MapText,"AZIELLA_SCYNDI"
+	call MapText,"AZIELLA_AZIELLA"
+	call Map.WalkTo,"Spot_Eric"
+	call MapText,"AZIELLA_ERIC"
+	call Map.WalkTo,"Spot_Rebecca"
+	call MapText,"AZIELLA_REBECCA"
+	call Map.WalkTo,"Spot_Brendor"
+	call MapText,"AZIELLA_BRENDOR"
+	call Map.WalkTo,"Spot_Irravonia"
+	call MapText,"AZIELLA_IRRAVONIA"
+	; All done?
+	call Map.WalkTo,"SpotAziella"
+	call MapText,"AZIELLA_ENDSTORY"
+	call MapScript.AZ_Remove
+	call Achievements.Award,"CHAPTER3"
 	end
