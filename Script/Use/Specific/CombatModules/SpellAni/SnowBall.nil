@@ -44,7 +44,7 @@ module SpellAni_Snowball
 	
 	void Init(act)
 		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
-		self.PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Exe,Act.Targets[1],true,true)
+		self.PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Exe,act.Targets[1],true,true)
 	end
 	
 	void CONSTRUCTOR()
