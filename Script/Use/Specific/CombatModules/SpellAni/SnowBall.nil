@@ -39,12 +39,12 @@ module SpellAni_Snowball
 	var PRJ
 	
 	get delegate Cycle
-		return PRJ.Cycle
+		return self.PRJ.Cycle
 	end
 	
 	void Init(act)
 		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
-		PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Exe,Act.Targets[1],true,true)
+		self.PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Exe,Act.Targets[1],true,true)
 	end
 	
 	void CONSTRUCTOR()
