@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.11
+// version: 20.02.24
 // End License Information
 
 do
@@ -46,7 +46,7 @@ a = {
 	-- Crossbow
 	
 	-- Befindo Enchanments
-	Confusion      = { ["Befindo Enchants"] = 5 + (s * 5) },
+	Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) },
 	
 	-- Scharum
 	Power2x        = { Scharum = true },
