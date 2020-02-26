@@ -45,7 +45,7 @@ module SpellAni_AziellaShoot
 	
 	void Init(act)
 		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
-		self.PRJ.Start("gfx/Combat/SpellAni/AziellaBolt.png",act.Exe,act.Targets[1],false,true)
+		self.PRJ.Start("gfx/Combat/SpellAni/AziellaBolt.png",act.Executor,act.Targets[1],false,true)
 	end
 	
 	void CONSTRUCTOR()
