@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZCurse.nil
-// Version: 20.02.13
+// Version: 20.02.27
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -66,7 +66,7 @@ new Combat_Status("Curse",{
 					f.Char.Points("AP").Have = f.Char.Points("AP").Have - (__skill * 5)
 				end
 			case 4
-				f.Char.StatusChanges.Poison = true
+				f.StatusChanges.Poison = true
 			case 5
 				HP.Have = 1
 			case 6
