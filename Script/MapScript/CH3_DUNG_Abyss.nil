@@ -1,0 +1,101 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH3_DUNG_Abyss.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.02.27
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+#use "Script/use/Specific/CheckTrueAbyss" as CTA
+#use "libs/strings"
+
+group MScript
+	
+	table plasmasized
+	
+	void NPC_NEXT()
+		int l 
+		int v
+		string n
+		l = tonumber(right(Map.Layer,3))
+		v = l+1
+		n = sprintf("#%03d",v)
+		if v%5!=0
+			Map.Generate(n)
+		end
+		Map.GoToLayer(n,"Start")
+	end
+	
+	void EXITMAP()
+		self.NPC_NEXT()
+	end
+	
+	void NPC_DELISTO()
+		WorldMap.Delisto()
+	end
+	
+	void UNLOCK_TRUEABYSS()
+		CTA.Unlocked_TrueAbyss = true
+	end
+	
+	void CONSTRUCTOR()
+		KthuraGenerator.IgnoreDestroy("Plasma")
+		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
+		KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
+		KthuraGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
+		KthuraGenerator.Size.X      = 6400
+		KthuraGenerator.Size.Y      = 3200
+		Map.TieGenerator()
+		Map.ZA_Enter("ExitMap","ExitMap")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+		Map.Obj="Plasma"
+		Map.ObjInt.X = Map.ScrollX
+		Map.ObjInt.Y = Map.ScrollY
+		if not self.plasmasized[Map.Layer]
+			Map.ObjInt.W = Screen.W
+			Map.ObjInt.H = Screen.H
+		end
+	end
+	
+end
+#say "Map Script - Compiling!"
