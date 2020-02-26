@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/SnowBall.nil
-// Version: 20.01.21
+// Version: 20.02.24
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -44,7 +44,7 @@ module SpellAni_Snowball
 	
 	void Init(act)
 		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
-		self.PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Exe,act.Targets[1],true,true)
+		self.PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Executor,act.Targets[1],true,true)
 	end
 	
 	void CONSTRUCTOR()
