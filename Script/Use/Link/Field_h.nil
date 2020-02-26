@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.02.12
+// Version: 20.02.27
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -122,6 +122,14 @@ group Map
 	
 	void LoadAltNext(string AN)
 		FLD_Exe(sprintf("ZoneAction.LoadAltNext(trim(\"%s\"))",AN))
+	end
+	
+	void TieGenerator()
+		FLD_Exe("KthuraGenerator.SetMap(FieldMap.Kthura.ID)")
+	end
+	
+	void Generate(string Layer)
+		FLD_Exe(sprintf("KthuraGenerator.Generate(trim(\"%s\"))",Layer))
 	end
 	
 	void Kill(string objtag, perma)
