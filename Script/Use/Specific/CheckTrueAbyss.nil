@@ -1,0 +1,79 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CheckTrueAbyss.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.02.27
+// End License Information
+module MODULE_TRUEABYSS_CHECK
+
+	get string D
+		string t
+		t = GameHomeDir()
+		if mid(t,2,1)==":"
+			t = right(t,#t-2)
+		end
+		return t
+	end
+	
+	get string Hash
+		return HashMD5(self.D)
+	end
+	
+	get bool Unlocked_TrueAbyss
+		return BubbleConfig.UTTA == self.Hash
+	end
+	
+	set bool Unlocked_TrueAbyss
+		CSayF("Unlock True Abyss = %s",tostring(value))
+		if value
+			CSayF("Setting UTTA to: %s",self.Hash)
+			BubbleConfig.UTTA = self.Hash
+		else
+			BubbleConfig.UTTA = "Whatever"
+		end
+	end
+	
+	get bool Unlocked_NewGamePlus
+		return BubbleConfig.UNGP == self.Hash
+	end
+	
+	set bool Unlocked_NewGamePlus
+		if value
+			BubbleConfig.UNGP = self.Hash
+		else
+			BubbleConfig.UNGP = "Whatever"
+		end
+	end
+
+
+end
