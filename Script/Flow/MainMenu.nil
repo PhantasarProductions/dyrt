@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 19.12.16
+// Version: 20.02.27
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -38,6 +38,7 @@
 
 #say "MainMenu: Use commands"
 #use "script/use/anyway"
+#use "Script/use/Specific/CheckTrueAbyss" as CTA
 #use "libs/linkedlist"
 #use "libs/BuildData"
 
@@ -223,7 +224,7 @@ end
 #say "MainMenu: Init menu items"
 new MenuItem("New Game",NewGame,true)
 new MenuItem("New Game+",NewGamePlus,false)
-new MenuItem("New Game: True Abyss",NOTHINGYET,false)
+new MenuItem("New Game: True Abyss",NOTHINGYET,CTA.Unlocked_TrueAbyss)
 new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
 // new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
 new MenuItem("Jukebox",NOTHINGYET,true)
