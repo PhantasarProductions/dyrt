@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/Projectile.nil
-// Version: 20.01.21
+// Version: 20.02.24
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -53,11 +53,12 @@ module M_Projectile
 	number degrees
 	number x
 	number y
+	int Speed = 4
 	
 	void Start(string Image,Exe,Tar,aTurn,aHC)
-		self.Turn = aTurn!=false
-		self.HotCenter = aHC!=false
-		self.PrjImage = LoadIfNew(Image,sprintf("PROJECTILE_%s_%s_%s",replace(Image:upper(),"/","_")),tostring(self.turn),tostring(self.HotCenter))
+		self.Turn = aTurn!=false and aTurn!=nil;
+		self.HotCenter = aHC!=false and aHC!=nil;
+		self.PrjImage = LoadIfNew(Image,sprintf("PROJECTILE_%s_%s_%s",replace(Image:upper(),"/","_"),tostring(self.Turn),tostring(self.HotCenter)))
 		self.ex = Exe.X
 		self.ey = Exe.Y
 		self.tx = Tar.X
@@ -87,18 +88,22 @@ module M_Projectile
 	end
 	
 	bool Cycle()
-		--self.cycles
-		if self.cycles<=0
-			return true
-		end
-		#+ self.x self.dx
-		#+ self.y self.dy
-		if self.Turn
-			self.degrees++
-		end
-		Rotate.Deg = self.degrees
-		self.PrjImage.XDraw(self.x,self.y)
-		Rotate.Deg = 0
+		int skippy
+		repeat
+			skippy++
+			--self.cycles
+			if self.cycles<=0
+				return true
+			end
+			#+ self.x self.dx
+			#+ self.y self.dy
+			if self.Turn
+				self.degrees++
+			end
+			Rotate.Deg = self.degrees
+			self.PrjImage.XDraw(self.x,self.y)
+			Rotate.Deg = 0
+		until skippy>=self.Speed
 	end
 
 end
