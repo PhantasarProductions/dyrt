@@ -32,10 +32,8 @@
 // 
 // **********************************************
 // 
-// version: 20.02.19
+// version: 20.02.25
 // End License Information
-
-
 
 #say "Map Script - None!"
 #use "script/use/anyway"
@@ -144,6 +142,12 @@ group MScript
 	void TOSUGARLAND()
 		Field.LoadMap("GJ_DUNG_Sugarland")
 		Map.GoToLayer("#001","Start")
+	end
+	
+	void NPC_ABYSS()
+		MapText("RESEARCHNOTES")
+		WM_Unlocked.D_Abyss = true
+		Map.Kill("NPC_Abyss",true)
 	end
 	
 	void CONSTRUCTOR()
