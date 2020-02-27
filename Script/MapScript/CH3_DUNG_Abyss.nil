@@ -72,6 +72,18 @@ group MScript
 		CTA.Unlocked_TrueAbyss = true
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "Abyss"
+		StartCombat.Foe[1] = "Boss/SuperPink"
+		StartCombat.RX[2] = 50
+		StartCombat.RY[2] = 75
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		KthuraGenerator.IgnoreDestroy("Plasma")
 		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"

@@ -41,7 +41,7 @@
 	
 :Boss
 	chk gv.Bool.AbyssBoss,Done
-	; call MapScript.Boss
+	call MapScript.Boss
 	call CSay,"Let's unlock the true abyss"
 	call MapScript.UNLOCK_TRUEABYSS
 	call CSay,"Tutor time"
@@ -49,5 +49,6 @@
 	call CSay,"Achievement"
 	call Achievements.Award,"SECDUNG_ABYSS"
 	call CSay,"All Done"
+	mov true,gv.Bool.AbyssBoss
 	:Done
 	end
