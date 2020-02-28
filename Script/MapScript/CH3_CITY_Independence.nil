@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.24
+// version: 20.02.27
 // End License Information
 
 bool beenonbeach
@@ -41,6 +41,8 @@ bool beenonbeach
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 #use "libs/tables"
+
+#macro BeenInArea gv.Bool.Ever_Been_In_Aeria_Before
 
 group MScript
 	void SING()
@@ -142,6 +144,18 @@ group MScript
 		Map.GoToLayer("Beach","SpotAziella")
 		Map.Leader = "Aziella"
 		MapScript.SASKIA("Aziella")
+	end
+	
+	void NPC_GUARD()
+		if BeenInAreaBefore
+			WorldMap.Phantasar()
+		elseif Yes("Are you ready to fly to Aeria?")
+			Field.LoadMap("CH4_HUB_AERIA_BEACH")
+			Map.GoToLayer("BEACH","FromWorld")
+			Map.HideObj("Player")
+			BeenInAreaBefore=true
+			MapScript.SASKIA("Entree")
+		end
 	end
 	
 	void CONSTRUCTOR()
