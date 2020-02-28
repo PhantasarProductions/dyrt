@@ -136,6 +136,10 @@ group Map
 		FLD_Exe(sprintf("FieldMap.Kill(trim(\"%s\"),%s)",objtag,tostring(perma==true)))
 	end
 	
+	void VisibleOnlyByZone(string tag,bool inzone)
+		FLD_Exe(sprintf("FieldMap.Kthura.VisibleOnlyByZone(trim(\"%s\"),%s)",tag,tostring(inzone)))
+	end
+	
 	void SpawnPlayer(string spot,altwind)
 		if altwind
 			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
