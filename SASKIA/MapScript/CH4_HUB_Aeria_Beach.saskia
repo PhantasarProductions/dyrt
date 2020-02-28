@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.02.27
+; version: 20.02.28
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title

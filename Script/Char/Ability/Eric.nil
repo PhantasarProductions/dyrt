@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.12
+// version: 20.02.28
 // End License Information
 do
 	int s
@@ -42,6 +42,7 @@ do
 	return {
 		-- Sword
 		QuickStrike = { Skill_Sword = 5 * s },
+		Power3x     = { Scharum = true },
 		
 		-- Fire
 		Fire       = { ['Skill_Red Dragon']  = 1 },
