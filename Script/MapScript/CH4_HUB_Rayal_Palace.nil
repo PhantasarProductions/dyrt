@@ -81,6 +81,8 @@ group MScript
 	
 	void SHOWPART(string z)
 		Map.VisibleOnlyByZone(z,true)
+		Map.HideByLabel("H")
+		Map.HideObj("Katha")
 	end
 	
 	void SCHARUMSTART()
@@ -111,6 +113,22 @@ group MScript
 		MapScript.SASKIA("Scharum")
 	end
 	
+	void NPC_KING()
+		if not Done.FirstTimeHerondoRayal
+			Map.HideObj("Player")
+			Map.ShowByLabel("H")
+			MapScript.SASKIA("Herondo_FirstTime")
+			return
+		end
+		
+	end
+	
+	void Guard()
+		MapText("GUARD")
+	end
+	
+	link NPC_GUARD1 = MScript.Guard
+	link NPC_GUARD2 = MScript.Guard
 	
 	void CONSTRUCTOR()
 		self.HideZones = { "Scharum", "Kings_Room","Garden", "SecretPassage" }
@@ -119,6 +137,7 @@ group MScript
 			Map.ZA_Enter(z,"SHOWPART",z)
 			Map.ZA_Leave(z,"HideSubs")
 		end
+		
 	end
 	
 	void Draw()

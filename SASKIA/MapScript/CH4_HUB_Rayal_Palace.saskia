@@ -50,3 +50,10 @@
 	call MapScript.ScharumStart
 	call MapScript.ScharumEnd
 	end
+	
+	
+:Herondo_FirstTime
+	call MapText,"KONINGSTORY"
+	call Map.ShowObj,"Katha"
+	call MapText,"KONINGKATHA"
+	call error,"Script ends here... for now!"
