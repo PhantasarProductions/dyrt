@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.02.28
+; version: 20.03.05
 ; End License Information
 :OnLoad
 	chk Done.Chapter4Shown,NoChapter
@@ -56,4 +56,11 @@
 	call MapText,"KONINGSTORY"
 	call Map.ShowObj,"Katha"
 	call MapText,"KONINGKATHA"
-	call error,"Script ends here... for now!"
+	;call error,"Script ends here... for now!"
+	call MapScript.NightNight
+	end
+	
+:Herondo_Aziella
+	call MapText,"KONINGSTONE"
+	call StoneMaster,"Herondo"
+	end
