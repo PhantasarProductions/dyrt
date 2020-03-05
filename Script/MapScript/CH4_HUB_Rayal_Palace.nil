@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.02.28
+// version: 20.03.05
 // End License Information
 
 
@@ -120,7 +120,22 @@ group MScript
 			MapScript.SASKIA("Herondo_FirstTime")
 			return
 		end
-		
+		if Map.Leader=="Aziella"
+			MapScript.SASKIA("Herondo_Aziella")
+		else
+			MapText("KONINGALG")
+		end
+	end
+	
+	void NIGHTNIGHT()
+		Field.LoadMap("CH4_HUB_Rayal_Palace_Upstairs_Night")
+		for i=2,8
+			RPG.Party[i]=""
+		end
+		RPG.Party[1] = "Eric"
+		Map.Leader = "Eric"
+		Map.GoToLayer("NACHT","Start_Nacht")
+		MapText("NOSLEEP")
 	end
 	
 	void Guard()
@@ -130,6 +145,26 @@ group MScript
 	link NPC_GUARD1 = MScript.Guard
 	link NPC_GUARD2 = MScript.Guard
 	
+	void STARTERICMISSION()
+		for i=4,8
+			RPG.Party[i]=""
+		end
+		RPG.Party[1] = "Eric"
+		RPG.Party[2] = "Irravonia"
+		RPG.Party[3] = "Brendor"
+		RPG.Party[4] = "Aziella"
+		Map.Kill("StartSplit")
+	end
+	
+	void LEAVE()
+		if gv.Bool.FirstTimeHerondoRayal
+			WorldMap.Aeria()
+		else
+			Map.WalkTo("Start")
+			MapText("KINGFIRST")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		self.HideZones = { "Scharum", "Kings_Room","Garden", "SecretPassage" }
 		self.HideSubs()
@@ -137,7 +172,18 @@ group MScript
 			Map.ZA_Enter(z,"SHOWPART",z)
 			Map.ZA_Leave(z,"HideSubs")
 		end
-		
+		if gv.Bool.SpokenToOracle and (not Done.SplitMissionStart_Eric)
+			Map.ZA_Enter("StartSplit","StartEricMission")
+		end
+		var Az
+		Az = RPG.GetChar("Aziella")
+		if Az.Points("SKILLLVL0").Have == 1
+			Az.Points("SKILLLVL0").Have = 24 / __skill
+		end
+		if Az.Points("SKILLLVL1").Have == 0
+			Az.Points("SKILLLVL1").Have = 24 / __skill
+		end
+		Map.ZA_Enter("Leave","Leave")
 	end
 	
 	void Draw()
