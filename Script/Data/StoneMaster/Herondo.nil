@@ -1,0 +1,49 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Data/StoneMaster/Herondo.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.03.05
+// End License Information
+do
+	var ret
+	string c = "Aziella"
+	ret = new CStoneMaster
+	//for c,w in pairs {["Eric"]="Sword",["Yasathar"]="Sword",["Brendor"]="Hammer",["Scyndi"]="Whip",["Rebecca"]="Sword",["Dernor"]="Bat",["Merya"]="Dagger"}
+		var u
+		ret.NewSkill(c,0, "Upgrade skills with a crossbow")
+		ret.NewSkill(c,1, "Upgrade skills with Befindo enchantments")
+		CSayF("Setting skills for character %s",c)
+	//end
+	CSay("Wendy has been loaded as a Stone Master")	
+	return ret
+end
