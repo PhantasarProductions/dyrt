@@ -1,0 +1,135 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH4_HUB_Rayal_Palace_Upstairs_Night.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.03.05
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+#use "libs/tables"
+group MScript
+	
+	bool dominate
+
+	
+	void NOWAY(string c)
+		MapText("DD_"..replace(c:upper(),"2", ""))
+		Map.WalkTo("DD_"..c)
+	end
+	
+	table HideZones
+	
+	void HideSubs()
+		Map.VisibleOnlyByZone("Fake",false)
+		for z in each(self.HideZones)
+			Map.HideByZone(z)
+		end
+	end
+	
+	link HIDESUBS = MScript.HideSubs
+	
+	void SHOWPART(string z)
+		Map.VisibleOnlyByZone(z,true)
+		if z=="Slaapkamer" and gv.Bool.SpokenToOracle
+			MapScript.SASKIA("Sleep")
+		end
+	end
+	
+	void TALKCRACK()
+		MapText("CRACK")
+		Map.Kill("TalkCrack",true)
+	end
+	
+	void BERGPAD_Z()
+		Map.GoToLayer("NACHT","Start")
+	end
+	
+	void NPC_ORACLEHUT()
+		Map.GoToLayer("NACHT","Start_Orakel")
+		Achievements.Award("SCEN_ORACLE")
+		Map.Cam(1600,800)
+		$SHOWPART("Orakel")
+		if not Done.SpokenToOracle
+			MapText("ORACLE")
+		end
+	end
+	
+	void NPC_ORACLE()
+		MapText("AFTERORACLE")
+	end
+	
+	void BERGPAD_N()
+		Map.GoToLayer("NACHT","NPC_OracleHut_SPOT")
+	end
+	
+	void BACKTOMAIN()
+		Map.GoToLayer("NACHT","Einde")
+		if gv.Bool.SpokenToOracle
+			Map.Kill("Pic_Crack",true)
+			Map.Kill("Zone_Crack",true)
+		end
+	end
+	
+	void CONSTRUCTOR()
+		for _,ch in ipairs { "Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Zooi", "Zooi2" }
+			Map.ZA_Enter("NOWAY_"..ch,"NOWAY",ch)
+		end
+		self.HideZones = { "Slaapkamer", "Orakel", "Bergpad" }
+		self.HideSubs()
+		for z in each(self.HideZones)
+			Map.ZA_Enter(z,"SHOWPART",z)
+			Map.ZA_Leave(z,"HideSubs")
+		end
+		Map.ZA_Enter("TalkCrack","TalkCrack")
+		Map.ZA_Enter("Zone_Crack","Bergpad_Z")
+		Map.ZA_Enter("Exit_Orakel","Bergpad_N")
+		Map.ZA_Enter("BackToMain","BackToMain")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+		if not $dominate
+			Map.Obj="Player"
+			Map.ObjInt.Dominance=40
+			$dominate=true
+		end
+	end
+	
+end
+#say "Map Script - Compiling!"
