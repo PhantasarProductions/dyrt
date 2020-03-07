@@ -32,10 +32,13 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.03.06
+; version: 20.03.07
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:NPC_SASKIA_Bank
+	Call MapText,"RAYFEY"
+	call GoToBank
+	end
