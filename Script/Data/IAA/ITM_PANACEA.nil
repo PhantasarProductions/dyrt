@@ -4,8 +4,8 @@
 do
 
 
-table ret_ITM_PEPPER
-ret_ITM_PEPPER={
+table ret_ITM_PANACEA
+ret_ITM_PANACEA={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
 	["Attack"] = 0,
@@ -22,7 +22,7 @@ ret_ITM_PEPPER={
 	["BuffIntelligence"] = 0,
 	["BuffResistance"] = 0,
 	["BuffStrength"] = 0,
-	["BuyPrice"] = 100,
+	["BuyPrice"] = 1000,
 	["CauseConfusion"] = false,
 	["CauseCurse"] = false,
 	["CauseDeath"] = false,
@@ -36,21 +36,21 @@ ret_ITM_PEPPER={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 250,
-	["CureConfusion"] = false,
-	["CureCurse"] = false,
+	["COM2ACT"] = 10,
+	["CureConfusion"] = true,
+	["CureCurse"] = true,
 	["CureDeath"] = false,
 	["CureDestruction"] = false,
-	["CureDisease"] = false,
+	["CureDisease"] = true,
 	["CureExhaustion"] = true,
-	["CureFear"] = false,
-	["CureParalysis"] = false,
-	["CurePoison"] = false,
-	["CureSilence"] = false,
+	["CureFear"] = true,
+	["CureParalysis"] = true,
+	["CurePoison"] = true,
+	["CureSilence"] = true,
 	["CureSleep"] = true,
-	["CureZombie"] = false,
+	["CureZombie"] = true,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "It's gonna be hot!",
+	["Description"] = "This is the medicine",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
@@ -99,9 +99,9 @@ ret_ITM_PEPPER={
 	["GainSkill0"] = 0,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
-	["GainSkill1"] = 60,
+	["GainSkill1"] = 0,
 	["GainSkill1All"] = false,
-	["GainSkill1Chars"] = "Merya",
+	["GainSkill1Chars"] = "",
 	["GainSkill2"] = 0,
 	["GainSkill2All"] = false,
 	["GainSkill2Chars"] = "",
@@ -120,17 +120,17 @@ ret_ITM_PEPPER={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Pepper",
+	["Name"] = "Panacea",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
-	["SpellAniScript"] = "Sparkle",
+	["SpellAniScript"] = "",
 	["Stance"] = "CAST",
-	["Target"] = "1A",
+	["Target"] = "Auto",
 	["Type"] = "Item",
 }
 
-return ret_ITM_PEPPER
+return ret_ITM_PANACEA
 
 
 end

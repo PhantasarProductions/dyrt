@@ -4,8 +4,8 @@
 do
 
 
-table ret_ITM_PEPPER
-ret_ITM_PEPPER={
+table ret_ITM_LIONHEART
+ret_ITM_LIONHEART={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
 	["Attack"] = 0,
@@ -42,15 +42,15 @@ ret_ITM_PEPPER={
 	["CureDeath"] = false,
 	["CureDestruction"] = false,
 	["CureDisease"] = false,
-	["CureExhaustion"] = true,
-	["CureFear"] = false,
+	["CureExhaustion"] = false,
+	["CureFear"] = true,
 	["CureParalysis"] = false,
 	["CurePoison"] = false,
 	["CureSilence"] = false,
-	["CureSleep"] = true,
+	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "It's gonna be hot!",
+	["Description"] = "Are you fit for Godric's house?",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
@@ -120,7 +120,7 @@ ret_ITM_PEPPER={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Pepper",
+	["Name"] = "Lion's Heart",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
@@ -130,7 +130,7 @@ ret_ITM_PEPPER={
 	["Type"] = "Item",
 }
 
-return ret_ITM_PEPPER
+return ret_ITM_LIONHEART
 
 
 end

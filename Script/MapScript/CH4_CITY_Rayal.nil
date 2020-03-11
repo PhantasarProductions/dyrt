@@ -47,10 +47,26 @@ group MScript
 		Map.WalkTo("X_"..p)
 	end
 	
+	void Guard()
+		MapText("GUARD")
+	end
+	
+	void DOM40()
+		Map.Obj = "Player"
+		Map.ObjInt.Dominance=40
+		if not Done.Rayal_City_Welcome
+			MapText("WELCOME")
+		end
+	end
+	
+	link NPC_GUARD1 = MScript.Guard
+	link NPC_GUARD2 = MScript.Guard
+	
 	void CONSTRUCTOR()
 		for w,tag in pairs {["S"]="FLY",["W"]="VOOGELAER",["E"]="WAZNABAER"}
 			Map.ZA_Enter("NO_"..w,"No_Way",w,tag)
 		end
+		Map.ZA_Enter("Dom40","Dom40")
 	end
 	
 	void Draw()

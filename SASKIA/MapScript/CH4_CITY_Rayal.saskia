@@ -42,3 +42,12 @@
 	Call MapText,"RAYFEY"
 	call GoToBank
 	end
+	
+:NPC_SASKIA_Clam
+	Call MapText,"CLAM"
+	call Merchant,"CH4_CLAM"
+	end
+
+:NPC_SASKIA_Klazien
+	call MapText,"KLAZIEN"
+	call Merchant,"CH4_KLAZIEN"
