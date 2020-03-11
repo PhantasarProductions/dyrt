@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 20.02.13
+// Version: 20.03.11
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -256,13 +256,18 @@ group SubParty
 					splitmore = split(cmd,".")
 					stat = splitmore[2]
 					for subs in each(self.StatSubs)
-						int v = 0
-						if subs=="BASE_" then v = tonumber(para) or 0 end
-						if subs=="END_"
+						int v = 0						
+						if subs=="BASE_" then 
+							v = tonumber(para) or 0 
+							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
+						end						
+						elseif subs=="END_"
 							CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
 							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto(stat)
 						else
-							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
+							if not Done[sprintf("%s_%s_%s",tag,subs,stat)]
+								ch.Stat(sprintf("%s%s",subs,stat))['Value'] = 0
+							end
 						end
 						CSayF("%s has stat %s%s of %d",tag,subs,stat,ch.Stat(sprintf("%s%s",subs,stat)).Value)
 					end
