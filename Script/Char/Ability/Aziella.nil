@@ -46,6 +46,7 @@ a = {
 	-- Crossbow
 	
 	-- Befindo Enchanments
+	MysticCare     = { Start = true }
 	Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) },
 	
 	-- Scharum
