@@ -41,4 +41,5 @@
 	call MapText,"WELCOME"
 :Title
 	call Fader,Field.MapData.Title
+	mov true,Map.RENC_Inf
 	end
