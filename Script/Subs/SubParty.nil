@@ -260,7 +260,6 @@ group SubParty
 						if subs=="BASE_" then 
 							v = tonumber(para) or 0 
 							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
-						end						
 						elseif subs=="END_"
 							CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
 							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto(stat)
