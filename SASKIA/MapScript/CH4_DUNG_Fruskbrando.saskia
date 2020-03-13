@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.03.12
+; version: 20.03.13
 ; End License Information
 
 :OnLoad
@@ -42,4 +42,20 @@
 :Title
 	call Fader,Field.MapData.Title
 	mov true,Map.RENC_Inf
+	;call Map.ZA_Enter,"S_Aeria",WorldMap.Aeria
+	call ZoneAction,"Enter","S_Aeria",WorldMap.Aeria
+	call Map.ZA_Enter,"Boss","SASKIA:Boss"
+	end
+	
+	
+:Boss
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/Reg.wav",StartCombat.Music 
+	mov "Indie",StartCombat.Arena
+	mov "Boss/BigDemonAir",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	call Map.Kill,"Boss",true
+	mov true,WM_Unlocked.A_Malabia
 	end
