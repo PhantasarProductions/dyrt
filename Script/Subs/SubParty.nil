@@ -225,6 +225,13 @@ group SubParty
 		tag = trim(tag)
 		ch = RPG.Char(tag)
 		ch.Stat("Level").Value=level
+		if level>=100 and tag!="YoungIrravonia" and tag!="Kirana" and tag!="Shanda"
+			if tag=="Yasathar"
+				Achievements.Award("100_ERIC")
+			else
+				Achievements.Award("100_"..tag)
+			end
+		end
 		lines = JCR_GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
 		CSayF("Parsing %s lines of LvStat data",#lines)
 		for ln,line in ipairs(lines)

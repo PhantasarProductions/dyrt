@@ -36,6 +36,7 @@
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
+	call Achievements.Award,"SCEN_AERIA"
 	end
 	
 :Entree
