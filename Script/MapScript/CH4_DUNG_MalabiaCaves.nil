@@ -43,7 +43,9 @@
 group MScript
 	
 	void TUT_SCHIETEN()
-		MapText("TUT_SCHIETEN")
+		if not Done.Tutorial_Aziella_Kan_Schieten
+			MapText("TUT_SCHIETEN")
+		end
 	end
 	
 	void CONSTRUCTOR()
