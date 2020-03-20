@@ -35,11 +35,18 @@
 // version: 19.12.16
 // End License Information
 
+
+
 module Aziella_Personal_Action
 
 	var Img
 	int X
 	int Y
+	
+	var AN
+	var AW
+	var AE
+	var AS
 	
 	void Draw()
 		self.Img.Draw(self.X,self.Y)
