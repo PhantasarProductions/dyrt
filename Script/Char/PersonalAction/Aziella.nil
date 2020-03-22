@@ -96,7 +96,7 @@ module Aziella_Personal_Action
 						if true then // Map.Data.NoPerm!="YES"
 							string m
 							m = "MAPCHANGES."..FieldMap.LoadedMap
-							Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tMap.Obj=\""..tag.."\"; Map.ObjString=\""..Map.ObjString.Texture.."\"..\n"
+							Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tMap.Obj=\""..tag.."\";\tMap.ObjString.Texture=\""..Map.ObjString.Texture.."\"\n"
 						end
 						MapScript[tag]()
 					end
