@@ -321,6 +321,10 @@ group FieldMap
 			CSay("Temporary kill, object tagged: "..tag)
 		end
 		$Kthura.Kill(tag)
+		if $Kthura.HasTag("AziellaArrowObject")
+			$Kthura.Kill("AziellaArrowObject")
+			CSay("Shooting Terminated! Due to killing: "..tag)
+		end
 	end
 	
 	void KillSwap()
