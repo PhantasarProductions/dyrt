@@ -48,6 +48,11 @@ group MScript
 		end
 	end
 	
+	void SCHIET_KAMER1()
+		Map.Kill("Barrier",true)
+		Achievements.Award("PUZ_180")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("TUT_Schieten","TUT_Schieten")
 	end
