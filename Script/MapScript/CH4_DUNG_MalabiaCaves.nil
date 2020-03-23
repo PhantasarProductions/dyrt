@@ -53,6 +53,16 @@ group MScript
 		Achievements.Award("PUZ_180")
 	end
 	
+	void SCHIET_MAAKBRUG()
+		string m
+		string doit = "Map.Obj='Brug';\tMap.ObjBool.Visible=true;\tMap.ObjBool.ForcePassible=true"
+		delegate doitf
+		doitf = NIL.Load(doit,"Maak een brug")
+		doitf()
+		m = "MAPCHANGES.CH4_DUNG_MalabiaCaves"
+		Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..Map.Layer.."\";"..doit.."\n"
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("TUT_Schieten","TUT_Schieten")
 	end
