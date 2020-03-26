@@ -211,7 +211,7 @@ group MScript
 	end
 	
 	void TOTHETEMPLE()
-		WM_Unlocked.A_MALBIATEMPLE = true
+		WM_Unlocked.A_MALABIATEMPLE = true
 		WorldMap.Aeria()
 	end
 	
