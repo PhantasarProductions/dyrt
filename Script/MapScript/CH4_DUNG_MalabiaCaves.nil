@@ -39,7 +39,113 @@
 
 #say "Map Script - None!"
 #use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+// #use "Script/Use/StartCombatMod"
+#use "libs/linkedlist"
+
+class Knopje
+
+	readonly static table All
+	readonly static table Room
+	static int TimeOut = 15000
+	
+	readonly var Nodes
+	readonly string tag
+	readonly string roomtag
+	
+	bool HasNode(string n)
+		for N in self.Nodes.Each
+			if N.tag==n
+				return true
+			end
+		end
+		return false
+	end
+	
+	void Add(string Node,string Room,dontcomeback)
+		--self.TimeOut
+		assert(self.TimeOut,"Addition Time-Out!")
+		//if not self.HasNode(Node)
+		CSay("Check self.All[\""..Node.."\"] >> "..tostring(self.All[Node]))
+		if not self.All[Node]
+			// Wrong!!
+			// self.Nodes[Node] = self.Nodes[Node] or new Knopje(Node,Room)
+			// self.Nodes[Node].Add(self.tag,Room)
+			CSay("= Creating Node: "..Node..", in order to link to "..self.tag)
+			var NN
+			NN = new Knopje(Node,Room)
+			self.Nodes.AddLast(NN)
+			//if dontcomeback!=false
+			//	NN.Add(self.tag,Room,true)
+			//end
+		else
+			CSay("= Adding existing node: "..Node)
+			self.Nodes.AddLast(self.All[Node])
+		end
+		
+	end
+	
+	get bool On
+		Map.Obj = self.tag
+		return Map.ObjString.Texture:upper() == "GFX/TEXTURES/JEWELBUTTONS/GREEN.PNG"
+	end
+	
+	set bool On
+		if value
+			Map.ObjString.Texture = "GFX/TEXTURES/JEWELBUTTONS/GREEN.PNG"
+		else
+			Map.ObjString.Texture = "GFX/TEXTURES/JEWELBUTTONS/BLUE.PNG"
+		end
+	end
+	
+	void Toggle()
+		self.On = not self.On
+	end
+	
+	void FullToggle()
+		self.Toggle()
+		for Node in self.Nodes.Each
+			Node.Toggle()
+		end
+	end
+	
+	void Link(string Room,infinity)
+		for i,Node in ipairs({infinity})
+			assert(type(Node)=="string","All nodes must be strings!")
+			self.Add(Node,Room)
+		end
+	end
+	
+	static var MK(string tag, string Room, infinity)
+		self.All[tag] = self.All[tag] or new Knopje(tag,Room,infinity)
+		self.All[tag].Link(Room,infinity)
+		return self.All[tag]
+	end
+	
+	void CONSTRUCTOR(string tag, string Room, infinity)
+		assert(not self.All[tag],"Duplicate switch button: "..tag.."/"..Room)
+		Map.ZA_Enter(tag,"KNOPJE",tag)
+		CSayF("Creating %s::%s",Room,tag)
+		self.Nodes = new TLinkedList
+		self.Room[Room] = self.Room[Room] or {}
+		self.Room[Room][#self.Room[Room]+1] = self
+		self.All[tag] = self
+		self.tag = tag
+		self.roomtag = Room
+	end
+	
+end
+
+quickmeta group Solved
+	index
+		return gv.Bool["MALABIACAVES_KNOPJE_"..key]
+	end
+	
+	newindex
+		gv.Bool["MALABIACAVES_KNOPJE_"..key] = value
+	end
+end
+
+
 group MScript
 	
 	void TUT_SCHIETEN()
@@ -63,8 +169,93 @@ group MScript
 		Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..Map.Layer.."\";"..doit.."\n"
 	end
 	
+	void KNOPJE(string tag)
+		var K
+		K = Knopje.All[tag]
+		if Solved[K.roomtag]
+			return
+		end
+		K.FullToggle()
+		bool S = true
+		for _,k in ipairs(Knopje.Room[K.roomtag])
+			S = S and k.On
+		end
+		Solved[K.roomtag] = S
+		if S
+			Map.Kill("Barrier",true)
+			for _,k in ipairs(Knopje.Room[K.roomtag])
+				Map.Kill(k.tag,true)
+			end
+			if Map.Layer=="#008"
+				Achievements.Award("PUZ_INSANE")
+			end
+		end
+	end
+	
+	void BOVEN()
+		Map.Obj="Boven"
+		Map.ObjBool.ForcePassible=true
+		Map.Obj="Beneden"
+		Map.ObjBool.ForcePassible=false
+		Map.Obj="Player"
+		Map.ObjInt.Dominance = 50
+	end
+
+	void BENEDEN()
+		Map.Obj="Boven"
+		Map.ObjBool.ForcePassible=false
+		Map.Obj="Beneden"
+		Map.ObjBool.ForcePassible=true
+		Map.Obj="Player"
+		Map.ObjInt.Dominance = 20
+	end
+	
+	void TOTHETEMPLE()
+		WM_Unlocked.A_MALBIATEMPLE = true
+		WorldMap.Aeria()
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("TUT_Schieten","TUT_Schieten")
+		Map.ZA_Enter("Oben","Boven")
+		Map.ZA_Enter("Upstairs","Boven")
+		Map.ZA_Enter("Unten","Beneden")
+		Map.ZA_Enter("Downstairs","Beneden")
+		Map.ZA_Enter("NaarDeTempel","ToTheTemple")
+		// #002
+		Knopje.MK("One",   "#002","Two")
+		Knopje.MK("Two",   "#002","Three","One")
+		Knopje.MK("Three", "#002","Four","Two")
+		Knopje.MK("Four",  "#002","Five","Three")
+		Knopje.MK("Five",  "#002","Four")
+		// #004
+		Knopje.MK("Een",   "#004","Acht", "Twee")
+		Knopje.MK("Twee",  "#004","Een",  "Drie")
+		Knopje.MK("Drie",  "#004","Twee" ,"Vier")
+		Knopje.MK("Vier",  "#004","Drie" ,"Vijf")
+		Knopje.MK("Vijf",  "#004","Vier", "Zes")
+		Knopje.MK("Zes",   "#004","Vijf", "Zeven")
+		Knopje.MK("Zeven", "#004","Zes",  "Acht")
+		Knopje.MK("Acht",  "#004","Zeven","Een")
+		// #008
+		for i=1,3
+			for j=1,3
+				var kn
+				kn = Knopje.MK(string.char(i+64)..string.char(j+48),"#008")
+				if i>1
+					kn.Add(string.char(i+63)..string.char(j+48),"#008")
+				end
+				if i<3
+					kn.Add(string.char(i+65)..string.char(j+48),"#008")
+				end
+				if j>1
+					kn.Add(string.char(i+64)..string.char(j+47),"#008")
+				end
+				if j<3
+					kn.Add(string.char(i+64)..string.char(j+49),"#008")
+				end
+			end
+		end
 	end
 	
 	void Draw()
