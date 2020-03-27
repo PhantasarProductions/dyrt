@@ -59,6 +59,7 @@ do
 		SickBite        = { Charm = { "Salamandar" }, Skill_Bat = 15 },
 		Burp            = { Charm = { "Toad" } },
 		Suicide         = { Charm = { "Lemming" } },
+		RavenPeck       = { Charm = { "Raven"}, Scharum=true, Skill_Bat=30,Skill_Nature=31 }
 	
 		-- Scharum
 	
