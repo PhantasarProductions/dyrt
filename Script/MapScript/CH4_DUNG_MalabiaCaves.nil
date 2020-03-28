@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.03.26
+// version: 20.03.28
 // End License Information
 
 
@@ -51,6 +51,14 @@ class Knopje
 	readonly var Nodes
 	readonly string tag
 	readonly string roomtag
+	
+	void DESTRUCTOR()
+		self.Nodes.Clear()
+		table kill
+		CSay("Destroying Knopje: "..self.tag)
+		self.All[self.tag] = nil;
+		self.Room[self.tag] = nil;		
+	end
 	
 	bool HasNode(string n)
 		for N in self.Nodes.Each
