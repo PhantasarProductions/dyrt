@@ -39,5 +39,22 @@
 	end
 
 :TheGordo
-	call error,"Script not yet available"
+	chk Done.TeamEricVisitMalabiaTheGordo,Nothing
+	call Map.ShowByLabel,"H"
+	mov "Aziella", Map.Leader
+	call MapText,"A"
+	call Map.WalkTo,"Einde"
+	call Map.Cam,0,0
+	call MapText,"B"
+	call Map.HideByLabel,"H"
+	end
+	
+:Malabia_TeamEric
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"H1"
+	call MapText,"MALABIA_ONE"
+	call MapScript.EndSplit,"Eric"
+	end
+	
+:Nothing
 	end
