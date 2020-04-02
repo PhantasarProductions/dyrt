@@ -1,0 +1,88 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/MapScript/EndSplit.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.04.02
+// End License Information
+void StartRebecca()
+	RPG.Party[1] = "Rebecca"
+	RPG.Party[2] = "Scyndi"
+	RPG.Party[3] = "Dernor"
+	RPG.Party[4] = "Merya"
+	Field.LoadMap("CH4_HUB_CAT_BEACH")
+	Map.SpawnPlayer("Split_Start")
+end
+
+void StartEric()
+	RPG.Party[1] = "Eric"
+	RPG.Party[2] = "Irravonia"
+	RPG.Party[3] = "Brendor"
+	RPG.Party[4] = "Aziella"
+	Field.LoadMap("CH4_HUB_RAYALPALACE")
+	Map.SpawnPlayer("Split_Start")
+end
+
+void Rejoin()
+	RPG.Party[1] = "Eric"
+	RPG.Party[2] = "Irravonia"
+	RPG.Party[3] = "Brendor"
+	RPG.Party[4] = "Scyndi"
+	RPG.Party[5] = "Rebecca"
+	RPG.Party[6] = "Dernor"
+	RPG.Party[7] = "Merya"
+	RPG.Party[8] = "Aziella"
+	Field.LoadMap("CH4_HUB_RAYALPALACE")
+	Map.SpawnPlayer("Split_Start")
+	error("Follow up not yet scripted")
+end
+
+void EndSplit(string team)
+	switch team:upper()
+		case "ERIC"
+			if gv.Bool.DefeatedFrundarmon
+				Rejoin()
+			else
+				StartRebecca()
+			end
+		case "REBECCA"
+			if gv.Bool.MeetMalabiaAtEndOfSplitTeamEric
+				Rejoin()
+			else
+				StartEric()
+			end
+		default
+			error("Unknown team: "..team)
+	end
+end
+
+return EndSplit
