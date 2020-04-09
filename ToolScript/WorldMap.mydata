@@ -101,7 +101,7 @@ Rec: C_BEACH
 
 Rec: C_FELIXIUM
 	AvailableOnStart = TRUE
-	Kthura = CH4_HUB_Cat_Beach
+	Kthura = CH4_CITY_Felixium
 	Layer = CAT
 	MarkAsNew = TRUE
 	Name = Felixium
