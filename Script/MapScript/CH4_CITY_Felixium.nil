@@ -112,7 +112,7 @@ group MScript
 				Scyndi.Points("SKILLLVL3").Have = 1
 			end
 		end
-	end
+	end	
 	
 	void CONSTRUCTOR()
 		self.HIDEHOUSE()
