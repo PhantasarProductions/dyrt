@@ -37,6 +37,7 @@
 
 :OnLoad
 	call Fader,Field.MapData.Title
+	mov true,WM_Unlocked.C_PURPLEFOREST
 	end
 	
 :Welcome
@@ -67,4 +68,14 @@
 :NPC_SASKIA_Bank
 	call MapText,"CATSH"
 	call GoToBank
+	end
+	
+:NPC_SASKIA_Katinka
+	call MapText,"KATINKA" 
+	call Merchant,"CH4_KATINKA" 
+	end
+
+:NPC_SASKIA_Felicia
+	call MapText,"FELICIA" 
+	call Merchant,"CH4_FELICIA" 
 	end
