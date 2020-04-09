@@ -63,3 +63,8 @@
 	call Map.ShowObj,"Player"
 	call Achievements.Award,"SCEN_TIGERION"
 	end
+	
+:NPC_SASKIA_Bank
+	call MapText,"CATSH"
+	call GoToBank
+	end
