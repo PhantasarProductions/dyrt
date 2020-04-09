@@ -1,0 +1,132 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH4_CITY_Felixium.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.04.09
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+// #use "Script/Use/StartCombatMod"
+group MScript
+	
+	void WELCOMECAM()
+		int x
+		int y
+		Map.Obj = "Welcome"
+		x = Map.ObjInt.X
+		y = Map.ObjInt.Y
+		Map.Cam(x,y)
+	end
+	
+	void TIGERIONCAM()
+		int x
+		int y
+		Map.Obj = "Welcome"
+		x = Map.ObjInt.X
+		y = Map.ObjInt.Y
+		for i=0,100
+			Map.Cam(x,y-i)
+		end
+	end
+	
+	void SHOWHOUSE()
+		Map.HideByZone("All")
+		Map.ShowByZone("InHouse")
+		// Mind the order!
+	end
+	
+	void HIDEHOUSE()
+		Map.ShowByZone("All")
+		Map.HideByZone("InHouse")
+		// Mind the order!
+	end
+	
+	void ENTERTIGERION()
+		Map.GoToLayer("CAT","Start_House")
+	end
+	link NPC_TIGHOUSE = MScript.ENTERTIGERION
+	
+	
+	void NPC_TIGERION()
+		if not gv.Bool.DefeatedFrundarmon
+			MapText("TIGERION.BEFOREFRUNDARMON")
+		elseif Map.Leader=="Rebecca" 
+			MapText("TIGERION.REBECCA")
+		else
+			MapText("TIGERION.AFTER")
+		end
+	end
+	
+	void NPC_KATHA()
+		if not gv.Bool.DefeatedFrundarmon
+			MapText("KATHA.BEFOREFRUNDARMON")
+		else
+			MapText("KATHA.AFTERFRUNDARMON")
+		end
+	end
+	
+	void LEAVE_TIGHOUSE()
+		Map.GoToLayer("CAT","NPC_TigHouse_SPOT")
+	end
+	
+	void NPC_THRUR()
+		MapText("THRUR")
+		if Map.Leader=="Scyndi" 
+			var Scyndi
+			Scyndi = RPG.GetChar("Scyndi")
+			Achievements.Award("SCYNDI_THRUR")
+			if Scyndi.Points("SKILLLVL3").Have==0
+				Scyndi.Points("SKILLLVL3").Have = 1
+			end
+		end
+	end
+	
+	void CONSTRUCTOR()
+		self.HIDEHOUSE()
+		Map.ZA_Enter("Welcome","SASKIA:Welcome")
+		Map.ZA_Enter("InHouse","ShowHouse")
+		Map.ZA_Leave("InHouse","HideHouse")
+		Map.ZA_Enter("Leave_TigHouse","Leave_TigHouse")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"

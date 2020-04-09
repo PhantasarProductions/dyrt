@@ -1,0 +1,65 @@
+; License Information:
+; **********************************************
+; 
+; src/Tricky Script/SASKIA/MapScript/CH4_CITY_Felixium.saskia
+; (c) Jeroen Broks, , All Rights Reserved.
+; 
+; This file contains material that is related
+; to a storyline that is which is strictly
+; copyrighted to Jeroen Broks.
+; 
+; This file may only be used in an unmodified
+; form with an unmodified version of the
+; software this file belongs to.
+; 
+; You may use this file for your study to see
+; how I solved certain things in the creation
+; of this project to see if you find valuable
+; leads for the creation of your own.
+; 
+; Mostly this file comes along with a project
+; that is for most part released under an
+; open source license and that means that if
+; you use that code with this file removed
+; from it, you can use it under that license.
+; Please check out the other files to find out
+; which license applies.
+; This file comes 'as-is' and in no possible
+; way the author can be held responsible of
+; any form of damages that may occur due to
+; the usage of this file
+; 
+; 
+; **********************************************
+; 
+; version: 20.04.09
+; End License Information
+
+:OnLoad
+	call Fader,Field.MapData.Title
+	end
+	
+:Welcome
+	call Map.HideObj,"Player"
+	call MapScript.WelcomeCam
+	call MapText,"BINNENKOMST_A"
+	call MapScript.TigerionCam
+	call MapText,"BINNENKOMST_B"
+	call Map.Kill,"Welcome",true
+	call Map.Kill,"S_Rebecca",true
+	call Map.Kill,"S_Scyndi",true
+	call Map.Kill,"S_Merya",true
+	call Map.Kill,"S_Dernor",true
+	call Map.Kill,"S_Tigerion",true
+	call MapScript.EnterTigerion
+	call MapScript.ShowHouse
+	call Map.HideObj,"Player" 
+	call Map.Cam,2500,1800
+	call MapText,"BINNENKOMST_C"
+	call Map.Kill,"T_Rebecca",true
+	call Map.Kill,"T_Scyndi",true
+	call Map.Kill,"T_Merya",true
+	call Map.Kill,"T_Dernor",true
+	call Map.ShowObj,"Player"
+	call Achievements.Award,"SCEN_TIGERION"
+	end
