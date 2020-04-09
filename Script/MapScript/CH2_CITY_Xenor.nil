@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.05
+// version: 20.04.09
 // End License Information
 
 
@@ -64,7 +64,7 @@ group MScript
 	end
 		
 	void EXIT_STORE()
-		Map.GoToLayer("CITY","NPC_Store_SPOT")	
+		Map.GoToLayer("CITY","NPC_Store_SPOT")
 	end
 	
 	void NPC_GIRL()
