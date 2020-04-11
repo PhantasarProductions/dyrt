@@ -1,0 +1,56 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/PurpleForest.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.04.11
+// End License Information
+	
+module Arena_SparForest
+	
+	var Forest
+	
+	void CONSTRUCTOR()
+		self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
+		self.Forest.LoadTex("GFX/Textures/PurpleForest/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
+		self.Forest.CloudR=180
+		self.Forest.CloudG=100
+		self.Forest.CloudB=255
+		self.Forest.texsky={['R']=180,['G']=0,['B']=225}
+		self.Forest.texfloorfile = "GFX/Textures/PurpleForest/Grass1.png"
+		self.Forest.Generate()
+	end
+	
+	void Draw()
+		self.Forest.Draw()
+	end
+end
