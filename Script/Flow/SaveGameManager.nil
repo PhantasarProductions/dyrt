@@ -164,7 +164,7 @@ class SG
 			if r==0 
 				g = (g+1)%256
 				if g==0
-					b = (b+1)%256)
+					b = (b+1)%256
 				end
 			end
 		end
