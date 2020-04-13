@@ -47,6 +47,12 @@ group MScript
 		end
 	end
 	
+	void DOEL()
+		WM_Unlocked.D_Frundarmon = true
+		Achievements.Award("SCEN_PURPLEFOREST")
+		WorldMap["Cat-Island"]()
+	end
+	
 	void CONSTRUCTOR()
 		Map.RENC_Inf = true
 		Map.ZA_Enter("Welcome","Welcome")

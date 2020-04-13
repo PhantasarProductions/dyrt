@@ -149,6 +149,28 @@ class SG
 		end		
 	end
 	
+	static void SaveTalk(string k,infinity)
+		static int r
+		static int g
+		static int b
+		string w
+		if #({infinity})==0
+			w = k
+		else
+			w = sprintf("SaveTalk: "..k,infinity)
+		end
+		r = (r+1)%256
+		while r+g+b<100
+			if r==0 
+				g = (g+1)%256
+				if g==0
+					b = (b+1)%256)
+				end
+			end
+		end
+		CWriteLine(w,r,g,b)
+	end
+	
 	static void SaveData(string File)
 		// The reason I put this in a separate function is actually for 
 		// my own needs alone, and not those of the player. In order to
@@ -157,37 +179,46 @@ class SG
 		
 		// Start
 		var jsg
+		SaveTalk("Starting SaveGame Process")
 		jsg = BubSave.StartJCRSave(File)
 		jsg.Hash = false // NALA uses its own method for this!
 		
 		// RPG Party Data
+		SaveTalk("Config Party")
 		jsg.XTRA = {['CMD']="RPGParty",['PARA']="Party"}
 		
 		// Swap Data
+		SaveTalk("Swap")
 		jsg.XTRA = {['CMD']="Swap", ['PARA']="Swap"}
 
 		// don't serialize yourself, this is more delicate than that!
 		jsg.Serial=false
 		
 		// Map and Player Actor data
+		SaveTalk("Field")
 		jsg["Data/Field"] = LuaGetString("FLOW_FIELD","FlowField.SGData","Grab Field Data for SaveGame")
 	
 		
 		// GameVars
+		SaveTalk("GameVars")
 		jsg["Data/GameVars"] = gv()
 		
 		// Inventory
+		SaveTalk("Inventory")
 		jsg["Data/Inventory"] = Inventory()
 		
 		// Abilities
+		SaveTalk("Abilities")
 		jsg["Data/MasteredAbilities"] = AbilitiesMastered()
 		
 		// Security
 		if BubSave.SaveXtra("ZZZZZ")
+			SaveTalk("Security")
 			jsg.Xtra = {['CMD']="ZZZZZ",['PARA']=""}
 		end
 		
 		// Finalize
+		SaveTalk("Closure!")
 		jsg.close = true
 		
 	end
