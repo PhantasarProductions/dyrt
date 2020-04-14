@@ -87,7 +87,7 @@ ret = {
 		["World"] = "Cat-Island",
 
 	},
-	["C_FRUDARMON"] = {
+	["C_FRUNDARMON"] = {
 		["AvailableOnStart"] = false,
 		["Kthura"] = "",
 		["Layer"] = "#001",
