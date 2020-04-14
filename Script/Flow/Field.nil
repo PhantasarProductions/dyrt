@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.03.22
+// Version: 20.04.14
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -958,6 +958,12 @@ global void BUB_Draw()
 	// This function will draw the screen minus the character bar
 	// That way it can be easily called from BoxText and maybe a few other functions
 	FlowField.DrawScreen()
+	
+	// Draw in MapScript
+	if StateExists("MAP")
+		LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Update()")
+	end
+
 	
 	// Character screen
 	FlowField.FieldStats()
