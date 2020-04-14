@@ -108,7 +108,7 @@ Rec: C_FELIXIUM
 	Start = Start
 	World = Cat-Island
 
-Rec: C_FRUDARMON
+Rec: C_FRUNDARMON
 	AvailableOnStart = FALSE
 	Kthura = 
 	Layer = #001
