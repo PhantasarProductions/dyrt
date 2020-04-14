@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 20.02.16
+// Version: 20.04.14
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -51,6 +51,7 @@
 #macro __red Color(255,0,0)
 #macro __green Color(0,255,0)
 #macro __blue Color(0,0,255)
+#macro __yellow Color(255,255,0)
 
 #macro __lang gv.String.Lang
 #macro __skill gv.Int.Skill
