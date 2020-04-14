@@ -149,26 +149,29 @@ class SG
 		end		
 	end
 	
+	static int st_r
+	static int st_g
+	static int st_b
 	static void SaveTalk(string k,infinity)
-		static int r
-		static int g
-		static int b
+		//static int r
+		//static int g
+		//static int b
 		string w
 		if #({infinity})==0
 			w = k
 		else
 			w = sprintf("SaveTalk: "..k,infinity)
 		end
-		r = (r+1)%256
-		while r+g+b<100
-			if r==0 
-				g = (g+1)%256
-				if g==0
-					b = (b+1)%256
+		while self.st_r+self.st_g+self.st_b<100
+			self.st_r = (self.st_r+1)%256
+			if self.st_r==0 
+				self.st_g = (self.st_g+1)%256
+				if self.st_g==0
+					self.st_b = (self.st_b+1)%256
 				end
 			end
 		end
-		CWriteLine(w,r,g,b)
+		CWriteLine(w,$st_r,$st_g,$st_b)
 	end
 	
 	static void SaveData(string File)
@@ -179,46 +182,46 @@ class SG
 		
 		// Start
 		var jsg
-		SaveTalk("Starting SaveGame Process")
+		$SaveTalk("Starting SaveGame Process")
 		jsg = BubSave.StartJCRSave(File)
 		jsg.Hash = false // NALA uses its own method for this!
 		
 		// RPG Party Data
-		SaveTalk("Config Party")
+		$SaveTalk("Config Party")
 		jsg.XTRA = {['CMD']="RPGParty",['PARA']="Party"}
 		
 		// Swap Data
-		SaveTalk("Swap")
+		$SaveTalk("Swap")
 		jsg.XTRA = {['CMD']="Swap", ['PARA']="Swap"}
 
 		// don't serialize yourself, this is more delicate than that!
 		jsg.Serial=false
 		
 		// Map and Player Actor data
-		SaveTalk("Field")
+		$SaveTalk("Field")
 		jsg["Data/Field"] = LuaGetString("FLOW_FIELD","FlowField.SGData","Grab Field Data for SaveGame")
 	
 		
 		// GameVars
-		SaveTalk("GameVars")
+		$SaveTalk("GameVars")
 		jsg["Data/GameVars"] = gv()
 		
 		// Inventory
-		SaveTalk("Inventory")
+		$SaveTalk("Inventory")
 		jsg["Data/Inventory"] = Inventory()
 		
 		// Abilities
-		SaveTalk("Abilities")
+		$SaveTalk("Abilities")
 		jsg["Data/MasteredAbilities"] = AbilitiesMastered()
 		
 		// Security
 		if BubSave.SaveXtra("ZZZZZ")
-			SaveTalk("Security")
+			$SaveTalk("Security")
 			jsg.Xtra = {['CMD']="ZZZZZ",['PARA']=""}
 		end
 		
 		// Finalize
-		SaveTalk("Closure!")
+		$SaveTalk("Closure!")
 		jsg.close = true
 		
 	end
