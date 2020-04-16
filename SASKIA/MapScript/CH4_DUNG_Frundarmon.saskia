@@ -38,4 +38,39 @@
 	call Fader,Field.MapData.Title
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:NPC_SASKIA_Kid1
+	call MapText,"ENTRANCEGIRL"
+	call MapScript.Kid,"Elf"
+	call Map.Kill,"NPC_SASKIA_Kid1",true
+	call Map.Kill,"Kid_Barrier1",true
+	end
+	
+;Both Lables should run the same event
+:NPC_SASKIA_Kid_SW11
+:NPC_SASKIA_Kid_SW12
+	call MapScript.Kid,"Fairy","Human"
+	call Map.Kill,"NPC_SASKIA_Kid_SW11",true
+	call Map.Kill,"NPC_SASKIA_Kid_SW12",true
+	end
+	
+:Kitchen
+	chk gv.Bool.DefeatedFrundarmon,Niks
+	call CSay,"10"
+	call CSay,"9"
+	call CSay,"8"
+	call CSay,"7"
+	call CSay,"6"
+	call CSay,"5"
+	call CSay,"4"
+	call CSay,"3"
+	call CSay,"2"
+	call CSay,"1"
+	call CSay,"0"
+	call MapScript.Kid,"Fairy","Phelynx"
+	Call Map.HideByLabel,"Kitchen_Kid"
+	end
+
+
+
+:Niks
+	end
