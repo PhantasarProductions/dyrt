@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 4/16/2020 6:20:28 PM
+// Generated: 4/16/2020 6:23:58 PM
 
 do
 var retfunc()
@@ -11,8 +11,8 @@ foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "A Phelynx girl cursed by Frundarmon"
 foeret.Fatal["Light"] = true
-foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Kids/Phelynx.png")
-foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/KIDS/PHELYNX.NEGATIVE.PNG")
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Kids/Phelynx_Girl.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/KIDS/PHELYNX_GIRL.NEGATIVE.PNG")
 foeret.Cash = 250
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 250
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_EEL"
