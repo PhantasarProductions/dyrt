@@ -1,0 +1,116 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH4_DUNG_Frundarmon.nil
+// (c) Jeroen Broks, , All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.04.14
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+#use "Script/Use/MapScript/CircularDarkness"
+
+//#use "libs/LinkedList"
+group MScript
+	
+	//var Lijst
+	string Kamer
+	var Font
+	
+	table KamerKop
+	
+	void ENTERKAMER(string tag)
+		Map.VisibleOnlyByZone(tag,true)
+		self.Kamer = replace(tag,"_"," ")
+		self.KamerKop[tag] = self.Font.Text(tag)
+	end
+	
+	void InitKamer(string tag)
+		//$Lijst.AddLast(tag)
+		Map.ZA_Enter(tag,"EnterKamer",tag)
+		CSayF("= Initiated Kamer: %s",tag)
+	end
+	
+	void KID(infinity)
+		StartCombat.StartSession()
+		StartCombat.Music = "*NONE*"
+		StartCombat.Arena = "Frundarmon"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		for i,kid in ipairs {infinity}
+			StartCombat.Foe[i] = sprintf("Kids/%s",kid)
+		end
+		StartCombat.Ready()
+	end
+	link Kid = MScript.KID
+	
+	void SWITCH_TO2()
+		Map.Kill("Barrier_TO2",true)
+	end
+	
+	void CONSTRUCTOR()
+		CSay("Entering the mansion")
+		//self.Lijst = new TLinkedList
+		self.Font = GetFont("BIGTEXT")
+		self.InitKamer("Lobby")
+		self.InitKamer("Corridor 1st Floor")
+		self.InitKamer("Living Room")
+		self.InitKamer("Secret Passage")
+		self.InitKamer("Storage")
+		self.InitKamer("Kitchen")
+		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
+	end
+	
+	void DESTRUCTOR()
+		CSay("Leaving the mansion")
+		//self.Lijst.Clear()
+	end
+	
+	  link DarkDraw = CircularDarkness.Draw__StyleStretch
+	//link DarkDraw = CircularDarkness.Draw__StyleSmall
+	
+	void Draw()
+		self.DarkDraw()
+		__yellow
+		if self.Kamer!=""
+			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
+		end
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
