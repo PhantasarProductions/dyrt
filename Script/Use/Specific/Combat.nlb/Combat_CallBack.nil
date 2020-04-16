@@ -114,6 +114,11 @@ global void BUB_Draw()
 	end
 	__white
 	
+	// AfterDraw if available
+	if Arena[".hasmember"]("AfterDraw") and (not Stage.Current[".hasmember"]("AltArena") )
+		Arena.AfterDraw()
+	end
+	
 	// Stage specific Draw
 	Stage.Current.Draw()
 	
