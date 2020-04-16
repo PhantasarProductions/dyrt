@@ -7,7 +7,7 @@ do
 table ret_ABL_HERO_SCYNDI_JOLT
 ret_ABL_HERO_SCYNDI_JOLT={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 15,
+	["AP_Cost"] = 50,
 	["Attack"] = 100,
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
