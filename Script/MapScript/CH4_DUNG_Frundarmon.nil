@@ -80,6 +80,11 @@ group MScript
 		Map.Kill("Barrier_TO2",true)
 	end
 	
+	void TOBASEMENT()
+		Field.LoadMap("CH4_DUNG_FrundarmonBasement")
+		Map.GoToLayer("#000","Start")
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Entering the mansion")
 		//self.Lijst = new TLinkedList
@@ -91,6 +96,7 @@ group MScript
 		self.InitKamer("Storage")
 		self.InitKamer("Kitchen")
 		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
+		Map.ZA_Enter("ToBasement","ToBasement")
 	end
 	
 	void DESTRUCTOR()
