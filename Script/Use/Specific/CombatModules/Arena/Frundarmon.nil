@@ -1,0 +1,38 @@
+#use "Script/Use/MapScript/CircularDarkness"
+
+module Arena_Frundarmon
+	
+	readonly var Vloer
+	readonly var Muur
+	readonly var Schilderij
+	readonly int center
+	readonly int kwart
+	readonly int schilderij_x
+	readonly int schilderij_y
+	
+	void CONSTRUCTOR()
+		self.center       = math.floor(Screen.H/2)-64
+		self.kwart        = math.floor(Screen.H/4)
+		self.schilderij_x = math.random(40,Screen.W-40)
+		self.schilderij_y = math.random(self.kwart+40,self.center-40)		
+		self.Muur         = LoadIfNew("GFX/Textures/Frundarmon/MWall.png",      "ARENA_FRUNDARMONMUUR")
+		self.Vloer        = LoadIfNew("GFX/Textures/Frundarmon/MVloer.png",     "ARENA_FRUNDARMONVLOER")
+		self.Schilderij   = LoadIfNew("GFX/Textures/Frundarmon/SchilderijM.png","ARENA_FRUNDARMONSCHILDERIJ")
+	end
+	
+	void Draw()
+		__white
+		// vloer
+		self.Vloer.Tile(0,self.center-3,Screen.W,self.center)
+		
+		// muur
+		for y=self.center,self.kwart,-32
+			self.Muur.Tile(0,y,Screen.W,32)
+		end
+		self.Muur.Tile(0,self.center,Screen.W,64)
+		self.Schilderij.Draw(self.schilderij_x,self.schilderij_y)
+	end
+	
+	link AfterDraw = CircularDarkness.Draw__StyleStretch
+
+end
