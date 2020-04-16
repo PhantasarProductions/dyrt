@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 4/16/2020 6:23:58 PM
+// Generated: 4/16/2020 9:28:31 PM
 
 do
 var retfunc()
@@ -350,7 +350,7 @@ else
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
-	foeret.Char.Stat("BASE_Intelligence").Value=123
+	foeret.Char.Stat("BASE_Intelligence").Value=223
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
@@ -358,7 +358,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=123
+	foeret.Char.Stat("BASE_Strength").Value=223
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
