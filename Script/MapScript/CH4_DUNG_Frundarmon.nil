@@ -85,6 +85,12 @@ group MScript
 		Map.GoToLayer("#000","Start")
 	end
 	
+	void WELCOME2()
+		if not Done.Frundarmon_Welcome_2ndFloor
+			Kid("Elf","Human","Phelynx","Fairy")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Entering the mansion")
 		//self.Lijst = new TLinkedList
@@ -95,8 +101,13 @@ group MScript
 		self.InitKamer("Secret Passage")
 		self.InitKamer("Storage")
 		self.InitKamer("Kitchen")
+		self.InitKamer("Corridor 2nd Floor")
+		self.InitKamer("Dining Room")
+		self.InitKamer("Bed Room")
+		self.InitKamer("Study")
 		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
 		Map.ZA_Enter("ToBasement","ToBasement")
+		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
 	end
 	
 	void DESTRUCTOR()
