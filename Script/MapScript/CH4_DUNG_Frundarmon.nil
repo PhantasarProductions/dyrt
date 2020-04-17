@@ -43,11 +43,29 @@
 #use "Script/Use/MapScript/CircularDarkness"
 
 //#use "libs/LinkedList"
+
+#macro ClosetPuzzle gv.Bool.Frundarmon_Closet_Puzzle_Solved
+#macro FrunDefeated gv.Bool.DefeatedFrundarmon
+
+
+
+table KidGen
+KidGen = {
+	["Befindo"] = "boy",
+	["human"]   = "boy",
+	["Fairy"]   = "girl",
+	["Phelynx"] = "girl",
+	["Elf"]     = "girl"
+}
+
 group MScript
 	
 	//var Lijst
 	string Kamer
 	var Font
+	
+	table boy
+	table girl
 	
 	table KamerKop
 	
@@ -87,7 +105,35 @@ group MScript
 	
 	void WELCOME2()
 		if not Done.Frundarmon_Welcome_2ndFloor
-			Kid("Elf","Human","Phelynx","Fairy")
+			self.Kid("Elf","Human","Phelynx","Fairy")
+		end
+		if (not ClosetPuzzle) or FrunDefeated
+			Map.HideByLabel("K3")
+		end
+	end
+	
+	void NPC_CLOSET()
+		if ClosetPuzzle
+			return
+		end
+		Annoy("Hey, there's a list of questions on the backside")
+		bool r = true
+		table gn
+		gn = {"boy","girl"}
+		for race,gender in pairs ( KidGen )
+			bool chk
+			string g
+			g = gn[math.random(1,2)]
+			chk = Yes(sprintf("Is the undead %s kid a %s?",race,g))
+			r = r and (g == gender)==chk
+			CSayF("Is the undead %s kid a %s? %s/%s[%s] => %s",race,g,tostring(chk),tostring(KidGen[race]==gender),gender,tostring(r))
+		end
+		ClosetPuzzle = r
+		if ClosetPuzzle
+			Annoy("You hear a door open in the corridor. But not only that. Some undead children appear to have run into the corridor to guard it!")
+			Map.Kill("Barrier",true)
+		else
+			Annoy("Nothing happens")
 		end
 	end
 	
@@ -108,6 +154,8 @@ group MScript
 		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
 		Map.ZA_Enter("ToBasement","ToBasement")
 		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
+		self.boy  = { ["boy"]=true,  ["girl"] = false }
+		self.girl = { ["boy"]=false, ["girl"] = true  }
 	end
 	
 	void DESTRUCTOR()
