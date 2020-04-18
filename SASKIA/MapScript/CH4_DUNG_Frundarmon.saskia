@@ -70,7 +70,14 @@
 	Call Map.HideByLabel,"Kitchen_Kid"
 	end
 
-
+:K3
+	; This has nothing to do with a Belgian girl trio.
+	; K3 means "Kamer 3" to which the stairs these kids
+	; stand guard to lead ("Kamer" means "room" in Dutch)
+	call MapScript.Kid,"Elf","Befindo","Human","Fairy","Phelynx"
+	call Map.Kill,"K3",true
+	call Map.HideByLabel,"K3"
+	end
 
 :Niks
 	end
