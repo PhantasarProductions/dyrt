@@ -64,8 +64,8 @@ group MScript
 	string Kamer
 	var Font
 	
-	table boy
-	table girl
+	// table boy
+	// table girl
 	
 	table KamerKop
 	
@@ -112,6 +112,8 @@ group MScript
 		end
 	end
 	
+	
+	
 	void NPC_CLOSET()
 		if ClosetPuzzle
 			return
@@ -154,8 +156,9 @@ group MScript
 		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
 		Map.ZA_Enter("ToBasement","ToBasement")
 		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
-		self.boy  = { ["boy"]=true,  ["girl"] = false }
-		self.girl = { ["boy"]=false, ["girl"] = true  }
+		Map.ZA_Enter("K3","SASKIA:K3")
+		//self.boy  = { ["boy"]=true,  ["girl"] = false }
+		//self.girl = { ["boy"]=false, ["girl"] = true  }
 	end
 	
 	void DESTRUCTOR()
