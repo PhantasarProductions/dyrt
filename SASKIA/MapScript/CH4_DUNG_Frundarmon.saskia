@@ -53,6 +53,14 @@
 	call Map.Kill,"NPC_SASKIA_Kid_SW12",true
 	end
 	
+:NPC_SASKIA_KID21
+:NPC_SASKIA_KID22
+	call MapScript.Kid,"Human","Befindo"
+	call Map.Kill,"NPC_SASKIA_KID21",true
+	call Map.Kill,"NPC_SASKIA_KID22",true
+	mov true,gv.Bool.Frundarmon_Boys_On_The_Second_Floor
+	end
+	
 :Kitchen
 	chk gv.Bool.DefeatedFrundarmon,Niks
 	call CSay,"10"
@@ -70,6 +78,23 @@
 	Call Map.HideByLabel,"Kitchen_Kid"
 	end
 
+:Guard_Closet
+	call CSay,"10"
+	call CSay,"9"
+	call CSay,"8"
+	call CSay,"7"
+	call CSay,"6"
+	call CSay,"5"
+	call CSay,"4"
+	call CSay,"3"
+	call CSay,"2"
+	call CSay,"1"
+	call CSay,"0"
+	call MapScript.Kid,"Fairy","Phelynx","Befindo"
+	Call Map.HideByLabel,"CLOSET_GUARD"
+	end
+
+
 :K3
 	; This has nothing to do with a Belgian girl trio.
 	; K3 means "Kamer 3" to which the stairs these kids
@@ -77,6 +102,7 @@
 	call MapScript.Kid,"Elf","Befindo","Human","Fairy","Phelynx"
 	call Map.Kill,"K3",true
 	call Map.HideByLabel,"K3"
+	mov true,gv.Bool.Frundarmon_KillK3
 	end
 
 :Niks

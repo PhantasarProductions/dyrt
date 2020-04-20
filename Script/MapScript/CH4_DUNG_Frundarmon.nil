@@ -107,12 +107,19 @@ group MScript
 		if not Done.Frundarmon_Welcome_2ndFloor
 			self.Kid("Elf","Human","Phelynx","Fairy")
 		end
-		if (not ClosetPuzzle) or FrunDefeated
+		if (not ClosetPuzzle) or gv.Bool.Frundarmon_KillK3
 			Map.HideByLabel("K3")
 		end
 	end
 	
-	
+	void GUARD_CLOSET()
+		if ClosetPuzzle
+			Map.HideByLabel("CLOSET_GUARD")
+		else
+			MapText("SLEEPKID."..Map.Leader)
+			MapScript.SASKIA("Guard_Closet")
+		end
+	end
 	
 	void NPC_CLOSET()
 		if ClosetPuzzle
@@ -156,6 +163,7 @@ group MScript
 		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
 		Map.ZA_Enter("ToBasement","ToBasement")
 		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
+		Map.ZA_Enter("Bed Room","Guard_Closet")
 		Map.ZA_Enter("K3","SASKIA:K3")
 		//self.boy  = { ["boy"]=true,  ["girl"] = false }
 		//self.girl = { ["boy"]=false, ["girl"] = true  }
