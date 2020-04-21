@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.19
+// version: 20.04.21
 // End License Information
 
 
@@ -41,6 +41,8 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
+#use "Script/Use/MapScript/EndSplit"
+
 
 //#use "libs/LinkedList"
 
@@ -59,6 +61,8 @@ KidGen = {
 }
 
 group MScript
+	
+	link THEEND = EndSplit
 	
 	//var Lijst
 	string Kamer
@@ -165,6 +169,9 @@ group MScript
 		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
 		Map.ZA_Enter("Bed Room","Guard_Closet")
 		Map.ZA_Enter("K3","SASKIA:K3")
+		if not FrunDefeated
+			Map.ZA_Enter("FrunBoss","SASKIA:Boss")
+		end
 		//self.boy  = { ["boy"]=true,  ["girl"] = false }
 		//self.girl = { ["boy"]=false, ["girl"] = true  }
 	end
