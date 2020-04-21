@@ -34,3 +34,13 @@
 // 
 // version: 20.04.21
 // End License Information
+
+module AI_OF_FRUNDARMON
+
+	int turn
+	
+	get bool DoSummon
+		return self.turn % (4-__skill) == 0
+	end
+
+end
