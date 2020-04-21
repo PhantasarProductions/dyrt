@@ -35,12 +35,27 @@
 // version: 20.04.21
 // End License Information
 
-module AI_OF_FRUNDARMON
+#use "Script/Use/Anything"
+
+group AI_OF_FRUNDARMON
 
 	int turn
 	
 	get bool DoSummon
-		return self.turn % (4-__skill) == 0
+		return self.turn % (4-__skill) == 0 or self.CountZero
 	end
+	
+	get bool CountZero
+		int ret
+		for k,v in pairs(Fighter.Foe) do
+			ret++
+		end
+		return ret>=1
+	end
+	
 
 end
+
+// I did not go for a module as the Spell Effector needs to access the 
+// turn field.
+return AI_OF_FRUNDARMON
