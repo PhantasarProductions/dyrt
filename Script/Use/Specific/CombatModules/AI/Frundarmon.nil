@@ -62,9 +62,9 @@ group AI_OF_FRUNDARMON
 		end
 		nact.ExeTag = Frund.Tag
 		nact.Targets = {Frund}
-		foe.NextAct = new Actions(nact)
-		foe.NextActSpeed = 150
-		foe.GaugePosition = 10001
+		Frund.NextAct = new Actions(nact)
+		Frund.NextActSpeed = 150
+		Frund.GaugePosition = 10001
 	end
 	
 
