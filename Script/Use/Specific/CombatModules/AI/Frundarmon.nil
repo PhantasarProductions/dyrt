@@ -35,7 +35,7 @@
 // version: 20.04.21
 // End License Information
 
-#use "Script/Use/Anything"
+#use "Script/Use/Anyway"
 
 group AI_OF_FRUNDARMON
 

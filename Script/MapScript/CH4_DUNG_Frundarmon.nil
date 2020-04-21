@@ -150,6 +150,16 @@ group MScript
 		end
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/UndeadBoss.wav"
+		StartCombat.Arena = "Frundarmon"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Foe[1] = "Boss/Frundarmon"
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Entering the mansion")
 		//self.Lijst = new TLinkedList
@@ -187,7 +197,7 @@ group MScript
 	void Draw()
 		self.DarkDraw()
 		__yellow
-		if self.Kamer!=""
+		if self.Kamer!="" and Map.Layer!="#003"
 			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
 		end
 	end
