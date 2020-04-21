@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.19
+; version: 20.04.21
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -104,6 +104,17 @@
 	call Map.HideByLabel,"K3"
 	mov true,gv.Bool.Frundarmon_KillK3
 	end
+	
+:Boss
+	; call Map.HideObj,"Player"
+	mov "Rebecca",Map.Leader
+	call Map.ShowByLabel,"Heroes"
+	call MapText,"BOSS"
+	call MapScript.Boss
+	call MapText,"AFTER_BOSS_A"
+	call Map.WalkTo,"Becky"
+	call MapText,"AFTER_BOSS_A"
+	call MapScript.TheEnd,"Rebecca"
 
 :Niks
 	end
