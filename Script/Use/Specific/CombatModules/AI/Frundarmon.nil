@@ -55,7 +55,7 @@ group AI_OF_FRUNDARMON
 	
 	void Decide(Frund)
 		table nact
-		if DoSummon
+		if self.DoSummon
 			nact.ActTag = "ZZZ_FRUNDARMON_SUMMON"
 		else
 			nact.ActTag = "BTY_OBSERVE"
