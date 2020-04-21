@@ -60,7 +60,7 @@ group AI_OF_FRUNDARMON
 		else
 			nact.ActTag = "BTY_OBSERVE"
 		end
-		nact.ExeTag = foe.Tag
+		nact.ExeTag = Frund.Tag
 		nact.Targets = {Frund}
 		foe.NextAct = new Actions(nact)
 		foe.NextActSpeed = 150
