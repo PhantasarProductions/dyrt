@@ -53,6 +53,20 @@ group AI_OF_FRUNDARMON
 		return ret>=1
 	end
 	
+	void Decide(Frund)
+		table nact
+		if DoSummon
+			nact.ActTag = "ZZZ_FRUNDARMON_SUMMON"
+		else
+			nact.ActTag = "BTY_OBSERVE"
+		end
+		nact.ExeTag = foe.Tag
+		nact.Targets = {Frund}
+		foe.NextAct = new Actions(nact)
+		foe.NextActSpeed = 150
+		foe.GaugePosition = 10001
+	end
+	
 
 end
 
