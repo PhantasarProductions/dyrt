@@ -113,7 +113,7 @@
 	call MapScript.Boss
 	call MapText,"AFTER_BOSS_A"
 	call Map.WalkTo,"Becky"
-	call MapText,"AFTER_BOSS_A"
+	call MapText,"AFTER_BOSS_B"
 	call MapScript.TheEnd,"Rebecca"
 
 :Niks
