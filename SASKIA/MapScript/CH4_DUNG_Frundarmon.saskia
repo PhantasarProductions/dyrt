@@ -114,6 +114,7 @@
 	call MapText,"AFTER_BOSS_A"
 	call Map.WalkTo,"Becky"
 	call MapText,"AFTER_BOSS_B"
+	mov true,gv.Bool.DefeatedFrundarmon
 	call MapScript.TheEnd,"Rebecca"
 
 :Niks
