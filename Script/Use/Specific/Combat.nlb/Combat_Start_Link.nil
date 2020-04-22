@@ -137,6 +137,7 @@ global void LetsGetReadyToRumble()
 				case 0
 					ifight.GaugePosition=math.random(0,9500)
 				case 1
+					Combat_Message.Msg("Pre-Emptive Strike")
 					switch iteam
 						case "Hero"
 							ifight.GaugePosition=math.random(8000,9500)
@@ -146,6 +147,7 @@ global void LetsGetReadyToRumble()
 							error("Unknown team: "..iteam)
 					end
 				case 2
+					Combat_Message.Msg("Ambushed")
 					switch iteam
 						case "Hero"
 							ifight.GaugePosition=math.random(0,4000)
