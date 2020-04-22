@@ -147,6 +147,13 @@ group Action_Exe
 		end
 		F.NextAct = nil
 		Stage.Go("IDLE")
+		for i=5,8
+			string bch
+			bck = RPG.Party[i]
+			if bck and bck!=""
+				RPG.GetChar(bck).Points("AP").Have++
+			end
+		end
 	end
 end
 
