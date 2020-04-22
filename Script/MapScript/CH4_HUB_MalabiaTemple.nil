@@ -41,6 +41,8 @@
 #use "script/use/anyway"
 #use "Script/Use/MapScript/EndSplit"
 
+#macro Scyndi_Goddess RPG.GetChar("Scyndi").Points("SKILLLVL4").Have
+
 group MScript
 	
 	link ENDSPLIT = EndSplit
@@ -50,7 +52,19 @@ group MScript
 			MapScript.SASKIA("Malabia_TeamEric")
 			return
 		end
-		error("No script for this situation")
+		if Map.Leader=="Scyndi" and Scyndi_Goddess==0
+			MapText("MALABIA_SCYNDI")
+			if __skill==3
+				Scyndi_Goddess=1
+				return
+			end
+			int tot
+			tot = RPG.GetChar("Scyndi").Points("SKILLLVL1").Have + RPG.GetChar("Scyndi").Points("SKILLLVL2").Have + RPG.GetChar("Scyndi").Points("SKILLLVL3").Have
+			Scyndi_Goddess = math.ceil(tot/(__skill+1))
+			return
+		end
+		// error("No script for this situation")
+		MapText("MALABIA_NOTHING")
 	end
 	
 	void CONSTRUCTOR()
