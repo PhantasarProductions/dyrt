@@ -72,6 +72,7 @@
 	call MapText,"AFTERSPLIT"
 	call Map.HideByLabel,"H"
 	call Map.ShowObj,"Player"
+	call Map.VisibleOnlyByZone,"Kings_Room",true
 	mov true,gv.Bool.SplitPartyDone
 	mov false,Respawn.Initiated
 	end
