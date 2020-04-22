@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 20.01.25
+// Version: 20.04.21
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -166,6 +166,10 @@ class Foe extends Fighter
 			end
 		end
 		__white
+		if prefixed(self.FromFile:upper(),"KIDS/") and Killed["Boss/Frundarmon"]>0 
+			--RPG.GetChar(self.Tag).Points("HP").Have
+			Combat_Message.Msg("Frundarmon's undead kids are fading away")
+		end
 	end
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
@@ -192,7 +196,8 @@ class Foe extends Fighter
 			myFoe.SpotX = ActPos.Spot[myFoe.Tag].x
 			myFoe.SpotY = ActPos.Spot[myFoe.Tag].y
 		else
-			error("Foe spot randomizer not yet properly set up!")
+			myFoe.SpotX = math.random(100,math.floor(Screen.W/2))
+			myFoe.SpotY = math.random(math.floor(Screen.H/2),Screen.H-128)	
 		end
 	end
 	
