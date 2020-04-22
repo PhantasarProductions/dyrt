@@ -34,6 +34,7 @@
 ; 
 ; version: 20.03.05
 ; End License Information
+
 :OnLoad
 	chk Done.Chapter4Shown,NoChapter
 	call Fader,LoadImage("GFX/Chapter/4.png")
@@ -63,4 +64,14 @@
 :Herondo_Aziella
 	call MapText,"KONINGSTONE"
 	call StoneMaster,"Herondo"
+	end
+	
+:Rejoin
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"H"
+	call MapText,"AFTERSPLIT"
+	call Map.HideByLabel,"H"
+	call Map.ShowObj,"Player"
+	mov true,gv.Bool.SplitPartyDone
+	mov false,Respawn.Initiated
 	end
