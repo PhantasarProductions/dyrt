@@ -10079,8 +10079,8 @@ Rec: ABL_HERO_SCYNDI_FIRSTAID
 
 Rec: ABL_HERO_SCYNDI_HEAVENLIGHT
 	AccuracyCheck = FALSE
-	AP_Cost = 10
-	Attack = 75
+	AP_Cost = 75
+	Attack = 120
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10122,7 +10122,7 @@ Rec: ABL_HERO_SCYNDI_HEAVENLIGHT
 	CureSleep = FALSE
 	CureZombie = FALSE
 	DefenseStat = Resistance
-	Description = Love shine a light, with every corner of my heart.
+	Description = My cold dark tower seems so bright
 	Discriminate = FALSE
 	EffectArgument = 
 	EffectFunction = 
@@ -10180,7 +10180,7 @@ Rec: ABL_HERO_SCYNDI_HEAVENLIGHT
 	GainSkill3 = 0
 	GainSkill3All = FALSE
 	GainSkill3Chars = 
-	GainSkill4 = 100
+	GainSkill4 = 125
 	GainSkill4All = TRUE
 	GainSkill4Chars = 
 	Heal = 0
@@ -10192,13 +10192,13 @@ Rec: ABL_HERO_SCYNDI_HEAVENLIGHT
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Shine
+	Name = Heaven's Light
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
 	SpellAniScript = Shine
 	Stance = CAST
-	Target = 1F
+	Target = AF
 	Type = Ability
 
 Rec: ABL_HERO_SCYNDI_HELLFIRE
@@ -11195,8 +11195,8 @@ Rec: ABL_HERO_SCYNDI_REMPARALYSE
 
 Rec: ABL_HERO_SCYNDI_SHINE
 	AccuracyCheck = FALSE
-	AP_Cost = 75
-	Attack = 120
+	AP_Cost = 10
+	Attack = 75
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11238,7 +11238,7 @@ Rec: ABL_HERO_SCYNDI_SHINE
 	CureSleep = FALSE
 	CureZombie = FALSE
 	DefenseStat = Resistance
-	Description = My cold dark tower seems so bright
+	Description = Love shine a light, with every corner of my heart.
 	Discriminate = FALSE
 	EffectArgument = 
 	EffectFunction = 
@@ -11296,7 +11296,7 @@ Rec: ABL_HERO_SCYNDI_SHINE
 	GainSkill3 = 0
 	GainSkill3All = FALSE
 	GainSkill3Chars = 
-	GainSkill4 = 125
+	GainSkill4 = 100
 	GainSkill4All = TRUE
 	GainSkill4Chars = 
 	Heal = 0
@@ -11308,7 +11308,7 @@ Rec: ABL_HERO_SCYNDI_SHINE
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Heaven's Light
+	Name = Shine
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
