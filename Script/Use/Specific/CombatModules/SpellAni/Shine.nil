@@ -100,11 +100,12 @@ module SpellAni_Shine
 				s.D=-1
 			end
 			if s.C<0
-				l.Unlink()
+				l.UnLink()
 			else
 				Rect(s.X-s.C,0,s.Y,s.C*2)
 			end
 		end
+		SetAlpha(255)
 		return Shine.List.Count<=0
 	end
 	
