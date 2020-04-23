@@ -40,6 +40,8 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+#use "Script/Use/MapScript/CircularDarkness"
+
 group MScript
 	
 	void IRRANOUSE()
@@ -65,7 +67,10 @@ group MScript
 		Map.ZA_Enter("ToMansion","ToMansion")
 	end
 	
+	link DarkDraw = CircularDarkness.Draw__StyleStretch
+
 	void Draw()
+		self.DarkDraw()
 	end
 	
 	void Update()
