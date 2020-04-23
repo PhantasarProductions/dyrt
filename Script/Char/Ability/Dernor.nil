@@ -60,7 +60,9 @@ do
 		Burp            = { Charm = { "Toad" } },
 		Suicide         = { Charm = { "Lemming" } },
 		RavenPeck       = { Charm = { "Raven"}, Scharum=true, Skill_Bat=30,Skill_Nature=31 },
-		LethalPollen    = { Charm = { "TrueDeathCap" }, Skill_Nature = 6*s }
+		LethalPollen    = { Charm = { "TrueDeathCap" }, Skill_Nature = 6*s },
+		AttackInDamnnation
+		                = { Charm = { "UndeadHound" }, Skill_Bat = s*5, Skill_Nature = s * 8 },
 	
 		-- Scharum
 	

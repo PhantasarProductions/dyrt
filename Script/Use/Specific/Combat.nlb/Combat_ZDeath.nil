@@ -183,9 +183,14 @@ new Combat_Status("Fallen",{
 					return 0
 			end
 		end,
+	["AltHeal"] = int(f,int i)
+			return 0
+		end,
 	["Caused"] = void(f)
+			f.Char.Points("HP").Have = 0
 		end,
 	["Cured"] = void(f)
+			f.Char.Points("HP").Have = 1
 		end	
 })
 

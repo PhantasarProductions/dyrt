@@ -93,7 +93,7 @@ module SpellAni_Shine
 	
 	bool Cycle(act)
 		__white
-		SetAlpha(100)
+		SetAlpha(200)
 		for s,l in Shine.List.Each
 			#+ s.C s.D
 			if s.C>=s.W
@@ -102,7 +102,7 @@ module SpellAni_Shine
 			if s.C<0
 				l.UnLink()
 			else
-				Rect(s.X-s.C,0,s.Y,s.C*2)
+				Rect(s.X-s.C,0, s.C*2,s.Y)
 			end
 		end
 		SetAlpha(255)

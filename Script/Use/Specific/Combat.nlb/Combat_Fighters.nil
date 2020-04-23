@@ -144,6 +144,9 @@ class Fighter
 		self.ByTag[aTag]=self
 		self.StatusChanges = setmetatable({},{
 			["__index"] = var(s,string k)
+				if k:upper()!="FALLEN" and self.Char.Points("HP").Have==0
+					StatusChangesRealTable[k]=nil
+				end
 				switch k:upper()
 					case "DEATH" "FALLEN"
 						if self.Char.Points("HP").Have==0
@@ -194,7 +197,7 @@ class Fighter
 						if v
 							assert(CStatus[k],"No status labelled: "..k)
 							self.StatusChangesRealTable[k] = CStatus[k]
-							new Hurt(k,self.Tag,255,100,100)
+							// new Hurt(k,self.Tag,255,100,100)
 							CSayF("Status %s attached to character: %s",k,self.Tag)
 						else
 							if self.StatusChangesRealTable[k]
