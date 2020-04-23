@@ -55,7 +55,7 @@ class Shine
 	
 	void CONSTRUCTOR(target)
 		self.Count++
-		self.List = self.List or new TLinkedLst
+		self.List = self.List or new TLinkedList
 		self.ID = self.Count
 		CSayF("Shine #%05d created!",self.ID)
 		self.W = math.floor(target.Width / 2)
