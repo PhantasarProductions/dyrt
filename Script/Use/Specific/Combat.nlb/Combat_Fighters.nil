@@ -144,9 +144,6 @@ class Fighter
 		self.ByTag[aTag]=self
 		self.StatusChanges = setmetatable({},{
 			["__index"] = var(s,string k)
-				if k:upper()!="FALLEN" and self.Char.Points("HP").Have==0
-					StatusChangesRealTable[k]=nil
-				end
 				switch k:upper()
 					case "DEATH" "FALLEN"
 						if self.Char.Points("HP").Have==0
@@ -176,6 +173,9 @@ class Fighter
 							forever
 						end
 					default
+						if self.Char.Points("HP").Have==0
+							self.StatusChangesRealTable[k]=nil;
+						end
 						return self.StatusChangesRealTable[k:upper()]
 				end
 			end,
@@ -187,7 +187,10 @@ class Fighter
 						if v and self.Char.Points("HP").Have>0
 							self.Char.Points("HP").Have = 0
 							new Hurt("Death",self.Tag,255,0,0)
-						elseif self.Char.Points("HP").Have == 0
+						elseif (not v) and (self.StatusChanges.UNDEAD or self.StatusChanges.ZOMBIE)
+							self.Char.Points("HP").Have = 0
+							new Hurt("Destroyed",self.Tag,255,0,0)
+						elseif self.Char.Points("HP").Have == 0 and (not v) and ((not prefixed(self.Tag,"FOE_"))
 							self.Char.Points("HP").Have = 1
 							new Hurt("Revive",self.Tag,255,0,0)
 						end

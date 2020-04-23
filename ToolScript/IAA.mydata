@@ -11066,7 +11066,7 @@ Rec: ABL_HERO_SCYNDI_RAISEDEAD
 	SpellAniFunction = 
 	SpellAniScript = Shine
 	Stance = CAST
-	Target = Auto
+	Target = 1A
 	Type = Ability
 
 Rec: ABL_HERO_SCYNDI_RECOVER

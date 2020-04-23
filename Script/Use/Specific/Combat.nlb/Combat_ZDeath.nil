@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
-// Version: 20.04.24
+// Version: 20.02.14
 // Copyright (C)  Jeroen Petrus Broks
 // 
 // ===========================
@@ -166,7 +166,7 @@ new Combat_Status("Fallen",{
 	["IsDefeated"] = true,
 	["UntargetableFoe"] = true,
 	["OverDraw"] = true,
-	["Draw"] = void(f)
+	["Draw"] = void(f)			
 			if prefixed(f.Tag,"FOE")
 				EnemyDeathFade(f)
 			else
