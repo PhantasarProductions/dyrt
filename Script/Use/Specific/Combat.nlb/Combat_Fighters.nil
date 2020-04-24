@@ -190,7 +190,7 @@ class Fighter
 						elseif (not v) and (self.StatusChanges.UNDEAD or self.StatusChanges.ZOMBIE)
 							self.Char.Points("HP").Have = 0
 							new Hurt("Destroyed",self.Tag,255,0,0)
-						elseif self.Char.Points("HP").Have == 0 and (not v) and ((not prefixed(self.Tag,"FOE_"))
+						elseif self.Char.Points("HP").Have == 0 and (not v) and (not prefixed(self.Tag,"FOE_"))
 							self.Char.Points("HP").Have = 1
 							new Hurt("Revive",self.Tag,255,0,0)
 						end
