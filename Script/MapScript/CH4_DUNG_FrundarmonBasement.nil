@@ -65,6 +65,7 @@ group MScript
 		Map.ZA_Enter("Welcome","Welcome")
 		Map.ZA_Enter("IrraNoUse","IrraNoUse")
 		Map.ZA_Enter("ToMansion","ToMansion")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
 	end
 	
 	link DarkDraw = CircularDarkness.Draw__StyleStretch
