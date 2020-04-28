@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH1_DUNG_Weniaria.nil
-// (c) Jeroen Broks, , All Rights Reserved.
+// (c) Jeroen Broks, 2019, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.01.17
+// version: 20.04.28
 // End License Information
 
 #macro __weniaria_spoken gv.Bool.Done_Scyndi_Prologue_Spoken_To_Weniaria_To_Open_The_Door
