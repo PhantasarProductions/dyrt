@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 4/24/2020 5:48:05 PM
+// Generated: 4/24/2020 6:12:09 PM
 
 do
 var retfunc()
@@ -199,8 +199,6 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DEATH"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DEATH"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DEATH"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DEATH"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DEATH"
