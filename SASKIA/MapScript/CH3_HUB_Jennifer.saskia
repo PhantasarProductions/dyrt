@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.28
+; version: 20.04.30
 ; End License Information
 
 :OnLoad
@@ -108,4 +108,11 @@
 	call Map.HideByLabel,"RebCrew"
 	call Map.Kill,"ActScyndi"
 	call Map.Kill,"NoExit",true
+	end
+	
+:Pre_Storage
+	call MapText,"DZGJYMZA"
+	call Music.Play,"Music/Combat/Boss/Blenchy.wav"
+	call MapText,"DZGJYMZA_PART_TWO"
+	mov true,WM_Unlocked.D_DarkStorage
 	end
