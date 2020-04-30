@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.04.30
 // End License Information
 
 
@@ -61,11 +61,40 @@ group MScript
 		Map.GoToLayer("#001","FromBasement")
 	end
 	
+	void TOEINDE()
+		Map.GoToLayer("#000","TrueEinde")
+	end
+	
+	void TO009()
+		Map.GoToLayer("#009","Einde")
+	end
+	
+	void REMENDBARRIER()
+		if not Done.FrundarmonSecretBasementCompleted
+			Map.Kill("EndBarrier",true)
+			Party.LvUp()
+			Achievements.Award("SECDUNG_BASEMENT")
+		end
+	end
+	
+	void TOTREASURE()
+		Map.GoToLayer('#010','Start')
+	end
+	
+	void BACK2MAIN()
+		Map.GoToLayer('#000','FromTreasure');
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Welcome","Welcome")
 		Map.ZA_Enter("IrraNoUse","IrraNoUse")
 		Map.ZA_Enter("ToMansion","ToMansion")
 		Map.ZA_Enter("Boss","SASKIA:Boss")
+		Map.ZA_Enter("ToEnd","ToEinde")
+		Map.ZA_Enter("To009","To009")
+		Map.ZA_Enter("RemoveEndBarrier","RemEndBarrier")
+		Map.ZA_Enter("ToTreasure","ToTreasure")
+		Map.ZA_Enter("BackToMain","Back2Main")
 	end
 	
 	link DarkDraw = CircularDarkness.Draw__StyleStretch
