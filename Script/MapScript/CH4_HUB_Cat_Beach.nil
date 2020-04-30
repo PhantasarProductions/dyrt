@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH4_HUB_Cat_Beach.nil
-// (c) Jeroen Broks, , All Rights Reserved.
+// (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.08
+// version: 20.04.30
 // End License Information
 
 
@@ -46,7 +46,8 @@ group MScript
 		if not gv.Bool.DefeatedFrundarmon
 			MapText("THOMAS")
 		else
-			MapScript.SASKIA("Thomas")
+			// MapScript.SASKIA("Thomas")
+			WorldMap.Phantasar()
 		end
 	end
 	
