@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.04.30
 // End License Information
 
 
@@ -42,6 +42,7 @@
 #use "Script/Use/StartCombatMod"
 
 #macro RebeccaJoin gv.Bool.SpeakRebeccaDernorAndMeryaAfterSpeakingWithJennifer
+#macro JenniferMentionedToHerondo gv.Bool.DefeatedFrundarmon and gv.Bool.MeetMalabiaAtEndOfSplitTeamEric
 
 group MScript
 	
@@ -55,11 +56,16 @@ group MScript
 	end
 	
 	void NPC_JENNIFER()
-		if not gv.Bool.JenniferMentionedToHerondo
+		if not JenniferMentionedToHerondo
 			MapText("JEN1E")
 			return
 		end
-		error("Jennifer not yet scripted for this portion of the story line")
+		if not Done.JenniferOpenedDarkStorage
+			MapScript.SASKIA("Pre_Storage")
+			return
+		end
+		MapText("JEN2A")
+		// error("Jennifer not yet scripted for this portion of the story line")
 	end
 	
 	void ACTION()
