@@ -32,10 +32,18 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.30
+; version: 20.05.02
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
+	
+:Einde
+	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:Kantine
+	chk gv.Bool.DarkStorageBoss_Aldarus,Einde
+	call MapText,"KANTINE"
+	call MapScript.Boss
+	mov true,gv.Bool.DarkStorageBoss_Aldarus
+	end
