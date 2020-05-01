@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.05.02
 // End License Information
 
 do
@@ -44,6 +44,7 @@ s = __skill
 local
 a = {
 	-- Crossbow
+	BlessedArrow   = { Skill_Crossbow = __skill * 2, ["Skill_Befindo enchants"] = __skill + 1 }
 	
 	-- Befindo Enchanments
 	MysticCare     = { Start = true },
