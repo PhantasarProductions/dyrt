@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 2/22/2020 10:31:42 AM
+// Generated: 5/3/2020 12:10:29 AM
 
 do
 var retfunc()
@@ -15,6 +15,11 @@ foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BigSalamander.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/BIGSALAMANDER.NEGATIVE.PNG")
 foeret.Cash = 5
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 5
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 5
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 5
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 5
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 5
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 5
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
@@ -35,6 +40,16 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
@@ -65,6 +80,57 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
 if not Foe.LoadOversoul
 	foeret.Experience = 2000
 end

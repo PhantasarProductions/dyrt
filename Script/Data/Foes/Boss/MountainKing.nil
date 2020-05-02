@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 2/9/2020 12:02:12 AM
+// Generated: 5/3/2020 12:10:30 AM
 
 do
 var retfunc()
@@ -38,6 +38,11 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAN
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "EQW_IRRAVONIA_WAND_Earth"
 if not Foe.LoadOversoul
 	foeret.Experience = 25000
 end
