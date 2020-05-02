@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 4/16/2020 11:23:50 AM
+// Generated: 5/3/2020 12:10:31 AM
 
 do
 var retfunc()
@@ -40,6 +40,9 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HolyWater"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Potion"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Potion"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Potion"
