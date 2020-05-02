@@ -117,18 +117,60 @@ group Execution
 				case 3
 					a = a * 5
 			end
-			TarChar.Points("AP").Inc(math.abs(math.ceil(a)))
+			Tar.Char.Points("AP").Inc(math.abs(math.ceil(a)))
 		end
 		
-		TarChar.Points("HP").Dec(enddmg)
+		Tar.Char.Points("HP").Dec(enddmg)
 		if gv.Bool.DEBUG_CHEAT_JACKTHERIPPER and ( prefixed(Tar.Tag,"FOE_") )
 			CSay("Killing foe due to the Jack The Ripper mode")
-			TarChar.Points("HP").Have = 0
+			Tar.Char.Points("HP").Have = 0
 		end
-		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,TarChar.Points("HP").Have)
+		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,Tar.Char.Points("HP").Have)
 		if prefixed(Tar.Tag,"FOE_") and Tar.AI_Data[".hasmember"]("Hurt")
 			Tar.AI_Data.Hurt(Tar,Act.Act.Element,enddmg, Act)
 		end
+	end
+	
+	void AltAttack(Tar,int dmg,string element)
+		bool fatal
+		int enddmg
+		number elmod
+		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[element]
+		enddmg = dmg - (math.floor(dmg * (Tar.Char.Stat(sprintf("END__RESIST_Elem_%s",element)).Value/100)))
+
+		// Show what damage done
+		if fatal
+			enddmg = Tar.Char.Points("HP").Have
+			new Hurt("Death",Tar.Tag,255,0,0)
+		elseif enddmg<0
+			new Hurt(enddmg,Tar.Tag,0,255,0)
+		elseif elmod<0
+			new Hurt(enddmg,Tar.Tag,255,0,0)
+		elseif elmod==100
+			enddmg = 0
+			new Hurt("Immune",Tar.Tag,255,180,0)
+		elseif elmod>0
+			new Hurt(enddmg,Tar.Tag,255,180,0)
+		else
+			new Hurt(enddmg,Tar.Tag)
+		end
+		
+		if (not prefixed(Tar.Tag,"FOE_"))
+			number a
+			a = enddmg/Tar.Char.Points("HP").Maximum
+			switch __skill
+				case 1
+					a = a * 25
+				case 2
+					a = a * 15
+				case 3
+					a = a * 5
+			end
+			Tar.Char.Points("AP").Inc(math.abs(math.ceil(a)))
+		end
+		
+		Tar.Char.Points("HP").Dec(enddmg)
+		
 	end
 	
 	void Heal(Exe,Tar,Act)
@@ -205,7 +247,19 @@ group Execution
 		
 		// Calculate attack and damage
 		if Action.Act.Attack>0
-			$Attack(Executor,Target,Action)
+			string Alt
+			Alt = Action.Act.AttackAlt
+			if Action.Act.AttackAlt=="" or Action.Act.AttackAlt==nil then Alt="None" end
+			switch Alt
+				case "None"
+					$Attack(Executor,Target,Action)
+				case "PercentOppMaxAP"
+					int atk
+					atk = math.min(1,math.floor(Target.Char.Points("HP").Maximum * (Action.Act.Attack/100)))
+					$AltAttack(Target,atk,Action.Act.Element)
+				default
+					error("Unknown AttackAlt: "..Alt)
+			end
 			hit = true
 		end
 		
