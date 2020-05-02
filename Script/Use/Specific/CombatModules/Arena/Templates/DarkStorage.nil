@@ -75,7 +75,7 @@ group DarkStorage_Arena
 		self.ycenter = math.floor(Screen.H/2)
 		self.ymodulo = self.ycenter % 64
 		self.Troep = new TLinkedList
-		CSayF("Center %d; Modulo %d;",self.ycenter,self.ymodulo)
+		CSayF("Screen: %dx%d; Center %d; Modulo %d;",Screen.W,Screen.H,self.ycenter,self.ymodulo)
 		int x = 0
 		table shit
 		shit[1] = self.ImgBarrel
@@ -98,16 +98,20 @@ group DarkStorage_Arena
 			CSayF("%4d: End, and increment!",x)
 			#+ x math.random(32,100)
 		until x>=Screen.W
+		CSay("Done!")
 	end
 
 	var Init(string Name)
+		CSay("Loading the required textures for: "..Name)
 		self.ImgWall   = LoadIfNew(sprintf("GFX/Textures/DarkStorage/%s1.png",Name),sprintf("ARENA_WALL_DS_%s1",Name))
 		self.ImgWall2  = LoadIfNew(sprintf("GFX/Textures/DarkStorage/%s2.png",Name),sprintf("ARENA_WALL_DS_%s2",Name))
 		self.ImgFloor  = LoadIfNew(sprintf("GFX/Textures/DarkStorage/%s_Floor.png",Name),sprintf("ARENA_FLOOR_DS_%s",Name))
+		CSay("Done")
 		return self
 	end
 	
 	void Draw()
+		// CSay("DS.DRAW") // debug!
 		self.ImgFloor.Tile(0,self.ycenter-10,Screen.W,self.ycenter)
 		self.ImgWall.ITile(0,0,Screen.W,self.ycenter,0,self.ymodulo)
 		for ding in self.Troep.Each

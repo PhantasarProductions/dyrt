@@ -53,8 +53,15 @@ group MScript
 		Map.HideByLabel(sprintf("SECRET%d",i))
 	end
 	
-	void BOSS1()
-		error("The boss has not yet been set up")
+	void BOSS()
+		// error("The boss has not yet been set up")
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "DS_Aldarus"
+		StartCombat.Foe[1] = "Boss/GiantSquid"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
 	end
 	
 	void CONSTRUCTOR()
