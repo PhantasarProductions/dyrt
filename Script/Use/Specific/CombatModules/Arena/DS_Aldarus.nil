@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_DarkStorage_Aldarus.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/DS_Aldarus.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -35,42 +35,6 @@
 // version: 20.05.02
 // End License Information
 
+#use "Script/Use/Specific/CombatModules/Arena/Templates/DarkStorage"
 
-
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-
-#macro MaxSecret 10
-
-group MScript
-	
-	void SHOW(int i)
-		Map.ShowByLabel(sprintf("SECRET%d",i))
-	end
-	
-	void HIDE(int i)
-		Map.HideByLabel(sprintf("SECRET%d",i))
-	end
-	
-	void BOSS1()
-		error("The boss has not yet been set up")
-	end
-	
-	void CONSTRUCTOR()
-		for i=1,MaxSecret 
-			Map.ZA_Enter(sprintf("SECRET%d",i),"Show",i)
-			Map.ZA_Leave(sprintf("SECRET%d",i),"Hide",i)
-			CSayF("Secret set %2d",i)
-		end
-		Map.ZA_Enter("Kantine","SASKIA:Kantine")
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-	end
-	
-end
-#say "Map Script - Compiling!"
+return DarkStorage_Arena.Init("Aldarus")
