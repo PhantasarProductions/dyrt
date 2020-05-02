@@ -69,6 +69,9 @@ PAGE:Ability
 
 [Page:Attack]
 int Attack
+mc AttackAlt
+@i None
+@i PercentOppMaxHP
 mc AttackType
 @i Physical
 @i Magical
@@ -287,6 +290,7 @@ Rec: ABL_ALDARUSSTRIKE
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 200
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -411,6 +415,7 @@ Rec: ABL_FOE_BLUEPOLLEN
 	AccuracyCheck = FALSE
 	AP_Cost = 125
 	Attack = 123
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -535,6 +540,7 @@ Rec: ABL_FOE_BOSS_JERACKO_JERACKO_SPIN
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -659,6 +665,7 @@ Rec: ABL_FOE_CURSE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -783,6 +790,7 @@ Rec: ABL_FOE_DEMONSOULBREAKER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -907,6 +915,7 @@ Rec: ABL_FOE_HADESSTRIKE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Strength
 	AttackType = Physical
@@ -1031,6 +1040,7 @@ Rec: ABL_FOE_POISONSTING
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 80
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -1046,6 +1056,7 @@ Rec: ABL_FOE_POISONSTING
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1059,6 +1070,7 @@ Rec: ABL_FOE_POISONSTING
 	Charge = 
 	COM2ACT = 175
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1083,6 +1095,25 @@ Rec: ABL_FOE_POISONSTING
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -1134,6 +1165,7 @@ Rec: ABL_FOE_PURPLEPOLLEN
 	AccuracyCheck = FALSE
 	AP_Cost = 100
 	Attack = 123
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -1149,6 +1181,7 @@ Rec: ABL_FOE_PURPLEPOLLEN
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1162,6 +1195,7 @@ Rec: ABL_FOE_PURPLEPOLLEN
 	Charge = 
 	COM2ACT = 500
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1256,6 +1290,7 @@ Rec: ABL_FOE_REDPOLLEN
 	AccuracyCheck = FALSE
 	AP_Cost = 85
 	Attack = 123
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -1271,6 +1306,7 @@ Rec: ABL_FOE_REDPOLLEN
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1284,6 +1320,7 @@ Rec: ABL_FOE_REDPOLLEN
 	Charge = 
 	COM2ACT = 500
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1378,6 +1415,7 @@ Rec: ABL_FOE_RONDOMO_BOMB
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Physical
@@ -1393,6 +1431,7 @@ Rec: ABL_FOE_RONDOMO_BOMB
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1406,6 +1445,7 @@ Rec: ABL_FOE_RONDOMO_BOMB
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1500,6 +1540,7 @@ Rec: ABL_FOE_SHOOT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Accuracy
 	AttackType = Physical
@@ -1515,6 +1556,7 @@ Rec: ABL_FOE_SHOOT
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1528,6 +1570,7 @@ Rec: ABL_FOE_SHOOT
 	Charge = 
 	COM2ACT = 500
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1552,6 +1595,25 @@ Rec: ABL_FOE_SHOOT
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -1603,6 +1665,7 @@ Rec: ABL_FOE_SHURIKEN
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -1618,6 +1681,7 @@ Rec: ABL_FOE_SHURIKEN
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1631,6 +1695,7 @@ Rec: ABL_FOE_SHURIKEN
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1725,6 +1790,7 @@ Rec: ABL_FOE_SNOWBALL
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Strength
 	AttackType = Physical
@@ -1740,6 +1806,7 @@ Rec: ABL_FOE_SNOWBALL
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1753,6 +1820,7 @@ Rec: ABL_FOE_SNOWBALL
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1847,6 +1915,7 @@ Rec: ABL_FOE_SPITVENOM
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -1862,6 +1931,7 @@ Rec: ABL_FOE_SPITVENOM
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1875,6 +1945,7 @@ Rec: ABL_FOE_SPITVENOM
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -1969,6 +2040,7 @@ Rec: ABL_FOE_STUNBITE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -1984,6 +2056,7 @@ Rec: ABL_FOE_STUNBITE
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -1997,6 +2070,7 @@ Rec: ABL_FOE_STUNBITE
 	Charge = 
 	COM2ACT = 111
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -2091,6 +2165,7 @@ Rec: ABL_FOE_ULTRASONIC
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -2106,6 +2181,7 @@ Rec: ABL_FOE_ULTRASONIC
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -2119,6 +2195,7 @@ Rec: ABL_FOE_ULTRASONIC
 	Charge = 
 	COM2ACT = 112
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -2213,6 +2290,7 @@ Rec: ABL_HERO_AZIELLA_BLESSEDARROW
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 125
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -2337,6 +2415,7 @@ Rec: ABL_HERO_AZIELLA_CONFUSION
 	AccuracyCheck = FALSE
 	AP_Cost = 60
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -2461,6 +2540,7 @@ Rec: ABL_HERO_AZIELLA_MYSTICCARE
 	AccuracyCheck = FALSE
 	AP_Cost = 20
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -2585,6 +2665,7 @@ Rec: ABL_HERO_AZIELLA_SLEEP
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -2709,6 +2790,7 @@ Rec: ABL_HERO_BRENDOR_CHARGE
 	AccuracyCheck = FALSE
 	AP_Cost = 150
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Defense
 	AttackType = Physical
@@ -2724,6 +2806,7 @@ Rec: ABL_HERO_BRENDOR_CHARGE
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -2737,6 +2820,7 @@ Rec: ABL_HERO_BRENDOR_CHARGE
 	Charge = 
 	COM2ACT = 75
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -2761,6 +2845,25 @@ Rec: ABL_HERO_BRENDOR_CHARGE
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -2812,6 +2915,7 @@ Rec: ABL_HERO_BRENDOR_HAMMERSMASH
 	AccuracyCheck = FALSE
 	AP_Cost = 125
 	Attack = 350
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -2827,6 +2931,7 @@ Rec: ABL_HERO_BRENDOR_HAMMERSMASH
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -2840,6 +2945,7 @@ Rec: ABL_HERO_BRENDOR_HAMMERSMASH
 	Charge = 
 	COM2ACT = 25
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -2864,6 +2970,25 @@ Rec: ABL_HERO_BRENDOR_HAMMERSMASH
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -2915,6 +3040,7 @@ Rec: ABL_HERO_DERNOR_AAA_CHARM
 	AccuracyCheck = FALSE
 	AP_Cost = 5
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -2930,6 +3056,7 @@ Rec: ABL_HERO_DERNOR_AAA_CHARM
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -2943,6 +3070,7 @@ Rec: ABL_HERO_DERNOR_AAA_CHARM
 	Charge = 
 	COM2ACT = 95
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -3037,6 +3165,7 @@ Rec: ABL_HERO_DERNOR_BLOODSUCKER
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -3052,6 +3181,7 @@ Rec: ABL_HERO_DERNOR_BLOODSUCKER
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -3065,6 +3195,7 @@ Rec: ABL_HERO_DERNOR_BLOODSUCKER
 	Charge = 
 	COM2ACT = 123
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -3159,6 +3290,7 @@ Rec: ABL_HERO_DERNOR_BURP
 	AccuracyCheck = FALSE
 	AP_Cost = 120
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -3283,6 +3415,7 @@ Rec: ABL_HERO_DERNOR_CLAW
 	AccuracyCheck = FALSE
 	AP_Cost = 60
 	Attack = 125
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -3407,6 +3540,7 @@ Rec: ABL_HERO_DERNOR_CROC_BITE
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 275
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -3531,6 +3665,7 @@ Rec: ABL_HERO_DERNOR_GROWL
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -3655,6 +3790,7 @@ Rec: ABL_HERO_DERNOR_HOWLING
 	AccuracyCheck = FALSE
 	AP_Cost = 56
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -3779,6 +3915,7 @@ Rec: ABL_HERO_DERNOR_LETHALPOLLEN
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -3903,6 +4040,7 @@ Rec: ABL_HERO_DERNOR_PECK
 	AccuracyCheck = TRUE
 	AP_Cost = 250
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -4027,6 +4165,7 @@ Rec: ABL_HERO_DERNOR_RAVENPECK
 	AccuracyCheck = FALSE
 	AP_Cost = 100
 	Attack = 400
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Strength
 	AttackType = Physical
@@ -4151,6 +4290,7 @@ Rec: ABL_HERO_DERNOR_SICKBITE
 	AccuracyCheck = FALSE
 	AP_Cost = 85
 	Attack = 125
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -4275,6 +4415,7 @@ Rec: ABL_HERO_DERNOR_SPORES
 	AccuracyCheck = FALSE
 	AP_Cost = 100
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -4399,6 +4540,7 @@ Rec: ABL_HERO_DERNOR_SUICIDE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 1000000
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Defense
 	AttackType = Physical
@@ -4523,6 +4665,7 @@ Rec: ABL_HERO_ERIC_BIOHAZARD
 	AccuracyCheck = FALSE
 	AP_Cost = 70
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -4647,6 +4790,7 @@ Rec: ABL_HERO_ERIC_BLIZZARD
 	AccuracyCheck = FALSE
 	AP_Cost = 125
 	Attack = 200
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -4662,6 +4806,7 @@ Rec: ABL_HERO_ERIC_BLIZZARD
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -4675,6 +4820,7 @@ Rec: ABL_HERO_ERIC_BLIZZARD
 	Charge = 
 	COM2ACT = 100
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -4769,6 +4915,7 @@ Rec: ABL_HERO_ERIC_DARKNESS
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -4784,6 +4931,7 @@ Rec: ABL_HERO_ERIC_DARKNESS
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -4797,6 +4945,7 @@ Rec: ABL_HERO_ERIC_DARKNESS
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -4891,6 +5040,7 @@ Rec: ABL_HERO_ERIC_DEATH
 	AccuracyCheck = FALSE
 	AP_Cost = 50
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -4906,6 +5056,7 @@ Rec: ABL_HERO_ERIC_DEATH
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = TRUE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -4919,6 +5070,7 @@ Rec: ABL_HERO_ERIC_DEATH
 	Charge = 
 	COM2ACT = 50
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5013,6 +5165,7 @@ Rec: ABL_HERO_ERIC_DISINTEGRATE
 	AccuracyCheck = FALSE
 	AP_Cost = 80
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5028,6 +5181,7 @@ Rec: ABL_HERO_ERIC_DISINTEGRATE
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = TRUE
 	CauseDisease = FALSE
@@ -5041,6 +5195,7 @@ Rec: ABL_HERO_ERIC_DISINTEGRATE
 	Charge = 
 	COM2ACT = 50
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5135,6 +5290,7 @@ Rec: ABL_HERO_ERIC_DVISION
 	AccuracyCheck = FALSE
 	AP_Cost = 500
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5150,6 +5306,7 @@ Rec: ABL_HERO_ERIC_DVISION
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = TRUE
+	CauseCurse = FALSE
 	CauseDeath = TRUE
 	CauseDestruction = TRUE
 	CauseDisease = FALSE
@@ -5163,6 +5320,7 @@ Rec: ABL_HERO_ERIC_DVISION
 	Charge = 
 	COM2ACT = 120
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5257,6 +5415,7 @@ Rec: ABL_HERO_ERIC_EVIL
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 65
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5272,6 +5431,7 @@ Rec: ABL_HERO_ERIC_EVIL
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = TRUE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -5285,6 +5445,7 @@ Rec: ABL_HERO_ERIC_EVIL
 	Charge = 
 	COM2ACT = 150
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5379,6 +5540,7 @@ Rec: ABL_HERO_ERIC_FREEZE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5394,6 +5556,7 @@ Rec: ABL_HERO_ERIC_FREEZE
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -5407,6 +5570,7 @@ Rec: ABL_HERO_ERIC_FREEZE
 	Charge = 
 	COM2ACT = 300
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5501,6 +5665,7 @@ Rec: ABL_HERO_ERIC_GLOOM
 	AccuracyCheck = FALSE
 	AP_Cost = 80
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5625,6 +5790,7 @@ Rec: ABL_HERO_ERIC_ICEBLAST
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5640,6 +5806,7 @@ Rec: ABL_HERO_ERIC_ICEBLAST
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -5653,6 +5820,7 @@ Rec: ABL_HERO_ERIC_ICEBLAST
 	Charge = 
 	COM2ACT = 300
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5747,6 +5915,7 @@ Rec: ABL_HERO_ERIC_PHANTOM
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5762,6 +5931,7 @@ Rec: ABL_HERO_ERIC_PHANTOM
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -5775,6 +5945,7 @@ Rec: ABL_HERO_ERIC_PHANTOM
 	Charge = 
 	COM2ACT = 150
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -5869,6 +6040,7 @@ Rec: ABL_HERO_ERIC_POISONCLOUD
 	AccuracyCheck = FALSE
 	AP_Cost = 9
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -5993,6 +6165,7 @@ Rec: ABL_HERO_ERIC_VOID
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6008,6 +6181,7 @@ Rec: ABL_HERO_ERIC_VOID
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -6021,6 +6195,7 @@ Rec: ABL_HERO_ERIC_VOID
 	Charge = 
 	COM2ACT = 600
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -6115,6 +6290,7 @@ Rec: ABL_HERO_ERIC_ZEROKELVIN
 	AccuracyCheck = FALSE
 	AP_Cost = 125
 	Attack = 300
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6130,6 +6306,7 @@ Rec: ABL_HERO_ERIC_ZEROKELVIN
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -6143,6 +6320,7 @@ Rec: ABL_HERO_ERIC_ZEROKELVIN
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -6237,6 +6415,7 @@ Rec: ABL_HERO_IRRAVONIA_BLOWAWAY
 	AccuracyCheck = FALSE
 	AP_Cost = 5
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6361,6 +6540,7 @@ Rec: ABL_HERO_IRRAVONIA_BREEZE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6485,6 +6665,7 @@ Rec: ABL_HERO_IRRAVONIA_FIRE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6609,6 +6790,7 @@ Rec: ABL_HERO_IRRAVONIA_FIREBLAST
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6733,6 +6915,7 @@ Rec: ABL_HERO_IRRAVONIA_HEAL
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6857,6 +7040,7 @@ Rec: ABL_HERO_IRRAVONIA_HURRICANE
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -6981,6 +7165,7 @@ Rec: ABL_HERO_IRRAVONIA_INFERNO
 	AccuracyCheck = FALSE
 	AP_Cost = 150
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -7105,6 +7290,7 @@ Rec: ABL_HERO_IRRAVONIA_ROCK
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -7229,6 +7415,7 @@ Rec: ABL_HERO_IRRAVONIA_SPLASH
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -7353,6 +7540,7 @@ Rec: ABL_HERO_IRRAVONIA_TSUNAMI
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -7477,6 +7665,7 @@ Rec: ABL_HERO_MERYA_BACKSTAB
 	AccuracyCheck = FALSE
 	AP_Cost = 120
 	Attack = 50
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Magical
@@ -7601,6 +7790,7 @@ Rec: ABL_HERO_MERYA_DISEMBOWEL
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -7725,6 +7915,7 @@ Rec: ABL_HERO_MERYA_FASTDRAW
 	AccuracyCheck = FALSE
 	AP_Cost = 80
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Agility
 	AttackType = Physical
@@ -7849,6 +8040,7 @@ Rec: ABL_HERO_MERYA_FOLLOWME
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -7973,6 +8165,7 @@ Rec: ABL_HERO_MERYA_INTIMIDATE
 	AccuracyCheck = FALSE
 	AP_Cost = 2
 	Attack = 1
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Accuracy
 	AttackType = Physical
@@ -8097,6 +8290,7 @@ Rec: ABL_HERO_MERYA_KILLERSTAB
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 250
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Agility
 	AttackType = Physical
@@ -8221,6 +8415,7 @@ Rec: ABL_HERO_MERYA_PICKPOCKET
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -8345,6 +8540,7 @@ Rec: ABL_HERO_MERYA_POISONSTAB
 	AccuracyCheck = TRUE
 	AP_Cost = 50
 	Attack = 65
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -8469,6 +8665,7 @@ Rec: ABL_HERO_MERYA_STUBSTAB
 	AccuracyCheck = TRUE
 	AP_Cost = 75
 	Attack = 65
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -8593,6 +8790,7 @@ Rec: ABL_HERO_MERYA_VIRUSSTAB
 	AccuracyCheck = TRUE
 	AP_Cost = 35
 	Attack = 65
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -8717,6 +8915,7 @@ Rec: ABL_HERO_REBECCA_FOCUS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -8841,6 +9040,7 @@ Rec: ABL_HERO_REBECCA_LAY
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -8965,6 +9165,7 @@ Rec: ABL_HERO_REBECCA_POWER2X
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 200
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -9089,6 +9290,7 @@ Rec: ABL_HERO_REBECCA_POWER3X
 	AccuracyCheck = FALSE
 	AP_Cost = 45
 	Attack = 300
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -9213,6 +9415,7 @@ Rec: ABL_HERO_REBECCA_POWER4X
 	AccuracyCheck = FALSE
 	AP_Cost = 80
 	Attack = 400
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -9337,6 +9540,7 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	AccuracyCheck = FALSE
 	AP_Cost = 140
 	Attack = 500
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -9461,6 +9665,7 @@ Rec: ABL_HERO_REBECCA_QUICKSTRIKE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 50
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Strength
 	AttackType = Physical
@@ -9585,6 +9790,7 @@ Rec: ABL_HERO_REBECCA_WARSHOUT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -9709,6 +9915,7 @@ Rec: ABL_HERO_SCYNDI_BARRIER
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -9833,6 +10040,7 @@ Rec: ABL_HERO_SCYNDI_BLAST
 	AccuracyCheck = FALSE
 	AP_Cost = 25
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -9957,6 +10165,7 @@ Rec: ABL_HERO_SCYNDI_CUREDISEASE
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10081,6 +10290,7 @@ Rec: ABL_HERO_SCYNDI_FIRSTAID
 	AccuracyCheck = FALSE
 	AP_Cost = 8
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10205,6 +10415,7 @@ Rec: ABL_HERO_SCYNDI_HEAVENLIGHT
 	AccuracyCheck = FALSE
 	AP_Cost = 75
 	Attack = 120
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10329,6 +10540,7 @@ Rec: ABL_HERO_SCYNDI_HELLFIRE
 	AccuracyCheck = FALSE
 	AP_Cost = 1000
 	Attack = 550
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10453,6 +10665,7 @@ Rec: ABL_HERO_SCYNDI_JOLT
 	AccuracyCheck = FALSE
 	AP_Cost = 50
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10577,6 +10790,7 @@ Rec: ABL_HERO_SCYNDI_MENTALGYM
 	AccuracyCheck = FALSE
 	AP_Cost = 6
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10701,6 +10915,7 @@ Rec: ABL_HERO_SCYNDI_MJOLLNIR
 	AccuracyCheck = FALSE
 	AP_Cost = 100
 	Attack = 255
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10825,6 +11040,7 @@ Rec: ABL_HERO_SCYNDI_NEUTPOISON
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -10949,6 +11165,7 @@ Rec: ABL_HERO_SCYNDI_PRAY
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11073,6 +11290,7 @@ Rec: ABL_HERO_SCYNDI_RAISEDEAD
 	AccuracyCheck = FALSE
 	AP_Cost = 50
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11197,6 +11415,7 @@ Rec: ABL_HERO_SCYNDI_RECOVER
 	AccuracyCheck = FALSE
 	AP_Cost = 24
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11321,6 +11540,7 @@ Rec: ABL_HERO_SCYNDI_REMPARALYSE
 	AccuracyCheck = FALSE
 	AP_Cost = 60
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11445,6 +11665,7 @@ Rec: ABL_HERO_SCYNDI_SHINE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11569,6 +11790,7 @@ Rec: ABL_HERO_SCYNDI_SHOCK
 	AccuracyCheck = FALSE
 	AP_Cost = 15
 	Attack = 95
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11693,6 +11915,7 @@ Rec: ABL_HERO_SCYNDI_SILENCE
 	AccuracyCheck = FALSE
 	AP_Cost = 50
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11817,6 +12040,7 @@ Rec: ABL_HERO_SCYNDI_SMITE
 	AccuracyCheck = FALSE
 	AP_Cost = 125
 	Attack = 350
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -11941,6 +12165,7 @@ Rec: ABL_HERO_SCYNDI_VITALIZE
 	AccuracyCheck = FALSE
 	AP_Cost = 120
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -12065,6 +12290,7 @@ Rec: ACT_ATTACK
 	AccuracyCheck = TRUE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -12189,6 +12415,7 @@ Rec: ACT_UNDEADATTACK
 	AccuracyCheck = TRUE
 	AP_Cost = 4
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -12313,6 +12540,7 @@ Rec: BTY_LAZINESS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -12437,6 +12665,7 @@ Rec: BTY_OBSERVE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -12561,6 +12790,7 @@ Rec: EQA_GIRL_DRESS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -12685,6 +12915,7 @@ Rec: EQA_IRRADRESS2
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -12809,6 +13040,7 @@ Rec: EQA_IRRADRESS3
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -12933,6 +13165,7 @@ Rec: EQA_IRRADRESS4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13057,6 +13290,7 @@ Rec: EQA_IRRADRESS5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13181,6 +13415,7 @@ Rec: EQA_IRRADRESS6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13305,6 +13540,7 @@ Rec: EQA_IRRADRESS7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13429,6 +13665,7 @@ Rec: EQA_LARMOR2
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13553,6 +13790,7 @@ Rec: EQA_LARMOR3
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13568,6 +13806,7 @@ Rec: EQA_LARMOR3
 	BuffStrength = 0
 	BuyPrice = 450
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -13581,6 +13820,7 @@ Rec: EQA_LARMOR3
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -13675,6 +13915,7 @@ Rec: EQA_LARMOR4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13799,6 +14040,7 @@ Rec: EQA_LARMOR5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -13923,6 +14165,7 @@ Rec: EQA_LARMOR6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14047,6 +14290,7 @@ Rec: EQA_LARMOR7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14171,6 +14415,7 @@ Rec: EQA_MERYA_CLOAK4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14295,6 +14540,7 @@ Rec: EQA_MERYA_CLOAK5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14419,6 +14665,7 @@ Rec: EQA_MERYA_CLOAK6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14543,6 +14790,7 @@ Rec: EQA_MERYA_CLOAK7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14667,6 +14915,7 @@ Rec: EQA_ROBE2
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14791,6 +15040,7 @@ Rec: EQA_ROBE3
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -14915,6 +15165,7 @@ Rec: EQA_ROBE4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15039,6 +15290,7 @@ Rec: EQA_ROBE5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15163,6 +15415,7 @@ Rec: EQA_ROBE6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15287,6 +15540,7 @@ Rec: EQA_ROBE7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15411,6 +15665,7 @@ Rec: EQA_SHANDA_ROYALDRESS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15426,6 +15681,7 @@ Rec: EQA_SHANDA_ROYALDRESS
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -15439,6 +15695,7 @@ Rec: EQA_SHANDA_ROYALDRESS
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -15463,6 +15720,25 @@ Rec: EQA_SHANDA_ROYALDRESS
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 5
@@ -15514,6 +15790,7 @@ Rec: EQA_SHIRT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15529,6 +15806,7 @@ Rec: EQA_SHIRT
 	BuffStrength = 0
 	BuyPrice = 2
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -15542,6 +15820,7 @@ Rec: EQA_SHIRT
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -15636,6 +15915,7 @@ Rec: EQA_TOGA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15760,6 +16040,7 @@ Rec: EQA_TOGA7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15884,6 +16165,7 @@ Rec: EQA_YOUNGIRRAVONIA_DRESS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -15899,6 +16181,7 @@ Rec: EQA_YOUNGIRRAVONIA_DRESS
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -15912,6 +16195,7 @@ Rec: EQA_YOUNGIRRAVONIA_DRESS
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -15936,6 +16220,25 @@ Rec: EQA_YOUNGIRRAVONIA_DRESS
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 1
 	EQP_Defense = 1
@@ -15987,6 +16290,7 @@ Rec: EQW_AZIELLA_BOLT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16111,6 +16415,7 @@ Rec: EQW_AZIELLA_BOLT7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16235,6 +16540,7 @@ Rec: EQW_BRENDOR_HAMMER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16250,6 +16556,7 @@ Rec: EQW_BRENDOR_HAMMER
 	BuffStrength = 0
 	BuyPrice = 5
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -16263,6 +16570,7 @@ Rec: EQW_BRENDOR_HAMMER
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -16357,6 +16665,7 @@ Rec: EQW_BRENDOR_HAMMER2
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16372,6 +16681,7 @@ Rec: EQW_BRENDOR_HAMMER2
 	BuffStrength = 0
 	BuyPrice = 600
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -16385,6 +16695,7 @@ Rec: EQW_BRENDOR_HAMMER2
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -16479,6 +16790,7 @@ Rec: EQW_BRENDOR_HAMMER3
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16494,6 +16806,7 @@ Rec: EQW_BRENDOR_HAMMER3
 	BuffStrength = 0
 	BuyPrice = 700
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -16507,6 +16820,7 @@ Rec: EQW_BRENDOR_HAMMER3
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -16601,6 +16915,7 @@ Rec: EQW_BRENDOR_HAMMER4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16725,6 +17040,7 @@ Rec: EQW_BRENDOR_HAMMER5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16849,6 +17165,7 @@ Rec: EQW_BRENDOR_HAMMER6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -16973,6 +17290,7 @@ Rec: EQW_BRENDOR_HAMMER7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17097,6 +17415,7 @@ Rec: EQW_DERNOR_BAT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17221,6 +17540,7 @@ Rec: EQW_DERNOR_BAT4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17345,6 +17665,7 @@ Rec: EQW_DERNOR_BAT5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17469,6 +17790,7 @@ Rec: EQW_DERNOR_BAT6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17593,6 +17915,7 @@ Rec: EQW_DERNOR_BAT7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17717,6 +18040,7 @@ Rec: EQW_ERICREBECCA_SHORTSWORD
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17732,6 +18056,7 @@ Rec: EQW_ERICREBECCA_SHORTSWORD
 	BuffStrength = 0
 	BuyPrice = 5
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -17745,6 +18070,7 @@ Rec: EQW_ERICREBECCA_SHORTSWORD
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -17769,6 +18095,25 @@ Rec: EQW_ERICREBECCA_SHORTSWORD
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -17820,6 +18165,7 @@ Rec: EQW_ERICREBECCA_SWORD
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -17944,6 +18290,7 @@ Rec: EQW_ERICREBECCA_SWORD3
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18068,6 +18415,7 @@ Rec: EQW_ERICREBECCA_SWORD4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18192,6 +18540,7 @@ Rec: EQW_ERICREBECCA_SWORD5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18316,6 +18665,7 @@ Rec: EQW_ERICREBECCA_SWORD6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18440,6 +18790,7 @@ Rec: EQW_ERICREBECCA_SWORD7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18564,6 +18915,7 @@ Rec: EQW_IRRAVONIA_WAND_EARTH
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18688,6 +19040,7 @@ Rec: EQW_IRRAVONIA_WAND_FLAME
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18703,6 +19056,7 @@ Rec: EQW_IRRAVONIA_WAND_FLAME
 	BuffStrength = 0
 	BuyPrice = 1120
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -18716,6 +19070,7 @@ Rec: EQW_IRRAVONIA_WAND_FLAME
 	Charge = 
 	COM2ACT = 240
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -18810,6 +19165,7 @@ Rec: EQW_IRRAVONIA_WAND_FROST
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -18825,6 +19181,7 @@ Rec: EQW_IRRAVONIA_WAND_FROST
 	BuffStrength = 0
 	BuyPrice = 1120
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -18838,6 +19195,7 @@ Rec: EQW_IRRAVONIA_WAND_FROST
 	Charge = 
 	COM2ACT = 240
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -18932,6 +19290,7 @@ Rec: EQW_IRRAVONIA_WAND_HEAL
 	AccuracyCheck = TRUE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19056,6 +19415,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19071,6 +19431,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	BuffStrength = 0
 	BuyPrice = 1000
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -19084,6 +19445,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	Charge = 
 	COM2ACT = 190
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -19178,6 +19540,7 @@ Rec: EQW_IRRAVONIA_WAND_THUNDER
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19193,6 +19556,7 @@ Rec: EQW_IRRAVONIA_WAND_THUNDER
 	BuffStrength = 0
 	BuyPrice = 1120
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -19206,6 +19570,7 @@ Rec: EQW_IRRAVONIA_WAND_THUNDER
 	Charge = 
 	COM2ACT = 240
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -19300,6 +19665,7 @@ Rec: EQW_IRRAVONIA_WAND_WATER
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19315,6 +19681,7 @@ Rec: EQW_IRRAVONIA_WAND_WATER
 	BuffStrength = 0
 	BuyPrice = 1120
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -19328,6 +19695,7 @@ Rec: EQW_IRRAVONIA_WAND_WATER
 	Charge = 
 	COM2ACT = 240
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -19422,6 +19790,7 @@ Rec: EQW_IRRAVONIA_WAND_WIND
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19437,6 +19806,7 @@ Rec: EQW_IRRAVONIA_WAND_WIND
 	BuffStrength = 0
 	BuyPrice = 1120
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -19450,6 +19820,7 @@ Rec: EQW_IRRAVONIA_WAND_WIND
 	Charge = 
 	COM2ACT = 240
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -19544,6 +19915,7 @@ Rec: EQW_MERYA_DAGGER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19668,6 +20040,7 @@ Rec: EQW_MERYA_DAGGER4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19792,6 +20165,7 @@ Rec: EQW_MERYA_DAGGER5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -19916,6 +20290,7 @@ Rec: EQW_MERYA_DAGGER6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20040,6 +20415,7 @@ Rec: EQW_MERYA_DAGGER7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20164,6 +20540,7 @@ Rec: EQW_SCYNDI_WHIP
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20288,6 +20665,7 @@ Rec: EQW_SCYNDI_WHIP2
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20412,6 +20790,7 @@ Rec: EQW_SCYNDI_WHIP3
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20536,6 +20915,7 @@ Rec: EQW_SCYNDI_WHIP4
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20660,6 +21040,7 @@ Rec: EQW_SCYNDI_WHIP5
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20784,6 +21165,7 @@ Rec: EQW_SCYNDI_WHIP6
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -20908,6 +21290,7 @@ Rec: EQW_SCYNDI_WHIP7
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21032,9 +21415,12 @@ Rec: EQW_SHANDA_SCEPTRE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
+	Block_Fear = FALSE
+	Block_Silence = FALSE
 	BlockSilence = FALSE
 	BuffAccuracy = 0
 	BuffAgility = 0
@@ -21044,6 +21430,8 @@ Rec: EQW_SHANDA_SCEPTRE
 	BuffResistance = 0
 	BuffStrength = 0
 	BuyPrice = 100
+	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21056,6 +21444,8 @@ Rec: EQW_SHANDA_SCEPTRE
 	CauseZombie = FALSE
 	Charge = 
 	COM2ACT = 10
+	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -21080,6 +21470,25 @@ Rec: EQW_SHANDA_SCEPTRE
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -21131,6 +21540,7 @@ Rec: EQW_WAND_HEALING
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21146,6 +21556,7 @@ Rec: EQW_WAND_HEALING
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21159,6 +21570,7 @@ Rec: EQW_WAND_HEALING
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -21183,6 +21595,25 @@ Rec: EQW_WAND_HEALING
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -21234,6 +21665,7 @@ Rec: EQW_YOUNGIRRAVONIA_TWIG
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21249,6 +21681,7 @@ Rec: EQW_YOUNGIRRAVONIA_TWIG
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21262,6 +21695,7 @@ Rec: EQW_YOUNGIRRAVONIA_TWIG
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -21286,6 +21720,25 @@ Rec: EQW_YOUNGIRRAVONIA_TWIG
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 1
 	EQP_Agility = 1
 	EQP_Defense = 0
@@ -21337,6 +21790,7 @@ Rec: ITM_ALOEVERA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21352,6 +21806,7 @@ Rec: ITM_ALOEVERA
 	BuffStrength = 5
 	BuyPrice = 500
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21365,6 +21820,7 @@ Rec: ITM_ALOEVERA
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = TRUE
@@ -21459,6 +21915,7 @@ Rec: ITM_AMBROSIA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21583,6 +22040,7 @@ Rec: ITM_ANTIDOTE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21598,6 +22056,7 @@ Rec: ITM_ANTIDOTE
 	BuffStrength = 0
 	BuyPrice = 25
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21611,6 +22070,7 @@ Rec: ITM_ANTIDOTE
 	Charge = 
 	COM2ACT = 123
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -21705,6 +22165,7 @@ Rec: ITM_APPLE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21720,6 +22181,7 @@ Rec: ITM_APPLE
 	BuffStrength = 0
 	BuyPrice = 10
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21733,6 +22195,7 @@ Rec: ITM_APPLE
 	Charge = 
 	COM2ACT = 400
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -21827,6 +22290,7 @@ Rec: ITM_BANDAGE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -21842,6 +22306,7 @@ Rec: ITM_BANDAGE
 	BuffStrength = 0
 	BuyPrice = 10
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -21855,6 +22320,7 @@ Rec: ITM_BANDAGE
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -21949,6 +22415,7 @@ Rec: ITM_BRIMSTONE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22073,6 +22540,7 @@ Rec: ITM_CARROT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22197,6 +22665,7 @@ Rec: ITM_CHOCO
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22321,6 +22790,7 @@ Rec: ITM_EEL
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22445,6 +22915,7 @@ Rec: ITM_ENERGYDRINK
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22569,6 +23040,7 @@ Rec: ITM_ESCULAAPSYMBOL
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22693,6 +23165,7 @@ Rec: ITM_FUDGE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22817,6 +23290,7 @@ Rec: ITM_GUM
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22941,6 +23415,7 @@ Rec: ITM_HERB
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -22956,6 +23431,7 @@ Rec: ITM_HERB
 	BuffStrength = 0
 	BuyPrice = 2500
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -22969,6 +23445,7 @@ Rec: ITM_HERB
 	Charge = 
 	COM2ACT = 350
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = TRUE
@@ -23063,6 +23540,7 @@ Rec: ITM_HOLYWATER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -23187,6 +23665,7 @@ Rec: ITM_ICICLE
 	AccuracyCheck = FALSE
 	AP_Cost = 10
 	Attack = 75
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -23202,6 +23681,7 @@ Rec: ITM_ICICLE
 	BuffStrength = 0
 	BuyPrice = 500
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -23215,6 +23695,7 @@ Rec: ITM_ICICLE
 	Charge = 
 	COM2ACT = 240
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -23309,6 +23790,7 @@ Rec: ITM_LIONHEART
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -23433,6 +23915,7 @@ Rec: ITM_MAGICDISC
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -23448,6 +23931,7 @@ Rec: ITM_MAGICDISC
 	BuffStrength = 0
 	BuyPrice = 600
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -23461,6 +23945,7 @@ Rec: ITM_MAGICDISC
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = TRUE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -23555,6 +24040,7 @@ Rec: ITM_MEDICINE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -23570,6 +24056,7 @@ Rec: ITM_MEDICINE
 	BuffStrength = 0
 	BuyPrice = 200
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -23583,6 +24070,7 @@ Rec: ITM_MEDICINE
 	Charge = 
 	COM2ACT = 300
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = TRUE
@@ -23677,6 +24165,7 @@ Rec: ITM_MEDIKIT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -23692,6 +24181,7 @@ Rec: ITM_MEDIKIT
 	BuffStrength = 0
 	BuyPrice = 700
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -23705,6 +24195,7 @@ Rec: ITM_MEDIKIT
 	Charge = 
 	COM2ACT = 150
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = TRUE
@@ -23799,6 +24290,7 @@ Rec: ITM_NUKE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 1200
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Physical
@@ -23814,6 +24306,7 @@ Rec: ITM_NUKE
 	BuffStrength = 0
 	BuyPrice = 10000
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = TRUE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -23827,6 +24320,7 @@ Rec: ITM_NUKE
 	Charge = 
 	COM2ACT = 5
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -23921,6 +24415,7 @@ Rec: ITM_PANACEA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24045,6 +24540,7 @@ Rec: ITM_PARADUST
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24169,6 +24665,7 @@ Rec: ITM_PEPPER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24293,6 +24790,7 @@ Rec: ITM_PHOENIX
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24308,6 +24806,7 @@ Rec: ITM_PHOENIX
 	BuffStrength = 0
 	BuyPrice = 500
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -24321,6 +24820,7 @@ Rec: ITM_PHOENIX
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = TRUE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -24415,6 +24915,7 @@ Rec: ITM_PIXIEDUST
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24539,6 +25040,7 @@ Rec: ITM_POTION
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24554,6 +25056,7 @@ Rec: ITM_POTION
 	BuffStrength = 0
 	BuyPrice = 25
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -24567,6 +25070,7 @@ Rec: ITM_POTION
 	Charge = 
 	COM2ACT = 350
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -24661,6 +25165,7 @@ Rec: ITM_SPORES
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24785,6 +25290,7 @@ Rec: ITM_SUPERMEDIKIT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -24909,6 +25415,7 @@ Rec: ITM_VOCALHERB
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25033,6 +25540,7 @@ Rec: JWL_AQUAMARINE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25157,6 +25665,7 @@ Rec: JWL_AURINA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25281,6 +25790,7 @@ Rec: JWL_BRACERS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25405,6 +25915,7 @@ Rec: JWL_EMERALD
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25529,6 +26040,7 @@ Rec: JWL_GARNET
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25653,6 +26165,7 @@ Rec: JWL_GOLDENMEDALLION
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25668,6 +26181,7 @@ Rec: JWL_GOLDENMEDALLION
 	BuffStrength = 0
 	BuyPrice = 10000
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -25681,6 +26195,7 @@ Rec: JWL_GOLDENMEDALLION
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -25705,6 +26220,25 @@ Rec: JWL_GOLDENMEDALLION
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -25756,6 +26290,7 @@ Rec: JWL_ONYX
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -25880,6 +26415,7 @@ Rec: JWL_PEARL
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26004,6 +26540,7 @@ Rec: JWL_RUBY
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26128,6 +26665,7 @@ Rec: JWL_SAPHIRE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26143,6 +26681,7 @@ Rec: JWL_SAPHIRE
 	BuffStrength = 0
 	BuyPrice = 2000
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26156,6 +26695,7 @@ Rec: JWL_SAPHIRE
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -26250,6 +26790,7 @@ Rec: JWL_SHANDA_ROYALRING
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26265,6 +26806,7 @@ Rec: JWL_SHANDA_ROYALRING
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26278,6 +26820,7 @@ Rec: JWL_SHANDA_ROYALRING
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -26302,6 +26845,25 @@ Rec: JWL_SHANDA_ROYALRING
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -26353,6 +26915,7 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26368,6 +26931,7 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26381,6 +26945,7 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	Charge = 
 	COM2ACT = 10
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -26405,6 +26970,25 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	EqIrravonia = TRUE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
@@ -26456,6 +27040,7 @@ Rec: ZZZ_AZIELLA_SHOOT
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Strength
 	AttackType = Physical
@@ -26580,6 +27165,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_EARTH
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26595,6 +27181,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_EARTH
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26608,6 +27195,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_EARTH
 	Charge = 
 	COM2ACT = 100
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -26702,6 +27290,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_FLAME
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26717,6 +27306,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_FLAME
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26730,6 +27320,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_FLAME
 	Charge = 
 	COM2ACT = 101
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -26824,6 +27415,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WATER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26839,6 +27431,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WATER
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26852,6 +27445,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WATER
 	Charge = 
 	COM2ACT = 102
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -26946,6 +27540,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WIND
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -26961,6 +27556,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WIND
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -26974,6 +27570,7 @@ Rec: ZZZ_BIGCRYSTAL_CHARGE_WIND
 	Charge = 
 	COM2ACT = 103
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -27068,6 +27665,7 @@ Rec: ZZZ_BIGCRYSTAL_EARTH
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 150
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -27192,6 +27790,7 @@ Rec: ZZZ_BIGCRYSTAL_FLAME
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 150
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -27207,6 +27806,7 @@ Rec: ZZZ_BIGCRYSTAL_FLAME
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -27220,6 +27820,7 @@ Rec: ZZZ_BIGCRYSTAL_FLAME
 	Charge = 
 	COM2ACT = 100
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -27314,6 +27915,7 @@ Rec: ZZZ_BIGCRYSTAL_WATER
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 150
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -27329,6 +27931,7 @@ Rec: ZZZ_BIGCRYSTAL_WATER
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -27342,6 +27945,7 @@ Rec: ZZZ_BIGCRYSTAL_WATER
 	Charge = 
 	COM2ACT = 100
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -27436,6 +28040,7 @@ Rec: ZZZ_BIGCRYSTAL_WIND
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 150
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -27451,6 +28056,7 @@ Rec: ZZZ_BIGCRYSTAL_WIND
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -27464,6 +28070,7 @@ Rec: ZZZ_BIGCRYSTAL_WIND
 	Charge = 
 	COM2ACT = 100
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -27558,6 +28165,7 @@ Rec: ZZZ_CRYSTAL_APNUL
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -27573,6 +28181,7 @@ Rec: ZZZ_CRYSTAL_APNUL
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -27586,6 +28195,7 @@ Rec: ZZZ_CRYSTAL_APNUL
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -27680,6 +28290,7 @@ Rec: ZZZ_CRYSTAL_ATTACK
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Physical
@@ -27695,6 +28306,7 @@ Rec: ZZZ_CRYSTAL_ATTACK
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -27708,6 +28320,7 @@ Rec: ZZZ_CRYSTAL_ATTACK
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -27802,6 +28415,7 @@ Rec: ZZZ_CRYSTAL_CURSE
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -27926,6 +28540,7 @@ Rec: ZZZ_CRYSTAL_HP1
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -28050,6 +28665,7 @@ Rec: ZZZ_CRYSTAL_PARALYSIS
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -28065,6 +28681,7 @@ Rec: ZZZ_CRYSTAL_PARALYSIS
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28078,6 +28695,7 @@ Rec: ZZZ_CRYSTAL_PARALYSIS
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -28172,6 +28790,7 @@ Rec: ZZZ_CRYSTAL_SLEEP
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -28187,6 +28806,7 @@ Rec: ZZZ_CRYSTAL_SLEEP
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28200,6 +28820,7 @@ Rec: ZZZ_CRYSTAL_SLEEP
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -28294,6 +28915,7 @@ Rec: ZZZ_CRYSTAL_VENOM
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -28418,6 +29040,7 @@ Rec: ZZZ_EXHURU_KAKSI
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 200
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Magical
@@ -28433,6 +29056,7 @@ Rec: ZZZ_EXHURU_KAKSI
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28446,6 +29070,7 @@ Rec: ZZZ_EXHURU_KAKSI
 	Charge = 
 	COM2ACT = 500
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -28540,6 +29165,7 @@ Rec: ZZZ_EXHURU_KOLME
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 300
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Magical
@@ -28555,6 +29181,7 @@ Rec: ZZZ_EXHURU_KOLME
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28568,6 +29195,7 @@ Rec: ZZZ_EXHURU_KOLME
 	Charge = 
 	COM2ACT = 250
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -28662,6 +29290,7 @@ Rec: ZZZ_EXHURU_KUUSI
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 600
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Magical
@@ -28677,6 +29306,7 @@ Rec: ZZZ_EXHURU_KUUSI
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28690,6 +29320,7 @@ Rec: ZZZ_EXHURU_KUUSI
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -28784,6 +29415,7 @@ Rec: ZZZ_EXHURU_NELJA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 400
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Strength
 	AttackType = Magical
@@ -28799,6 +29431,7 @@ Rec: ZZZ_EXHURU_NELJA
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28812,6 +29445,7 @@ Rec: ZZZ_EXHURU_NELJA
 	Charge = 
 	COM2ACT = 200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -28906,6 +29540,7 @@ Rec: ZZZ_EXHURU_YKSI
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 100
+	AttackAlt = 
 	AttackCancel = TRUE
 	AttackStat = Strength
 	AttackType = Magical
@@ -28921,6 +29556,7 @@ Rec: ZZZ_EXHURU_YKSI
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -28934,6 +29570,7 @@ Rec: ZZZ_EXHURU_YKSI
 	Charge = 
 	COM2ACT = 1200
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -29028,6 +29665,7 @@ Rec: ZZZ_FRUNDARMON_SUMMON
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
@@ -29152,6 +29790,7 @@ Rec: ZZZ_KILLER_MOAB
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 9000000
+	AttackAlt = 
 	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Physical
@@ -29167,6 +29806,7 @@ Rec: ZZZ_KILLER_MOAB
 	BuffStrength = 0
 	BuyPrice = 100
 	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = TRUE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -29180,6 +29820,7 @@ Rec: ZZZ_KILLER_MOAB
 	Charge = 
 	COM2ACT = 25
 	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -29274,8 +29915,12 @@ Rec: ZZZ_TEST
 	AccuracyCheck = FALSE
 	AP_Cost = 0
 	Attack = 0
+	AttackAlt = 
+	AttackCancel = FALSE
 	AttackStat = Intelligence
 	AttackType = Magical
+	Block_Fear = FALSE
+	Block_Silence = FALSE
 	BlockSilence = FALSE
 	BuffAccuracy = 0
 	BuffAgility = 0
@@ -29285,6 +29930,8 @@ Rec: ZZZ_TEST
 	BuffResistance = 0
 	BuffStrength = 0
 	BuyPrice = 100
+	CauseConfusion = FALSE
+	CauseCurse = FALSE
 	CauseDeath = FALSE
 	CauseDestruction = FALSE
 	CauseDisease = FALSE
@@ -29297,6 +29944,8 @@ Rec: ZZZ_TEST
 	CauseZombie = FALSE
 	Charge = 
 	COM2ACT = 10
+	CureConfusion = FALSE
+	CureCurse = FALSE
 	CureDeath = FALSE
 	CureDestruction = FALSE
 	CureDisease = FALSE
@@ -29321,6 +29970,25 @@ Rec: ZZZ_TEST
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
+	EQP__RESIST_Elem_Darkness = 0
+	EQP__RESIST_Elem_Earth = 0
+	EQP__RESIST_Elem_Flame = 0
+	EQP__RESIST_Elem_Frost = 0
+	EQP__RESIST_Elem_Light = 0
+	EQP__RESIST_Elem_Thunder = 0
+	EQP__RESIST_Elem_Water = 0
+	EQP__RESIST_Elem_Wind = 0
+	EQP__RESIST_Stat_Confusion = 0
+	EQP__RESIST_Stat_Death = 0
+	EQP__RESIST_Stat_Destruction = 0
+	EQP__RESIST_Stat_Disease = 0
+	EQP__RESIST_Stat_Exhaustion = 0
+	EQP__RESIST_Stat_Fear = 0
+	EQP__RESIST_Stat_Paralysis = 0
+	EQP__RESIST_Stat_Poison = 0
+	EQP__RESIST_Stat_Silence = 0
+	EQP__RESIST_Stat_Sleep = 0
+	EQP__RESIST_Stat_Zombie = 0
 	EQP_Accuracy = 0
 	EQP_Agility = 0
 	EQP_Defense = 0
