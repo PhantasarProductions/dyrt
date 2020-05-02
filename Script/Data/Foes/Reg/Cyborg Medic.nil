@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/28/2020 12:28:50 PM
+// Generated: 5/3/2020 12:10:31 AM
 
 do
 var retfunc()
@@ -32,6 +32,9 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "JWL_AURINA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
@@ -72,9 +75,16 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BANDAGE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
+foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDIKIT"
 if not Foe.LoadOversoul
 	foeret.Experience = 200
 end
