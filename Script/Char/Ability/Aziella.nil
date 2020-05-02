@@ -44,7 +44,7 @@ s = __skill
 local
 a = {
 	-- Crossbow
-	BlessedArrow   = { Skill_Crossbow = __skill * 2, ["Skill_Befindo enchants"] = __skill + 1 }
+	BlessedArrow   = { Skill_Crossbow = __skill * 2, ["Skill_Befindo enchants"] = s + 1 },
 	
 	-- Befindo Enchanments
 	MysticCare     = { Start = true },
