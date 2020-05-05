@@ -1,0 +1,113 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/Steal.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.05.05
+// End License Information
+do
+	bool StealOnyx(foe,string name)
+		if Done["Stolen_From_Onyx_"..name]
+			new Hurt("You already stole the key from "..name,"FOE_1",255,255,0)
+			return false
+		end
+		var MeryaRogue
+		MeryaRogue = RPG.GetChar("Merya").Points("SKILLEXP1")
+		MeryaRogue.Have = MeryaRogue.Maximum
+		Inventory.KEY_DARKSTORAGEKEY++
+		foe.Char.Points("HP").Minimum = 0
+		new Hurt(sprintf("Stolen Dark Storage Key from %s",name),"FOE_1",255,255,0)
+		return true
+	end
+	
+	bool PickPocket(Act,Target)
+		bool okdrop
+		if Target.Char.Points("HP").Have == 0
+			return false
+		end
+		CSayF("Stealing from %s => %s",Target.Tag,Target.FromFile)
+		if prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/ALDARUS2")
+			return StealOnyx(Target,"Aldarus")
+		elseif prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/JERACKO2")
+			return StealOnyx(Target,"Jeracko")
+		elseif prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/KIRANA2")
+			return StealOnyx(Target,"Kirana")
+		elseif prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/RONDOMO2")
+			return StealOnyx(Target,"Rondomo")			
+		elseif prefixed(Target.Tag,"FOE_")
+			if Target.StolenFrom or (not Target.Steal) or (#Target.Steal==0)
+				new Hurt("Has nothing!",Target.StolenFrom)
+				return false
+			end
+			int r
+			r = math.random(1,#Target.Steal)
+			switch type(Target.Steal[r])
+				case "number"
+					if __cash<(900000000/__skill)
+						okdrop=true
+						LoadAudio("SFX/Treasure/ChaChing.wav").Play()
+						int getcash
+						switch __skill
+							case 1
+								getcash = math.random(Target.Steal[r],Target.Steal[r]*2)
+							case 2
+								getcash = math.random(math.ceil(Target.Steal[r]/2),Target.Steal[r])
+							case 3
+								getcash = math.random(1,math.ceil(Target.Steal[r]/2))
+						end
+						__cash = __cash + getcash
+						if Target.Steal[r]==1
+							new Hurt("Stolen 1 __onecurrency",Target.Tag,255,255,0)
+						else
+							new Hurt(sprintf("Stolen %d __currency",getcash),Target.Tag,255,255,0)
+						end
+					end
+				case "string"
+					string itag
+					itag = Target.Steal[r]
+					if Inventory[itag]<Inventory.__CAP__
+						Inventory[itag]++
+						okdrop=true
+						new Hurt(sprintf("Stolen %s",Item[itag].Name),Target.Tag,255,255,0)
+					end
+				default
+					error("Invalid item steal!")
+			end // switch
+			error("Stealing from enemies not yet implemented")
+		else
+			error("Stealing from heroes not yet implemented")
+		end
+		return okdrop
+	end
+	
+	return PickPocket
+end
