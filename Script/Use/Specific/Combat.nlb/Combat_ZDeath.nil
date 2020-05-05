@@ -121,7 +121,7 @@ void EnemyDeathFade(f)
 		
 		// Item or money drops
 		bool okdrop
-		if f.Drop and #f.Drop>0
+		if f.Drop and #f.Drop>0 and not f.StolenFrom
 			int r
 			r = math.random(1,#f.Drop)
 			switch type(f.Drop[r])

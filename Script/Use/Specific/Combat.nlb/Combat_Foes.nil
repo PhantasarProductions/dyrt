@@ -68,7 +68,9 @@ class Foe extends Fighter
 	string FromFile
 	int Cash
 	table Drop
+	table Steal
 	int FlickStance = 0
+	bool StolenFrom = false
 	
 	get int Height
 		return self.Image.Height

@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.05.02
+; version: 20.05.04
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -46,4 +46,16 @@
 	call MapText,"KANTINE"
 	call MapScript.Boss
 	mov true,gv.Bool.DarkStorageBoss_Aldarus
+	end
+	
+:NPC_SASKIA_Aldarus
+	CALL Map.HideObj,"Player"
+	call Map.ShowByLabel,"H"
+	call MapText,"ALDARUS"
+	call MapScript.Aldarus
+	call Map.Kill,"NPC_SASKIA_Aldarus",true
+	call MapText,"AFTER"
+	mov true,gv.Bool.DS_ONYX_Aldarus
+	call Map.HideByLabel,"H"
+	call Map.ShowObj,"Player"
 	end

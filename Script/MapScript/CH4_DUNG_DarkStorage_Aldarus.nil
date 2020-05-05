@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.02
+// version: 20.05.03
 // End License Information
 
 
@@ -64,6 +64,26 @@ group MScript
 		StartCombat.Ready()
 	end
 	
+	void ALDARUS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "DS_Aldarus"
+		StartCombat.Foe[1] = "Boss/Aldarus2"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.OnyxSteal = "Aldarus"
+		StartCombat.Ready()
+	end
+	
+	void WARPBACK()
+		Map.GoToLayer("#100","Start")
+	end
+	
+	void TOMAIN()
+		Field.LoadMap("CH4_DUNG_DarkStorage")
+		Map.GoToLayer("#000","FromAldarus")
+	end
+	
 	void CONSTRUCTOR()
 		for i=1,MaxSecret 
 			Map.ZA_Enter(sprintf("SECRET%d",i),"Show",i)
@@ -71,6 +91,8 @@ group MScript
 			CSayF("Secret set %2d",i)
 		end
 		Map.ZA_Enter("Kantine","SASKIA:Kantine")
+		Map.ZA_Enter("WarpBack","WarpBack")
+		Map.ZA_Enter("ToMain","ToMain")
 	end
 	
 	void Draw()

@@ -59,6 +59,7 @@ group Combat_Start
 	int StartMode = 0
 	table RX
 	table RY
+	string OnyxSteal
 	
 	// When set the enemy cannot be defeated
 	bool FoeIDDQD = false
@@ -163,5 +164,12 @@ global void LetsGetReadyToRumble()
 		
 		GoToFlow("Combat")
 		Stage.Current = Stage.Stages.IDLE
+		if $OnyxSteal and $OnyxSteal!="" and (not gv.Bool["Stolen_From_Onyx_"..$OnyxSteal])
+			Fighter.ByTag.FOE_1.Char.Points("HP").Minimum=100
+			if not Done.Tutorial_Onyx_Steal
+				BoxText.Load("Combat/OnyxSteal","ONYXSTEAL")
+				BoxText("ONYXSTEAL","ONYXSTEAL")
+			end
+		end
 	end
 end
