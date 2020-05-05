@@ -47,7 +47,19 @@ group MScript
 		Map.GoToLayer("#000","FromJeracko")
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "DS_Jeracko"
+		StartCombat.Foe[1] = "Boss/SuperHag"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("ToMain","ToMain")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
 	end
 	
 	void Draw()

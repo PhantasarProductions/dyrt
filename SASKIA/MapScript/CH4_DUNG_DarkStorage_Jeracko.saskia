@@ -36,6 +36,14 @@
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
-	end
+	jmp Niks
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:Boss
+	chk gv.Bool.DS_Boss_JerackSection,Niks
+	call MapText,"PREBOSS"
+	call MapScript.Boss
+	mov true,gv.Bool.DS_Boss_JerackSection,Niks
+	jmp Niks
+	
+:Niks
+	end
