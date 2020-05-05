@@ -54,7 +54,6 @@ group MScript
 	end
 	
 	void BOSS()
-		// error("The boss has not yet been set up")
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
 		StartCombat.Arena = "DS_Aldarus"
