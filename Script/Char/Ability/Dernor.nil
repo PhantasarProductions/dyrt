@@ -63,6 +63,7 @@ do
 		LethalPollen    = { Charm = { "TrueDeathCap" }, Skill_Nature = 6*s },
 		AttackInDamnnation
 		                = { Charm = { "UndeadHound" }, Skill_Bat = s*5, Skill_Nature = s * 8 },
+		Inferno         = { Charm = { "HellHound"}, Skill_Nature = (s+s) * s } 
 	
 		-- Scharum
 	
