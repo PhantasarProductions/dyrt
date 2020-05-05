@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 5/3/2020 10:23:53 PM
+// Generated: 5/5/2020 9:39:11 PM
 
 do
 var retfunc()
@@ -14,7 +14,7 @@ foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/GiantSquid.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/GIANTSQUID.NEGATIVE.PNG")
 foeret.Cash = 500
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 500
-foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 500
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Drop+1] = 500
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
@@ -793,11 +793,11 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
-foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
-foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
-foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
-foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
-foeret.Steal = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
 if not Foe.LoadOversoul
 	foeret.Experience = 10000
 end
