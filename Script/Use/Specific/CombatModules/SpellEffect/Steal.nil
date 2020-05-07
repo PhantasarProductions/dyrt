@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.05
+// version: 20.05.07
 // End License Information
 do
 	bool StealOnyx(foe,string name)
