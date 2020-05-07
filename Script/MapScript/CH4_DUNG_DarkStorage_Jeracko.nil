@@ -57,9 +57,26 @@ group MScript
 		StartCombat.Ready()
 	end
 	
+	void JERACKO()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "DS_Jeracko"
+		StartCombat.Foe[1] = "Boss/Jeracko2"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.OnyxSteal = "Jeracko"
+		StartCombat.Ready()
+	end
+	
+	void GOBACK()
+		Map.GoToLayer("#200","Start")
+	end
+
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ToMain","ToMain")
 		Map.ZA_Enter("Boss","SASKIA:Boss")
+		Map.ZA_Enter("GoBack","GoBack")
 	end
 	
 	void Draw()

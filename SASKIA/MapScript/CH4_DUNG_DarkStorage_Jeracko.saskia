@@ -45,5 +45,18 @@
 	mov true,gv.Bool.DS_Boss_JerackSection,Niks
 	jmp Niks
 	
+:NPC_SASKIA_Jeracko
+	CALL Map.HideObj,"Player"
+	call Map.ShowByLabel,"H"
+	call MapText,"Jeracko"
+	call MapScript.Jeracko
+	call Map.Kill,"NPC_SASKIA_Jeracko",true
+	call MapText,"AFTER"
+	mov true,gv.Bool.DS_ONYX_Jeracko
+	call Map.HideByLabel,"H"
+	call Map.ShowObj,"Player"
+	jmp Niks
+
 :Niks
+	call CSay,"SASKIA Script ended!"
 	end
