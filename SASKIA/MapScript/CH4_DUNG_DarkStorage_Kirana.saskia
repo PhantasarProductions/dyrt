@@ -32,17 +32,17 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.05.07
+; version: 20.05.09
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
 
 :Boss
-	chk gv.Bool.DS_Boss_JerackSection,Niks
+	chk gv.Bool.DS_Boss_KiranaSection,Niks
 	call MapText,"PREBOSS"
 	call MapScript.Boss
-	mov true,gv.Bool.DS_Boss_JerackSection,Niks
+	mov true,gv.Bool.DS_Boss_KiranaSection,Niks
 	jmp Niks
 	
 :NPC_SASKIA_Kirana
@@ -58,5 +58,5 @@
 	jmp Niks
 
 :Niks
-	CSay("All done!")
+	call CSay,"All done!"
 	end
