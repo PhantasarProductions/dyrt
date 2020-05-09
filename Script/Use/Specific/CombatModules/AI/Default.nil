@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/AI/Default.nil
-// Version: 20.01.26
-// Copyright (C)  Jeroen Petrus Broks
+// Version: 20.05.09
+// Copyright (C) 2019 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -104,7 +104,7 @@ module AI_Default
 					for iteam,imember,ifighter in Fighter.ForAll()
 						nact.Targets[#nact.Targets+1]=ifighter
 					end
-					GoedGekeurd = nact.Targets>0
+					GoedGekeurd = #nact.Targets>0
 				default
 					error(sprintf("Unknown target type '%s'!",nitem.Target))
 			end
