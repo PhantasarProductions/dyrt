@@ -41,10 +41,58 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 
+#use "Script/Use/MapScript/Memory"
 
 #macro MaxSecret 10
 
 group MScript
+	
+	// Memory puzzle
+	delegate NPC_MEMORY1
+	delegate NPC_MEMORY2
+	delegate NPC_MEMORY3
+	delegate NPC_MEMORY4
+	delegate NPC_MEMORY5
+	delegate NPC_MEMORY6
+	delegate NPC_MEMORY7
+	delegate NPC_MEMORY8
+	delegate NPC_MEMORY9
+	delegate NPC_MEMORY10
+	delegate NPC_MEMORY11
+	delegate NPC_MEMORY12
+	delegate NPC_MEMORY13
+	delegate NPC_MEMORY14
+	delegate NPC_MEMORY15
+	delegate NPC_MEMORY16
+	
+	link DoneMemory = gv.Bool.Done_DarkStorage_Rondomo_MemoryPuzzle
+	
+	void RESETMEMORY()
+		if self.DoneMemory
+			return
+		end
+		Memory.Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Aziella"})
+	end
+	
+	link MEMORYCYCLE = Memory.Cycle
+	
+	void MemoryPuzzleSolved()
+		LoadAudio("SFX/Puzzle/Solved.wav").Play()
+		Map.Kill("Barrier",true)
+		Map.Kill("StartPuzzle",true)
+		self.KILLMEMORY()
+		Party.LvUp()
+	end
+	
+	void KILLMEMORY()
+		for i=1,16
+			Map.Kill("NPC_MEMORY"..i,true)
+		end
+		self.DoneMemory = true
+	end
+
+	
+	// Other crap
 	
 	void TOMAIN()
 		Field.LoadMap("CH4_DUNG_DarkStorage")
@@ -94,6 +142,7 @@ group MScript
 		Map.ZA_Enter("GoMain","ToMain")
 		Map.ZA_Enter("Boss","SASKIA:Boss")
 		Map.ZA_Enter("GoBack","GoBack")
+		Map.ZA_Enter("StartPuzzle","ResetMemory")
 		CSay("Welcome to Rondomo's section of the Dark Storage")
 	end
 	
