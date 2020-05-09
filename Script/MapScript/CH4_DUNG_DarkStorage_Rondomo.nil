@@ -1,0 +1,107 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH4_DUNG_DarkStorage_Rondomo.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.05.09
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+
+
+#macro MaxSecret 10
+
+group MScript
+	
+	void TOMAIN()
+		Field.LoadMap("CH4_DUNG_DarkStorage")
+		Map.GoToLayer("#000","FromRondomo")
+	end
+	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "DS_Rondomo"
+		StartCombat.Foe[1] = "Boss/Smiley"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void Rondomo()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "DS_Rondomo"
+		StartCombat.Foe[1] = "Boss/Rondomo2"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.OnyxSteal = "Rondomo"
+		StartCombat.Ready()
+	end
+	
+	void GOBACK()
+		Map.GoToLayer("#300","Start")
+	end
+
+	void SHOW(int i)
+		Map.ShowByLabel(sprintf("SECRET_%d",i))
+	end
+	
+	void HIDE(int i)
+		Map.HideByLabel(sprintf("SECRET_%d",i))
+	end
+
+	
+	void CONSTRUCTOR()
+		for i=1,MaxSecret 
+			Map.ZA_Enter(sprintf("SECRET_%d",i),"Show",i)
+			Map.ZA_Leave(sprintf("SECRET_%d",i),"Hide",i)
+			CSayF("Secret set %2d",i)
+		end
+		Map.ZA_Enter("GoMain","ToMain")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
+		Map.ZA_Enter("GoBack","GoBack")
+		CSay("Welcome to Rondomo's section of the Dark Storage")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
