@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.09
+// version: 20.05.10
 // End License Information
 
 
@@ -109,7 +109,7 @@ group MScript
 		StartCombat.Ready()
 	end
 	
-	void Rondomo()
+	void RONDOMO()
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
 		StartCombat.Arena = "DS_Rondomo"
@@ -121,7 +121,7 @@ group MScript
 	end
 	
 	void GOBACK()
-		Map.GoToLayer("#300","Start")
+		Map.GoToLayer("#400","Start")
 	end
 
 	void SHOW(int i)
