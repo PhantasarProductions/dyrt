@@ -1,6 +1,6 @@
 ; License Information:
 ; src/Tricky Script/SASKIA/MapScript/CH4_DUNG_DarkStorage.saskia
-; Version: 20.04.30
+; Version: 20.05.11
 ; Copyright (C) 2020 Jeroen Petrus Broks
 ; 
 ; ===========================
@@ -38,4 +38,14 @@
 	call Fader,Field.MapData.Title
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:Meanwhile
+	call MapText,"MEANWHILE"
+	call Map.GoToLayer,"#002","Meanwhile"
+	call Map.ShowByLabel,"Onyx"
+	call MapText,"MEANWHILE_A"
+	call Map.HideByLabel,"Onyx"
+	call Map.GoToLayer,"#000","Einde"
+	call Map.Kill,"Deur",true
+	mov "Merya",Map.Leader
+	call MapText,"OPEN"
+	end
