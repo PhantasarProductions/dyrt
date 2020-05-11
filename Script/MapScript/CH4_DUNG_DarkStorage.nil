@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.30
+// version: 20.05.11
 // End License Information
 
 
@@ -40,6 +40,9 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+bool gj_checked
+
 group MScript
 	
 	void GOSUB(int i, string onyx)
@@ -47,10 +50,51 @@ group MScript
 		Map.GoToLayer("#"..i.."00","Start")
 	end
 	
+	void MEANWHILE()
+		if Inventory.KEY_DARKSTORAGEKEY>=4 and (not Done.DarkStorageOnyx_Meanwhile_Cutscene)
+			MapScript.SASKIA("Meanwhile")
+		end
+	end
+	
+	void GJ_OPEN()
+		var GJ
+		if (not gv.Bool.GameJolt) or gj_checked
+			return
+		end
+		gj_checked = true
+		GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		if not GJ
+			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+			return
+		end
+		if GJ.ImpureRatio>=64
+			Map.Kill("GameJoltBarrier")
+			Map.ShowByLabel("GJ")
+		end
+	end
+	
+	void FROMGJ()
+		if gj_checked
+			return
+		end
+		Map.Kill("GameJoltBarrier")
+		Map.ShowByLabel("GJ")
+		gj_checked = true
+	end
+	
+	void ENTERMORKER()
+		Field.LoadMap("GJ_DUNG_MORKER")
+		Map.GoToLayer("#001","Start")
+	end
+	
 	void CONSTRUCTOR()
 		for i,onyx in pairs { "Aldarus", "Jeracko", "Kirana", "Rondomo" } 
 			Map.ZA_Enter("Go"..onyx,"GoSub",i,onyx)
 		end
+		Map.ZA_Enter("MainHall","Meanwhile")
+		Map.ZA_Enter("CheckGJ","GJ_Open")
+		Map.ZA_Enter("FromGJ","FROMGJ")
+		Map.ZA_Enter("ToMorker","EnterMorker")
 	end
 	
 	void Draw()
