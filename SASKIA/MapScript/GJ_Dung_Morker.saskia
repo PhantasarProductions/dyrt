@@ -32,10 +32,17 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.05.11
+; version: 20.05.13
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	;call Fader,Field.MapData.Title
+	call Fader,"M|"..string.char(34).."orker"
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:NPC_SASKIA_Thief
+	call MapText,"THIEF"
+	call MapScript.Thief
+	call Map.Kill,"NPC_SASKIA_Thief",true
+	mov true,gv.Bool.MorkerThiefDead
+	call MapText,"THIEF_AFTER"
+	end

@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.11
+// version: 20.05.13
 // End License Information
 
 
@@ -63,6 +63,17 @@ group MScript
 		end
 		error("This part of speaking to Kthura not yet covered")
 	end
+	
+	void THIEF()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "BlackDragonCave"
+		StartCombat.Foe[1] = "Boss/ArachnitaThief"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Leave","Leave")
