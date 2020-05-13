@@ -20,6 +20,7 @@ itemret[#itemret+1]="ITM_LIONHEART"
 itemret[#itemret+1]="ITM_MAGICDISC"
 itemret[#itemret+1]="ITM_MEDICINE"
 itemret[#itemret+1]="ITM_MEDIKIT"
+itemret[#itemret+1]="ITM_MORKERWEED"
 itemret[#itemret+1]="ITM_NUKE"
 itemret[#itemret+1]="ITM_PANACEA"
 itemret[#itemret+1]="ITM_PARADUST"
@@ -117,6 +118,7 @@ itemret[#itemret+1]="JWL_SAPHIRE"
 itemret[#itemret+1]="JWL_SHANDA_ROYALRING"
 itemret[#itemret+1]="JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 itemret[#itemret+1]="KEY_DARKSTORAGEKEY"
+itemret[#itemret+1]="KEY_KTHURAPENDANT"
 
 
 return itemret
