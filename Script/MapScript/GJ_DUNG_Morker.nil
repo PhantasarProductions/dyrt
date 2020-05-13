@@ -42,7 +42,8 @@
 #use "Script/Use/StartCombatMod"
 
 #macro QueesteVolbracht gv.Bool.KthuraPendantReturnedMorkerGJBonus
-#macro Gevonden gv.Bool.KthuraPendantFound
+// #macro Gevonden gv.Bool.KthuraPendantFound
+#macro Gevonden gv.Bool.MorkerThiefDead
 
 group MScript
 	
@@ -61,7 +62,14 @@ group MScript
 			MapText("KTHURA_NOTYETFOUND")
 			return
 		end
-		error("This part of speaking to Kthura not yet covered")
+		if QueesteVolbracht
+			MapText("KTHURA_COMPLETE")
+			return		
+		end
+		MapText("KTHURA_RECOVER")
+		Inventory.JWL_DIAMOND ++
+		Achievements.Award('GJ_COMPLETE_MORKER')
+		// error("This part of speaking to Kthura not yet covered")
 	end
 	
 	void THIEF()
