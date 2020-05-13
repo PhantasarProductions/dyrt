@@ -859,6 +859,21 @@ ret = {
 		["skill_check"] = false,
 
 	},
+	["GJ_COMPLETE_MORKER"] = {
+		["AutoProcess"] = false,
+		["Description"] = "Complete Moeker forest",
+		["hidden"] = true,
+		["Name"] = "It's a dark world, after all!",
+		["ProcessMax"] = 0,
+		["ProcessString"] = "{Value} of {Max}",
+		["ProcessValue"] = "",
+		["require_gamejolt"] = true,
+		["skill_1"] = true,
+		["skill_2"] = true,
+		["skill_3"] = true,
+		["skill_check"] = false,
+
+	},
 	["GJ_COMPLETE_SUGARLAND"] = {
 		["AutoProcess"] = false,
 		["Description"] = "Complete Sugarland",
