@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.07
+// version: 20.05.13
 // End License Information
 do
 	bool StealOnyx(foe,string name)
@@ -90,6 +90,7 @@ do
 						else
 							new Hurt(sprintf("Stolen %d __currency",getcash),Target.Tag,255,255,0)
 						end
+						Target.StolenFrom = true
 					end
 				case "string"
 					string itag
@@ -98,6 +99,7 @@ do
 						Inventory[itag]++
 						okdrop=true
 						new Hurt(sprintf("Stolen %s",Item[itag].Name),Target.Tag,255,255,0)
+						Target.StolenFrom = true
 					end
 				default
 					error("Invalid item steal!")
