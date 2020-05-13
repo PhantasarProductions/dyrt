@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.07
+// version: 20.05.13
 // End License Information
 
 do
@@ -76,6 +76,7 @@ do
 		a.PollenRed    = { Charm = {"RedFlower"}, Skill_Nature = 25 }
 		a.PollenBlue   = { Charm = {"BlueFlower"}, Skill_Nature = 25 }
 		a.PollenPurple = { Charm = {"PurpleFlower"}, Skill_Nature = 25 }
+		a.Moo          = { Charm = {"Moo-Moo-Ant"}, Skill_Nature=math.ceil(s*2.5) }
 	end
 	
 	return a
