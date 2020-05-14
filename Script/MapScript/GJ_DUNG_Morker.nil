@@ -68,8 +68,9 @@ group MScript
 		end
 		MapText("KTHURA_RECOVER")
 		Inventory.JWL_DIAMOND ++
+		Inventory.KEY_KTHURAPENDANT = 0
 		Achievements.Award('GJ_COMPLETE_MORKER')
-		// error("This part of speaking to Kthura not yet covered")
+		QueesteVolbracht = true
 	end
 	
 	void THIEF()
