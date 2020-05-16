@@ -262,20 +262,31 @@ group Execution
 					error("Unknown AttackAlt: "..Alt)
 			end
 			hit = true
-			Instant[Target.Instant.ATTACK](Target,Action)
+			if not Action.Countered
+				Instant[Target.Instant.ATTACK](Target,Action)
+				Action.Countered = Instant.Done
+			end
 		end
 		
 		// Cancel
 		if Action.Act.AttackCancel and Target.GaugePosition>10000
 			Target.GaugePosition = 0
 			new Hurt("Cancel",Target.Tag,255,255,0)
-			Instant[Target.Instant.CANCEL](Target,Action)			
+			if not Action.Countered
+				CSay("Do we counter this cancel?")
+				Instant[Target.Instant.CANCEL](Target,Action)
+				Action.Countered = Instant.Done
+				CSayF(">>> %s",tostring(Action.Countered))
+			end
 		end
 		
 		// Calculate healing
 		if Action.Act.Heal>0
 			$Heal(Executor,Target,Action)
-			Instant[Target.Instant.HEALING](Target,Action)
+			if not Action.Countered				
+				Instant[Target.Instant.HEALING](Target,Action)
+				Action.Countered = Instant.Done
+			end
 			hit = true
 		end
 		

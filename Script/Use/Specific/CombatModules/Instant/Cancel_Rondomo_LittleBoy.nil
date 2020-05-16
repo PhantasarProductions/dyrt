@@ -41,12 +41,11 @@ do
 		end
 		table nact
 		nact.ActTag = "ABL_FOE_RONDOMO_LITTLEBOY"
-		nact.ExeTag = "FOE_1"
+		nact.ExeTag = ron.Tag
 		nact.Targets = {act.Executor}
 		ron.NextAct = new Actions(nact)
 		ron.NextActSpeed = 3000
 		ron.GaugePosition = 10001
-		
 	end
 	return RondomoLittleBoy
 end

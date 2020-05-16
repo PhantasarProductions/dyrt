@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 5/14/2020 9:41:18 PM
+// Generated: 5/15/2020 12:57:13 PM
 
 do
 var retfunc()
@@ -7,7 +7,7 @@ var foeret
 foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
-foeret.AI_Module = "Default"
+foeret.AI_Module = "Kirana_3rd"
 foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "A dispicable woman with a superiority complex"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/boss/Kirana.png")
@@ -40,7 +40,7 @@ foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_HERB"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_HERB"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
 if not Foe.LoadOversoul
-	foeret.Experience = 20000
+	foeret.Experience = 40000
 end
 foeret.Name="Kirana"
 foeret.Char.Stat("BASE__RESIST_Elem_Darkness").Value=100
@@ -107,7 +107,7 @@ foeret.Char.Stat("BASE__RESIST_Stat_Paralysis").Value=80
 foeret.Char.Stat("BUFF__RESIST_Stat_Paralysis").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Script="SUM:BASE__RESIST_Stat_Paralysis,BUFF__RESIST_Stat_Paralysis"
-foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=70
+foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=35
 foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
@@ -146,11 +146,11 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=60000
+	foeret.Char.Stat("BASE_HP").Value=40000
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
-	foeret.Char.Stat("BASE_Intelligence").Value=400
+	foeret.Char.Stat("BASE_Intelligence").Value=300
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
@@ -185,14 +185,42 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_TSUNAMI"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_TSUNAMI"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_DEMONSOULBREAKER"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_DEMONSOULBREAKER"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_DEMONSOULBREAKER"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_ULTRASONIC"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_AZIELLA_CONFUSION"
@@ -211,6 +239,16 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIREBLAST"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_TSUNAMI"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_TSUNAMI"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_CURSE"

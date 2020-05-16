@@ -4,18 +4,18 @@
 do
 
 
-table ret_ABL_HERO_ERIC_ZEROKELVIN
-ret_ABL_HERO_ERIC_ZEROKELVIN={
+table ret_ABL_HERO_IRRAVONIA_QUAKE
+ret_ABL_HERO_IRRAVONIA_QUAKE={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 125,
-	["Attack"] = 300,
+	["AP_Cost"] = 75,
+	["Attack"] = 100,
 	["AttackAlt"] = "",
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
 	["AttackType"] = "Magical",
 	["Block_Fear"] = false,
 	["Block_Silence"] = true,
-	["BlockSilence"] = false,
+	["BlockSilence"] = true,
 	["BuffAccuracy"] = 0,
 	["BuffAgility"] = 0,
 	["BuffDefense"] = 0,
@@ -34,10 +34,10 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["CauseParalysis"] = false,
 	["CausePoison"] = false,
 	["CauseSilence"] = false,
-	["CauseSleep"] = true,
+	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 250,
+	["COM2ACT"] = 150,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -51,12 +51,12 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "It won't get any colder than this!",
+	["Description"] = "Shake it, baby!",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
 	["EffectScript"] = "",
-	["Element"] = "Frost",
+	["Element"] = "Earth",
 	["EqAziella"] = false,
 	["EqBrendor"] = false,
 	["EqDernor"] = false,
@@ -100,11 +100,11 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["GainSkill0"] = 0,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
-	["GainSkill1"] = 0,
-	["GainSkill1All"] = false,
+	["GainSkill1"] = 95,
+	["GainSkill1All"] = true,
 	["GainSkill1Chars"] = "",
-	["GainSkill2"] = 200,
-	["GainSkill2All"] = true,
+	["GainSkill2"] = 0,
+	["GainSkill2All"] = false,
 	["GainSkill2Chars"] = "",
 	["GainSkill3"] = 0,
 	["GainSkill3All"] = false,
@@ -121,17 +121,17 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Zero Kelvin",
+	["Name"] = "Quake",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
-	["SpellAniScript"] = "",
+	["SpellAniScript"] = "Flame",
 	["Stance"] = "CAST",
 	["Target"] = "AF",
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_ERIC_ZEROKELVIN
+return ret_ABL_HERO_IRRAVONIA_QUAKE
 
 
 end

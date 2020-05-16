@@ -86,7 +86,7 @@ MapMeta = {
 						#endpure
 						switch type(a)
 							case "nil" "boolean" "number"
-								parm = parm .. a
+								parm = parm .. tostring(a)
 							case "string"
 								parm = parm .. '"'..a..'"'
 							default

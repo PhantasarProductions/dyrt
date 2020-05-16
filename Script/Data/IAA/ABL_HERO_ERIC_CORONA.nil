@@ -4,11 +4,11 @@
 do
 
 
-table ret_ABL_HERO_ERIC_ZEROKELVIN
-ret_ABL_HERO_ERIC_ZEROKELVIN={
+table ret_ABL_HERO_ERIC_CORONA
+ret_ABL_HERO_ERIC_CORONA={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 125,
-	["Attack"] = 300,
+	["Attack"] = 310,
 	["AttackAlt"] = "",
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
@@ -34,7 +34,7 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["CauseParalysis"] = false,
 	["CausePoison"] = false,
 	["CauseSilence"] = false,
-	["CauseSleep"] = true,
+	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
 	["COM2ACT"] = 250,
@@ -51,12 +51,12 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "It won't get any colder than this!",
+	["Description"] = "The sun's atmosphere should really bring some heath upon the enemy, doncha think?",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
 	["EffectScript"] = "",
-	["Element"] = "Frost",
+	["Element"] = "Flame",
 	["EqAziella"] = false,
 	["EqBrendor"] = false,
 	["EqDernor"] = false,
@@ -100,10 +100,10 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["GainSkill0"] = 0,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
-	["GainSkill1"] = 0,
-	["GainSkill1All"] = false,
+	["GainSkill1"] = 200,
+	["GainSkill1All"] = true,
 	["GainSkill1Chars"] = "",
-	["GainSkill2"] = 200,
+	["GainSkill2"] = 0,
 	["GainSkill2All"] = true,
 	["GainSkill2Chars"] = "",
 	["GainSkill3"] = 0,
@@ -121,7 +121,7 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Zero Kelvin",
+	["Name"] = "Corona",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
@@ -131,7 +131,7 @@ ret_ABL_HERO_ERIC_ZEROKELVIN={
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_ERIC_ZEROKELVIN
+return ret_ABL_HERO_ERIC_CORONA
 
 
 end

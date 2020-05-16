@@ -194,7 +194,7 @@ class Foe extends Fighter
 		if Combat_Start.FoeIDDQD
 			myFoe.Char.Points("HP").Minimum = myFoe.Char.Points("HP").Maximum
 		end
-		myFoe.AI_Data = NIL.Use(sprintf("Script/Use/Specific/CombatModules/AI/%s.nil",myFoe.AI_Module))
+		myFoe.AI_Data = NIL.Use(sprintf("Script/Use/Specific/CombatModules/AI/%s",myFoe.AI_Module))
 		if num<24
 			myFoe.SpotX = ActPos.Spot[myFoe.Tag].x
 			myFoe.SpotY = ActPos.Spot[myFoe.Tag].y

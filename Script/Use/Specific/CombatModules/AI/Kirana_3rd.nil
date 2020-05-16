@@ -1,0 +1,85 @@
+module Kirana_AI3
+
+	var Default
+	int Beurt = 1
+	readonly int modulo
+	
+	void CONSTRUCTOR()
+		self.modulo = 24 / __skill
+		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+	end
+	
+	get var FoeR
+		int i = 0
+		return var()
+			i++
+			if i>3
+				return nil
+			elseif i>1 
+				return i+1
+			else 
+				return i
+			end
+		end
+	end
+	
+	get var eachheroes
+		int i=0
+		return var()
+			i++
+			if i>4
+				return nil
+			else
+				return Fighter.ByTag[RPG.Party[i]]
+			end
+		end
+	end
+	
+	void AltMove(foe,string abl)
+		table nact
+		if abl=="SOUL"
+			nact.ActTag = "ABL_FOE_DEMONSOULBREAKER"
+			foe.NextActSpeed = 200
+		else
+			nact.ActTag = "ZZZ_KIRANA"..abl
+			foe.NextActSpeed = 9876
+		end
+		nact.ExeTag = foe.Tag
+		nact.Targets = {}
+		for check in self.eachheroes
+			if check.Char.Points("HP").Have>0
+				nact.Targets[#nact.Targets+1]=check
+			end
+		end
+		foe.NextAct = new Actions(nact)
+		foe.GaugePosition = 10001
+	end
+	
+	void Decide(foe)
+		bool death
+		bool damaged
+		for i in self.FoeR
+			var f
+			var HP
+			f = Fighter.ByTag["FOE_"..i]
+			HP = f.Char.Points("HP")
+			death   = death   or HP.Have==0
+			damaged = damaged or HP.Have<HP.Maximum
+		end
+		if death
+			MapText("AI_KIRANA_FURY")
+			self.AltMove(foe,"ALLDEATH")
+			return
+		end
+		if damaged
+			self.AltMove(foe,"ALLHEAL")
+			return
+		end
+		self.Beurt++
+		if self.Beurt % self.modulo == 0
+			self.AltMove(foe,"SOUL")
+			return
+		end
+		self.Default.Decide(foe)
+	end
+end

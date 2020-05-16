@@ -39,11 +39,17 @@ table trueinstant
 void InstantNothing(f,act)
 end
 
+bool InstantDone = false
+
 quickmeta group Instant
 
 	index
+		if key=="Done"
+			return InstantDone
+		end
 		if (not key) or key==""
 			CSayF("No instant for key '%s'!",tostring(key))
+			InstantDone=false
 			return InstantNothing
 		end
 		if type(key)!="string"
@@ -52,6 +58,7 @@ quickmeta group Instant
 		CSayF("Invoking instant '%s'",key)
 		key = key:upper()
 		trueinstant[key] = trueinstant[key] or NIL.Use("Script/Use/Specific/CombatModules/Instant/"..key)
+		InstantDone = true
 		return trueinstant[key]
 	end
 	

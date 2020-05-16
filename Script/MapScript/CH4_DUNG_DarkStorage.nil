@@ -41,6 +41,10 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 
+#macro OnyxBlock gv.Bool.DarkStorage_OnyxBlock
+#macro OnyxKilled gv.Bool.DarkStorage_OnyxKilled
+#macro SoulOrbsSeen gv.Bool.DarkStorage_Soul_Orbs_Seen
+
 bool gj_checked
 
 group MScript
@@ -87,6 +91,110 @@ group MScript
 		Map.GoToLayer("#001","Start")
 	end
 	
+	void ALTPREV()
+		if OnyxBlock
+			Map.StopWalking()
+			Map.WalkTo("Start")
+			MapText("NOTBACK_"..(Map.Leader:upper()))
+		else
+			Map.GoToLayer('#002','Einde')
+		end
+	end
+	
+	void BLOCKONYX(bool v)
+		OnyxBlock = v
+		CSayF("Onyx block: %s",tostring(v))
+	end
+	
+	void ONYXSTART()
+		if OnyxKilled 
+			return
+		end
+		MapScript.SASKIA("Onyx")
+	end
+	
+	void ONYX()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+		StartCombat.Arena = "DS_Main"
+		StartCombat.Foe[1] = "Boss/Aldarus3"
+		StartCombat.Foe[2] = "Boss/Kirana3"
+		StartCombat.Foe[3] = "Boss/Rondomo3"
+		StartCombat.Foe[4] = "Boss/Jeracko3"
+		
+		StartCombat.RX[1] = 25
+		StartCombat.RY[1] = 60
+		
+		StartCombat.RX[2] = 25
+		StartCombat.RY[2] = 75
+		
+		StartCombat.RX[3] = 40
+		StartCombat.RY[3] = 60
+		
+		StartCombat.RX[4] = 40
+		StartCombat.RY[4] = 75
+		
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void ONYXISKILLED()
+		OnyxKilled = true
+		CSay("Onyx is killed")
+	end
+	
+	void NPC_KIRANA()
+		if not SoulOrbsSeen
+			return
+		end
+		MapScript.SASKIA("Kirana")
+	end
+	
+	void REMOVEERIC()
+		if Done.DarkStorate_RemoveEric
+			// Technically this should be unneeded, as Eric will come 
+			// back as "Yasathar", but to be sure no bugs can happen
+			return
+		end
+		bool Eric = false
+		for i=1,7
+			Eric = Eric or RPG.Party[i]=="Eric"
+			if Eric
+				RPG.Party[i] = RPG.Party[i+1]
+			end
+		end
+		RPG.Party[8]=""
+	end
+	
+	void NPC_SOUL()
+		if Done.DarkStorage_Soul_Orbs_Seen
+			MapText("SIGN")
+			return
+		end
+		MapScript.SASKIA("Souls")
+	end
+	
+	void ADDKIRANA()
+		var Kirana
+		Party.NewCharacter("Kirana",300/__skill)
+		Kirana = RPG.GetChar("Kirana")
+		for i=8,2,-1
+			RPG.Party[i] = RPG.Party[i-1]
+		end
+		RPG.Party[1] = "Kirana"
+		for i=0,4
+			Kirana.Points("SKILLLVL"..i).Have = Kirana.Points("SKILLLVL"..i).Maximum
+		end
+		for _,e in ipairs { "Flame","Wind","Water","Earth","Frost","Thunder" }
+			Kirana.Stat("BASE__RESIST_Elem_"..e).Value=math.random(60/__skill,90/__skill)
+		end
+		Kirana.Stat("BASE__RESIST_Elem_Darkness").Value=math.random(90/__skill,96/__skill)
+		Kirana.Stat("BASE__RESIST_Elem_Light").Value=-math.random(10*__skill,30*__skill)
+		OnyxBlock=false	
+	end
+
+	
 	void CONSTRUCTOR()
 		for i,onyx in pairs { "Aldarus", "Jeracko", "Kirana", "Rondomo" } 
 			Map.ZA_Enter("Go"..onyx,"GoSub",i,onyx)
@@ -95,6 +203,9 @@ group MScript
 		Map.ZA_Enter("CheckGJ","GJ_Open")
 		Map.ZA_Enter("FromGJ","FROMGJ")
 		Map.ZA_Enter("ToMorker","EnterMorker")
+		Map.ZA_Enter("AltPrev","AltPrev")
+		Map.ZA_Enter("Onyx","OnyxStart")
+		Map.ZA_Enter("RemoveEric","RemoveEric")
 	end
 	
 	void Draw()

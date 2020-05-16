@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Kirana_1st.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/DS_Aldarus.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,50 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.05.02
 // End License Information
-#use "libs/tables"
 
-module Kirana_AI1
-	
-	var Default
-	int beurt = 0
-	
-	void CONSTRUCTOR()
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-	end
+#use "Script/Use/Specific/CombatModules/Arena/Templates/DarkStorage"
 
-	void Decide(foe)
-		self.beurt++
-		table heroes
-		for tag,hero in pairs(Fighter.Team.Hero)
-			heroes[#heroes+1]=hero
-		end
-		bool AnyOneFull()
-			bool ret = false
-			for i,h in ipairs(heroes)
-				ret = ret or h.Char.Points("HP").Have==h.Char.Points("HP").Maximum
-			end
-			return ret
-		end
-		if (self.beurt % 3 == 0) or AnyOneFull()
-			table nact
-			nact.ActTag = "ABL_FOE_DEMONSOULBREAKER"
-			nact.ExeTag = foe.Tag
-			nact.Targets = {}
-			for check in each(heroes)
-				if check.Char.Points("HP").Have>0
-					nact.Targets[#nact.Targets+1]=check
-				end
-			end
-			foe.NextAct = new Actions(nact)
-			foe.NextActSpeed = 200
-			foe.GaugePosition = 10001
-		else
-			self.Default.Decide(foe)
-			return
-		end
-	end
-	
-	
-end
+return DarkStorage_Arena.Init("Main")

@@ -67,6 +67,7 @@ class Actions
 	bool AllowLearning
 	string LearnTag
 	bool Learned
+	bool Countered = false
 	
 	// Targets
 	table TargetTags

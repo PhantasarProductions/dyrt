@@ -538,6 +538,10 @@ group Flow_FieldMenu
 		if $SwitchHover==""
 			return
 		end
+		if $CharTag=="Kirana"
+			Annoy("Since Kirana has been forced up front by Scyndi and Irravonia, you cannot switch her!")
+			return
+		end
 		string swp
 		swp = $CharTag
 		int i1

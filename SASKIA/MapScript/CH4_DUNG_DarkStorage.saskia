@@ -1,6 +1,6 @@
 ; License Information:
 ; src/Tricky Script/SASKIA/MapScript/CH4_DUNG_DarkStorage.saskia
-; Version: 20.05.11
+; Version: 20.05.17
 ; Copyright (C) 2020 Jeroen Petrus Broks
 ; 
 ; ===========================
@@ -48,4 +48,42 @@
 	call Map.Kill,"Deur",true
 	mov "Merya",Map.Leader
 	call MapText,"OPEN"
+	end
+	
+:Onyx
+	call MapText,"ONYX"
+	call MapScript.Onyx
+	call MapScript.OnyxIsKilled
+	call Map.Kill,"Aldarus",true
+	call Map.Kill,"Jeracko",true
+	call Map.Kill,"Rondomo",true
+	call Map.HideObj,"NPC_Kirana"
+	call MapScript.BlockOnyx,true
+	call Achievements.Award,"BOSS_ONYX"
+	call MapText,"AFTER"
+	end
+
+:Souls
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"H"
+	call MapText,"Empty"
+	call Party.LvUp
+	call Map.HideByLabel,"H"
+	call Map.ShowObj,"Player"
+	mov "#003",Map.Layer
+	call Map.ShowObj,"NPC_Kirana"
+	mov "#004",Map.Layer
+	end
+
+:Kirana
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"H"
+	call MapText,"KIRANA"
+	call Map.ShowObj,"Player"
+	call Map.HideByLabel,"H"
+	call Map.Kill,"NPC_Kirana",true
+	call Achievements.Award,"SCEN_KIRANAPARTY"
+	call MapText,"TUTKIRANA"
+	call MapScript.AddKirana
+	mov true,WM_Unlocked.D_FRENDORBUSHSOUTH
 	end

@@ -63,6 +63,12 @@ void EnemyDeathFade(f)
 	SetScale(dF.X,dF.Y)
 	f.Image.XDraw(f.X,f.Y)
 	SetScale(1000,1000)
+	if (f.FromFile=="BOSS/KIRANA3" or f.FromFile=="BOSS/JERACKO3" or f.FromFile=="BOSS/ALDARUS3" or f.FromFile=="BOSS/RONDOMO3") and (not Done["Onyx_Death_Cry_"..f.FromFile])
+		string ft
+		ft = replace(f.FromFile,"BOSS/","")
+		ft = replace(ft,"3","")
+		MapText("DIE_"..ft)
+	end
 	if dF.X==0
 	
 		// Kills
