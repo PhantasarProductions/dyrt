@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/DS_Aldarus.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/DS_Main.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.02
+// version: 20.05.17
 // End License Information
 
 #use "Script/Use/Specific/CombatModules/Arena/Templates/DarkStorage"
