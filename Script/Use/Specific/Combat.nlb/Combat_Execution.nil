@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.05.17
+// Version: 20.05.18
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -254,9 +254,9 @@ group Execution
 			switch Alt
 				case "None"
 					$Attack(Executor,Target,Action)
-				case "PercentOppMaxAP"
+				case "PercentOppMaxHP"
 					int atk
-					atk = math.min(1,math.floor(Target.Char.Points("HP").Maximum * (Action.Act.Attack/100)))
+					atk = math.max(1,math.floor(Target.Char.Points("HP").Maximum * (Action.Act.Attack/100)))
 					$AltAttack(Target,atk,Action.Act.Element)
 				default
 					error("Unknown AttackAlt: "..Alt)

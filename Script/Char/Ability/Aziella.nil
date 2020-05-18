@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.03
+// version: 20.05.18
 // End License Information
 
 do
@@ -45,6 +45,7 @@ local
 a = {
 	-- Crossbow
 	BlessedArrow   = { Skill_Crossbow = s * 2, ["Skill_Befindo enchants"] = s + 1 },
+	PoisonArrow    = { Skill_Crossbow = (s * 2) + 15 },
 	
 	-- Befindo Enchanments
 	MysticCare     = { Start = true },

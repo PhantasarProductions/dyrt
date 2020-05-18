@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.13
+// version: 20.05.18
 // End License Information
 
 do
@@ -63,7 +63,8 @@ do
 		LethalPollen    = { Charm = { "TrueDeathCap" }, Skill_Nature = 6*s },
 		AttackInDamnnation
 		                = { Charm = { "UndeadHound" }, Skill_Bat = s*5, Skill_Nature = s * 8 },
-		Inferno         = { Charm = { "HellHound"}, Skill_Nature = (s+s) * s } 
+		Inferno         = { Charm = { "HellHound"}, Skill_Nature = (s+s) * s } ,
+		Dive            = { Charm = { "Eagle" }, Skill_Bat = 20 }
 	
 		-- Scharum
 	
