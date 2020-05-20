@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.18
+// version: 20.05.21
 // End License Information
 
 
@@ -67,9 +67,16 @@ group MScript
 		StartCombat.Ready()	
 	end
 	
+	void FINISH()
+		Achievements.Award("SCEN_FRENDORBUSHES")
+		WM_Unlocked.D_BLACKPRISON = true
+		WorldMap.Delisto()
+	end
+	
 	void CONSTRUCTOR()
 		Map.RENC_Inf = true
 		Map.ZA_Enter("ForceSheckLock","ForceSheckLock")
+		Map.ZA_Enter("Eindpunt","Finish")
 	end
 	
 	void Draw()
