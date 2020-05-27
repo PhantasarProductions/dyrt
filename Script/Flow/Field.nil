@@ -405,8 +405,10 @@ group FlowField
 	var SFont
 	var BigNumbers
 	
+	bool AutoPlayerUpdate = true
+	
 	void UpdatePlayerTex()
-		if self.Map.Kthura.Actor.Player.Exists
+		if self.Map.Kthura.Actor.Player.Exists and self.AutoPlayerUpdate
 			self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
 		end
 	end

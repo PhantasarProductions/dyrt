@@ -1,0 +1,17 @@
+
+module AI_Mort
+
+	var Default
+	int beurt = 0
+	
+	void CONSTRUCTOR()
+		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
+			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Merya").Stat("END_"..st).Value
+			CSayF("%10s = %3d",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value)
+		end
+	end
+	
+	link Decide = self.Default.Decide
+
+end

@@ -56,3 +56,4 @@
 	call MapText,"SHECKSTONE"
 	call StoneMaster,"SHECKLOCK"
 	end
+	
