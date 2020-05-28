@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.05.18
+; version: 20.05.28
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -56,4 +56,3 @@
 	call MapText,"SHECKSTONE"
 	call StoneMaster,"SHECKLOCK"
 	end
-	
