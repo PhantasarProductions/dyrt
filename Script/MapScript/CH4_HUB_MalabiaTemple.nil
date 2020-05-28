@@ -67,6 +67,41 @@ group MScript
 		MapText("MALABIA_NOTHING")
 	end
 	
+	void CREATEYASATHAR()
+		var Eric
+		var	Yasathar
+		Eric = RPG.GetChar("Eric")
+		Party.NewCharacter("Yasathar",RPG.GetChar("Eric").Stat("Level").Value + (3 - __skill))
+		Yasathar = RPG.GetChar("Yasathar")
+		for i=0,4
+			Yasathar.Points("SKILLLVL"..i).Have = Eric.Points("SKILLLVL"..i).Have
+			Yasathar.Points("SKILLEXP"..i).Have = Eric.Points("SKILLEXP"..i).Have
+		end
+		Yasathar.LinkStat("Level","Eric")
+		Eric.LinkStat("Level","Yasathar")
+		for _,st in ipairs { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
+			CSay("Linking Stat: "..st)
+			Eric.LinkStat("PERMPOWERUP_"..st,"Yasathar")
+		end
+		for _,st in pairs { "Poison",	"Disease",	"Silence",	"Paralysis",	"Sleep",	"Exhaustion",	"Confusion",	"Fear",	"Death",	"Destruction",	"Zombie" }
+			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
+				CSayF("Linking Status Resitance %s.%s",st,sub)
+				Eric.LinkStat(sprintf("%s__RESIST_Stat_%s",sub,st)
+			end
+		for _,st in pairs { "Poison",	"Disease",	"Silence",	"Paralysis",	"Sleep",	"Exhaustion",	"Confusion",	"Fear",	"Death",	"Destruction",	"Zombie" }
+			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
+				CSayF("Linking Status Resitance %s.%s",st,sub)
+				Eric.LinkStat(sprintf("%s__RESIST_Stat_%s",sub,st)
+			end
+		for _,st in pairs {"None", 	"Flame",	"Wind",	"Water",	"Earth",	"Frost",	"Thunder",	"Light",	"Darkness" }
+			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
+				CSayF("Linking Elemental Resitance %s.%s",st,sub)
+				Eric.LinkStat(sprintf("%s__RESIST_Elem_%s",sub,st)
+			end
+		end
+		
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("TheGordo","SASKIA:TheGordo")
 	end

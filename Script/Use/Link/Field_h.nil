@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.05.28
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -275,6 +275,22 @@ group Map
 	
 	get int ScrollY
 		return LuaGetInt('FLOW_FIELD','FlowField.Map.ScrollY')
+	end
+	
+	set int CamX
+		FLD_Exe(sprintf("FlowField.Map.ScrollX = %d",value))
+	end
+	
+	set int CamY
+		FLD_Exe(sprintf("FlowField.Map.ScrollY = %d",value))
+	end
+	
+	get int CamX
+		return self.ScrollX
+	end
+	
+	get int CamY
+		return self.ScrollY
 	end
 		
 	

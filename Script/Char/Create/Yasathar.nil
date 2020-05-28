@@ -1,8 +1,8 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/BlackPrison.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Tricky Script/Script/Char/Create/Yasathar.nil
+// (c) Jeroen Broks, 2019, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,24 +32,33 @@
 // 
 // **********************************************
 // 
-// version: 20.05.28
+// version: 20.04.28
 // End License Information
+#use "Script/Use/AnyWay"
+var Yasathar
+var Eric
+Eric = RPG.GetChar("Eric")
 
-module BlackPrison_Arena
+Yasathar = RPG.GetChar("Yasathar")
+Yasathar.Name = Names.Yasathar
 
-	var Dung
-	
-	void CONSTRUCTOR()
-		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Prison")
-		self.Dung.Floor = "GFX/Textures/Black Prison/Floor.png"
-		self.Dung.Wall  = "GFX/Textures/Black Prison/WR_N.png"
-		self.Dung.TorchOff = true
-		self.Dung.Skeleton = true
-		self.Dung.Init()
-	end
-	
-	void Draw() 
-		self.Dung.Draw()
-	end
+Yasathar.Data["SKILL0"] = "Sword Skills"
+Yasathar.Data["SKILL1"] = "Red Dragon Power"
+Yasathar.Data["SKILL2"] = "White Dragon Power"
+Yasathar.Data["SKILL3"] = "Green Dragon Power"
+Yasathar.Data["SKILL4"] = "Black Dragon Power"
 
-end
+
+// The dragon skills will be put in once Yasathar actually obtains them!
+
+//if __newgameplus
+//	for i=0,4
+//		Yasathar.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
+//		Yasathar.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
+//	end
+//end
+
+
+Yasathar.Data.Weapon = "EQW_YASATHAR_BLUEMOON"
+Yasathar.Data.Armor  = Eric.Data.Armor
+Yasathar.Data.Jewel  = Eric.Data.Jewel

@@ -65,17 +65,20 @@
 	
 :Dzgjymza
 	call Map.StopWalking
-	call Map.StopMoving
+	;call Map.StopMoving
 	call Map.MoveTo,"GaWeg"
+	mov false,FlowField.AutoScroll
 	mov 0,Map.CamX
 	mov 0,Map.CamY
 	call Map.ShowObj,"Dzgjymza"
 	call MapText,"DZGJYMZA"
+	mov true,FlowField.AutoScroll
 	call Map.GoToLayer,"#000","Voltooid"
-	mov "Merya",Map.leader
+	call Map.ShowObj,"Eric"
+	mov "Merya",Map.Leader
 	call MapText,"ERIC_B"
 	call OnyxBang.Start
-	call Map.Kill,"NPC_Kirana",true
+	call Map.Kill,"NPC_MT_Kirana",true
 :OnyxBang
 	;This should cause a loop until the Bang is over... Hopefully!
 	chk OnyxBang.Going,OnyxBang
@@ -85,9 +88,8 @@
 	call Map.Kill,"NPC_MT_Brendor",true
 	call Map.Kill,"NPC_MT_Scyndi",true
 	call Map.Kill,"NPC_MT_Rebecca",true
-	call Map.Kill,"NPC_Dernor"
+	call Map.Kill,"NPC_Dernor",true
 	call Map.Kill,"NPC_MT_Aziella",true
-	;This achievement should be awared from the moment Eric assumes his "Yasathar" form
-	;call Achievements.Award,"CHAPTER3"
-	call error,"This part has not yet been scripted!"
+	call Field.ChainMap,"CH4_HUB_MalabiaTemple","Yasathar"
+	;call error,"This part has not yet been scripted!"
 	end

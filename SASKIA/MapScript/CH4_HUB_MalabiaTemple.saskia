@@ -56,5 +56,24 @@
 	call MapScript.EndSplit,"Eric"
 	end
 	
+:Yasathar
+	group 3
+	call CSay,"Yasathar script started!"
+	call Map.GoToLayer,"#002","Start"
+	call BoxText.Load,"Maps/CH4_DUNG_BlackPrison","YASATHAR"
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"H2"
+	call BoxText,"YASATHAR","MALABIA"
+	;This achievement should be awared from the moment Eric assumes his "Yasathar" form
+	call Achievements.Award,"CHAPTER3"
+	call Map.HideObj,"Eric"
+	call Map.ShowObj,"Yasathar"
+	call MapScript.CreateYasathar
+	call BoxText,"YASATHAR","MALABIA_A"
+	call ChainMap,"CH4_HUB_RAYALPALACE","StartChapter5"
+	end
+	
+
+	
 :Nothing
 	end
