@@ -225,6 +225,26 @@ group MScript
 			Party.LvUp("Merya")
 			MapText("MORTWELCOME")
 		end
+		if Voltooid
+			MapScript.SASKIA("Dzgjymza")
+		end
+	end
+	
+	void FIGHTMORT()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Special.wav"
+		StartCombat.Arena = "BlackPrison"
+		StartCombat.Foe[1] = "Boss/Mort"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void NPC_ERIC()
+		Voltooid = true
+		Achievements.Award("SCEN_BLACKPRISON")
+		RPG.Party[2] = "Eric"
+		MapScript.SASKIA("Eric")
 	end
 	
 	void CONSTRUCTOR()

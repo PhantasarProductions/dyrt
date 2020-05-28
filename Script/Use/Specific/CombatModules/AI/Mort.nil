@@ -12,6 +12,8 @@ module AI_Mort
 		end
 	end
 	
-	link Decide = self.Default.Decide
+	get var Decide
+		return self.Default.Decide
+	end
 
 end

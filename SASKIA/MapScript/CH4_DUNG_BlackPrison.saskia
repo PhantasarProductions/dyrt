@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.05.22
+; version: 20.05.28
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -56,4 +56,38 @@
 	call MapText,"MORT"
 	call MapScript.FightMort
 	call Map.Kill,"NPC_SASKIA_Mort",true
+	end
+	
+:Eric
+	call MapText,"ERIC_A"
+	call Map.Kill,"NPC_Eric",true
+	end
+	
+:Dzgjymza
+	call Map.StopWalking
+	call Map.StopMoving
+	call Map.MoveTo,"GaWeg"
+	mov 0,Map.CamX
+	mov 0,Map.CamY
+	call Map.ShowObj,"Dzgjymza"
+	call MapText,"DZGJYMZA"
+	call Map.GoToLayer,"#000","Voltooid"
+	mov "Merya",Map.leader
+	call MapText,"ERIC_B"
+	call OnyxBang.Start
+	call Map.Kill,"NPC_Kirana",true
+:OnyxBang
+	;This should cause a loop until the Bang is over... Hopefully!
+	chk OnyxBang.Going,OnyxBang
+	call MapText,"ERIC_C"
+	call Map.Kill,"Eric",true
+	call Map.Kill,"NPC_MT_Irravonia",true
+	call Map.Kill,"NPC_MT_Brendor",true
+	call Map.Kill,"NPC_MT_Scyndi",true
+	call Map.Kill,"NPC_MT_Rebecca",true
+	call Map.Kill,"NPC_Dernor"
+	call Map.Kill,"NPC_MT_Aziella",true
+	;This achievement should be awared from the moment Eric assumes his "Yasathar" form
+	;call Achievements.Award,"CHAPTER3"
+	call error,"This part has not yet been scripted!"
 	end
