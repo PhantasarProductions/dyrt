@@ -71,7 +71,7 @@
 	call MapScript.CreateYasathar
 	call BoxText,"YASATHAR","MALABIA_B"
 	call RPG.KillChar,"Kirana"
-	call Field.ChainMap,"CH4_HUB_RAYALPALACE","StartChapter5"
+	call Field.ChainMap,"CH4_HUB_RAYAL_PALACE","StartChapter5"
 	end
 	
 

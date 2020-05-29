@@ -81,6 +81,7 @@ group F_WorldMap
 		self.filtered = {}
 		int x = 5
 		int y = WM_STARTY
+		WM_Unlocked.D_ZONDRA = WM_Unlocked.D_ZONDRA or gv.Bool.BoysOnly 
 		for k,v in spairs(self.whole)
 			CSayF("WMFilter: Handing record: %s",k)
 			bool show
@@ -88,7 +89,7 @@ group F_WorldMap
 			show = show or self.Unlocked[k]
 			// This one below MUST be and, as it MUST override all
 			// earlier settings when the continent is wrong!
-			show = show and v.World==continent
+			show = show and v.World==continent and (v.AvailableDuringBoysOnly or (not gv.Bool.BoysOnly))
 			if show
 				v.ID = k
 				v.X = x

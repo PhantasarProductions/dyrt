@@ -76,3 +76,12 @@
 	mov true,gv.Bool.SplitPartyDone
 	mov false,Respawn.Initiated
 	end
+	
+:StartChapter5
+	call MapScript.Yasathar_Dress
+	call MapText,"START_CHAPTER_FIVE"
+	call Fader,LoadImage("GFX/Chapter/5.png")
+	call Map.HideByLabel,"H"
+	call Map.ShowObj,"Player"
+	mov true,gv.Bool.BoysOnly
+	end

@@ -165,6 +165,15 @@ group MScript
 		end
 	end
 	
+	void YASATHAR_DRESS()
+		Map.SpawnPlayer("Split_Start")
+		Map.Obj="Eric"
+		Map.ObjString.Texture="GFX/actors/heroes/Yasathar.North.jpbf/00000000.png"
+		Map.HideObj("Player")
+		Map.ShowByLabel("H")
+		self.SHOWPART("Kings_Room")
+	end
+	
 	void CONSTRUCTOR()
 		self.HideZones = { "Scharum", "Kings_Room","Garden", "SecretPassage" }
 		self.HideSubs()

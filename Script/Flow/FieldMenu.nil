@@ -390,7 +390,11 @@ group Flow_FieldMenu
 			int ind = 0
 			string stag
 			bool hovering
-			stag = "ABL_HERO_"..self.CharTag.."_"..tag
+			if self.CharTag=="Yasathar"
+				stag = "ABL_HERO_Eric_"..tag
+			else
+				stag = "ABL_HERO_"..self.CharTag.."_"..tag
+			end
 			hovering = Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+19+ubox.y
 			if AbilitiesMastered[self.CharTag][tag]
 				if hovering
