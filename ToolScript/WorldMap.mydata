@@ -395,8 +395,8 @@ Rec: D_YASATHAR
 Rec: D_ZONDRA
 	AvailableDuringBoysOnly = TRUE
 	AvailableOnStart = FALSE
-	Kthura = 
-	Layer = #001
+	Kthura = CH5_HUB_Zondra
+	Layer = ZONDRA
 	MarkAsNew = TRUE
 	Name = Zondra's Grave
 	Start = Start
