@@ -69,8 +69,9 @@
 	call Map.HideObj,"Eric"
 	call Map.ShowObj,"Yasathar"
 	call MapScript.CreateYasathar
-	call BoxText,"YASATHAR","MALABIA_A"
-	call ChainMap,"CH4_HUB_RAYALPALACE","StartChapter5"
+	call BoxText,"YASATHAR","MALABIA_B"
+	call RPG.KillChar,"Kirana"
+	call Field.ChainMap,"CH4_HUB_RAYALPALACE","StartChapter5"
 	end
 	
 

@@ -88,7 +88,7 @@
 	call Map.Kill,"NPC_MT_Brendor",true
 	call Map.Kill,"NPC_MT_Scyndi",true
 	call Map.Kill,"NPC_MT_Rebecca",true
-	call Map.Kill,"NPC_Dernor",true
+	call Map.Kill,"NPC_SASKIA_Dernor",true
 	call Map.Kill,"NPC_MT_Aziella",true
 	call Field.ChainMap,"CH4_HUB_MalabiaTemple","Yasathar"
 	;call error,"This part has not yet been scripted!"

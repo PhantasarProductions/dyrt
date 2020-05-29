@@ -77,29 +77,34 @@ group MScript
 			Yasathar.Points("SKILLLVL"..i).Have = Eric.Points("SKILLLVL"..i).Have
 			Yasathar.Points("SKILLEXP"..i).Have = Eric.Points("SKILLEXP"..i).Have
 		end
-		Yasathar.LinkStat("Level","Eric")
-		Eric.LinkStat("Level","Yasathar")
+		Yasathar.Stat("Level").Link("Eric")
+		Eric.Stat("Level").Link("Yasathar")
 		for _,st in ipairs { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
 			CSay("Linking Stat: "..st)
-			Eric.LinkStat("PERMPOWERUP_"..st,"Yasathar")
+			Eric.Stat("PERMPOWERUP_"..st).Link("Yasathar")
 		end
 		for _,st in pairs { "Poison",	"Disease",	"Silence",	"Paralysis",	"Sleep",	"Exhaustion",	"Confusion",	"Fear",	"Death",	"Destruction",	"Zombie" }
 			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
 				CSayF("Linking Status Resitance %s.%s",st,sub)
-				Eric.LinkStat(sprintf("%s__RESIST_Stat_%s",sub,st)
+				Eric.Stat(sprintf("%s__RESIST_Stat_%s",sub,st)).Link("Yasathar")
 			end
+		end
 		for _,st in pairs { "Poison",	"Disease",	"Silence",	"Paralysis",	"Sleep",	"Exhaustion",	"Confusion",	"Fear",	"Death",	"Destruction",	"Zombie" }
 			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
 				CSayF("Linking Status Resitance %s.%s",st,sub)
-				Eric.LinkStat(sprintf("%s__RESIST_Stat_%s",sub,st)
+				Eric.Stat(sprintf("%s__RESIST_Stat_%s",sub,st)).Link("Yasathar")
 			end
+		end
 		for _,st in pairs {"None", 	"Flame",	"Wind",	"Water",	"Earth",	"Frost",	"Thunder",	"Light",	"Darkness" }
 			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
 				CSayF("Linking Elemental Resitance %s.%s",st,sub)
-				Eric.LinkStat(sprintf("%s__RESIST_Elem_%s",sub,st)
+				Eric.Stat(sprintf("%s__RESIST_Elem_%s",sub,st)).Link("Yasathar")
 			end
 		end
-		
+		RPG.Party[1] = "Yasathar"
+		RPG.Party[2] = "Brendor"
+		RPG.Party[3] = "Dernor"
+		__EricIsYasathar = true
 	end
 	
 	void CONSTRUCTOR()

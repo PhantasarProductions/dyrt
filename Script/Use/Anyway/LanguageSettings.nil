@@ -72,7 +72,11 @@ MetaNames.__index = string(t,k)
 	table chktable
 	string ret
 	chktable = LangToNames[__lang] or EnglishNames
-	ret = chktable[k] 
+	if k=="Yasathar"
+		ret = chktable.Eric
+	else
+		ret = chktable[k] 
+	end
 	assert(ret,sprintf("No name tied for character %s in language %s or the English language table!",k,__lang))
 	return ret
 end
@@ -93,6 +97,8 @@ MetaNames.__call = void(t,lang)
 				gv.String.Scyndi = Names.PreScyndi
 				gv.String.SCYNDI = Names.PreScyndi
 				CSayF("For now Scyndi will be called %s as her new name will be chosen later, after all",gv.String.SCYNDI)
+			case "Yasathar"
+				gv.String.Yasathar = Names.Eric
 			default
 				gv.String[k:upper()] = Names[k]
 				gv.String[k] = Names[k]
