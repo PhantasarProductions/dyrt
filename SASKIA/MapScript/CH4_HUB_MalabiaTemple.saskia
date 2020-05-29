@@ -65,7 +65,7 @@
 	call Map.ShowByLabel,"H2"
 	call BoxText,"YASATHAR","MALABIA"
 	;This achievement should be awared from the moment Eric assumes his "Yasathar" form
-	call Achievements.Award,"CHAPTER3"
+	call Achievements.Award,"CHAPTER4"
 	call Map.HideObj,"Eric"
 	call Map.ShowObj,"Yasathar"
 	call MapScript.CreateYasathar
