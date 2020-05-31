@@ -2,7 +2,7 @@
 ; **********************************************
 ; 
 ; src/Tricky Script/SASKIA/MapScript/CH1_DUNG_XenorBushes.saskia
-; (c) Jeroen Broks, 2019, All Rights Reserved.
+; (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
 ; 
 ; This file contains material that is related
 ; to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.28
+; version: 20.06.01
 ; End License Information
 
 :GetOut
@@ -80,6 +80,34 @@
 	end
 	
 	; Of course, I should've put everything put in above in the NIL script, but what the HECK! :P
+	
+	
+:BoysJoin
+	chk not gv.Bool.SpokenToJackAboutZondra,NOTHING
+	chk Done.SpokenGirlsAboutZondraAndTheTripWithTheMermaids_TheJourneyToDyrtCanBegin,NOTHING
+	call Map.ShowByLabel,"G"
+	call Map.WalkTo,"BoysJoin"
+	:WalkLook
+	chk FlowField.Map.Kthura.Actor.Player.Walking,WalkLook
+	group 2
+		mov "Player",Map.Obj
+		mov false,Map.ObjBool.Visible
+	call Map.ShowByLabel,"B"
+	call MapText,"ZONDRA"
+	mov "GFX/combat/Fighters/Hero/Rebecca.dead.png",MapObjTex.Rebecca
+	Call MapText,"ZONDRAFAINT"
+	mov "Yasathar",RPG.Party[1]
+	mov "Irravonia",RPG.Party[2]
+	mov "Brendor",RPG.Party[3]
+	mov "Scyndi",RPG.Party[4]
+	mov "Rebecca",RPG.Party[5]
+	mov "Dernor",RPG.Party[6]
+	mov "Merya",RPG.Party[7]
+	mov "Aziella",RPG.Party[8]
+	mov false,gv.Bool.BoysOnly
+	mov true,WorldMap_Unlocked.D_MERMAID
+	call WorldMap.Delisto
+	end
 
 :OnLoad
 	end
