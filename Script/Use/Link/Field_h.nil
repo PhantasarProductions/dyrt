@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.05.28
+// Version: 20.06.01
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,20 @@
 // End License Information
 
 #use "libs/strings"
+
+#accept Map
+
+quickmeta group MapObjTex
+	index
+		Map.Obj=key
+		return Map.ObjString.Texture
+	end
+	
+	newindex
+		Map.Obj=key
+		Map.ObjString.Texture = value
+	end
+end
 
 void FieldCheck()
 	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
