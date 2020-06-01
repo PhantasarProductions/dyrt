@@ -1,0 +1,64 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/BlueMoon.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.06.02
+// End License Information
+module SpellAni_BlueMoon
+
+	int x
+	int y
+	int to_y
+	
+	var sword
+	
+	void CONSTRUCTOR()
+		self.sword = LoadIfNew("GFX/Combat/Spellani/Blue Moon.png","SpellAni_BlueMoon")
+	end
+	
+	void Init(act)
+		var tar
+		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
+		tar = act.Targets[1]
+		self.x = math.floor((tar.X + tar.Width/2) - (self.sword.Width/2))
+		self.y = - self.sword.Height
+		self.to_y = (tar.Y + tar.Height) - self.sword.Height
+	end
+	
+	bool Cycle()
+		#+ self.y 2
+		self.sword.Draw(self.x,self.y)
+		return self.y>self.to_y
+	end
+
+end
