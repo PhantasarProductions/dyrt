@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.06.03
 // End License Information
 
 bool beenonbeach
@@ -158,11 +158,28 @@ group MScript
 		end
 	end
 	
+	void MANIPCAT()
+		Map.Kill("ManipCat")
+		if not gv.Bool.VisitedMermaidHarbor
+			Map.Kill("NPC_Cat")
+		end
+	end
+	
+	void NPC_CAT()
+		if Map.Leader=="Scyndi"
+			MapText("CATSCYNDI")
+			WM_Unlocked.D_REDTEMPLE = true
+		else
+			MapText("CAT")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Entree","SASKIA:Entree")
 		Map.ZA_Enter("ToBeach","ToBeach")
 		Map.ZA_Enter("ToCity","ToCity")
 		Map.ZA_Enter("Aziella","Aziella")
+		Map.ZA_Enter("ManipCat","ManipCat")
 	end
 	
 	void Draw()
