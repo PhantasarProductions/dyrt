@@ -32,14 +32,15 @@
 // 
 // **********************************************
 // 
-// version: 20.05.29
+// version: 20.06.02
 // End License Information
 do
 	int s
 	s = __skill
+	var abls
 
 	#pure
-	return {
+	abls = {
 		-- Sword
 		QuickStrike = { Skill_Sword = 5 * s },
 		Power3x     = { Scharum = true },
@@ -76,5 +77,10 @@ do
 		
 	}
 	#endpure
-		
+	if __trueabyss
+		abls.Yasathar = { ['Skill_Red Dragon'] = s * 10, ['Skill_Green Dragon'] = s * 10, ['Skill_White Dragon'] = s * 10, ['Skill_Black Dragon'] = s * 10}
+	else
+		abls.Yasathar = { ['BoolVar'] = "EricIsYasathar" }
+	end
+	return abls
 end
