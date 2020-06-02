@@ -61,6 +61,7 @@
 #macro __travellevel gv.num.TravelLevel
 #macro __victor gv.Bool.Victor
 #macro __newgameplus gv.Bool.NewGamePlus
+#macro __trueabyss gv.Bool.NewGameTrueAbyss
 #macro __magicstones gv.Num.MagicStones
 #macro __bank gv.num.MoneyOnBank
 #macro __orbblack gv.Num.BlackOrb
