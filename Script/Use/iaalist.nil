@@ -125,6 +125,7 @@ itemret[#itemret+1]="JWL_SHANDA_ROYALRING"
 itemret[#itemret+1]="JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 itemret[#itemret+1]="KEY_DARKSTORAGEKEY"
 itemret[#itemret+1]="KEY_KTHURAPENDANT"
+itemret[#itemret+1]="KEY_REDKEY"
 
 
 return itemret
