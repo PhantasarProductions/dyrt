@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.06.03
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -120,6 +120,12 @@ void NewGamePlus()
 	StartNewGame(true)
 end
 
+void StartJukeBox()
+	LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
+	LuaDoString("FLOW_JUKEBOX","GROUP_JukeBox.ReturnFlow='MAINMENU'")
+	GoToFlow("JUKEBOX")
+end
+
 
 
 #say "MainMenu: class MenuItem"
@@ -227,7 +233,7 @@ new MenuItem("New Game+",NewGamePlus,false)
 new MenuItem("New Game: True Abyss",NOTHINGYET,CTA.Unlocked_TrueAbyss)
 new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
 // new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
-new MenuItem("Jukebox",NOTHINGYET,true)
+new MenuItem("Jukebox",StartJukeBox,true)
 new MenuItem("Websites",NOTHINGYET,true)
 new MenuItem("Repository & Bug tracker",URL_GitHub,true)
 new MenuItem("Credits",NOTHINGYET,true)
