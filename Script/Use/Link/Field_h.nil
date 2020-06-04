@@ -149,6 +149,7 @@ group Map
 	void Kill(string objtag, perma)
 		FLD_Exe(sprintf("FieldMap.Kill(trim(\"%s\"),%s)",objtag,tostring(perma==true)))
 	end
+		
 	
 	void VisibleOnlyByZone(string tag,bool inzone)
 		FLD_Exe(sprintf("FieldMap.Kthura.VisibleOnlyByZone(trim(\"%s\"),%s)",tag,tostring(inzone)))
