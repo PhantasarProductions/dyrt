@@ -93,7 +93,14 @@ group MScript
 		if Done.RedStaffTaken
 			return
 		end
-		
+		Achievement.Award("SCEN_REDSTAFF")
+		Inventory.KEY_REDSTAFF++
+		Map.Obj="NPC_REDSTAFF"
+		Map.ObjString.Texture="GFX/Textures/Objects/Chest_Open.png"
+		Map.AddSwap("Map.Layer='#003' ")
+		Map.AddSwap("Map.Obj='NPC_REDSTAFF' ")
+		Map.AddSwap("Map.ObjString.Texture='GFX/Textures/Objects/Chest_Open.png' ")
+		MapText("RED_STAFF")
 	end
 	
 	void CONSTRUCTOR()
