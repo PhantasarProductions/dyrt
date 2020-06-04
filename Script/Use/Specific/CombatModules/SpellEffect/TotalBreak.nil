@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/TotalBreak.nil
-// Version: 20.05.13
+// Version: 20.06.04
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,6 +36,7 @@
 // End License Information
 do
 	bool TotalBreak(Act,Target)
+		CSayF("Total Break on %s",Target.Tag)
 		int rew = 0
 		#+ rew (Target.Char.Points("HP").Have-1)
 		#+ rew  Target.Char.Points("AP").Have
