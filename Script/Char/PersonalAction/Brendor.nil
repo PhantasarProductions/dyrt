@@ -55,7 +55,7 @@ module Brendor_Personal_Action
 	
 	bool Click(int but,int x, int y)
 		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
-			return
+			return false;
 		end
 		for tag in FieldMap.Kthura.EachTag()
 			for i=__player.Y-64,__player.Y
