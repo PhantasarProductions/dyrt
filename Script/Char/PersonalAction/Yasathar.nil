@@ -49,6 +49,9 @@ module Yasathar_Personal_Action
 		self.Img.Draw(self.X,self.Y)
 	end
 	
+	void RedSeal
+	end
+	
 	bool Click(int but,int x, int y)
 		if not self.Unlocked
 			return false
@@ -56,6 +59,9 @@ module Yasathar_Personal_Action
 		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
 			return false;
 		end
+		// Red Seal
+		
+		
 	end
 	
 	void CONSTRUCTOR()
