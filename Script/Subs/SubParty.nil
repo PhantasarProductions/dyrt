@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.06.04
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -375,7 +375,7 @@ group SubParty
 		string CharTag
 		int level
 		CharTag=tag // Laziness in its purest form, but it saves me a lot of bugs....
-		if RPG.Char(CharTag).Stat("Experience").Value<=0
+		if RPG.Char(CharTag).Stat("Experience").Value<=0 and RPG.Char(CharTag).Stat("Level").Value < self.LevelCap
 			// int ondernul
 			// ondernul = RPG.Char(CharTag).Stat("Experience").Value
 			RPG.Char(CharTag).Stat("Level").Value++
