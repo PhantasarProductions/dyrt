@@ -8819,6 +8819,7 @@ Rec: ABL_HERO_IRRAVONIA_FIREBLAST
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -8944,6 +8945,7 @@ Rec: ABL_HERO_IRRAVONIA_HEAL
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = 
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -9069,6 +9071,7 @@ Rec: ABL_HERO_IRRAVONIA_HURRICANE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -9194,6 +9197,7 @@ Rec: ABL_HERO_IRRAVONIA_INFERNO
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -9319,6 +9323,7 @@ Rec: ABL_HERO_IRRAVONIA_QUAKE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
