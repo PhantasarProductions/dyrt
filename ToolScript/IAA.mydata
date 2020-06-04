@@ -3653,6 +3653,7 @@ Rec: ABL_HERO_AZIELLA_BLESSEDARROW
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -3778,6 +3779,7 @@ Rec: ABL_HERO_AZIELLA_CONFUSION
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -3903,6 +3905,7 @@ Rec: ABL_HERO_AZIELLA_MYSTICCARE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4154,6 +4157,7 @@ Rec: ABL_HERO_AZIELLA_SLEEP
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4279,6 +4283,7 @@ Rec: ABL_HERO_BRENDOR_CHARGE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4404,6 +4409,7 @@ Rec: ABL_HERO_BRENDOR_HAMMERSMASH
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4529,6 +4535,7 @@ Rec: ABL_HERO_DERNOR_AAA_CHARM
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4654,6 +4661,7 @@ Rec: ABL_HERO_DERNOR_BLOODSUCKER
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4779,6 +4787,7 @@ Rec: ABL_HERO_DERNOR_BURP
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -4904,6 +4913,7 @@ Rec: ABL_HERO_DERNOR_CLAW
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5029,6 +5039,7 @@ Rec: ABL_HERO_DERNOR_CROC_BITE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5154,6 +5165,7 @@ Rec: ABL_HERO_DERNOR_DIVE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5279,6 +5291,7 @@ Rec: ABL_HERO_DERNOR_GROWL
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5404,6 +5417,7 @@ Rec: ABL_HERO_DERNOR_HOWLING
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5529,6 +5543,7 @@ Rec: ABL_HERO_DERNOR_LETHALPOLLEN
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5654,6 +5669,7 @@ Rec: ABL_HERO_DERNOR_MOO
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = 
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 200
 	GainEXP = 0
@@ -5779,6 +5795,7 @@ Rec: ABL_HERO_DERNOR_PECK
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -5904,6 +5921,7 @@ Rec: ABL_HERO_DERNOR_RAVENPECK
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -6029,6 +6047,7 @@ Rec: ABL_HERO_DERNOR_SICKBITE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -6154,6 +6173,7 @@ Rec: ABL_HERO_DERNOR_SPORES
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -6279,6 +6299,7 @@ Rec: ABL_HERO_DERNOR_SUICIDE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 5
 	GainEXP = 0
@@ -6404,6 +6425,7 @@ Rec: ABL_HERO_ERIC_BIOHAZARD
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
