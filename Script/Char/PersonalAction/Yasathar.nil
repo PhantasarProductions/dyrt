@@ -49,7 +49,10 @@ module Yasathar_Personal_Action
 		self.Img.Draw(self.X,self.Y)
 	end
 	
-	void RedSeal
+	void RedSeal()
+	end
+	
+	void InstantEncounter()
 	end
 	
 	bool Click(int but,int x, int y)
@@ -61,7 +64,8 @@ module Yasathar_Personal_Action
 		end
 		// Red Seal
 		
-		
+		// Instant Encounter
+		self.InstantEncounter() 
 	end
 	
 	void CONSTRUCTOR()
