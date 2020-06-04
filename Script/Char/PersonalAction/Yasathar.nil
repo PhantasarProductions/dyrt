@@ -34,7 +34,7 @@
 // 
 // version: 20.05.29
 // End License Information
-module Eric_Personal_Action
+module Yasathar_Personal_Action
 
 	var Img
 	int X
@@ -59,7 +59,7 @@ module Eric_Personal_Action
 	end
 	
 	void CONSTRUCTOR()
-		self.img = LoadImage("GFX/PersAction/Eric.png")
+		self.Img = LoadImage("GFX/PersAction/Eric.png")
 		self.X = Screen.Width -300
 		self.Y = Screen.Height-400
 	end
