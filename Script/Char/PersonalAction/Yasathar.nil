@@ -37,15 +37,31 @@
 module Eric_Personal_Action
 
 	var Img
+	int X
+	int Y
+	
+	link Unlocked = gv.Bool.RedStaffTaken
 	
 	void Draw()
+		if not self.Unlocked
+			return
+		end
+		self.Img.Draw(self.X,self.Y)
 	end
 	
-	void Click(int but,int x, int y)
+	bool Click(int but,int x, int y)
+		if not self.Unlocked
+			return false
+		end
+		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
+			return false;
+		end
 	end
 	
 	void CONSTRUCTOR()
-		
+		img = LoadImage("GFX/PersAction/Eric.png")
+		self.X = Screen.Width -300
+		self.Y = Screen.Height-400
 	end
 
 end
