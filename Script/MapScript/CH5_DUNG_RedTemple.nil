@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.03
+// version: 20.06.04
 // End License Information
 
 
@@ -40,6 +40,9 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+bool gj_checked
+
 group MScript
 	
 	bool DeurOpened = false
@@ -54,8 +57,49 @@ group MScript
 		end
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Special.wav"
+		StartCombat.Arena = "RedTemple"
+		StartCombat.Foe[1] = "Boss/DoomSweeper"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void GJ_OPEN()
+		var GJ
+		if (not gv.Bool.GameJolt) or gj_checked
+			return
+		end
+		gj_checked = true
+		GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		if not GJ
+			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+			return
+		end
+		if GJ.ImpureRatio>=74
+			Map.Kill("GJ_Barrier")
+			// Map.ShowByLabel("GJ")
+		end
+		Map.ShowByLabel("GJ_SECRET")
+	end
+	
+	void GJ_HIDE()
+		Map.HideByLabel("GJ_SECRET")
+	end
+	
+	void NPC_REDSTAFF()
+		if Done.RedStaffTaken
+			return
+		end
+		
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("OpenDeur","OpenDeur")
+		Map.ZA_Enter("GJ_SECRET","GJ_OPEN")
+		Map.ZA_Leave("GJ_SECRET","GJ_HIDE")
 	end
 	
 	void Draw()
