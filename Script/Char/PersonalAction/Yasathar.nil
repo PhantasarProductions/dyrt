@@ -59,7 +59,7 @@ module Eric_Personal_Action
 	end
 	
 	void CONSTRUCTOR()
-		img = LoadImage("GFX/PersAction/Eric.png")
+		self.img = LoadImage("GFX/PersAction/Eric.png")
 		self.X = Screen.Width -300
 		self.Y = Screen.Height-400
 	end
