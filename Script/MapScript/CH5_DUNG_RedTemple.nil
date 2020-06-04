@@ -68,6 +68,7 @@ group MScript
 	end
 	
 	void GJ_OPEN()
+		Map.ShowByLabel("GJ_SECRET")
 		var GJ
 		if (not gv.Bool.GameJolt) or gj_checked
 			return
@@ -82,7 +83,6 @@ group MScript
 			Map.Kill("GJ_Barrier")
 			// Map.ShowByLabel("GJ")
 		end
-		Map.ShowByLabel("GJ_SECRET")
 	end
 	
 	void GJ_HIDE()
