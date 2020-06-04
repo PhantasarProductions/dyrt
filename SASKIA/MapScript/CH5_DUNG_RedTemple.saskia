@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.06.03
+; version: 20.06.04
 ; End License Information
 
 :Niks
@@ -55,4 +55,10 @@
 	chk Done.MeryaStoleRedKeyFromMonk,Niks
 	call MapText,"MERYASTEAL"
 	mov 1,Inventory.KEY_REDKEY
+	jmp Niks
+	
+:NPC_SASKIA_Boss
+	call MapScript.Boss
+	call Map.Kill,"NPC_SASKIA_Boss",true
+	call Map.Kill,"BossBarrier",true
 	jmp Niks
