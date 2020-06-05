@@ -36,30 +36,30 @@
 // End License Information
 
 do
-int s
-s = __skill
+	int s
+	s = __skill
 
-#pure
+	#pure
 	
-local
-a = {
-	-- Crossbow
-	BlessedArrow   = { Skill_Crossbow = s * 2, ["Skill_Befindo enchants"] = s + 1 },
-	PoisonArrow    = { Skill_Crossbow = (s * 2) + 15 },
+	local
+	a = {
+		-- Crossbow
+		BlessedArrow   = { Skill_Crossbow = s * 2, ["Skill_Befindo enchants"] = s + 1 },
+		PoisonArrow    = { Skill_Crossbow = (s * 2) + 15 },
 	
-	-- Befindo Enchanments
-	MysticCare     = { Start = true },
-	Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) },
+		-- Befindo Enchanments
+		MysticCare     = { Start = true },
+		Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) },
 	
-	-- Scharum
-	Power2x        = { Scharum = true },
+		-- Scharum
+		Power2x        = { Scharum = true },
 	
-	-- Sealed Boss
-	CursedArrow    = { SealedBoss = true },
+		-- Sealed Boss
+		CursedArrow    = { SealedBoss = true },
 	
-}
+	}
 	
-return a
+	return a
 	
-#endpure
+	#endpure
 end
