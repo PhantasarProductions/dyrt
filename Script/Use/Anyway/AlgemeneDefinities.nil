@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 20.06.03
+// Version: 20.06.05
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -131,4 +131,17 @@ group Arrow
 			self[k]=TImage.Obtain(k:upper())
 		end
 	end
+end
+
+#accept gv
+quickmeta group SealedDefeated
+
+	index
+		return gv.Bool["SealedBossForCharacter"..key.."Defeated"]
+	end
+	
+	newindex
+		gv.Bool["SealedBossForCharacter"..key.."Defeated"] = value
+	end
+	
 end
