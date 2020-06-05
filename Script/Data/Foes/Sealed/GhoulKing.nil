@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 6/5/2020 6:26:21 PM
+// Generated: 6/5/2020 10:24:47 PM
 
 do
 var retfunc()
@@ -17,7 +17,7 @@ foeret.Cash = 100000
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HOLYWATER"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
 if not Foe.LoadOversoul
-	foeret.Experience = 200000
+	foeret.Experience = 20000
 end
 foeret.Name="Ghoul King"
 foeret.Char.Stat("BASE__RESIST_Elem_Darkness").Value=100000
