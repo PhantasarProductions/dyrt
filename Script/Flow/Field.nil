@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.05.29
+// Version: 20.06.05
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -485,7 +485,7 @@ group FlowField
 		mx = kth.ObjInt.X - FieldMap.ScrollX
 		my = kth.ObjInt.Y - FieldMap.ScrollY
 		__travellevel++
-		__levelcap = __levelcap + (6-__skill)
+		__levelcap = math.min(__levelcap + (6-__skill),1000)
 		new MiniMsg(mx,my-20,"Traveler's Emblem Found",200,255,100)
 		new MiniMsg(mx,my   ,sprintf("Traveler's level increased to: %s",Roman(__travellevel)),240,210,80)
 		new MiniMsg(mx,my+29,sprintf("Level cap increased to: %s",Roman(__levelcap)),100,200,255)
