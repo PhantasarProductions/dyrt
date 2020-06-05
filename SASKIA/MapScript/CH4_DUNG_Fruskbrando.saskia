@@ -73,6 +73,7 @@
 	;call End RedSeal
 	call FlowField.TravelEmblem,"RED_SEAL"
 	mov 1,Inventory.EQW_AZIELLA_BOLT_SUPER
+	call MiniMsg.New,"Ultra weapon 'Boltimate' obtained!",255,100,180
 	mov true,SealedDefeated.Aziella
 	call Party.LvUp,"Aziella"
 	call AllSealedCheck
