@@ -34,6 +34,9 @@
 // 
 // version: 20.06.04
 // End License Information
+
+#use "libs/xmath"
+
 module Yasathar_Personal_Action
 
 	var Img
@@ -49,10 +52,19 @@ module Yasathar_Personal_Action
 		self.Img.Draw(self.X,self.Y)
 	end
 	
-	void RedSeal()
+	void InstantEncounter()
 	end
 	
-	void InstantEncounter()
+	get bool RedSeal
+		int x
+		int y
+		if not Map.HasTag("RED_SEAL")
+			return false
+		end
+		Map.Obj = "RED_SEAL"
+		x = Map.ObjInt.X
+		y = Map.ObjInt.Y
+		return xmath.Pythagoras(x,y,__player.X,__player.Y)<96
 	end
 	
 	bool Click(int but,int x, int y)
@@ -63,6 +75,10 @@ module Yasathar_Personal_Action
 			return false;
 		end
 		// Red Seal
+		if self.RedSeal
+			MapScript.SASKIA("REDSEAL")
+			return true;
+		end
 		
 		// Instant Encounter
 		self.InstantEncounter() 
