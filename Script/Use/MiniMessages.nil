@@ -102,7 +102,7 @@ class MiniMsg
 		self.List.AddLast(self)
 	end
 	
-	static void CreateCenter(string msg,r,g,b)
+	static var CreateCenter(string msg,r,g,b)
 		return new MiniMsg(Screen.W/2,Screen.H/2,msg,r,g,b)
 	end
 	
