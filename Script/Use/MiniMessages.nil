@@ -102,6 +102,10 @@ class MiniMsg
 		self.List.AddLast(self)
 	end
 	
+	static void CreateCenter(string msg,r,g,b)
+		return new MiniMsg(Screen.W/2,Screen.H/2,msg,r,g,b)
+	end
+	
 	void DESTRUCTOR()
 		// Debug to see if the memory is indeed properly released!
 		CSayF("MiniMessage %d destroyed!   CD(%d,%d)",self.ID,self.CD1,self.CD2)
