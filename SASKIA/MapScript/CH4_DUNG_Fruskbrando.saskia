@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.28
+; version: 20.06.05
 ; End License Information
 
 :OnLoad
@@ -59,3 +59,20 @@
 	call Map.Kill,"Boss",true
 	mov true,WM_Unlocked.A_Malabia
 	end
+	
+:RedSeal
+:REDSEAL
+	;call MapScript.RedSeal
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/Sealed.wav",StartCombat.Music 
+	mov "Indie",StartCombat.Arena
+	mov "Sealed/GhoulKing",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	;call End RedSeal
+	call FlowField.TravelEmblem,"RED_SEAL"
+	mov 1,Inventory.EQW_AZIELLA_BOLT_SUPER
+	mov true,SealedDefeated.Aziella
+	call Party.LvUp,"Aziella"
+	call AllSealedCheck
