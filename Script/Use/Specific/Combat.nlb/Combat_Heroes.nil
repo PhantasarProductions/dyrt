@@ -207,8 +207,7 @@ class Hero extends Fighter
 					case "Num" "NumVar"
 						unlock = unlock and (gv.Num[v[1]]>=v[2])
 					case "SealedBoss"
-						unlock = false
-						// TODO: Make this possible!
+						unlock = SealedDefeated[self.Tag]						
 					case "Charm"
 						unlock = unlock and Charm.Check(ablk)
 					default
