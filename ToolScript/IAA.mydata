@@ -3939,7 +3939,7 @@ Rec: ABL_HERO_AZIELLA_CURSEDARROW
 	SpellAniFunction = 
 	SpellAniScript = AziellaShoot
 	Stance = ATTACK
-	Target = Auto
+	Target = 1F
 	Type = Ability
 
 Rec: ABL_HERO_AZIELLA_MYSTICCARE
