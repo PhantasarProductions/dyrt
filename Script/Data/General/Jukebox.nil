@@ -12,6 +12,7 @@ do
 	ret["MUSIC/ORIGINAL/120BPMONSTER.WAV"] = { ["Title"] = "120bpmonster", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/ACIDJAZZ.WAV"] = { ["Title"] = "AcidJazz", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/ALIGNMENTWITHEVIL.WAV"] = { ["Title"] = "Alignment With Evil", ["Author"]="Pruno", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/ANCIENT-TROOPS-AMASSING 16000.WAV"] = { ["Title"] = "Ancient Troops Amassing", ["Author"]="Eric Matyas", ["Notes"] = "This tune was created by Eric Matyas, and is free to use as long as the author is credited. Look at https://soundimage.org for more information" }
 	ret["MUSIC/ORIGINAL/ANGEVIN.WAV"] = { ["Title"] = "Angevin", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/BATTLE_CHAPTER2.WAV"] = { ["Title"] = "Combat Tune - Chapter 2", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/BATTLE_CHAPTER3.WAV"] = { ["Title"] = "Combat Tune - Chapter 3", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
