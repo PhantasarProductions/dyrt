@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Achievements_h.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.06.05
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -86,3 +86,15 @@ end
 
 global var Trophy
 Trophy = Achievements
+
+
+global void AllSealedCheck()
+	bool gotthemall = true
+	for _,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+		CSayF("Sealed Boss - Checking %s: %s; Complete %s",ch,tostring(SealedDefeated[ch]),tostring(gotthemall))
+		gotthemall = gotthemall and SealedDefeated[ch]
+	end
+	if gotthemall
+		Achievements.Award("SEALED_ALL")
+	end
+end
