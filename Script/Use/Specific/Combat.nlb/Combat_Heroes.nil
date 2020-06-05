@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.06.02
+// Version: 20.06.05
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -367,8 +367,15 @@ group Stage_SelectTarget extends Stage
 					ystat = fight.Y+60
 					if fight.GaugePosition>=10001
 						Color(0,180,255)
-						DarkText.Font(CombatTime.FontGauge,Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
-						fight.NextAct.Targets[1].Icon(fight.X+40,ystat)
+						// This is not a bug-fix... there is no bug.
+						// Still the system did crash on it despite all impossibilities.
+						// This routine simply voids that
+						if not fight.NextAct
+							DarkText.Font("?????",fight.X+80,ystat)
+						else
+							DarkText.Font(CombatTime.FontGauge,Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
+							fight.NextAct.Targets[1].Icon(fight.X+40,ystat)
+						end
 						#+ ystat 20
 					end
 					__white
