@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.28
+; version: 20.06.06
 ; End License Information
 :OnLoad
 	call CSay,"Madhouse!"
@@ -69,6 +69,3 @@
 
 :Einde
 	end
-	
-	
-	
