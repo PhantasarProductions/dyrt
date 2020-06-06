@@ -23945,7 +23945,7 @@ Rec: EQW_REBECCA_SWORD_SUPER
 	EqAziella = FALSE
 	EqBrendor = FALSE
 	EqDernor = FALSE
-	EqEric = TRUE
+	EqEric = FALSE
 	EqIrravonia = FALSE
 	EqKirana = FALSE
 	EqMerya = FALSE
@@ -23974,11 +23974,11 @@ Rec: EQW_REBECCA_SWORD_SUPER
 	EQP_Evasion = -6
 	EQP_Intelligence = 0
 	EQP_Resistance = 0
-	EQP_Strength = 40
+	EQP_Strength = 60
 	EqRebecca = TRUE
 	EqScyndi = FALSE
 	EqShanda = FALSE
-	Equip_Attack = ACT_ATTACK
+	Equip_Attack = EQW_REBECCA_SWORD_SUPER
 	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 16
@@ -28491,6 +28491,7 @@ Rec: ITM_PANACEA
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
