@@ -46,6 +46,29 @@
 	call MapScript.Boss
 	call Map.Kill,"Boss",true
 	jmp Einde
+	
+:RedSeal
+:REDSEAL
+	;call MapScript.RedSeal
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/Sealed.wav",StartCombat.Music 
+	mov "SparForest",StartCombat.Arena
+	mov "Sealed/HobGoblin",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	;call End RedSeal
+	call FlowField.TravelEmblem,"RED_SEAL"
+	mov 1,Inventory.EQW_REBECCA_SWORD_SUPER
+	call MiniMsg.CreateCenter,"Ultra weapon 'Oathkeeper' obtained!",255,100,0
+	mov true,SealedDefeated.Rebecca
+	call Party.LvUp,"Rebecca"
+	call AllSealedCheck
+	jmp Einde
+
 
 :Einde
 	end
+	
+	
+	
