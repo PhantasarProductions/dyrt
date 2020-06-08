@@ -39,3 +39,16 @@
 	; This will unlock the cat in Independence
 	mov true,gv.Bool.VisitedMermaidHarbor
 	end
+	
+:NoGo
+	call MapText,"ARIELNO"
+	end
+	
+:Ariel
+	call MapText,"ARIELALREADY"
+	chk not Yes("Do you want to go to Dyrt?"),NoGo
+	chk Done.FirstTimeMermaidToDyrt,GoToDyrt
+	call MapText,"ARIELINTRO"
+:GoToDyrt
+	call MapScript.GoToDyrt
+	end
