@@ -48,10 +48,16 @@ group MScript
 		WorldMap.Dyrt()
 	end
 	
+	void EINDSTREEP2()
+		WM_Unlocked.Z_UMERINGTON = true
+		WorldMap.Dyrt()
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Welcome to the wasteland")
 		Map.RENC_Inf = true
-		Map.ZA_Enter("Eindstreep","Eindstreep")
+		Map.ZA_Enter("Eindstreep", "Eindstreep")
+		Map.ZA_Enter("Eindstreep2","Eindstreep2")
 	end
 	
 	void Draw()
