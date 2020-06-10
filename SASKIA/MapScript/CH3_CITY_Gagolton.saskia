@@ -53,3 +53,23 @@
 	call MapText,"Kirana"
 	call Map.Kill,"NPC_Kirana",true
 	end
+	
+:RedSeal
+:REDSEAL
+	;call MapScript.RedSeal
+	call StartCombat.StartSession
+	;mov "Music/Combat/Boss/Sealed.wav",StartCombat.Music 
+	mov "Music/Combat/Boss/MountainKing.wav",StartCombat.Music
+	mov "ExamRuins",StartCombat.Arena
+	mov "Sealed/MountainEmperor",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	;call End RedSeal
+	call FlowField.TravelEmblem,"RED_SEAL"
+	mov 1,Inventory.EQW_IRRAVONIA_WAND_SUPER
+	call MiniMsg.CreateCenter,"Ultra weapon 'Catastrophe' obtained!",255,0,0
+	mov true,SealedDefeated.Irravonia
+	call Party.LvUp,"Irravonia"
+	call AllSealedCheck
+	end

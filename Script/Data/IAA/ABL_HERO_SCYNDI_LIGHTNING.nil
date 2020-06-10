@@ -4,11 +4,11 @@
 do
 
 
-table ret_ABL_HERO_SCYNDI_JOLT
-ret_ABL_HERO_SCYNDI_JOLT={
+table ret_ABL_HERO_SCYNDI_LIGHTNING
+ret_ABL_HERO_SCYNDI_LIGHTNING={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 50,
-	["Attack"] = 100,
+	["AP_Cost"] = 90,
+	["Attack"] = 150,
 	["AttackAlt"] = "",
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
@@ -31,7 +31,7 @@ ret_ABL_HERO_SCYNDI_JOLT={
 	["CauseDisease"] = false,
 	["CauseExhaustion"] = false,
 	["CauseFear"] = false,
-	["CauseParalysis"] = false,
+	["CauseParalysis"] = true,
 	["CausePoison"] = false,
 	["CauseSilence"] = false,
 	["CauseSleep"] = false,
@@ -51,7 +51,7 @@ ret_ABL_HERO_SCYNDI_JOLT={
 	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "It's electrifying",
+	["Description"] = "It's a greased lightning!",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
@@ -122,7 +122,7 @@ ret_ABL_HERO_SCYNDI_JOLT={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Jolt",
+	["Name"] = "Lighting",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
@@ -132,7 +132,7 @@ ret_ABL_HERO_SCYNDI_JOLT={
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_SCYNDI_JOLT
+return ret_ABL_HERO_SCYNDI_LIGHTNING
 
 
 end
