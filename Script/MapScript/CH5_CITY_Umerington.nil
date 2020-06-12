@@ -55,6 +55,7 @@ group MScript
 		for h in each(self.Houses)
 			Map.HideByZone(h)
 		end
+		Map.HideByZone("ToSecret")
 		if z
 			Map.GoToLayer("CITY","NPC_Enter"..z.."_SPOT")
 		end
