@@ -4,8 +4,8 @@
 do
 
 
-table ret_EQW_DERNOR_BAT7
-ret_EQW_DERNOR_BAT7={
+table ret_EQW_BRENDOR_HAMMER8
+ret_EQW_BRENDOR_HAMMER8={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
 	["Attack"] = 0,
@@ -23,7 +23,7 @@ ret_EQW_DERNOR_BAT7={
 	["BuffIntelligence"] = 0,
 	["BuffResistance"] = 0,
 	["BuffStrength"] = 0,
-	["BuyPrice"] = 2500,
+	["BuyPrice"] = 20000,
 	["CauseConfusion"] = false,
 	["CauseCurse"] = false,
 	["CauseDeath"] = false,
@@ -51,15 +51,15 @@ ret_EQW_DERNOR_BAT7={
 	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "A few more for a free base?",
+	["Description"] = "I came in like a wrecking ball! I never meant to break the wall",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
 	["EffectScript"] = "",
 	["Element"] = "None",
 	["EqAziella"] = false,
-	["EqBrendor"] = false,
-	["EqDernor"] = true,
+	["EqBrendor"] = true,
+	["EqDernor"] = false,
 	["EqEric"] = false,
 	["EqIrravonia"] = false,
 	["EqKirana"] = false,
@@ -75,21 +75,21 @@ ret_EQW_DERNOR_BAT7={
 	["EQP__RESIST_Stat_Confusion"] = 0,
 	["EQP__RESIST_Stat_Death"] = 0,
 	["EQP__RESIST_Stat_Destruction"] = 0,
-	["EQP__RESIST_Stat_Disease"] = 1,
+	["EQP__RESIST_Stat_Disease"] = 0,
 	["EQP__RESIST_Stat_Exhaustion"] = 0,
 	["EQP__RESIST_Stat_Fear"] = 0,
-	["EQP__RESIST_Stat_Paralysis"] = 0,
-	["EQP__RESIST_Stat_Poison"] = 3,
+	["EQP__RESIST_Stat_Paralysis"] = 3,
+	["EQP__RESIST_Stat_Poison"] = 0,
 	["EQP__RESIST_Stat_Silence"] = 0,
 	["EQP__RESIST_Stat_Sleep"] = 0,
-	["EQP__RESIST_Stat_Zombie"] = 1,
-	["EQP_Accuracy"] = 1,
-	["EQP_Agility"] = 0,
-	["EQP_Defense"] = 1,
-	["EQP_Evasion"] = 0,
+	["EQP__RESIST_Stat_Zombie"] = 0,
+	["EQP_Accuracy"] = 0,
+	["EQP_Agility"] = -14,
+	["EQP_Defense"] = 5,
+	["EQP_Evasion"] = -20,
 	["EQP_Intelligence"] = 0,
 	["EQP_Resistance"] = 0,
-	["EQP_Strength"] = 18,
+	["EQP_Strength"] = 150,
 	["EqRebecca"] = false,
 	["EqScyndi"] = false,
 	["EqShanda"] = false,
@@ -122,7 +122,7 @@ ret_EQW_DERNOR_BAT7={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Wide",
+	["Name"] = "Wrechking Ball!",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
@@ -132,7 +132,7 @@ ret_EQW_DERNOR_BAT7={
 	["Type"] = "Item",
 }
 
-return ret_EQW_DERNOR_BAT7
+return ret_EQW_BRENDOR_HAMMER8
 
 
 end

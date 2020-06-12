@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.06.11
+; version: 20.06.12
 ; End License Information
+
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
@@ -49,4 +50,16 @@
 :NPC_SASKIA_Cindy
 	Call MapText,"CINDY"
 	call GoToBank
+	end
+	
+:NPC_SASKIA_Astrid
+:NPC_SASKIA_ASTRID
+	call MapText,"ASTRID"
+	call Merchant,"CH5_ASTRID"
+	end
+
+:NPC_SASKIA_Esther
+:NPC_SASKIA_ESTHER
+	call MapText,"ESTHER"
+	call Merchant,"CH5_ESTHER"
 	end

@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.11
+// version: 20.06.12
 // End License Information
 
 
@@ -47,6 +47,8 @@ group MScript
 	
 	delegate NPC_ENTERITEMSHOP
 	delegate NPC_ENTERBANK
+	delegate NPC_ENTERARMORSHOP
+	delegate NPC_ENTERWEAPONSHOP
 	
 	void DownTown(z)
 		Map.ShowByZone("Everything")
@@ -67,14 +69,19 @@ group MScript
 		Map.ShowByZone(z)
 	end
 	
+	void SHOWSECRET()
+		Map.ShowByZone("ToSecret")
+	end
+	
 	void CONSTRUCTOR()
-		self.Houses = { "ItemShop", "Bank" }
+		self.Houses = { "ItemShop", "Bank", "ArmorShop", "WeaponShop" }
 		self.DownTown()
 		for init in each(self.Houses)
 			CSayF("Init zone: %s",init)
 			self["NPC_ENTER"..init:upper()] = NIL.Load(sprintf("Map.GoToLayer('CITY','Start%s')\nMScript.ShowBuilding('%s')",init,init),sprintf("Enter:%s",init))
 			Map.ZA_Enter("Leave"..init,"DownTown",init)
 		end
+		Map.ZA_Enter("ShowSecret","ShowSecret"); Map.HideByZone("ToSecret")
 	end
 	
 	void Draw()
