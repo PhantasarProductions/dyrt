@@ -63,3 +63,29 @@
 	call MapText,"ESTHER"
 	call Merchant,"CH5_ESTHER"
 	end
+	
+:RencOn
+	mov true,RENC.ManEncOn
+	end
+
+:RencOff
+	mov true,RENC.ManEncOff
+	end
+
+:Jurgen
+	call MapText,"JURGEN"
+	chk Yes("Play 20"..string.char(44).."000 shilders to obtain a Traveler's emblem?"),Emblem
+	call MapText,"JURGENNO"
+	end
+	
+:Emblem
+	chk gv.Int.Cash<20000,NoMoney
+	dec gv.Int.Cash,20000
+	call FlowField.TravelEmblem,"FakeTravelEmblem"
+	call MapText,"JURGENYES"
+	mov true,gv.Bool.JurgensEmblem
+	end
+	
+:NoMoney
+	call MapText,"JURGENNOCASH"
+	end

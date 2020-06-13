@@ -58,6 +58,7 @@ group MScript
 		Map.HideByZone("ToSecret")
 		if z
 			Map.GoToLayer("CITY","NPC_Enter"..z.."_SPOT")
+			MapScript.SASKIA("RencOn")
 		end
 	end
 	
@@ -68,6 +69,15 @@ group MScript
 	void ShowBuilding(string z)
 		Map.HideByZone("Everything")
 		Map.ShowByZone(z)
+		MapScript.SASKIA("RencOff")
+	end
+	
+	void NPC_JURGEN()
+		if gv.Bool.JurgensEmblem
+			MapText("JURGENYES")
+			return
+		end
+		MapScript.SASKIA("Jurgen")
 	end
 	
 	void SHOWSECRET()
