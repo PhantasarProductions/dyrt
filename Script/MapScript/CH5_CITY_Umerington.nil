@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.12
+// version: 20.06.13
 // End License Information
 
 
@@ -84,6 +84,16 @@ group MScript
 		Map.ShowByZone("ToSecret")
 	end
 	
+	void DZGJYMZA()
+		WM_Unlocked.Z_Z_DZGJYMZA = true
+		WorldMap.Dyrt()
+	end
+	
+	void DEATHCAVES()
+		WM_Unlocked.Z_DEATH = true
+		WorldMap.Dyrt()
+	end
+	
 	void CONSTRUCTOR()
 		self.Houses = { "ItemShop", "Bank", "ArmorShop", "WeaponShop" }
 		self.DownTown()
@@ -93,6 +103,8 @@ group MScript
 			Map.ZA_Enter("Leave"..init,"DownTown",init)
 		end
 		Map.ZA_Enter("ShowSecret","ShowSecret"); Map.HideByZone("ToSecret")
+		Map.ZA_Enter("Dzgjymza","Dzgjymza")
+		Map.ZA_Enter("DeathCaves","DeathCaves")
 	end
 	
 	void Draw()
