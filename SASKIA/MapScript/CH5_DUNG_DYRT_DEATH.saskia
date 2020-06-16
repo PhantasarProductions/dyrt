@@ -38,4 +38,21 @@
 	call Fader,Field.MapData.Title
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:RedSeal
+:REDSEAL
+	;call MapScript.RedSeal
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/Sealed.wav",StartCombat.Music 
+	mov "NakedRocks",StartCombat.Arena
+	mov "Sealed/OrcOverlord",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	;call End RedSeal
+	call FlowField.TravelEmblem,"RED_SEAL"
+	mov 1,Inventory.EQW_DERNOR_BAT_SUPER
+	call MiniMsg.CreateCenter,"Ultra weapon 'Homerun' obtained!",180,255,100
+	mov true,SealedDefeated.Dernor
+	call Party.LvUp,"Dernor"
+	call AllSealedCheck
+	end
