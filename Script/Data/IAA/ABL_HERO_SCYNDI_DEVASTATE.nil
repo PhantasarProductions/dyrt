@@ -4,11 +4,11 @@
 do
 
 
-table ret_ABL_HERO_SCYNDI_BLAST
-ret_ABL_HERO_SCYNDI_BLAST={
+table ret_ABL_HERO_SCYNDI_DEVASTATE
+ret_ABL_HERO_SCYNDI_DEVASTATE={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 25,
-	["Attack"] = 100,
+	["AP_Cost"] = 75,
+	["Attack"] = 200,
 	["AttackAlt"] = "",
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
@@ -122,17 +122,17 @@ ret_ABL_HERO_SCYNDI_BLAST={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Blast",
+	["Name"] = "Devastate",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
 	["SpellAniScript"] = "",
 	["Stance"] = "CAST",
-	["Target"] = "1F",
+	["Target"] = "AF",
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_SCYNDI_BLAST
+return ret_ABL_HERO_SCYNDI_DEVASTATE
 
 
 end
