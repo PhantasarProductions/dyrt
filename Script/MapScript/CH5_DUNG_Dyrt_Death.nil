@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.14
+// version: 20.06.19
 // End License Information
 
 
@@ -46,7 +46,17 @@ group MScript
 	
 	link DarkDraw = CircularDarkness.Draw__StyleStretch
 	
+	void TO001()
+		Map.GoToLayer("#001","From008")
+	end
+	
+	void TO008()
+		Map.GoToLayer("#008","Einde")
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("To001","To001")
+		Map.ZA_Enter("To008","To008")
 	end
 	
 	void Draw()
