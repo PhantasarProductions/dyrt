@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.05.18
+// Version: 20.06.21
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -310,9 +310,11 @@ group Execution
 				if stc=="Curse"
 					stc2="Silence"
 				end
-				if not Target.StatusChanges[stc] and math.random(0,99) >= Target.Char.Stat("END__RESIST_Stat_"..stc2).Value
+				if stc=="Death" and (Target.StatusChanges.Zombie or Target.StatusChanges.Undead)
+					new Hurt("Immune!",Target.Tar)
+				elseif not Target.StatusChanges[stc] and math.random(0,99) >= Target.Char.Stat("END__RESIST_Stat_"..stc2).Value
 					Target.StatusChanges[stc] = true
-					new Hurt(stc.."!",255,100,60)
+					new Hurt(stc.."!",Target.Tag,255,100,60)
 					hit = true
 				end
 			end
