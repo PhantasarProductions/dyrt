@@ -45,7 +45,7 @@ do
 	a = {
 		-- Skill_Nature
 		AAA_Charm       = { Start=true },
-		NeutPosion      = { Skill_Nature = 20 },
+		NeutPoison      = { Skill_Nature = 20 },
 		Vitalize        = { Skill_Nature = 40 + (s * 20) },
 	
 		-- Charm
