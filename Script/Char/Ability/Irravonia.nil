@@ -57,7 +57,7 @@ a = {
 	
 	-- Earth
 	Rock       = { Skill_Earth = 1, Start=true },
-	EarthQuake = { Skill_Earth = 15 },
+	Quake      = { Skill_Earth = 15 },
 	IDDQD      = { Skill_Earth = 30 },
 	
 	-- Scharum

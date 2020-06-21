@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 6/21/2020 4:36:27 PM
+// Generated: 6/21/2020 6:24:46 PM
 
 do
 var retfunc()
@@ -42,7 +42,7 @@ foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=100
 foeret.Char.Stat("BUFF__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Script="SUM:BASE__RESIST_Elem_Frost,BUFF__RESIST_Elem_Frost"
-foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-750
+foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-800
 foeret.Char.Stat("BUFF__RESIST_Elem_Light").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Light").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Light").Script="SUM:BASE__RESIST_Elem_Light,BUFF__RESIST_Elem_Light"
@@ -121,7 +121,7 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=900000
+	foeret.Char.Stat("BASE_HP").Value=700000
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
@@ -129,7 +129,7 @@ else
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
-	foeret.Char.Stat("BASE_Resistance").Value=10
+	foeret.Char.Stat("BASE_Resistance").Value=1
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
@@ -167,6 +167,12 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_BREAKSTAB"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_BREAKSTAB"
@@ -205,6 +211,8 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_BREAKSTAB"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_BREAKSTAB"
