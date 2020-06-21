@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.19
+// version: 20.06.21
 // End License Information
 
 
@@ -57,6 +57,7 @@ group MScript
 	void CONSTRUCTOR()
 		Map.ZA_Enter("To001","To001")
 		Map.ZA_Enter("To008","To008")
+		Map.ZA_Enter("StartBoss","SASKIA:Boss")
 	end
 	
 	void Draw()

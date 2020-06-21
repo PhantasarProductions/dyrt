@@ -32,10 +32,11 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.06.16
+; version: 20.06.21
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
+:Niks
 	end
 
 :RedSeal
@@ -55,4 +56,19 @@
 	mov true,SealedDefeated.Dernor
 	call Party.LvUp,"Dernor"
 	call AllSealedCheck
+	end
+	
+	
+:Boss
+	chk gv.Bool.BossDeathCaves,Niks
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/UndeadBoss.wav",StartCombat.Music 
+	mov "NakedRocks",StartCombat.Arena
+	mov "Boss/Ubermummy",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	mov true,gv.Bool.BossDeathCaves
+	call Map.Kill,"BarrierBoss",true
+	call Map.Kill,"Boss",true
 	end
