@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZPoisonDisease.nil
-// Version: 20.04.28
+// Version: 20.06.21
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -66,5 +66,10 @@ new Combat_Status("Poison",{
 
 
 new Combat_Status("Disease",{
-	
+	["Draw"] = void(f)
+		Color(255,180,0)
+	end,
+	["AltHeal"] = int(e,f,int i)
+		return 0
+	end
 })
