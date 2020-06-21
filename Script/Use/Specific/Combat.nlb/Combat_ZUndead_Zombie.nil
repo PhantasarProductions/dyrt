@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZUndead_Zombie.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.06.21
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -36,8 +36,11 @@
 // End License Information
 table undead
 
-undead.AltHeal = int(f,int i)
-	CSay('Negative healing for undead')
+undead.AltHeal = int(e,f,int i)
+	if prefixed(f.Tag,"FOE_") and (f.FromFile=="BOSS/UBERMUMMY" or f.FromFile=="BOSS/BLENCHY2")
+		CSayF('%s: Negative healing for undead: %s',f.Tag,f.FromFile)
+		return -math.min(math.abs(i),250)
+	end
 	return -math.abs(i)
 end
 

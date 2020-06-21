@@ -189,7 +189,7 @@ new Combat_Status("Fallen",{
 					return 0
 			end
 		end,
-	["AltHeal"] = int(f,int i)
+	["AltHeal"] = int(e,f,int i)
 			return 0
 		end,
 	["Caused"] = void(f)

@@ -194,7 +194,7 @@ group Execution
 		end
 		for sn,status in Tar.StatusChanges.Each
 			if status.AltHeal				
-				hvalue = status.AltHeal(Exe,hvalue)
+				hvalue = status.AltHeal(Exe,Tar,hvalue)
 				CSayF("AltHeal due to status %s sets the heal value to %d",sn,hvalue)
 			else
 				CSayF("No AltHeal in status %s",sn)
