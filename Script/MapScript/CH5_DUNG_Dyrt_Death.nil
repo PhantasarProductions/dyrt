@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.21
+// version: 20.06.24
 // End License Information
 
 
@@ -54,10 +54,42 @@ group MScript
 		Map.GoToLayer("#008","Einde")
 	end
 	
+	void SWITCH_EINDSWITCH()
+		Map.Layer="#000"
+		Map.Kill("BarrierBlackMarket",true)
+		Map.Layer="#001"
+		Achievements.Award("SECDUNG_DEATH")
+		MapText("OPENBLACK")
+	end
+	
+	void LEAVEBLACKMARKET()
+		Map.GoToLayer("#000","FromBlackMarket")
+	end
+	
+	void ENTERMARKET()
+		Map.GoToLayer("#009","Start")
+	end
+	
+	void SHOWORB()
+		Map.ShowByLabel("ORB")
+	end
+	
+	void HIDEORB()
+		Map.HideByLabel("ORB")
+	end
+	
+	void NPC_BLACKMARKET()
+		MapScript.SASKIA("BlackMarket")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("To001","To001")
 		Map.ZA_Enter("To008","To008")
 		Map.ZA_Enter("StartBoss","SASKIA:Boss")
+		Map.ZA_Enter("LeaveBlackMarket","LeaveBlackmarket")
+		Map.ZA_Enter("ToBlackMarket","EnterMarket")
+		Map.ZA_Enter("ORB","ShowOrb")
+		Map.ZA_Leave("ORB","HideOrb")
 	end
 	
 	void Draw()

@@ -4,8 +4,8 @@
 do
 
 
-table ret_ITM_MYSTERIOUSPOTION
-ret_ITM_MYSTERIOUSPOTION={
+table ret_ITM_SAYONARA_BLACKSHOWER
+ret_ITM_SAYONARA_BLACKSHOWER={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
 	["Attack"] = 0,
@@ -23,10 +23,10 @@ ret_ITM_MYSTERIOUSPOTION={
 	["BuffIntelligence"] = 0,
 	["BuffResistance"] = 0,
 	["BuffStrength"] = 0,
-	["BuyPrice"] = 5000,
+	["BuyPrice"] = 1000,
 	["CauseConfusion"] = false,
 	["CauseCurse"] = false,
-	["CauseDeath"] = false,
+	["CauseDeath"] = true,
 	["CauseDestruction"] = false,
 	["CauseDisease"] = false,
 	["CauseExhaustion"] = false,
@@ -37,7 +37,7 @@ ret_ITM_MYSTERIOUSPOTION={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 100,
+	["COM2ACT"] = 120,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -51,11 +51,11 @@ ret_ITM_MYSTERIOUSPOTION={
 	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "It's been labelled \042Drink me!\042",
+	["Description"] = "This is not poison... This stuff is cursed!",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
-	["EffectScript"] = "Nothing",
+	["EffectScript"] = "",
 	["Element"] = "None",
 	["EqAziella"] = false,
 	["EqBrendor"] = false,
@@ -96,22 +96,22 @@ ret_ITM_MYSTERIOUSPOTION={
 	["Equip_Attack"] = "ACT_ATTACK",
 	["EqYasathar"] = false,
 	["EqYoungIrravonia"] = false,
-	["GainAP"] = 200,
+	["GainAP"] = 0,
 	["GainEXP"] = 0,
-	["GainSkill0"] = 1000,
-	["GainSkill0All"] = true,
+	["GainSkill0"] = 0,
+	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
-	["GainSkill1"] = 1000,
-	["GainSkill1All"] = true,
+	["GainSkill1"] = 0,
+	["GainSkill1All"] = false,
 	["GainSkill1Chars"] = "",
-	["GainSkill2"] = 1000,
-	["GainSkill2All"] = true,
+	["GainSkill2"] = 0,
+	["GainSkill2All"] = false,
 	["GainSkill2Chars"] = "",
-	["GainSkill3"] = 1000,
-	["GainSkill3All"] = true,
+	["GainSkill3"] = 0,
+	["GainSkill3All"] = false,
 	["GainSkill3Chars"] = "",
-	["GainSkill4"] = 1000,
-	["GainSkill4All"] = true,
+	["GainSkill4"] = 0,
+	["GainSkill4All"] = false,
 	["GainSkill4Chars"] = "",
 	["Heal"] = 0,
 	["HealStat"] = "Intelligence",
@@ -122,17 +122,17 @@ ret_ITM_MYSTERIOUSPOTION={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Mysterious Potion!",
+	["Name"] = "Sayonara's Black Shower",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
-	["SpellAniScript"] = "Sparkle",
+	["SpellAniScript"] = "",
 	["Stance"] = "CAST",
-	["Target"] = "OS",
+	["Target"] = "1F",
 	["Type"] = "Item",
 }
 
-return ret_ITM_MYSTERIOUSPOTION
+return ret_ITM_SAYONARA_BLACKSHOWER
 
 
 end

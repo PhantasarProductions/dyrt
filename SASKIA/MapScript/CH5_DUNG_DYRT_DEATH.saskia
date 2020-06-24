@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.06.21
+; version: 20.06.24
 ; End License Information
+
 :OnLoad
 	call Fader,Field.MapData.Title
 :Niks
@@ -71,4 +72,9 @@
 	mov true,gv.Bool.BossDeathCaves
 	call Map.Kill,"BarrierBoss",true
 	call Map.Kill,"Boss",true
+	end
+	
+:BlackMarket
+	Call MapText,"BLACK"
+	call Merchant,"CH5_THEBLACKMARKET"
 	end

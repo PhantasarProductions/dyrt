@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 6/21/2020 6:24:46 PM
+// Generated: 6/22/2020 2:19:24 PM
 
 do
 var retfunc()
@@ -23,7 +23,7 @@ foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MYSTERIOU
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_BANBANA"
 if not Foe.LoadOversoul
-	foeret.Experience = 1000000000
+	foeret.Experience = 10000000
 end
 foeret.Name="Ubermummy"
 foeret.Char.Stat("BASE__RESIST_Elem_Darkness").Value=1000000
@@ -121,7 +121,7 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=700000
+	foeret.Char.Stat("BASE_HP").Value=400000
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
@@ -167,6 +167,8 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
@@ -211,6 +213,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 	case 3
