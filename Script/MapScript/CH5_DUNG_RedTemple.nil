@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.04
+// version: 20.06.24
 // End License Information
 
 
@@ -79,7 +79,7 @@ group MScript
 			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
 			return
 		end
-		if GJ.ImpureRatio>=74
+		if GJ.ImpureRatio>=72
 			Map.Kill("GJ_Barrier")
 			// Map.ShowByLabel("GJ")
 		end
