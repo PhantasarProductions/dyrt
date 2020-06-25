@@ -103,10 +103,16 @@ group MScript
 		MapText("RED_STAFF")
 	end
 	
+	void GJ_EXIT()
+		Field.LoadMap("GJ_DUNG_Underworld")
+		Map.GoToLayer("#001","Start")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("OpenDeur","OpenDeur")
 		Map.ZA_Enter("GJ_SECRET","GJ_OPEN")
 		Map.ZA_Leave("GJ_SECRET","GJ_HIDE")
+		Map.ZA_Enter("GJ_EXIT","GJ_EXIT")
 	end
 	
 	void Draw()
