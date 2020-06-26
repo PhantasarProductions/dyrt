@@ -11,11 +11,12 @@ do
 	
 	ret["MUSIC/ORIGINAL/120BPMONSTER.WAV"] = { ["Title"] = "120bpmonster", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/ACIDJAZZ.WAV"] = { ["Title"] = "AcidJazz", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/ALIGNMENTWITHEVIL.WAV"] = { ["Title"] = "Alignment With Evil", ["Author"]="Pruno", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/ANCIENT-TROOPS-AMASSING 16000.WAV"] = { ["Title"] = "Ancient Troops Amassing", ["Author"]="Eric Matyas", ["Notes"] = "This tune was created by Eric Matyas, and is free to use as long as the author is credited. Look at https://soundimage.org for more information" }
+	ret["MUSIC/ORIGINAL/AGNUS DEI X.WAV"] = { ["Title"] = "Agnus Dei X", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
+	ret["MUSIC/ORIGINAL/ALIGNMENTWITHEVIL.WAV"] = { ["Title"] = "AlignmentWithEvil", ["Author"]="Pruno", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/ANCIENT-TROOPS-AMASSING 16000.WAV"] = { ["Title"] = "Ancient-Troops-Amassing 16000", ["Author"]="Eric Matyas", ["Notes"] = "This tune was created by Eric Matyas, and is free to use as long as the author is credited. Look at https://soundimage.org for more information" }
 	ret["MUSIC/ORIGINAL/ANGEVIN.WAV"] = { ["Title"] = "Angevin", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/BATTLE_CHAPTER2.WAV"] = { ["Title"] = "Combat Tune - Chapter 2", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/BATTLE_CHAPTER3.WAV"] = { ["Title"] = "Combat Tune - Chapter 3", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
+	ret["MUSIC/ORIGINAL/BATTLE_CHAPTER2.WAV"] = { ["Title"] = "BATTLE_Chapter2", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/BATTLE_CHAPTER3.WAV"] = { ["Title"] = "Battle_Chapter3", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
 	ret["MUSIC/ORIGINAL/BLACK VORTEX.WAV"] = { ["Title"] = "Black Vortex", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/CALM INDOORS.WAV"] = { ["Title"] = "Calm Indoors", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/CASTLE.WAV"] = { ["Title"] = "Castle", ["Author"]="Pruno", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
@@ -31,41 +32,42 @@ do
 	ret["MUSIC/ORIGINAL/DEADLY DEADLY DEADLY.WAV"] = { ["Title"] = "Deadly Deadly Deadly", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/DISCO4.WAV"] = { ["Title"] = "Disco4", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/DIVERTIMENTO K131.WAV"] = { ["Title"] = "Divertimento K131", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/DUNGEON1.WAV"] = { ["Title"] = "Dungeon Tune", ["Author"]="Arjan Broeders", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/DUNGEON1.WAV"] = { ["Title"] = "Dungeon1", ["Author"]="Arjan Broeders", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/ENCHANTED VALLEY.WAV"] = { ["Title"] = "Enchanted Valley", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/EPICITY.WAV"] = { ["Title"] = "Epicity", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/EVERGREEN DREAMS.WAV"] = { ["Title"] = "Evergreen Dreams", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/EXHILARATE.WAV"] = { ["Title"] = "Exhilarate", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/FAHUDS BOSS BATTLE PART 1.WAV"] = { ["Title"] = "Fahuds Boss Battle Part 1", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/FAHUDS WALTZ LOOPABLE BATTLE - WIDZY.WAV"] = { ["Title"] = "Fahuds Boss - Waltz", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/FAHUDS WALTZ LOOPABLE BATTLE - WIDZY.WAV"] = { ["Title"] = "Fahuds Waltz Loopable Battle - Widzy", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/FANFARE FOR SPACE.WAV"] = { ["Title"] = "Fanfare for Space", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/FROZEN STAR.WAV"] = { ["Title"] = "Frozen Star", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/FUN IN A BOTTLE.WAV"] = { ["Title"] = "Fun in a Bottle", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/GHOSTS OF DISEASE.WAV"] = { ["Title"] = "Ghosts of Disease", ["Author"]="Knight Of Fire", ["Notes"] = "Released under the Public Domain" }
 	ret["MUSIC/ORIGINAL/GRAVE MATTERS.WAV"] = { ["Title"] = "Grave Matters", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/HALL OF THE MOUNTAIN KING.WAV"] = { ["Title"] = "Hall of the Mountain King", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/HARDNOISE.WAV"] = { ["Title"] = "Hard Noise", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
+	ret["MUSIC/ORIGINAL/HARDNOISE.WAV"] = { ["Title"] = "hardnoise", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
 	ret["MUSIC/ORIGINAL/HERO DOWN.WAV"] = { ["Title"] = "Hero Down", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/HITMAN.WAV"] = { ["Title"] = "Hitman", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
+	ret["MUSIC/ORIGINAL/HITMAN.WAV"] = { ["Title"] = "hitman", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/HOLY PLANET.WAV"] = { ["Title"] = "Holy Planet", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/HOW DID I GET DOWN HERE.WAV"] = { ["Title"] = "How did I get down here?", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/IRISHFISHERMAN.WAV"] = { ["Title"] = "Irish Fisherman", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/KALIMBA-RELAXATION-MUSIC-BY-KEVIN-MACLEOD.WAV"] = { ["Title"] = "Kalimba Relaxation Music", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
+	ret["MUSIC/ORIGINAL/HOW DID I GET DOWN HERE.WAV"] = { ["Title"] = "How did I get down here", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/IRISHFISHERMAN.WAV"] = { ["Title"] = "IrishFisherman", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/KALIMBA-RELAXATION-MUSIC-BY-KEVIN-MACLEOD.WAV"] = { ["Title"] = "kalimba-relaxation-music-by-kevin-macleod", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/MINSTREL GUILD.WAV"] = { ["Title"] = "Minstrel Guild", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/MONKEYS SPINNING MONKEYS.WAV"] = { ["Title"] = "Monkeys Spinning Monkeys", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/MOONLIGHT HALL.WAV"] = { ["Title"] = "Moonlight Hall", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/OCEAN-WAVES-1.WAV"] = { ["Title"] = "Ocean Waves", ["Author"]="Sound Jay", ["Notes"] = "This file is property of Sound Jay and may not be extracted from this project. Please retrieve the original file at soundjay.com" }
+	ret["MUSIC/ORIGINAL/OCEAN-WAVES-1.WAV"] = { ["Title"] = "ocean-waves-1", ["Author"]="Sound Jay", ["Notes"] = "This file is property of Sound Jay and may not be extracted from this project. Please retrieve the original file at soundjay.com" }
 	ret["MUSIC/ORIGINAL/OOZE.WAV"] = { ["Title"] = "Ooze", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
 	ret["MUSIC/ORIGINAL/OREGON.WAV"] = { ["Title"] = "Oregon", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/PANIC STATIONS.WAV"] = { ["Title"] = "Panic Stations", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/PIPPIN THE HUNCHBACK.WAV"] = { ["Title"] = "Pippin The Hunchback", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/PRISONER OF WAR - JAIL - WIDZY.WAV"] = { ["Title"] = "Prisoner of War", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/REBECCAS THEME - DRAMATANIC.WAV"] = { ["Title"] = "Rebecca's Theme", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/SHANDAS CASTLE.WAV"] = { ["Title"] = "Shanda's Castle", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/PRISONER OF WAR - JAIL - WIDZY.WAV"] = { ["Title"] = "Prisoner of War - Jail - Widzy", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/REBECCAS THEME - DRAMATANIC.WAV"] = { ["Title"] = "Rebeccas Theme - Dramatanic", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/RIDE OF THE VALYRIES.WAV"] = { ["Title"] = "Ride of the Valyries", ["Author"]="FreeMusic109", ["Notes"] = "Creative Commons ??? Attribution 3.0 Unported??? CC BY 3.0" }
+	ret["MUSIC/ORIGINAL/SHANDAS CASTLE.WAV"] = { ["Title"] = "Shandas Castle", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/SILENCE.WAV"] = { ["Title"] = "Silence", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
 	ret["MUSIC/ORIGINAL/SPACE 1990.WAV"] = { ["Title"] = "Space 1990", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/SPY VS SPY.WAV"] = { ["Title"] = "Spy Vs Spy", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
-	ret["MUSIC/ORIGINAL/STARTTOFANTASYINSTRUMENTAL.WAV"] = { ["Title"] = "The Start To Fantasy (Instrumental)", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/STARTTOFANTASYINSTRUMENTAL.WAV"] = { ["Title"] = "StartToFantasyInstrumental", ["Author"]="Wicky77", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/STRANGLED.WAV"] = { ["Title"] = "Strangled", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
 	ret["MUSIC/ORIGINAL/TEMPTING SECRETS.WAV"] = { ["Title"] = "Tempting Secrets", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/THATCHED VILLAGERS.WAV"] = { ["Title"] = "Thatched Villagers", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
@@ -73,15 +75,15 @@ do
 	ret["MUSIC/ORIGINAL/THE MACHINE THINKS.WAV"] = { ["Title"] = "The Machine Thinks", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/THE SNOW QUEEN.WAV"] = { ["Title"] = "The Snow Queen", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/THE WAITING ROOM (CALMER INDOORS).WAV"] = { ["Title"] = "The Waiting Room (Calmer Indoors)", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/THE-ISLAND-OF-DR-SINISTER.WAV"] = { ["Title"] = "The Island of Dr. Sinister", ["Author"]="Eric Matyas", ["Notes"] = "This tune was created by Eric Matyas, and is free to use as long as the author is credited. Look at https://soundimage.org for more information" }
-	ret["MUSIC/ORIGINAL/THEDREAD.WAV"] = { ["Title"] = "The Dread", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
+	ret["MUSIC/ORIGINAL/THE-ISLAND-OF-DR-SINISTER.WAV"] = { ["Title"] = "The-Island-of-Dr-Sinister", ["Author"]="Eric Matyas", ["Notes"] = "This tune was created by Eric Matyas, and is free to use as long as the author is credited. Look at https://soundimage.org for more information" }
+	ret["MUSIC/ORIGINAL/THEDREAD.WAV"] = { ["Title"] = "TheDread", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/THERE IS ROMANCE.WAV"] = { ["Title"] = "There is Romance", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
-	ret["MUSIC/ORIGINAL/VICTORY.WAV"] = { ["Title"] = "Victory Tune", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
+	ret["MUSIC/ORIGINAL/VICTORY.WAV"] = { ["Title"] = "Victory", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
 	ret["MUSIC/ORIGINAL/WATER PRELUDE.WAV"] = { ["Title"] = "Water Prelude", ["Author"]="Kevin McLeod", ["Notes"] = "Downloaded from incompetech.com! Please check out that site for more details" }
 	ret["MUSIC/ORIGINAL/WICKED.WAV"] = { ["Title"] = "Wicked", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
-	ret["MUSIC/ORIGINAL/WILKOMMEN - V1.WAV"] = { ["Title"] = "Wilkommen", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
+	ret["MUSIC/ORIGINAL/WILKOMMEN - V1.WAV"] = { ["Title"] = "Wilkommen - V1", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
 	ret["MUSIC/ORIGINAL/WILKOMMEN.WAV"] = { ["Title"] = "Wilkommen", ["Author"]="Widzy", ["Notes"] = "Written exclusively for Jeroen P. Broks. Contact artist for specific license terms" }
-	ret["MUSIC/ORIGINAL/WOULDNT_IT_BE.WAV"] = { ["Title"] = "Wouldn't it be", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
+	ret["MUSIC/ORIGINAL/WOULDNT_IT_BE.WAV"] = { ["Title"] = "Wouldnt_it_be", ["Author"]="Matt McFarland", ["Notes"] = "Creative Commons by Attribution License" }
 	ret["MUSIC/ORIGINAL/X-RAY.WAV"] = { ["Title"] = "X-Ray", ["Author"]="Jeroen P. Broks", ["Notes"] = "Licensed under a CC-NC-SA license" }
 
 	
