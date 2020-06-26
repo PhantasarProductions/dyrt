@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.05.29
+// Version: 20.06.26
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -98,6 +98,9 @@ group Flow_FieldMenu
 	var TopBox
 	var LeftBox
 	var RightBox
+	
+	var ArUp
+	var ArDown
 	
 	table BaseStats
 	
@@ -335,6 +338,8 @@ group Flow_FieldMenu
 	
 	void Items(ubox)
 		int y 
+		bool allowscrollup
+		bool allowscrolldown
 		y = -$InvItemScrollY
 		$InvItemList = $InvItemList or NIL.Use("Script/Use/iaalist.nil")
 		//Viewport(ubox.x,ubox.y,ubox.w,ubox.h) // Microsoft messed this up! Cool, huh?
@@ -342,12 +347,12 @@ group Flow_FieldMenu
 		for itemtag in each($InvItemList)
 			int ind = 0
 			if Inventory[itemtag]>0
-				if y>=0 and y+35<ubox.h 
+				if y>=0 and y+35<ubox.h
 					if $situations[$situation].ItemSellPrice and Item[itemtag].Sellable
 						Color(0,180,255)
 						DarkText.Font($BlitzFont,sprintf("Sell price: %9d shilders",math.ceil(Item[itemtag].BuyPrice/__skill)),ubox.x+math.floor((ubox.w-40)/2),ubox.y+y+4)
 					end
-					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+20+ubox.y
+					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+(ubox.w-50) and Mouse.Y<y+20+ubox.y
 						$InvItemHover = Item[itemtag]
 						#pure
 						--[[
@@ -366,7 +371,7 @@ group Flow_FieldMenu
 					end
 					DarkText.Font($Font,Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5+ind,ubox.y+y)
 					__amber
-					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+ubox.w-40,ubox.y+y)
+					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+(ubox.w-40-ind),ubox.y+y,1)
 				end
 				y = y + 20
 			end
@@ -375,6 +380,28 @@ group Flow_FieldMenu
 			$GenIAAHelp()
 		else 
 			//$ItemHover = nil;
+		end
+		allowscrollup = $InvItemScrollY!=0
+		allowscrolldown = y+35>ubox.h 		
+		if allowscrollup
+			__amber
+			if Mouse.X>ubox.x+(ubox.w-40) and Mouse.Y>ubox.y+10 and Mouse.Y<ubox.y+40
+				__white
+				if Mouse.HeldLeft
+					#- self.InvItemScrollY 4
+				end
+			end
+			self.ArUp.Draw(ubox.x+(ubox.w-40),ubox.y+10)
+		end
+		if allowscrolldown
+			__amber
+			if Mouse.X>ubox.x+(ubox.w-40) and Mouse.Y>ubox.y+(ubox.h-50) and Mouse.Y<ubox.y+ubox.h
+				__white
+				if Mouse.HeldLeft
+					#+ self.InvItemScrollY 4
+				end
+			end
+			self.ArDown.Draw(ubox.x+(ubox.w-40),ubox.y+(ubox.h-50))
 		end
 		//Viewport()
 	end
@@ -751,6 +778,12 @@ group Flow_FieldMenu
 		CSay("= Import Sys font")
 		self.BlitzFont = GetFont("SYSFONT")
 		assert(self.BlitzFont,"Font import failed!")
+		
+		// Arrows
+		CSay("Retrieving scroll arrows")
+		self.ArUp     = TImage.Obtain("UP")
+		self.ArDown   = TImage.Obtain("DOWN")
+		
 		CSay("= Construction of field menu done!")
 		
 		
