@@ -42,6 +42,31 @@
 #use "Script/Use/StartCombatMod"
 group MScript
 	
+	bool Sailing
+	int Going
+	
+	get int NorthPoint
+		Map.Obj="Ferry_N"
+		return Map.ObjInt.Y
+	end
+	
+	get int SouthPoint
+		Map.Obj="Ferry_S"
+		return Map.ObjInt.Y
+	end
+	
+	get int BoatPoint
+		Map.Obj="Boat"
+		return Map.ObjInt.Y
+	end
+	
+	set int BoatPoint
+		Map.Obj="Boat"
+		Map.ObjInt.Y = value
+		Map.Obj="CharonBoat"
+		Map.ObjInt.Y = value - 44
+	end
+	
 	void CONSTRUCTOR()
 	end
 	
@@ -52,6 +77,23 @@ group MScript
 		if Map.Layer=="#003"
 			Map.Obj="Styx"
 			Map.ObjInt.InsertX = (Map.ObjInt.InsertX + 1) % 256
+			if self.Sailing
+				if self.BoatPoint<self.Going
+					#- self.BoatPoint 2
+				elseif self.BoatPoint>self.Going
+					#+ self.BoatPoint 2
+				else
+					Map.Obj="CharonBoat"
+					Map.ObjBool.Visible = false
+					//Map.Obj="NPC_Charon_S"
+					//Map.ObjBool.Visible = self.Going == self.SouthPoint
+					//Map.Obj="NPC_Charon_N"
+					//Map.ObjBool.Visible = self.Going == self.NorthPoint
+					Map.Obj="NPC_Charon_N"
+					Map.ObjBool.Visible = true
+					Map.GoToLayer("#003","NPC_Charon_N_SPOT")
+				end
+			end
 		end
 	end
 	
