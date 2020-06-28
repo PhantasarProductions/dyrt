@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Dyrt_Forest.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Underworld.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.10
+// version: 20.06.28
 // End License Information
 
 module Arena_DyrtForest
