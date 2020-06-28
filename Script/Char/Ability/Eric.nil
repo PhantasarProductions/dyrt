@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.03
+// version: 20.06.28
 // End License Information
 do
 	int s
@@ -73,7 +73,9 @@ do
 		Death      = { ['Skill_Black Dragon'] = 14+s },
 		Disintegrate 
 		           = { ['Skill_Black Dragon'] = (s*5)+10 },
-		Gloom      = { ['Skill_Black Dragon'] = s + (s^2) }	
+		Gloom      = { ['Skill_Black Dragon'] = s + (s^2) },
+		
+		Yggdrassil = { SealedBoss = true }
 		
 	}
 	#endpure
