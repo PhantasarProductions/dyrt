@@ -1,0 +1,64 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Dyrt_Forest.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.06.10
+// End License Information
+
+module Arena_DyrtForest
+
+	var EXT	
+	delegate Draw
+
+	void CONSTRUCTOR()
+		switch Map.Layer
+			case "#001"
+				self.EXT = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
+				//self.EXT.LoadTex("GFX/Textures/Dyrt/Trees/SPAR.png",self.EXT.LoadComm.Cloud,"gfx/Textures/Sky/cloud.png")
+				self.EXT.LoadTex("GFX/Textures/Dyrt/Trees/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
+				self.EXT.CloudR=80
+				self.EXT.CloudG=80
+				self.EXT.CloudB=95
+				self.EXT.texsky={['R']=80,['G']=80,['B']=95}
+				self.EXT.texfloorfile = "GFX/Textures/Dyrt/Road/Grass.png"
+				self.EXT.Generate()
+				self.Draw = self.EXT.Draw
+			default
+				self.EXT = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Cave")
+				self.EXT.Wall  = 'GFX/Textures/BlackDragon/W_N.png'
+				self.EXT.Floor = "GFX/Textures/Dyrt/Road/Grass.png"
+				self.Draw = self.EXT.Draw
+		end
+	end
+	
+end
