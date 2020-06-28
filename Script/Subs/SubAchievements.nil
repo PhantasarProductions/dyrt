@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.06.28
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -210,7 +210,7 @@ group F_Achievements
 			end
 			wy = wy + 70
 		end
-		AchBox.SysFont.DrawText(sprintf("Mouse(%4d,%d) -> %s    %s <-   press: %s",Mouse.X,Mouse.Y,tostring(Mouse.X>x), tostring(Mouse.X<x+w) , tostring( Mouse.HeldLeft ) ),50,50)
+		// AchBox.SysFont.DrawText(sprintf("Mouse(%4d,%d) -> %s    %s <-   press: %s",Mouse.X,Mouse.Y,tostring(Mouse.X>x), tostring(Mouse.X<x+w) , tostring( Mouse.HeldLeft ) ),50,50)
 		if Mouse.X>x and Mouse.X<x+w and Mouse.HeldLeft
 			//CSayF("Above bottom: %s; Below top %s; Past Half: %s; Before half: %s; Not at end: %s; At start: %s",
 			//	tostring(Mouse.Y<y+h),
