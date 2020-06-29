@@ -67,7 +67,80 @@ group MScript
 		Map.ObjInt.Y = value - 44
 	end
 	
+	get int CharonPrice
+		int ret
+		for i=1,6
+			if RPG.Party[i] and RPG.Party[i]!=""
+				#+ ret RPG.GetChar(RPG.Party[i]).Stat("Level").Value
+			end
+		end
+		switch __skill
+			case 1
+				return math.ceil(ret/5)
+			case 2
+				return ret
+			case 3
+				return math.floor(ret * 5.1)
+			default
+				error(sprintf("Unknown skill: %d",__skill))
+		end
+		
+	end
+	
+	void CHARONRIDE()
+		int p
+		p = self.CharonPrice
+		if Yes(sprintf("Charon charges %9d shilders for a one way ride.\n\nDo you want to cross the Styx?",p))
+			if __cash<p
+				Notify("You don't have enough money to pay for the ride!")
+				return
+			end
+			self.Sailing = true
+			self.Going = self.NorthPoint
+			Map.ShowObj("CharonBoat")
+			Map.HideObj("NPC_Charon_S")
+			Map.HideObj("Player")
+			#- __cash p
+		end
+	end
+	
+	void NPC_CHARON_S()
+		MapScript.SASKIA("Charon")
+	end
+	
+	void STARTBOSS()
+		table xfoe
+		xfoe = {"Reg/Valkyrie","Reg/Restless_Spirit"}
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Valkyrie.wav"
+		StartCombat.Arena = "Underworld"
+		switch __skill
+			case 1
+				StartCombat.Foe[1] = "Boss/SuperValkyrie"
+			case 2
+				StartCombat.Foe[1] = xfoe[math.random(1,#xfoe)]
+				StartCombat.Foe[2] = "Boss/SuperValkyrie"
+				StartCombat.Foe[3] = xfoe[math.random(1,#xfoe)]
+			case 3
+				StartCombat.Foe[1] = xfoe[math.random(1,#xfoe)]
+				StartCombat.Foe[2] = "Boss/SuperValkyrie"
+				for i=3,6
+					StartCombat.Foe[i] = xfoe[math.random(1,#xfoe)]
+				end
+			default
+				error("Unknown difficulty setting "..__skill)
+		end
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void NPC_CHARON_N()
+		MapText("CHARON_DONE")
+	end
+	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("BossStart","SASKIA:StartBoss")
 	end
 	
 	void Draw()
@@ -78,9 +151,9 @@ group MScript
 			Map.Obj="Styx"
 			Map.ObjInt.InsertX = (Map.ObjInt.InsertX + 1) % 256
 			if self.Sailing
-				if self.BoatPoint<self.Going
+				if self.BoatPoint>self.Going
 					#- self.BoatPoint 2
-				elseif self.BoatPoint>self.Going
+				elseif self.BoatPoint<self.Going
 					#+ self.BoatPoint 2
 				else
 					Map.Obj="CharonBoat"
@@ -92,6 +165,7 @@ group MScript
 					Map.Obj="NPC_Charon_N"
 					Map.ObjBool.Visible = true
 					Map.GoToLayer("#003","NPC_Charon_N_SPOT")
+					self.Sailing = false
 				end
 			end
 		end
