@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.26
+// version: 20.06.30
 // End License Information
 
 
@@ -139,8 +139,23 @@ group MScript
 		MapText("CHARON_DONE")
 	end
 	
+	void AWARD()
+		if not Done.CompletedUnderworld
+			Achievements.Award("GJ_COMPLETE_UNDERWORLD")
+		end
+	end
+	
+	void LEAVE()
+		Field.LoadMap("CH5_DUNG_RedTemple")
+		Map.GoToLayer("#002","From_GJ")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("BossStart","SASKIA:StartBoss")
+		if not gv.Bool.CompletedUnderworld
+			Map.ZA_Enter("Award","AWARD")
+		end
+		Map.ZA_Enter("Leave","Leave")
 	end
 	
 	void Draw()
