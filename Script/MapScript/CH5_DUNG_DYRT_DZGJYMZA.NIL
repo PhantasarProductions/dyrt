@@ -155,6 +155,30 @@ group MScript
 	end
 	// End Memory
 	
+	void SANCTUARY()
+		Music.Play("Music/Dungeon/WeniariasTemple.wav")
+	end
+	
+	void LEAVESANCTUARY()
+		Music.Play("Music/Dungeon/Dzgjymza.wav")
+	end
+	
+	void NPC_WENIARIA()
+		if not Done.Weniaria_in_DzgjymzaKeep_In_Dyrt
+			MapScript.SASKIA("Weniaria")
+			Map.Layer="#009"
+			Map.Kill("DeurDzgjymza",true)
+			Map.Layer="#010"
+		else
+			MapText("WENRECOVER")
+		end
+		for i=1,8
+			var c
+			c = RPG.GetChar(RPG.Party[i])
+			c.Points( "HP").Have = c.Points( "HP").Maximum
+			c.Points("VIT").Have = c.Points("VIT").Maximum		
+		end
+	end
 	
 	void CONSTRUCTOR()
 		UseKettingKaart()
@@ -178,10 +202,14 @@ group MScript
 			Map.ZA_Leave("SECRET"..i,"HIDESECRET",i)
 		end
 		Map.ZA_Enter("StartPuzzle","ResetMemory")
+		Map.ZA_Enter("Sanctuary","Sanctuary")
+		Map.ZA_Leave("Sanctuary","LeaveSanctuary")
 	end
 	
 	void Draw()
-		self.DarkDraw()
+		if Map.Layer!="#010"
+			self.DarkDraw()
+		end
 		__yellow
 		if self.Kamer!=""
 			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
