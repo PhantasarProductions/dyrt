@@ -45,6 +45,28 @@
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
 
+
+#accept MScript
+
+quickmeta group MetaSwitch
+	index
+		return gv.Bool["DZGJYMZA_KEEP_SWITCH_DONE."..(key:upper())]
+	end
+	
+	newindex
+		gv.Bool["DZGJYMZA_KEEP_SWITCH_DONE."..(key:upper())] = value
+		for _,n in ipairs { "Jeracko","Rondomo","Aldarus","Kirana" }
+			if not MScript.Switch[n]
+				CSayF("Exiting: Switch for %s not yet flipped!",n)
+				return				
+			end
+			CSayF("Continueing: Switch for %s has been flipped",n)
+		end
+		error("Big doors in the main hall not yet scripted")
+	end
+end
+
+
 group MScript
 	
 	table KamerKop
@@ -58,6 +80,23 @@ group MScript
 		return CURRENT_KAMER
 	end
 	
+	link Switch = MetaSwitch
+		
+	void SWITCH_JERACKO()
+		self.Switch.Jeracko = true
+	end
+
+	void SWITCH_RONDOMO()
+		self.Switch.Rondomo = true
+	end
+	
+	void SWITCH_ALDARUS()
+		self.Switch.Aldarus = true
+	end
+	
+	void SWITCH_KIRANA()
+		self.Switch.Kirana = true
+	end
 	
 	void SHOWSECRET(int i)
 		Map.ShowByLabel("SECRET"..i)
