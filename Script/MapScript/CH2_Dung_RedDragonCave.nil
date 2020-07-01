@@ -39,7 +39,7 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 group MScript
-	
+		
 	void Panel()
 		MapScript.SASKIA("Puzzle")
 	end
