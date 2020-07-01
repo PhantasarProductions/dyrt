@@ -40,9 +40,24 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+#macro maxsecrets 2
+
 group MScript
 	
+	void SHOWSECRET(int i)
+		Map.ShowByLabel("SECRET"..i)
+	end
+	
+	void HIDESECRET(int i)
+		Map.HideByLabel("SECRET"..i)
+	end
+	
 	void CONSTRUCTOR()
+		for i=1,maxsecrets
+			Map.ZA_Enter("SECRET"..i,"SHOWSECRET",i)
+			Map.ZA_Leave("SECRET"..i,"HIDESECRET",i)
+		end
 	end
 	
 	void Draw()
