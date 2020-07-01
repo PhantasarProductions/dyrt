@@ -70,6 +70,7 @@ group MScript
 	link DarkDraw = CircularDarkness.Draw__StyleStretch
 	
 	void CONSTRUCTOR()
+		UseKettingKaart()
 		self.Font = GetFont("BIGTEXT")
 		self.KamerNames = {
 			["#000"] = "Lobby",
