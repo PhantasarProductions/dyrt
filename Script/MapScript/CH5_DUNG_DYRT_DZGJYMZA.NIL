@@ -41,6 +41,7 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
+#use "Script/Use/MapScript/Memory"
 
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
@@ -85,10 +86,6 @@ group MScript
 	void SWITCH_JERACKO()
 		self.Switch.Jeracko = true
 	end
-
-	void SWITCH_RONDOMO()
-		self.Switch.Rondomo = true
-	end
 	
 	void SWITCH_ALDARUS()
 		self.Switch.Aldarus = true
@@ -107,6 +104,52 @@ group MScript
 	end
 	
 	link DarkDraw = CircularDarkness.Draw__StyleStretch
+	
+		// Memory puzzle
+	delegate NPC_MEMORY1
+	delegate NPC_MEMORY2
+	delegate NPC_MEMORY3
+	delegate NPC_MEMORY4
+	delegate NPC_MEMORY5
+	delegate NPC_MEMORY6
+	delegate NPC_MEMORY7
+	delegate NPC_MEMORY8
+	delegate NPC_MEMORY9
+	delegate NPC_MEMORY10
+	delegate NPC_MEMORY11
+	delegate NPC_MEMORY12
+	delegate NPC_MEMORY13
+	delegate NPC_MEMORY14
+	delegate NPC_MEMORY15
+	delegate NPC_MEMORY16
+	
+	link DoneMemory = gv.Bool.Done_DarkStorage_Rondomo_MemoryPuzzle
+	
+	// Memory
+	void RESETMEMORY()
+		if self.Switch.Rondomo
+			return
+		end
+		Memory.Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Aziella"})
+	end
+	
+	link MEMORYCYCLE = Memory.Cycle
+	
+	void MemoryPuzzleSolved()
+		LoadAudio("SFX/Puzzle/Solved.wav").Play()
+		Map.Kill("StartPuzzle",true)
+		self.KILLMEMORY()
+		Party.LvUp()
+	end
+	
+	void KILLMEMORY()
+		for i=1,16
+			Map.Kill("NPC_MEMORY"..i,true)
+		end
+		self.Switch.Rondomo = true
+	end
+	// End Memory
+	
 	
 	void CONSTRUCTOR()
 		UseKettingKaart()
@@ -129,6 +172,7 @@ group MScript
 			Map.ZA_Enter("SECRET"..i,"SHOWSECRET",i)
 			Map.ZA_Leave("SECRET"..i,"HIDESECRET",i)
 		end
+		Map.ZA_Enter("StartPuzzle","ResetMemory")
 	end
 	
 	void Draw()
