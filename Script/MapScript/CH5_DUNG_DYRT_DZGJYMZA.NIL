@@ -63,7 +63,12 @@ quickmeta group MetaSwitch
 			end
 			CSayF("Continueing: Switch for %s has been flipped",n)
 		end
-		error("Big doors in the main hall not yet scripted")
+		// error("Big doors in the main hall not yet scripted")
+		string l
+		l = Map.Layer
+		Map.Layer="#001"
+		Map.Kill("Deur",true)
+		Map.Layer = l
 	end
 end
 
