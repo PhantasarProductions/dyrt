@@ -40,6 +40,7 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+#use "Script/Use/MapScript/CircularDarkness"
 
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
@@ -66,6 +67,8 @@ group MScript
 		Map.HideByLabel("SECRET"..i)
 	end
 	
+	link DarkDraw = CircularDarkness.Draw__StyleStretch
+	
 	void CONSTRUCTOR()
 		self.Font = GetFont("BIGTEXT")
 		self.KamerNames = {
@@ -89,6 +92,7 @@ group MScript
 	end
 	
 	void Draw()
+		self.DarkDraw()
 		__yellow
 		if self.Kamer!=""
 			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
