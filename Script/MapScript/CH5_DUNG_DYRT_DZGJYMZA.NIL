@@ -42,8 +42,21 @@
 #use "Script/Use/StartCombatMod"
 
 #macro maxsecrets 2
+#macro CURRENT_KAMER self.KamerNames[Map.Layer]
 
 group MScript
+	
+	table KamerKop
+	table KamerNames
+	
+	var Font
+	
+	get string Kamer
+		assert(CURRENT_KAMER,"No data for area: "..Map.Layer)
+		self.KamerKop[CURRENT_KAMER] = self.KamerKop[CURRENT_KAMER] or self.Font.Text(CURRENT_KAMER)
+		return CURRENT_KAMER
+	end
+	
 	
 	void SHOWSECRET(int i)
 		Map.ShowByLabel("SECRET"..i)
@@ -54,6 +67,21 @@ group MScript
 	end
 	
 	void CONSTRUCTOR()
+		self.Font = GetFont("BIGTEXT")
+		self.KamerNames = {
+			["#000"] = "Lobby",
+			["#001"] = "Grand Hall",
+			["#002"] = "Upstairs Corridor",
+			["#003"] = "Wanda's bedroom",
+			["#004"] = "Lord Dzgjymza's bedroom",
+			["#005"] = "Jeracko's bedroom",
+			["#006"] = "Rondomo's bedroom",
+			["#007"] = "Aldarus' bedroom",
+			["#008"] = "Kirana's bedroom",
+			["#009"] = "Passage",
+			["#010"] = "Sanctuary",
+			["#011"] = "Audience Chamber"
+		}
 		for i=1,maxsecrets
 			Map.ZA_Enter("SECRET"..i,"SHOWSECRET",i)
 			Map.ZA_Leave("SECRET"..i,"HIDESECRET",i)
@@ -61,6 +89,11 @@ group MScript
 	end
 	
 	void Draw()
+		__yellow
+		if self.Kamer!=""
+			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
+		end
+	
 	end
 	
 	void Update()
