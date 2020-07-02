@@ -1,0 +1,65 @@
+class ctroep
+	int x
+	int y
+	var img
+	
+	void Draw()
+		self.img.Draw(self.x,self.y)
+	end
+	
+	void CONSTRUCTOR(int x,int y, img)
+		self.x = x
+		self.y = y
+		self.img = img
+		self.lijst.AddLast(self)
+	end
+	
+	void DESTRUCTOR()
+		CSayF("Cleaning up crap at (%4d,%4d)",self.x,self.y)
+	end
+	
+	static var lijst
+	
+	static void DrawAll()
+		for o in self.lijst.Each
+			o.Draw()
+		end
+	end
+	
+end
+
+module Arena_Dzgjymza_Castle
+
+	table itroep
+	link troep = ctroep.lijst
+	var Muur
+	var Vloer
+	
+	void CONSTRUCTOR()
+		self.Vloer    = LoadIfNew("GFX/Textures/Dyrt/Dzgjymza/Floor.png",  "ARENA_DZGJYMZA_FLOOR")
+		self.Muur     = LoadIfNew("GFX/Textures/Dyrt/Dzgjymza/W__N.png" ,  "ARENA_DZGJYMZA_WALL")
+		self.itroep[1] = LoadIfNew("GFX/Textures/Dyrt/Dzgjymza/Pillar.PNG","ARENA_DZGJYMZA_PILLAR")
+		self.itroep[2] = LoadIfNew("GFX/Textures/Objects/Kaars Uit.png",   "ARENA_DZGJYMZA_CANDLE")
+		int x = 100
+		int y = 200
+		self.troep = new TLinkedList
+		repeat
+			#+ y math.random(100,500)
+			if y>Screen.H/2
+				#- y (Screen.H/2)
+				#+ y 200
+				#+ x math.random(100,500)
+			end
+			if x>=Screen.W-100
+				break
+			end
+		forever
+	end
+	
+	void Draw()
+		self.Vloer.Tile(0,0,Screen.W,Screen.H)
+		self.Muur.Tile(0,0,Screen.W,96)
+		ctroep.DrawAll()
+	end
+
+end
