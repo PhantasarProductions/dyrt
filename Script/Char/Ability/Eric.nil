@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.28
+// version: 20.07.03
 // End License Information
 do
 	int s
@@ -75,7 +75,9 @@ do
 		           = { ['Skill_Black Dragon'] = (s*5)+10 },
 		Gloom      = { ['Skill_Black Dragon'] = s + (s^2) },
 		
-		Yggdrassil = { SealedBoss = true }
+		-- Misc
+		Yggdrassil = { SealedBoss = true },
+		Dispell    = { ['Skill_Red Dragon'] = s * 5, ['Skill_Green Dragon'] = s * 5, ['Skill_White Dragon'] = s * 5, ['Skill_Black Dragon'] = s * 5}
 		
 	}
 	#endpure

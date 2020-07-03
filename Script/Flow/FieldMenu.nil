@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.06.26
+// Version: 20.07.03
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -333,6 +333,36 @@ group Flow_FieldMenu
 			elseif prefixed(k,"Cure") and v
 				Help[#Help+1]="Cures "..Right(k,#k-4)
 			end
+			if prefixed(k,"Buff")
+				string stat
+				stat = Right(k,#k-4)
+				if v>0
+					Help[#Help+1]=sprintf("Raises %s by %4d%%",stat,v)
+				elseif v<0
+					Help[#Help+1]=sprintf("Lowers %s by %4d%%",stat,math.abs(v))
+				end
+			end
+		end
+		// Targets must be last!!!
+		if ($InvItemHover.Type=="Item" and $InvItemHover.ItemType=="Consumable" ) or ($InvItemHover.Type=="Ability")
+			string Targets = "Targets: "
+			switch $InvItemHover.Target
+				case "OS"
+					Targets = Targets.."Self"
+				case "EV"
+					Targets = Targets.."Everybody"
+				case "1A"
+					Targets = Targets.."One ally"
+				case "AA"
+					Targets = Targets.."All allies"
+				case "1F"
+					Targets = Targets.."One foe"
+				case "AF"
+					Targets = Targets.."All foes"
+				default
+					Targets = Targets.."???"
+			end
+			Help[#Help+1] = Targets
 		end
 	end
 	

@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.05
+// version: 20.07.03
 // End License Information
 
 do
@@ -50,6 +50,8 @@ do
 		-- Befindo Enchanments
 		MysticCare     = { Start = true },
 		Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) },
+		Permanence     = { ["Skill_Befindo enchants"] = s * 6 },
+		Vanish         = { ["Skill_Befindo enchants"] = s * 7 },
 	
 		-- Scharum
 		Power2x        = { Scharum = true },

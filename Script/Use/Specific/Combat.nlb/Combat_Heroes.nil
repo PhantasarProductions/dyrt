@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.06.28
+// Version: 20.07.02
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -384,10 +384,30 @@ group Stage_SelectTarget extends Stage
 						DarkText.Font(CombatTime.FontGauge,sk,fight.X+80,ystat)
 						ystat = ystat + 20
 					end
+					for _,s in ipairs(fight.Ch.ListStats)
+						if prefixed(s,"BUFF_")
+							int v
+							string n
+							n = Right(s,#s-5)
+							v = fight.Ch.Stat(s).Value
+							if v>0
+								Color(180,255,0)
+								hstat = true
+								DarkText.Font(CombatTime.FontGauge,sprintf("%s up %d",n,v),fight.X+80,ystat)
+								ystat = ystat + 20
+							elseif v<0
+								Color(255,0,0)
+								hstat = true
+								DarkText.Font(CombatTime.FontGauge,sprintf("%s dn %d",n,math.abs(v)),fight.X+80,ystat)
+								ystat = ystat + 20
+							end
+						end
+					end
 					if not hstat
 						Color(180,255,0)
 						DarkText.Font(CombatTime.FontGauge,"Status: Okay",fight.X+80,ystat)
 					end
+							
 				end
 			end
 		end

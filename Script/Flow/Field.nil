@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.06.16
+// Version: 20.07.03
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -442,6 +442,26 @@ group FlowField
 		end
 	end
 	
+	void ResetBuffs(a)
+		for i=1,8
+			string ctag
+			ctag = RPG.Party[i] or ""
+			if ctag!=""
+				CSayF("Char #%d: %s",i,ctag)
+				var ch
+				ch = RPG.GetChar(ctag)
+				for i,stat in ipairs(ch.ListStats)
+					if prefixed(stat,"BUFF_")
+						CSayF("> %5d: Reset %s",i,stat)
+						if (not a) or (a=="neg" and ch.Stat(stat).Value<0) or (a=="pos" and ch.Stat(stat).Value>0)
+							ch.Stat(stat).Value = 0
+						end
+					end
+				end
+			end
+		end
+	end
+	
 	void SaveSpot(string col)
 		for i=1,8
 			if RPG.Party[i] and RPG.Party[i]!=""
@@ -451,16 +471,23 @@ group FlowField
 					case "RED"
 						if __skill!=3
 							RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
+						else
+							self.ResetBuffs("pos")
 						end
 						if __skill==1
 							RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
+							self.ResetBuffs("neg")
 						end
 					case "GREEN"
 						if __skill!=3
 							RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
 							RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
+							self.ResetBuffs("neg")
+						else
+							self.ResetBuffs("pos")
 						end
 					case "BLUE"
+						self.ResetBuffs()
 						RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
 						RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
 						gv.String.Respawn_Map = $Map.LoadedMap
@@ -992,9 +1019,23 @@ global void BUB_Draw()
 end
 
 
+int BuffTimer
+var BuffStats
+
+table mkBuffStats(ch)
+	table ret
+	for i,s in ipairs(ch.ListStats)
+		if prefixed(s,"BUFF_")
+			CSayF("%3d: Adding BuffStat: %s",i,s)
+			ret[#ret+1] = s
+		end
+	end
+	return ret
+end
+
 global void BUB_Update()
 	static int eox
-	static int eoy
+	static int eoy	
 	bool Acted = false
 	
 	// debug
@@ -1100,10 +1141,32 @@ global void BUB_Update()
 		end
 		eox=enx
 		eoy=eny
-	end
-	
+		// Buff down
+		BuffTimer = (BuffTimer + 1) % 30
+		if BuffTimer == 0
+			for i=1,8
+				string s
+				s = RPG.Party[i] or ""
+				if s!=""
+					var ch
+					ch = RPG.GetChar(s)
+					BuffStats = BuffStats or mkBuffStats(ch)
+					for _,s in ipairs(BuffStats)
+						if prefixed(s,"BUFF_")
+							var st
+							st = ch.Stat(s)
+							if st.Value<0
+								st.Value = math.max(st.Value+(3/__skill))
+							elseif st.Value>0
+								st.Value = math.min(st.Value-__skill)
+							end
+						end
+					end
+				end
+			end
+		end
+	end	
 	Party.Click()
-
 end
 
 

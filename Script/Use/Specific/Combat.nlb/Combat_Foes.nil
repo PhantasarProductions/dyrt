@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 20.05.17
+// Version: 20.07.02
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -71,6 +71,8 @@ class Foe extends Fighter
 	table Steal
 	int FlickStance = 0
 	bool StolenFrom = false
+	//int maxfoenum
+	// link maxfoenum = Buff.maxfoenum
 	
 	
 	get int Height
@@ -178,6 +180,7 @@ class Foe extends Fighter
 	static void Compile(int num, string FoeFile,FoeOversoul)
 		var myFoe
 		var myFoeUse
+		Buffs.maxfoenum = math.max(Buffs.maxfoenum,num)
 		if FoeOversoul
 			CSay("Due to an oversoul request let's destroy the old record!")
 			RPG.KillChar(sprintf("FOE_%d",num))
