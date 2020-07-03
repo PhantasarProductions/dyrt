@@ -72,5 +72,3 @@
 	call Party.LvUp,"Brendor"
 	call AllSealedCheck
 	end
-	
-
