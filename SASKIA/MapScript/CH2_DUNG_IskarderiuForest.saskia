@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.06.16
+; version: 20.07.03
 ; End License Information
 
 :OnLoad
@@ -53,7 +53,7 @@
 	call FlowField.TravelEmblem,"RED_SEAL"
 	mov 1,Inventory.EQW_MERYA_DAGGER_SUPER
 	call MiniMsg.CreateCenter,"Ultra weapon 'Violator' obtained!",180,0,255
-	mov true,SealedDefeated.Rebecca
-	call Party.LvUp,"Rebecca"
+	mov true,SealedDefeated.Merya
+	call Party.LvUp,"Merya"
 	call AllSealedCheck
 	end
