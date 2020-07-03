@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.02
+; version: 20.07.03
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -51,4 +51,23 @@
 	call MapText,"Weniaria"
 	call Map.HideByLabel,"H"
 	call Map.ShowObj,"Player"
+	end
+	
+:RedSeal
+:REDSEAL
+	;call MapScript.RedSeal
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/Sealed.wav",StartCombat.Music 
+	mov "Dzgjymza",StartCombat.Arena
+	mov "Sealed/KingSlime",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	;call End RedSeal
+	call FlowField.TravelEmblem,"RED_SEAL"
+	mov 1,Inventory.eqw_Brendor_Hammer_Super
+	call MiniMsg.CreateCenter,"Ultra armor 'Ultracrush' obtained!",180,0,255
+	mov true,SealedDefeated.Brendor
+	call Party.LvUp,"Brendor"
+	call AllSealedCheck
 	end

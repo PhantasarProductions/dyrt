@@ -74,7 +74,9 @@ group Buffs
 		self.EnemyInterval = self.SetEnemyInterval
 		self.HeroInterval = self.SetHeroInterval
 	end
-
+	
+	table herostat
+	table enemstat
 	void BuffCheck()
 		self.Timer++
 		// Decrease player buff and enemy debuff
@@ -91,7 +93,8 @@ group Buffs
 					f = self.Fighter.ByTag[chtag]
 					// assert(f,"Character doesn't exist `"..chtag.."`!! #"..i..tostring(RPG.Party[i]))
 					ch = RPG.GetChar(chtag)
-					stl = ch.ListStats
+					self.herostat[chtag] = self.herostat[chtag] or ch.ListStats
+					stl = self.herostat[chtag] 
 					for _,st in ipairs(stl)
 						int pr = 0
 						if i<=4
@@ -114,7 +117,8 @@ group Buffs
 					if f
 						ch = RPG.GetChar(chtag)
 						if ch.Points("HP").Have>0
-							stl = ch.ListStats
+							self.enemstat[chtag] = self.enemstat[chtag] or ch.ListStats
+							stl = self.enemstat[chtag]
 							for _,st in ipairs(stl)
 								if prefixed(st,"BUFF_") and ch.Stat(st).Value<0
 									++ch.Stat(st).Value

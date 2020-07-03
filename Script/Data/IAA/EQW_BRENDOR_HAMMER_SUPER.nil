@@ -4,24 +4,24 @@
 do
 
 
-table ret_EQW_BRENDOR_HAMMER8
-ret_EQW_BRENDOR_HAMMER8={
+table ret_EQW_BRENDOR_HAMMER_SUPER
+ret_EQW_BRENDOR_HAMMER_SUPER={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
-	["Attack"] = 0,
+	["Attack"] = 123,
 	["AttackAlt"] = "",
 	["AttackCancel"] = false,
 	["AttackStat"] = "Intelligence",
 	["AttackType"] = "Magical",
-	["Block_Fear"] = false,
+	["Block_Fear"] = true,
 	["Block_Silence"] = false,
 	["BlockSilence"] = false,
 	["BuffAccuracy"] = 0,
-	["BuffAgility"] = 0,
-	["BuffDefense"] = 0,
-	["BuffEvasion"] = 0,
+	["BuffAgility"] = 25,
+	["BuffDefense"] = 75,
+	["BuffEvasion"] = 25,
 	["BuffIntelligence"] = 0,
-	["BuffResistance"] = 0,
+	["BuffResistance"] = 75,
 	["BuffStrength"] = 0,
 	["BuyPrice"] = 20000,
 	["CauseConfusion"] = false,
@@ -37,7 +37,7 @@ ret_EQW_BRENDOR_HAMMER8={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 10,
+	["COM2ACT"] = 300,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -51,7 +51,7 @@ ret_EQW_BRENDOR_HAMMER8={
 	["CureSleep"] = false,
 	["CureZombie"] = false,
 	["DefenseStat"] = "Resistance",
-	["Description"] = "I came in like a wrecking ball! I never meant to break the wall",
+	["Description"] = "Can we destroy it! Yes, we can!",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
@@ -84,21 +84,21 @@ ret_EQW_BRENDOR_HAMMER8={
 	["EQP__RESIST_Stat_Sleep"] = 0,
 	["EQP__RESIST_Stat_Zombie"] = 0,
 	["EQP_Accuracy"] = 0,
-	["EQP_Agility"] = -14,
+	["EQP_Agility"] = -30,
 	["EQP_Defense"] = 5,
-	["EQP_Evasion"] = -20,
+	["EQP_Evasion"] = -50,
 	["EQP_Intelligence"] = 0,
 	["EQP_Resistance"] = 0,
-	["EQP_Strength"] = 150,
+	["EQP_Strength"] = 300,
 	["EqRebecca"] = false,
 	["EqScyndi"] = false,
 	["EqShanda"] = false,
 	["Equip_Attack"] = "ACT_ATTACK",
 	["EqYasathar"] = false,
 	["EqYoungIrravonia"] = false,
-	["GainAP"] = 0,
+	["GainAP"] = 25,
 	["GainEXP"] = 0,
-	["GainSkill0"] = 0,
+	["GainSkill0"] = 95,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
 	["GainSkill1"] = 0,
@@ -122,7 +122,7 @@ ret_EQW_BRENDOR_HAMMER8={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Wrechking Ball!",
+	["Name"] = "Ultracrush",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
@@ -132,7 +132,7 @@ ret_EQW_BRENDOR_HAMMER8={
 	["Type"] = "Item",
 }
 
-return ret_EQW_BRENDOR_HAMMER8
+return ret_EQW_BRENDOR_HAMMER_SUPER
 
 
 end

@@ -67,7 +67,7 @@ do
 		Shock      = { Skill_Thrur = 1 },
 		Jolt       = { Skill_Thrur = 5},
 		Lightning  = { Skill_Thrur = 6*s },
-		Mjolnir    = { Skill_Thrur = 15*s },
+		Mjollnir    = { Skill_Thrur = 15*s },
 	
 		-- Malabia
 		Shine       = { Skill_Malabia = 1 },
