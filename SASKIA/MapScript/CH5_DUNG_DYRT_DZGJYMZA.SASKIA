@@ -38,9 +38,10 @@
 	call Fader,Field.MapData.Title
 	end
 
-:NPC_SASKIA_Blenchy
-	; call SCENRAIO
+:NPC_SASKIA_Blenchy	
+	call MapText,"BLENCHY"
 	; call InitBoss
+	call error,"Blenchy boss not yet scrupted"
 	call Map.Kill,"DeurWeniaria",true
 	call FlowField.TravelEmblem,"NPC_SASKIA_Blenchy"
 	end
@@ -71,3 +72,5 @@
 	call Party.LvUp,"Brendor"
 	call AllSealedCheck
 	end
+	
+
