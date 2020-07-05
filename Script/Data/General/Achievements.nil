@@ -441,10 +441,12 @@ ret = {
 
 	},
 	["BOSS_GIANTTIGER"] = {
+		["allow_trueabyss"] = false,
 		["AutoProcess"] = true,
 		["Description"] = "Beat the giant tiger",
 		["hidden"] = false,
 		["Name"] = "Eye of the tiger",
+		["only_trueabyss"] = false,
 		["ProcessMax"] = 1,
 		["ProcessString"] = "Encounter the tiger and be a survivor!",
 		["ProcessValue"] = "KILLED_BOSS_BIGTIGER",
@@ -455,11 +457,30 @@ ret = {
 		["skill_check"] = false,
 
 	},
+	["BOSS_GREEENDRAGON"] = {
+		["allow_trueabyss"] = false,
+		["AutoProcess"] = true,
+		["Description"] = "Defeat the green dragon",
+		["hidden"] = false,
+		["Name"] = "Ten green bottles are hanging on the wall!",
+		["only_trueabyss"] = false,
+		["ProcessMax"] = 1,
+		["ProcessString"] = "",
+		["ProcessValue"] = "KILLED_BOSS_GREENDRAGON",
+		["require_gamejolt"] = false,
+		["skill_1"] = true,
+		["skill_2"] = true,
+		["skill_3"] = true,
+		["skill_check"] = false,
+
+	},
 	["BOSS_GREENGUARDIAN"] = {
+		["allow_trueabyss"] = false,
 		["AutoProcess"] = true,
 		["Description"] = "Defeat the green guardian",
 		["hidden"] = false,
 		["Name"] = "The Green Children",
+		["only_trueabyss"] = false,
 		["ProcessMax"] = 1,
 		["ProcessString"] = "",
 		["ProcessValue"] = "KILLED_BOSS_GREENGUARDIAN",
@@ -591,10 +612,12 @@ ret = {
 
 	},
 	["BOSS_REDDRAGON"] = {
+		["allow_trueabyss"] = false,
 		["AutoProcess"] = true,
 		["Description"] = "Defeat the red dragon",
 		["hidden"] = false,
 		["Name"] = "NO! Not the red button!",
+		["only_trueabyss"] = false,
 		["ProcessMax"] = 1,
 		["ProcessString"] = "",
 		["ProcessValue"] = "KILLED_BOSS_REDDRAGON",
