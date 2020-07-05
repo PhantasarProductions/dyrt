@@ -32,18 +32,29 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.03
+; version: 20.07.05
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
 
 :NPC_SASKIA_Blenchy	
+	; pre boss
 	call MapText,"BLENCHY"
-	; call InitBoss
-	call error,"Blenchy boss not yet scrupted"
+	; boss fight itself
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/UndeadBoss.wav",StartCombat.Music 
+	mov "Dzgjymza",StartCombat.Arena
+	mov "Boss/Blenchy2",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+
+	
+	; post boss
 	call Map.Kill,"DeurWeniaria",true
 	call FlowField.TravelEmblem,"NPC_SASKIA_Blenchy"
+	call MapText,"BLENCHYAFTER"
 	end
 	
 :Weniaria

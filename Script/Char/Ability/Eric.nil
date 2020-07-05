@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.03
+// version: 20.07.05
 // End License Information
 do
 	int s
@@ -63,6 +63,7 @@ do
 		NeutPoison = { ["Skill_Green Dragon"] = 1 + s },
 		BioHazard  = { ["Skill_Green Dragon"] = 8 },
 		Vitalize   = { ["Skill_Green Dragon"] = 5 * s },
+		Bact       = { ["Skill_Green Dragon"] = math.min((s*2)^s,60), Skill_Sword=s*5 },
 		
 		-- Black
 		Darkness   = { ["Skill_Black Dragon"] = 1 },

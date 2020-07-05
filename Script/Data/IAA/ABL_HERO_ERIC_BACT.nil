@@ -4,14 +4,14 @@
 do
 
 
-table ret_ABL_HERO_REBECCA_POWER2X
-ret_ABL_HERO_REBECCA_POWER2X={
+table ret_ABL_HERO_ERIC_BACT
+ret_ABL_HERO_ERIC_BACT={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 25,
-	["Attack"] = 200,
-	["AttackAlt"] = "",
+	["AP_Cost"] = 50,
+	["Attack"] = 125,
+	["AttackAlt"] = "None",
 	["AttackCancel"] = false,
-	["AttackStat"] = "Strength",
+	["AttackStat"] = "Defense",
 	["AttackType"] = "Physical",
 	["Block_Fear"] = true,
 	["Block_Silence"] = false,
@@ -28,16 +28,16 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["CauseCurse"] = false,
 	["CauseDeath"] = false,
 	["CauseDestruction"] = false,
-	["CauseDisease"] = false,
+	["CauseDisease"] = true,
 	["CauseExhaustion"] = false,
 	["CauseFear"] = false,
 	["CauseParalysis"] = false,
-	["CausePoison"] = false,
+	["CausePoison"] = true,
 	["CauseSilence"] = false,
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 300,
+	["COM2ACT"] = 100,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -50,8 +50,8 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["CureSilence"] = false,
 	["CureSleep"] = false,
 	["CureZombie"] = false,
-	["DefenseStat"] = "Defense",
-	["Description"] = "You only live twice",
+	["DefenseStat"] = "Resistance",
+	["Description"] = "Bad for your health!",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
@@ -98,7 +98,7 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["EqYoungIrravonia"] = false,
 	["GainAP"] = 0,
 	["GainEXP"] = 0,
-	["GainSkill0"] = 120,
+	["GainSkill0"] = 25,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
 	["GainSkill1"] = 0,
@@ -107,7 +107,7 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["GainSkill2"] = 0,
 	["GainSkill2All"] = false,
 	["GainSkill2Chars"] = "",
-	["GainSkill3"] = 0,
+	["GainSkill3"] = 60,
 	["GainSkill3All"] = false,
 	["GainSkill3Chars"] = "",
 	["GainSkill4"] = 0,
@@ -122,17 +122,17 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Double Power Strike",
+	["Name"] = "Bacteria Sword",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
 	["SpellAniScript"] = "",
-	["Stance"] = "CAST",
+	["Stance"] = "ATTACK",
 	["Target"] = "1F",
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_REBECCA_POWER2X
+return ret_ABL_HERO_ERIC_BACT
 
 
 end

@@ -4,13 +4,13 @@
 do
 
 
-table ret_ABL_HERO_REBECCA_POWER2X
-ret_ABL_HERO_REBECCA_POWER2X={
+table ret_ABL_HERO_AZIELLA_DOUBLE_BOLT
+ret_ABL_HERO_AZIELLA_DOUBLE_BOLT={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 25,
+	["AP_Cost"] = 30,
 	["Attack"] = 200,
 	["AttackAlt"] = "",
-	["AttackCancel"] = false,
+	["AttackCancel"] = true,
 	["AttackStat"] = "Strength",
 	["AttackType"] = "Physical",
 	["Block_Fear"] = true,
@@ -37,7 +37,7 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 300,
+	["COM2ACT"] = 100,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -122,17 +122,17 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Double Power Strike",
+	["Name"] = "Double Bolt",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
-	["SpellAniScript"] = "",
+	["SpellAniScript"] = "AziellaShoot",
 	["Stance"] = "CAST",
 	["Target"] = "1F",
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_REBECCA_POWER2X
+return ret_ABL_HERO_AZIELLA_DOUBLE_BOLT
 
 
 end

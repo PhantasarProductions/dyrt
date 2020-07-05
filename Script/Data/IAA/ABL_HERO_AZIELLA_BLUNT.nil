@@ -4,16 +4,16 @@
 do
 
 
-table ret_ABL_HERO_REBECCA_POWER2X
-ret_ABL_HERO_REBECCA_POWER2X={
+table ret_ABL_HERO_AZIELLA_BLUNT
+ret_ABL_HERO_AZIELLA_BLUNT={
 	["AccuracyCheck"] = false,
-	["AP_Cost"] = 25,
-	["Attack"] = 200,
-	["AttackAlt"] = "",
+	["AP_Cost"] = 100,
+	["Attack"] = 0,
+	["AttackAlt"] = "None",
 	["AttackCancel"] = false,
-	["AttackStat"] = "Strength",
-	["AttackType"] = "Physical",
-	["Block_Fear"] = true,
+	["AttackStat"] = "Intelligence",
+	["AttackType"] = "Magical",
+	["Block_Fear"] = false,
 	["Block_Silence"] = false,
 	["BlockSilence"] = false,
 	["BuffAccuracy"] = 0,
@@ -22,7 +22,7 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["BuffEvasion"] = 0,
 	["BuffIntelligence"] = 0,
 	["BuffResistance"] = 0,
-	["BuffStrength"] = 0,
+	["BuffStrength"] = -50,
 	["BuyPrice"] = 100,
 	["CauseConfusion"] = false,
 	["CauseCurse"] = false,
@@ -37,7 +37,7 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 300,
+	["COM2ACT"] = 350,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -50,8 +50,8 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["CureSilence"] = false,
 	["CureSleep"] = false,
 	["CureZombie"] = false,
-	["DefenseStat"] = "Defense",
-	["Description"] = "You only live twice",
+	["DefenseStat"] = "Resistance",
+	["Description"] = "Your blade is useless now",
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
@@ -98,11 +98,11 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["EqYoungIrravonia"] = false,
 	["GainAP"] = 0,
 	["GainEXP"] = 0,
-	["GainSkill0"] = 120,
+	["GainSkill0"] = 0,
 	["GainSkill0All"] = false,
 	["GainSkill0Chars"] = "",
-	["GainSkill1"] = 0,
-	["GainSkill1All"] = false,
+	["GainSkill1"] = 75,
+	["GainSkill1All"] = true,
 	["GainSkill1Chars"] = "",
 	["GainSkill2"] = 0,
 	["GainSkill2All"] = false,
@@ -122,17 +122,17 @@ ret_ABL_HERO_REBECCA_POWER2X={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Double Power Strike",
+	["Name"] = "Blunt",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
-	["SpellAniScript"] = "",
+	["SpellAniScript"] = "Sparkle",
 	["Stance"] = "CAST",
 	["Target"] = "1F",
 	["Type"] = "Ability",
 }
 
-return ret_ABL_HERO_REBECCA_POWER2X
+return ret_ABL_HERO_AZIELLA_BLUNT
 
 
 end

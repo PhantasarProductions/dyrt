@@ -1,0 +1,202 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Blenchy2.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.07.05
+// End License Information
+
+
+
+//
+//     During the game you'll encounter Blenchy twice.
+//     
+//     The first time you meet her (in the first prison of the game), 
+//     she'll just cast some random spells on you (which may still offer a hard 
+//     fight nonetheless).
+//     
+//     In the second encounter in Lord Dzgjymza's keep, she'll be offering up
+//     much more of a dangerous fight, or at least depending on how well you
+//     worked out your characters.
+//     
+//     She'll study the special abilities of one of your characters and use
+//     those against you. 
+//     
+//     Every 3 turns she'll make a new study. The more dangerous spells you
+//     have acquired already, the harder Blenchy can become to defeat. That
+//     is the idea.
+//     
+//     
+//     The study ability itself can be found in:
+//          Scripts/Use/Game/Combat/AbilityEffect/BlenchyStudy.lua
+//          
+//     How to use this ability is described in this script. ;)     
+// 
+//
+
+// Please note that this is a kind of a translation of code original written in Lua to NIL, with some adaptions for the new system.
+
+
+global var AI_Blenchy
+
+module Blenchy_AI2
+	// -- @IF IGNOREME
+	// E_IMove = {}
+	// -- @FI
+
+	int BlenchyTurns
+	table BlenchySpells
+
+	void BlenchyStudy(foe)
+		CSay("Blenchy will study the a party member")
+		int TimeOut=10000
+		bool GoedGekeurd
+		table nact
+		// FoeAct = {
+		//
+		//	TargetGroup = "Heroes",
+		//	Target      = rand(1,4),
+		//	Action      = "ABL",
+		//	Ability     = "BLENCHY_STUDY",
+		// ActSpeed    = 300
+		//
+		// }
+		
+		repeat
+			assert(TimeOut>=0,"Blenchy Study -- Timeout!")
+			nact.ActTag = "ZZZ_BLENCHY_STUDY"
+			//nact.Targets = {foes[math.random(1,#foes)]}
+			nact.Targets = { Fighter.ByTag[RPG.Party[math.random(1,4)]] }
+			nact.ExeTag = foe.Tag
+			GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+			--TimeOut
+		until GoedGekeurd
+		foe.NextAct = new Actions(nact)
+		foe.NextActSpeed = math.random(150,250)
+		foe.GaugePosition = 10001
+
+		self.BlenchyTurns=3
+	end
+	
+	//
+	//
+	// -- How does Blenchy operate?
+	void Decide(foe)
+		int TimeOut=20000
+		int abr
+		var nitem
+		table heroes
+		table foes
+		table nact
+			
+		bool GoedGekeurd
+		
+		for tag,hero in pairs(Fighter.Team.Hero)
+			heroes[#heroes+1]=hero
+		end
+		for tag,ifoe in pairs(Fighter.Team.Foe)
+			foes[#foes+1]=ifoe
+		end
+
+		// function E_IMove.Blenchy(ACTOR)
+		// if (not BlenchySpells) or (not BlenchyTurns) or BlenchyTurns==0 then return BlenchyStudy() end
+		if self.BlenchyTurns <= 0 or (not self.BlenchySpells) or (#self.BlenchySpells<0)
+			self.BlenchyStudy(foe)
+			return
+		end
+		// FoeAct = FoeAct or {}
+		abr = math.random(1,#self.BlenchySpells)
+		// FoeAct[5] = {
+		//	Action   = "ABL",
+		//	Ability  = BlenchySpells[abr],
+		//	ActSpeed = 300
+		// }
+		nitem = Item[self.BlenchySpells[abr]] // local abl = Abilities[BlenchySpells[abr]]
+		nact.ActTag = self.BlenchySpells[abr]
+		nact.ExeTag = foe.Tag
+		repeat
+			// target
+			switch nitem.Target
+				case "OS"
+					nact.Targets = {foe}
+					GoedGekeurd=true
+				case "1A"
+					nact.Targets = {foes[math.random(1,#foes)]}
+					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+				case "AA"
+					nact.Targets = {}
+					for check in each(foes)
+						if check.Char.Points("HP").Have>0
+							nact.Targets[#nact.Targets+1]=check
+						end
+					end
+					GoedGekeurd = #nact.Targets>0
+				case "1F"
+					int maxheroes
+					maxheroes = #heroes
+					if maxheroes>4
+						maxheroes=4
+					end
+					nact.Targets = {heroes[math.random(1,maxheroes)]}
+					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+				case "AF"
+					nact.Targets = {}
+					for check in each(heroes)
+						if check.Char.Points("HP").Have>0
+							nact.Targets[#nact.Targets+1]=check
+						end
+					end
+					GoedGekeurd = #nact.Targets>0
+				case "EV"
+					nact.Targets = {}
+					for iteam,imember,ifighter in Fighter.ForAll()
+						nact.Targets[#nact.Targets+1]=ifighter
+					end
+					GoedGekeurd = #nact.Targets>0
+				default
+					error(sprintf("Unknown target type '%s'!",nitem.Target))
+			end
+			TimeOut--
+			assert(GoedGekeurd or TimeOut>0,"Blenchy's AI timeout!")
+		until GoedGekeurd
+		self.BlenchyTurns = (self.BlenchyTurns or 3) - 1
+		foe.NextAct = new Actions(nact)
+		foe.NextActSpeed = nitem.COM2ACT
+		foe.GaugePosition = 10001
+	end
+	
+	void CONSTRUCTOR()
+		AI_Blenchy = self
+	end
+	
+	
+end

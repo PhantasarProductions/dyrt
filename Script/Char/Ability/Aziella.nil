@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.03
+// version: 20.07.05
 // End License Information
 
 do
@@ -46,12 +46,17 @@ do
 		-- Crossbow
 		BlessedArrow   = { Skill_Crossbow = s * 2, ["Skill_Befindo enchants"] = s + 1 },
 		PoisonArrow    = { Skill_Crossbow = (s * 2) + 15 },
+		Double_Bolt    = { Skill_Crossbow = 5 * s },
 	
 		-- Befindo Enchanments
 		MysticCare     = { Start = true },
 		Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) },
+		Protect        = { ["Skill_Befindo enchants"] = s * 3 },
 		Permanence     = { ["Skill_Befindo enchants"] = s * 6 },
 		Vanish         = { ["Skill_Befindo enchants"] = s * 7 },
+		Shield         = { ["Skill_Befindo enchants"] = s * 8 },
+		Blunt          = { ["Skill_Befindo enchants"] = s * 10 },
+		Hyper          = { ["Skill_Befindo enchants"] = (s+2) ^ 2 },
 	
 		-- Scharum
 		Power2x        = { Scharum = true },
