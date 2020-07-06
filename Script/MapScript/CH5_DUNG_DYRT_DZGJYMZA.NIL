@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.02
+// version: 20.07.06
 // End License Information
 
 
@@ -45,6 +45,10 @@
 
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
+
+#macro SKIP_DZGJYMZA true
+
+#macro ZO_GAAN_WE_SKIPPEN_OF_NIET if SKIP_DZGJYMZA then Annoy("Skipped boss fight!") return end
 
 
 #accept MScript
@@ -81,7 +85,10 @@ group MScript
 	var Font
 	
 	get string Kamer
-		assert(CURRENT_KAMER,"No data for area: "..Map.Layer)
+		if (not CURRENT_KAMER) or prefixed(CURRENT_KAMER,"END")
+			return ""
+		end
+		// assert(CURRENT_KAMER,"No data for area: "..Map.Layer)
 		self.KamerKop[CURRENT_KAMER] = self.KamerKop[CURRENT_KAMER] or self.Font.Text(CURRENT_KAMER)
 		return CURRENT_KAMER
 	end
@@ -180,6 +187,42 @@ group MScript
 		end
 	end
 	
+	void NPC_DZGJYMZA()
+		MapScript.SASKIA("Dzgjymza")
+	end
+	
+	void DZGJYMZA_START1()
+		CSay("Let's start round #1")
+		ZO_GAAN_WE_SKIPPEN_OF_NIET
+		error("First Dzgjymza fight not yet scripted")
+	end
+	
+	void DZGJYMZA_START2()
+		CSay("Let's start round #2")
+		ZO_GAAN_WE_SKIPPEN_OF_NIET
+		error("Second Dzgjymza fight not yet scripted")
+	end
+	
+	void BANGSET(string o)
+		int x
+		int y
+		Map.Obj = o
+		x = Map.ObjInt.x
+		y = Map.ObjInt.y
+		Map.Obj = "OnyxBang"
+		Map.ObjInt.x = x
+		Map.ObjInt.y = y
+		CSayF("Coordinates for OnyxBang set to (%04d,%04d)",x,y)
+	end
+	
+	void BLENCHY_FADE()
+		#- gv.Int.FadeBlenchy 2
+		for i=0,9
+			Map.Obj = "DS"..i
+			Map.ObjInt.Alpha = gv.Int.FadeBlenchy
+		end
+	end
+	
 	void CONSTRUCTOR()
 		UseKettingKaart()
 		self.Font = GetFont("BIGTEXT")
@@ -195,7 +238,7 @@ group MScript
 			["#008"] = "Kirana's bedroom",
 			["#009"] = "Passage",
 			["#010"] = "Sanctuary",
-			["#011"] = "Audience Chamber"
+			["#011"] = "Audience Chamber"			
 		}
 		for i=1,maxsecrets
 			Map.ZA_Enter("SECRET"..i,"SHOWSECRET",i)
@@ -207,7 +250,7 @@ group MScript
 	end
 	
 	void Draw()
-		if Map.Layer!="#010"
+		if Map.Layer!="#010" and (not prefixed(Map.Layer,"END")
 			self.DarkDraw()
 		end
 		__yellow

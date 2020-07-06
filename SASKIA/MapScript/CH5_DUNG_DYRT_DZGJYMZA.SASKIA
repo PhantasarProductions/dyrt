@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.05
+; version: 20.07.06
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -49,7 +49,6 @@
 	mov false,StartCombat.NoLose
 	mov false,StartCombat.FoeIDDQD 
 	call StartCombat.Ready
-
 	
 	; post boss
 	call Map.Kill,"DeurWeniaria",true
@@ -82,4 +81,62 @@
 	mov true,SealedDefeated.Brendor
 	call Party.LvUp,"Brendor"
 	call AllSealedCheck
+	end
+	
+:Dzgjymza
+	; Welcome
+	call Map.ShowByLabel,"H"
+	call Map.HideObj,"Player"
+	call MapText,"DZGJYMZA_START_A"
+	
+	; Start fight 1
+	call MapScript.Dzgjymza_Start1
+	
+	; Between the fights
+	call MapText,"DZGJYMZA_INTER_A"
+	call MapScript.BangSet,"Kirana"
+	call OnyxBang.Start
+	call Map.ShowObj,"Kirana"
+	:OnyxBang
+	chk OnyxBang.Going,OnyxBang
+	call MapText,"DZGJYMZA_INTER_B"
+	call MapScript.BangSet,"NPC_DZGJYMZA"
+	call OnyxBang.Start
+	call Map.HideObj,"Kirana"
+	call Map.HideObj,"NPC_DZGJYMZA"
+	:OnyxBang2
+	chk OnyxBang.Going,OnyxBang2
+	call MapText,"DZGJYMZA_INTER_C"
+	
+	; Start fight 2
+	call MapScript.Dzgjymza_Start2
+	
+	; Post fight
+	call MapText,"DZGJYMZA_WIN"
+	
+	; Blenchy's goodbye
+	call Map.GoToLayer,"#001","Einde"
+	call Map.HideObj,"Player"
+	call Map.ShowByLabel,"BB"
+	call MapText,"BYE_BLENCHY"
+	mov 1000,gv.Int.FadeBlenchy
+	:BlenchyLoop
+	call MapScript.Blenchy_Fade
+	chk gv.Int.FadeBlenchy>0,BlenchyLoop
+	
+	;Time to get outta here!
+	call MapText,"UH-OH"
+	
+	; Shanda, Banthosor and Jennifer
+	call Map.GoToLayer,"END1","Start"
+	call Map.HideObj,"Player"
+	group 2
+		mov 1090,Map.CamY
+		call MapText,"FOREST_A"
+	group 2
+		mov 900,Map.CamY
+		call MapText,"FOREST_B" 
+
+
+	call error,"The rest of the Dzgjymza stuff has not yet been scripted"
 	end
