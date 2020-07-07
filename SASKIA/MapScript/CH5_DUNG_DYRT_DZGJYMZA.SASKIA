@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.06
+; version: 20.07.07
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
@@ -136,6 +136,10 @@
 	group 2
 		mov 900,Map.CamY
 		call MapText,"FOREST_B" 
+	
+	; Credits reel
+	call LoadFlow,"CREDITS","Script/Flow/Credits.nil"
+	call GoToFlow,"CREDITS"
 
 
 	call error,"The rest of the Dzgjymza stuff has not yet been scripted"

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.07.03
+// Version: 20.07.07
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -1289,4 +1289,11 @@ group ConsoleCommands
 		end
 		CWriteLine("Ok",0,255,255)
 	end
+	
+	void CREDITS()
+		LoadFlow("CREDITS","Script/Flow/Credits.nil")
+		GoToFlow("CREDITS")
+		CSay("Hit ESCAPE to start the credits flow!")
+	end
+
 end
