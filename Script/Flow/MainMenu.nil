@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 20.06.03
+// Version: 20.07.07
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -229,7 +229,7 @@ end
 
 #say "MainMenu: Init menu items"
 new MenuItem("New Game",NewGame,true)
-new MenuItem("New Game+",NewGamePlus,false)
+new MenuItem("New Game+",NewGamePlus,CTA_Unlocked_NewGamePlus)
 new MenuItem("New Game: True Abyss",NOTHINGYET,CTA.Unlocked_TrueAbyss)
 new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
 // new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
