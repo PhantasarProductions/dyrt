@@ -30,8 +30,6 @@ table ret
 	ret["Graphics"] = {}
 	ret["Graphics"][#ret["Graphics"]+1] = "lyo"
 	ret["Graphics"][#ret["Graphics"]+1] = "Man of Steel"
-	ret["Script"] = {}
-	ret["Script"][#ret["Script"]+1] = "Man of Steel"
 	ret["Graphics"][#ret["Graphics"]+1] = "Jeroen P. Broks"
 	ret["Graphics"][#ret["Graphics"]+1] = "Lilian Watson"
 	ret["Graphics"][#ret["Graphics"]+1] = "Game Jolt"
@@ -50,11 +48,13 @@ table ret
 	ret["Graphics"][#ret["Graphics"]+1] = "Man of Steel & Jeroen P. Broks"
 	ret["Graphics"][#ret["Graphics"]+1] = "Unknown Artist"
 	ret["Graphics"][#ret["Graphics"]+1] = "Unknown Public Domain artist"
+	ret["Graphics"][#ret["Graphics"]+1] = "Lazur URH"
 	ret["Graphics"][#ret["Graphics"]+1] = "Quinn"
 	ret["Graphics"][#ret["Graphics"]+1] = "Johnny Automatic"
 	ret["Graphics"][#ret["Graphics"]+1] = "GDJ"
 	ret["Graphics"][#ret["Graphics"]+1] = "barnhearttowl"
 	ret["Graphics"][#ret["Graphics"]+1] = "Reiner Prokein"
+	ret["Script"] = {}
 	ret["Script"][#ret["Script"]+1] = "Jeroen P. Broks"
 	ret["City and dungeon design"] = {}
 	ret["City and dungeon design"][#ret["City and dungeon design"]+1] = "Jeroen P. Broks"
