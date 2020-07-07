@@ -113,10 +113,16 @@ void StartNewGame(bool plus)
 end
 
 void NewGame()
+	if not Yes("Do you really want to start a new game?")
+		return
+	end
 	StartNewGame(false)
 end
 
 void NewGamePlus()	
+	if not Yes("Do you really want to start a new game+?")
+		return
+	end
 	StartNewGame(true)
 end
 
