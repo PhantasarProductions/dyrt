@@ -229,7 +229,7 @@ end
 
 #say "MainMenu: Init menu items"
 new MenuItem("New Game",NewGame,true)
-new MenuItem("New Game+",NewGamePlus,CTA_Unlocked.NewGamePlus)
+new MenuItem("New Game+",NewGamePlus,CTA.Unlocked_NewGamePlus)
 new MenuItem("New Game: True Abyss",NOTHINGYET,CTA.Unlocked_TrueAbyss)
 new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
 // new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
