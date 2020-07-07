@@ -128,8 +128,10 @@
 	call MapText,"UH-OH"
 	
 	; Shanda, Banthosor and Jennifer
+	call Music.Play,"Music/Event/Jennifer.wav"
 	call Map.GoToLayer,"END1","Start"
-	call Map.HideObj,"Player"
+	mov 1000,Map.CamX
+	call Map.HideObj,"Player"	
 	group 2
 		mov 1090,Map.CamY
 		call MapText,"FOREST_A"
@@ -140,7 +142,26 @@
 	; Credits reel
 	call LoadFlow,"CREDITS","Script/Flow/Credits.nil"
 	call GoToFlow,"CREDITS"
-
+	
+	; Post Credits
+	group 2
+		call Map.GoToLayer,"END2","Start"
+		call Map.HideObj,"Player"
+	call Music.Play,"Music/Event/Romance.wav"
+	call MapText,"LOVE"
+	:BliksemLoop
+	call MapScript.Love
+	chk not gv.Bool.EndLoveStop,BliksemLoop
+	group 2
+		call Map.GoToLayer,"END3","Start"
+		call Map.HideObj,"Player"
+	call MapText,"LOVEREBECCASCYNDI"
+	
+	;The End
+	call Map.GoToLayer,"END_THE_END","Start"
+	call MapText,"NEWGAME+"
+	call Annoy,"Thank you for playing 'The Secrets of Dyrt'!"
+	call Bye
 
 	call error,"The rest of the Dzgjymza stuff has not yet been scripted"
 	end

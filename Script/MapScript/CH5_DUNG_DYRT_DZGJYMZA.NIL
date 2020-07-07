@@ -42,6 +42,7 @@
 #use "Script/Use/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
 #use "Script/Use/MapScript/Memory"
+#use "Script/use/Specific/CheckTrueAbyss" as CTA
 
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
@@ -221,6 +222,36 @@ group MScript
 			Map.Obj = "DS"..i
 			Map.ObjInt.Alpha = gv.Int.FadeBlenchy
 		end
+		CTA.Unlocked_NewGamePlus = true
+	end
+	
+	int  LoveLoop=30
+	int  LoveDone=11
+	bool LoveFlits
+	bool LoveDrawn
+	void LOVE()
+		if not self.LoveDrawn
+			return
+		end
+		if (self.LoveDone>11 or self.LoveLoop<=0) and (not self.LoveFlits)
+			if self.LoveDone<=0 or (self.LoveDone<5 and math.random(0,self.LoveDone)==1)
+				gv.Bool.EndLoveStop=true
+				return
+			end
+			--self.LoveDone
+			self.LoveLoop=math.random(20,30)
+			Map.Obj="Bliksem"
+			Map.ObjInt.X = math.random(300,500)
+			Map.ObjInt.Rotation = math.random(0,90)-45
+			Map.ObjInt.R = math.random(0,255)
+			Map.ObjInt.G = math.random(0,255)
+			Map.ObjInt.B = math.random(0,255)
+		end
+		self.LoveFlits = not self.LoveFlits
+		Map.Obj="Bliksem"
+		Map.ObjBool.Visible = self.LoveFlits
+		self.LoveDrawn = false
+		--self.LoveLoop
 	end
 	
 	void CONSTRUCTOR()
@@ -252,12 +283,13 @@ group MScript
 	void Draw()
 		if Map.Layer!="#010" and (not prefixed(Map.Layer,"END"))
 			self.DarkDraw()
+		else
+			self.LoveDrawn = true
 		end
 		__yellow
 		if self.Kamer!=""
 			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
-		end
-	
+		end		
 	end
 	
 	void Update()

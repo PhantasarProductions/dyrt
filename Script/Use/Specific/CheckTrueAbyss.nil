@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.07
 // End License Information
 module MODULE_TRUEABYSS_CHECK
 
@@ -64,12 +64,12 @@ module MODULE_TRUEABYSS_CHECK
 	end
 	
 	get bool Unlocked_NewGamePlus
-		return BubbleConfig.UNGP == self.Hash
+		return BubbleConfig.UNGP == HashMD5(self.Hash)
 	end
 	
 	set bool Unlocked_NewGamePlus
 		if value
-			BubbleConfig.UNGP = self.Hash
+			BubbleConfig.UNGP = HashMD5(self.Hash)
 		else
 			BubbleConfig.UNGP = "Whatever"
 		end
