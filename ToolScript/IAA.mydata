@@ -27472,7 +27472,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = MagicMissle
+	SpellAniScript = MagicMissile
 	Stance = ATTACK
 	Target = 1F
 	TriggerAfterAttack = FALSE
