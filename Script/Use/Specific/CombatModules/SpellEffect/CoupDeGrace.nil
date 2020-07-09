@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Scyndi.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/CoupDeGrace.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -34,27 +34,13 @@
 // 
 // version: 20.07.09
 // End License Information
-module Will_Scyndi
+do
+	bool Zet_die_HP_maar_op_0_jongens(Act,Target)
+		Target.Char.Points("HP").Minimum = 0
+		Target.Char.Points("HP").Have = 0
+		new Hurt("Coup De Grace!",Target.Tag,255,180,90)
+		return true
+	end
 	
-	// Scyndi
-	delegate AfterEnemyAttack
-	
-	// Dernor
-	delegate AfterBeingHurt
-	
-	// Eric, Rebecca
-	delegate AfterAttack
-	
-	// Irravonia, Brendor
-	delegate DamageManipulation
-	
-	// Aziella
-	delegate Targeted
-	
-	// Kirana
-	delegate PreInput
-	
-	// Merya
-	delegate ManipulateItemUsage
-	
+	return Zet_die_HP_maar_op_0_jongens
 end

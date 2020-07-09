@@ -32,9 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.09
 // End License Information
-module Will_Template
+module Will_Dernor
 	
 	// Scyndi
 	delegate AfterEnemyAttack

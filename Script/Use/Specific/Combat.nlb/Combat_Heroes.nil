@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.07.02
+// Version: 20.07.09
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -52,6 +52,7 @@ class Hero extends Fighter
 	table Pics
 	string CharTag
 	int EXP_Rate
+	var Will
 	
 	get number fEXP_Rate
 		return self.EXP_Rate/100
@@ -278,7 +279,10 @@ class Hero extends Fighter
 		myhero = new Hero(tag)
 		myhero.Heroes[pos or #myhero.Heroes+1] = myhero
 		myhero.Char = RPG.Char(tag)
-		myhero.CharTag = tag
+		myhero.CharTag = tag		
+		CSay("Loading will: "..tag)
+		myhero.Will = NIL.Use("Script/Char/Will/"..tag)
+		assert(myhero.Will,"Failed to load the will for: "..tag)
 	end
 	
 	static void CompileAll()
@@ -506,7 +510,9 @@ group PlayerSwitch
 			CSayF("%d: (%s == %s) >>> %s",i,v,nieuw,tostring(v==nieuw))
 			if v==nieuw
 				var ch
-				ch = new Hero(nieuw,i)
+				//ch = new Hero(nieuw,i)
+				Hero.Compile(nieuw,i)
+				ch = Fighter.ByTag[nieuw]
 				ch.Char = RPG.Char(nieuw)
 				//ch.Tag = nieuw
 			end

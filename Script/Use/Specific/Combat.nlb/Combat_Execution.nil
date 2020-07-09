@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.07.02
+// Version: 20.07.09
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -380,6 +380,18 @@ group Execution
 				AbilitiesMastered[Action.ExeTag][Action.LearnTag] = true
 				CSayF("AbilitiesMastered['%s']['%s'] = true",Action.ExeTag,Action.LearnTag)
 				new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("Learned '%s'!",Action.Act.Name))
+			end
+			CSay("AfterAttack "..tostring(Action.Act.TriggerAfterAttack).."! Not foe: "..tostring(not prefixed(Action.Executor.Tag,"FOE_")))
+			if Action.Act.TriggerAfterAttack and (not prefixed(Action.Executor.Tag,"FOE_")) 
+				assert(Action.Executor.Will,"No will for "..Action.Executor.Tag)
+				if Action.Executor.Will.AfterAttack
+					CSay("Performing!")
+					Action.Executor.Will.AfterAttack(Action)
+				else
+					CSay("No afteraction for this executor: "..Action.Executor.Tag)
+				end
+			else
+				CSay("AfterAction rejected!")
 			end
 		end
 	end

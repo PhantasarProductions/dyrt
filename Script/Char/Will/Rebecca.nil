@@ -32,9 +32,9 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.09
 // End License Information
-module Will_Template
+module Will_Rebecca
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -56,5 +56,9 @@ module Will_Template
 	
 	// Merya
 	delegate ManipulateItemUsage
+	
+	void CONSTRUCTOR()
+		CSay("Rebecca's will loaded!")
+	end
 	
 end

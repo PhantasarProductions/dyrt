@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Scyndi.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Instant/DzRestore.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -32,29 +32,12 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
+// version: 20.07.08
 // End License Information
-module Will_Scyndi
-	
-	// Scyndi
-	delegate AfterEnemyAttack
-	
-	// Dernor
-	delegate AfterBeingHurt
-	
-	// Eric, Rebecca
-	delegate AfterAttack
-	
-	// Irravonia, Brendor
-	delegate DamageManipulation
-	
-	// Aziella
-	delegate Targeted
-	
-	// Kirana
-	delegate PreInput
-	
-	// Merya
-	delegate ManipulateItemUsage
-	
+do
+	void D_Restore(ron,act)
+		--LordDzgjymza.beurt
+		CSayF("Turn restoration: %d",LordDzgjymza.beurt)
+	end
+	return D_Restore
 end

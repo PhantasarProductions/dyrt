@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.05.17
+// Version: 20.07.09
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -68,6 +68,8 @@ class Actions
 	string LearnTag
 	bool Learned
 	bool Countered = false
+	bool DontResetGauge
+	
 	
 	// Targets
 	table TargetTags
@@ -141,12 +143,16 @@ group Action_Exe
 		if ok
 			Execution.Exec(Stage_Action.Act)
 		end
-		F.GaugePosition = 0
+		if Stage_Action.Act.DontResetGauge
+			Stage_Action.Act.DontResetGauge = false
+		else
+			F.GaugePosition = 0
+			F.NextAct = nil;
+		end
 		if not prefixed(F.Tag,"FOE_")
 			F.Frame = 0
 			F.Houding = "IDLE"
 		end
-		F.NextAct = nil
 		Stage.Go("IDLE")
 		for i=5,8
 			string bck

@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.07
+// version: 20.07.09
 // End License Information
 
 
@@ -47,7 +47,7 @@
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
 
-#macro SKIP_DZGJYMZA true
+#macro SKIP_DZGJYMZA false
 
 #macro ZO_GAAN_WE_SKIPPEN_OF_NIET if SKIP_DZGJYMZA then Annoy("Skipped boss fight!") return end
 
@@ -195,13 +195,27 @@ group MScript
 	void DZGJYMZA_START1()
 		CSay("Let's start round #1")
 		ZO_GAAN_WE_SKIPPEN_OF_NIET
-		error("First Dzgjymza fight not yet scripted")
+		// error("First Dzgjymza fight not yet scripted")
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Dzgjymza_Human.wav"
+		StartCombat.Arena = "Dzgjymza"
+		StartCombat.Foe[1] = "Boss/Dzgjymza1"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
 	end
 	
 	void DZGJYMZA_START2()
 		CSay("Let's start round #2")
 		ZO_GAAN_WE_SKIPPEN_OF_NIET
-		error("Second Dzgjymza fight not yet scripted")
+		// error("Second Dzgjymza fight not yet scripted")
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Dzgjymza_God.wav"
+		StartCombat.Arena = "Plasma"
+		StartCombat.Foe[1] = "Boss/Dzgjymza2"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
 	end
 	
 	void BANGSET(string o)

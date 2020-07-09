@@ -1,7 +1,7 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Scyndi.nil
+// src/Tricky Script/Script/Use/Specific/CombatModules/Instant/DzPay.nil
 // (c) Jeroen Broks, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
@@ -34,27 +34,15 @@
 // 
 // version: 20.07.09
 // End License Information
-module Will_Scyndi
-	
-	// Scyndi
-	delegate AfterEnemyAttack
-	
-	// Dernor
-	delegate AfterBeingHurt
-	
-	// Eric, Rebecca
-	delegate AfterAttack
-	
-	// Irravonia, Brendor
-	delegate DamageManipulation
-	
-	// Aziella
-	delegate Targeted
-	
-	// Kirana
-	delegate PreInput
-	
-	// Merya
-	delegate ManipulateItemUsage
-	
+do
+	delegate usb
+	usb = NIL.Use("Script/Use/Specific/CombatModules/Instant/Cancel_UltimateSoulBreaker")
+	void D_Pay(ron,act)
+		--LordDzgjymza.beurt
+		CSayF("Turn restoration: %9d",LordDzgjymza.beurt)
+		Fighter.ByTag.FOE_1.SpeedBonus++
+		CSayF("Speed Bonus:      %9d",Fighter.ByTag.FOE_1.SpeedBonus)
+		usb(ron,act)
+	end
+	return D_Pay
 end

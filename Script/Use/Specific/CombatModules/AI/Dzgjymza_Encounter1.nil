@@ -1,0 +1,116 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Dzgjymza_Encounter1.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.07.09
+// End License Information
+
+global var LordDzgjymza
+
+module DZGJYMZA_AI1
+	
+	int beurt
+	readonly table Actions
+	
+	get table Eric
+		int r 
+		r = math.random(1,4)
+		for i=1,4
+			if RPG.Party[i]=="Yasathar" and RPG.GetChar("Yasathar").Points("HP").Have>0
+				r = i
+			end
+		end
+		CSayF("Eric: Picked %d >> %s",r,RPG.Party[r] or "???")
+		return { Fighter.ByTag[RPG.Party[r]] }
+	end
+	
+	get table All
+		table ret
+		for i=1,4
+			ret[i] = Fighter.ByTag[RPG.Party[i]] 
+		end
+		return ret
+	end
+	
+	void CONSTRUCTOR()
+		Fighter.ByTag.FOE_1.Char.Points("HP").Minimum = Fighter.ByTag.FOE_1.Char.Points("HP").Maximum
+		LordDzgjymza = self
+	end
+	
+	void SetTurn(string Tag, table Targets)
+		var foe
+		table nact
+		var nitem
+		assert(#Targets>0,"No targets set for Dzgjymza's move \""..Tag.."\"???")
+		foe = Fighter.ByTag.FOE_1
+		nitem = Item[Tag]
+		nact.ActTag = Tag
+		nact.ExeTag = foe.Tag
+		nact.Targets = Targets
+		foe.NextAct = new Actions(nact)
+		foe.NextActSpeed = nitem.COM2ACT
+		foe.GaugePosition = 10001
+	end
+
+	void Decide(foe)		
+		self.beurt++
+		switch self.beurt 
+			case 0 1
+				if __skill==3
+					self.SetTurn('ABL_FOE_DEMONSOULBREAKER',self.All)
+				else
+					self.SetTurn("BTY_OBSERVE",self.Eric)
+				end
+			case 2
+				self.SetTurn("ABL_FOE_CURSE",self.Eric)
+			case 3
+				if __skill==3
+					self.SetTurn("ABL_HERO_ERIC_DEATH",self.All)
+				else
+					self.SetTurn("ABL_HERO_ERIC_DEATH",self.Eric)
+				end
+			case 4
+				self.SetTurn("ABL_HERO_IRRAVONIA_DISPELL",self.All)
+			case 5
+				self.SetTurn("ABL_FOE_ULTIMATESOULBREAKER",self.All)
+			case 6 7 8 9 10
+				GoToFlow("FIELD")
+				End_Combat.EndIt()
+				Music.Pull()
+				KillFlow("COMBAT")
+			default
+				error("Unknown turn number: "..self.beurt)
+		end
+	end
+	
+end

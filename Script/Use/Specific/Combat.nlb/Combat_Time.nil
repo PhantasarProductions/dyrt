@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Time.nil
-// Version: 20.06.04
+// Version: 20.07.08
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -167,7 +167,7 @@ group CombatTime
 					ifighter.GaugePosition = ifighter.GaugePosition - 25
 				end
 			elseif ifighter.GaugePosition<10000
-				ifighter.GaugePosition = ifighter.GaugePosition + $GaugeSpeed[imember]
+				ifighter.GaugePosition = ifighter.GaugePosition + $GaugeSpeed[imember] + ifighter.SpeedBonus
 				if ifighter.GaugePosition>10000
 					ifighter.GaugePosition = 10000
 				end
@@ -188,7 +188,7 @@ group CombatTime
 					end
 				end
 			elseif ifighter.GaugePosition < 20000
-				ifighter.GaugePosition = ifighter.GaugePosition + ifighter.NextActSpeed
+				ifighter.GaugePosition = ifighter.GaugePosition + ifighter.NextActSpeed + ifighter.SpeedBonus
 				if ifighter.GaugePosition>20000
 					ifighter.GaugePosition = 20000
 				end
