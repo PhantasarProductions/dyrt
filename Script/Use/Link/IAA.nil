@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/IAA.nil
-// Version: 20.07.09
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 20.04.28
+// Copyright (C) 2019 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -121,7 +121,7 @@ quickmeta group AbilitiesMastered
 			CA_CHAR="Eric"
 		end
 		LoadSubIAA()
-		LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"] = SubAbilitiesMastered[\"trim(%s)\"] or {}",key,key),"IAA:ABIL:CreateCharIfNeeded")
+		LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")] = SubAbilitiesMastered[trim(\"%s\")] or {}",key,key),"IAA:ABIL:CreateCharIfNeeded")
 		return CharAbilitiesMastered
 	end
 	newindex
