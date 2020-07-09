@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH1_DUNG_XenorBushes_West.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.09
 // End License Information
 
 #use "script/use/anyway"
@@ -98,7 +98,8 @@ group MScript
 		if not Done.XenorBushesWestDone
 			//error("Chain not working yet")
 			Field.ChainMap("CH1_DUNG_ExamRuins","FirstTime","#001")
-			Map.SpawnPlayer("Start")
+			Map.GoToLayer("#001","Start")
+			//Map.SpawnPlayer("Start")
 		else
 			WorldMap.Delisto()
 		end
