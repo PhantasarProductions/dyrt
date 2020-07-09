@@ -98,7 +98,7 @@ quickmeta group CharAbilitiesMastered
 		if value==true
 			LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = true",CA_CHAR,key) )
 		else
-			LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\") = nil",CA_CHAR,key) )
+			LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = nil",CA_CHAR,key) )
 		end
 		CA_CHAR=""
 	end
