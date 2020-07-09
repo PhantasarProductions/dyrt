@@ -61,10 +61,10 @@
 
 :Prologue
 	; Group the first 6 actions together
-	group 6
+	group 5
 
 	; Spawn little Irravonia
-	call FlowField.SpawnPlayer,"Start"
+	;call FlowField.SpawnPlayer,"Start"
 	call FlowField.DoAutoScroll,true
 	
 	; Start Chapter Fader + Dungeon Fader
@@ -83,6 +83,7 @@
 	
 	
 :BoysJoin
+	call Achievements.Award,"SCEN_BEGIN"
 	chk not gv.Bool.SpokenToJackAboutZondra,NOTHING
 	chk Done.SpokenGirlsAboutZondraAndTheTripWithTheMermaids_TheJourneyToDyrtCanBegin,NOTHING
 	call Map.ShowByLabel,"G"

@@ -60,7 +60,9 @@
 	call BoxText,"PROLOGUE_START","K"
 	
 	;And lastly let's chain to the forest
-	call Field.ChainMap,"CH1_DUNG_XENORBUSHES","Prologue"
+	group 2
+		call Field.ChainMap,"CH1_DUNG_XENORBUSHES","Prologue"
+		call Map.GoToLayer,"_BASE","Start"
 	end
 	
 	

@@ -318,11 +318,13 @@ Rec: BOSS_CREEP
 	skill_check = FALSE
 
 Rec: BOSS_CRYSTAL
+	allow_trueabyss = FALSE
 	AutoProcess = TRUE
 	Description = Defeat the Crystal in the caves of the Naked Rocks
 	hidden = FALSE
 	Name = Crystal Clear!
-	ProcessMax = 0
+	only_trueabyss = FALSE
+	ProcessMax = 1
 	ProcessString = 
 	ProcessValue = KILLED_BOSS_CRYSTAL
 	require_gamejolt = FALSE

@@ -355,6 +355,7 @@ void StartGame()
 	BoxText.Load("GENSCEN/CH1/STARTGAME","STARTGAME")
 	StartChat("Loading Prison map, and prologue start events")
 	Field.ChainMap("CH1_DUNG_Prison","Prologue_Start")
+	Map.GoToLayer("#999","EnterCell")
 	//Field.LoadMap("CH1_DUNG_Prison","Prologue_Start") // Debug ONLY!
 	StartChat("Go To FIELD flow!")
 	GoToFlow("FIELD")

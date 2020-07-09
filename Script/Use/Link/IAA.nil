@@ -96,9 +96,9 @@ quickmeta group CharAbilitiesMastered
 		assert(type(value)=="boolean","Boolean value expected!")
 		LoadSubIAA()
 		if value==true
-			LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s)\"] = true",CA_CHAR,key) )
+			LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = true",CA_CHAR,key) )
 		else
-			LuaDoString("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s) = nil",CA_CHAR,key) )
+			LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\") = nil",CA_CHAR,key) )
 		end
 		CA_CHAR=""
 	end
@@ -107,7 +107,7 @@ quickmeta group CharAbilitiesMastered
 		LoadSubIAA()
 		assert(CA_CHAR!="","Illegal meta group call!")
 		bool ret
-		ret = LuaGetBool("IAA",sprintf("SubAbilitiesMastered[\"trim(%s)\"][\"trim(%s)\"] == true",CA_CHAR,key) )
+		ret = LuaGetBool("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] == true",CA_CHAR,key) )
 		CA_CHAR=""
 		return ret
 	end

@@ -46,7 +46,8 @@
 :Prologue_Start
 	; Normally this many scenarios are not needed
 	call CSay,"Time to start our story!"
-	mov "#999",Map.Layer
+	;mov "#999",Map.Layer
+	call Map.HideObj,"Player"
 	call BoxText.Load,"GENSCEN/CH1/STARTGAME","PROLOGUE_START"
 	call BoxText,"PROLOGUE_START","A"
 	call BoxText,"PROLOGUE_START","INT"
