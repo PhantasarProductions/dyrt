@@ -84,7 +84,7 @@
 	end
 	
 :Dzgjymza
-	jmp Final2
+	;jmp Final2
 	; Welcome
 	call Map.ShowByLabel,"H"
 	call Map.HideObj,"Player"
@@ -114,6 +114,7 @@
 	call MapScript.Dzgjymza_Start2
 	
 	; Post fight
+	call Achievements.Award,"BOSS_ZZZZZZZ_FINAL"
 	call MapText,"DZGJYMZA_WIN"
 	
 	; Blenchy's goodbye
@@ -146,6 +147,8 @@
 	call GoToFlow,"CREDITS"
 	
 	; Post Credits
+	call Achievements.Award,"CHAPTER5"
+	call MapScript.EndAchievement
 	group 2
 		call Map.GoToLayer,"END2","Start"
 		call Map.HideObj,"Player"

@@ -239,6 +239,10 @@ group MScript
 		CTA.Unlocked_NewGamePlus = true
 	end
 	
+	void ENDACHIEVEMENT()
+		Achievements.Award("ZZZ_FINISH"..__skill)
+	end
+	
 	int  LoveLoop=30
 	int  LoveDone=11
 	bool LoveFlits
