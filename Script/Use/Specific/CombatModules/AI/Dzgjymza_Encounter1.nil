@@ -106,7 +106,7 @@ module DZGJYMZA_AI1
 			case 6 7 8 9 10
 				GoToFlow("FIELD")
 				End_Combat.EndIt()
-				Music.Pull()
+				Music.Pop()
 				KillFlow("COMBAT")
 			default
 				error("Unknown turn number: "..self.beurt)
