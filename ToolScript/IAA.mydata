@@ -26932,8 +26932,9 @@ Rec: EQW_IRRAVONIA_WAND_EARTH
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_Earth
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 6
+	GainAP = 7
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
@@ -26966,6 +26967,7 @@ Rec: EQW_IRRAVONIA_WAND_EARTH
 	SpellAniScript = 
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Ability
 
 Rec: EQW_IRRAVONIA_WAND_FLAME
@@ -27057,8 +27059,9 @@ Rec: EQW_IRRAVONIA_WAND_FLAME
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_FLAME
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 6
+	GainAP = 7
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
@@ -27091,6 +27094,7 @@ Rec: EQW_IRRAVONIA_WAND_FLAME
 	SpellAniScript = Flame
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_FROST
@@ -27182,8 +27186,9 @@ Rec: EQW_IRRAVONIA_WAND_FROST
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_FROST
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 6
+	GainAP = 7
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
@@ -27216,6 +27221,7 @@ Rec: EQW_IRRAVONIA_WAND_FROST
 	SpellAniScript = FreezeSparkle
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_HEAL
@@ -27307,6 +27313,7 @@ Rec: EQW_IRRAVONIA_WAND_HEAL
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_HEAL
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 3
 	GainEXP = 0
@@ -27341,6 +27348,7 @@ Rec: EQW_IRRAVONIA_WAND_HEAL
 	SpellAniScript = 
 	Stance = ATTACK
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_MISSILE
@@ -27432,6 +27440,7 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_MISSILE
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 5
 	GainEXP = 0
@@ -27463,9 +27472,10 @@ Rec: EQW_IRRAVONIA_WAND_MISSILE
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = MagicMissle
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_SUPER
@@ -27592,6 +27602,7 @@ Rec: EQW_IRRAVONIA_WAND_SUPER
 	SpellAniScript = Shine
 	Stance = ATTACK
 	Target = AF
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_THUNDER
@@ -27683,8 +27694,9 @@ Rec: EQW_IRRAVONIA_WAND_THUNDER
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_THUNDER
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 6
+	GainAP = 7
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
@@ -27717,6 +27729,7 @@ Rec: EQW_IRRAVONIA_WAND_THUNDER
 	SpellAniScript = 
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_WATER
@@ -27808,8 +27821,9 @@ Rec: EQW_IRRAVONIA_WAND_WATER
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_WATER
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 6
+	GainAP = 7
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
@@ -27842,6 +27856,7 @@ Rec: EQW_IRRAVONIA_WAND_WATER
 	SpellAniScript = 
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_IRRAVONIA_WAND_WIND
@@ -27933,8 +27948,9 @@ Rec: EQW_IRRAVONIA_WAND_WIND
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = EQW_IRRAVONIA_WAND_WIND
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 6
+	GainAP = 7
 	GainEXP = 0
 	GainSkill0 = 0
 	GainSkill0All = FALSE
@@ -27967,6 +27983,7 @@ Rec: EQW_IRRAVONIA_WAND_WIND
 	SpellAniScript = 
 	Stance = ATTACK
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: EQW_KIRANA
