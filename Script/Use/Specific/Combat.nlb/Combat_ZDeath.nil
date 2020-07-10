@@ -82,7 +82,7 @@ void EnemyDeathFade(f)
 		end
 		
 		// Magic Stone Drops
-		if gv.Bool.AllowMagicStones and (__kills % (5^__skill)==0)
+		if gv.Bool.AllowMagicStones and (__kills % (4^__skill)==0)
 			__magicstones++
 			new MiniMsg(10,Screen.H-150,"Magic Stone Dropped!",0,180,255)
 		end
