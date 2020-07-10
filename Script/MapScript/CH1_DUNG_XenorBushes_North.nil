@@ -58,7 +58,8 @@ group MScript
 		RPG.Party[1] = "Eric"
 		RPG.Party[2] = "Irravonia"
 		RPG.Party[3] = "Rebecca"
-		Map.SpawnPlayer("Start")
+		// Map.SpawnPlayer("Start")
+		Map.ShowObj("Player")
 	end
 	
 	void SOUTH()
