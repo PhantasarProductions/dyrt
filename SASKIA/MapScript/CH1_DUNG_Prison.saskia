@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.09
+; version: 20.07.10
 ; End License Information
 
 
@@ -73,15 +73,18 @@ end
 	call CSay,"En daar gaan we weer naar de gevangenis!"
 	call BoxText,"EXAM_END","C"
 	Call Map.KillSwap,"CH1_DUNG_XenorBushes_North"
-	call Field.ChainMap,"CH1_DUNG_XenorBushes_North","StartToDoubline","#001"
+	group 2
+		call Field.ChainMap,"CH1_DUNG_XenorBushes_North","StartToDoubline","#001"
+		call Map.GoToLayer,"#001","Start"
 	end
 	
 	
 :ShandaDone
 	mov "#999",Map.Layer
 	call BoxText,"BLENCHY","E"
-	call Field.ChainMap,"CH1_DUNG_MysteriousCrypt", "StartBrendor", "#000"
-	call Map.GoToLayer, "#000", "Start"
+	group 2
+		call Field.ChainMap,"CH1_DUNG_MysteriousCrypt", "StartBrendor", "#000"
+		call Map.GoToLayer, "#000", "Start"
 	end
 
 :From_World
