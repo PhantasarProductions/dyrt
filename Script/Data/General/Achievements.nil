@@ -2240,6 +2240,23 @@ ret = {
 		["skill_check"] = false,
 
 	},
+	["WILL_IRRAVONIA"] = {
+		["allow_trueabyss"] = false,
+		["AutoProcess"] = false,
+		["Description"] = "Irravonia has warded Fire, Wind, Water and Earth ",
+		["hidden"] = false,
+		["Name"] = "The Fifth Element",
+		["only_trueabyss"] = false,
+		["ProcessMax"] = 5,
+		["ProcessString"] = "{Value} of {Max}",
+		["ProcessValue"] = "WILL_ERIC",
+		["require_gamejolt"] = false,
+		["skill_1"] = true,
+		["skill_2"] = true,
+		["skill_3"] = true,
+		["skill_check"] = false,
+
+	},
 	["WILL_REBECCA"] = {
 		["allow_trueabyss"] = false,
 		["AutoProcess"] = true,

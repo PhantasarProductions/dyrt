@@ -32,9 +32,54 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
+// version: 20.07.10
 // End License Information
 module Will_Irravonia
+	
+	table Warded
+	
+	void MkWard()
+		self.Ward = ({"Flame","Wind","Water","Earth"})[math.random(1,4)]
+		CSay("Irravonia will ward: "..self.Ward)
+	end
+	
+	get string Ward
+		if gv.String.IrraWard==""
+			self.MkWard()
+		end
+		return gv.String.IrraWard
+	end
+	
+	set string Ward
+		gv.String.IrraWard = value
+	end
+	
+	link AP = RPG.GetChar("Irravonia").Points("AP").Have
+		
+	void CONSTRUCTOR()
+		setmetatable(self.Warded,{
+			["__newindex"] = void(s,string elem,bool value)
+				gv.Bool["IrraWarded."..elem] = value
+				bool yes = true
+				for _,e in ipairs {"Flame","Wind","Water","Earth"}
+					yes = yes and self.Warded[e]
+				end
+				if yes
+					Achievements.Award("WILL_IRRAVONIA")
+				end
+			end,
+			
+			// for some (odd) reason NIL 
+			// didn't recognize the function defintion here, so let's 
+			// make Lua do it by itself.
+			#pure
+			["__index"] = function(s, elem)
+				return gv.Bool["IrraWarded."..elem]
+			end
+			#endpure
+			
+		})
+	end
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -46,7 +91,21 @@ module Will_Irravonia
 	delegate AfterAttack
 	
 	// Irravonia, Brendor
-	delegate DamageManipulation
+	int DamageManipulation(Action,int Damage,string Element)
+		CSay("Will Irravonia ward this?")
+		if Element:upper()!=self.Ward:upper()
+			CSayF("No.... Element doesn't match! (%s != %s)",Element:upper(),self.Ward:upper())
+			return Damage
+		end
+		new Hurt("Personal will:",Action.Executor.Tag,255,180,0)
+		new Hurt("Elemental ward",Action.Executor.Tag,0,180,255)
+		if __skill!=3
+			#+ self.AP Damage
+		end
+		MkWard()
+		return 0
+	end
+
 	
 	// Aziella
 	delegate Targeted

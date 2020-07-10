@@ -2102,6 +2102,22 @@ Rec: WILL_ERIC
 	skill_3 = true
 	skill_check = FALSE
 
+Rec: WILL_IRRAVONIA
+	allow_trueabyss = FALSE
+	AutoProcess = FALSE
+	Description = Irravonia has warded Fire, Wind, Water and Earth 
+	hidden = FALSE
+	Name = The Fifth Element
+	only_trueabyss = FALSE
+	ProcessMax = 5
+	ProcessString = {Value} of {Max}
+	ProcessValue = WILL_ERIC
+	require_gamejolt = FALSE
+	skill_1 = true
+	skill_2 = true
+	skill_3 = true
+	skill_check = FALSE
+
 Rec: WILL_REBECCA
 	allow_trueabyss = FALSE
 	AutoProcess = TRUE
