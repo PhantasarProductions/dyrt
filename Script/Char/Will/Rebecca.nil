@@ -32,9 +32,11 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
+// version: 20.07.10
 // End License Information
 module Will_Rebecca
+	
+	int count
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -43,7 +45,23 @@ module Will_Rebecca
 	delegate AfterBeingHurt
 	
 	// Eric, Rebecca
-	delegate AfterAttack
+	void AfterAttack(Action)
+		if self.count==0
+			self.count = 3^__skill
+		end
+		if math.random(1,self.count)==1
+			new Hurt("Personal will:",Action.Executor.Tag,255,180,0)
+			new Hurt("Strike Streak",Action.Executor.Tag,0,180,255)
+			Action.Executor.NextAct = new Actions({["ExeTag"] = Action.Executor.Tag, ["ActTag"]=Action.ActTag, ["Targets"]=Action.Targets})
+			Action.Executor.GaugePosition = 15000
+			Action.Executor.NextActSpeed  =   800
+			Action.DontResetGauge = true
+			self.count++
+			gv.Int.WILL_REBECCA++
+		elseif __skill!=3
+			self.count=0
+		end
+	end
 	
 	// Irravonia, Brendor
 	delegate DamageManipulation
