@@ -41,7 +41,7 @@
 
 
 :StartToDoubline
-	mov "#001",Map.Layer
+	;mov "#001",Map.Layer
 	Call Map.KillSwap
 	call MapScript.NGPSECRETREMOVE
 	call BoxText,"EXAM_END","D"
@@ -55,3 +55,4 @@
 	call Map.Kill,"N_Eric",true
 	call Map.Kill,"N_Irravonia",true
 	call MapScript.SETSTARTGROUP
+	end
