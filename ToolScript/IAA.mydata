@@ -10618,9 +10618,10 @@ Rec: ABL_HERO_IRRAVONIA_BREEZE
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = Wind
 	Stance = CAST
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = Ability
 
 Rec: ABL_HERO_IRRAVONIA_CATASTROPHE
@@ -11375,9 +11376,10 @@ Rec: ABL_HERO_IRRAVONIA_HURRICANE
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = Flame
+	SpellAniScript = Wind
 	Stance = CAST
 	Target = AF
+	TriggerAfterAttack = FALSE
 	Type = Ability
 
 Rec: ABL_HERO_IRRAVONIA_INFERNO
@@ -18641,7 +18643,7 @@ Rec: AUTO_ERIC_COUPDEGRACE
 	GainAP = 50
 	GainEXP = 0
 	GainSkill0 = 95
-	GainSkill0All = FALSE
+	GainSkill0All = TRUE
 	GainSkill0Chars = 
 	GainSkill1 = 0
 	GainSkill1All = FALSE
