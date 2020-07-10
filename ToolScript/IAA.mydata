@@ -14615,6 +14615,7 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -14649,6 +14650,7 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	SpellAniScript = 
 	Stance = CAST
 	Target = 1F
+	TriggerAfterAttack = TRUE
 	Type = Ability
 
 Rec: ABL_HERO_REBECCA_QUICKSTRIKE
@@ -18636,9 +18638,9 @@ Rec: AUTO_ERIC_COUPDEGRACE
 	Equip_Attack = ACT_ATTACK
 	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
-	GainAP = 0
+	GainAP = 50
 	GainEXP = 0
-	GainSkill0 = 0
+	GainSkill0 = 95
 	GainSkill0All = FALSE
 	GainSkill0Chars = 
 	GainSkill1 = 0
