@@ -128,6 +128,41 @@ class Fighter
 		#endpure
 	end
 	
+	static delegate ForAllQuick()
+		int team = 1
+		int heronum
+		int foenum
+		#pure
+		return function()
+		#endpure
+			repeat
+				switch team
+					case 1
+						string h
+						heronum++						
+						h = RPG.Party[heronum] or ""
+						if heronum>4 or RPG.Party[heronum]==""
+							team = 2
+						else
+							return "Hero",h,Fighter.ByTag[h]
+						end
+					case 2
+						string h						
+						foenum++
+						h = "FOE_"..foenum
+						if not Fighter.ByTag[h]
+							return nil,nil,nil;
+						end
+						return "Foe",h,Fighter.ByTag[h]
+					default
+						error("WTF!!!!! Invalid team number!")
+				end
+			forever
+		#pure
+		end
+		#endpure
+	end
+	
 	void PreInput()
 		for k,s in self.StatusChanges.Each
 			if s.PreInput

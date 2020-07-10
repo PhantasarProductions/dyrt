@@ -154,7 +154,7 @@ group CombatTime
 	var signal
 	
 	void UpdateGauge()
-		for iteam,imember,ifighter in Fighter.ForAll()
+		for iteam,imember,ifighter in Fighter.ForAllQuick()
 			bool offgauge
 			for _,s in ifighter.StatusChanges.Each
 				offgauge = offgauge or s.OffGauge
@@ -176,6 +176,12 @@ group CombatTime
 				ifighter.PreInput()
 				if ifighter.StatusAltAI("")
 				elseif iteam=="Hero"
+					if ifighter.Will.PreInput
+						CSay("Pre-Input will for character: "..imember)
+						ifighter.Will.PreInput()
+					else 
+						CSay("No pre-Input will for character: "..imember)
+					end
 					Stage.Go("PlayerInput")
 					Stage.Current.CharTag = imember
 					self.signal = self.signal or GetAudio("COMBATSIGNAL")

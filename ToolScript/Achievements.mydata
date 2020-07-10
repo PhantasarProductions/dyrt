@@ -2109,9 +2109,9 @@ Rec: WILL_IRRAVONIA
 	hidden = FALSE
 	Name = The Fifth Element
 	only_trueabyss = FALSE
-	ProcessMax = 5
-	ProcessString = {Value} of {Max}
-	ProcessValue = WILL_ERIC
+	ProcessMax = 0
+	ProcessString = 
+	ProcessValue = 
 	require_gamejolt = FALSE
 	skill_1 = true
 	skill_2 = true
