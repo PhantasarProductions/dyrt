@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.07.09
+// Version: 20.07.10
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -102,6 +102,7 @@ class Actions
 		// Executor
 		self.Executor = Fighter.ByTag[data.ExeTag]
 		// Act
+		self.ActTag = data.ActTag
 		self.Act = Item[data.ActTag]
 		
 		// Debug
