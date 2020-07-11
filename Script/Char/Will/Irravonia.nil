@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.10
+// version: 20.07.11
 // End License Information
 module Will_Irravonia
 	
@@ -97,8 +97,8 @@ module Will_Irravonia
 			CSayF("No.... Element doesn't match! (%s != %s)",Element:upper(),self.Ward:upper())
 			return Damage
 		end
-		new Hurt("Personal will:",Action.Executor.Tag,255,180,0)
-		new Hurt("Elemental ward",Action.Executor.Tag,0,180,255)
+		new Hurt("Personal will:","Irravonia",255,180,0)
+		new Hurt("Elemental ward","Irravonia",0,180,255)
 		if __skill!=3
 			#+ self.AP Damage
 		end
