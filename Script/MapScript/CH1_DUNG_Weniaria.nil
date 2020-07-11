@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH1_DUNG_Weniaria.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.11
 // End License Information
 
 #macro __weniaria_spoken gv.Bool.Done_Scyndi_Prologue_Spoken_To_Weniaria_To_Open_The_Door
@@ -93,7 +93,7 @@ group MScript
 		end
 		if not cleaned
 			if not __weniaria_complete
-				Map.Kill("NPC_Priest")
+				Map.Kill("NPC_SASKIA_Priest")
 				if __weniaria_spoken and (not __weniaria_complete)
 					Map.Kill("WenDeur")
 				end
