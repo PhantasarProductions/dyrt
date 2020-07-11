@@ -268,6 +268,15 @@ group Execution
 				Instant[Target.Instant.ATTACK](Target,Action)
 				Action.Countered = Instant.Done
 			end
+			for i=1,4
+				if RPG.Party[i] and RPG.Party[i]!=""
+					var CheckPlay
+					CheckPlay = Buffs.Fighter.ByTag[RPG.Party[i]]
+					if CheckPlay.Will.AfterEnemyAttack
+						CheckPlay.Will.AfterEnemyAttack()
+					end
+				end
+			end
 		end
 		
 		// Cancel
