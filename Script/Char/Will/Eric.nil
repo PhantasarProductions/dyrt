@@ -79,6 +79,7 @@ module Will_Eric
 		Action.Executor.GaugePosition = 15000
 		Action.Executor.NextActSpeed  =   600
 		Action.DontResetGauge = true
+		gv.Int.WILL_ERIC++
 		new Hurt("Personal will:",Action.Executor.Tag,255,180,0)
 		new Hurt("Coup de Grace",Action.Executor.Tag,0,180,255)
 	end
