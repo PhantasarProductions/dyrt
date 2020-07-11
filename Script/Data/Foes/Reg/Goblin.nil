@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 5/10/2020 11:18:56 AM
+// Generated: 7/11/2020 8:23:29 PM
 
 do
 var retfunc()
@@ -34,6 +34,9 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 1
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
 if not Foe.LoadOversoul
 	foeret.Experience = 5
 end
