@@ -32,9 +32,31 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
+// version: 20.07.11
 // End License Information
 module Will_Brendor
+	
+	// Data
+	int count
+	void CONSTRUCTOR()
+		self.count = __skill^__skill
+		if __skill==3
+			self.count = math.max(gv.Int.DernorCount,self.count)
+		end
+	end
+	
+	get int Blocked
+		return self.count
+	end
+	
+	set int Blocked
+		self.count = math.min(value,100000)
+		if __skill==3
+			gv.Int.DernorCount = value
+		end
+	end	
+	
+	link PointsBlocked = gv.Int.WillBrendor
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -46,7 +68,21 @@ module Will_Brendor
 	delegate AfterAttack
 	
 	// Irravonia, Brendor
-	delegate DamageManipulation
+	int DamageManipulation(Action,int Damage,string Element)
+		CSay("Brendor Block - Check")
+		if math.random(1,self.count)!=1 
+			CSay("Chance roll not right!")
+			return Damage
+		end
+		if Fighter.ByTag.FOE_1 and Fighter.ByTag.FOE_1.FromFile:upper()=="BOSS/RONDOMO"
+			CSay("Rondomo fight... This can spook the 'bound to lose' effect")
+			return Damage
+		end
+		self.PointsBlocked = math.min(self.PointsBlocked+Damage,1000000000)
+		new Hurt("Personal will:","Brendor",255,180,0)
+		new Hurt("Total Block","Brendor",0,180,255)		
+		return 0
+	end
 	
 	// Aziella
 	delegate Targeted
