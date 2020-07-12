@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 20.06.28
+// Version: 20.07.12
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -76,7 +76,7 @@ class AchBox
 			CWriteLine(sprintf("%s %s",type(v),k),255,180,0)
 		end
 	end
-		
+	
 	void CONSTRUCTOR(string tag)
 		tag = trim(tag) 
 		//CWriteLine("Creating achievement box: "..tag,255,180,0) CSay(NIL.LuaSerialize("Achievements",AchData)) CWriteLine("Ok?",180,0,255) // debug line
@@ -95,14 +95,14 @@ class AchBox
 		self.Box = new Box(50,self.y,Screen.Width-100,70)
 		self.TxAchName = self.Font.Text(self.Achievement.Name)
 		self.tag=tag
-		CSay("= Re-adjusting y")
-		for ab in self.BoxList.Each
+		CSay("Listing Box")
+		self.BoxList.AddLast(self)
+		CSay("= Re-adjusting y")		
+		for ab in self.BoxList.Each			
 			if ab.y>=self.y-25
 				#+ self.y 150
 			end
-		end
-		CSay("Listing Box")
-		self.BoxList.AddLast(self)
+		end			
 		CSay("Registering!")
 		self.Awarded[tag] = true
 		CSayF("Achievement earned: %s",tag)
@@ -156,6 +156,24 @@ group F_Achievements
 		AchData = NIL.Use("Script/Data/General/Achievements.nil")
 	end
 	
+	bool Allow(tag)
+		bool ret = true
+		var a
+		a = AchData[tag]
+		if a.require_gamejolt
+			ret = ret and gv.Bool.GameJolt
+		end
+		if a.skill_check
+			ret = ret and a["skill_"..__skill]
+		end
+		if not a.allow_trueabyss
+			ret = ret and (not __trueabyss)
+		elseif a.only_trueabyss
+			ret = ret and __trueabyss
+		end
+		return ret
+	end
+	
 	void Award(string tag)
 		tag = tag:upper()
 		if self.Awarded[tag]
@@ -195,20 +213,22 @@ group F_Achievements
 		int wy
 		wy = 0-$ovScrollY
 		for tag,data in spairs($AchData)
-			if wy>=0 and wy<(y+h)-70
-				Color(0,180,255)
-				AchBox.Font.DrawText(data.Name,x+5,wy+y)
-				__white
-				AchBox.SysFont.DrawText(data.Description,x+5,wy+35+y)
-				if $Awarded[tag]
-					Color(0,255,0)
-					AchBox.SysFont.DrawText("Obtained!",(x+w)-10,wy+30+y,1)
-				elseif data.ProcessValue!="" 
-					Color(255,180,0)
-					AchBox.SysFont.DrawText(replace(replace(data.ProcessString,"{Value}",sprintf("%d",gv.Num[data.ProcessValue])),"{Max}",tostring(data.ProcessMax)),(x+w)-10,wy+30+y,1)
+			if self.Allow(tag) and ((not data.hidden) or self.Awarded[tag])
+				if wy>=0 and wy<(y+h)-70
+					Color(0,180,255)
+					AchBox.Font.DrawText(data.Name,x+5,wy+y)
+					__white
+					AchBox.SysFont.DrawText(data.Description,x+5,wy+35+y)
+					if $Awarded[tag]
+						Color(0,255,0)
+						AchBox.SysFont.DrawText("Obtained!",(x+w)-10,wy+30+y,1)
+					elseif data.ProcessValue!="" 
+						Color(255,180,0)
+						AchBox.SysFont.DrawText(replace(replace(data.ProcessString,"{Value}",sprintf("%d",gv.Num[data.ProcessValue])),"{Max}",tostring(data.ProcessMax)),(x+w)-10,wy+30+y,1)
+					end
 				end
+				wy = wy + 70
 			end
-			wy = wy + 70
 		end
 		// AchBox.SysFont.DrawText(sprintf("Mouse(%4d,%d) -> %s    %s <-   press: %s",Mouse.X,Mouse.Y,tostring(Mouse.X>x), tostring(Mouse.X<x+w) , tostring( Mouse.HeldLeft ) ),50,50)
 		if Mouse.X>x and Mouse.X<x+w and Mouse.HeldLeft
