@@ -141,7 +141,8 @@ group Defeated
 		bool cDefeated = true
 		for tag,fight in pairs(self.F.Team[TeamTag])
 			bool chardefeated = false
-			for _,s in fight.StatusChanges.Each
+			//for _,s in fight.StatusChanges.Each
+			for _,s in fight.StatusChanges.QEach
 				chardefeated = chardefeated or s.IsDefeated
 				AnyStatus = true
 			end

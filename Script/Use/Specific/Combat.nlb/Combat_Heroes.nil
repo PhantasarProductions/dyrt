@@ -127,7 +127,9 @@ class Hero extends Fighter
 		__white
 		SetAlpha(255)
 		delegate overdraw
-		for _,status in self.StatusChanges.Each
+		for _,status in self.StatusChanges.QEach
+		//for _,status in self.StatusChanges.Each
+		//for _,status in pairs( self.TrueStatusChanges )
 			if status.Draw 
 				if status.OverDraw
 					overdraw = status.Draw

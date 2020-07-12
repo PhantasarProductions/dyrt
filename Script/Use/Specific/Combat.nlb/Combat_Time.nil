@@ -156,7 +156,8 @@ group CombatTime
 	void UpdateGauge()
 		for iteam,imember,ifighter in Fighter.ForAllQuick()
 			bool offgauge
-			for _,s in ifighter.StatusChanges.Each
+			for _,s in ifighter.StatusChanges.QEach
+			//for _,s in pairs ( ifighter.StatusChangesRealTable )
 				offgauge = offgauge or s.OffGauge
 				if s.IDLE
 					s.IDLE(ifighter)

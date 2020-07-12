@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 4:08:54 PM
+// Generated: 7/11/2020 11:38:04 PM
 
 do
 var retfunc()
@@ -168,6 +168,8 @@ CSay('HP Init Start');
 foeret.Char.Points("HP",true).MaxCopy="END_HP"
 foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
 CSay('HP Init End');
+CSay('Status Changes')
+
 
 
 return foeret

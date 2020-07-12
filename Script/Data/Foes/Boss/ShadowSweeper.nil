@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 5/10/2020 11:18:54 AM
+// Generated: 7/11/2020 11:38:01 PM
 
 do
 var retfunc()
@@ -190,7 +190,6 @@ foeret.Char.Stat("BASE__RESIST_Stat_Zombie").Value=100
 foeret.Char.Stat("BUFF__RESIST_Stat_Zombie").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Zombie").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Zombie").Script="SUM:BASE__RESIST_Stat_Zombie,BUFF__RESIST_Stat_Zombie"
-foeret.StatusChanges.Undead = true
 foeret.Boss = false
 
 
@@ -291,6 +290,9 @@ CSay('HP Init Start');
 foeret.Char.Points("HP",true).MaxCopy="END_HP"
 foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
 CSay('HP Init End');
+CSay('Status Changes')
+foeret.StatusChanges.Undead = true
+
 
 
 return foeret

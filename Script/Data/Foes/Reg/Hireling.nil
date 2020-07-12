@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 5/10/2020 11:18:56 AM
+// Generated: 7/12/2020 9:46:12 AM
 
 do
 var retfunc()
@@ -16,21 +16,49 @@ foeret.Cash = 75
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 75
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_POTION"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_ANTIDOTE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_ANTIDOTE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_ANTIDOTE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_ANTIDOTE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_ANTIDOTE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MEDICINE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MEDICINE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_PHOENIX"
 if not Foe.LoadOversoul
 	foeret.Experience = 150
 end
@@ -96,7 +124,7 @@ else
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=50
+	foeret.Char.Stat("BASE_Defense").Value=20
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -116,7 +144,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=95
+	foeret.Char.Stat("BASE_Strength").Value=80
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
@@ -178,6 +206,8 @@ CSay('HP Init Start');
 foeret.Char.Points("HP",true).MaxCopy="END_HP"
 foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
 CSay('HP Init End');
+CSay('Status Changes')
+
 
 
 return foeret

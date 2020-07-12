@@ -152,7 +152,8 @@ class Foe extends Fighter
 	
 	void Draw()
 		delegate overdraw
-		for _,status in self.StatusChanges.Each
+		//for _,status in self.StatusChanges.Each
+		for _,status in self.StatusChanges.QEach
 			if status.Draw 
 				if status.OverDraw
 					overdraw = status.Draw

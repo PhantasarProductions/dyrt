@@ -211,6 +211,7 @@ new Combat_Status("Destruction",{
 		end,
 	["Caused"] = void(f)
 			f.Char.Points("HP").Have = 0
+			f.StatusChanges.Destruction = false
 		end,
 	["Cured"] = void(f)
 		end	

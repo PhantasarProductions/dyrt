@@ -59,7 +59,8 @@ EnglishNames = {
    Merya = "Merya",
    Aziella = 'Azi|"ella',
    Shanda = 'Shanda',
-   Kirana = 'Kirana'
+   Kirana = 'Kirana',
+   IrraShort = "Irra"
 }
 #endpure
 
