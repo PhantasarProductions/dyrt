@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:04 PM
+// Generated: 7/13/2020 7:35:14 PM
 
 do
 var retfunc()
@@ -13,6 +13,8 @@ foeret.Description = "This fellow ain't human, even though he looks like one"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/reg/Shadow.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/SHADOW.NEGATIVE.PNG")
 foeret.Cash = 6
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SACREDPOWDER"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_SACREDPOWDER"
 if not Foe.LoadOversoul
 	foeret.Experience = 250
 end
@@ -40,7 +42,7 @@ foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=75
 foeret.Char.Stat("BUFF__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Script="SUM:BASE__RESIST_Elem_Frost,BUFF__RESIST_Elem_Frost"
-foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-450
+foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-4500
 foeret.Char.Stat("BUFF__RESIST_Elem_Light").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Light").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Light").Script="SUM:BASE__RESIST_Elem_Light,BUFF__RESIST_Elem_Light"
@@ -146,7 +148,7 @@ else
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
-	foeret.Char.Stat("BASE_Evasion").Value=1000000
+	foeret.Char.Stat("BASE_Evasion").Value=100
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
