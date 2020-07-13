@@ -20,8 +20,10 @@
 do
 	var buzzsound
 	
-	global void Buzz()
+	global void VoidBuzz()
 		buzzsound = buzzsound or GetAudio("BUZZ")
 		buzzsound.Play()
 	end
+	
+	return VoidBuzz
 end

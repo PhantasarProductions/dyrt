@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:00 PM
+// Generated: 7/13/2020 2:20:30 PM
 
 do
 var retfunc()
@@ -78,7 +78,7 @@ if not Foe.LoadOversoul
 	foeret.Experience = 1500
 end
 foeret.Name="GreenDragon"
-foeret.Char.Stat("BASE__RESIST_Elem_Flame").Value=-90000
+foeret.Char.Stat("BASE__RESIST_Elem_Flame").Value=-9000
 foeret.Char.Stat("BUFF__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Script="SUM:BASE__RESIST_Elem_Flame,BUFF__RESIST_Elem_Flame"

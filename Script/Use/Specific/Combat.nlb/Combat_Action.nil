@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.07.10
+// Version: 20.07.13
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -121,7 +121,16 @@ group Action_Exe
 		F = Stage_Action.Act.Executor
 		if Stage_Action.Act.RemoveItem and Stage_Action.Act.RemoveItem!="" 
 			if Inventory[ Stage_Action.Act.RemoveItem ] > 0
-				Inventory[ Stage_Action.Act.RemoveItem ]--
+				if F.Tag=="Merya" and math.random(1,(__skill^2)*2)==1
+					#pure
+					Hurt("Personal will:","Merya",255,180,0)
+					Hurt("Conserve Items","Merya",0,180,255)
+					#endpure
+					gv.Int.WILL_MERYA++
+					F.Points("SKILLEXP").Have = F.Points("SKILLEXP").Have + (900/__skill)
+				else
+					Inventory[ Stage_Action.Act.RemoveItem ]--
+				end
 			else
 				ok = false
 				Combat_Message.Msg("Out of items!")
@@ -265,13 +274,95 @@ group Stage_Action extends Stage
 	var Stage
 	var Act
 		
+	get var AP
+		if prefixed(self.Act.Executor.Tag,"FOE_")
+			return 0
+		end
+		return self.Act.Executor.Char.Points("AP")
+	end
+
+	get var HP
+		return self.Act.Executor.Char.Points("HP")
+	end
+
+	
+	void Cancel(string why)
+		#pure
+		Hurt("Action Cancelled",self.Act.Executor.Tag,255,100,100)
+		Hurt(why,self.Act.Executor.Tag,255,90,90)
+		#endpure
+		Buzz()
+	end
+	
+	void PurgeTargets()
+		table newtar
+		for _,tar in ipairs(self.Act.Targets)
+			bool a = true
+			if tar.Char.Points("HP").Have==0
+				a = a and (not prefixed(tar.Tag,"FOE_"))
+				a = a and self.Act.Act.CureDeath
+			end
+			if a
+				newtar[#newtar+1] = tar
+			end
+		end
+		self.Act.Targets = newtar
+	end
+		
+	get bool Reject
+		delegate Cancel
+		Cancel = self.Cancel
+		self.PurgeTargets()
+		if #self.Act.Targets==0
+			Cancel("No valid targets")
+			return true
+		end
+		if self.Act.RemoveAP and self.Act.RemoveAP>0 and self.AP.Have<self.Act.RemoveAP
+			Cancel("Not enough AP")
+			return true
+		end
+		if self.Act.RemoveItem and self.Act.RemoveItem!="" 
+			if Inventory[ self.Act.RemoveItem ] < 0
+				Cancel("Out of items!")
+				return true
+			end
+		end
+		return false
+	end
+		
 	void ComeToMe(Act)
 		var Icon
-		self.Act = Act
+		self.Act = Act		
 		assert(Act,"No action!")
+		if self.Reject
+			switch __skill
+				case 1
+					if prefixed(self.Act.Executor.Tag,"FOE_")
+						self.Act.Executor.GaugePosition = 0
+					else
+						self.Act.Executor.GaugePosition = 7000
+					end
+				case 2
+					if prefixed(self.Act.Executor.Tag,"FOE_")
+						self.Act.Executor.GaugePosition = 5000
+					else
+						self.Act.Executor.GaugePosition = 5000
+					end
+				case 3
+					if prefixed(self.Act.Executor.Tag,"FOE_")
+						self.Act.Executor.GaugePosition = -1000
+					else
+						self.Act.Executor.GaugePosition = 8000
+					end
+				default
+					error("Action-cancellation skill error: "..__skill)
+			end
+			Stage.Go("IDLE")
+			return
+		end
 		self.Action = Action_Announce
 		Stage.Go("ACTION")
-		self.Action=Action_Announce
+		self.Action = Action_Announce
 		if not prefixed(Act.ExeTag,"FOE_")
 			Icon = Act.ExeTag
 		end
