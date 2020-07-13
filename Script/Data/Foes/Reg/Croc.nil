@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/13/2020 11:30:23 PM
+// Generated: 7/14/2020 12:30:18 AM
 
 do
 var retfunc()
@@ -8,12 +8,33 @@ foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
-foeret.AllowOversoul = true and __skill!=1
+foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "Those are not jaws... THESE are jaws."
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/Croc.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/CROC.NEGATIVE.PNG")
 foeret.Cash = 201
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 201
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_PHOENIX"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_EEL"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_EEL"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_EEL"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_BRIMSTONE"
 if not Foe.LoadOversoul
 	foeret.Experience = 175
 end
@@ -25,11 +46,15 @@ if Foe.LoadOversoul
 	end
 end
 foeret.Name="Croc"
-foeret.Char.Stat("BASE__RESIST_Elem_Flame").Value=-50
+foeret.Char.Stat("BASE__RESIST_Elem_Flame").Value=-500
 foeret.Char.Stat("BUFF__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Script="SUM:BASE__RESIST_Elem_Flame,BUFF__RESIST_Elem_Flame"
-foeret.Char.Stat("BASE__RESIST_Elem_Thunder").Value=-250
+foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-10
+foeret.Char.Stat("BUFF__RESIST_Elem_Light").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Light").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Light").Script="SUM:BASE__RESIST_Elem_Light,BUFF__RESIST_Elem_Light"
+foeret.Char.Stat("BASE__RESIST_Elem_Thunder").Value=-1900
 foeret.Char.Stat("BUFF__RESIST_Elem_Thunder").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Thunder").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Thunder").Script="SUM:BASE__RESIST_Elem_Thunder,BUFF__RESIST_Elem_Thunder"
@@ -86,11 +111,11 @@ if Foe.LoadOversoul
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
-	foeret.Char.Stat("BASE_Agility").Value=85
+	foeret.Char.Stat("BASE_Agility").Value=60
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=112
+	foeret.Char.Stat("BASE_Defense").Value=80
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -119,11 +144,11 @@ else
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
-	foeret.Char.Stat("BASE_Agility").Value=60
+	foeret.Char.Stat("BASE_Agility").Value=50
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=85
+	foeret.Char.Stat("BASE_Defense").Value=75
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -139,11 +164,11 @@ else
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
-	foeret.Char.Stat("BASE_Resistance").Value=95
+	foeret.Char.Stat("BASE_Resistance").Value=75
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=112
+	foeret.Char.Stat("BASE_Strength").Value=100
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
@@ -161,6 +186,15 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
@@ -171,6 +205,11 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
@@ -182,6 +221,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	default
 		error("Unknown skill "..__skill)
 end

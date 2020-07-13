@@ -39,7 +39,11 @@ module Will_Irravonia
 	table Warded
 	
 	void MkWard()
-		self.Ward = ({"Flame","Wind","Water","Earth"})[math.random(1,4)]
+		string old
+		old = gv.String.IrraWard
+		repeat
+			self.Ward = ({"Flame","Wind","Water","Earth"})[math.random(1,4)]
+		until old!=self.Ward
 		CSay("Irravonia will ward: "..self.Ward)
 	end
 	
