@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/13/2020 7:35:14 PM
+// Generated: 7/13/2020 8:18:25 PM
 
 do
 var retfunc()
@@ -188,16 +188,19 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_EEL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_EEL"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
@@ -217,17 +220,21 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_VITALIZE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_EEL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_EEL"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
@@ -248,6 +255,10 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_SPLASH"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_SCYNDI_SILENCE"
@@ -259,6 +270,8 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_EEL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_EEL"
 	default
 		error("Unknown skill "..__skill)
 end
