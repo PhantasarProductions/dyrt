@@ -54,7 +54,13 @@ module Will_Irravonia
 		gv.String.IrraWard = value
 	end
 	
-	link AP = RPG.GetChar("Irravonia").Points("AP").Have
+	get int AP 
+		return RPG.GetChar("Irravonia").Points("AP").Have
+	end
+	
+	set int AP
+		RPG.GetChar("Irravonia").Points("AP").Have = value
+	end
 		
 	void CONSTRUCTOR()
 		setmetatable(self.Warded,{
@@ -102,7 +108,7 @@ module Will_Irravonia
 		if __skill!=3
 			#+ self.AP Damage
 		end
-		MkWard()
+		self.MkWard()
 		return 0
 	end
 
