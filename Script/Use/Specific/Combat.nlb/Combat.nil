@@ -59,6 +59,7 @@
 #use "Script/Use/Specific/Combat.nlb/Combat_ZCurse.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZExhaustion.nil"
+#use "Script/Use/Specific/Combat.nlb/Combat_ZGuard.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZorgCentrum.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZPara.nil"
 #use "Script/Use/Specific/Combat.nlb/Combat_ZPoisonDisease.nil"

@@ -287,9 +287,9 @@ class Fighter
 							// new Hurt(k,self.Tag,255,100,100)
 							CSayF("Status %s attached to character: %s",k,self.Tag)
 						else
-							if self.StatusChangesRealTable[k]
-								new Hurt("Cure: "..k,self.Tag,180,255,000)
-							end
+							//if self.StatusChangesRealTable[k]
+							//	new Hurt("Cure: "..k,self.Tag,180,255,000)
+							//end
 							CSayF("Status %s removed to character: %s",k,self.Tag)
 							self.StatusChangesRealTable[k] = nil;
 						end

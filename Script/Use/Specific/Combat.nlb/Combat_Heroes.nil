@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.07.12
+// Version: 20.07.13
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -551,6 +551,16 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartGuard()
+		table nact
+		var me
+		me = Fighter.ByTag[self.CharTag]
+		nact.ActTag = "ACT_GUARD"
+		nact.ExeTag = self.CharTag
+		nact.Targets = {me}
+		me.NextActSpeed = 9000
+		me.GaugePosition = 10001
+		me.NextAct = new Actions(nact)
+		Stage.Go("IDLE")
 	end
 	
 	void StartSwitch()

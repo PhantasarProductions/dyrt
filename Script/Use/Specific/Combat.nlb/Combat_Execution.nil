@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.07.11
+// Version: 20.07.13
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -123,6 +123,15 @@ group Execution
 		if (not prefixed(Tar.Tag,"FOE_")) and Tar.Will.DamageManipulation
 			enddmg = Tar.Will.DamageManipulation(Act,enddmg,Act.Act.Element)
 		end
+		for sn,status in Tar.StatusChanges.Each
+			if status.AltAttack	
+				enddmg = status.AltAttack(Exe,Tar,enddmg)
+				CSayF("AltAttack due to status %s sets the heal value to %d",sn,enddmg)
+			else
+				CSayF("No AltAttack in status %s",sn)
+			end
+		end
+
 		Tar.Char.Points("HP").Dec(enddmg)
 		if gv.Bool.DEBUG_CHEAT_JACKTHERIPPER and ( prefixed(Tar.Tag,"FOE_") )
 			CSay("Killing foe due to the Jack The Ripper mode")
@@ -134,12 +143,28 @@ group Execution
 		end
 	end
 	
-	void AltAttack(Tar,int dmg,string element)
+	void AltAttack(Exe, Tar,int dmg,string element,Act)
 		bool fatal
 		int enddmg
 		number elmod
+		
 		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[element]
 		enddmg = dmg - (math.floor(dmg * (Tar.Char.Stat(sprintf("END__RESIST_Elem_%s",element)).Value/100)))
+		
+		for sn,status in Tar.StatusChanges.Each
+			if status.AltAttack	
+				enddmg = status.AltAttack(Exe,Tar,enddmg)
+				CSayF("AltAttack due to status %s sets the heal value to %d",sn,enddmg)
+			else
+				CSayF("No AltAttack in status %s",sn)
+			end
+		end
+		
+		if (not prefixed(Tar.Tag,"FOE_")) and Tar.Will.DamageManipulation
+			enddmg = Tar.Will.DamageManipulation(Act,enddmg,element)
+		end
+
+
 
 		// Show what damage done
 		if fatal
@@ -259,7 +284,7 @@ group Execution
 				case "PercentOppMaxHP"
 					int atk
 					atk = math.max(1,math.floor(Target.Char.Points("HP").Maximum * (Action.Act.Attack/100)))
-					$AltAttack(Target,atk,Action.Act.Element)
+					$AltAttack(Executor,Target,atk,Action.Act.Element,Action)
 				default
 					error("Unknown AttackAlt: "..Alt)
 			end

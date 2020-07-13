@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_AbnormalStatus.nil
-// Version: 20.07.12
+// Version: 20.07.13
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -76,6 +76,10 @@ class Combat_Status
 	
 	// This delegate must be "int(f,int hp)"
 	delegate AltHeal
+
+	// This delegate must be "int(f,int hp)"
+	delegate AltAttack
+
 	
 	static table S
 	static table SN
