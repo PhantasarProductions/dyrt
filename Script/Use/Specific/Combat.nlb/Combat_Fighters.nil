@@ -212,7 +212,7 @@ class Fighter
 						if prefixed(self.Tag,"FOE_") and self.Oversoul
 							return CStatus.Oversoul
 						end
-					case "EACH"
+					case "GENEACH"
 						int i=0
 						return var()
 							string k
@@ -236,12 +236,12 @@ class Fighter
 								end
 							forever
 						end
-					case "QEACH"
+					case "QEACH" "EACH"
 						if stat_modified
 							CSay("Modified, so regenerating QEACH table: "..self.Tag)
 							qstats = {}
 							stat_modified = false
-							for k,v,i in self.StatusChanges.Each
+							for k,v,i in self.StatusChanges.GenEach
 								CSayF("QEACH Generation:%03d.%03d: %s",#qstats+1,i,k)
 								qstats[#qstats+1]={['k']=k,['v']=v}
 							end
@@ -256,9 +256,9 @@ class Fighter
 						end
 					default
 						if self.HP.Have==0
-							self.StatusChangesRealTable[k]=nil;
+							self.StatusChangesRealTable[ku]=nil;
 						end
-						return self.StatusChangesRealTable[k]
+						return self.StatusChangesRealTable[ku]
 				end
 			end,
 			["__newindex"] = void(s,string k,v)
