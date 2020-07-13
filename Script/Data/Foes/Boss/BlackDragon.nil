@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:37:59 PM
+// Generated: 7/13/2020 9:18:35 PM
 
 do
 var retfunc()
@@ -15,6 +15,7 @@ foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Boss/BlackDragon.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/BLACKDRAGON.NEGATIVE.PNG")
 foeret.Cash = 20
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 20
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
 if not Foe.LoadOversoul
 	foeret.Experience = 1200
 end
@@ -117,7 +118,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=150
+	foeret.Char.Stat("BASE_Strength").Value=140
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
@@ -135,6 +136,16 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
@@ -145,6 +156,10 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_ERIC_DARKNESS"
@@ -155,6 +170,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	default
 		error("Unknown skill "..__skill)
 end
