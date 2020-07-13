@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_RENC.nil
-// Version: 20.06.13
+// Version: 20.07.13
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -242,7 +242,7 @@ group RENC
 			end
 			repeat
 				numfoe = math.random(1,self.MaxFoes.GetValue(__skill,numchars))
-			until math.random(0,numfoe)<=__skill and math.random(0,numfoe)<=numchars
+			until math.random(0,numfoe)<=__skill and math.random(0,numfoe)<=numchars and math.random(0,numfoe)<=__skill
 			for i=1,numfoe
 				StartCombat.Foe[i] = "Reg/"..$Foes[math.random(1,#self.Foes)]
 			end

@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/Flow/Introduction.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.13
 // End License Information
 
 // Dirty code straight from the toilet!
@@ -131,6 +131,7 @@ group Loading
 		new Loader("Audio","SFX/Combat/Signal.Wav","COMBATSIGNAL")
 		new Loader("Audio","Music/Original/Victory.wav","VICTORY_TUNE")
 		new Loader("Audio","SFX/Party/LevelUp.Wav","LEVELUP")
+		new Loader("Audio","SFX/General/Buzz.wav","BUZZ")
 		
 		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
 		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
