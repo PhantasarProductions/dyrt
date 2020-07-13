@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:02 PM
+// Generated: 7/13/2020 11:30:23 PM
 
 do
 var retfunc()
@@ -119,7 +119,7 @@ else
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
-	foeret.Char.Stat("BASE_Agility").Value=65
+	foeret.Char.Stat("BASE_Agility").Value=60
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
@@ -158,6 +158,9 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
@@ -165,6 +168,9 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_DERNOR_CROC_BITE"
@@ -173,6 +179,9 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_GUARD"
 	default
 		error("Unknown skill "..__skill)
 end
