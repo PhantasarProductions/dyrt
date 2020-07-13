@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:02 PM
+// Generated: 7/13/2020 7:40:55 PM
 
 do
 var retfunc()
@@ -19,6 +19,11 @@ foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 50
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 50
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 50
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = 50
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_POTION"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_SACREDPOWDER"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_SACREDPOWDER"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_POTIONSTRENGTH"
 if not Foe.LoadOversoul
 	foeret.Experience = 150
 end
@@ -164,7 +169,7 @@ else
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
-	foeret.Char.Stat("BASE_Intelligence").Value=175
+	foeret.Char.Stat("BASE_Intelligence").Value=100
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
