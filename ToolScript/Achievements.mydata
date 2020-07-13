@@ -2153,11 +2153,11 @@ Rec: WILL_MERYA
 Rec: WILL_REBECCA
 	allow_trueabyss = FALSE
 	AutoProcess = TRUE
-	Description = Make Rebecca perform Strike Streak 10 times
+	Description = Make Rebecca perform Strike Streak 30 times
 	hidden = FALSE
 	Name = Serial Sis!
 	only_trueabyss = FALSE
-	ProcessMax = 10
+	ProcessMax = 30
 	ProcessString = {Value} of {Max}
 	ProcessValue = WILL_REBECCA
 	require_gamejolt = FALSE

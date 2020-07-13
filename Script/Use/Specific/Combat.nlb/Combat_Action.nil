@@ -70,6 +70,8 @@ class Actions
 	bool Countered = false
 	bool DontResetGauge
 	
+	static int ActionCounter
+	
 	
 	// Targets
 	table TargetTags
@@ -151,6 +153,11 @@ group Action_Exe
 			end
 		end
 		if ok
+			Actions.ActionCounter++
+			CSayF("Action execution #%4d",Actions.ActionCounter)
+			if Actions.ActionCounter==1 and (not prefixed(Stage_Action.Act.Executor.Tag,"FOE_"))
+				Achievements.Award("COMBAT_FIRST")
+			end
 			Execution.Exec(Stage_Action.Act)
 		end
 		if Stage_Action.Act.DontResetGauge
