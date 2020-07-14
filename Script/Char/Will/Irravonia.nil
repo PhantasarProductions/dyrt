@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.13
+// version: 20.07.14
 // End License Information
 module Will_Irravonia
 	
@@ -43,7 +43,7 @@ module Will_Irravonia
 		old = gv.String.IrraWard
 		repeat
 			self.Ward = ({"Flame","Wind","Water","Earth"})[math.random(1,4)]
-		until old!=self.Ward
+		until old!=gv.String.IrraWard
 		CSay("Irravonia will ward: "..self.Ward)
 	end
 	

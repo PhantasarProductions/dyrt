@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.07.13
+// Version: 20.07.14
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -163,15 +163,13 @@ group Execution
 		if (not prefixed(Tar.Tag,"FOE_")) and Tar.Will.DamageManipulation
 			enddmg = Tar.Will.DamageManipulation(Act,enddmg,element)
 		end
-
-
-
+		
 		// Show what damage done
 		if fatal
 			enddmg = Tar.Char.Points("HP").Have
 			new Hurt("Death",Tar.Tag,255,0,0)
 		elseif enddmg<0
-			new Hurt(enddmg,Tar.Tag,0,255,0)
+			new Hurt(math.abs(enddmg),Tar.Tag,0,255,0)
 		elseif elmod<0
 			new Hurt(enddmg,Tar.Tag,255,0,0)
 		elseif elmod==100
@@ -198,6 +196,10 @@ group Execution
 		end
 		
 		Tar.Char.Points("HP").Dec(enddmg)
+		
+		if (not prefixed(Tar.Tag,"FOE_")) and enddmg>0 and Tar.Will.AfterBeingHurt
+			Tar.Will.AfterBeingHurt()
+		end
 		
 	end
 	
