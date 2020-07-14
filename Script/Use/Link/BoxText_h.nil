@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/BoxText_h.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.07.15
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -57,6 +57,10 @@ group TrueBoxTextGroup
 	void Load(string Scenario,string File)
 		CWriteLine(sprintf("Loading scenario %s from file %s",Scenario,File),180,0,255)
 		BTExe(sprintf("Scenario.LoadData(\"%s\",\"%s\", false)",Trim("Scenario/"..__lang.."/"..Scenario),Trim(File)))
+	end
+	
+	void LoadNew(string File,string LoadAs)
+		BTExe(sprintf("Scenario.LoadNewData(\"%s\",\"%s\", false)",Trim("Scenario/"..__lang.."/"..File),Trim(LoadAs)))
 	end
 
 	void CallMe(string Scenario,string Tag,ReturnFlow,Num)

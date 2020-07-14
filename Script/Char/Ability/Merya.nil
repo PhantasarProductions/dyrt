@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.15
 // End License Information
 
 
@@ -44,6 +44,7 @@ a = {
 	FastDraw       = { Skill_Dagger = 25 },
 	
 	-- Rogue
+	AAA_ID         = { Start=true },
 	Pickpocket     = { Start=true },
 	Intimidate     = { Start=true },
 	
