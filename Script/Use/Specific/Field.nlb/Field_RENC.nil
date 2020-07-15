@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_RENC.nil
-// Version: 20.07.13
+// Version: 20.07.15
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -280,7 +280,7 @@ group RENC
 	void InfRefill()
 		int mc 
 		mc = math.ceil(($MapTravelLevel-__travellevel)/__skill)
-		if $MapTravelLevel<=__travellevel or mc==0
+		if $MapTravelLevel>=__travellevel or mc==0
 			// mc should never be 0 or in the check, but I've seen
 			// crazier things, so I need this check to be 100% no
 			// division by 0 is possible later!
