@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.07.13
+// Version: 20.07.15
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -352,6 +352,9 @@ group Stage_SelectTarget extends Stage
 			if not Combat_Status.UnTargetable(tag)
 				__white
 				fight.Icon(fight.X+40,fight.Y+20)
+				if self.wrongteam
+					__red
+				end
 				DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
 				if __skill<3 or fight.GetTeamName()=="Hero"
 					Color(100,100,100)
@@ -439,7 +442,14 @@ group Stage_SelectTarget extends Stage
 								gotcha=true
 								if imember2!=imember
 									self.targetted[imember2]=ifighter2
-									self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+									// self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+															
+									switch self.Item.Target
+										case "AF"
+											self.wrongteam = not prefixed(ifighter.Tag,"FOE_")
+										case "AA"
+											self.wrongteam =     prefixed(ifighter.Tag,"FOE_")
+									end						
 								end
 							end
 						end
@@ -447,10 +457,19 @@ group Stage_SelectTarget extends Stage
 				case "1F" "1A"
 					gotcha = (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y) and (not Combat_Status.UnTargetable(ifighter.Tag))
 					if gotcha 
-						self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+						// self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
+						switch self.Item.Target
+							case "1F"
+								self.wrongteam = not prefixed(ifighter.Tag,"FOE_")
+							case "1A"
+								self.wrongteam =     prefixed(ifighter.Tag,"FOE_")
+						end
 					end
 				default
 					error("Unknown target type: "..self.Item.Target)
+			end
+			if self.wrongteam
+				gotcha = gotcha and (not self.Item.Discriminate)
 			end
 			if gotcha
 				gotone = true;
