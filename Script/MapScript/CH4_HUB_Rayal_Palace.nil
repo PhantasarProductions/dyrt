@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.29
+// version: 20.07.16
 // End License Information
 
 
@@ -135,6 +135,7 @@ group MScript
 		RPG.Party[1] = "Eric"
 		Map.Leader = "Eric"
 		Map.GoToLayer("NACHT","Start_Nacht")
+		MapScript.ShowPart("Slaapkamer")
 		MapText("NOSLEEP")
 	end
 	

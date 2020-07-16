@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.30
+// version: 20.07.16
 // End License Information
 
 
@@ -52,6 +52,15 @@ group MScript
 	end
 	
 	void CONSTRUCTOR()
+		if not Done.StartRebeccaSplitMission_SetUpParty
+			for i=4,8
+				RPG.Party[i]=""
+			end
+			RPG.Party[1] = "Rebecca"
+			RPG.Party[2] = "Scyndi"
+			RPG.Party[3] = "Dernor"
+			RPG.Party[4] = "Merya"
+		end
 	end
 	
 	void Draw()

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.06.19
+// Version: 20.07.16
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -329,6 +329,10 @@ group Map
 	
 	void AddSwap(string code)
 		FLD_Exe("FlowField.Map.AddSwap(\"" .. SafeString(code) .. "\")")
+	end
+	
+	void Remap()
+		FLD_Exe("FlowField.Map.Kthura.Remap()")
 	end
 	
 	void KillSwap(m)
