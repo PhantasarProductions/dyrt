@@ -93,8 +93,12 @@ global void MUS_Play(string file,dontloop)
 	if curplaying and curfile==file then return end
 	newmus = new TAudio(file,"MUSIC"..BN(mbuf))
 	if curinstance
-			curinstance.Stop()	
-			curinstance = nil;
+		CSay("Murdering old instance! "..curinstance.buftag)
+		curinstance.Stop()
+		curinstance.Free()
+		curinstance = nil;
+	else
+		CSay("No instance so nothing to release!")
 	end
 	if curplaying
 		curplaying.Free()
@@ -114,6 +118,7 @@ global void MUS_Stop()
 	if curinstance
 		curinstance.Stop()
 	end
+	curinstance.Free()
 	curinstance = nil;
 end
 
