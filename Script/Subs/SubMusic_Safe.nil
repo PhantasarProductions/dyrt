@@ -101,6 +101,7 @@ global void MUS_Play(string file,dontloop)
 	end
 	curplaying = newmus
 	newmus = nil;
+	curfile = file
 	if dontloop
 		curinstance = curplaying.IPlay()
 	else
@@ -127,10 +128,12 @@ end
 
 global void MUS_Pop()
 	if #pushed<=0 
+		CSay("Music stack empty, so no pops!")
 		return
 	end
 	string popped
 	popped = pushed[#pushed]
+	CSayF("'%s' popped!",popped)
 	pushed[#pushed] = nil;
 	MUS_Play(popped)
 end
