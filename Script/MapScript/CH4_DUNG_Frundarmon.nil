@@ -160,6 +160,15 @@ group MScript
 		StartCombat.Ready()
 	end
 	
+	void KIDKILL()
+		string old
+		old = Map.Layer
+		Map.Layer='#001'
+		Map.Kill("KID_T11",true)
+		Map.Kill("KID_T12",true)
+		Map.Layer=old // Bug prevention
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Entering the mansion")
 		//self.Lijst = new TLinkedList
