@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/Projectile.nil
-// Version: 20.04.28
+// Version: 20.07.18
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -81,7 +81,7 @@ module M_Projectile
 			if self.ey>self.ty
 				self.dy=-1
 			end
-			self.dx = (self.tx-self.ex)/self.eu
+			self.dx = (self.tx-self.ex)/self.ey
 			self.cycles=math.abs(self.ex-self.tx)
 		end
 		// Not the most elegant method, but using Bresenham would get more issues
