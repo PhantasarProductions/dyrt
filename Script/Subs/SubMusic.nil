@@ -1,8 +1,8 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubMusic.nil
 // SubMusic
-// version: 20.04.28
-// Copyright (C) 2019 Jeroen P. Broks
+// version: 20.07.18
+// Copyright (C) 2019, 2020 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -45,6 +45,13 @@ class TMusic
 		self.resource = LoadAudio(file)
 	end
 	
+	void DESTRUCTOR()
+		CSay("Free music loaded from \""..self.filename.."\"")
+		self.instance.Stop()
+		self.instance=nil
+		self.resource.Free()
+	end
+	
 end	
 
 var curplaying
@@ -67,6 +74,7 @@ global void MUS_Play(string file,dontloop)
 		end
 	end
 	curplaying = newmus
+	newmus = nil;
 	if dontloop
 		curplaying.instance = curplaying.resource.IPlay()
 	else
@@ -80,9 +88,10 @@ global void MUS_Stop()
 	end
 end
 
-global void MUS_Push()
+global void MUS_Push()	
 	assert(curplaying,"I cannot push when no music is loaded!")
 	assert(not pushed[curplaying],"Can't push the same music instance twice!")
+	CSayF("Pushing: "..curplaying.filename)
 	stacked.Value = curplaying
 	pushed[curplaying]=true
 end
@@ -95,12 +104,19 @@ global void MUS_Pop()
 		curplaying.instance.Stop()
 		popped.instance.Resume()
 	end
+	CSayF("Popped: "..popped.filename)
 	curplaying = popped	
 	pushed[popped]=nil;
+	popped=nil;
 end
 
 
-
+global void MUS_Debug()
+	CSayF("Curplayer '%s' => '%s'",tostring(curplaying),curplaying.filename)
+	for p,v in pairs(pushed) do
+		CSayF("Pushed '%s' => '%s' (%s)",tostring(p),p.filename,tostring(v))
+	end
+end
 
 
 

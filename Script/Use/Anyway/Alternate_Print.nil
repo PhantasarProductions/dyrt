@@ -1,8 +1,8 @@
 // License Information:
-// src/Tricky Script/Script/Use/Link/Music.nil
-// Music link script
+// src/Tricky Script/Script/Use/Anyway/Alternate_Print.nil
+// Alternate print
 // version: 20.07.18
-// Copyright (C) 2019, 2020 Jeroen P. Broks
+// Copyright (C) 2020 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -17,45 +17,11 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+global delegate trueprint
+trueprint = print
 
-
-
-
-#accept MUSICSCRIPT
-
-if MUSICSCRIPT then return nil end
-
-
-void LoadSubMusic()
-	if not StateExists("MUSIC")
-		CSay("Loading sub: MUSIC")
-		// LoadState("MUSIC","Script/Subs/SubMusic.nil")
-		LoadState("MUSIC","Script/Subs/SubMusic_Safe.nil")
+print = void(infinity)
+	for i,t in ipairs {infinity}
+		CWriteLine( ("print.%04d: %s"):format(i,tostring(t)),255,255,255 )
 	end
-end
-
-void MsExe(command)
-	if not musicavailable then return end
-	LoadSubMusic()
-	LuaDoString("MUSIC",command,"Call sub: MUSIC") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
-end
-
-module ClassMusic
-
-	void Play(string file,dontloop)
-		MsExe(string.format("MUS_Play('%s',%s)",file,tostring(dontloop==true)))
-	end
-
-	void Stop()
-		MsExe("MUS_Stop()")
-	end
-
-	void Push()
-		MsExe("MUS_Push()")
-	end
-
-	void Pop()
-		MsExe("MUS_Pop()")
-	end
-
 end

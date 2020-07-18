@@ -1,8 +1,8 @@
 // License Information:
 // src/Tricky Script/Script/System/console.nil
 // Console
-// version: 20.04.28
-// Copyright (C) 2019 Jeroen P. Broks
+// version: 20.07.18
+// Copyright (C) 2019, 2020 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -148,6 +148,24 @@ group ConsoleCommands
 	void IDDQD()
 		gv.Bool.DEBUG_CHEAT_IDDQD = not gv.Bool.DEBUG_CHEAT_IDDQD
 		CSay("Mode IDDQD: "..tostring(gv.Bool.DEBUG_CHEAT_IDDQD))
+	end
+	
+	void MUSICMEM()
+		LuaDoString("MUSIC","MUS_Debug()","Debug sub: MUSIC")
+	end
+	
+	void AUDIOMEM()
+		var lines
+		lines = split(LoadedAdioBuffers(),"\n")
+		for i,line in ipairs(lines)
+			int r
+			int g
+			int b
+			b = math.floor( (i/#lines) * 255 )
+			g = 255-b
+			r = 255-math.abs( math.sin(i) * 25 )
+			CWriteLine(line,r,g,b)
+		end
 	end
 
 end
