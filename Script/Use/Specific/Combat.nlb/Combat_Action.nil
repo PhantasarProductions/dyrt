@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.07.13
+// Version: 20.07.18
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -129,7 +129,7 @@ group Action_Exe
 					Hurt("Conserve Items","Merya",0,180,255)
 					#endpure
 					gv.Int.WILL_MERYA++
-					F.Points("SKILLEXP").Have = F.Points("SKILLEXP").Have + (900/__skill)
+					F.Char.Points("SKILLEXP").Have = F.Char.Points("SKILLEXP").Have + (900/__skill)
 				else
 					Inventory[ Stage_Action.Act.RemoveItem ]--
 				end
