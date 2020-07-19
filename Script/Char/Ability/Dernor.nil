@@ -64,9 +64,10 @@ do
 		AttackInDamnnation
 		                = { Charm = { "UndeadHound" }, Skill_Bat = s*5, Skill_Nature = s * 8 },
 		Inferno         = { Charm = { "HellHound"}, Skill_Nature = (s+s) * s } ,
-		Dive            = { Charm = { "Eagle" }, Skill_Bat = 20 }
+		Dive            = { Charm = { "Eagle" }, Skill_Bat = 20 },
 	
 		-- Scharum
+		MotherNature   = { Scharum = true }
 	
 		-- Sealed Boss
 	
