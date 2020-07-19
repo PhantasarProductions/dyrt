@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
-// Version: 20.07.12
+// Version: 20.07.19
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -133,12 +133,13 @@ void EnemyDeathFade(f)
 			switch type(f.Drop[r])
 				case "number"
 					if __cash<(900000000/__skill)
-						okdrop=true
-						LoadAudio("SFX/Treasure/ChaChing.wav").Play()
+						okdrop=true						
 						__cash = __cash + f.Drop[r]
 						if f.Drop[r]==1
+							LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 							new Hurt("Dropped 1 __onecurrency",tag,255,255,0)
-						else
+						elseif f.Drop[r]>0
+							LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 							new Hurt(sprintf("Dropped %d __currency",f.Drop[r]),f.Tag,255,255,0)
 						end
 					end
@@ -154,12 +155,13 @@ void EnemyDeathFade(f)
 					error("Invalid item drop!")
 			end // switch
 		end // Drop check
-		if (not okdrop) and  __cash<(900000000/__skill)						
-			LoadAudio("SFX/Treasure/ChaChing.wav").Play()
+		if (not okdrop) and  __cash<(900000000/__skill)									
 			__cash = __cash + f.Cash
 			if f.Cash==1
+				LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 				new Hurt("Dropped 1 __onecurrency!",tag,255,255,0)
-			else
+			elseif f.Cash>0
+				LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 				new Hurt(sprintf("Dropped %d __currency!",f.Cash),f.Tag,255,255,0)
 			end
 		end // Cash if no other drop
