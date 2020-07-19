@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/Projectile.nil
-// Version: 20.07.18
+// Version: 20.07.19
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -69,20 +69,44 @@ module M_Projectile
 		if (self.HotCenter)
 			self.PrjImage.HotCenter()
 		end
-		if math.abs(self.ex-self.tx)>math.abs(self.ey-self.ty)
-			self.dx=1
-			if self.ex>self.tx
-				self.dx=-1
+		if self.tx<self.ex
+			if math.abs(math.abs(self.ex)-math.abs(self.tx))>math.abs(math.abs(self.ey)-math.abs(self.ty))
+				self.dx=1
+				//if self.ex>self.tx
+					self.dx=-1
+				//end
+				self.dy = math.abs(self.ty-self.ey)/self.ex
+				self.cycles=math.abs(self.ex-self.tx)
+				CSayF("Projectile Start: (%04d,%04d) => (%04d,%04d); H<; Mv(%4.4f,%4.4f); Cycles: %04d",self.ex,self.ey,self.tx,self.ty,self.dx,self.dy,self.cycles)
+			else
+				self.dy=1
+				if self.ey>self.ty
+					self.dy=-1
+				end
+				self.dx = math.abs(self.tx-self.ex)/self.ey
+				//self.cycles=math.abs(self.ex-self.tx)
+				self.cycles=math.abs(self.ey-self.ty)
+				CSayF("Projectile Start: (%04d,%04d) => (%04d,%04d); V<; Mv(%4.4f,%4.4f); Cycles: %04d",self.ex,self.ey,self.tx,self.ty,self.dx,self.dy,self.cycles)
 			end
-			self.dy = (self.ty-self.ey)/self.ex
-			self.cycles=math.abs(self.ex-self.tx)
 		else
-			self.dy=1
-			if self.ey>self.ty
-				self.dy=-1
+			if math.abs(math.abs(self.ex)-math.abs(self.tx))>math.abs(math.abs(self.ey)-math.abs(self.ty))
+				self.dx=1
+				//if self.ex>self.tx
+				//	self.dx=-1
+				//end
+				self.dy = math.abs(self.ty-self.ey)/(self.tx-self.ex)
+				self.cycles=math.abs(self.ex-self.tx)
+				CSayF("Projectile Start: (%04d,%04d) => (%04d,%04d); H<; Mv(%4.4f,%4.4f); Cycles: %04d",self.ex,self.ey,self.tx,self.ty,self.dx,self.dy,self.cycles)
+			else
+				self.dy=1
+				if self.ey>self.ty
+					self.dy=-1
+				end
+				self.dx = math.abs(self.tx-self.ex)/math.abs(self.ey-self.ty)
+				//self.cycles=math.abs(self.ex-self.tx)
+				self.cycles=math.abs(self.ey-self.ty)
+				CSayF("Projectile Start: (%04d,%04d) => (%04d,%04d); V<; Mv(%4.4f,%4.4f); Cycles: %04d",self.ex,self.ey,self.tx,self.ty,self.dx,self.dy,self.cycles)
 			end
-			self.dx = (self.tx-self.ex)/self.ey
-			self.cycles=math.abs(self.ex-self.tx)
 		end
 		// Not the most elegant method, but using Bresenham would get more issues
 	end

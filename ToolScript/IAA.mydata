@@ -2837,6 +2837,7 @@ Rec: ABL_FOE_SHOOT
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -2932,9 +2933,10 @@ Rec: ABL_FOE_SHOOT
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = LaserShoot
 	Stance = CAST
 	Target = 1F
+	TriggerAfterAttack = FALSE
 	Type = 
 
 Rec: ABL_FOE_SHOUT
