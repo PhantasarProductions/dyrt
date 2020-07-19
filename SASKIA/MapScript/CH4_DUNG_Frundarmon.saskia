@@ -62,7 +62,7 @@
 	end
 	
 :Kitchen
-	chk gv.Bool.DefeatedFrundarmon,Niks
+	chk gv.Bool.DefeatedFrundarmon,NoKiddo
 	call CSay,"10"
 	call CSay,"9"
 	call CSay,"8"
@@ -117,6 +117,10 @@
 	mov true,gv.Bool.DefeatedFrundarmon
 	call MapScript.KidKill
 	call MapScript.TheEnd,"Rebecca"
+	
+:NoKiddo
+	call Map.HideByLabel,"NoKiddo"
+	jmp Niks
 
 :Niks
 	end

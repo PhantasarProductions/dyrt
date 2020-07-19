@@ -64,6 +64,8 @@ group MScript
 	
 	link THEEND = EndSplit
 	
+	bool kidkill_diningroom
+	
 	//var Lijst
 	string Kamer
 	var Font
@@ -169,6 +171,15 @@ group MScript
 		Map.Layer=old // Bug prevention
 	end
 	
+	void KIDKILLDININGROOM()
+		if self.kidkill_diningroom
+			return
+		end
+		Map.Kill("NPC_SASKIA_KID21")
+		Map.Kill("NPC_SASKIA_KID22")
+		self.kidkill_diningroom = true
+	end
+	
 	void CONSTRUCTOR()
 		CSay("Entering the mansion")
 		//self.Lijst = new TLinkedList
@@ -188,6 +199,10 @@ group MScript
 		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
 		Map.ZA_Enter("Bed Room","Guard_Closet")
 		Map.ZA_Enter("K3","SASKIA:K3")
+		if FrunDefeated
+			Map.ZA_Enter("Dining Room","KidKillDiningRoom")
+		end
+		
 		if not FrunDefeated
 			Map.ZA_Enter("FrunBoss","SASKIA:Boss")
 		end
