@@ -59,7 +59,7 @@ do
 		Hyper          = { ["Skill_Befindo enchants"] = (s+2) ^ 2 },
 	
 		-- Scharum
-		Power2x        = { Scharum = true },
+		Triple_Bolt    = { Scharum = true },
 	
 		-- Sealed Boss
 		CursedArrow    = { SealedBoss = true },
