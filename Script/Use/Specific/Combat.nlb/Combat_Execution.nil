@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.07.14
+// Version: 20.07.20
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -404,6 +404,7 @@ group Execution
 							G = 255 - R
 							new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("%s's %s level %s",Action.Executor.Char.Name,Action.Executor.Char.Data[sprintf("SKILL%d",i)], Roman(skl.Have)),R,G,0)
 							self.skillupf[Action.Executor.Tag] = self.skillupf[Action.Executor] or NIL.Use("Script/Char/SkillUp/"..Action.Executor.Tag)
+							skp.Maximum = (10 * (10^__skill)) + (5*(skl.Have*__skill))
 							#pure
 							self.skillupf[Action.Executor.Tag](i)
 							#endpure
