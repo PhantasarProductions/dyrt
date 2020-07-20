@@ -8929,7 +8929,7 @@ Rec: ABL_HERO_ERIC_CORONA
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = Corona
 	Stance = CAST
 	Target = AF
 	TriggerAfterAttack = FALSE
