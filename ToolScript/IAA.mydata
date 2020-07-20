@@ -19171,11 +19171,11 @@ Rec: ACT_UNDEADATTACK
 Rec: AUTO_AZIELLA
 	AccuracyCheck = FALSE
 	AP_Cost = 0
-	Attack = 0
+	Attack = 175
 	AttackAlt = None
-	AttackCancel = FALSE
-	AttackStat = Intelligence
-	AttackType = Magical
+	AttackCancel = TRUE
+	AttackStat = Strength
+	AttackType = Physical
 	Block_Fear = FALSE
 	Block_Silence = FALSE
 	BlockSilence = FALSE
@@ -19195,7 +19195,7 @@ Rec: AUTO_AZIELLA
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
 	CauseGuard = FALSE
-	CauseParalysis = FALSE
+	CauseParalysis = TRUE
 	CausePoison = FALSE
 	CauseSilence = FALSE
 	CauseSleep = FALSE
@@ -19214,7 +19214,7 @@ Rec: AUTO_AZIELLA
 	CureSilence = FALSE
 	CureSleep = FALSE
 	CureZombie = FALSE
-	DefenseStat = Resistance
+	DefenseStat = Evasion
 	Description = 
 	Discriminate = TRUE
 	EffectArgument = 

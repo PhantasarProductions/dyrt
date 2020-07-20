@@ -309,6 +309,18 @@ group Stage_Action extends Stage
 				a = a and (not prefixed(tar.Tag,"FOE_"))
 				a = a and self.Act.Act.CureDeath
 			end
+			if not prefixed(tar.Tag,"FOE_")
+				int i
+				repeat
+					i++
+					if i>4
+						a = false
+					end
+				until i>8 or RPG.Party[i]==tar.Tag
+				if tar.Will.Targeted
+					a = a and tar.Will.Targeted(self.Act)
+				end
+			end
 			if a
 				newtar[#newtar+1] = tar
 			end
@@ -333,6 +345,10 @@ group Stage_Action extends Stage
 				Cancel("Out of items!")
 				return true
 			end
+		end
+		if self.Act.Executor.GaugePosition<15000
+			Cancel("Forcefully canceled")
+			return true
 		end
 		return false
 	end
