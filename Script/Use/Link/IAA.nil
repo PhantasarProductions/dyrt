@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/IAA.nil
-// Version: 20.07.09
+// Version: 20.07.20
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -146,6 +146,12 @@ quickmeta group Item
 				return CleanLoadedItems
 			default
 				LoadedItems[k] = LoadedItems[k] or NIL.Use("Script/Data/IAA/"..k..".nil")
+				if LoadedItems[k].Target=="Auto"
+					LoadedItems[k].Target="1F"
+					if LoadedItems[k].Heal>0
+						LoadedItems[k].Target="1A"
+					end
+				end
 				// CSayF("Requested %s\n%s",k,NIL.LuaSerialize(k,LoadedItems[k]))
 				return LoadedItems[k]
 		end
