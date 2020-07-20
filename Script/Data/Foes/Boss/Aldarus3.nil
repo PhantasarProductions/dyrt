@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:37:59 PM
+// Generated: 7/20/2020 6:38:02 PM
 
 do
 var retfunc()
@@ -45,7 +45,7 @@ foeret.Char.Stat("BASE__RESIST_Stat_Paralysis").Value=95
 foeret.Char.Stat("BUFF__RESIST_Stat_Paralysis").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Script="SUM:BASE__RESIST_Stat_Paralysis,BUFF__RESIST_Stat_Paralysis"
-foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=75
+foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=70
 foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
 foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
@@ -144,6 +144,11 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_ALDARUSSTRIKE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_ALDARUSSTRIKE"
@@ -153,6 +158,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"

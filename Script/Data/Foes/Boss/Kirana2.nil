@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:00 PM
+// Generated: 7/20/2020 5:10:07 PM
 
 do
 var retfunc()
@@ -149,7 +149,7 @@ else
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
-	foeret.Char.Stat("BASE_Intelligence").Value=400
+	foeret.Char.Stat("BASE_Intelligence").Value=300
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
