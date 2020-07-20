@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.19
+// version: 20.07.20
 // End License Information
 
 
@@ -46,6 +46,17 @@
 group MScript
 	
 	link ENDSPLIT = EndSplit
+	
+	get bool NoEric
+		for i=1,8
+			string p
+			p = RPG.Party[i]
+			if p=="Eric" or p=="Yasathar"
+				return false
+			end
+		end
+		return true
+	end
 	
 	void NPC_MALABIA()
 		if not Done.MeetMalabiaAtEndOfSplitTeamEric
@@ -110,8 +121,17 @@ group MScript
 		__EricIsYasathar = true
 	end
 	
+	void NOERICBACK()
+		MapText("NOPE")
+		Map.StopWalking()
+		Map.WalkTo("Start")
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("TheGordo","SASKIA:TheGordo")
+		if self.NoEric
+			Map.ZA_Enter("NoEric","NoEricBack")
+		end
 	end
 	
 	void Draw()
