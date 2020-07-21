@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/FreezeSparkle.nil
-// Version: 20.05.10
+// Version: 20.07.21
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -65,7 +65,7 @@ module SpellAni_FreezeSprakle
 		for tar in each(act.Targets)
 			for i=1,35 
 				Color(math.random(0,10),math.random(50,150),math.random(170,255))
-				self.Glitter.Draw(tar.X+math.random(0,32),tar.Y+math.random(1,64))
+				self.Glitter.Draw(tar.X+math.random(0,tar.Width),tar.Y+math.random(1,tar.Height))
 			end
 		end
 		__white
