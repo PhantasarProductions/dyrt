@@ -32,9 +32,14 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
+// version: 20.07.21
 // End License Information
-module Will_Kirana
+
+#macro KiranaAPHav RPG.GetChar("Kirana").Points("AP").Have
+#macro KiranaAPMax RPG.GetChar("Kirana").Points("AP").Maximum
+
+
+module Will_Shanda
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -51,10 +56,31 @@ module Will_Kirana
 	// Aziella
 	delegate Targeted
 	
-	// Kirana
-	delegate PreInput
+	
+	// Kirana, Shanda
+	void PreInput()
+		CSay("Regenerate Kirana!")
+		int i
+		switch __skill
+			case 1
+				i = math.min(25,math.floor(KiranaAPMax * 0.75))
+			case 2
+				i = math.min(10,math.floor(KiranaAPMax * 0.25))
+			case 3
+				i = 3
+		end
+		new Hurt("Personal will:",'Kirana',255,180,  0)
+		new Hurt("Magic charge",  'Kirana',  0,255,255)
+		new Hurt(tostring(i),     'Kirana',  0,180,255)
+		KiranaAPHav = KiranaAPHav + i
+	end
 	
 	// Merya
 	delegate ManipulateItemUsage
+	
+	void CONSTRUCTOR()
+		CSay("Nu wil ik eens weten! Is het systeem een leugenaar?")
+		CSay(tostring(self.PreInput))
+	end
 	
 end
