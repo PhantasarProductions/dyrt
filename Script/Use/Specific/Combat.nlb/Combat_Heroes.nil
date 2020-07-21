@@ -523,12 +523,13 @@ end
 	
 group PlayerSwitch
 	void Switch(string oud,string nieuw)
+		CSayF("PlayerSwitch.Switch('%s','%s')",oud,nieuw)
 		Fighter.Team.Hero[oud] = nil;
 		//for i,v in ipairs(Hero.Heroes)
 		for i=1,8
 			string v
 			v = RPG.Party[i]
-			CSayF("%d: (%s == %s) >>> %s",i,v,nieuw,tostring(v==nieuw))
+			CSayF("%d: Switch (%s == %s) >>> %s",i,v,nieuw,tostring(v==nieuw))
 			if v==nieuw
 				var ch
 				//ch = new Hero(nieuw,i)
@@ -587,6 +588,7 @@ group Stage_PlayerInput extends Stage
 			Annoy("Remember, Kirana was forced up front by Scyndi and Irravonia, and may therefore NOT be switched")
 		else
 			GoMenu(self.CharTag,"COMBAT_SWITCH")
+			Stage.Go("IDLE")
 		end
 	end
 	

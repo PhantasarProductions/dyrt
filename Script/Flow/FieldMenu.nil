@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.07.03
+// Version: 20.07.21
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -596,7 +596,7 @@ group Flow_FieldMenu
 	
 	string SwitchHover
 	void JustSwitch()
-		if $SwitchHover==""
+		if $SwitchHover=="" or (not $SwitchHover)
 			return
 		end
 		if $CharTag=="Kirana"
@@ -623,6 +623,13 @@ group Flow_FieldMenu
 		string swp2
 		swp1 = $CharTag
 		swp2 = $SwitchHover
+		CSayF("Combat Switch '%s' => '%s'",tostring(swp1),tostring(swp2))
+		if swp1==swp2 or (not swp2) or swp2==""
+			CSay("No switch")
+			LuaDoString("FLOW_COMBAT",'Stage.Go("IDLE")')
+			GoToFlow("COMBAT")
+			return
+		end
 		self.JustSwitch() // This has to be done anyway
 		// And below the link back to combat
 		LuaDoString("FLOW_COMBAT",sprintf("PlayerSwitch.Switch(trim('%s'),trim('%s'))",swp1,swp2))
@@ -765,7 +772,8 @@ group Flow_FieldMenu
 					{ ["IconFile"] = "Switch", ["Right"]=self.Switch, ["Help"]="Switch chacters" }
 				},
 				["SwitchRange"] = {5,8},
-				["SwitchAction"] = self.CombatSwitch,				
+				["SwitchAction"] = self.CombatSwitch,		
+				["Return"] = "COMBAT"		
 			},
 			["STONEMASTER"] = { 
 				["MenuItems"] = {
