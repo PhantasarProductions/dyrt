@@ -57,6 +57,7 @@ do
 		Shield         = { ["Skill_Befindo enchants"] = s * 8 },
 		Blunt          = { ["Skill_Befindo enchants"] = s * 10 },
 		Hyper          = { ["Skill_Befindo enchants"] = (s+2) ^ 2 },
+		Purify         = { ["Skill_Befindo enchants"] = s * 30 },
 	
 		-- Scharum
 		Triple_Bolt    = { Scharum = true },
