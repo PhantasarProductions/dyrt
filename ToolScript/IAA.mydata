@@ -10851,7 +10851,7 @@ Rec: ABL_HERO_ERIC_ZEROKELVIN
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = ZeroKelvin
 	Stance = CAST
 	Target = AF
 	TriggerAfterAttack = FALSE
