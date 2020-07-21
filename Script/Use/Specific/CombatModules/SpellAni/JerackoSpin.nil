@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.07
+// version: 20.07.21
 // End License Information
 
 #use "libs/tables"
@@ -134,6 +134,7 @@ module JS_SpellAni
 	
 	bool Cycle()
 		if self.Klaar
+			Rotate.Deg = 0
 			return self.RecoverySpots()
 		end
 		//CSayF("<Jeracko spin cycle>\n%s\n</Jeracko spin cycle>",self[".dump"]) // DEBUG ONLY!!!
