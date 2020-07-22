@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.05
+// version: 20.07.22
 // End License Information
 
 #use "libs/xmath"
@@ -53,6 +53,7 @@ module Yasathar_Personal_Action
 	end
 	
 	void InstantEncounter()
+		RENC.RencCheck(true)
 	end
 	
 	get bool RedSeal
@@ -82,6 +83,7 @@ module Yasathar_Personal_Action
 		
 		// Instant Encounter
 		self.InstantEncounter() 
+		return true;
 	end
 	
 	void CONSTRUCTOR()
