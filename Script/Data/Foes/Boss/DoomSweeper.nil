@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:00 PM
+// Generated: 7/22/2020 3:20:00 PM
 
 do
 var retfunc()
@@ -16,7 +16,7 @@ foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
 foeret.Cash = 1
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_AMBROSIA"
 if not Foe.LoadOversoul
-	foeret.Experience = 250000
+	foeret.Experience = 25000
 end
 foeret.Name="DoomSweeper"
 foeret.Char.Stat("BASE__RESIST_Elem_Darkness").Value=100000
