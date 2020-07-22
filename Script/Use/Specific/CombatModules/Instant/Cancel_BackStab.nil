@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/Instant/Cancel_BackStab.nil
-// Version: 20.06.09
+// Version: 20.07.22
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,9 +36,6 @@
 // End License Information
 do
 	void C_BackStab(ron,act)
-		if not Done.CounterRondomoVeryCleverLittleBoy
-			MapText("CANCELCOUNTER")
-		end
 		table nact
 		nact.ActTag = "ABL_HERO_MERYA_BACKSTAB"
 		nact.ExeTag = ron.Tag
