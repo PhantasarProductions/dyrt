@@ -271,6 +271,7 @@ class Hero extends Fighter
 				Act.Learned = true
 				Act.LearnTag = ablk
 				self.NextActSpeed = 9000
+				return
 			end
 		end
 	end
