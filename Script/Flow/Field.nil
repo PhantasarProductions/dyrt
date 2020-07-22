@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.07.19
+// Version: 20.07.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -541,7 +541,7 @@ group FlowField
 				new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
 				return
 			end
-			chaching = chaching or LoadAudio("SFX/Treasure/ChaChing.wav")
+			chaching = chaching or LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 			chaching.Play()
 			__cash = __cash + foundcash
 			new MiniMsg(mx,my,sprintf("Obtained: %d %s",foundcash, shild),0,180,255)
