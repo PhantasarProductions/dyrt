@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.07.21
+// Version: 20.07.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -367,6 +367,7 @@ group Flow_FieldMenu
 	end
 	
 	void Items(ubox)
+		self.ChaChing = self.ChaChing or LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
 		int y 
 		bool allowscrollup
 		bool allowscrolldown
@@ -547,6 +548,7 @@ group Flow_FieldMenu
 			CSayF("Cannot buy %s ... Not enough money (%9d; need %9d)",tag,__cash,Item[tag].BuyPrice)
 			return
 		end
+		self.ChaChing.Play()
 		CSayF("Buying %s",tag)
 		Inventory[tag]++
 		#- __cash Item[tag].BuyPrice
@@ -554,9 +556,11 @@ group Flow_FieldMenu
 	
 	string CurrentStore
 	var CurrentStock
+	var ChaChing
 	void StoreBuy(ubox)
 		var Stock
 		self.CurrentStock = self.CurrentStock or NIL.Use(sprintf("Script/Data/Stores/%s",self.CurrentStore) )
+		self.ChaChing = self.ChaChing or LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
 		Stock = self.CurrentStock // I am lazy!
 		__amber
 		DarkText.Font($Font,Stock.Name,ubox.x+10,ubox.y+10)
@@ -760,8 +764,10 @@ group Flow_FieldMenu
 					{ ["IconFile"]="Sell", ["Right"]=self.Items, ["Help"]="Sells items to this merchant" }
 				} ,
 				["ItemAction"] = void(string itemtag)
+						// Sell Item //
 						__cash = __cash + math.ceil(Item[itemtag].BuyPrice/__skill)
 						Inventory[itemtag]--
+						self.ChaChing.Play()
 					end,
 				["ItemSellPrice"]=true,
 				["Return"]="FIELD"
