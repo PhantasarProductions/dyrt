@@ -17117,7 +17117,7 @@ Rec: ABL_HERO_SCYNDI_LIGHTNING
 	Jump2Target = FALSE
 	MoveRepeat = 0
 	MoveRepeatSpeed = 0
-	Name = Lighting
+	Name = Lightning
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
