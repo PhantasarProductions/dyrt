@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.07.22
 // End License Information
 
 
@@ -82,10 +82,10 @@ group MScript
 		Map.ZA_Enter("StartBoss","SASKIA:Boss")
 		Map.ZA_Enter("ToEinde","GoEind")
 		Map.ZA_Enter("WayBack","GoBack")
-		Map.Layer="#001"
-		Map.HideByZone("Secret")
-		Map.ZA_Enter("Secret","SSECRET")
-		Map.ZA_Leave("Secret","HSECRET")
+		//Map.Layer="#001"
+		//Map.HideByZone("Secret")
+		//Map.ZA_Enter("Secret","SSECRET")
+		//Map.ZA_Leave("Secret","HSECRET")
 	end
 	
 	void Draw()
