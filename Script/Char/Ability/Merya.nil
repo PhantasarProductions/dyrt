@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.15
+// version: 20.07.24
 // End License Information
 
 
@@ -47,6 +47,7 @@ a = {
 	AAA_ID         = { Start=true },
 	Pickpocket     = { Start=true },
 	Intimidate     = { Start=true },
+	SmokeBomb      = { Start=not(s==3) },
 	
 	Virusstab      = { Skill_Dagger=18, Skill_Rogue=19 },
 	Poisonstab     = { Skill_Dagger=19, Skill_Rogue=25 },
@@ -61,6 +62,8 @@ a = {
 	KillerStab     = { SealedBoss = true },
 	
 }
+	
+if s==3 then a.SmokeBomb.SkillRogue=75 end
 	
 return a
 	
