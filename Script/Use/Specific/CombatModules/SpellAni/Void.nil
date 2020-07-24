@@ -73,9 +73,10 @@ module SpellAni_VOID
 	#say "Init"
 	void Init(act)
 		CSay("VOID.Init( --ACT-- )")
-		// self.Screen = Grab("SPELLANI_VOID_SCREEN")
-		CSay("- Rand Grad Tile")
-		self.Screen = RandGradTile(Screen.W,Screen.H)
+		CSay("- Grab Screen")
+		self.Screen = Grab("SPELLANI_VOID_SCREEN")
+		//CSay("- Rand Grad Tile")
+		//self.Screen = RandGradTile(Screen.W,Screen.H)
 		CSay("- Configuring data")
 		self.Stage  = 0
 		self.Scale  = 1000
