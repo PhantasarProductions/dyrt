@@ -1,0 +1,157 @@
+// License Information:
+// src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/Void.nil
+// Version: 20.07.24
+// Copyright (C) 2020 Jeroen Petrus Broks
+// 
+// ===========================
+// This file is part of a project related to the Phantasar Chronicles or another
+// series or saga which is property of Jeroen P. Broks.
+// This means that it may contain references to a story-line plus characters
+// which are property of Jeroen Broks. These references may only be distributed
+// along with an unmodified version of the game.
+// 
+// As soon as you remove or replace ALL references to the storyline or character
+// references, or any termology specifically set up for the Phantasar universe,
+// or any other univers a story of Jeroen P. Broks is set up for,
+// the restrictions of this file are removed and will automatically become
+// zLib licensed (see below).
+// 
+// Please note that doing so counts as a modification and must be marked as such
+// in accordance to the zLib license.
+// ===========================
+// zLib license terms:
+// This software is provided 'as-is', without any express or implied
+// warranty.  In no event will the authors be held liable for any damages
+// arising from the use of this software.
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+// 1. The origin of this software must not be misrepresented; you must not
+// claim that you wrote the original software. If you use this software
+// in a product, an acknowledgment in the product documentation would be
+// appreciated but is not required.
+// 2. Altered source versions must be plainly marked as such, and must not be
+// misrepresented as being the original software.
+// 3. This notice may not be removed or altered from any source distribution.
+// End License Information
+#use "libs/xmath"
+
+#say "Module VOID"
+module SpellAni_VOID
+	
+	#say "Standard Declarations!"
+	var BlackHole
+	var Screen
+	
+	int Stage
+	int Scale = 1000
+	int Deg
+	int Rot
+	int Radius
+	int Alpha
+	
+	table Targets
+	
+	#say "Link voided"
+	link voided = gv.Int.Voided
+	
+	#say "(X,Y) properties"
+	get int X
+		return math.floor( xmath.sin(self.Deg) * self.Radius ) + (Screen.W/2)
+	end
+		
+	get int Y
+		return math.floor( xmath.cos(self.Deg) * self.Radius ) + (Screen.H/2)
+	end
+	
+	#say "CONSTRUCTOR"
+	void CONSTRUCTOR()
+		CSay("VOID.CONSTRUCTOR() - Loading the Black Hole picture")
+		self.BlackHole = LoadIfNew("GFX/Combat/SpellAni/BlackHole.png","SPELLANI_VOID_VOID")
+	end
+	
+	#say "Init"
+	void Init(act)
+		CSay("VOID.Init( --ACT-- )")
+		// self.Screen = Grab("SPELLANI_VOID_SCREEN")
+		CSay("- Rand Grad Tile")
+		self.Screen = RandGradTile(Screen.W,Screen.H)
+		CSay("- Configuring data")
+		self.Stage  = 0
+		self.Scale  = 1000
+		self.Rot    = 0
+		self.Radius = 0
+		self.Targets = act.Targets
+		self.Alpha   = 0
+		CSay("- Hotcentering screen (replacement)")
+		self.Screen.HotCenter()
+		CSay("- Done")
+	end
+	
+	#say "Cycle"
+	bool Cycle()
+		// say Als hij hier op crasht dan is de computer aan het liegen, want GrabDone bestaat wel degelijk!
+		// if not GrabDone()
+		//	return false
+		// end
+		// CSayF("VOID.Cycle() - Stage %d!",self.Stage)
+		if self.Stage!=0
+			self.BlackHole.StretchDraw(0,0,Screen.W,Screen.H)
+		end
+		SetAlpha(self.Alpha)
+		Rotate.Deg = self.Rot
+		SetScale(self.Scale)
+		self.Screen.XDraw(self.X,self.Y)
+		SetAlpha(255)
+		Rotate.Deg = 0
+		SetScale(1000)
+		return self["Stage"..self.Stage]()
+	end
+	
+	#say "Stage 0"
+	void Stage0()
+		self.Alpha = math.min(255,self.Alpha+1)
+		if self.Alpha==255
+			self.Stage=1
+		end
+	end
+	
+	#say "Stage 1"
+	void Stage1()
+		#+ self.Radius 4
+		#+ self.Rot math.max(math.min(1,math.floor(self.Radius/100)),5)
+		self.Deg++
+		if self.Radius>=Screen.H/3
+			self.Stage = 2
+		end
+	end
+	
+	#say "Stage 2"
+	bool Stage2()
+		#+ self.Rot 5
+		#+ self.Deg 2
+		#- self.Radius 1
+		self.Scale = math.max(3,self.Scale - 4)
+		if self.Radius<=4 
+			self.RemoveTargets()
+			return true
+		end
+		return false
+	end
+	
+	#say "Target removal"
+	void RemoveTargets()
+		for _,target in pairs(self.Targets)
+			if target.Boss
+				CSayF("NOT voided: %s (boss)",target.Tag)
+			else
+				CSayF("--> voided: %s",target.Tag)
+				target.StatusChanges.Gone = true
+				self.voided++
+				CSayF("That makes a total of %5d enemies voided now!",self.voided)
+			end
+		end
+	end
+	#say "Closure"
+	
+end
