@@ -11033,7 +11033,7 @@ Rec: ABL_HERO_IRRAVONIA_BLOWAWAY
 	CureZombie = FALSE
 	DefenseStat = Resistance
 	Description = Removes an enemy from battle
-	Discriminate = FALSE
+	Discriminate = TRUE
 	EffectArgument = 
 	EffectFunction = 
 	EffectScript = Nothing

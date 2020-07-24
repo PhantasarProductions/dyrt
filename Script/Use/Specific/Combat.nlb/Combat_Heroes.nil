@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Heroes.nil
-// Version: 20.07.21
+// Version: 20.07.24
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -440,17 +440,18 @@ group Stage_SelectTarget extends Stage
 					if (not gotone) and ifighter.PosHover(Mouse.X,Mouse.Y) and (not Combat_Status.UnTargetable(ifighter.Tag))
 						for iteam2,imember2,ifighter2 in Fighter.ForAll()
 							if iteam2==iteam and (not Combat_Status.UnTargetable(ifighter2.Tag))
-								gotcha=true
 								if imember2!=imember
-									self.targetted[imember2]=ifighter2
 									// self.wrongteam = Right(iteam,1)!=Left(self.Item.Target,1)
-															
+									gotcha=true															
 									switch self.Item.Target
 										case "AF"
 											self.wrongteam = not prefixed(ifighter.Tag,"FOE_")
 										case "AA"
 											self.wrongteam =     prefixed(ifighter.Tag,"FOE_")
 									end						
+									if not(self.wrongteam and self.Item.Discriminate)
+										self.targetted[imember2]=ifighter2
+									end
 								end
 							end
 						end
