@@ -78,12 +78,12 @@ module SpellAni_VOID
 		//CSay("- Rand Grad Tile")
 		//self.Screen = RandGradTile(Screen.W,Screen.H)
 		CSay("- Configuring data")
-		self.Stage  = 0
+		self.Stage  = 1
 		self.Scale  = 1000
 		self.Rot    = 0
 		self.Radius = 0
 		self.Targets = act.Targets
-		self.Alpha   = 0
+		self.Alpha   = 250
 		CSay("- Hotcentering screen (replacement)")
 		self.Screen.HotCenter()
 		CSay("- Done")
