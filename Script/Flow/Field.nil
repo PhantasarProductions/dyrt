@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.07.23
+// Version: 20.07.25
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -1007,7 +1007,9 @@ global void BUB_Draw()
 	RENC.Gauge()
 	
 	// Peronal Action
-	PA[FlowField.Leader].Draw()
+	if (not __trueabyss)
+		PA[FlowField.Leader].Draw()
+	end
 	
 	// Mini Messages (must be last before the mouse, which must be the very last)
 	MiniMsg.DrawAll()
@@ -1071,7 +1073,7 @@ global void BUB_Update()
 		ZoneAction.AltNext.Cycle()
 	end
 	
-	if Mouse.HitLeft and PA[FlowField.Leader].Click(1,Mouse.X,Mouse.Y)
+	if (not __trueabyss) and Mouse.HitLeft and PA[FlowField.Leader].Click(1,Mouse.X,Mouse.Y)
 		CSay("Personal action took over, so ignore the walking requests!")
 	elseif (Mouse.Y<Screen.Height-128 and Mouse.HitLeft) and (not __nowalk)
 		var clobj
