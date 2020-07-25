@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.07.20
+// Version: 20.07.25
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -74,7 +74,7 @@ group Execution
 		base = math.ceil(RPG.Char(Exe.Tag).Stat(sprintf("END_%s",Act.Act.AttackStat)).Value*(Act.Act.Attack/100))
 		// local base = Combat_Stat(TGROUP,TACTOR,abl.AttackStat); CSay("AttackStat = "..abl.AttackStat); CSay("base = "..base)
 		// if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
-		adie = rand(1,math.ceil(base/2))
+		adie = rand(1,math.max(2,math.ceil(base/2)))
 		defb = RPG.Char(Tar.Tag).Stat(sprintf("END_%s",Act.Act.DefenseStat)).Value //Combat_Stat(TACT["TargetGroup"],target,Act.Act.DefenseStat)
 		ddie = rand(0,math.floor(defb/5))
 		totaldmg = base + adie
