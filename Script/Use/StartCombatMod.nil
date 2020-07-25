@@ -39,6 +39,10 @@
 
 #use "libs/strings"
 
+do
+
+var CombatStartJingle
+
 void CombatLoaded()
 	assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
 end
@@ -112,6 +116,8 @@ quickmeta group StartCombat
 			case "Ready"
 				return void()
 					CombatLoaded()
+					CombatStartJingle = CombatStartJingle or LoadNewAudio("SFX/Combat/Start.wav","LETS_GET_READY_TO_RUMBLE")
+					CombatStartJingle.Play()
 					LuaDoString("FLOW_COMBAT","LetsGetReadyToRumble()","Let's get ready to rumble!")
 				end
 			case "Foe" "Enemy"
@@ -145,3 +151,5 @@ quickmeta group StartCombat
 	end
 
 end
+
+end // do
