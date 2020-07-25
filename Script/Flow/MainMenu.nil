@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 20.07.07
+// Version: 20.07.25
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -103,10 +103,13 @@ void ToGitHub()
 	OpenURL(URL_GitHub)
 end
 
-void StartNewGame(bool plus)
+void StartNewGame(bool plus,bool TrueAbyss)
 	LoadFlow("NEWGAME","Script/Flow/NewGame.nil")
 	if plus
 		LuaDoString("FLOW_NEWGAME","NewGamePlus()")
+	end
+	if TrueAbyss
+		LuaDoString("FLOW_NEWGAME","NewGameTrueAbyss()")
 	end
 	GoToFlow("NEWGAME")
 	KillFlow("MAINMENU")
@@ -116,15 +119,23 @@ void NewGame()
 	if not Yes("Do you really want to start a new game?")
 		return
 	end
-	StartNewGame(false)
+	StartNewGame(false,false)
 end
 
-void NewGamePlus()	
+void NewGamePlus()
 	if not Yes("Do you really want to start a new game+?")
 		return
 	end
-	StartNewGame(true)
+	StartNewGame(true,false)
 end
+
+void NewGameTrueAbyss()
+	if not Yes("Do you really want to start a new game in the True Abyss?\n\nPlease note, you cannot get into the normal game from the True Abyss, so I do recommend different save slots for these games")
+		return
+	end
+	StartNewGame(false,true)
+end
+
 
 void StartJukeBox()
 	LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
@@ -236,7 +247,7 @@ end
 #say "MainMenu: Init menu items"
 new MenuItem("New Game",NewGame,true)
 new MenuItem("New Game+",NewGamePlus,CTA.Unlocked_NewGamePlus)
-new MenuItem("New Game: True Abyss",NOTHINGYET,CTA.Unlocked_TrueAbyss)
+new MenuItem("New Game: True Abyss",NewGameTrueAbyss,CTA.Unlocked_TrueAbyss)
 new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
 // new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
 new MenuItem("Jukebox",StartJukeBox,true)

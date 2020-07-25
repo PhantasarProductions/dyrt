@@ -1,0 +1,146 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/TrueAbyss_01.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.07.25
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+group MScript
+	
+	// Links
+	link Score = gv.Int.TrueAbyssScore
+	link FloorsReset = gv.Int.TrueAbyssReset
+	
+	// Layer quick
+	get int LayerNum
+		return tonumber(right(Map.Layer,3)) or 0
+	end
+	
+	set int LayerNum
+		Map.Layer = sprintf("$%03d",value)
+	end
+	
+	// Next Flor
+	void NPC_NEXT()
+		int l 
+		int v
+		string n
+		l = self.LayerNum
+		v = l+1
+		n = sprintf("#%03d",v)
+		if v%5!=0
+			Map.Generate(n)
+		end
+		Map.GoToLayer(n,"Start")
+		self.MUSIC()
+	end
+	
+	void EXITMAP()
+		self.NPC_NEXT()
+	end
+
+	// Abyss score
+	void RecalcAbyssScore()
+		self.Score = self.LayerNum + self.FloorsReset
+	end
+	
+	// Music
+	table Cities
+	table General
+	
+	void MUSIC()
+		if self.LayerNum == 0
+			Music.Play("Music/Dungeon/Abyss.wav")
+		elseif self.LayerNum == 1
+			CSay("Kick out on floor 1... Safety precaution")
+			return
+		elseif self.LayerNum % 5 == 1
+			Music.Play("Music/Dungeon/"..self.General[math.random(1,#self.General)]..".wav")
+		elseif self.LayerNum % 15 == 0
+			Music.Play("Music/Cities/"..self.Cities[math.random(1,#self.General)]..".wav")
+		else
+			CSay("Not a floor to change music for")
+		end
+	end
+	
+	// Plasma
+	table plasmasized
+	
+	
+	// Conchita
+	void CONCHITA_WELCOME()
+		if not Done.Conchita_Welcome
+			MapText("NPC_MT_CONCHITASTART")
+		end
+	end
+	
+	
+	// Init
+	void CONSTRUCTOR()
+		KthuraGenerator.IgnoreDestroy("Plasma")
+		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
+		KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
+		KthuraGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
+		KthuraGenerator.Size.X      = 6400
+		KthuraGenerator.Size.Y      = 3200
+		Map.TieGenerator()
+		Map.ZA_Enter("ExitMap","ExitMap")
+		// Map.ZA_Enter("Boss","SASKIA:Boss")
+		
+		self.Cities = {"Doubline","Felixium","Frendor","Independence","Iskarderiu","Xenor"}
+		self.General = {"Abyss","Airom","BlackDragon","Botanica","DeathCaves","ExamRuins","Frundarmon","Fruskbrando","Marshes","Morker","NakedRocks"}
+		Map.ZA_Enter("Welcome","Conchita_Welcome")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+		Map.Obj="Plasma"
+		Map.ObjInt.X = Map.ScrollX
+		Map.ObjInt.Y = Map.ScrollY
+		if not self.plasmasized[Map.Layer]
+			Map.ObjInt.W = Screen.W
+			Map.ObjInt.H = Screen.H
+		end
+		Map.ObjInt.InsertX = math.floor(Map.ScrollX/10)
+		Map.ObjInt.InsertY = math.floor(Map.ScrollY/10)
+	end
+	
+end
+#say "Map Script - Compiling!"

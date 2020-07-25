@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/NewGame.nil
-// Version: 20.07.09
+// Version: 20.07.25
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -364,8 +364,35 @@ void StartGame()
 	StartChat("Wake the mouse!")
 	Mouse.Sleeping=false
 	StartChat("Set the cash")
-	__cash = 900 / (__skill*(10^(__skill-1)))
+	__cash = math.floor(900 / (__skill*(10^(__skill-1))))
 	StartChat("Carry it all over to the game now!")
+end
+
+void StartTheTrueAbyss()
+	NIL.Use("Script/Auto/SwapKill.nil") // Make sure all swap files have been neutralized
+	LoadFlow("FIELD","Script/Flow/Field.nil")
+	__cash = math.floor(900 / (__skill*(10^(__skill-1))))
+	Swap.Data.ReadMe = "This is the swap data folder op\nThe Secrets of Dyrt.NET (The True Abyss)\n\n\nThis session has begin on "..os.date().."\n\nDON'T PUT ANY FILES IN THIS FOLDER!\nYou'll only get them removed when you start or load a new Dyrt.NET game!"
+	RPG.Party.Max=8
+	for i,ch in ipairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+		CSayF("Creating: %d:%s",i,ch)
+		Party.NewCharacter(ch,1)
+		RPG.Party[i] = ch
+	end
+	for ch,sk in pairs { ["Eric"]=4,["Irravonia"]=4,["Brendor"]=0,["Scyndi"]=4,["Rebecca"]=0,["Dernor"]=1,["Merya"]=1,["Aziella"]=1 }
+		for i=0,sk
+			var rch
+			CSayF("Setting skill %d/%d for %s",i,sk,ch)
+			rch = RPG.GetChar(ch).Points("SKILLLVL"..i,true)
+			rch.Minimum = 1
+			rch.Have = 1
+		end
+	end
+	Field.LoadMap("TrueAbyss_01")
+	Map.GoToLayer("#000","Start")
+	CSay("True Abyss Configured - Let's start our road into infinity")
+	GoToFlow("FIELD")
+	KillFlow("NEWGAME")
 end
 
 
@@ -387,7 +414,11 @@ class Stage_StartGame
 	void update()
 		Mouse.Sleeping=true
 		if self.CD<=0
-			StartGame()
+			if gv.Bool.TheTrueAbyss
+				StartTheTrueAbyss()
+			else
+				StartGame()
+			end
 		end
 	end
 end
@@ -402,6 +433,10 @@ stages[#stages+1] = new Stage_StartGame
 #say "To plus, or not to plus! That's the question!"
 global void NewGamePlus()
 	CSayF("NewGame+ from %s to %s",Done.NewGamePlus,Done.NewGamePlus)
+end
+
+global void NewGameTrueAbyss()
+	CSayF("TrueAbyss from %s to %s",tostring(Done.TheTrueAbyss),tostring(Done.TheTrueAbyss))
 end
 
 
