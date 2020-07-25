@@ -37,7 +37,10 @@
 do
 
 	bool Vergeet(Act,Target)
-		Target.Char.Stat("Experience").Value = math.abs(Target.Char.Stat("Experience").Value + (Target.Char.Stat("Experience").Value * __skill)))
+		if Target.Char.Stat("Experience").Value<=0
+			return
+		end
+		Target.Char.Stat("Experience").Value = math.abs(Target.Char.Stat("Experience").Value + (Target.Char.Stat("Experience").Value * __skill)) //))
 		return true
 	end
 	
