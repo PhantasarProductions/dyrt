@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:04 PM
+// Generated: 7/25/2020 10:55:22 AM
 
 do
 var retfunc()
@@ -9,10 +9,40 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
-foeret.Description = "Wait... these also come in "rogues"?"
+foeret.Description = "Wait... these also come in \"rogues\"?"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/OrcRogue.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/ORCROGUE.NEGATIVE.PNG")
 foeret.Cash = 5000
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_Banana"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Ambrosia"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_Ambrosia"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_Ambrosia"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MysteriousPotion"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_MysteriousPotion"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MysteriousPotion"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MysteriousPotion"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MysteriousPotion"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_HERB"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_HERB"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_HERB"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_HERB"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_HERB"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
+foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_APPLE"
 if not Foe.LoadOversoul
 	foeret.Experience = 2500
 end
