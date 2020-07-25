@@ -10141,7 +10141,7 @@ Rec: ABL_HERO_ERIC_ICEBLAST
 	EffectArgument = 
 	EffectFunction = 
 	EffectScript = 
-	Element = None
+	Element = Frost
 	EqAziella = FALSE
 	EqBrendor = FALSE
 	EqDernor = FALSE
