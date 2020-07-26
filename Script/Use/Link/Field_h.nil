@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.07.16
+// Version: 20.07.26
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -403,6 +403,10 @@ group Map
 	
 	set bool RENC_Inf
 		FLD_Exe(sprintf("RENC.Infinite = %s",tostring(value)))
+	end
+	
+	bool Blocked(int x,int y,real)
+		return LuaGetBool("FLOW_FIELD",sprintf("FieldMap.Kthura.Blocked(%d,%d,%s)",x,y,tostring(real==true)))
 	end
 	
 end
