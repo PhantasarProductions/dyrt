@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.07.25
+// Version: 20.07.26
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -947,6 +947,10 @@ group FlowField
 		if __orbblack>0
 			Y = Y - YMin
 			$SFont.DrawText(sprintf("Black Orbs: %d",__orbblack),5,Y)
+		end
+		if __trueabyss
+			Y = Y - YMin
+			$SFont.DrawText("Abyss Score: "..Roman(gv.Int.TrueAbyssScore),5,Y)
 		end
 	end
 	

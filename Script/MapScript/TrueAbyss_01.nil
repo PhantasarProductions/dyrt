@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.25
+// version: 20.07.26
 // End License Information
 
 
@@ -68,6 +68,7 @@ group MScript
 		end
 		Map.GoToLayer(n,"Start")
 		self.MUSIC()
+		self.Score = self.LayerNum + self.FloorsReset
 	end
 	
 	void EXITMAP()
@@ -91,6 +92,8 @@ group MScript
 			return
 		elseif self.LayerNum % 5 == 1
 			Music.Play("Music/Dungeon/"..self.General[math.random(1,#self.General)]..".wav")
+		elseif self.LayerNum % 5 == 0
+			Music.Play("Music/Original/Silence.wav")
 		elseif self.LayerNum % 15 == 0
 			Music.Play("Music/Cities/"..self.Cities[math.random(1,#self.General)]..".wav")
 		else
@@ -109,9 +112,41 @@ group MScript
 		end
 	end
 	
+	// Reset
+	void NPC_YELLOW()
+		if Yes("These yellow orbs are resetters.\nUsing them will bring you back to floor 000, and all your levels will be reset to 1\n\nInventory, equipment, money and mastered abilities will however be transferred.\n\nYou will also, based on how many floors you already passed, also gain extra bonuses on your experience gained (both regular as for your skill groups).\n\nDo you want to perform this reset?")
+			self.Reset()
+		end
+	end
+	
+	void Reset()
+		for _,ch in ipairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+			CSayF("Resetting: %10s",ch)
+			Party.SetLevelStats(ch, 1)
+			RPG.GetChar(ch).Stat('Experience').Value = (math.random(25,100)*__skill)-self.Score
+			for sk=0,4
+				var skill
+				var expp
+				skill = RPG.GetChar(ch).Points("SKILLLVL"..sk)
+				expp  = RPG.GetChar(ch).Points("SKILLEXP"..sk)
+				if skill.Have>0
+					skill.Have = 1
+					expp.Have = 6/__skill
+				end
+			end
+		end
+		#+ self.FloorsReset self.LayerNum
+		NIL.Use("Script/Auto/SwapKill.nil")
+		Field.LoadMap("TrueAbyss_01")		
+		Map.GoToLayer("#000","Start")
+		self.Score = self.LayerNum + self.FloorsReset
+		gv.Bool.RESPAWN_INITIATED = false
+	end
+	
 	
 	// Init
 	void CONSTRUCTOR()
+		self.Score = self.LayerNum + self.FloorsReset
 		KthuraGenerator.IgnoreDestroy("Plasma")
 		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
 		KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
