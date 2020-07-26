@@ -40,6 +40,9 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+#macro MaxTreasure 123
+
 group MScript
 	
 	// Links
@@ -57,15 +60,21 @@ group MScript
 	
 	// Next Floor
 	void NPC_NEXT()
+		if self.LayerNum % 15 == 0 and (not Yes("Do you want to leave this town to continue to the next floor?"))
+			return
+		end
 		int l 
 		int v
 		string n
-		if v % 10 == 1
-			Field.LoadMap(sprintf("True_Abyss%02d",math.ceil(v/10)))
+		l = self.LayerNum
+		if self.LayerNum % 10 == 0
+			string m
+			m = sprintf("TrueAbyss_%02d",math.ceil((self.LayerNum+1)/10))
+			CSay("Loading Map: %s",m)
+			Field.LoadMap(m)
 		else
 			self.MUSIC()
 		end
-		l = self.LayerNum
 		v = l+1
 		n = sprintf("#%03d",v)
 		if v%5!=0
@@ -74,6 +83,18 @@ group MScript
 		Map.GoToLayer(n,"Start")
 		self.Score = self.LayerNum + self.FloorsReset
 		gv.Bool.AllowMagicStones = self.Score >= 5 * __skill
+		for i=1,MaxTreasure
+			if Map.HasTag("RANDOMTREASURE_"..i)
+				int x
+				int y
+				int v
+				x,y = Map.Obj.X,Map.Obj.Y
+				v = not Map.Blocked(x,y,true)
+				Map.Obj = "RANDOMTREASURE_"..i
+				Map.Bool.Visible = v
+				CSayF("Hidden %03d: (%d,%d) > %s",i,x,y,tostring(v))
+			end
+		end
 	end
 	
 	void EXITMAP()
@@ -188,7 +209,8 @@ group MScript
 	void CONSTRUCTOR()
 		self.Score = self.LayerNum + self.FloorsReset
 		KthuraGenerator.IgnoreDestroy("Plasma")
-		for i=1,math.ceil(123/__skill)
+		for i=1,math.ceil(MaxTreasure/__skill)
+			CSay("Ignore Treasure "..i)
 			KthuraGenerator.IgnoreDestroy("RANDOMTREASURE_"..i)
 		end
 		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
