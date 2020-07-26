@@ -41,3 +41,12 @@
 	
 :End
 	end
+	
+	
+:Boss
+	call CSayF,"Boss Time: %s",Map.Layer
+	call MapScript.Boss
+	call Party.LvUp
+	call MapScript.BossAchievement
+	call Map.Kill,"Boss",true
+	end

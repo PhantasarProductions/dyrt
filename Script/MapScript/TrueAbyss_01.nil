@@ -55,11 +55,16 @@ group MScript
 		Map.Layer = sprintf("$%03d",value)
 	end
 	
-	// Next Flor
+	// Next Floor
 	void NPC_NEXT()
 		int l 
 		int v
 		string n
+		if v % 10 == 1
+			Field.LoadMap(sprintf("True_Abyss%02d",math.ceil(v/10)))
+		else
+			self.MUSIC()
+		end
 		l = self.LayerNum
 		v = l+1
 		n = sprintf("#%03d",v)
@@ -67,7 +72,6 @@ group MScript
 			Map.Generate(n)
 		end
 		Map.GoToLayer(n,"Start")
-		self.MUSIC()
 		self.Score = self.LayerNum + self.FloorsReset
 		gv.Bool.AllowMagicStones = self.Score >= 5 * __skill
 	end
@@ -142,6 +146,41 @@ group MScript
 		Map.GoToLayer("#000","Start")
 		self.Score = self.LayerNum + self.FloorsReset
 		gv.Bool.RESPAWN_INITIATED = false
+	end
+	
+	// Boss
+	void BOSS()		
+		StartCombat.StartSession()
+		// Music
+		switch self.LayerNum
+			case 0
+				error("Just a marker!")
+			default
+				StartCombat.Music = "Music/Combat/Boss/Special.wav"
+		end
+		// Arena
+		switch self.LayerNum
+			case 0
+				error("Just a marker!")
+			default
+				StartCombat.Arena = "Abyss"
+		end
+		switch self.LayerNum
+			case 10
+				for i=1,__skill
+					StartCombat.Foe[i] = "Boss/BigTiger"
+				end
+			default
+				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
+		end
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+
+	end
+	
+	void BOSSACHIEVEMENT()
+		Achievements.Award(sprintf("ABYSS_BOSS%03d",self.LayerNum))
 	end
 	
 	
