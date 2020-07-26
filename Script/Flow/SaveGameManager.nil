@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 20.04.28
-// Copyright (C) 2019 Jeroen Petrus Broks
+// Version: 20.07.26
+// Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -246,6 +246,9 @@ class SG
 		$PartyNames = {}
 		$PartyLevels = {}
 		CSay("= Character outline")
+		if __trueabyss
+			$Location = $Location .. sprintf(" - Floor %s",Map.Layer)
+		end
 		for i=1,8
 			if RPG.Party[i] and RPG.Party[i]!=""
 				$PartyNames[i] = RPG.Party[i]
