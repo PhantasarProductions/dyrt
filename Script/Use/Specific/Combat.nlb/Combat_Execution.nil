@@ -385,6 +385,9 @@ group Execution
 		if not prefixed(Action.Executor.Tag,"FOE_")
 			CSay("After move care!")
 			Action.Executor.Char.Points("AP").Inc(Action.Act.GainAP)
+			if __trueabyss and __skill!=3
+				Action.Executor.Char.Points("AP").Inc(math.ceil(gv.Int.TrueAbyssScore/(5^__skill)))
+			end
 			for i=0,4
 				CSayF("= Skill #%d",i)
 				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(split(Action.Act[sprintf("GainSkill%dChar",i)] or "",";"),Action.Executor.Tag)
@@ -395,7 +398,7 @@ group Execution
 					if skl.Have>0
 						skp.Inc(Action.Act[sprintf("GainSkill%d",i)])
 						if __trueabyss
-							skp.Inc(gv.Int.TrueAbyssScore)
+							skp.Inc(gv.Int.TrueAbyssScore*(4-__skill))
 						end
 						if skp.Have >= skp.Maximum and skl.Have < skl.Maximum
 							skp.Have = 0

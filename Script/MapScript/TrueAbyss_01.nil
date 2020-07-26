@@ -69,6 +69,7 @@ group MScript
 		Map.GoToLayer(n,"Start")
 		self.MUSIC()
 		self.Score = self.LayerNum + self.FloorsReset
+		gv.Bool.AllowMagicStones = self.Score >= 5 * __skill
 	end
 	
 	void EXITMAP()
@@ -148,6 +149,9 @@ group MScript
 	void CONSTRUCTOR()
 		self.Score = self.LayerNum + self.FloorsReset
 		KthuraGenerator.IgnoreDestroy("Plasma")
+		for i=1,math.ceil(123/__skill)
+			KthuraGenerator.IgnoreDestroy("RANDOMTREASURE_"..i)
+		end
 		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
 		KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
 		KthuraGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
@@ -155,7 +159,7 @@ group MScript
 		KthuraGenerator.Size.Y      = 3200
 		Map.TieGenerator()
 		Map.ZA_Enter("ExitMap","ExitMap")
-		// Map.ZA_Enter("Boss","SASKIA:Boss")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
 		
 		self.Cities = {"Doubline","Felixium","Frendor","Independence","Iskarderiu","Xenor"}
 		self.General = {"Abyss","Airom","BlackDragon","Botanica","DeathCaves","ExamRuins","Frundarmon","Fruskbrando","Marshes","Morker","NakedRocks"}
