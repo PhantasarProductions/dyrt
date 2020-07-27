@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.25
+; version: 20.07.27
 ; End License Information
 :OnLoad
 	chk Done.WelcomeFaderTrueAbyss,End
@@ -49,4 +49,35 @@
 	call Party.LvUp
 	call MapScript.BossAchievement
 	call Map.Kill,"Boss",true
+	end
+	
+:NPC_SASKIA_Bank
+	Call MapText,"BANK"
+	call GoToBank
+	end
+
+:NPC_SASKIA_StoneElement
+	Call MapText,"STONEELEMENT"
+	Call StoneMaster,"Lena"
+	end
+	
+:NPC_SASKIA_Rosetta
+:NPC_SASKIA_StoneStatus
+	Call MapText,"STONESTATUS"
+	Call StoneMaster,"Rosetta_Abyss"
+	end
+	
+:NPC_SASKIA_StoneMagic
+	call MapText,"STONEMAGIC"
+	call StoneMaster,"Johnny"
+	end
+	
+:NPC_SASKIA_StoneWeapon
+	call MapText,"STONEWEAPON"
+	call StoneMaster,"Alexander"
+	end
+	
+:NPC_SASKIA_Merchant
+	call MapText,"MERCHANT"
+	call Merchant,"TA_LOREEN"
 	end

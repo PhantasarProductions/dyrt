@@ -92,7 +92,7 @@ group MScript
 				x,y = Map.ObjInt.X,Map.ObjInt.Y
 				v = not Map.Blocked(x,y,true)
 				Map.Obj = "RANDOMTREASURE_"..i
-				Map.Bool.Visible = v
+				Map.ObjBool.Visible = v
 				CSayF("Hidden %03d: (%d,%d) > %s",i,x,y,tostring(v))
 			end
 		end
@@ -112,6 +112,12 @@ group MScript
 	table General
 	
 	void MUSIC()
+		self.MusicBegun=false
+	end
+	
+	bool MusicBegun
+	void StartMusic()
+		CSay("Get music to start")
 		if self.LayerNum == 0
 			Music.Play("Music/Dungeon/Abyss.wav")
 		elseif self.LayerNum == 1
@@ -119,10 +125,10 @@ group MScript
 			return
 		elseif self.LayerNum % 5 == 1
 			Music.Play("Music/Dungeon/"..self.General[math.random(1,#self.General)]..".wav")
-		elseif self.LayerNum % 5 == 0
-			Music.Play("Music/Original/Silence.wav")
 		elseif self.LayerNum % 15 == 0
-			Music.Play("Music/Cities/"..self.Cities[math.random(1,#self.General)]..".wav")
+			Music.Play("Music/Cities/"..self.Cities[math.random(1,#self.Cities)]..".wav")
+		elseif self.LayerNum %  5 == 0
+			Music.Play("Music/Original/Silence.wav")
 		else
 			CSay("Not a floor to change music for")
 		end
@@ -241,6 +247,10 @@ group MScript
 		end
 		Map.ObjInt.InsertX = math.floor(Map.ScrollX/10)
 		Map.ObjInt.InsertY = math.floor(Map.ScrollY/10)
+		if not self.MusicBegun
+			self.StartMusic()
+			self.MusicBegun = true
+		end
 	end
 	
 end
