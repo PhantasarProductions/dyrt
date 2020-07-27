@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.26
+// version: 20.07.27
 // End License Information
 
 
@@ -83,12 +83,13 @@ group MScript
 		Map.GoToLayer(n,"Start")
 		self.Score = self.LayerNum + self.FloorsReset
 		gv.Bool.AllowMagicStones = self.Score >= 5 * __skill
+		gv.Bool.AllowOversoul = __skill!=1 and (self.Score >= 90 / __skill) 
 		for i=1,MaxTreasure
 			if Map.HasTag("RANDOMTREASURE_"..i)
 				int x
 				int y
 				int v
-				x,y = Map.Obj.X,Map.Obj.Y
+				x,y = Map.ObjInt.X,Map.ObjInt.Y
 				v = not Map.Blocked(x,y,true)
 				Map.Obj = "RANDOMTREASURE_"..i
 				Map.Bool.Visible = v
