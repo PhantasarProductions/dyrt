@@ -181,15 +181,15 @@ group MScript
 		StartCombat.StartSession()
 		// Music
 		switch self.LayerNum
-			case 0
-				error("Just a marker!")
+			case 20
+				StartCombat.Music = "Music/Combat/Boss/UndeadBoss.wav"
 			default
 				StartCombat.Music = "Music/Combat/Boss/Special.wav"
 		end
 		// Arena
 		switch self.LayerNum
-			case 0
-				error("Just a marker!")
+			case 20
+				StartCombat.Arena = "Frundarmon"
 			default
 				StartCombat.Arena = "Abyss"
 		end
@@ -197,6 +197,11 @@ group MScript
 			case 10
 				for i=1,__skill
 					StartCombat.Foe[i] = "Boss/BigTiger"
+				end
+			case 20
+				StartCombat.Foe[1] = "Boss/Abyss_SoulConsumer"
+				if __skill==3
+					StartCombat.Foe[2] = "Boss/Abyss_SoulConsumer"
 				end
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))

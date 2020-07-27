@@ -4,8 +4,8 @@
 do
 
 
-table ret_ABL_FOE_ARMAGEDDON
-ret_ABL_FOE_ARMAGEDDON={
+table ret_ZZZ_ULTIMATE_VENGEANCE
+ret_ZZZ_ULTIMATE_VENGEANCE={
 	["AccuracyCheck"] = false,
 	["AP_Cost"] = 0,
 	["Attack"] = 0,
@@ -38,7 +38,7 @@ ret_ABL_FOE_ARMAGEDDON={
 	["CauseSleep"] = false,
 	["CauseZombie"] = false,
 	["Charge"] = "",
-	["COM2ACT"] = 200,
+	["COM2ACT"] = 100,
 	["CureConfusion"] = false,
 	["CureCurse"] = false,
 	["CureDeath"] = false,
@@ -56,7 +56,7 @@ ret_ABL_FOE_ARMAGEDDON={
 	["Discriminate"] = false,
 	["EffectArgument"] = "",
 	["EffectFunction"] = "",
-	["EffectScript"] = "Die",
+	["EffectScript"] = "UltimateVengeance",
 	["Element"] = "None",
 	["EqAziella"] = false,
 	["EqBrendor"] = false,
@@ -123,18 +123,18 @@ ret_ABL_FOE_ARMAGEDDON={
 	["Jump2Target"] = false,
 	["MoveRepeat"] = 0,
 	["MoveRepeatSpeed"] = 0,
-	["Name"] = "Armageddon",
+	["Name"] = "Ultimate Vengeance",
 	["Sellable"] = true,
 	["SpellAniArgument"] = "",
 	["SpellAniFunction"] = "",
-	["SpellAniScript"] = "Corona",
+	["SpellAniScript"] = "Shine",
 	["Stance"] = "CAST",
 	["Target"] = "AF",
 	["TriggerAfterAttack"] = false,
 	["Type"] = "Ability",
 }
 
-return ret_ABL_FOE_ARMAGEDDON
+return ret_ZZZ_ULTIMATE_VENGEANCE
 
 
 end
