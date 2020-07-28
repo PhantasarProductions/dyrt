@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.07.22
+// Version: 20.07.28
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -496,7 +496,11 @@ group Flow_FieldMenu
 							case "Scharum"
 								Help[#Help+1] = "= To defeat Scharum"
 							case "SealedBoss"
-								Help[#Help+1] = "= To defeat a certain sealed boss"
+								if __trueabyss
+									Help[#Help+1] = "= Complete all 100 levels and if you are lucky you may get this one... who knows?"
+								else
+									Help[#Help+1] = "= To defeat a certain sealed boss"
+								end
 							case "BoolVar" "NumVar"
 								Help[#Help+1] = "= To have reached a certain spot in the scenario"
 							case "Charm"
