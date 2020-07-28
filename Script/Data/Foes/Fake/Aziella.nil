@@ -35,7 +35,7 @@
 // version: 20.07.28
 // End License Information
 // GENERATED NIL SCRIPT!
-// Generated: 7/28/2020 1:16:44 AM
+// Generated: 7/28/2020 12:35:50 PM
 
 do
 var retfunc()
@@ -172,7 +172,7 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=1
+	foeret.Char.Stat("BASE_HP").Value=123456789
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
