@@ -32,15 +32,18 @@
 // 
 // **********************************************
 // 
-// version: 20.07.19
+// version: 20.07.28
 // End License Information
 
 do
 	int s
 	s = __skill
-	#pure
 	
-	local gj = gv.Bool.GameJolt
+	
+	bool gj 
+	gj = gv.Bool.GameJolt and (not __trueabyss)
+	
+	#pure
 	local
 	a = {
 		-- Skill_Nature
@@ -65,6 +68,7 @@ do
 		                = { Charm = { "UndeadHound" }, Skill_Bat = s*5, Skill_Nature = s * 8 },
 		Inferno         = { Charm = { "HellHound"}, Skill_Nature = (s+s) * s } ,
 		Dive            = { Charm = { "Eagle" }, Skill_Bat = 20 },
+		SpitPoison      = { Charm = { "Cobra" }, Skill_Bat = s },
 	
 		-- Scharum
 		MotherNature   = { Scharum = true }
