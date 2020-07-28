@@ -81,3 +81,12 @@
 	call MapText,"MERCHANT"
 	call Merchant,"TA_LOREEN"
 	end
+	
+:NPC_SASKIA_Scharum
+	call MapText,"SCHARUM" 
+	chk Yes("Do you want to Duel Scharum?"),ScharumYes
+	end
+	:ScharumYes
+	call MapScript.ScharumStart
+	call MapScript.ScharumEnd
+	end

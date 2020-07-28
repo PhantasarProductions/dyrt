@@ -41,7 +41,32 @@
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
 
+#macro ScharumMusic "Music/Combat/Random/Chapter"..math.random(1,4)..".wav"
+
 #macro MaxTreasure 123
+
+// Needed for Scharum
+group TempParty
+	table pushed
+	void Push()
+		string L
+		L = Map.Leader
+		for i=1,8 do
+			self.pushed[i] = RPG.Party[i]
+			if i==1 
+				RPG.Party[1] = L
+			else
+				RPG.Party[i] = ""
+			end
+		end
+	end
+	void Pop()
+		for i=1,8 do
+			RPG.Party[i] = self.pushed[i]
+		end
+	end
+end
+
 
 group MScript
 	
@@ -219,13 +244,41 @@ group MScript
 		StartCombat.NoLose = false
 		StartCombat.FoeIDDQD = false
 		StartCombat.Ready()
-
 	end
 	
 	void BOSSACHIEVEMENT()
 		Achievements.Award(sprintf("ABYSS_BOSS%03d",self.LayerNum))
 	end
 	
+	// Scharum
+	void SCHARUMSTART()
+		TempParty.Push()
+		StartCombat.StartSession()
+		StartCombat.Music = ScharumMusic
+		switch self.LayerNum
+			case 30
+				StartCombat.Arena = "SparForest"
+			default
+				StartCombat.Arena = "Abyss"
+		end
+		StartCombat.Foe[1] = "Boss/Scharum"
+		StartCombat.NoLose = true
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void SCHARUMEND()
+		TempParty.Pop()
+		if gv.Bool.Victor
+			if not Done["Scharum_"..Map.Leader]
+				CSayF("Unlocking Scharum Ability for %s",Map.Leader)
+			end
+			MapText("SCHARUM_WIN")
+		else
+			MapText("SCHARUM_LOSE")
+			RPG.GetChar(Map.Leader).Points("HP").Have = 1
+		end
+	end
 	
 	// Init
 	void CONSTRUCTOR()
