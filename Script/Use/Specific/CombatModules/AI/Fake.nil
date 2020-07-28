@@ -41,6 +41,7 @@ module Fake_AI
 		for _,s in pairs {"HP","Strength","Defense","Intelligence","Resistance","Agility","Accuracy","Evasion","_RESIST_Elem_Flame","_RESIST_Elem_Wind","RESIST_Elem_Water","_RESIST_Elem_Earth","_RESIST_Stat_Posion","_RESIST_Stat_Disease","_RESIST_Stat_Silence","_RESIST_Stat_Paralysis","_RESIST_Stat_Sleep","_RESIST_Stat_Exhaustion","_RESIST_Stat_Fear","_RESIST_Stat_Death","_RESIST_Stat_Destruction","_RESIST_Stat_Fear"}
 			foe.Char.Stat("BASE_"..s).Value = RPG.GetChar(char).Stat("END_"..s).Value
 		end
+		foe.Experience = RPG.GetChar(char).Stat("Level").Value * math.min(30 - (__skill*10),2)
 	end
 	
 	void CONSTRUCTOR()
