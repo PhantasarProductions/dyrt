@@ -1,0 +1,59 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Fake.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.07.28
+// End License Information
+module Fake_AI
+	
+	void SyncStats(foe,string char)
+		char = left(char,1)..string.lower(right(char,#char-1))
+		for _,s in pairs {"HP","Strength","Defense","Intelligence","Resistance","Agility","Accuracy","Evasion","_RESIST_Elem_Flame","_RESIST_Elem_Wind","RESIST_Elem_Water","_RESIST_Elem_Earth","_RESIST_Stat_Posion","_RESIST_Stat_Disease","_RESIST_Stat_Silence","_RESIST_Stat_Paralysis","_RESIST_Stat_Sleep","_RESIST_Stat_Exhaustion","_RESIST_Stat_Fear","_RESIST_Stat_Death","_RESIST_Stat_Destruction","_RESIST_Stat_Fear"}
+			foe.Char.Stat("BASE_"..s).Value = RPG.GetChar(char).Stat("END_"..s).Value
+		end
+	end
+	
+	void CONSTRUCTOR()
+		for tag,foe in pairs(Fighter.ByTag)
+			if prefixed(tag,"FOE_") and prefixed(foe.FromFile,"FAKE/")
+				self.SyncStats(foe,right(foe.FromFile,#foe.FromFile-5))
+			end
+		end
+		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+		self.Decide = self.Default.Decide
+	end
+	
+	var Default
+	delegate Decide
+	
+end
