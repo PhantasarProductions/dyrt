@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.27
+// version: 20.07.28
 // End License Information
 
 
@@ -86,16 +86,20 @@ group MScript
 		gv.Bool.AllowOversoul = __skill!=1 and (self.Score >= 90 / __skill) 
 		for i=1,MaxTreasure
 			if Map.HasTag("RANDOMTREASURE_"..i)
+				CSayF("Checking %03d",i)
 				int x
 				int y
 				int v
+				Map.Obj = "RANDOMTREASURE_"..i
 				x,y = Map.ObjInt.X,Map.ObjInt.Y
 				v = not Map.Blocked(x,y,true)
-				Map.Obj = "RANDOMTREASURE_"..i
 				Map.ObjBool.Visible = v
-				CSayF("Hidden %03d: (%d,%d) > %s",i,x,y,tostring(v))
+				CSayF("Hidden   %03d: (%d,%d) > %s",i,x,y,tostring(v))
+			else
+				CSayF("Not there %03d!",i)
 			end
 		end
+		CSay("All checking accounted for!")
 	end
 	
 	void EXITMAP()
