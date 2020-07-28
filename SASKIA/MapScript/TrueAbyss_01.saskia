@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.27
+; version: 20.07.28
 ; End License Information
 :OnLoad
 	chk Done.WelcomeFaderTrueAbyss,End
