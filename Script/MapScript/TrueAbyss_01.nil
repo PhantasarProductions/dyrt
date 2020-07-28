@@ -187,6 +187,8 @@ group MScript
 		switch self.LayerNum
 			case 20
 				StartCombat.Music = "Music/Combat/Boss/UndeadBoss.wav"
+			case 30
+				StartCombat.Music = "Music/combat/boss/mountainking.wav"
 			default
 				StartCombat.Music = "Music/Combat/Boss/Special.wav"
 		end
@@ -194,6 +196,8 @@ group MScript
 		switch self.LayerNum
 			case 20
 				StartCombat.Arena = "Frundarmon"
+			case 30
+				StartCombat.Arena = "SparForest"
 			default
 				StartCombat.Arena = "Abyss"
 		end
@@ -207,6 +211,8 @@ group MScript
 				if __skill==3
 					StartCombat.Foe[2] = "Boss/Abyss_SoulConsumer"
 				end
+			case 30
+				StartCombat.Foe[1] = "Boss/MountainKing"				
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end
