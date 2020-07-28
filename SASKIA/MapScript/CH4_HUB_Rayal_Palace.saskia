@@ -44,7 +44,7 @@
 
 
 :Scharum
-	call MapText,"SCHARUM"
+	call MapText,"SCHARUM" 
 	chk Yes("Do you want to Duel Scharum?"),ScharumYes
 	end
 	:ScharumYes
