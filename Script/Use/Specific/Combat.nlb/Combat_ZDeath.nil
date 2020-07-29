@@ -118,7 +118,7 @@ void EnemyDeathFade(f)
 				end
 				if __trueabyss
 					#+Exp gv.Int.TrueAbyssScore
-					#+Exp (math.floor(Exp/(10^_skill)) * gv.Int.TrueAbyssScore)
+					#+Exp (math.floor(Exp/(10^__skill)) * gv.Int.TrueAbyssScore)
 				end
 				if Char.Stat("Level").Value<__levelcap
 					Char.Stat("Experience").Value = Char.Stat("Experience").Value - Exp
