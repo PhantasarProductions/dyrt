@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.07.20
+// Version: 20.07.29
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -391,6 +391,7 @@ group Stage_Action extends Stage
 		end
 		if (Act.Learned)
 			BoxText("NEWABILITY",Act.ExeTag:upper().."1")
+			AbilitiesMastered[Act.ExeTag][Act.LearnTag] = true
 		end
 		Combat_Message.Msg(Act.Act.Name,Icon)
 		self.Stage = Action_Announce
