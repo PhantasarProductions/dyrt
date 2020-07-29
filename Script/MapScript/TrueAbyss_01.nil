@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.28
+// version: 20.07.29
 // End License Information
 
 
@@ -214,6 +214,8 @@ group MScript
 				StartCombat.Music = "Music/Combat/Boss/UndeadBoss.wav"
 			case 30
 				StartCombat.Music = "Music/combat/boss/mountainking.wav"
+			case 40 50 60 70
+				StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
 			default
 				StartCombat.Music = "Music/Combat/Boss/Special.wav"
 		end
@@ -223,6 +225,8 @@ group MScript
 				StartCombat.Arena = "Frundarmon"
 			case 30
 				StartCombat.Arena = "SparForest"
+			case 40
+				StartCombat.Arena = "Azquakunda"
 			default
 				StartCombat.Arena = "Abyss"
 		end
@@ -237,7 +241,9 @@ group MScript
 					StartCombat.Foe[2] = "Boss/Abyss_SoulConsumer"
 				end
 			case 30
-				StartCombat.Foe[1] = "Boss/MountainKing"				
+				StartCombat.Foe[1] = "Boss/MountainKing"
+			case 40
+				StartCombat.Foe[1] = "Boss/Abyss_Aldarus"
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end
