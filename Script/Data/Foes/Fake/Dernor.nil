@@ -32,10 +32,10 @@
 // 
 // **********************************************
 // 
-// version: 20.07.29
+// version: 20.07.30
 // End License Information
 // GENERATED NIL SCRIPT!
-// Generated: 7/29/2020 1:51:34 PM
+// Generated: 7/29/2020 9:03:49 PM
 
 do
 var retfunc()
@@ -44,7 +44,7 @@ foeret = new Foe(string.format("FOE_%d",Foe.LoadFoeID))
 foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Fake"
-foeret.AllowOversoul = true and __skill!=1
+foeret.AllowOversoul = false and __skill!=1
 foeret.Description = "He is manipulating nature... or isn't he?"
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/fake/Dernor.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/DERNOR.NEGATIVE.PNG")
