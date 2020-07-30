@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.29
+// version: 20.07.30
 // End License Information
 
 
@@ -227,6 +227,8 @@ group MScript
 				StartCombat.Arena = "SparForest"
 			case 40
 				StartCombat.Arena = "Azquakunda"
+			case 50
+				StartCombat.Arena = "ShandaDung"
 			default
 				StartCombat.Arena = "Abyss"
 		end
@@ -244,6 +246,12 @@ group MScript
 				StartCombat.Foe[1] = "Boss/MountainKing"
 			case 40
 				StartCombat.Foe[1] = "Boss/Abyss_Aldarus"
+			case 50
+				StartCombat.Foe[1] = "Boss/Abyss_Jeracko"
+			case 60
+				StartCombat.Foe[1] = "Boss/Abyss_Kirana"
+			case 70
+				StartCombat.Foe[1] = "Boss/Abyss_Rondomo"
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end
