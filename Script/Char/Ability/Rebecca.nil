@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.28
+// version: 20.07.30
 // End License Information
 do
 	int s
@@ -52,7 +52,7 @@ do
 	}
 	#endpure
 	if __trueabyss
-		RebAbl.Lay = { ['NumVar'] = {"gv.Int.TrueAbyssScore",15*(__skill+1) } }
+		RebAbl.Lay = { ['NumVar'] = {"TrueAbyssScore",15*(__skill+1) } }
 	end
 	return RebAbl
 end
