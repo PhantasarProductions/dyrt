@@ -43,8 +43,8 @@ do
 	bool gj 
 	gj = gv.Bool.GameJolt and (not __trueabyss)
 	
-	#pure
-	local
+	table a
+	#pure	
 	a = {
 		-- Skill_Nature
 		AAA_Charm       = { Start=true },
@@ -85,7 +85,13 @@ do
 		a.Moo          = { Charm = {"Moo-Moo-Ant"}, Skill_Nature=math.ceil(s*2.5) }
 	end
 	
+#endpure
+	
+	if __trueabyss
+		a.Void = { ['Charm'] = {'Abyss_Ant'} }
+	end
+	
 	return a
 	
-#endpure
+
 end
