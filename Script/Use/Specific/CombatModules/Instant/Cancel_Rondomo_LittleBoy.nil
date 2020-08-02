@@ -32,12 +32,14 @@
 // 
 // **********************************************
 // 
-// version: 20.05.17
+// version: 20.08.02
 // End License Information
 do
 	void RondomoLittleBoy(ron,act)
-		if not Done.CounterRondomoVeryCleverLittleBoy
-			MapText("CANCELCOUNTER")
+		if not __trueabyss
+			if not Done.CounterRondomoVeryCleverLittleBoy 
+				MapText("CANCELCOUNTER")
+			end
 		end
 		table nact
 		nact.ActTag = "ABL_FOE_RONDOMO_LITTLEBOY"
