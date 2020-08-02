@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.28
+// version: 20.08.03
 // End License Information
 module Fake_AI
 	
@@ -42,6 +42,9 @@ module Fake_AI
 			foe.Char.Stat("BASE_"..s).Value = RPG.GetChar(char).Stat("END_"..s).Value
 		end
 		foe.Experience = RPG.GetChar(char).Stat("Level").Value * math.min(30 - (__skill*10),2)
+		// foe.Char.Points("HP").MaxCopy = ""
+		// foe.Char.Points("HP").Maximum = RPG.GetChar(char).Points("HP").Maximum
+		foe.Char.Points("HP").Have = RPG.GetChar(char).Points("HP").Have
 	end
 	
 	void CONSTRUCTOR()
