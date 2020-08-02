@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.30
+// version: 20.08.02
 // End License Information
 
 
@@ -206,7 +206,7 @@ group MScript
 	end
 	
 	// Boss
-	void BOSS()		
+	void BOSS()
 		StartCombat.StartSession()
 		// Music
 		switch self.LayerNum
@@ -229,6 +229,8 @@ group MScript
 				StartCombat.Arena = "Azquakunda"
 			case 50
 				StartCombat.Arena = "ShandaDung"
+			case 60
+				StartCombat.Arena = "Airom"
 			default
 				StartCombat.Arena = "Abyss"
 		end
@@ -294,6 +296,26 @@ group MScript
 		end
 	end
 	
+	// EXP madness stop
+	void EXP_NO_NEG()
+		for _,ch in ipairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+			var p
+			p = RPG.GetChar(ch).Stat("Experience")
+			switch __skill
+				case 1
+					p.Value = math.max(p.Value,1)
+				case 2
+					p.Value = math.abs(p.Value)
+				case 3
+					if p.Have<0
+						p.Value = math.abs(p.Value) * 2
+					end
+				default
+					error("Unknown Skill Level")
+			end
+		end
+	end
+	
 	// Init
 	void CONSTRUCTOR()
 		self.Score = self.LayerNum + self.FloorsReset
@@ -314,6 +336,7 @@ group MScript
 		self.Cities = {"Doubline","Felixium","Frendor","Independence","Iskarderiu","Xenor"}
 		self.General = {"Abyss","Airom","BlackDragon","Botanica","DeathCaves","ExamRuins","Frundarmon","Fruskbrando","Marshes","Morker","NakedRocks"}
 		Map.ZA_Enter("Welcome","Conchita_Welcome")
+		Map.ZA_Enter("EXP_NO_NEG","EXP_NO_NEG")
 	end
 	
 	void Draw()
