@@ -254,6 +254,27 @@ group MScript
 				StartCombat.Foe[1] = "Boss/Abyss_Kirana"
 			case 70
 				StartCombat.Foe[1] = "Boss/Abyss_Rondomo"
+			case 80
+				int kies
+				kies = math.random(1,5)
+				switch kies
+					case 1
+						for i=1,__skill*3
+							StartCombat.Foe[i] = "Boss/Creep"
+						end
+					case 2
+						StartCombat.Foe[1]="Boss/DoomSweeper"
+					case 3
+						for i=1,__skill
+							StartCombat.Foe[i]="Boss/SuperPink"
+						end
+					case 4
+						StartCombat.Foe[1]="Boss/LichKing"
+					case 5
+						StartCombat.Foe[1]="Boss/UberMummy"
+					default
+						error("Unknown boss number: "..kies)
+				end
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end

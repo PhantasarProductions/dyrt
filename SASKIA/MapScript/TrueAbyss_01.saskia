@@ -90,3 +90,8 @@
 	call MapScript.ScharumStart
 	call MapScript.ScharumEnd
 	end
+	
+:NPC_SASKIA_Jewel
+	call MapText,"JEWEL"
+	call Merchant,"TA_DUNCAN"
+	end
