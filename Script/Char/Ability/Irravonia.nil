@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.03
+// version: 20.08.01
 // End License Information
 
 do
@@ -72,7 +72,7 @@ a = {
 	Meditation  = { Skill_Water = 20, Skill_Fire = 20, Skill_Wind = 20, Skill_Earth = 20 },
 	Blizzard    = { Skill_Water = 55, Skill_Wind = 45 },
 	Yggdrassil  = { Skill_Water = 65, Skill_Earth = 50 },
-	Mjolnir     = { Skill_Fire  = 65, Skill_Wind = 70 },
+	Mjollnir    = { Skill_Fire  = 65, Skill_Wind = 70 },
 	Vesuvius    = { Skill_Fire  = 75, Skill_Earth = 80 },
 	Dispell     = { Skill_Water  = 3*s, Skill_Fire = 3*s, Skill_Wind = 3*s, Skill_Earth= 3*s }
 	
