@@ -216,6 +216,8 @@ group MScript
 				StartCombat.Music = "Music/combat/boss/mountainking.wav"
 			case 40 50 60 70
 				StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
+			case 90
+				// Defined elsewhere
 			default
 				StartCombat.Music = "Music/Combat/Boss/Special.wav"
 		end
@@ -275,6 +277,24 @@ group MScript
 					default
 						error("Unknown boss number: "..kies)
 				end
+			case 90
+				table sealed
+				int chosen
+				sealed[#sealed+1] = "Sealed/GhoulKing"
+				sealed[#sealed+1] = "Sealed/GigaLich"
+				sealed[#sealed+1] = "Sealed/HobGoblin"
+				sealed[#sealed+1] = "Sealed/kabi"
+				sealed[#sealed+1] = "Sealed/KingSlime"
+				sealed[#sealed+1] = "Sealed/MountainEmperor"
+				sealed[#sealed+1] = "Sealed/OrcOverlord"
+				sealed[#sealed+1] = "Sealed/ShadowRogue"
+				chosen = math.random(1,#sealed)
+				if sealed[chosen]=="Sealed/MountainEmperor" 
+					StartCombat.Music = "Music/combat/boss/mountainking.wav"
+				else
+					StartCombat.Music = "Music/combat/boss/sealed.wav"
+				end
+				StartCombat.Foe[1] = sealed[chosen]
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end
