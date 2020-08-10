@@ -85,7 +85,7 @@ group MScript
 	
 	// Next Floor
 	void NPC_NEXT()
-		if self.LayerNum % 15 == 0 and (not Yes("Do you want to leave this town to continue to the next floor?"))
+		if self.LayerNum>0 and self.LayerNum % 15 == 0 and (not Yes("Do you want to leave this town to continue to the next floor?"))
 			return
 		end
 		int l 
@@ -218,6 +218,8 @@ group MScript
 				StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
 			case 90
 				// Defined elsewhere
+			case 100
+				StartCombat.Music = "Music/Combat/Boss/AbyssGuardian.wav"
 			default
 				StartCombat.Music = "Music/Combat/Boss/Special.wav"
 		end
@@ -233,6 +235,8 @@ group MScript
 				StartCombat.Arena = "ShandaDung"
 			case 60
 				StartCombat.Arena = "Airom"
+			case 100
+				StartCombat.Arena = "Dzgjymza"
 			default
 				StartCombat.Arena = "Abyss"
 		end
@@ -295,6 +299,8 @@ group MScript
 					StartCombat.Music = "Music/combat/boss/sealed.wav"
 				end
 				StartCombat.Foe[1] = sealed[chosen]
+			case 100
+				StartCombat.Foe[1] = "Boss/AbyssGuardian"
 			default
 				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end
@@ -305,6 +311,29 @@ group MScript
 	
 	void BOSSACHIEVEMENT()
 		Achievements.Award(sprintf("ABYSS_BOSS%03d",self.LayerNum))
+		if self.LayerNum == 100
+			self.FinalBossDown()
+		end
+	end
+	
+	void FinalBossDown()
+		table Heroes 
+		table Weapons
+		Heroes = {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+		SealedDefeated[Heroes[math.random(1,#Heroes)]] = true // Will get one hero to learn their ultimate ability
+		Weapons = {"EQW_ERIC_BLUEMOON","EQW_IRRAVONIA_WAND_SUPER",
+		           "EQW_BRENDOR_HAMMER_SUPER","EQW_SCYNDI_WHIP_SUPER",
+		           "EQW_REBECCA_SWORD_SUPER","EQW_DERNOR_BAT_SUPER",
+		           "EQW_MERYA_DAGGER_SUPER","EQW_AZIELLA_BOLT_SUPER" }
+		int rw
+		string w
+		rw = math.random(1,#Weapons)
+		w = Weapons[rw]
+		Inventory[w]++
+		gv.String.AbyssSuperWeapon = Item[w].Name
+		MapScript.SASKIA("SUPER") // Dirty, yet easiest way to go, at this point!
+		Achievements.Award("ABYSS_COMPLETE")
+		Achievements.Award("ABYSS_COMPLETE_"..__skill)
 	end
 	
 	// Scharum
@@ -357,6 +386,12 @@ group MScript
 		end
 	end
 	
+	// THE END
+	void THEEND()
+		MapText("NPC_MT_CONCHITA_END")
+		Map.Kill("TheEnd",true)
+	end
+	
 	// Init
 	void CONSTRUCTOR()
 		self.Score = self.LayerNum + self.FloorsReset
@@ -378,6 +413,7 @@ group MScript
 		self.General = {"Abyss","Airom","BlackDragon","Botanica","DeathCaves","ExamRuins","Frundarmon","Fruskbrando","Marshes","Morker","NakedRocks"}
 		Map.ZA_Enter("Welcome","Conchita_Welcome")
 		Map.ZA_Enter("EXP_NO_NEG","EXP_NO_NEG")
+		Map.ZA_Enter("TheEnd","TheEnd")
 	end
 	
 	void Draw()

@@ -95,3 +95,7 @@
 	call MapText,"JEWEL"
 	call Merchant,"TA_DUNCAN"
 	end
+	
+:SUPER
+	call MiniMsg.CreateCenter,"Ultra weapon '"..gv.String.AbyssSuperWeapon.."' obtained!",0,180,255
+	end
