@@ -1,0 +1,2 @@
+# Bob Data (Must ALWAYS be non-existent when cloning from GitHub/BitBucket)
+*.CheckData.lua
