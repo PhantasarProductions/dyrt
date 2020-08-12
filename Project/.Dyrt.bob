@@ -1,0 +1,12 @@
+# Bob Script for Dyrt.NET
+
+$CHECK E:/Projects/Applications/Site/DevLogs/Dyrt
+	powershell DevlogPush
+
+$CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/Music
+	NJCR script bmusic.lua
+
+$CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src
+	powershell b
+
+
