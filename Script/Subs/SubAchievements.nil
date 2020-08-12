@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 20.07.12
+// Version: 20.08.12
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -157,19 +157,31 @@ group F_Achievements
 	end
 	
 	bool Allow(tag)
+		bool allowchat = false
 		bool ret = true
 		var a
+		void AChat(infinity)
+			if not allowchat then return end
+			string saysomething
+			for _,s in ipairs{infinity} do saysomething = saysomething .. tostring(s) end
+			CSay(saysomething)
+		end
 		a = AchData[tag]
+		AChat("Is achievement ",tag," allowed?")
 		if a.require_gamejolt
 			ret = ret and gv.Bool.GameJolt
+			AChat("= Game Jolt required.... GameJolt Active = ",gv.Bool.GameJolt," so ret = ",ret)
 		end
 		if a.skill_check
 			ret = ret and a["skill_"..__skill]
+			AChat("= Based on skill! Skill is ",__skill,"; Allowed on this skill is: ",a["skill_"..__skill],", so ret = ",ret)
 		end
 		if not a.allow_trueabyss
 			ret = ret and (not __trueabyss)
+			AChat("= Achievement NOT allowed in the true abyss... Are we in the true abyss? ",__trueabyss,"..... So ret must be ",ret)
 		elseif a.only_trueabyss
 			ret = ret and __trueabyss
+			AChat("= Achievement ONLY allowed in the true abyss... Are we in the true abyss? ",__trueabyss,"..... So ret must be ",ret)
 		end
 		return ret
 	end
@@ -191,9 +203,8 @@ group F_Achievements
 			$AutoCD=$AutoCDReset
 			for tag,a in pairs($AchData)
 				if a.ProcessValue!="" 
-					CSayF("Tag '%s'; Wanted gv.Num.%s; Contains %9d; Must be at least: %9d; Awarded: %s",tag,a.ProcessValue,gv.Num[a.ProcessValue],a.ProcessMax,tostring(self.Awarded[tag]))
-					if a.ProcessMax<=gv.Num[a.ProcessValue] and (not self.Awarded[tag])
-					
+					CSayF("Tag '%s'; Wanted gv.Num.%s; Contains %9d; Must be at least: %9d; Awarded: %s; Allowed: %s",tag,a.ProcessValue,gv.Num[a.ProcessValue],a.ProcessMax,tostring(self.Awarded[tag]),tostring(self.Allow(tag)))
+					if a.ProcessMax<=gv.Num[a.ProcessValue] and (not self.Awarded[tag]) and self.Allow(tag)
 						CSay("=> Awarded!")
 						$Award(tag)
 					end
