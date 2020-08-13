@@ -41647,6 +41647,7 @@ Rec: ZZZ_BIGCRYSTAL_EARTH
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -41710,6 +41711,7 @@ Rec: ZZZ_BIGCRYSTAL_EARTH
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -41741,9 +41743,10 @@ Rec: ZZZ_BIGCRYSTAL_EARTH
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = Quake
 	Stance = CAST
 	Target = AF
+	TriggerAfterAttack = FALSE
 	Type = 
 
 Rec: ZZZ_BIGCRYSTAL_FLAME
