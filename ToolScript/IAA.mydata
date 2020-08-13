@@ -42025,6 +42025,7 @@ Rec: ZZZ_BIGCRYSTAL_WIND
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -42088,6 +42089,7 @@ Rec: ZZZ_BIGCRYSTAL_WIND
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -42119,9 +42121,10 @@ Rec: ZZZ_BIGCRYSTAL_WIND
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = Wind
 	Stance = CAST
 	Target = AF
+	TriggerAfterAttack = FALSE
 	Type = 
 
 Rec: ZZZ_BLENCHY_STUDY
