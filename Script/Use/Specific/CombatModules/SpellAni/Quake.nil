@@ -1,0 +1,51 @@
+#use "libs/xmath"
+
+module SpellAni_Quake
+
+	var Screen
+	int CD
+	readonly int CDMax = 180
+		
+	int Rotate
+	int RotateFlow
+	
+	void Init()
+		self.Screen = Grab("SPELLANI_QUAKE_SCREEN")
+		self.Screen.HotBottomCenter()
+		self.CD = self.CDMax
+		self.RotateFlow = 1
+	end
+	
+	bool Cycle()
+		bool ret
+		int malt = 0
+		__black
+		Rect(0,0,Screen.W,Screen.H)
+		__white
+		if self.CD>0 then
+			int mdeg			
+			mdeg = math.floor(math.abs(xmath.sin(self.CD)*15))
+			if self.Rotate>=mdeg
+				self.RotateFlow=-1
+			elseif self.Rotate<=-mdeg
+				self.RotateFlow= 1
+			end
+			malt = math.floor(xmath.sin(self.CD*4)*5)
+			#+ self.Rotate self.RotateFlow
+			self.CD--
+			ret = false
+		else
+			if self.Rotate>0 
+				--self.Rotate
+			elseif self.Rotate<0
+				++self.Rotate
+			end
+			ret = self.Rotate == 0
+		end
+		Rotate.Deg = self.Rotate
+		self.Screen.XDraw(Screen.W/2,Screen.H+malt)
+		Rotate.Deg = 0
+		return ret
+	end
+	
+end
