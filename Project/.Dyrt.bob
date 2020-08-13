@@ -2,9 +2,14 @@
 
 $CHECK E:/Projects/Applications/Site/DevLogs/Dyrt
 	powershell DevlogPush
+	
+$CHECK E:/Projects/Applications/VisualStudio/Bubble
+	powershell NALA
+	echo "NALA UPDATED!" > src/NALA_Update.txt
 
 $CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/Music
 	NJCR script bmusic.lua
+	echo "Music Updated!" > src/Music_Update.txt
 
 $CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src
 	powershell b
