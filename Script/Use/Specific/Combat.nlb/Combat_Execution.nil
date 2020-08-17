@@ -76,7 +76,7 @@ group Execution
 		// if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
 		adie = rand(1,math.max(2,math.ceil(base/2)))
 		defb = RPG.Char(Tar.Tag).Stat(sprintf("END_%s",Act.Act.DefenseStat)).Value //Combat_Stat(TACT["TargetGroup"],target,Act.Act.DefenseStat)
-		ddie = rand(0,math(1,math.floor(defb/5)))
+		ddie = rand(0,math.max(1,math.floor(defb/5)))
 		totaldmg = base + adie
 		totaldef = defb + ddie
 		dmg = xmath.round(totaldmg-totaldef); if dmg<1 then dmg=1 end
