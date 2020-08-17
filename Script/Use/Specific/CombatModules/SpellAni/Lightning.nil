@@ -35,9 +35,8 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 #use "libs/linkedlist"
-
 	
-module SpellAni_BurnBabyBurn_DiscoInferno
+module SpellAni_Greased_Lightning
 	
 	var L1
 	var L2
