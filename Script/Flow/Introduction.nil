@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.13
+// version: 20.08.18
 // End License Information
 
 // Dirty code straight from the toilet!
@@ -104,6 +104,7 @@ group Loading
 		new Loader("Image","GFX/Alg/Prev.png","PREV")
 		new Loader("Image","GFX/Alg/Up.png","UP")
 		new Loader("Image","GFX/Alg/Down.png","DOWN")
+		new Loader("Image","GFX/Alg/Close.png","CANCEL")
 		
 		// Combat UI
 		new Loader("Image","GFX/Combat/UI/TimeGauge.png","COMBAT_TIMEGAUGE")

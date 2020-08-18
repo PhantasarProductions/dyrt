@@ -437,6 +437,7 @@ class SG
 		if $ScrollY>0
 			Arrow.Up.Draw($ZijBalk.x+3,$ZijBalk.y+3)
 		end
+		Arrow.Cancel.Draw($ZijBalk.x+3,$ZijBalk.y+45)
 		if $List.Last and $List.Last.MyObject.SlotBox.y+128>Screen.Height
 			Arrow.Down.Draw($ZijBalk.x+4,($ZijBalk.y+$ZijBalk.h)-35)
 		end
@@ -493,6 +494,15 @@ class SG
 						$Hover.Perform_Load(sprintf("Save/__GameName.%d",$Hover.ID))
 				end
 			end
+			if Mouse.X>$ZijBalk.x and Mouse.Y>$ZijBalk.y+45 and Mouse.Y<$ZijBalk.y+77
+				switch $mode:upper()
+					case "SAVE"
+						GoToFlow("FIELD")
+					case "LOAD"
+						GoToFlow("MAINMENU")
+				end
+			end
+			
 		end
 		if Mouse.HeldLeft
 			if Mouse.X>$ZijBalk.x

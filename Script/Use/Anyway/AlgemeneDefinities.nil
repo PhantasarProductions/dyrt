@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 20.07.25
+// Version: 20.08.18
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -119,6 +119,7 @@ group Arrow
 	readonly var Prev
 	readonly var Up
 	readonly var Down
+	readonly var Cancel
 	get var Left
 		return $Next
 	end
@@ -127,7 +128,7 @@ group Arrow
 	end
 	
 	void CONSTRUCTOR()
-		for i,k in ipairs({"Next","Prev","Up","Down"})
+		for i,k in ipairs({"Next","Prev","Up","Down","Cancel"})
 			self[k]=TImage.Obtain(k:upper())
 		end
 	end
