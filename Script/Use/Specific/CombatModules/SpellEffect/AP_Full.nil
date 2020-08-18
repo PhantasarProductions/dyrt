@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/AP_Full.nil
-// Version: 20.07.28
+// Version: 20.08.18
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -36,7 +36,7 @@
 // End License Information
 do
 	bool Zet_die_AP_maar_vol_jongens(Act,Target)
-		if prefixed(Target.Tar,"FOE_")
+		if prefixed(Target.Tag,"FOE_")
 			return false
 		end
 		Target.Char.Points("AP").Have = Target.Char.Points("AP").Maximum
