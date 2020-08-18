@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 20.07.26
+// Version: 20.08.18
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -363,6 +363,7 @@ class SG
 
 	// Callbacks
 	static void Draw()
+		// Todo: Saving/Loading screen prior to actual saving/loading
 		__white
 		// Originally these numbers were used in the ECN bar, but as I don't plan
 		// To get that one back, I decided to use these numbers for THIS purpose :)		
