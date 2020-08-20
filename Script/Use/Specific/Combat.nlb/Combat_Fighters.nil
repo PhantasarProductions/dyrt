@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Fighters.nil
-// Version: 20.07.13
+// Version: 20.08.20
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -141,7 +141,7 @@ class Fighter
 						string h
 						heronum++						
 						h = RPG.Party[heronum] or ""
-						if heronum>4 or RPG.Party[heronum]==""
+						if heronum>4 or (not  RPG.Party[heronum]) or RPG.Party[heronum]==""
 							team = 2
 						else
 							return "Hero",h,Fighter.ByTag[h]
