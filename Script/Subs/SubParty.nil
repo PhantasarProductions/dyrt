@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 20.06.04
+// Version: 20.08.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -384,6 +384,7 @@ group SubParty
 			SubParty.SetLevelStats(CharTag,level)
 			//SubParty.AudioLevelUp.Play()
 			CSayF("On spot number #%d, character '%s' has gone up to level %04d/%s",num,tag,level,roman(level))
+			self.NGPlusLvUpExtra(CharTag,level)
 		end
 	end
 	
@@ -445,6 +446,7 @@ group SubParty
 					self.JustLeveled[CharTag] = 320
 					SubParty.SetLevelStats(CharTag,level)
 					SubParty.AudioLevelUp.Play()
+					self.NGPlusLvUpExtra(CharTag,level)
 				end
 			end
 			DarkText.Font(font,roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
@@ -473,6 +475,19 @@ group SubParty
 			LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
 		elseif Mouse.HitRight and $Hover>0
 			LuaDoString(CurrentFlow(),sprintf("if PartyClickAlt then PartyClickAlt(%d) end",$Hover))
+		end
+	end
+	
+	void NGPlusLvUpExtra(string CharTag,int level)
+		if not __newgameplus
+			return
+		end
+		var Char
+		Char = RPG.GetChar(CharTag)
+		for i=0,4 do
+			if Char.Points("SKILLLVL"..i).Have>0
+				Char.Points("SKILLEXP"..i).Inc(level)
+			end
 		end
 	end
 

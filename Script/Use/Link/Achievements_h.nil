@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Achievements_h.nil
-// Version: 20.06.05
+// Version: 20.08.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -97,4 +97,11 @@ global void AllSealedCheck()
 	if gotthemall
 		Achievements.Award("SEALED_ALL")
 	end
+end
+
+global void GJLOGINFAILED()
+	if not StateExists("ACHIEVEMENTS")
+		LoadState("ACHIEVEMENTS","Script/Subs/SubAchievements.nil")
+	end
+	LuaDoString("ACHIEVEMENTS","gjfailed = true")
 end

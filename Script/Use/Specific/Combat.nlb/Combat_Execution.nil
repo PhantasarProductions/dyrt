@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.08.18
+// Version: 20.08.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -400,10 +400,29 @@ group Execution
 						if __trueabyss
 							skp.Inc(gv.Int.TrueAbyssScore*(4-__skill))
 						end
+						if __newgameplus
+							skp.Inc(Action.Act[sprintf("GainSkill%d",i)] * (3-__skill))
+						end
 						if skp.Have >= skp.Maximum and skl.Have < skl.Maximum
 							skp.Have = 0
 							skl.Have ++
 							Party.LvUpSound()
+							if __newgameplus and Action.Executor.Char.Stat("Level").Value < __levelcap
+								CSayF("Skill level up, extra EXP bonus for character %s?",Action.Executor.Tag)
+								number b = 0
+								switch Action.Executor.Tag
+									case "Eric" "Scyndi" "Irravonia"
+										b = skl.Have
+									case "Rebecca" "Brendor"
+										b = skl.Have * 5
+									case "Aziella" "Dernor" "Merya"
+										b = math.ceil(skl.Have * 3.75) // this may change, but for now this will do!
+									default
+										b = 0
+								end
+								CSayF("= %d extra experience points granted for skill level because of New Game+",b)
+								Action.Executor.Char.Stat("Experience").Value = Action.Executor.Char.Stat("Experience").Value - b
+							end
 							int R
 							int G
 							R = 255 - (i * 63)
