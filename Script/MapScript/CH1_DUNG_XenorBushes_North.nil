@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.10
+// version: 20.08.23
 // End License Information
 
 #use "script/use/anyway"
@@ -43,6 +43,10 @@ group MScript
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Leave","SOUTH")
 		Map.ZA_Enter("ToDoubline","NORTH")
+		if __newgameplus
+			Map.ZA_Enter("ToLostArc","ToLostArc")
+			CSay("New Game Plus - So link field to lost ark activated")
+		end
 		if not Done.FirstTimeInXenorBushesNorth
 			Respawn.Initiated = false
 		end
@@ -51,7 +55,13 @@ group MScript
 	void NGPSECRETREMOVE()
 		if __newgameplus
 			Map.Kill("NGP_REMOVE",true)
+			CSay("New Game Plus - So barrier at lost ark removed")
 		end
+	end
+	
+	void TOLOSTARC()
+		Field.LoadMap("NGP_DUNG_LostArc")
+		Map.GoToLayer("#000","Start")
 	end
 	
 	void SETSTARTGROUP()
