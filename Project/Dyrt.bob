@@ -1,6 +1,6 @@
 # <lic>
 # src/Tricky Script/Project/Dyrt.bob
-# Version: 20.08.13
+# Version: 20.08.23
 # Copyright (C) 2020 Jeroen Petrus Broks
 # 
 # ===========================
@@ -36,15 +36,13 @@
 # </lic>
 # Bob Script for Dyrt.NET
 
-$CHECK E:/Projects/Applications/Site/DevLogs/Dyrt
-	powershell DevlogPush
 	
 $CHECK E:/Projects/Applications/VisualStudio/Bubble
 	powershell NALA
 	echo "NALA UPDATED!" > src/NALA_Update.txt
 
 $CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/Music
-	NJCR script bmusic.lua
+	NJCR script Music/bmusic.lua
 	echo "Music Updated!" > src/Music_Update.txt
 
 $CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src
@@ -52,14 +50,20 @@ $CHECK E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src
 	
 $CHECK src/Tricky Script/Script/Use/Anyway
 	go run anyway.go
+	mkl_update
 	powershell b
 	
 $CHECK src/Tricky Script/Script/Use/Specific/Combat.nlb
 	go run anyway.go
+	mkl_update
 	powershell b
 	
 $CHECK src/Tricky Script/Script/Use/Specific/Field.nlb
 	go run anyway.go
+	mkl_update
 	powershell b
 
 # The last three seem odd, but the Anyway.go script does calculate from the JCR resource, so I had no choice but to work this way.
+
+$CHECK E:/Projects/Applications/Site/DevLogs/Dyrt
+	powershell DevlogPush
