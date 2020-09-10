@@ -75,7 +75,8 @@ module M_Projectile
 				//if self.ex>self.tx
 					self.dx=-1
 				//end
-				self.dy = math.abs(self.ty-self.ey)/self.ex
+				//self.dy = math.abs(self.ty-self.ey)/self.ex
+				self.dy = (self.ty-self.ey)/self.ex
 				self.cycles=math.abs(self.ex-self.tx)
 				CSayF("Projectile Start: (%04d,%04d) => (%04d,%04d); H<; Mv(%4.4f,%4.4f); Cycles: %04d",self.ex,self.ey,self.tx,self.ty,self.dx,self.dy,self.cycles)
 			else
@@ -94,7 +95,8 @@ module M_Projectile
 				//if self.ex>self.tx
 				//	self.dx=-1
 				//end
-				self.dy = math.abs(self.ty-self.ey)/(self.tx-self.ex)
+				//self.dy = math.abs(self.ty-self.ey)/(self.tx-self.ex)
+				self.dy = (self.ty-self.ey)/(self.tx-self.ex)
 				self.cycles=math.abs(self.ex-self.tx)
 				CSayF("Projectile Start: (%04d,%04d) => (%04d,%04d); H<; Mv(%4.4f,%4.4f); Cycles: %04d",self.ex,self.ey,self.tx,self.ty,self.dx,self.dy,self.cycles)
 			else
