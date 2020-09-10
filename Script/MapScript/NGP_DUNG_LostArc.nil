@@ -45,8 +45,19 @@ group MScript
 		Map.GoToLayer("#001","FromArc")
 	end
 	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "LostArk"
+		StartCombat.Foe[1] = "Boss/OceanGoblin"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Leave","LEAVE")
+		Map.ZA_Enter("ActivateBoss","SASKIA:Boss")
 	end
 	
 	void Draw()
