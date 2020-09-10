@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.08.23
+; version: 20.09.11
 ; End License Information
 
 :OnLoad
@@ -46,5 +46,3 @@
 	call Map.Kill,"Boss",true
 	call Map.Kill,"ActivateBoss",true
 	jmp einde
-
-
