@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.09.11
+; version: 20.09.12
 ; End License Information
 
 :OnLoad
@@ -51,6 +51,7 @@
 	call MapText,"FOXEY"
 	mov true,WM_Unlocked.D_HallOfHeroes
 	call Map.Kill,"NPC_SASKIA_Foxey",true
+	call Achievements.Award,"NGP_LostArk"
 	call Party.LvUp
 	call MapScript.Leave
 	jmp einde
