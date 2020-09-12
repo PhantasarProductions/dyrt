@@ -46,3 +46,11 @@
 	call Map.Kill,"Boss",true
 	call Map.Kill,"ActivateBoss",true
 	jmp einde
+	
+:NPC_SASKIA_Foxey
+	call MapText,"FOXEY"
+	mov true,WM_Unlocked.D_HallOfHeroes
+	call Map.Kill,"NPC_SASKIA_Foxey",true
+	call Party.LvUp
+	call MapScript.Leave
+	jmp einde
