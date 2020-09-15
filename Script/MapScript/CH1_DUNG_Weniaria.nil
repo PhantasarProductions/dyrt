@@ -139,6 +139,12 @@ group MScript
 		if not Done.EnterWeniariaDuringScyndiPrologue
 			gv.Bool["RESPAWN_INITIATED"] = false
 		end
+		if __newgameplus and (not Done.ScyndiStartWithAllGodsInNewGamePlus)
+			CSay("Setting Seelah Gandra's skills right for New Game +")
+			for i=1,4 do
+				RPG.GetChar("Scyndi").Points("SKILLLVL"..i).Have=1
+			end
+		end
 	end
 	
 	void Draw()
