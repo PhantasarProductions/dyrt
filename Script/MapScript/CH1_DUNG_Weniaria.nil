@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.11
+// version: 20.09.17
 // End License Information
 
 #macro __weniaria_spoken gv.Bool.Done_Scyndi_Prologue_Spoken_To_Weniaria_To_Open_The_Door
