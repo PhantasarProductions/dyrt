@@ -50,6 +50,7 @@
 :NPC_SASKIA_Foxey
 	call MapText,"FOXEY"
 	mov true,WM_Unlocked.D_HallOfHeroes
+	mov true,NPG_Complete_LostArk
 	call Map.Kill,"NPC_SASKIA_Foxey",true
 	call Achievements.Award,"NGP_LostArk"
 	call Party.LvUp
