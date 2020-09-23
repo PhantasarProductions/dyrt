@@ -37,3 +37,7 @@
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
+	
+:Foxey
+	call MapText,"FOXEY"
+	
