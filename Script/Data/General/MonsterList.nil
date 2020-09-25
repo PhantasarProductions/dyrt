@@ -27,7 +27,7 @@ do
 	ret["Big Tiger"] = { ["Name"] = "Big Tiger", ["File"] = "Script/Data/Foes/Boss/BigTiger.nil", ["Category"] = "Boss" }
 	ret["Black Dragon"] = { ["Name"] = "Black Dragon", ["File"] = "Script/Data/Foes/Boss/BlackDragon.nil", ["Category"] = "Boss" }
 	ret["Black Guardian"] = { ["Name"] = "Black Guardian", ["File"] = "Script/Data/Foes/Boss/BlackGuardian.nil", ["Category"] = "Boss" }
-	ret["Benchy (1st encounter)"] = { ["Name"] = "Benchy (1st encounter)", ["File"] = "Script/Data/Foes/Boss/Blenchy1.nil", ["Category"] = "Boss" }
+	ret["Blenchy (1st encounter)"] = { ["Name"] = "Blenchy (1st encounter)", ["File"] = "Script/Data/Foes/Boss/Blenchy1.nil", ["Category"] = "Boss" }
 	ret["Blenchy (2nd encounter)"] = { ["Name"] = "Blenchy (2nd encounter)", ["File"] = "Script/Data/Foes/Boss/Blenchy2.nil", ["Category"] = "Boss" }
 	ret["Creep"] = { ["Name"] = "Creep", ["File"] = "Script/Data/Foes/Boss/Creep.nil", ["Category"] = "Boss" }
 	ret["Crystal"] = { ["Name"] = "Crystal", ["File"] = "Script/Data/Foes/Boss/Crystal.nil", ["Category"] = "Boss" }

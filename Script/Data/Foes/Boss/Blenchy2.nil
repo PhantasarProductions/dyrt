@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:37:59 PM
+// Generated: 9/25/2020 9:08:06 PM
 
 do
 var retfunc()
@@ -19,7 +19,7 @@ foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_AMBROSIA"
 if not Foe.LoadOversoul
 	foeret.Experience = 500000
 end
-foeret.Name="Blenchy2"
+foeret.Name="Blenchy"
 foeret.Char.Stat("BASE__RESIST_Elem_Darkness").Value=1234567
 foeret.Char.Stat("BUFF__RESIST_Elem_Darkness").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Darkness").Value=0

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 20.08.18
+// Version: 20.09.25
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -47,6 +47,7 @@
 #macro __white Color(255,255,255)
 #macro __black Color(  0,  0,  0)
 #macro __amber Color(255,180,  0)
+#macro __ember Color(255,180,  0)
 #macro __skyblue Color(0,180,180)
 #macro __red Color(255,0,0)
 #macro __green Color(0,255,0)
