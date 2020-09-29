@@ -155,7 +155,6 @@ class Foe
 				return 0
 			end
 		})
-		
 	end
 	
 end
@@ -164,6 +163,9 @@ end
 
 group MIDM
 	
+	readonly var ArUp
+	readonly var ArDown
+
 	readonly var Lijst 
 	readonly var BigFont
 	readonly var Font
@@ -178,6 +180,7 @@ group MIDM
 	
 	int page = 0
 	table pfunc
+	int scrollhover = 0
 	
 	void Draw()
 		// Base UI
@@ -185,12 +188,12 @@ group MIDM
 		Box.DrawAll()
 		// Left
 		int y 		
-		y = self.ScrollY
+		y = 0-self.ScrollY
 		self.hover = nil;
 		for f,entry in spairs(self.Lijst)
 			if y>0 and y<$LeftBox.h-20
 				int insx=0
-				if Mouse.X<Screen.W/2 and Mouse.Y>=y and Mouse.y<y+20
+				if Mouse.X<Screen.W/2 and Mouse.Y>=y and Mouse.y<y+20 and Mouse.X>60
 					insx=10
 					self.hover = entry
 				end
@@ -198,13 +201,32 @@ group MIDM
 				if self.show and entry==self.show.entry
 					__ember
 				end
-				DarkText.Font($Font,f,self.LeftBox.x+10+insx,y)
+				DarkText.Font($Font,f,self.LeftBox.x+60+insx,y)
 				Color(0,180,255)
 				DarkText.Font($Font,entry.Category,(self.LeftBox.x+self.LeftBox.w)-20-insx,y,1)
 			end
 			#+ y 20
 		end
 		__white
+		// Scroll
+		self.scrollhover = 0
+		if self.ScrollY>0
+			if Mouse.X<40 and Mouse.Y<40
+				self.scrollhover = -2
+				Color(100,255,0)
+			end
+			self.ArUp.Draw(5,5)
+			__white
+		end
+		if y>=$LeftBox.h-20
+			if Mouse.X<40 and Mouse.Y<self.LeftBox.h and Mouse.Y>self.LeftBox.h-50
+				self.scrollhover = 2
+				Color(100,255,0)
+			end
+			self.ArDown.Draw(5,self.LeftBox.h-50)
+			__white
+		end
+		
 		// Right
 		if self.show
 			var d 
@@ -230,6 +252,12 @@ group MIDM
 		end
 		if Mouse.X>Screen.W/2 and Mouse.Y<Screen.H-128 and Mouse.HitLeft
 			self.page = (self.page+1) % #self.pfunc
+		end
+		if Mouse.HitRight
+			GoToFlow("FIELD")
+		end
+		if Mouse.HeldLeft
+			#+ self.ScrollY self.scrollhover
 		end
 	end
 	
@@ -326,5 +354,7 @@ group MIDM
 				end
 			end
 		end
+		self.ArUp     = TImage.Obtain("UP")
+		self.ArDown   = TImage.Obtain("DOWN")
 	end
 end
