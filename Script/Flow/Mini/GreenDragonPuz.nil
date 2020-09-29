@@ -122,7 +122,7 @@ group Start
 	
 	void Draw()
 		for i=1,5
-			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..i] )
+			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..giftig[i]] )
 				skull.Draw(Flessen[i].X+36,yline + 100)
 			end
 		end
@@ -226,7 +226,7 @@ group Reveal
 	
 	void Draw()
 		for i=1,5
-			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..i] )
+			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..giftig[i]] )
 				skull.Draw(Flessen[i].X+36,yline + 100)
 			end
 		end
