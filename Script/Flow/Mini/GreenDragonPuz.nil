@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Mini/GreenDragonPuz.nil
-// Version: 20.04.28
+// Version: 20.09.30
 // Copyright (C) 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -72,6 +72,7 @@ end
 
 class Fles
 	bool giftig = false
+	bool marked = false
 	int x
 	int movex = 0
 	
@@ -95,6 +96,7 @@ end
 for i=1,4
 	// CSay("???"..i.."\t"..tostring(giftig[i]))
 	Flessen[giftig[i]].giftig = true
+	Flessen[giftig[i]].marked = gv.Bool["GREENDRAGONFLASKMARKED"..i]
 	CSayF("Flesje %d is giftig! Niet drinken dus!",i)
 end
 
@@ -122,7 +124,7 @@ group Start
 	
 	void Draw()
 		for i=1,5
-			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..giftig[i]] )
+			if Flessen[i].giftig and (ForceView or Flessen[i].marked )
 				skull.Draw(Flessen[i].X+36,yline + 100)
 			end
 		end
@@ -226,7 +228,8 @@ group Reveal
 	
 	void Draw()
 		for i=1,5
-			if Flessen[i].giftig and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..giftig[i]] )
+			if Flessen[i].giftig 
+			// and (ForceView or gv.Bool["GREENDRAGONFLASKMARKED"..i] )
 				skull.Draw(Flessen[i].X+36,yline + 100)
 			end
 		end
