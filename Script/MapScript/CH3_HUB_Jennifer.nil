@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.30
+// version: 20.10.02
 // End License Information
 
 
@@ -56,7 +56,7 @@ group MScript
 	end
 	
 	void NPC_JENNIFER()
-		if not JenniferMentionedToHerondo
+		if not( JenniferMentionedToHerondo )
 			MapText("JEN1E")
 			return
 		end
