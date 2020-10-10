@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.10.04
 // End License Information
 
 
@@ -100,6 +100,15 @@ group MScript
 		Map.GoToLayer("__BASE","Start")
 	end
 	
+	void NPC_DOG()
+		if Map.Leader=="Scyndi"
+			MapText("DISCO_DOG_SCYNDI")
+			WM_Unlocked.D_HALLMUSIC=true
+		else
+			MapText("DISCO_DOG")
+		end
+	end
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("Outside","ShowOutSide")
 		Map.ZA_Enter("Bank","ShowBank")
@@ -107,6 +116,9 @@ group MScript
 		
 		Map.ZA_Enter("Exit_Store","Exit_Store")
 		Map.ZA_Enter("LeaveBank","LeaveBank")
+		if not __newgameplus
+			Map.Kill("NPC_Dog")
+		end
 	end
 	
 	
