@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.07.26
+// Version: 20.10.14
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -362,7 +362,7 @@ group Map
 				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")]",k))
 			end,
 			["__newindex"] = void(s,string k,string v)
-				CSay(sprintf("==> Flow.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+				//CSay(sprintf("==> Flow.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
 				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
 			end
 		})
