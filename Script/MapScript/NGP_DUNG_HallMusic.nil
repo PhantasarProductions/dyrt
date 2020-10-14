@@ -90,6 +90,7 @@ group MScript
 		Map.ZA_Enter("ShowSecret","ShowSecret")
 		Map.ZA_Enter("To002","TO002")
 		Map.ZA_Enter("To004","TO004")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
 	end
 	
 	void Draw()
