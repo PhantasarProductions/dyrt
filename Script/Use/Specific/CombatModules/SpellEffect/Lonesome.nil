@@ -1,0 +1,16 @@
+do
+	bool Eenzaam(Act,Target)
+		for i=1,4
+			if RPG.Party[i] and RPG.Party[i]!="" 
+				if RPG.Party[i]==Target.Tag
+					RPG.Char(RPG.Party[i]).Points("HP").Have = RPG.Char(RPG.Party[i]).Points("HP").Maximum
+				else
+					RPG.Char(RPG.Party[i]).Points("HP").Have = 0
+				end
+			end
+		end
+		return true
+	end
+	
+	return Eenzaam
+end

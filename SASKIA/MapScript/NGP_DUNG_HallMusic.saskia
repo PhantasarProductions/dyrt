@@ -32,10 +32,19 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.10.10
+; version: 20.10.23
 ; End License Information
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+:Boss
+	call StartCombat.StartSession
+	mov "Music/Combat/Boss/Reg.wav",StartCombat.Music 
+	mov "Examruins",StartCombat.Arena
+	mov "Boss/TheKing",StartCombat.Foe[1]
+	mov false,StartCombat.NoLose
+	mov false,StartCombat.FoeIDDQD 
+	call StartCombat.Ready
+	call Map.Kill,"Boss",true
+	end
