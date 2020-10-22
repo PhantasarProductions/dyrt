@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 10/22/2020 8:20:07 PM
+// Generated: 10/22/2020 9:03:49 PM
 
 do
 var retfunc()
@@ -9,32 +9,27 @@ foeret.FoeID = Foe.LoadFoeID
 foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
-foeret.Description = "What kind of realm did this creature come from?"
-foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/HMUS_Abba.png")
-foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/HMUS_ABBA.NEGATIVE.PNG")
+foeret.Description = "She's the queen of a realm you don't know"
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/MUS_Queen.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/MUS_QUEEN.NEGATIVE.PNG")
 foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
-foeret.Cash = 250
 if not Foe.LoadOversoul
-	foeret.Experience = 1000
+	foeret.Experience = 1200
 end
 if Foe.LoadOversoul
 	if __skill==3
 		foeret.Experience = 0
 	else
-		foeret.Experience = 5
+		foeret.Experience = 1
 	end
 end
-foeret.Name="Abba"
-foeret.Char.Stat("BASE__RESIST_Stat_Death").Value=60
-foeret.Char.Stat("BUFF__RESIST_Stat_Death").Value=0
-foeret.Char.Stat( "END__RESIST_Stat_Death").Value=0
-foeret.Char.Stat( "END__RESIST_Stat_Death").Script="SUM:BASE__RESIST_Stat_Death,BUFF__RESIST_Stat_Death"
+foeret.Name="Queen"
 foeret.Boss = false
 
 
 // Oversoul specific
 if Foe.LoadOversoul
-	foeret.Char.Stat("BASE_Accuracy").Value=250
+	foeret.Char.Stat("BASE_Accuracy").Value=1000
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
@@ -42,60 +37,60 @@ if Foe.LoadOversoul
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=100
+	foeret.Char.Stat("BASE_Defense").Value=1000
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
-	foeret.Char.Stat("BASE_Evasion").Value=10000
+	foeret.Char.Stat("BASE_Evasion").Value=750
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=50000
+	foeret.Char.Stat("BASE_HP").Value=2000
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
-	foeret.Char.Stat("BASE_Intelligence").Value=250
+	foeret.Char.Stat("BASE_Intelligence").Value=500
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
-	foeret.Char.Stat("BASE_Resistance").Value=10000
+	foeret.Char.Stat("BASE_Resistance").Value=1000
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=500
+	foeret.Char.Stat("BASE_Strength").Value=550
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
 else
-	foeret.Char.Stat("BASE_Accuracy").Value=100
+	foeret.Char.Stat("BASE_Accuracy").Value=600
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
-	foeret.Char.Stat("BASE_Agility").Value=25
+	foeret.Char.Stat("BASE_Agility").Value=500
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=100
+	foeret.Char.Stat("BASE_Defense").Value=200
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
-	foeret.Char.Stat("BASE_Evasion").Value=4
+	foeret.Char.Stat("BASE_Evasion").Value=7
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=2500
+	foeret.Char.Stat("BASE_HP").Value=800
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
-	foeret.Char.Stat("BASE_Intelligence").Value=250
+	foeret.Char.Stat("BASE_Intelligence").Value=300
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
-	foeret.Char.Stat("BASE_Resistance").Value=100
+	foeret.Char.Stat("BASE_Resistance").Value=400
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=250
+	foeret.Char.Stat("BASE_Strength").Value=100
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
@@ -104,40 +99,48 @@ end
 // Skill specific
 switch __skill
 	case 1
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_MOVEON"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_SOS"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKFREE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_RADIO_GAGA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_SLIGHTLYMAD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	case 2
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_MOVEON"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_SOS"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKFREE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_RADIO_GAGA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_SLIGHTLYMAD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 	case 3
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_DANCINGQUEEN"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUS_MOVEON"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_SOS"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_THEWINNERTAKESITALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKFREE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_RADIO_GAGA"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_SLIGHTLYMAD"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
