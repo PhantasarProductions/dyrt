@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
-// Version: 20.09.17
+// Version: 20.10.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -85,6 +85,13 @@ void EnemyDeathFade(f)
 		if gv.Bool.AllowMagicStones and ( (__kills % (4^__skill)==0) or (__trueabyss and __kills%(gv.Int.TrueAbyssScore*__skill)==0  ) or (f.Oversoul and __skill==2) or (__newgameplus and __skill!=3 and  __kills%(__skill*5)==0) )
 			__magicstones++
 			new MiniMsg(10,Screen.H-150,"Magic Stone Dropped!",0,180,255)
+		end
+		
+		// Recover stolen money
+		if __skill!=3 and f.StolenCash>0
+			__cash = __cash + f.StolenCash
+			new MiniMsg(10,Screen.H-150,sprintf("%d stolen shilders recovered!",f.StolenCash),0,180,255)
+			f.StolenCash = 0 
 		end
 		
 		// Experience points (if applicable)
