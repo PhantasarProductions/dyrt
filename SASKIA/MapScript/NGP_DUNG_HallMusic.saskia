@@ -48,3 +48,15 @@
 	call StartCombat.Ready
 	call Map.Kill,"Boss",true
 	end
+	
+:NPC_SASKIA_Handel
+	mov true, gv.Bool.NewGamePlusMetHandleInHallsOfMusic
+	call MapText,"HANDEL"
+	call CSay,"Removing fairy"
+	call Map.Kill,"NPC_SASKIA_Handel",true
+	call CSay,"Back to the worldmap"
+	call WorldMap.Delisto
+	call CSay,"Award achievement"
+	Call Achievements.Award,"NGP_HALLSMUSIC"
+	call CSay,"All over!"
+	end
