@@ -46,6 +46,9 @@ group MScript
 		if not gv.Bool.NPG_Complete_LostArk
 			Map.Kill("NPC_Foxey")
 		end
+		if not gv.Bool.NewGamePlusMetHandleInHallsOfMusic
+			Map.Kill("NPC_Handle")
+		end
 	end
 	
 	void NPC_FOXEY()
