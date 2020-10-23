@@ -50,7 +50,7 @@
 	end
 	
 :NPC_SASKIA_Handel
-	mov true, gv.Bool.NewGamePlusMetHandleInHallsOfMusic
+	mov true,gv.Bool.NewGamePlusMetHandleInHallsOfMusic
 	call MapText,"HANDEL"
 	call CSay,"Removing fairy"
 	call Map.Kill,"NPC_SASKIA_Handel",true
