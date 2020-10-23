@@ -64,6 +64,7 @@ do
 	ret["Super-Hag"] = { ["Name"] = "Super-Hag", ["File"] = "Script/Data/Foes/Boss/SuperHag.nil", ["Category"] = "Boss" }
 	ret["Super-Pink"] = { ["Name"] = "Super-Pink", ["File"] = "Script/Data/Foes/Boss/SuperPink.nil", ["Category"] = "Boss" }
 	ret["Super-Valkyrie"] = { ["Name"] = "Super-Valkyrie", ["File"] = "Script/Data/Foes/Boss/SuperValkyrie.nil", ["Category"] = "Boss" }
+	ret["The King"] = { ["Name"] = "The King", ["File"] = "Script/Data/Foes/Boss/TheKing.nil", ["Category"] = "Boss" }
 	ret["Turbo Candy"] = { ["Name"] = "Turbo Candy", ["File"] = "Script/Data/Foes/Boss/Turbo Candy.nil", ["Category"] = "Boss" }
 	ret["Uebermummy"] = { ["Name"] = "Uebermummy", ["File"] = "Script/Data/Foes/Boss/Ubermummy.nil", ["Category"] = "Boss" }
 	ret["White Dragon"] = { ["Name"] = "White Dragon", ["File"] = "Script/Data/Foes/Boss/WhiteDragon.nil", ["Category"] = "Boss" }
@@ -143,6 +144,11 @@ do
 	ret["Mine Creeper"] = { ["Name"] = "Mine Creeper", ["File"] = "Script/Data/Foes/Reg/MineCreeper.nil", ["Category"] = "Regular" }
 	ret["Moo-Moo-Ant"] = { ["Name"] = "Moo-Moo-Ant", ["File"] = "Script/Data/Foes/Reg/moo-moo-ant.nil", ["Category"] = "Regular" }
 	ret["Mummy"] = { ["Name"] = "Mummy", ["File"] = "Script/Data/Foes/Reg/Mummy.nil", ["Category"] = "Regular" }
+	ret["Abba"] = { ["Name"] = "Abba", ["File"] = "Script/Data/Foes/Reg/MUS_Abba.nil", ["Category"] = "Regular" }
+	ret["Golden Earring"] = { ["Name"] = "Golden Earring", ["File"] = "Script/Data/Foes/Reg/MUS_GoldenEarring.nil", ["Category"] = "Regular" }
+	ret["Heaven 17"] = { ["Name"] = "Heaven 17", ["File"] = "Script/Data/Foes/Reg/MUS_Heaven17.nil", ["Category"] = "Regular" }
+	ret["Queen"] = { ["Name"] = "Queen", ["File"] = "Script/Data/Foes/Reg/MUS_Queen.nil", ["Category"] = "Regular" }
+	ret["Rammstein"] = { ["Name"] = "Rammstein", ["File"] = "Script/Data/Foes/Reg/MUS_Rammstein.nil", ["Category"] = "Regular" }
 	ret["Myr"] = { ["Name"] = "Myr", ["File"] = "Script/Data/Foes/Reg/Myr.nil", ["Category"] = "Regular" }
 	ret["Ninja"] = { ["Name"] = "Ninja", ["File"] = "Script/Data/Foes/Reg/Ninja.nil", ["Category"] = "Regular" }
 	ret["Orc"] = { ["Name"] = "Orc", ["File"] = "Script/Data/Foes/Reg/Orc.nil", ["Category"] = "Regular" }
