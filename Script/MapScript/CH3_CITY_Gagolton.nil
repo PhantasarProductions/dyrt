@@ -120,7 +120,7 @@ group MScript
 	
 	void GJ_UNLOCK()
 		var GJ
-		if (not gv.Bool.GameJolt) or gj_checked
+		if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
 			return
 		end
 		gj_checked = true
