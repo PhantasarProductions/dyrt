@@ -32,8 +32,9 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.09.25
+; version: 20.10.24
 ; End License Information
+
 :OnLoad
 	call Fader,Field.MapData.Title
 	end
@@ -41,3 +42,9 @@
 :Foxey
 	call MapText,"FOXEY"
 	call GoToFlow,"MONSTERS"
+	end
+	
+:Handle
+	call MapText,"HANDLE"
+	call MapScript.JukeBox
+	end

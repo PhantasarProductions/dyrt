@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.10.23
+// version: 20.10.24
 // End License Information
 
 
@@ -57,6 +57,16 @@ group MScript
 			LoadFlow("MONSTERS","Script/Flow/Monsters.nil")
 		end
 		MapScript.SASKIA("Foxey")
+	end
+	
+	void NPC_HANDLE()
+		MapScript.SASKIA("Handle")
+	end
+	
+	void JUKEBOX()
+		LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
+		LuaDoString("FLOW_JUKEBOX","GROUP_JukeBox.ReturnFlow='FIELD'")
+		GoToFlow("JUKEBOX")
 	end
 	
 	void Draw()
