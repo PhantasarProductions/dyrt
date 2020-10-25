@@ -150,6 +150,11 @@ group MScript
 		Map.Kill("NPC_Abyss",true)
 	end
 	
+	void NPC_THIEFDEN()
+		MapText("GULLIVER")
+		WM_Unlocked.D_THIEFDEN = true
+	end
+	
 	void CONSTRUCTOR()
 		for tag in Map.EachTag
 			if __EMPTY and suffixed(tag,"_DISA")
@@ -164,6 +169,9 @@ group MScript
 				Map.ZA_Enter(tag,"Enter",tag)
 				Map.ZA_Leave(tag,"Leave",tag)
 			end
+		end
+		if not(__newgameplus and gv.Bool.AziellaJoined)
+			Map.Kill("NPC_ThiefDen")
 		end
 		Map.ZA_Enter("Delisto2","Delisto")
 		Map.ZA_Enter("Delisto3","Delisto")
