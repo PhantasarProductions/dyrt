@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.10.14
+// Version: 20.10.31
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -354,6 +354,7 @@ group Map
 	table ObjString
 	table ObjInt
 	table ObjBool
+	table ObjData
 	
 	void CONSTRUCTOR()
 		CSay("Obj linking metatables")
@@ -381,6 +382,16 @@ group Map
 			["__newindex"] = void(s,string k,bool v)
 				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")] = %s",k,tostring(v)))
 			end
+		})
+		setmetatable(self.ObjData,{
+			["__index"] = string(s,string k)
+				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")]",k))
+			end,
+			["__newindex"] = void(s,string k,string v)
+				//CSay(sprintf("==> Flow.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
+				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
+			end
+			
 		})
 	end
 		
