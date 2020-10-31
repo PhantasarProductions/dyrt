@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.10.29
+// version: 20.10.31
 // End License Information
 
 
@@ -40,20 +40,96 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+
+quickmeta group Solved
+	index
+		return gv.Bool["THIEFDEN_GEOPUZZLE_SOLVED_"..key]
+	end
+	
+	newindex
+		gv.Bool["THIEFDEN_GEOPUZZLE_SOLVED_"..key] = value!=false and value!=nil;
+	end
+end
+
+
 group MScript
 	
 	readonly table Panels
 	get table CPanels
-		return Panels[Map.Layer]
+		return self.Panels[Map.Layer]
+	end
+	
+	void SetPanel(table P,string ObjTag)
+		table PN
+		Map.Obj = ObjTag
+		assert(Map.ObjInt.X % 32 == 0,"Panel X Grid Error!")
+		assert(Map.ObjInt.Y % 32 == 0,"Panel Y Grid Error!")
+		int truex
+		int truey
+		int x
+		int y
+		truex = Map.ObjInt.X
+		truey = Map.ObjInt.Y
+		x = truex / 32
+		y = truey / 32
+		string PTag
+		PTag = sprintf("%04d_%04d",x,y)
+		assert(not P[PTag],"Duplicate panel definition! :"..PTag..">"..ObjTag)
+		P[PTag] = PN
+		P.maxx = math.max(x,P.maxx or 0)
+		P.minx = math.min(x,P.minx or x)
+		P.maxy = math.max(y,P.maxy or 0)
+		P.miny = math.min(y,P.miny or y)
+		PN.x = x
+		PN.y = y
+		PN.Tag = ObjTag
+		PN.R = Map.ObjInt.R
+		PN.G = Map.ObjInt.G
+		PN.B = Map.ObjInt.B
+		PN.N = tonumber(Map.ObjData.Point) or 0
+		assert(PN.N>=1 and PN.N<=6,"Invalid point number: "..PN.N)
+		CSayF("Panel set: (%d,%d) => %d",x,y,PN.N)
+	end
+	
+	table GetPanel(int x,int y)
+		string PTag
+		PTag = sprintf("%04d_%04d",x,y)
+		return self.Panels[Map.Layer][PTag]
 	end
 	
 	void PanelScan(string L)
 		var CPan
-		Panels[L] = {}
-		CPan = Panels[L]
+		self.Panels[L] = {['Points']={}}
+		CPan = self.Panels[L]
+		for t in Map.EachTag
+			if prefixed(t,"GeoFloor_")
+				self.SetPanel(CPan,t) 
+			elseif prefixed(t,"GeoPoint_")
+				CPan.Points[#CPan.Points+1]=t
+			end
+		end
+	end
+	
+	void ResetPuzzle(table rt)
+	end
+	
+	void STARTPUZZLE()
+		if Solved[Map.Layer]
+			CSay("Puzzle solved on "..Map.Layer..", so let's forget about this!")
+			return
+		elseif self.Panels[Map.Layer]
+			CSay("Resetting puzzle on "..Map.Layer.."!")
+			self.ResetPuzzle(self.Panels[Map.Layer])
+		else
+			CSay("Initiating puzzle on "..Map.Layer)
+			self.PanelScan(Map.Layer)
+		end
+		CSay(NIL.LuaSerialize("Panels",self.Panels))
 	end
 	
 	void CONSTRUCTOR()
+		Map.ZA_Enter("StartPuzzle","StartPuzzle")
 	end
 	
 	void Draw()
