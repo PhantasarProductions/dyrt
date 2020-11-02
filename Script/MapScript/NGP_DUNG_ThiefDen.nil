@@ -52,10 +52,29 @@ quickmeta group Solved
 	end
 end
 
+class GeoPanel
+	static table Panels
+	static var chain
+	readonly int x
+	readonly int y
+	readonly int tocol
+	
+	void CONSTRUCTOR(int ax, int ay, int atocol)
+		self.chain = self.chain or new TLinkedList
+		self.x     = ax
+		self.y     = ay
+		self.tocol = atocol
+		self.chain.AddLast(self)
+		CSayF("GeoPanel.Chain ---> Added (%d,%d) to color: %d",ax,ay,atocol)
+	end
+end
+
 
 group MScript
 	
-	readonly table Panels
+	//readonly table Panels
+	link Panels = GeoPanel.Panels
+	
 	get table CPanels
 		return self.Panels[Map.Layer]
 	end
@@ -107,11 +126,17 @@ group MScript
 				self.SetPanel(CPan,t) 
 			elseif prefixed(t,"GeoPoint_")
 				CPan.Points[#CPan.Points+1]=t
+				Map.Obj = t				
+				Map.NewClickable(t,Map.ObjInt.X,Map.ObjInt.Y,"GeoPoint",t)
 			end
 		end
 	end
 	
 	void ResetPuzzle(table rt)
+	end
+	
+	void GEOPOINT(string t)
+		CSayF("Geopoint '%s' triggered",t)
 	end
 	
 	void STARTPUZZLE()
