@@ -420,6 +420,20 @@ group Map
 		return LuaGetBool("FLOW_FIELD",sprintf("FieldMap.Kthura.Blocked(%d,%d,%s)",x,y,tostring(real==true)))
 	end
 	
+	void NewClickable(string Tag,int x, int y, string script,param)
+		string p
+		if not param
+			p = "nil"
+		elseif type(param)=="string" 
+			p = '"'..param..'"'
+		elseif type(param)=="number"
+			p = tostring(param)
+		else
+			error("Invalid type for parameters: "..type(param))
+		end
+		FLD_Exe(sprintf("Clickables('%s',%d,%d,MapScript.%s,%s)",Tag,x,y,script,p))
+		// Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y,FlowField.BlackOrb)
+	end
 end
 
 group Respawn
