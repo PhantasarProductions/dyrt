@@ -1,2 +1,6 @@
 # Bob Data (Must ALWAYS be non-existent when cloning from GitHub/BitBucket)
 *.CheckData.lua
+
+# Exe files that get created during prototyping and testing
+*.exe
+*.EXE
