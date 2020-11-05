@@ -52,6 +52,17 @@ quickmeta group Solved
 	end
 end
 
+class PanelPop
+	readonly int x
+	readonly int y
+	readonly int changeto
+	void CONSTRUCTOR(int ax,int ay, int ac)
+		self.x        = ax
+		self.y        = ay
+		self.changeto = ac
+	end
+end
+
 class GeoPanel
 	static table Panels
 	static var chain
@@ -66,6 +77,10 @@ class GeoPanel
 		self.tocol = atocol
 		self.chain.AddLast(self)
 		CSayF("GeoPanel.Chain ---> Added (%d,%d) to color: %d",ax,ay,atocol)
+	end
+	
+	static void pop(string tag)
+		// to do: code!
 	end
 end
 
