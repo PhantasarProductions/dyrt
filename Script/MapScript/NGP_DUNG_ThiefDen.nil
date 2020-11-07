@@ -79,8 +79,106 @@ class GeoPanel
 		CSayF("GeoPanel.Chain ---> Added (%d,%d) to color: %d",ax,ay,atocol)
 	end
 	
-	static void Pop(string tag)
+	static void Pop(string tag,nieuw)
 		// to do: code!
+		int X
+		int Y
+		int D
+		int DI;
+		string Ch
+		table over
+		int Col
+		var Point
+		Point = self.Panels[Map.Layer][tag]
+		X = Point.X
+		Y = Point.Y
+		int minix
+		int miniy
+		int maxix
+		int maxiy
+		minix = self.Panels[Map.Layer].minx
+		miniy = self.Panels[Map.Layer].miny
+		maxix = self.Panels[Map.Layer].maxy
+		maxiy = self.Panels[Map.Layer].maxy
+		
+		delegate Max
+		Max = math.max
+	
+		bool PopDone()
+			return Over['<'] and Over['>'] and Over['^'] and Over['V']
+		end
+
+		void CUp();
+			// Col:=Max(1,(Col+1) mod 16)
+			// Not reall relevant in the map script. Left over from the Pascal prototype.
+		end
+	
+		// Main
+		if nieuw or (not self.chain)
+			self.chain = new TLinkedList()
+		end
+		Ch = '>'
+		X = 40
+		Y = 12
+		Over['<'] = false;
+		Over['>'] = false;
+		Over['^'] = false;
+		Over['V'] = false;
+		Col = 1;
+		D = 1;
+		DI = D;
+		ClrScr;
+		repeat
+			// TextColor(Col);
+			if (X>=minix) and (X<=maxix) and (Y>=miniy) and (Y<=maxiy) 
+				// GotoXY(X,Y);
+				// Write(Ch)
+				self.chain.AddLast(new PanelPop(X,Y,Point.N))
+			elseif X<minix 
+				Over['<'] = true
+			elseif X>maxiy 
+				Over['>'] = true
+			elseif Y<miniy 
+				Over['^'] = true
+			elseif Y>maxiy 
+				Over['V'] = true;		
+			end
+			switch Ch
+				case '<'
+					X--
+					DI--
+					if DI==0 
+						DI = D
+						Ch = '^';
+					end				
+				case '^'
+					Y--
+					DI--
+					if DI==0
+						D++
+						DI = D;
+						CH = '>';
+						CUp()
+					end
+				case '>'
+					X++
+					DI--
+					if DI==0
+						DI = D;
+						Ch = 'V';
+					end				
+				case 'V'
+					Y++
+					DI--
+					if DI==0
+						D++
+						DI = D;
+						CH = '<'
+					end
+			end
+			//Delay(100);
+		until PopDone()
+	// end of pop!
 	end
 end
 
@@ -142,7 +240,7 @@ group MScript
 			elseif prefixed(t,"GeoPoint_")
 				Map.Obj=t;
 				CPan.Points[#CPan.Points+1]=t
-				CPan.Points[t] = { ["X"] = math.floor(Map.ObjInt.X/32), ["Y"] = math.floor((Map.ObjInt.Y-6)/32) }
+				CPan.Points[t] = { ["X"] = math.floor(Map.ObjInt.X/32), ["Y"] = math.floor((Map.ObjInt.Y-6)/32), ["N"] = tonumber(Map.ObjData.Point) or 0 }
 				Map.Obj = t				
 				Map.NewClickable(t,Map.ObjInt.X,Map.ObjInt.Y,"GeoPoint",t)
 			end
