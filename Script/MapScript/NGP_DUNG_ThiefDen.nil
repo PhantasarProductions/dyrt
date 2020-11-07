@@ -79,7 +79,7 @@ class GeoPanel
 		CSayF("GeoPanel.Chain ---> Added (%d,%d) to color: %d",ax,ay,atocol)
 	end
 	
-	static void pop(string tag)
+	static void Pop(string tag)
 		// to do: code!
 	end
 end
@@ -140,7 +140,9 @@ group MScript
 			if prefixed(t,"GeoFloor_")
 				self.SetPanel(CPan,t) 
 			elseif prefixed(t,"GeoPoint_")
+				Map.Obj=t;
 				CPan.Points[#CPan.Points+1]=t
+				CPan.Points[t] = { ["X"] = math.floor(Map.ObjInt.X/32), ["Y"] = math.floor((Map.ObjInt.Y-6)/32) }
 				Map.Obj = t				
 				Map.NewClickable(t,Map.ObjInt.X,Map.ObjInt.Y,"GeoPoint",t)
 			end
