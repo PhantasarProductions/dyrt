@@ -86,7 +86,7 @@ class GeoPanel
 		int D
 		int DI;
 		string Ch
-		table over
+		table Over
 		int Col
 		var Point
 		Point = self.Panels[Map.Layer][tag]
@@ -108,7 +108,7 @@ class GeoPanel
 			return Over['<'] and Over['>'] and Over['^'] and Over['V']
 		end
 
-		void CUp();
+		void CUp()
 			// Col:=Max(1,(Col+1) mod 16)
 			// Not reall relevant in the map script. Left over from the Pascal prototype.
 		end
@@ -127,7 +127,7 @@ class GeoPanel
 		Col = 1;
 		D = 1;
 		DI = D;
-		ClrScr;
+		// ClrScr;
 		repeat
 			// TextColor(Col);
 			if (X>=minix) and (X<=maxix) and (Y>=miniy) and (Y<=maxiy) 
@@ -157,7 +157,7 @@ class GeoPanel
 					if DI==0
 						D++
 						DI = D;
-						CH = '>';
+						Ch = '>';
 						CUp()
 					end
 				case '>'
@@ -173,7 +173,7 @@ class GeoPanel
 					if DI==0
 						D++
 						DI = D;
-						CH = '<'
+						Ch = '<'
 					end
 			end
 			//Delay(100);
