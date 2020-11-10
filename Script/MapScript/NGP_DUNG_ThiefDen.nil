@@ -256,6 +256,11 @@ group MScript
 	
 	void GEOPOINT(string t)
 		CSayF("Geopoint '%s' triggered",t)
+		if Solved[Map.Layer]
+			CSay("Puzzle already solved, so let's ignore that.")
+			// Should NEVER happen as the points should be removed then, but at least this prevents system crashes!
+			return
+		end
 	end
 	
 	void STARTPUZZLE()
