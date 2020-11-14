@@ -67,7 +67,7 @@ class PanelPop
 end
 
 class GeoPanel
-	static var 
+	static var NextPop
 	static table Panels
 	static var chain
 	readonly int x
@@ -85,6 +85,7 @@ class GeoPanel
 	
 	static void Pop(string tag,wantcolor,nieuw)
 		// to do: code!
+		self.NextPop = self.NextPop or new TLinkedList
 		int X
 		int Y
 		int D
@@ -134,7 +135,7 @@ class GeoPanel
 		// ClrScr;
 		repeat
 			// TextColor(Col);
-			if (X>=minix) and (X<=maxix) and (Y>=miniy) and (Y<=maxiy) and
+			if (X>=minix) and (X<=maxix) and (Y>=miniy) and (Y<=maxiy)
 				// GotoXY(X,Y);
 				// Write(Ch)
 				self.chain.AddLast(new PanelPop(X,Y,Point.N))
