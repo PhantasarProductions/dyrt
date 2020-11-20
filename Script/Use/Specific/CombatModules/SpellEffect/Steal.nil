@@ -32,9 +32,11 @@
 // 
 // **********************************************
 // 
-// version: 20.05.13
+// version: 20.11.20
 // End License Information
 do
+	var stealitems
+	
 	bool StealOnyx(foe,string name)
 		if Done["Stolen_From_Onyx_"..name]
 			new Hurt("You already stole the key from "..name,"FOE_1",255,255,0)
@@ -106,7 +108,20 @@ do
 			end // switch
 			// error("Stealing from enemies not yet implemented")
 		else
-			error("Stealing from heroes not yet implemented")
+			int i
+			string itemtag
+			var Exe
+			stealitems = stealitems or NIL.Use("Script/Data/General/EnemyStealItems.nil")
+			i = math.random(1,#stealitems)
+			itemtag = stealitems[i]
+			if Inventory[itemtag]<=0
+				return false
+			end
+			Exe = Act.Executor
+			Exe.StolenItems[#Exe.StolenItems+1] = itag
+			Inventory[itemtag]--
+			new Hurt(sprintf("Stolen %s",Item[itag].Name),Target.Tag,255,255,0)
+			// error("Stealing from heroes not yet implemented")
 		end
 		return okdrop
 	end

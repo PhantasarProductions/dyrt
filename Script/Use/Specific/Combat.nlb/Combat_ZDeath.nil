@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
-// Version: 20.10.22
+// Version: 20.11.20
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -92,6 +92,13 @@ void EnemyDeathFade(f)
 			__cash = __cash + f.StolenCash
 			new MiniMsg(10,Screen.H-150,sprintf("%d stolen shilders recovered!",f.StolenCash),0,180,255)
 			f.StolenCash = 0 
+		end
+		if __skill!=3
+			for _,it_tag in ipairs(f.StolenItems)
+				new MiniMsg(10,Screen.H-150,sprintf("Stolen %s recovered!",it_tag),0,180,255)
+				Inventory[it_tag]++
+			end
+			f.StolenItems = {}
 		end
 		
 		// Experience points (if applicable)

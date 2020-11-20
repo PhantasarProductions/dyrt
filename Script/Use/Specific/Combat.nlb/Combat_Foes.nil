@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Foes.nil
-// Version: 20.10.22
+// Version: 20.11.20
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -71,6 +71,7 @@ class Foe extends Fighter
 	table Steal
 	int FlickStance = 0
 	int StolenCash = 0 
+	table StolenItems
 	bool StolenFrom = false
 	//int maxfoenum
 	// link maxfoenum = Buff.maxfoenum
