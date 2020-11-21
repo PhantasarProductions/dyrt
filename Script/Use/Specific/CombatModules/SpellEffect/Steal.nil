@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.11.20
+// version: 20.11.21
 // End License Information
 do
 	var stealitems
@@ -56,7 +56,11 @@ do
 		if Target.Char.Points("HP").Have == 0
 			return false
 		end
-		CSayF("Stealing from %s => %s",Target.Tag,Target.FromFile)
+		if prefixed(Target.Tag,"FOE_")
+			CSayF("Stealing from %s => %s",Target.Tag,Target.FromFile)
+		else
+			CSayF("Stealing from %s (Hero)",Target.Tag)
+		end
 		if prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/ALDARUS2")
 			return StealOnyx(Target,"Aldarus")
 		elseif prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/JERACKO2")
@@ -118,10 +122,11 @@ do
 				return false
 			end
 			Exe = Act.Executor
-			Exe.StolenItems[#Exe.StolenItems+1] = itag
+			Exe.StolenItems[#Exe.StolenItems+1] = itemtag
 			Inventory[itemtag]--
-			new Hurt(sprintf("Stolen %s",Item[itag].Name),Target.Tag,255,255,0)
+			new Hurt(sprintf("Stolen %s",Item[itemtag].Name),Target.Tag,255,255,0)
 			// error("Stealing from heroes not yet implemented")
+			return true
 		end
 		return okdrop
 	end

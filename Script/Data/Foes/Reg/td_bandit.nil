@@ -10,8 +10,8 @@ foeret.Char = RPG.CreateChar(foeret.Tag)
 foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "Lives for theft"
-foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/td_thief.png")
-foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/TD_THIEF.NEGATIVE.PNG")
+foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/td_bandit.png")
+foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/TD_BANDIT.NEGATIVE.PNG")
 foeret.Cash = 250
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Potion"
 foeret.Drop = foeret.Drop or {} foeret.Drop[#foeret.Drop+1] = "ITM_Potion"
@@ -31,7 +31,7 @@ foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MYSTERIOU
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MYSTERIOUSPOTION"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_MYSTERIOUSPOTION"
 if not Foe.LoadOversoul
-	foeret.Experience = 230
+	foeret.Experience = 250
 end
 if Foe.LoadOversoul
 	if __skill==3
@@ -40,7 +40,59 @@ if Foe.LoadOversoul
 		foeret.Experience = 300
 	end
 end
-foeret.Name="Thief"
+foeret.Name="Bandit"
+foeret.Char.Stat("BASE__RESIST_Elem_Darkness").Value=4
+foeret.Char.Stat("BUFF__RESIST_Elem_Darkness").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Darkness").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Darkness").Script="SUM:BASE__RESIST_Elem_Darkness,BUFF__RESIST_Elem_Darkness"
+foeret.Char.Stat("BASE__RESIST_Elem_Light").Value=-2
+foeret.Char.Stat("BUFF__RESIST_Elem_Light").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Light").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Light").Script="SUM:BASE__RESIST_Elem_Light,BUFF__RESIST_Elem_Light"
+foeret.Char.Stat("BASE__RESIST_Elem_Wind").Value=50
+foeret.Char.Stat("BUFF__RESIST_Elem_Wind").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Wind").Value=0
+foeret.Char.Stat( "END__RESIST_Elem_Wind").Script="SUM:BASE__RESIST_Elem_Wind,BUFF__RESIST_Elem_Wind"
+foeret.Char.Stat("BASE__RESIST_Stat_Death").Value=40
+foeret.Char.Stat("BUFF__RESIST_Stat_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Death").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Death").Script="SUM:BASE__RESIST_Stat_Death,BUFF__RESIST_Stat_Death"
+foeret.Char.Stat("BASE__RESIST_Stat_Destruction").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Destruction").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Destruction").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Destruction").Script="SUM:BASE__RESIST_Stat_Destruction,BUFF__RESIST_Stat_Destruction"
+foeret.Char.Stat("BASE__RESIST_Stat_Disease").Value=30
+foeret.Char.Stat("BUFF__RESIST_Stat_Disease").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Disease").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Disease").Script="SUM:BASE__RESIST_Stat_Disease,BUFF__RESIST_Stat_Disease"
+foeret.Char.Stat("BASE__RESIST_Stat_Exhaustion").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Exhaustion").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Exhaustion").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Exhaustion").Script="SUM:BASE__RESIST_Stat_Exhaustion,BUFF__RESIST_Stat_Exhaustion"
+foeret.Char.Stat("BASE__RESIST_Stat_Fear").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Fear").Script="SUM:BASE__RESIST_Stat_Fear,BUFF__RESIST_Stat_Fear"
+foeret.Char.Stat("BASE__RESIST_Stat_Paralysis").Value=70
+foeret.Char.Stat("BUFF__RESIST_Stat_Paralysis").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Paralysis").Script="SUM:BASE__RESIST_Stat_Paralysis,BUFF__RESIST_Stat_Paralysis"
+foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=40
+foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
+foeret.Char.Stat("BASE__RESIST_Stat_Silence").Value=100
+foeret.Char.Stat("BUFF__RESIST_Stat_Silence").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Silence").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Silence").Script="SUM:BASE__RESIST_Stat_Silence,BUFF__RESIST_Stat_Silence"
+foeret.Char.Stat("BASE__RESIST_Stat_Sleep").Value=50
+foeret.Char.Stat("BUFF__RESIST_Stat_Sleep").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Sleep").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Sleep").Script="SUM:BASE__RESIST_Stat_Sleep,BUFF__RESIST_Stat_Sleep"
+foeret.Char.Stat("BASE__RESIST_Stat_Zombie").Value=30
+foeret.Char.Stat("BUFF__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Value=0
+foeret.Char.Stat( "END__RESIST_Stat_Zombie").Script="SUM:BASE__RESIST_Stat_Zombie,BUFF__RESIST_Stat_Zombie"
 foeret.Boss = false
 
 
