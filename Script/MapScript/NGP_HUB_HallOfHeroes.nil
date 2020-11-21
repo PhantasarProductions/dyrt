@@ -48,6 +48,9 @@ group MScript
 		end
 		if not gv.Bool.NewGamePlusMetHandleInHallsOfMusic
 			Map.Kill("NPC_Handle")
+		end	
+		if not gv.Bool.FoundRubineInTheThiefDen
+			Map.Kill("NPC_Rubine")
 		end
 	end
 	

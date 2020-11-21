@@ -278,8 +278,19 @@ group MScript
 		CSay(NIL.LuaSerialize("Panels",self.Panels))
 	end
 	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "NakedRocks"
+		StartCombat.Foe[1] = "Boss/TD_Jesse"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+		
 	void CONSTRUCTOR()
 		Map.ZA_Enter("StartPuzzle","StartPuzzle")
+		Map.ZA_Enter("ActBoss","SASKIA:Boss")
 	end
 	
 	void Draw()
