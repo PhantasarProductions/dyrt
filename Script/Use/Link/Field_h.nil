@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 20.11.02
+// Version: 20.11.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -435,6 +435,12 @@ group Map
 		// Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y,FlowField.BlackOrb)
 	end
 end
+
+group Player
+	link X = Map.PlayerX
+	link Y = Map.PlayerY
+end
+
 
 group Respawn
 	

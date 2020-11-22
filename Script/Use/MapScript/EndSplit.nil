@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.11.22
 // End License Information
 void StartRebecca()
 	RPG.Party[1] = "Rebecca"
@@ -63,6 +63,8 @@ void Rejoin()
 	RPG.Party[8] = "Aziella"
 	Field.LoadMap("CH4_HUB_RAYAL_PALACE")
 	Map.SpawnPlayer("Split_Start")
+	MapScript.ShowPart("Kings_Room")
+	Map.Cam(Player.X-(Screen.W/2),Player.Y-(Screen.H/2))
 	MapScript.SASKIA("Rejoin")
 	// error("Follow up not yet scripted")
 end
