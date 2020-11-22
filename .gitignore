@@ -4,3 +4,4 @@
 # Exe files that get created during prototyping and testing
 *.exe
 *.EXE
+*.nil~
