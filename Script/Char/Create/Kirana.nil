@@ -32,13 +32,14 @@
 // 
 // **********************************************
 // 
-// version: 20.05.17
+// version: 20.11.23
 // End License Information
 #use "Script/Use/AnyWay"
 
 do
 	var Kirana
 	Kirana = RPG.GetChar("Kirana")
+	Kirana.Name = Names.Kirana
 	Kirana.Data.Weapon = "EQW_KIRANA"
 	Kirana.Data.Armor  = "EQA_KIRANA"
 	Kirana.Data.Jewel  = "JWL_KIRANA"
