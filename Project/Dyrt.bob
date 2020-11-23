@@ -63,9 +63,9 @@ $CHECK src/Tricky Script/Script/Use/Specific/Field.nlb
 	mkl_update
 	powershell b
 	
-$CHECK src/Tricky Private/Maps/Kthura
-	powershell "&'E:\Projects\Applications\Bubble\Games\The Secrets of Dyrt\DEV\DiscoFloor\bin\Debug\DiscoFloor.exe'"
-	powershell b
+#$CHECK src/Tricky Private/Maps/Kthura
+#	powershell "&'E:\Projects\Applications\Bubble\Games\The Secrets of Dyrt\DEV\DiscoFloor\bin\Debug\DiscoFloor.exe'"
+#	powershell b
 
 # The last three seem odd, but the Anyway.go script does calculate from the JCR resource, so I had no choice but to work this way.
 
