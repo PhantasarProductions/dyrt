@@ -120,6 +120,9 @@ group MScript
 		Map.ZA_Enter("InHouse","ShowHouse")
 		Map.ZA_Leave("InHouse","HideHouse")
 		Map.ZA_Enter("Leave_TigHouse","Leave_TigHouse")
+		if (not __newgameplus) or (not gv.Bool.DefeatedFrundarmon)
+			Map.Kill("NPC_Jeroen")
+		end
 	end
 	
 	void Draw()
