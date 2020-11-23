@@ -105,6 +105,7 @@ group MScript
 		if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
 			return
 		end
+		CSay("Next step - Loading the data")
 		gj_checked = true
 		GJ = NIL.Use("Secu/Include/GJSecret.nil")
 		if not GJ

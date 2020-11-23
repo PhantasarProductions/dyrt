@@ -78,18 +78,22 @@ group MScript
 	
 	void GAMEJOLTNEXT()
 		var GJ
-		if (not gv.Bool.GameJolt) or gj_checked
+		CSay("Start Check")
+		if (not gv.Bool.GameJolt) or gj_checked or gj_failed()
 			// Yes, even though a GJ account is required to even enter 
 			// the place this check is needed. If your account got
 			// banned over time, the door must remain closed!
 			return
 		end
+		CSay("Load GJSecret")
 		gj_checked = true
 		GJ = NIL.Use("Secu/Include/GJSecret.nil")
 		if not GJ
+			CSay("No good!")
 			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
 			return
 		end
+		CSay("Checking ratio")
 		if GJ.ImpureRatio>=50
 			CSay("All cool! Opening up the 2nd part!")
 			Map.Kill("GJ_Barrier")
