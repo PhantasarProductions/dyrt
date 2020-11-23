@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.05.17
+// version: 20.11.23
 // End License Information
 
 
@@ -62,7 +62,7 @@ group MScript
 	
 	void GJ_OPEN()
 		var GJ
-		if (not gv.Bool.GameJolt) or gj_checked
+		if (not gv.Bool.GameJolt) or gj_checked or gj_failed()
 			return
 		end
 		gj_checked = true
