@@ -2223,6 +2223,8 @@ Rec: ABL_FOE_PURPLEPOLLEN
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = TRUE
 	CauseSilence = FALSE
@@ -2318,9 +2320,10 @@ Rec: ABL_FOE_PURPLEPOLLEN
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = Flame
+	SpellAniScript = Darkness
 	Stance = CAST
 	Target = AF
+	TriggerAfterAttack = FALSE
 	Type = Ability
 
 Rec: ABL_FOE_REDPOLLEN
@@ -11174,6 +11177,7 @@ Rec: ABL_HERO_ERIC_EVIL
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -12582,6 +12586,7 @@ Rec: ABL_HERO_IRRAVONIA_BLIZZARD
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -13478,6 +13483,7 @@ Rec: ABL_HERO_IRRAVONIA_HEAL
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
