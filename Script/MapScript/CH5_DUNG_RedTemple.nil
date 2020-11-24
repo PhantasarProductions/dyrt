@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.24
+// version: 20.11.24
 // End License Information
 
 
@@ -70,7 +70,7 @@ group MScript
 	void GJ_OPEN()
 		Map.ShowByLabel("GJ_SECRET")
 		var GJ
-		if (not gv.Bool.GameJolt) or gj_checked
+		if (not gv.Bool.GameJolt) or gj_checked of gj_failed()
 			return
 		end
 		gj_checked = true
