@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 20.11.24
 // End License Information
 
 
@@ -48,6 +48,7 @@ module Arena_Sugarland
 		self.Forest.CloudB=195
 		//self.Forest.LoadTex("GFX/Textures/Trees/SPAR.png",self.Forest.LoadComm.Cloud,"gfx/Textures/Sky/cloud.png")
 		self.Forest.LoadTex("GFX/Textures/Trees/PinkSPAR.png",4,"gfx/Textures/Sky/cloud.png")
+		self.Forest.texfloorfile="GFX/Textures/Road/R.png"
 		self.Forest.Generate()
 	end
 	
