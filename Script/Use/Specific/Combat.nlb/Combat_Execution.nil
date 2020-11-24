@@ -254,8 +254,8 @@ group Execution
 		if Action.Act.AccuracyCheck and (not self.Helpless(Target))
 			int acc
 			int eva
-			acc = math.random(1,RPG.Char(ExeTag).Stat("END_Accuracy").Value)
-			eva = math.random(0,math.floor(RPG.Char(TarTag).Stat("END_Evasion").Value/5))
+			acc = math.random(1,math.max(RPG.Char(ExeTag).Stat("END_Accuracy").Value,2))
+			eva = math.random(0,math.max(2,math.floor(RPG.Char(TarTag).Stat("END_Evasion").Value/5)))
 			if eva>acc
 				new Hurt("Miss",Target.Tag,127,127,127)
 				return
