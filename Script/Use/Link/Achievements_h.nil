@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/Achievements_h.nil
-// Version: 20.09.17
+// Version: 20.11.24
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -109,8 +109,10 @@ global void GJLOGINFAILED()
 	LuaDoString("ACHIEVEMENTS","gjfailed = true")	
 end
 
-global bool gj_failed ()
+global bool gj_failed()
+	CSay("gj_failed() check")
 	if not StateExists("ACHIEVEMENTS")
+		CSay("Loading achievements sub")
 		LoadState("ACHIEVEMENTS","Script/Subs/SubAchievements.nil")
 	end
 	CSay("Did GJ fail to load or not?")
