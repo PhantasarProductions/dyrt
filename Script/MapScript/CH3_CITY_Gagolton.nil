@@ -152,7 +152,7 @@ group MScript
 	
 	void NPC_THIEFDEN()
 		MapText("GULLIVER")
-		WM_Unlocked.D_THIEFDEN = true
+		WM_Unlocked.D_THIEFDEN = true 
 	end
 	
 	void CONSTRUCTOR()
