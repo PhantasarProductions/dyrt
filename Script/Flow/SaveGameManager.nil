@@ -280,7 +280,7 @@ class SG
 			return false
 		end
 		if not GameJolt.ByResource("Secu/Sites/GameJolt")
-			Annoy("Your savegame was set up to make use of Game Jolt, however, the data I got from this game do not suppor Game Jolt support.\n\nI will let you go on, but no Game Jolt support will be there, sorry!")
+			Annoy("Your savegame was set up to make use of Game Jolt, however, the data I got from this game does not suppor Game Jolt support.\n\nI will let you go on, but no Game Jolt support will be there, sorry!\n\nPlease re-download and re-install the game in order to fix this issue")
 			gv.Bool.GAMEJOLT = false
 			return false
 		end
