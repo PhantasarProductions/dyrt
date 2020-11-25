@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.04.28
+; version: 20.11.25
 ; End License Information
 
 :OnLoad
@@ -78,4 +78,10 @@
 :NPC_SASKIA_Felicia
 	call MapText,"FELICIA" 
 	call Merchant,"CH4_FELICIA" 
+	end
+	
+:Jeroen
+	call MapText,"JEROENA"
+	call Map.Kill,"NPC_Jeroen",true
+	call MapText,"JEROENB"
 	end
