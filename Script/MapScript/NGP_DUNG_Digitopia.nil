@@ -1,0 +1,79 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/NGP_DUNG_Digitopia.nil
+// (c) Jeroen Broks, 2020, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 20.11.25
+// End License Information
+
+
+
+#say "Map Script - None!"
+#use "script/use/anyway"
+#use "Script/Use/StartCombatMod"
+	
+group MScript
+
+	void JEROEN()
+		if Done["Digitopia.Jeroen."..Map.Layer]
+			return
+		end
+		Map.StopWalking()
+		MapScript.SASKIA("Jeroen")
+	end
+	
+	void JEROENBOX()
+		string L
+		L = Right(Map.Layer,3)
+		MapText("JEROEN"..L)
+	end
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("ActJeroen","Jeroen")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+		Map.Obj="Back"
+		Map.ObjInt.X = Map.CamX - 20
+		Map.ObjInt.Y = Map.CamY - 20
+		Map.ObjInt.W = Screen.W + 40
+		Map.ObjInt.H = Screen.H + 40
+		Map.ObjInt.InsertX = math.floor(Player.X / 4)
+		Map.ObjInt.InsertY = math.floor(Player.Y / 4)
+	end
+	
+end
+
+#say "Map Script - Compiling!"
