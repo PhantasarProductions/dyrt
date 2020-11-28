@@ -62,7 +62,7 @@ group MScript
 		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
 		StartCombat.Arena = "Digitopia"
 		StartCombat.Foe[1] = "Boss/CGABRO_RYG"
-		StartCombat.Foe[2] = "Boss/CGABRO_RYG"
+		StartCombat.Foe[2] = "Boss/CGABRO_MCW"
 		StartCombat.NoLose = false
 		StartCombat.FoeIDDQD = false
 		StartCombat.Ready()
