@@ -108,7 +108,7 @@ do
 						Target.StolenFrom = true
 					end
 				default
-					error("Invalid item steal!")
+					error("Invalid item steal! ("..type(Target.Steal[r])..")")
 			end // switch
 			// error("Stealing from enemies not yet implemented")
 		else
