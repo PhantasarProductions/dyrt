@@ -57,8 +57,21 @@ group MScript
 		MapText("JEROEN"..L)
 	end
 	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "Digitopia"
+		StartCombat.Foe[1] = "Boss/CGABRO_RYG"
+		StartCombat.Foe[2] = "Boss/CGABRO_RYG"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ActJeroen","Jeroen")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
 	end
 	
 	void Draw()
