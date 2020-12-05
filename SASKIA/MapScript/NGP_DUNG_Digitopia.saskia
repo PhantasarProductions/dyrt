@@ -51,4 +51,13 @@
 	call Map.Kill,"CGA1",true
 	call Map.Kill,"CGA2",true
 	end
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
+
+	
+:NPC_SASKIA_Gogh
+	call MapText,"GOGH"
+	mov true,gv.Bool.Done_NewGamePlus_Digitopia
+	call Map.Kill,"EndBarrier",true
+	call Map.Kill,"NPC_SASKIA",true
+	call Achievements.Award,"NGP_DIGITOPIA"
+	call WorldMap["Cat-Island"]
+	end

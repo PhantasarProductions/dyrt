@@ -72,10 +72,14 @@ group MScript
 		StartCombat.Ready()
 	end
 	
+	void CALM()
+		Music.Play("Music/Dungeon/Digitopia_end.wav")
+	end
 	
 	void CONSTRUCTOR()
 		Map.ZA_Enter("ActJeroen","Jeroen")
 		Map.ZA_Enter("Boss","SASKIA:Boss")
+		Map.ZA_Enter("Calm","Calm")
 	end
 	
 	void Draw()
