@@ -1938,6 +1938,23 @@ Rec: MAXSKILL_4_IRRAVONIA
 	skill_3 = FALSE
 	skill_check = FALSE
 
+Rec: NGP_ALLHERO
+	allow_trueabyss = FALSE
+	AutoProcess = FALSE
+	Description = Visit the Hall of Heroes once all representatives have arrived there (New Game+ only)
+	hidden = FALSE
+	Name = A SUPER Hero
+	only_newgameplus = TRUE
+	only_trueabyss = FALSE
+	ProcessMax = 0
+	ProcessString = {Value} of {Max}
+	ProcessValue = 
+	require_gamejolt = FALSE
+	skill_1 = true
+	skill_2 = true
+	skill_3 = true
+	skill_check = FALSE
+
 Rec: NGP_DIGITOPIA
 	allow_trueabyss = FALSE
 	AutoProcess = FALSE

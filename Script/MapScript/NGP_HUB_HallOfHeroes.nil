@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.11.22
+// version: 20.12.05
 // End License Information
 
 
@@ -43,14 +43,25 @@
 group MScript
 	
 	void CONSTRUCTOR()
+		bool GotAll=true
 		if not gv.Bool.NPG_Complete_LostArk
 			Map.Kill("NPC_Foxey")
+			GotAll=false
 		end
 		if not gv.Bool.NewGamePlusMetHandleInHallsOfMusic
 			Map.Kill("NPC_Handle")
+			GotAll=false
 		end	
 		if not gv.Bool.FoundRubineInTheThiefDen
 			Map.Kill("NPC_Rubine")
+			GotAll=false
+		end
+		if not gv.Bool.Done_NewGamePlus_Digitopia
+			Map.Kill("NPC_Gogh")
+			GotAll=false
+		end
+		if GotAll
+			Achievements.Award("NGP_ALLHERO")
 		end
 	end
 	
