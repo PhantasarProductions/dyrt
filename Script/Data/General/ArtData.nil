@@ -8,25 +8,36 @@
 do
 	table ret
 
+		ret["GFX/ACTORS/HEROES/SCYNDI.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Walking East" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/PINGUIN.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Pinguin (negative)" }
+		ret["GFX/TEXTURES/ABYSS/PLASMA_SHORT.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Abyss - Plasma" }
+		ret["GFX/TEXTURES/DIGITOPIA/CHIP 3 (CYAN).PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Digitopia - Chip - Cyan" }
+		ret["GFX/TEXTURES/DRAGON/REDDRAGON.PNG"] = { ["Author"] = "Alicia", ["Name"] = "Textures: Dragons - Red" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/SQUID.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Squid (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/SEALED/SHADOWROGUE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Shadow Rogue" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/AZIELLA.IDLE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Aziella - IDLE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/REDGUARDIAN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Red Dragon" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BLUEY.NEGATIVE.PNG"] = { ["Author"] = "Roana", ["Name"] = "Foe: Bluey (negative)" }
+		ret["GFX/TEXTURES/DYRT/INHOUSE/WALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures - In House - Wall" }
 		ret["GFX/TEXTURES/GJ/GJTRANS.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Game Jolt - Portal" }
-		ret["GFX/TEXTURES/PHANTASAR/INHUIS/HOUT.BLC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Wood - BLC" }
-		ret["GFX/ALG/DYRT_LOGO.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: The Secrets of Dyrt" }
-		ret["GFX/TEXTURES/PHANTASAR/RAILS/EW2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Railway - East-West (2)" }
-		ret["GFX/COMBAT/SPELLANI/BLACKHOLE.PNG"] = { ["Author"] = "CC0 Public Domain", ["Name"] = "SpellAni: Black Hole" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/KIRANA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Kirana - Attacking" }
-		ret["GFX/ACTORS/HEROES/BRENDOR.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - Walking East" }
-		ret["GFX/ACTORS/PEOPLE/ELVES/GEDRIO FULLA.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Elves - Emperor Gedrio Fulla" }
-		ret["GFX/TEXTURES/RAYAL CITY/LEEGS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - 'Leeg' S" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/BRENDOR.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendo - Attacking" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/SEALED/SLIMEKING.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Sealed Boss: Slime King (negative)" }
-		ret["GFX/ACTORS/HEROES/YOUNGIRRAVONIA.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Walking West" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/SCYNDI.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Attacking" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/TD_JESSE.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Boss: Jesse (negative)" }
-		ret["GFX/TEXTURES/LIYELLOW/YWD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - YWD" }
-		ret["GFX/TEXTURES/PRISON/ALPHA SKELETON.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Prison - Skeleton" }
-		ret["GFX/ACTORS/HEROES/YASATHAR.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes - Eric (Y) - Walking West" }
-		ret["GFX/ACTORS/PEOPLE/BEFINDOS/MALE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Befindos - Male" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/KIRANA.IDLE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Kirana - IDLE" }
+		ret["GFX/BOXPIC/LORD DZGJYMZA/GENERAL.PNG"] = { ["Author"] = "Linvala Kemellon", ["Name"] = "Portrait: Lord Dzgjymza" }
+		ret["GFX/TEXTURES/NRCAVES/NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - NE" }
+		ret["GFX/TEXTURES/HUMVILLAGE/THADCHET ROOF.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Human Village - Roof" }
+		ret["GFX/ACTORS/PEOPLE/BEFINDOS/STATUE_MALABIA.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Statues: Malabia" }
+		ret["GFX/COMBAT/SPELLANI/MAGICMISSILE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Magic Missile" }
+		ret["GFX/TEXTURES/ALG/BOOK_BLUE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: Book Blue" }
+		ret["GFX/TEXTURES/DARKSTORAGE/RONDOMO_WE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Rondomo) - WE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/FIREGHOUL.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Fire Ghoul (negative)" }
+		ret["GFX/TEXTURES/STAIRS/UP64.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Stairs - 64 Pixels" }
+		ret["GFX/ACTORS/HEROES/AZIELLA.WEST.JPBF/00000000.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "?" }
+		ret["GFX/TEXTURES/ROAD/RBSE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Road - RBSE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/TD_THIEF.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Foe: Thief (negative)" }
+		ret["GFX/ACTORS/PEOPLE/VILLAGE/INDIAAN.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Cameo - Native American" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_FIRE.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Fire)" }
+		ret["GFX/ACTORS/HEROES/DERNOR.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Dernor - Walking South" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/FIREGHOST.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Heroes: Fire Ghost (Negative)" }
+		ret["GFX/ALG/MOUSE_SLEEP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: Mouse (sleep)" }
+		ret["GFX/TEXTURES/MARKTKRAAMPJES/MARKET_ROSETTA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Market Stand - Rosetta" }
 
 
 	return ret
