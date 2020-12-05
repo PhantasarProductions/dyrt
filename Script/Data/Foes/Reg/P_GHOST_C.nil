@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/28/2020 1:22:58 AM
+// Generated: 12/4/2020 4:41:06 PM
 
 do
 var retfunc()
@@ -11,7 +11,7 @@ foeret.AI_Module = "Default"
 foeret.AllowOversoul = true and __skill!=1
 foeret.Description = "They inhabit Digitopia\nWhat a strange creatures they are"
 foeret.Fatal["Flame"] = true
-foeret.Fatal["Frost"] = true
+foeret.Fatal["Frost"] = false
 foeret.Image = LoadImage("GFX/Combat/Fighters/Foes/Reg/P_GHOST_C.png")
 foeret.Image_Neg = LoadImage("GFX/COMBAT/FIGHTERS/FOES/REG/P_GHOST_C.NEGATIVE.PNG")
 foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
