@@ -8,111 +8,410 @@
 do
 	table ret
 
-		ret["GFX/TEXTURES/NIGHT_TREES/REINER_TREE_1MOD3.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Trees - Reiner (night)" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BLUE_SLIME.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Blue Slime (negative)" }
-		ret["GFX/TEXTURES/BLACKDRAGON/W_S.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Black Dragon's Lair - S" }
-		ret["GFX/TEXTURES/GJ/GJTRANS.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Game Jolt: Portal" }
-		ret["GFX/TEXTURES/IHOUSE/TABLE SHORT.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Short Table" }
-		ret["GFX/TEXTURES/IHOUSE/WOODFLOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Wooden Floor" }
-		ret["GFX/TEXTURES/NRCAVES/F.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - NR Floor" }
-		ret["GFX/TEXTURES/DECORATION/CAMPFIRE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Objects - Campfire" }
-		ret["GFX/ALG/PRESENTS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: Presents" }
-		ret["GFX/ACTORS/HEROES/AZIELLA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Aziella - Walking East" }
-		ret["GFX/ACTORS/PEOPLE/ELVES/FLORA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Elves - Flora" }
-		ret["GFX/TEXTURES/SHANDADUNGEON/ARCH2NODOOR2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Shanda's Dungeon - Arch" }
-		ret["GFX/ACTORS/HEROES/IRRAVONIA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Walking East" }
-		ret["GFX/TEXTURES/DYRT/ROAD/RBSW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dyrt - Road - RBSW" }
-		ret["GFX/TEXTURES/GREENTILES/NE_BIGCORNER.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Green - NEBC" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/WHITEGUARDIAN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "BOSS: White Dragon" }
-		ret["GFX/TEXTURES/SCYNDIHOOKPOINTS/BASIC_GRAY.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Scyndi's Hook Spot" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/WHITEDRAGON.NEGATIVE.PNG"] = { ["Author"] = "Alicia", ["Name"] = "Boss: White Dragon (negative)" }
-		ret["GFX/ACTORS/PEOPLE/ARACHNITA/ARACHNITA THIEF.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Arachnita Thief" }
-		ret["GFX/TEXTURES/RAYAL CITY/MUURPLATEAU - SE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Wall Plateau - SE" }
-		ret["GFX/BOXPIC/AZIELLA/GENERAL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Portrait: Aziella" }
-		ret["GFX/TEXTURES/SCENARIO/MEMORY/FACE/AZIELLA.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Memory Tiles: Aziella" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/AUDREY.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Audrey (negative)" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/IRRAVONIA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Irravonia" }
-		ret["GFX/TEXTURES/ROAD/RBS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Road - RBS" }
-		ret["GFX/ALG/CLOSE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: Close" }
-		ret["GFX/TEXTURES/LIYELLOW/ARCH2DOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - Door" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/REBECCA.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Rebecca (negative)" }
-		ret["GFX/TEXTURES/REDDRAGONPUZZLE/TAB_BLAUW.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Red Dragon's Lair - Puzzle - Blue Tablet" }
-		ret["GFX/TEXTURES/GAGOLTON/KANTEELE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Gagolton - Kanteel E" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/P_GHOST_C.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Packed Ghost (Cyan) (negative)" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BLACKIE.NEGATIVE.PNG"] = { ["Author"] = "Roana", ["Name"] = "Foe: Blackie (negative)" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/PURPLE_SLIME.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Purple Slime" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/YASATHAR.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Fallen" }
-		ret["GFX/EASTER EGGS/BIRTHDAY SCYNDI.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Easter Egg: Birthday Scyndi" }
-		ret["GFX/ACTORS/HEROES/ERIC.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric - Walking North" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/WHITE_SLIME.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: White Slime" }
-		ret["GFX/SCENARIO/ONYXBANG.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Scenario Graphics: Onyx Bang" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/IRRAVONIA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Attacking" }
-		ret["GFX/TEXTURES/EXAMRUINS/WESTWALL2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - West Wall" }
-		ret["GFX/ACTORS/PEOPLE/FAIRIES/TEPHONDAR_BACKSIDE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Fairies - Tephondar (back)" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/BRENDOR.IDLE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - IDLE" }
-		ret["GFX/TEXTURES/ALPHACAVES/N.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - ACN" }
-		ret["GFX/ACTORS/HEROES/YASATHAR.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Wealking East" }
+		ret["GFX/BOXPIC/KATHA/GENERAL.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Portraits: Katha" }
+		ret["GFX/TEXTURES/CAVES/ALPHA/NW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - ANW" }
+		ret["GFX/TEXTURES/DISCOFLR"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Disco Floor" }
+		ret["GFX/TEXTURES/PRISON/WALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Zoraman Prison - Wall" }
 		ret["GFX/TEXTURES/ABYSS/PLASMA_SHORT.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Abyss - Plasma" }
-		ret["GFX/TEXTURES/NIGHT_ROAD/R.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night Road - R" }
-		ret["GFX/TEXTURES/DARKSTORAGE/ALDARUS_WE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Aldarus) - WE" }
-		ret["GFX/TEXTURES/DYRT/DZGJYMZA/PILLAR2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dzgjymza's keep - Pillar 2" }
-		ret["GFX/TEXTURES/DYRT/INHOUSE/MAIN_BLC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Umerington - In house - Main BLC" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/SEALED/ORCOVERLORD.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Sealed Boss: Orc Overlord" }
-		ret["GFX/TEXTURES/AZQUAKUNDA PRISON/WALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Azquakunda Prison - Wall" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/SCYNDI.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Attacking" }
-		ret["GFX/COMBAT/SPELLANI/SMALLBOMB.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "SpellAni - Small Bomb" }
-		ret["GFX/TEXTURES/DIGITOPIA/PRINTPLAAT.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Digitopia - Background" }
-		ret["GFX/ACTORS/HEROES/DERNOR.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Dernor - Walking West" }
-		ret["GFX/ACTORS/PEOPLE/ELVES/SCYNDI_PYAMA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Pajamas" }
-		ret["GFX/TEXTURES/DYRT/TREES/SPAR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Trees - Spruce" }
-		ret["GFX/TEXTURES/REDTEMPLE/WS_NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Temple - WSNE" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/KIRANA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Kirana - Attacking" }
-		ret["GFX/TEXTURES/ABYSS/PLATFORM.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Abyss - Platform" }
-		ret["GFX/ACTORS/HEROES/AZIELLA.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Aziella - Walking South" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_DARKNESS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Darkness)" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/FIREGHOST.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foes: Fire Ghost" }
-		ret["GFX/TEXTURES/LIYELLOW/SOUTHWALL2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - South Wall" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSS_KIRANA.NEGATIVE.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Boss: Kirana (Abyss) (negative)" }
-		ret["GFX/TEXTURES/MOERAS/E.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Swamp - E" }
-		ret["GFX/ACTORS/HEROES/REBECCA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Rebecca - Walking East" }
-		ret["GFX/ACTORS/HEROES/YOUNGIRRAVONIA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Walking East" }
-		ret["GFX/TEXTURES/EXAMRUINS/BACKWALL3_RV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - Backwall 3 - RV" }
-		ret["GFX/TEXTURES/MARKTKRAAMPJES/MARKET_ROSETTA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Market Stand - Rosetta" }
-		ret["GFX/ACTORS/PEOPLE/VILLAGE/BOUWVAKKER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Cameo - Construction Worker" }
-		ret["GFX/ACTORS/HEROES/BRENDOR.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - Walking North" }
-		ret["GFX/ACTORS/HEROES/BRENDOR.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - Walking South" }
-		ret["GFX/ACTORS/PEOPLE/ONYX/JERACKO.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: The Order of Onyx - Jeracko" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BLUEFLOWER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Blue Flower" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/ERIC.ATTACK.JPBF"] = { ["Author"] = "Man of Steel & Jeroen P. Broks", ["Name"] = "Heroes: Eric - Attacking" }
-		ret["GFX/TEXTURES/DYRT/ROAD/RBS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Road - RBS" }
-		ret["GFX/TEXTURES/PHANTASAR/RAILS/NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Railroad - North-East" }
-		ret["GFX/TEXTURES/REDDRAGONPUZZLE/TAB_ROOD.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Red Dragon's Lair - Puzzle - Red Tablet" }
-		ret["GFX/COMBAT/SPELLANI/EXPLOSION.JPBF"] = { ["Author"] = "Unknown Artist", ["Name"] = "SpellAni: Explosion" }
-		ret["GFX/TEXTURES/GEO"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Unused crap" }
-		ret["GFX/TEXTURES/PURPLEFOREST/SPAR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Purple Forest - Spruch" }
-		ret["GFX/COMBAT/FIGHTERS/HERO/SCYNDI.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Fallen" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/FRUNDARMON.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Frundarmon" }
-		ret["GFX/TEXTURES/PRISON/ALPHA SKELETON.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Prison - Skeleton" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/DARK_GHOST.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Dark Ghost" }
-		ret["GFX/PICKUPS/BLACKORB.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Treasure: Black Orb" }
-		ret["GFX/TEXTURES/MUSIC/RECORD.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Hall of Music - Record" }
-		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_FIRE.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Fire)" }
-		ret["GFX/TEXTURES/RAYAL CITY/PLATEAU.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Plateau" }
+		ret["GFX/TEXTURES/ELFEMPEROR/THRONE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Elfish Imperial Castle - Throne" }
+		ret["GFX/TEXTURES/GJ/GJTRANS.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Game Jolt: Portal" }
+		ret["GFX/TEXTURES/OBJECTS/TOORTS/BRANDEND.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Objects - Torch (lit)" }
+		ret["GFX/TEXTURES/SKY/CLOUD.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Sky - Cloud" }
 		ret["GFX/TEXTURES/SUGAR/LOLLIPOP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Sugarland - Lollipop" }
+		ret["GFX/TEXTURES/GEO"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Unused crap" }
+		ret["GFX/TEXTURES/NIGHT_RAYAL PALACE/WALL_RV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace at night - Wall - RV" }
+		ret["GFX/TEXTURES/IHOUSE/TABLE2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In house - Table 2" }
+		ret["GFX/TEXTURES/SCHIETSCHIJF/HIT.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Target: Hit" }
+		ret["GFX/TEXTURES/LIYELLOW/SW_BIGCORNER2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - SW - Big Corner 2" }
+		ret["GFX/ACTORS/HEROES/BRENDOR.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - Walking South" }
+		ret["GFX/COMBAT/SPELLANI/GLITTER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Glitter" }
+		ret["GFX/TEXTURES/DARKSTORAGE/MAIN_WW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures:Dark Storage - WW" }
+		ret["GFX/ACTORS/HEROES/MERYA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Merya - Walking East" }
+		ret["GFX/ACTORS/HEROES/BRENDOR.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - Walking West" }
+		ret["GFX/TEXTURES/DARKSTORAGE/KIRANA_WE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Kirana) - WE" }
+		ret["GFX/TEXTURES/DYRT/ROAD/RBN.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Road - RBN" }
+		ret["GFX/TEXTURES/SHADOW/NW - S.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Shadow - NWS" }
+		ret["GFX/ACTORS/HEROES/SCYNDI.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Walking North" }
+		ret["GFX/ACTORS/PEOPLE/BEFINDOS/STATUE_MALABIA.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Statues: Malabia" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/FIREGHOUL.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Fire Ghoul" }
 		ret["GFX/COMBAT/FIGHTERS/HERO/MERYA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel & Jeroen P. Broks", ["Name"] = "Heroes: Merya - Attacking" }
-		ret["GFX/TEXTURES/CAVES/ALPHA/STALAGMIET.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - A - Stalagmite" }
-		ret["GFX/TEXTURES/NACHT_TILES/NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night - Tiles - NE" }
-		ret["GFX/TEXTURES/RAYAL PALACE/CHECKEREDTILES.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace - Checkered Floor Tiles" }
-		ret["GFX/COMBAT/SPELLANI/SPARK.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Spark" }
-		ret["GFX/TEXTURES/GAGOLTON/KANTEELNE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Gagolton - Kanteel - NE" }
-		ret["GFX/TEXTURES/REDDRAGON/ARCH/IN_NW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Dragon's Lair - Arch - INNW" }
-		ret["GFX/ACTORS/HEROES/REBECCA.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Rebecca - Walking West" }
+		ret["GFX/COMBAT/UI/GAUGEPOINTHERO.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "User Interface: Combat Gauge - Heroes" }
+		ret["GFX/TEXTURES/SHANDADUNGEON/THEYOUDONTTHINKYOURMONITORISBROKENGREENBACKWALL3_RV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Queen Shanda's Dungeon - Back Wall 3 - RV" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/DEMONAIR.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: DemonAir (negative)" }
+		ret["GFX/TEXTURES/LICYAN/FLOOR2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Cyan Dungeon - Floor" }
+		ret["GFX/TEXTURES/DYRT/INHOUSE/CHAIR - BACK.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Chair (back)" }
+		ret["GFX/TEXTURES/DECORATION/LONG GRASS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Long Grass" }
 		ret["GFX/COMBAT/FIGHTERS/HERO/SHANDA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Queen Shanda - Attacking" }
-		ret["GFX/TEXTURES/BLACK PRISON/PRISONBARS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Black Prison - Bars" }
-		ret["GFX/ACTORS/PEOPLE/BEFINDOS/FEMALE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Befindos - Female" }
-		ret["GFX/TEXTURES/EXAMRUINS/ARCH2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - Arch" }
-		ret["GFX/ALG/DYRT_LOGO.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: The Secrets of Dyrt" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/JERACKO.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Boss: Jeracko" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/IRRAVONIA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Attacking" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/IMP.PNG"] = { ["Author"] = "Lill-Beate Nymoen", ["Name"] = "Foe: Imp" }
+		ret["GFX/TEXTURES/ALPHACAVES/F_SHORE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - ACF Shore" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/ERIC.ATTACK.JPBF"] = { ["Author"] = "Man of Steel & Jeroen P. Broks", ["Name"] = "Heroes: Eric - Attacking" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/SCYNDI.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Attacking" }
+		ret["GFX/TEXTURES/NIGHT_ROAD/CLIFFSIDE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night - Road - Cliffside" }
+		ret["GFX/COMBAT/SPELLANI/FLAME.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Flame" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/DZGJYMZA2.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Boss: Lord Dzgjymza (God) (negative)" }
+		ret["GFX/TEXTURES/SHANDADUNGEON/FLOORYDYMIBZGREEN.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Shanda's Dungeon - Floor" }
+		ret["GFX/TEXTURES/WHITEDRAGON/N.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: White Dragon's Lair - N" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/YASATHAR.CAST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Casting" }
+		ret["GFX/RENC/SWORDS_GAUGE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "R-ENC: Swords-Gauge" }
+		ret["GFX/TEXTURES/REDDRAGON/ARCH/N.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Dragon's Lair - Arch (N)" }
+		ret["GFX/TEXTURES/LIYELLOW/NW_SMALLCORNER2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - NWSC2" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/MUMMY.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Mummy" }
+		ret["GFX/TEXTURES/BLACKDRAGON/C_NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Black Dragon's Lair - CNE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/BIGTIGER.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Big Tiger (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/SEALED/GIGALICH.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Sealed Boss: GigaLich (negative)" }
+		ret["GFX/ACTORS/HEROES/ERIC.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric - Walking South" }
+		ret["GFX/TEXTURES/CAVES/ALPHA/E_SOLID.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - ES" }
+		ret["GFX/TEXTURES/DYRT/DZGJYMZA/PILLAR2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dzgjymza's keep - Pillar 2" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/DARKSERVANT.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Foe: Dark Servant (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SUPERPINK.NEGATIVE.PNG"] = { ["Author"] = "Roana", ["Name"] = "Boss: Super Pink (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/SEALED/MOUNTAINEMPEROR.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Sealed Boss: Mountain Emperor (negative)" }
+		ret["GFX/TEXTURES/SUGAR/SUIKERSPIN.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Sugar World - Suikerspin" }
+		ret["GFX/ACTORS/HEROES/ERIC.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric - Walking East" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/GUARDDOG.PNG"] = { ["Author"] = "Kelly", ["Name"] = "Foe: Guard Dog" }
+		ret["GFX/SAVESPOT/TRAVEL.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Treasure: Traveler's Emblem" }
+		ret["GFX/TEXTURES/PHANTASAR/RAILS/SE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Railway - South-East" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/WHITEGUARDIAN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: White Guardian" }
+		ret["GFX/COMBAT/SPELLANI/EXPLOSION.JPBF"] = { ["Author"] = "Unknown Artist", ["Name"] = "SpellAni: Explosion" }
+		ret["GFX/TEXTURES/STUFF/SIGN_WAND.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Sings: Wand" }
+		ret["GFX/TEXTURES/RAYAL CITY/LEEGS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - 'Leeg' S" }
+		ret["GFX/TEXTURES/DARKSTORAGE/RONDOMO_WW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Rondomo) - WW" }
+		ret["GFX/COMBAT/STATUSCHANGES/SLEEP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Status Changes: Sleep" }
+		ret["GFX/TEXTURES/HALL OF HEROES/N.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Hall of Heroes - N" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/SHANDA.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Queen Shanda - Fallen" }
+		ret["GFX/TEXTURES/DARKSTORAGE/ALDARUS_WSW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Aldarus) - WSW" }
+		ret["GFX/ACTORS/HEROES/DERNOR.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Dernor - Walking South" }
+		ret["GFX/TEXTURES/TREES/STRUIK.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Trees: Bush" }
+		ret["GFX/TEXTURES/RAYAL CITY/LEEG HOEK NW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Leeg Hoek - NW" }
+		ret["GFX/TEXTURES/RAYAL CITY/PLATEAU - W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Plateau - W" }
+		ret["GFX/TEXTURES/INDEPENDENCE/HUIS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Independence - House" }
+		ret["GFX/TEXTURES/GREENDRAGON/W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Green Dragon's Lair - West" }
+		ret["GFX/TEXTURES/NIGHT_TREES/REINER_TREE_1MOD3.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Trees - Reiner (night)" }
+		ret["GFX/COMBAT/SPELLANI/SHURIKEN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "SpellAni: Shuriken" }
+		ret["GFX/COMBAT/UI/CURSOR_FALSE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "User Interface: Cursor - False" }
+		ret["GFX/MENUICONS/STONEMASTER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icons: Stone Master" }
+		ret["GFX/PUZZLE/BALLETJEBALLETJE/SKULL.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Mini-Game: Balletje-Balletje: Skull" }
+		ret["GFX/TEXTURES/GREENTILES/BACKWALL3.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Green - Back Wall" }
+		ret["GFX/TEXTURES/NRCAVES/F_SHORE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - F Shore" }
+		ret["GFX/ACTORS/PEOPLE/ARACHNITA/ARACHNITA THIEF.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Arachnita Thief" }
+		ret["GFX/TEXTURES/BLACK PRISON/WR_W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Black Prison - WR_W" }
+		ret["GFX/ACTORS/HEROES/SCYNDI.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Walking East" }
+		ret["GFX/BOXPIC/SCYNDI/GENERAL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Portrait: Scyndi" }
+		ret["GFX/COMBAT/SPELLANI/EXPLOSION.PNG"] = { ["Author"] = "Unknown Public Domain artist", ["Name"] = "SpellAni: Explosion" }
+		ret["GFX/TEXTURES/POND/PBE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Pond (PBE)" }
+		ret["GFX/TEXTURES/WHITEDRAGON/S.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: White Dragon's Lair - South" }
+		ret["GFX/CHAPTER/1.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Chapter #1" }
+		ret["GFX/TEXTURES/RAYAL PALACE/PILLAR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace - Pillar" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_WIND.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Wind) (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/CYBERASTRILOPUP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Cyber Astrilopup" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/IRRAVONIA.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Fallen" }
+		ret["GFX/TEXTURES/REDDRAGONPUZZLE/TAB_BLAUW.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Red Dragon's Lair - Puzzle - Blue Tablet" }
+		ret["GFX/ACTORS/HEROES/REBECCA.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Rebecca - Walking South" }
+		ret["GFX/COMBAT/SPELLANI/ICE_CRYSTAL.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Ice Cyrstal" }
+		ret["GFX/TEXTURES/PHANTASAR/INHUIS/STOEL.ACHTERKANT.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In-House - ANother chair" }
+		ret["GFX/TEXTURES/RAYAL CITY/LEEGE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Leeg E" }
+		ret["GFX/ACTORS/HEROES/DERNOR.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Dernor - Walking North" }
+		ret["GFX/TEXTURES/IHOUSE/WOODBRC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Wood - BRC" }
+		ret["GFX/TEXTURES/REDDRAGON/IN_SW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Dragon's Lair - INSW" }
+		ret["GFX/TEXTURES/WATER/WATER.PNG"] = { ["Author"] = "GR-Sites", ["Name"] = "Textures: Water" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/KIRANA.IDLE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Kirana - IDLE" }
+		ret["GFX/ACTORS/HEROES/IRRAVONIA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Walking East" }
+		ret["GFX/TEXTURES/NIGHT_RAYAL PALACE/WALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace At Night - Wall" }
+		ret["GFX/TEXTURES/NIGHT_RAYAL PALACE/WALLV_LV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace at Night - Wall VLV" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SMILEY.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Smiley (negative)" }
+		ret["GFX/ACTORS/HEROES/DERNOR.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Dernor - Walking East" }
+		ret["GFX/TEXTURES/HUMVILLAGE/VILLAGEWALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Human Village - Village Wall" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/MERYA.CAST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Merya - Casting" }
+		ret["GFX/SKILL/1.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Difficulty: Easy" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSS_KIRANA.NEGATIVE.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Boss: Kirana (Abyss) (negative)" }
+		ret["GFX/TEXTURES/DYRT/INHOUSE/WALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures:In House - Wall" }
+		ret["GFX/TEXTURES/DARKSTORAGE/RONDOMO_WSW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Rondomo) - WSW" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/SHROOM.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Shroom (negative)" }
+		ret["GFX/ACTORS/HEROES/YASATHAR.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Walking North" }
+		ret["GFX/CHAPTER/5.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Chapter #5" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/REDGUARDIAN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Red Dragon" }
+		ret["GFX/TEXTURES/PURPLEFOREST/LONG GRASS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Purple Forest - Long Grass" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_LIGHT.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Light) (negative)" }
+		ret["GFX/TEXTURES/SHANDA/WALL.PNG"] = { ["Author"] = "GR-Sites", ["Name"] = "Textures: Shanda's Castle - Wall" }
+		ret["GFX/TEXTURES/DARKSTORAGE/MAIN_WE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage - WE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SCHARUM.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Boss: Scharum (negative)" }
+		ret["GFX/MENUICONS/ITEMS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icons: Inventory" }
+		ret["GFX/TEXTURES/DARKSTORAGE/JERACKO1.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Jeracko) 1" }
+		ret["GFX/TEXTURES/EXAMRUINS/FAKKELGEVALDING.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - Fakkel Geval Ding" }
+		ret["GFX/TEXTURES/ALPHACAVES/F_SHORE_W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - AFW - Shore" }
+		ret["GFX/TEXTURES/DARKSTORAGE/ALDARUS_BLC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Aldarus) - BLC" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/SEALED/SHADOWROGUE.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Sealed Boss: Shadow Rogue (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/TURBO CANDY.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Turbo Candy" }
+		ret["GFX/COMBAT/SPELLANI/BLUE MOON.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Blue Moon" }
+		ret["GFX/TEXTURES/ASTRILOPUPS/FACILITY/DOORPOST_WEST.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Science Facility - Door Post - West" }
+		ret["GFX/TEXTURES/LIYELLOW/HOLETEXTURE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Hole - Yellow" }
+		ret["GFX/TEXTURES/REDDRAGON/W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Dragon's Lair - West" }
+		ret["GFX/ACTORS/PEOPLE/DARKSERVANT/DARKSERVANT_BACKSIDE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Dark Servant - Back" }
+		ret["GFX/TEXTURES/GREENTILES/WESTWALL2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Green - West Wall" }
+		ret["GFX/TEXTURES/BOTANICA/LEAF.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Botanica - Leaf" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/LICHKING.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Lich King (negative)" }
+		ret["GFX/BOXPIC/RONDOMO/GENERAL.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Portraits: Rondomo" }
+		ret["GFX/TEXTURES/ASTRILOPUPS/FACILITY/WEST.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Science Facility - West" }
+		ret["GFX/TEXTURES/ALPHACAVES/E.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - AE" }
+		ret["GFX/TEXTURES/ROAD/DEAD GRASS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dead Grass" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/SCYNDI.IDLE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - IDLE" }
+		ret["GFX/TEXTURES/MOERAS/SEO.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Swamp - SEO" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/KIDS/BEFINDO_BOY.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Undead Kid: Befindo boy" }
+		ret["GFX/TEXTURES/DYRT/INHOUSE/BED.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Umerington - In House - Bed" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/HAG.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Hag" }
+		ret["GFX/TEXTURES/SUGAR/ENGELSE DROP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Sugarland - Engelse Drop" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SHADOWSWEEPER.PNG"] = { ["Author"] = "Lill-Beate Nymoen", ["Name"] = "Boss: Shadow Sweeper" }
+		ret["GFX/TEXTURES/DARKSTORAGE/JERACKO_WSW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Jeracko) - WSW" }
+		ret["GFX/TEXTURES/RUBBLE.PNG"] = { ["Author"] = "Unknown Public Domain artist", ["Name"] = "Textures: Rubble" }
+		ret["GFX/TEXTURES/ELFEMPEROR/WINDOW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Elfish Imperial Castle - Window" }
+		ret["GFX/TEXTURES/RAYAL CITY/HEK - VERTICAAL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Hek - Verticaal" }
+		ret["GFX/TEXTURES/TEXT/ENEMIESOFDYRTBEWARE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Text: Enemies of Dyrt beware! (In Phantasar script + language of Phantasar)" }
+		ret["GFX/CHAPTER/4.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Chapter #4" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/KIDS/HUMAN_BOY.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Undead Kid: Human boy" }
+		ret["GFX/TEXTURES/SCENARIO/MEMORY/FACE/DERNOR.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Memory Tiles: Dernor" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/PINKY.NEGATIVE.PNG"] = { ["Author"] = "Roana", ["Name"] = "Foe: Pinky (negative)" }
+		ret["GFX/TEXTURES/RAYAL PALACE/WALLV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace - Wall(V)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/MOUNTAINKING.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Mountain King (negative)" }
+		ret["GFX/ACTORS/HEROES/YASATHAR.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Wealking East" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSSGUARDIAN.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Abyss Guardian (negative)" }
+		ret["GFX/TEXTURES/STAIRS/UP64.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Stairs - 64 Pixels" }
+		ret["GFX/TEXTURES/FRUNDARMON/MWALLE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Frundarmon's mansion - Wall E" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/DZGJYMZA2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Boss: Lord Dzgjymza (god)" }
+		ret["GFX/ACTORS/HEROES/ERIC.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric - Walking West" }
+		ret["GFX/TEXTURES/ABYSS/YELLOW.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Abyss - Yellow" }
+		ret["GFX/TEXTURES/RAYAL CITY/PLATEAU - E.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Plateau - East" }
+		ret["GFX/BOXPIC/FEENALARIA/GENERAL.PNG"] = { ["Author"] = "Lill-Beate Nymoen", ["Name"] = "Portraits: Elder Feenalaria" }
+		ret["GFX/TEXTURES/HUMVILLAGE/VILLAGEWALL2.1.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Human Village - Village Wall 2.1" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/IMP.NEGATIVE.PNG"] = { ["Author"] = "Lill-Beate Nymoen", ["Name"] = "Foe: Imp (Negative)" }
+		ret["GFX/TEXTURES/MORKER/TREE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Moerker - Tree" }
+		ret["GFX/ACTORS/HEROES/IRRAVONIA.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Walking North" }
+		ret["GFX/TEXTURES/MERMAIDS/CARRIAGE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Mermaid's Carriage" }
+		ret["GFX/TEXTURES/WHITEDRAGON/E.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: White Dragon's Lair - East" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/SALAMANDER.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Salamander (negative)" }
+		ret["GFX/ACTORS/HEROES/YOUNGIRRAVONIA.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Walking West" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/ORCMAGE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Orc Mage" }
+		ret["GFX/TEXTURES/PRISON/BENCH.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Prison - Bench" }
+		ret["GFX/TEXTURES/PRISON/WALL_LV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Zoraman Prison - Wall - LV" }
+		ret["GFX/BOXPIC/KEIZER GEDRIO FULLA/GNERAL.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Portraits: Emperor Gedrio Fulla" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/UFO.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: UFO (negative)" }
+		ret["GFX/BOXPIC/JERACKO/GENERAL.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Portrait: Jeracko" }
+		ret["GFX/TEXTURES/OBSTACLES/LAB/LABCOAT (HANGER).PNG"] = { ["Author"] = "barnhearttowl", ["Name"] = "Textures: Science Facility - Lab coat" }
+		ret["GFX/ACTORS/PEOPLE/HUMANS/JEROEN.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Humans - Jeroen P. Broks" }
+		ret["GFX/TEXTURES/DOOR/GEVANGENISDEUR64X64.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Prison - Door" }
+		ret["GFX/TEXTURES/FRUNDARMON/MHEMELBEDBED.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Frundarmon's Mansion - Bed" }
+		ret["GFX/TEXTURES/TELEPORT/PAD/TELPAD.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Teleport: Teleport Pad" }
+		ret["GFX/COMBAT/SPELLANI/MAGICMISSILE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Magic Missile" }
+		ret["GFX/TEXTURES/STUFF/SIGN.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Signs: General" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/PURPLE_SLIME.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Purple Slime" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/MUMMY.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Mummy (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/CANDY.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Candy (negative)" }
+		ret["GFX/ACTORS/PEOPLE/BEFINDOS/MALE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Befindos - Male" }
+		ret["GFX/ACTORS/PEOPLE/ONYX/JERACKO.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: The Order of Onyx - Jeracko" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SHECKLOCK.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Sheck-Lock" }
+		ret["GFX/TEXTURES/CATVILLAGE/HOUSE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Felixium - House" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_WIND.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Wind)" }
+		ret["GFX/TEXTURES/RAYAL CITY/LEEG HOEK 2SE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Leeg Hoek - 2SE" }
+		ret["GFX/TEXTURES/LIYELLOW/FLOORYELLOW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - Floor Yellow" }
+		ret["GFX/ACTORS/HEROES/BRENDOR.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendor - Walking East" }
+		ret["GFX/TEXTURES/ALPHACAVES/F.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - Floor (A)" }
+		ret["GFX/TEXTURES/EXAMRUINS/NORTHWALL1.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - North Wall (1)" }
+		ret["GFX/TEXTURES/OBSTACLES/LAB/DESK.PNG"] = { ["Author"] = "GDJ", ["Name"] = "Textures: Science Facility - Desk" }
+		ret["GFX/TEXTURES/DARKSTORAGE/MAIN_BLC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage - BLC" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/TURBO CANDY.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Turbo Candy" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/KIRANA.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Kirana - Attacking" }
+		ret["GFX/TEXTURES/RAYAL CITY/MUURPLATEAU - SW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Wall Plateau - SW" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/AZIELLA.CAST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Aziella - Casting" }
+		ret["GFX/PERSACTION/SCYNDI.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Personal Action: Scyndi" }
+		ret["GFX/TEXTURES/BLACK PRISON/FLOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Black Prison - Floor" }
+		ret["GFX/TEXTURES/DARKSTORAGE/KIRANA_WS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Kirana) - WS" }
+		ret["GFX/TEXTURES/HUMVILLAGE/BRICK FENCE3.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Human Village - Brick Fence #2" }
+		ret["GFX/TEXTURES/MARKTKRAAMPJES/MARKET_FAIRYMALE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Market Stands: Male Fairy" }
+		ret["GFX/TEXTURES/NRCAVES/NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - NE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/COBRA.NEGATIVE.PNG"] = { ["Author"] = "Kelly", ["Name"] = "Foe: Cobra (Negative)" }
+		ret["GFX/TEXTURES/LICYAN/EASTWALL2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Cyan Dungveon - East Wall 2" }
+		ret["GFX/BOXPIC/WENIARIA/GENERAL.PNG"] = { ["Author"] = "Linvala Kemellon", ["Name"] = "Portraits: Weniaria, the Goddess of Healing" }
+		ret["GFX/MAPEFFECTS/CIRCULARDARKNESS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Effects: Circular Darkness" }
+		ret["GFX/TEXTURES/FRUNDARMON/MVLOER.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Frundarmon's Mansion - Floor" }
+		ret["GFX/TEXTURES/NACHT_TILES/SW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night - SW" }
+		ret["GFX/TEXTURES/REDTEMPLE/WR_W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Temple - WR-W" }
+		ret["GFX/ACTORS/PEOPLE/MYTHOLOGY/CHARONBOAT.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Underworld - Charon's Boat" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/BIGSALAMANDER.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Big Salamander" }
+		ret["GFX/TEXTURES/REDDRAGON/IN_NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Dragon's Lair - IN_NE" }
+		ret["GFX/ALG/MENUBACK.PNG"] = { ["Author"] = "GR-Sites", ["Name"] = "General: Menu Background Texture" }
+		ret["GFX/MENUICONS/CONFIG.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icons: Configuration" }
+		ret["GFX/TEXTURES/OBSTACLES/CRATE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Objects: Crate" }
+		ret["GFX/ALG/PHANTASAR_PRODUCTIONS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: Phantasar Productions" }
+		ret["GFX/TEXTURES/IHOUSE/CHAIR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Chair (front)" }
+		ret["GFX/TEXTURES/PHANTASAR/INHUIS/TAFEL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Table" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/RED MONK MALE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Elves - Red Monk (Male)" }
+		ret["GFX/TEXTURES/DARKSTORAGE/JERACKO_FLOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Jeracko) - Floor" }
+		ret["GFX/TEXTURES/RAYAL PALACE/WALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace - Wall" }
+		ret["GFX/ACTORS/PEOPLE/ONYX/KIRANA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: The Order of Onyx - Kirana (unwinged)" }
+		ret["GFX/ACTORS/PEOPLE/ONYX/RONDOMO.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: The Order Of Onyx - Rondomo" }
+		ret["GFX/TEXTURES/CAVES/ALPHA/STALAGMIET2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - Stalagmite - A2" }
+		ret["GFX/TEXTURES/ALPHACAVES/NW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - NW" }
+		ret["GFX/TEXTURES/SCENARIO/MEMORY/FACE/ERIC.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Memory Tiles: Eric" }
+		ret["GFX/BOXPIC/YASATHAR/GENERAL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Portraits: Eric (Y)" }
+		ret["GFX/TEXTURES/AZQUAKUNDA PRISON/BENCHWEST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Prison - Bench West" }
+		ret["GFX/ACTORS/HEROES/YOUNGIRRAVONIA.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Walking South" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/CGABRO_MCW.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: CGA Brother (Magenta Cyan White)" }
+		ret["GFX/TEXTURES/STANDBEELDEN/THRUR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Statues: Thrur" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BLACKIE.NEGATIVE.PNG"] = { ["Author"] = "Roana", ["Name"] = "Foe: Blackie (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SMILEY.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Smiley" }
+		ret["GFX/TEXTURES/DZGJYMZA_SOKKELS/ALDARUS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Statue: Aldarus" }
+		ret["GFX/ACTORS/HEROES/SCYNDI.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Walking West" }
+		ret["GFX/TEXTURES/IHOUSE/CARPET.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In-House - Carpet" }
+		ret["GFX/TEXTURES/PRISON/ALPHA SKELETON.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Prison - Skeleton" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/AMBER_SLIME.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Amber Slime" }
+		ret["GFX/COMBAT/UI/GAUGEICONS/MERYA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Combat Gauge Icon: Merya" }
+		ret["GFX/TEXTURES/LIYELLOW/SW_SCHUIN.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Yellow Dungeon - SWS" }
+		ret["GFX/TEXTURES/STAIRS/UP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Stairs - Up - 32 Pixels" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/GOBLIN.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Foe: Goblin (negative)" }
+		ret["GFX/PERSACTION/ERIC.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Personal Action: Eric" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/DARK_GHOST.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Dark Ghost" }
+		ret["GFX/TEXTURES/BLACK PRISON/WR_N.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Black Prison - WRN" }
+		ret["GFX/ACTORS/PEOPLE/VILLAGE/INDIAAN.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Cameo - Native American" }
+		ret["GFX/CHAPTER/3.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Chapter #3" }
+		ret["GFX/PARTYBAR/VIT.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Party Bar: Vitality" }
+		ret["GFX/TEXTURES/DARKSTORAGE/MAIN2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage - 2" }
+		ret["GFX/TEXTURES/NIGHT_ROAD/GRASS2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night Road - Grass 2" }
+		ret["GFX/TEXTURES/ROAD/RBN.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Road - RBN" }
+		ret["GFX/TEXTURES/TELEPORTER PAD/RECOVER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Teleporter Pad - Recover" }
+		ret["GFX/TEXTURES/IHOUSE/SOUTHWOOD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - South Wood" }
+		ret["GFX/AZIELLABOLT/S.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Aziella's Bolt: South" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/TRIXIA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Elves - Trixia" }
+		ret["GFX/COMBAT/STATUSCHANGES/EXHAUSTED.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Status Changes: Exhaustion" }
+		ret["GFX/TEXTURES/RAYAL CITY/PLATEAU HOEK W.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Plateau - Corner - W" }
+		ret["GFX/TEXTURES/DARKSTORAGE/JERACKO_WS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Jeracko) - WS" }
+		ret["GFX/TEXTURES/SWITCHES"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Switch" }
+		ret["GFX/TEXTURES/AZQUAKUNDA PRISON/FLOORYELLOW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Azquakunda Prison - Yellow Floor" }
+		ret["GFX/TEXTURES/ASTRILOPUPS/FACILITY/FLOOR.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Science Facility - Floor" }
+		ret["GFX/TEXTURES/LIYELLOW/BACKWALL2_RV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Texture: Yellow Dungeon - Back Wall 2 - RV" }
+		ret["GFX/ALG/DOWN.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "General: Down" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BAT.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Bat" }
+		ret["GFX/SCENARIO/ONYXBANG.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Scenario Graphics: Onyx Bang" }
+		ret["GFX/ACTORS/PEOPLE/HUMANS/SHECKLOCK_WEST.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Humans - Sheck-Lock (West)" }
+		ret["GFX/TEXTURES/DARKSTORAGE/ALDARUS_WW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Dark Storage (Aldarus) - WW" }
+		ret["GFX/TEXTURES/KITCHEN/CAULDRON.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Objects - Cauldron" }
+		ret["GFX/COMBAT/SPELLANI/SMALLBOMB.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "SpellAni - Small Bomb" }
+		ret["GFX/TEXTURES/GAGOLTON/KANTEELNE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Gagolton - Kanteel - NE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SHECKLOCK.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Sheck-Lock (negative)" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/GANDRAFALDAR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Elves - Gandra Faldar" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/DERNOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Dernor" }
+		ret["GFX/TEXTURES/PRISON/WALL_RV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Zoraman Prison - Wall - RV" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/TD_THIEF.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Foe: Thief (negative)" }
 		ret["GFX/TEXTURES/ALPHACAVES/STALAGMIET2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - A - Stalagmite 2" }
+		ret["GFX/TEXTURES/DARKSTORAGE/KIRANA_FLOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Kirana) - Floor" }
+		ret["GFX/TEXTURES/ROAD/GRASS2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Grass" }
+		ret["GFX/ACTORS/HEROES/YASATHAR.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Walking South" }
+		ret["GFX/ACTORS/PEOPLE/PHELYNXES/KATHA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Phelynxes - Katha" }
+		ret["GFX/AZIELLABOLT/W.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Aziella's Bolt: West" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_EARTH.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Earth) (negative)" }
+		ret["GFX/ACTORS/PEOPLE/VILLAGE/BOUWVAKKER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Cameo - Construction Worker" }
+		ret["GFX/BOXPIC/TIGERION/GENERAL.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Portraits: Tigerion" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/IRRAVONIA.CAST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Casting" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/BRENDOR.CAST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Foe: Brendor - Casting" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/PURPLEFLOWER.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Purple Flower (negative)" }
+		ret["GFX/TEXTURES/AZQUAKUNDA PRISON/CAGE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Azquakunda Prison - Cage" }
+		ret["GFX/ACTORS/HEROES/IRRAVONIA.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Walking West" }
+		ret["GFX/TEXTURES/DYRT/INHOUSE/MAIN_WS(2).PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Umerington - In House - MAINWS2" }
+		ret["GFX/TEXTURES/IHOUSE/WOODFLOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Wooden Floor" }
+		ret["GFX/TEXTURES/ABYSS/PLATFORM.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Abyss - Platform" }
+		ret["GFX/MENUICONS/EXIT.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icons: Quit" }
+		ret["GFX/PICKUPS/BLACKORB.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Treasure: Black Orb" }
+		ret["GFX/TEXTURES/RAYAL CITY/TRAP.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Rayal City - Stairs" }
+		ret["GFX/TEXTURES/REDSEAL/REDSEAL.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Red Seal" }
+		ret["GFX/ACTORS/HEROES/REBECCA.EAST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Rebecca - Walking East" }
+		ret["GFX/TEXTURES/SHANDADUNGEON/ARCH2DOOR2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Shanda's Dungeon - Door" }
+		ret["GFX/TEXTURES/OBJECTS/KAARS.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Objects - Candle" }
+		ret["GFX/TEXTURES/MOERAS/SWO.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Swamp - SWO" }
+		ret["GFX/MENUICONS/SWITCH.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icons: Switch Party Members" }
+		ret["GFX/TEXTURES/SCENARIO/MEMORY/FACE/IRRAVONIA.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Memory Tiles: Irravonia" }
+		ret["GFX/TEXTURES/HUMVILLAGE/BRICK FENCE4.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Human Village - Brick Fence 4" }
+		ret["GFX/TEXTURES/NIGHT_RAYAL PALACE/CHECKEREDTILES.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace By Night - Checkered Tiles" }
+		ret["GFX/AZIELLABOLT/E.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Aziella's Bolt: East" }
+		ret["GFX/TEXTURES/OBSTACLES/STATUEWENIARIA.PNG"] = { ["Author"] = "Linvala Kemellon", ["Name"] = "Statues: Weniaria" }
+		ret["GFX/TEXTURES/GENWALLDECO/HOLEPALACEWALL.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Rayal Palace at night - Crack in the all (oracle)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/FRUNDARMON.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Frundarmon (negative)" }
+		ret["GFX/TEXTURES/ALPHACAVES/S.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves AS" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/CREEP.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Creep (negative)" }
+		ret["GFX/TEXTURES/RAYAL CITY/MUURPLATEAU - SE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Wall Plateau - SE" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/BRENDOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Brendor" }
+		ret["GFX/TEXTURES/NACHT_TILES/C.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night - C" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/KIDS/BEFINDO_BOY.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Undead Kid: Befindo Boy (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/ERIC.CAST.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric - Casting" }
+		ret["GFX/TEXTURES/EXAMRUINS/SE_BIGCORNER2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - SEBC2" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/MERYA.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Merya - Fallen" }
+		ret["GFX/ACTORS/PEOPLE/HUMANS/SHANDA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Humans - Queen Shanda" }
+		ret["GFX/ACTORS/HEROES/AZIELLA.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes - Aziella - Walking West" }
+		ret["GFX/ACTORS/HEROES/MERYA.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Merya - Walking North" }
+		ret["GFX/TEXTURES/PHANTASAR/MIJN/KARRETJE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Mines - Cart" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/SHADOWSWEEPER.NEGATIVE.PNG"] = { ["Author"] = "Lill-Beate Nymoen", ["Name"] = "Boss: Shadow Sweeper (negative)" }
+		ret["GFX/TEXTURES/REDTEMPLE/ARCH.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Temple - Arch" }
+		ret["GFX/ACTORS/PEOPLE/BEFINDOS/GUARD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Befindos - Guard" }
+		ret["GFX/TEXTURES/MARKTKRAAMPJES/MARKET_FAIRYFEMALE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Market Stand: Female Fairy" }
+		ret["GFX/TEXTURES/IHOUSE/BED.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Bed" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/RONDOMO.NEGATIVE.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Boss: Rondomo (negative)" }
+		ret["GFX/ACTORS/HEROES/AZIELLA.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Aziella - Walking North" }
+		ret["GFX/TEXTURES/DYRT/INHOUSE/MAIN_BLC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Umerington - In house - Main BLC" }
+		ret["GFX/TEXTURES/NACHT_TILES/NW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Night - NW" }
+		ret["GFX/TEXTURES/NIGHT_RAYAL PALACE/WALLV.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal Palace at Night - Wall V" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/HINDROASTRA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Elves - Hindro Astra" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/MUS_RAMMSTEIN.NEGATIVE.PNG"] = { ["Author"] = "Kelly", ["Name"] = "Foe: Rammstein (negative)" }
+		ret["GFX/COMBAT/SPELLANI/THERMOMETER.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Thermometer" }
+		ret["GFX/TEXTURES/PHANTASAR/INHUIS/HOUT.BLC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: In House - Wood - BLC" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/FLORA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Elves - Flora" }
+		ret["GFX/TEXTURES/DARKSTORAGE/KIRANA1.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Kirana) - 1" }
+		ret["GFX/TEXTURES/EXAMRUINS/SW_BIGCORNER2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Exams Ruins - SWBC2" }
+		ret["GFX/TEXTURES/ASTRILOPUPS/FACILITY/NORTH-WEST.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Science Facility - North-West" }
+		ret["GFX/TEXTURES/HUMVILLAGE/THADCHET ROOF.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Human Village - Roof" }
+		ret["GFX/COMBAT/UI/POINTFOE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "User Interface: Point Foe" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/REDGUARDIAN.NEGATIVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Boss: Red Guardian (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/REBECCA.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Rebecca - Fallen" }
+		ret["GFX/ACTORS/HEROES/SHANDA.SOUTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Shanda Placeholder" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/RAVEN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Raven" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/ALG_FEMALE1.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Elves - Female #1" }
+		ret["GFX/TEXTURES/DARKSTORAGE/ALDARUS_BRC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dark Storage (Aldarus) - BRC" }
+		ret["GFX/TEXTURES/PHANTASAR/RAILS/NE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Railroad - North-East" }
+		ret["GFX/TEXTURES/PHANTASAR/RAILS/SW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Railway - South-West" }
+		ret["GFX/TEXTURES/REDDRAGONPUZZLE/BLAUW.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Red Dragon's Lair - Puzzle - Bluw Blocks" }
+		ret["GFX/TEXTURES/NACHT/STARS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Sky - Stars" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_DARKNESS.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (negative)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/BULUPU_LIGHT.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Bulupu (Light)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/IJSBEER.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Polar Bear" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/P_GHOST_E.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Foe: Packed Ghost (Ember) (negative)" }
+		ret["GFX/ACTORS/HEROES/YASATHAR.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Eric (Y) - Walking West" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/BRENDOR.ATTACK.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Brendo - Attacking" }
+		ret["GFX/TEXTURES/DYRT/ROAD/RSSW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dyrt - Road - RSSW" }
+		ret["GFX/TEXTURES/MARKTKRAAMPJES/MARKET_BEFINDOMALE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Market Stand: Befindo Male" }
+		ret["GFX/COMBAT/UI/GAUGEICONS/ERIC.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Combat Gauge Icon: Eric" }
+		ret["GFX/TEXTURES/RAYAL CITY/LEEG HOEK2 SW.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Rayal City - Leeg - Hoek - 2" }
+		ret["GFX/TEXTURES/DYRT/ROAD/RSSE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Dyrt - Road - RSSE" }
+		ret["GFX/COMBAT/FIGHTERS/HERO/YOUNGIRRAVONIA.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Fallen" }
+		ret["GFX/BOXPIC/YOUNGIRRAVONIA/GENERAL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Portraits: Irravonia (kid)" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/MERYA.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Merya (negative)" }
+		ret["GFX/TEXTURES/AZQUAKUNDA PRISON/FLOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Azquakunda Prison - Floor" }
+		ret["GFX/TEXTURES/OBJECTS/GRAVE.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Objects - Grave" }
+		ret["GFX/ACTORS/PEOPLE/BEFINDOS/ORANYA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Befindos - The Oracle" }
+		ret["GFX/TEXTURES/GAGOLTON/TRAP.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Gagolton - Stairs" }
+		ret["GFX/TEXTURES/REDTEMPLE/ARCH WITH DOOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Red Temple - Arch + Door" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/REDDRAGON.PNG"] = { ["Author"] = "Alicia", ["Name"] = "Boss: Red Dragon" }
+		ret["GFX/TEXTURES/SCHIETSCHIJF/UNHIT.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Target - Unhit" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/BLACKDRAGON.NEGATIVE.PNG"] = { ["Author"] = "Alicia", ["Name"] = "Boss: Black Dragon (negative)" }
+		ret["GFX/COMBAT/SPELLANI/SPARK.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "SpellAni: Spark" }
+		ret["GFX/ACTORS/PEOPLE/ELVES/SCYNDI_PYAMA.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Scyndi - Pajamas" }
+		ret["GFX/ACTORS/PEOPLE/HUMANS/BANTHOSOR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Humans - Banthosor" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/SNOWMAN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Snow man" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/REG/TOAD.PNG"] = { ["Author"] = "Kelly", ["Name"] = "Foe: Toad" }
+		ret["GFX/TEXTURES/NRCAVES/S.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Caves - S" }
+		ret["GFX/ACTORS/PEOPLE/ANDROIDS/EXHURU.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "NPC: Androids - Experimental Human Replica Unit" }
+		ret["GFX/TEXTURES/DRAGON/GREENDRAGON.PNG"] = { ["Author"] = "Alicia", ["Name"] = "Textures: Dragon - Green Dragon" }
+		ret["GFX/TEXTURES/LICYAN/BACKWALL2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Cyan Dungeon - Back Wall 2" }
+		ret["GFX/ACTORS/HEROES/YOUNGIRRAVONIA.NORTH.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Walking North" }
+		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/SCYNDI.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Scyndi" }
+		ret["GFX/TEXTURES/LIBLUE/SOUTHWALL2.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Light Blue Dungeon - South Wall" }
+		ret["GFX/TEXTURES/WHITEDRAGON/FLOORICE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: White Dragon's Lair - Icy floor" }
 
 
 	return ret
