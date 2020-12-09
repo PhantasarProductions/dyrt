@@ -13,7 +13,11 @@ group GROUP_ArtGallery
 	readonly var Pijl_Op
 	readonly var Pijl_Neer
 	var hover 
+	var picked
+	var pickedpic	
 	int Scroll = 0
+	int pickedframe
+	int pickedframeskip
 	
 	void CONSTRUCTOR()
 		BUB_Draw        = self.Draw
@@ -26,15 +30,27 @@ group GROUP_ArtGallery
 		self.Pijl_Neer  = TImage.Obtain("DOWN")		
 		//Music.Stop();
 		int y = 0
-		for _,ent in spairs(self.Data)
+		for F,ent in spairs(self.Data)
 			y = y + 30
 			ent.Y=y
+			ent.File=F
 		end
 	end
 	
 	void Draw()
+		__white
 		self.Background.Tile(0,0,Screen.Width,Screen.Height)
 		self.hover = nil;
+		if self.pickedpic
+			self.pickedframeskip = (self.pickedframeskip + 1) % 8
+			if self.pickedframeskip==0
+				self.pickedframe++
+			end
+			if self.pickedframe>=self.pickedpic.Frames
+				self.pickedframe=0
+			end
+			self.pickedpic.Draw(Screen.Width-self.pickedpic.Width,(Screen.Height/2)-(self.pickedpic.Height/2),self.pickedframe)
+		end
 		for fil,dat in pairs(self.Data)
 			int y
 			int inspring=0
@@ -42,6 +58,9 @@ group GROUP_ArtGallery
 			if y>10 and y<Screen.Height-40
 				inspring=0
 				__white
+				if dat==self.picked
+					__ember
+				end
 				if Mouse.Y>=y and Mouse.Y<=y+29
 					self.hover=dat
 					inspring=15
@@ -49,6 +68,8 @@ group GROUP_ArtGallery
 				self.Font.Draw(dat.Name .. "(by "..dat.Author..")",10+inspring,y)
 			end
 		end
+		__white
+		Mouse.Show()
 	end
 
 	void Update()
@@ -58,6 +79,8 @@ group GROUP_ArtGallery
 			return
 		end
 		if Mouse.HitLeft and self.hover
+			self.picked = self.hover
+			self.pickedpic = TImage.Load(self.hover.File)
 		end
 	end
 
