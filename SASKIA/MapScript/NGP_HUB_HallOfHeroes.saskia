@@ -48,3 +48,8 @@
 	call MapText,"HANDLE"
 	call MapScript.JukeBox
 	end
+	
+:Gogh
+	call MapText,"GOGH"
+	call GoToFlow,"ARTGALLERY"
+	end

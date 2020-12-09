@@ -40,6 +40,8 @@
 #say "Map Script - None!"
 #use "script/use/anyway"
 #use "Script/Use/StartCombatMod"
+
+
 group MScript
 	
 	void CONSTRUCTOR()
@@ -81,6 +83,14 @@ group MScript
 		LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
 		LuaDoString("FLOW_JUKEBOX","GROUP_JukeBox.ReturnFlow='FIELD'")
 		GoToFlow("JUKEBOX")
+	end
+	
+	void NPC_GOGH()
+		if not StateExists("FLOW_ARTGALLERY")
+			CSay("Loading flow: ARTGALLERY")
+			LoadFlow("ARTGALLERY","Script/Flow/ArtGallery.nil")
+		end
+		MapScript.SASKIA("Gogh")
 	end
 	
 	void Draw()

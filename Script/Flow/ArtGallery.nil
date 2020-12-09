@@ -1,0 +1,64 @@
+#use "Script/Use/Anyway"
+#use "libs/tables"
+
+global var BUB_Draw
+global var BUB_Update
+
+
+group GROUP_ArtGallery
+
+	readonly var Data
+	readonly var Background
+	readonly var Font
+	readonly var Pijl_Op
+	readonly var Pijl_Neer
+	var hover 
+	int Scroll = 0
+	
+	void CONSTRUCTOR()
+		BUB_Draw        = self.Draw
+		BUB_Update      = self.Update
+		self.Data       = NIL.Use("Script/Data/General/ArtData.nil")
+		self.Background = TImage.Obtain("MENUBACK")
+		//self.NotesFont  = LoadImageFont(FONT_Blitz)
+		self.Font       = GetFont("BOXTEXT")
+		self.Pijl_Op    = TImage.Obtain("UP")
+		self.Pijl_Neer  = TImage.Obtain("DOWN")		
+		//Music.Stop();
+		int y = 0
+		for _,ent in spairs(self.Data)
+			y = y + 30
+			ent.Y=y
+		end
+	end
+	
+	void Draw()
+		self.Background.Tile(0,0,Screen.Width,Screen.Height)
+		self.hover = nil;
+		for fil,dat in pairs(self.Data)
+			int y
+			int inspring=0
+			y = dat.Y-self.Scroll			
+			if y>10 and y<Screen.Height-40
+				inspring=0
+				__white
+				if Mouse.Y>=y and Mouse.Y<=y+29
+					self.hover=dat
+					inspring=15
+				end
+				self.Font.Draw(dat.Name .. "(by "..dat.Author..")",10+inspring,y)
+			end
+		end
+	end
+
+	void Update()
+		Dev.ConCheck()
+		if Mouse.HitRight
+			GoToFlow("FIELD")
+			return
+		end
+		if Mouse.HitLeft and self.hover
+		end
+	end
+
+end
