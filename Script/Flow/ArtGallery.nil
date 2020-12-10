@@ -18,6 +18,20 @@ group GROUP_ArtGallery
 	int Scroll = 0
 	int pickedframe
 	int pickedframeskip
+	int maxscroll
+	
+	get int PijlX
+		return Screen.W-50
+	end
+	
+	get int PijlY_Op
+		return 5
+	end
+	
+	get int PijlY_Neer
+		return Screen.H-120
+	end
+
 	
 	void CONSTRUCTOR()
 		BUB_Draw        = self.Draw
@@ -34,6 +48,7 @@ group GROUP_ArtGallery
 			y = y + 30
 			ent.Y=y
 			ent.File=F
+			self.maxscroll = math.max(self.maxscroll,y)
 		end
 	end
 	
@@ -54,21 +69,35 @@ group GROUP_ArtGallery
 		for fil,dat in pairs(self.Data)
 			int y
 			int inspring=0
-			y = dat.Y-self.Scroll			
+			y = dat.Y-self.Scroll
 			if y>10 and y<Screen.Height-40
 				inspring=0
 				__white
 				if dat==self.picked
 					__ember
 				end
-				if Mouse.Y>=y and Mouse.Y<=y+29
+				if Mouse.Y>=y and Mouse.Y<=y+29 and Mouse.X<(self.PijlX*2)
 					self.hover=dat
 					inspring=15
 				end
-				self.Font.Draw(dat.Name .. "(by "..dat.Author..")",10+inspring,y)
+				self.Font.Draw(dat.Name .. "  (by "..dat.Author..")",10+inspring,y)
 			end
 		end
 		__white
+		if self.Scroll!=0
+			__white
+			self.Pijl_Op.Draw(self.PijlX,self.PijlY_Op)
+			if Mouse.X>Screen.W-40 and Mouse.Y>self.PijlY_Op and Mouse.Y<self.PijlY_Op+32 and Mouse.HeldLeft
+				#- self.Scroll 4
+			end
+		end
+		if self.Scroll<=self.maxscroll
+			__white
+			self.Pijl_Neer.Draw(self.PijlX,self.PijlY_Neer)
+			if Mouse.X>Screen.W-40 and Mouse.Y>self.PijlY_Neer and Mouse.Y<self.PijlY_Neer+32 and  Mouse.HeldLeft
+				#+ self.Scroll 4
+			end
+		end
 		Mouse.Show()
 	end
 
