@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.11.24
+// version: 20.12.12
 // End License Information
 
 #say "Map Script - None!"
@@ -41,6 +41,7 @@
 #use "libs/strings"
 
 #macro __EMPTY gv.Bool.GagoltonEmpty
+#macro __JUGDEFEATED gv.Bool.UltimateBossJuggernautDefeated
 // #macro __EMPTY true
 
 bool gj_checked
@@ -155,6 +156,60 @@ group MScript
 		WM_Unlocked.D_THIEFDEN = true 
 	end
 	
+	void UseBlackOrb(string Tag)
+		if __orbblack<=0
+			return
+		end
+		gv.Int.BlackOrbUsed++
+		Map.Kill(Tag,true)
+		__orbblack--
+		if gv.Int.BlackOrbUsed==6
+			Map.Kill("Black_Orb_Door",true)
+		end
+	end
+	
+	void JUGGERNAUT()
+		if __JUGDEFEATED
+			return
+		end
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Juggernaut.Wav"
+		StartCombat.Arena = "Black"
+		StartCombat.Foe[1] = "UltraBoss/Juggernaut"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void JUGDEFEATED()
+		__JUGDEFEATED = true
+	end
+
+		
+	
+	void NPC_JSOCKET1()
+		self.UseBlackOrb("NPC_JSOCKET1")
+	end
+	void NPC_JSOCKET2()
+		self.UseBlackOrb("NPC_JSOCKET2")
+	end
+	void NPC_JSOCKET3()
+		self.UseBlackOrb("NPC_JSOCKET3")
+	end
+	void NPC_JSOCKET4()
+		self.UseBlackOrb("NPC_JSOCKET4")
+	end
+	void NPC_JSOCKET5()
+		self.UseBlackOrb("NPC_JSOCKET5")
+	end
+	void NPC_JSOCKET6()
+		self.UseBlackOrb("NPC_JSOCKET6")
+	end
+
+
+
+
+	
 	void CONSTRUCTOR()
 		for tag in Map.EachTag
 			if __EMPTY and suffixed(tag,"_DISA")
@@ -179,6 +234,7 @@ group MScript
 		Map.ZA_Enter("GJ_Back","GJ_Back")
 		Map.ZA_Enter("GJ_Unlock","GJ_Unlock")
 		Map.ZA_Enter("ToSugarland","ToSugarland")
+		Map.ZA_Enter("ZONE_Juggernaut","SASKIA:Juggernaut")
 	end
 	
 	void Draw()

@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/Field.nil
-// Version: 20.08.22
+// Version: 20.12.12
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -159,6 +159,10 @@ class Clickables
 							if x>$ObjInt.x-hw and x<$ObjInt.x+hw and y>$ObjInt.y-$ObjInt.ObjectHeight and y<$ObjInt.y
 								return cl
 							end
+						case "Pic"
+						if x>$ObjInt.x and y>$ObjInt.y and x<$ObjInt.ObjectWidth and y<$ObjInt.ObjectHeight
+							return cl
+						end
 						default
 							error("Unknown object kind ("..$ObjString.Kind..") as clickable!")
 					end
@@ -1099,6 +1103,7 @@ global void BUB_Update()
 			// can already be scripted
 			CSayF("Clicked '%s', so going into alternate action!",clobj.Tag)
 			CSayF("As a result player should walk to (%d,%d)",clobj.WalkToX,clobj.WalkToY)
+			
 			cando = FlowField.Map.Kthura.Actor.Player.WalkTo(clobj.WalkToX,clobj.WalkToY) or (xmath.Pythagoras(clobj.WalkToX,clobj.WalkToY,Map.PlayerX,Map.PlayerY)<40)
 			if cando
 				CSay("Walk is possible, so let's do it!")
