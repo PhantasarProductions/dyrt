@@ -1,9 +1,12 @@
 // Rubine's Treasure Register!
-Generated on 12/14/2020 8:42:05 PM
+Generated on 12/14/2020 8:53:50 PM
 
 do
 	ret = {}
+	ret.Maps={}
+
 	ret["CH1_CITY_DOUBLINE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_CITY_DOUBLINE"
 	ret["CH1_CITY_DOUBLINE"][1]={}
 	ret["CH1_CITY_DOUBLINE"][1].Total=0
 	ret["CH1_CITY_DOUBLINE"][2]={}
@@ -11,6 +14,7 @@ do
 	ret["CH1_CITY_DOUBLINE"][3]={}
 	ret["CH1_CITY_DOUBLINE"][3].Total=0
 	ret["CH1_DUNG_EXAMRUINS"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_EXAMRUINS"
 	ret["CH1_DUNG_EXAMRUINS"][1]={}
 	ret["CH1_DUNG_EXAMRUINS"][1].Total=3
 	ret["CH1_DUNG_EXAMRUINS"][1][#ret["CH1_DUNG_EXAMRUINS"][1]+1] = { ["ITM_APPLE"] = 1 }
@@ -27,6 +31,7 @@ do
 	ret["CH1_DUNG_EXAMRUINS"][3][#ret["CH1_DUNG_EXAMRUINS"][3]+1] = { ["1 shilder"] = 1 }
 	ret["CH1_DUNG_EXAMRUINS"][3][#ret["CH1_DUNG_EXAMRUINS"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH1_DUNG_FRENDORBUSHES"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_FRENDORBUSHES"
 	ret["CH1_DUNG_FRENDORBUSHES"][1]={}
 	ret["CH1_DUNG_FRENDORBUSHES"][1].Total=0
 	ret["CH1_DUNG_FRENDORBUSHES"][2]={}
@@ -34,6 +39,7 @@ do
 	ret["CH1_DUNG_FRENDORBUSHES"][3]={}
 	ret["CH1_DUNG_FRENDORBUSHES"][3].Total=0
 	ret["CH1_DUNG_MYSTERIOUSCRYPT"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_MYSTERIOUSCRYPT"
 	ret["CH1_DUNG_MYSTERIOUSCRYPT"][1]={}
 	ret["CH1_DUNG_MYSTERIOUSCRYPT"][1].Total=100
 	ret["CH1_DUNG_MYSTERIOUSCRYPT"][1][#ret["CH1_DUNG_MYSTERIOUSCRYPT"][1]+1] = { ["ITM_ANTIDOTE"] = 38 }
@@ -53,6 +59,7 @@ do
 	ret["CH1_DUNG_MYSTERIOUSCRYPT"][3][#ret["CH1_DUNG_MYSTERIOUSCRYPT"][3]+1] = { ["ITM_POTION"] = 1 }
 	ret["CH1_DUNG_MYSTERIOUSCRYPT"][3][#ret["CH1_DUNG_MYSTERIOUSCRYPT"][3]+1] = { ["100 shilders"] = 1 }
 	ret["CH1_DUNG_PRISON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_PRISON"
 	ret["CH1_DUNG_PRISON"][1]={}
 	ret["CH1_DUNG_PRISON"][1].Total=66
 	ret["CH1_DUNG_PRISON"][1][#ret["CH1_DUNG_PRISON"][1]+1] = { ["ITM_ANTIDOTE"] = 3 }
@@ -72,6 +79,7 @@ do
 	ret["CH1_DUNG_PRISON"][3][#ret["CH1_DUNG_PRISON"][3]+1] = { ["1 shilder"] = 20 }
 	ret["CH1_DUNG_PRISON"][3][#ret["CH1_DUNG_PRISON"][3]+1] = { ["10 shilders"] = 0 }
 	ret["CH1_DUNG_SHANDADUNGEON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_SHANDADUNGEON"
 	ret["CH1_DUNG_SHANDADUNGEON"][1]={}
 	ret["CH1_DUNG_SHANDADUNGEON"][1].Total=161
 	ret["CH1_DUNG_SHANDADUNGEON"][1][#ret["CH1_DUNG_SHANDADUNGEON"][1]+1] = { ["ITM_APPLE"] = 25 }
@@ -94,6 +102,7 @@ do
 	ret["CH1_DUNG_SHANDADUNGEON"][3][#ret["CH1_DUNG_SHANDADUNGEON"][3]+1] = { ["20 shilders"] = 0 }
 	ret["CH1_DUNG_SHANDADUNGEON"][3][#ret["CH1_DUNG_SHANDADUNGEON"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH1_DUNG_WENIARIA"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_WENIARIA"
 	ret["CH1_DUNG_WENIARIA"][1]={}
 	ret["CH1_DUNG_WENIARIA"][1].Total=172
 	ret["CH1_DUNG_WENIARIA"][1][#ret["CH1_DUNG_WENIARIA"][1]+1] = { ["ITM_ANTIDOTE"] = 75 }
@@ -116,6 +125,7 @@ do
 	ret["CH1_DUNG_WENIARIA"][3][#ret["CH1_DUNG_WENIARIA"][3]+1] = { ["ITM_POTION"] = 1 }
 	ret["CH1_DUNG_WENIARIA"][3][#ret["CH1_DUNG_WENIARIA"][3]+1] = { ["5 shilders"] = 15 }
 	ret["CH1_DUNG_XENORBUSHES"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_XENORBUSHES"
 	ret["CH1_DUNG_XENORBUSHES"][1]={}
 	ret["CH1_DUNG_XENORBUSHES"][1].Total=12
 	ret["CH1_DUNG_XENORBUSHES"][1][#ret["CH1_DUNG_XENORBUSHES"][1]+1] = { [" CASH:2"] = 1 }
@@ -147,6 +157,7 @@ do
 	ret["CH1_DUNG_XENORBUSHES"][3][#ret["CH1_DUNG_XENORBUSHES"][3]+1] = { ["10 shilders"] = 0 }
 	ret["CH1_DUNG_XENORBUSHES"][3][#ret["CH1_DUNG_XENORBUSHES"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_XENORBUSHES_NORTH"
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1]={}
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1].Total=161
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ["ITM_ANTIDOTE"] = 35 }
@@ -175,6 +186,7 @@ do
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ["5 shilders"] = 0 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ["10 shilders"] = 0 }
 	ret["CH1_DUNG_XENORBUSHES_WEST"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_DUNG_XENORBUSHES_WEST"
 	ret["CH1_DUNG_XENORBUSHES_WEST"][1]={}
 	ret["CH1_DUNG_XENORBUSHES_WEST"][1].Total=33
 	ret["CH1_DUNG_XENORBUSHES_WEST"][1][#ret["CH1_DUNG_XENORBUSHES_WEST"][1]+1] = { ["ITM_ANTIDOTE"] = 4 }
@@ -194,6 +206,7 @@ do
 	ret["CH1_DUNG_XENORBUSHES_WEST"][3][#ret["CH1_DUNG_XENORBUSHES_WEST"][3]+1] = { ["3 shilders"] = 1 }
 	ret["CH1_DUNG_XENORBUSHES_WEST"][3][#ret["CH1_DUNG_XENORBUSHES_WEST"][3]+1] = { ["5 shilders"] = 0 }
 	ret["CH1_HUB_ERICREBECCAHOME"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_HUB_ERICREBECCAHOME"
 	ret["CH1_HUB_ERICREBECCAHOME"][1]={}
 	ret["CH1_HUB_ERICREBECCAHOME"][1].Total=0
 	ret["CH1_HUB_ERICREBECCAHOME"][2]={}
@@ -201,6 +214,7 @@ do
 	ret["CH1_HUB_ERICREBECCAHOME"][3]={}
 	ret["CH1_HUB_ERICREBECCAHOME"][3].Total=0
 	ret["CH1_HUB_IRRAVONIAHOME"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_HUB_IRRAVONIAHOME"
 	ret["CH1_HUB_IRRAVONIAHOME"][1]={}
 	ret["CH1_HUB_IRRAVONIAHOME"][1].Total=0
 	ret["CH1_HUB_IRRAVONIAHOME"][2]={}
@@ -208,6 +222,7 @@ do
 	ret["CH1_HUB_IRRAVONIAHOME"][3]={}
 	ret["CH1_HUB_IRRAVONIAHOME"][3].Total=0
 	ret["CH1_HUB_SHANDACASTLE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_HUB_SHANDACASTLE"
 	ret["CH1_HUB_SHANDACASTLE"][1]={}
 	ret["CH1_HUB_SHANDACASTLE"][1].Total=0
 	ret["CH1_HUB_SHANDACASTLE"][2]={}
@@ -215,6 +230,7 @@ do
 	ret["CH1_HUB_SHANDACASTLE"][3]={}
 	ret["CH1_HUB_SHANDACASTLE"][3].Total=0
 	ret["CH1_HUB_SQUIRREL"] = {}
+	ret.Maps[#ret.Maps+1] = "CH1_HUB_SQUIRREL"
 	ret["CH1_HUB_SQUIRREL"][1]={}
 	ret["CH1_HUB_SQUIRREL"][1].Total=0
 	ret["CH1_HUB_SQUIRREL"][2]={}
@@ -222,6 +238,7 @@ do
 	ret["CH1_HUB_SQUIRREL"][3]={}
 	ret["CH1_HUB_SQUIRREL"][3].Total=0
 	ret["CH2_CITY_FRENDOR"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_CITY_FRENDOR"
 	ret["CH2_CITY_FRENDOR"][1]={}
 	ret["CH2_CITY_FRENDOR"][1].Total=0
 	ret["CH2_CITY_FRENDOR"][2]={}
@@ -229,6 +246,7 @@ do
 	ret["CH2_CITY_FRENDOR"][3]={}
 	ret["CH2_CITY_FRENDOR"][3].Total=0
 	ret["CH2_CITY_ISKARDERIU"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_CITY_ISKARDERIU"
 	ret["CH2_CITY_ISKARDERIU"][1]={}
 	ret["CH2_CITY_ISKARDERIU"][1].Total=0
 	ret["CH2_CITY_ISKARDERIU"][2]={}
@@ -236,6 +254,7 @@ do
 	ret["CH2_CITY_ISKARDERIU"][3]={}
 	ret["CH2_CITY_ISKARDERIU"][3].Total=0
 	ret["CH2_CITY_XENOR"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_CITY_XENOR"
 	ret["CH2_CITY_XENOR"][1]={}
 	ret["CH2_CITY_XENOR"][1].Total=0
 	ret["CH2_CITY_XENOR"][2]={}
@@ -243,6 +262,7 @@ do
 	ret["CH2_CITY_XENOR"][3]={}
 	ret["CH2_CITY_XENOR"][3].Total=0
 	ret["CH2_DUNG_BLACKDRAGON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_BLACKDRAGON"
 	ret["CH2_DUNG_BLACKDRAGON"][1]={}
 	ret["CH2_DUNG_BLACKDRAGON"][1].Total=24
 	ret["CH2_DUNG_BLACKDRAGON"][1][#ret["CH2_DUNG_BLACKDRAGON"][1]+1] = { ["ITM_POTION"] = 6 }
@@ -265,6 +285,7 @@ do
 	ret["CH2_DUNG_BLACKDRAGON"][3][#ret["CH2_DUNG_BLACKDRAGON"][3]+1] = { ["2 shilders"] = 5 }
 	ret["CH2_DUNG_BLACKDRAGON"][3][#ret["CH2_DUNG_BLACKDRAGON"][3]+1] = { ["6 shilders"] = 2 }
 	ret["CH2_DUNG_DRAGONCRACKFOREST"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_DRAGONCRACKFOREST"
 	ret["CH2_DUNG_DRAGONCRACKFOREST"][1]={}
 	ret["CH2_DUNG_DRAGONCRACKFOREST"][1].Total=40
 	ret["CH2_DUNG_DRAGONCRACKFOREST"][1][#ret["CH2_DUNG_DRAGONCRACKFOREST"][1]+1] = { ["ITM_APPLE"] = 5 }
@@ -281,6 +302,7 @@ do
 	ret["CH2_DUNG_DRAGONCRACKFOREST"][3][#ret["CH2_DUNG_DRAGONCRACKFOREST"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH2_DUNG_DRAGONCRACKFOREST"][3][#ret["CH2_DUNG_DRAGONCRACKFOREST"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH2_DUNG_GREENDRAGON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_GREENDRAGON"
 	ret["CH2_DUNG_GREENDRAGON"][1]={}
 	ret["CH2_DUNG_GREENDRAGON"][1].Total=8
 	ret["CH2_DUNG_GREENDRAGON"][1][#ret["CH2_DUNG_GREENDRAGON"][1]+1] = { ["ITM_ANTIDOTE"] = 5 }
@@ -297,6 +319,7 @@ do
 	ret["CH2_DUNG_GREENDRAGON"][3][#ret["CH2_DUNG_GREENDRAGON"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH2_DUNG_GREENDRAGON"][3][#ret["CH2_DUNG_GREENDRAGON"][3]+1] = { ["1 shilder"] = 1 }
 	ret["CH2_DUNG_ISKARDERIUFOREST"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_ISKARDERIUFOREST"
 	ret["CH2_DUNG_ISKARDERIUFOREST"][1]={}
 	ret["CH2_DUNG_ISKARDERIUFOREST"][1].Total=54
 	ret["CH2_DUNG_ISKARDERIUFOREST"][1][#ret["CH2_DUNG_ISKARDERIUFOREST"][1]+1] = { ["ITM_ANTIDOTE"] = 10 }
@@ -322,6 +345,7 @@ do
 	ret["CH2_DUNG_ISKARDERIUFOREST"][3][#ret["CH2_DUNG_ISKARDERIUFOREST"][3]+1] = { ["1 shilder"] = 25 }
 	ret["CH2_DUNG_ISKARDERIUFOREST"][3][#ret["CH2_DUNG_ISKARDERIUFOREST"][3]+1] = { ["5 shilders"] = 2 }
 	ret["CH2_DUNG_MADHOUSE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_MADHOUSE"
 	ret["CH2_DUNG_MADHOUSE"][1]={}
 	ret["CH2_DUNG_MADHOUSE"][1].Total=81
 	ret["CH2_DUNG_MADHOUSE"][1][#ret["CH2_DUNG_MADHOUSE"][1]+1] = { ["ITM_MAGICDISC"] = 34 }
@@ -344,6 +368,7 @@ do
 	ret["CH2_DUNG_MADHOUSE"][3][#ret["CH2_DUNG_MADHOUSE"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH2_DUNG_MADHOUSE"][3][#ret["CH2_DUNG_MADHOUSE"][3]+1] = { ["50 shilders"] = 0 }
 	ret["CH2_DUNG_REDDRAGONCAVE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_REDDRAGONCAVE"
 	ret["CH2_DUNG_REDDRAGONCAVE"][1]={}
 	ret["CH2_DUNG_REDDRAGONCAVE"][1].Total=74
 	ret["CH2_DUNG_REDDRAGONCAVE"][1][#ret["CH2_DUNG_REDDRAGONCAVE"][1]+1] = { ["ITM_ANTIDOTE"] = 5 }
@@ -366,6 +391,7 @@ do
 	ret["CH2_DUNG_REDDRAGONCAVE"][3][#ret["CH2_DUNG_REDDRAGONCAVE"][3]+1] = { ["30 shilders"] = 0 }
 	ret["CH2_DUNG_REDDRAGONCAVE"][3][#ret["CH2_DUNG_REDDRAGONCAVE"][3]+1] = { ["60 shilders"] = 0 }
 	ret["CH2_DUNG_WHITEDRAGON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_DUNG_WHITEDRAGON"
 	ret["CH2_DUNG_WHITEDRAGON"][1]={}
 	ret["CH2_DUNG_WHITEDRAGON"][1].Total=41
 	ret["CH2_DUNG_WHITEDRAGON"][1][#ret["CH2_DUNG_WHITEDRAGON"][1]+1] = { ["ITM_ICICLE"] = 20 }
@@ -385,6 +411,7 @@ do
 	ret["CH2_DUNG_WHITEDRAGON"][3][#ret["CH2_DUNG_WHITEDRAGON"][3]+1] = { ["10 shilders"] = 1 }
 	ret["CH2_DUNG_WHITEDRAGON"][3][#ret["CH2_DUNG_WHITEDRAGON"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH2_HUB_ELFIMPCASTLE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_HUB_ELFIMPCASTLE"
 	ret["CH2_HUB_ELFIMPCASTLE"][1]={}
 	ret["CH2_HUB_ELFIMPCASTLE"][1].Total=0
 	ret["CH2_HUB_ELFIMPCASTLE"][2]={}
@@ -392,6 +419,7 @@ do
 	ret["CH2_HUB_ELFIMPCASTLE"][3]={}
 	ret["CH2_HUB_ELFIMPCASTLE"][3].Total=0
 	ret["CH2_HUB_HIDDENBUSH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_HUB_HIDDENBUSH"
 	ret["CH2_HUB_HIDDENBUSH"][1]={}
 	ret["CH2_HUB_HIDDENBUSH"][1].Total=0
 	ret["CH2_HUB_HIDDENBUSH"][2]={}
@@ -399,6 +427,7 @@ do
 	ret["CH2_HUB_HIDDENBUSH"][3]={}
 	ret["CH2_HUB_HIDDENBUSH"][3].Total=0
 	ret["CH2_HUB_XROADS"] = {}
+	ret.Maps[#ret.Maps+1] = "CH2_HUB_XROADS"
 	ret["CH2_HUB_XROADS"][1]={}
 	ret["CH2_HUB_XROADS"][1].Total=0
 	ret["CH2_HUB_XROADS"][2]={}
@@ -406,6 +435,7 @@ do
 	ret["CH2_HUB_XROADS"][3]={}
 	ret["CH2_HUB_XROADS"][3].Total=0
 	ret["CH3_CITY_GAGOLTON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_CITY_GAGOLTON"
 	ret["CH3_CITY_GAGOLTON"][1]={}
 	ret["CH3_CITY_GAGOLTON"][1].Total=0
 	ret["CH3_CITY_GAGOLTON"][2]={}
@@ -413,6 +443,7 @@ do
 	ret["CH3_CITY_GAGOLTON"][3]={}
 	ret["CH3_CITY_GAGOLTON"][3].Total=0
 	ret["CH3_CITY_INDEPENDENCE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_CITY_INDEPENDENCE"
 	ret["CH3_CITY_INDEPENDENCE"][1]={}
 	ret["CH3_CITY_INDEPENDENCE"][1].Total=0
 	ret["CH3_CITY_INDEPENDENCE"][2]={}
@@ -420,6 +451,7 @@ do
 	ret["CH3_CITY_INDEPENDENCE"][3]={}
 	ret["CH3_CITY_INDEPENDENCE"][3].Total=0
 	ret["CH3_DUNG_ABYSS"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_ABYSS"
 	ret["CH3_DUNG_ABYSS"][1]={}
 	ret["CH3_DUNG_ABYSS"][1].Total=0
 	ret["CH3_DUNG_ABYSS"][2]={}
@@ -427,6 +459,7 @@ do
 	ret["CH3_DUNG_ABYSS"][3]={}
 	ret["CH3_DUNG_ABYSS"][3].Total=0
 	ret["CH3_DUNG_AIROM"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_AIROM"
 	ret["CH3_DUNG_AIROM"][1]={}
 	ret["CH3_DUNG_AIROM"][1].Total=21
 	ret["CH3_DUNG_AIROM"][1][#ret["CH3_DUNG_AIROM"][1]+1] = { ["ITM_BRIMSTONE"] = 3 }
@@ -449,6 +482,7 @@ do
 	ret["CH3_DUNG_AIROM"][3][#ret["CH3_DUNG_AIROM"][3]+1] = { ["ITM_POTION"] = 2 }
 	ret["CH3_DUNG_AIROM"][3][#ret["CH3_DUNG_AIROM"][3]+1] = { ["100 shilders"] = 2 }
 	ret["CH3_DUNG_AZQUAKUNDA"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_AZQUAKUNDA"
 	ret["CH3_DUNG_AZQUAKUNDA"][1]={}
 	ret["CH3_DUNG_AZQUAKUNDA"][1].Total=12
 	ret["CH3_DUNG_AZQUAKUNDA"][1][#ret["CH3_DUNG_AZQUAKUNDA"][1]+1] = { ["ITM_APPLE"] = 5 }
@@ -465,6 +499,7 @@ do
 	ret["CH3_DUNG_AZQUAKUNDA"][3][#ret["CH3_DUNG_AZQUAKUNDA"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH3_DUNG_AZQUAKUNDA"][3][#ret["CH3_DUNG_AZQUAKUNDA"][3]+1] = { ["100 shilders"] = 0 }
 	ret["CH3_DUNG_GRASSPLAINS"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_GRASSPLAINS"
 	ret["CH3_DUNG_GRASSPLAINS"][1]={}
 	ret["CH3_DUNG_GRASSPLAINS"][1].Total=14
 	ret["CH3_DUNG_GRASSPLAINS"][1][#ret["CH3_DUNG_GRASSPLAINS"][1]+1] = { ["ITM_HERB"] = 2 }
@@ -481,6 +516,7 @@ do
 	ret["CH3_DUNG_GRASSPLAINS"][3][#ret["CH3_DUNG_GRASSPLAINS"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH3_DUNG_GRASSPLAINS"][3][#ret["CH3_DUNG_GRASSPLAINS"][3]+1] = { ["1 shilder"] = 7 }
 	ret["CH3_DUNG_GRASSPLAINS.BACKUP"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_GRASSPLAINS.BACKUP"
 	ret["CH3_DUNG_GRASSPLAINS.BACKUP"][1]={}
 	ret["CH3_DUNG_GRASSPLAINS.BACKUP"][1].Total=14
 	ret["CH3_DUNG_GRASSPLAINS.BACKUP"][1][#ret["CH3_DUNG_GRASSPLAINS.BACKUP"][1]+1] = { ["ITM_HERB"] = 2 }
@@ -497,6 +533,7 @@ do
 	ret["CH3_DUNG_GRASSPLAINS.BACKUP"][3][#ret["CH3_DUNG_GRASSPLAINS.BACKUP"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH3_DUNG_GRASSPLAINS.BACKUP"][3][#ret["CH3_DUNG_GRASSPLAINS.BACKUP"][3]+1] = { ["1 shilder"] = 7 }
 	ret["CH3_DUNG_INDIEBUSH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_INDIEBUSH"
 	ret["CH3_DUNG_INDIEBUSH"][1]={}
 	ret["CH3_DUNG_INDIEBUSH"][1].Total=41
 	ret["CH3_DUNG_INDIEBUSH"][1][#ret["CH3_DUNG_INDIEBUSH"][1]+1] = { ["ITM_APPLE"] = 20 }
@@ -513,6 +550,7 @@ do
 	ret["CH3_DUNG_INDIEBUSH"][3][#ret["CH3_DUNG_INDIEBUSH"][3]+1] = { ["ITM_HERB"] = 0 }
 	ret["CH3_DUNG_INDIEBUSH"][3][#ret["CH3_DUNG_INDIEBUSH"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH3_DUNG_MARSHES"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_MARSHES"
 	ret["CH3_DUNG_MARSHES"][1]={}
 	ret["CH3_DUNG_MARSHES"][1].Total=130
 	ret["CH3_DUNG_MARSHES"][1][#ret["CH3_DUNG_MARSHES"][1]+1] = { ["ITM_APPLE"] = 30 }
@@ -532,6 +570,7 @@ do
 	ret["CH3_DUNG_MARSHES"][3][#ret["CH3_DUNG_MARSHES"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH3_DUNG_MARSHES"][3][#ret["CH3_DUNG_MARSHES"][3]+1] = { ["100 shilders"] = 10 }
 	ret["CH3_DUNG_NAKEDROCKS"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_NAKEDROCKS"
 	ret["CH3_DUNG_NAKEDROCKS"][1]={}
 	ret["CH3_DUNG_NAKEDROCKS"][1].Total=310
 	ret["CH3_DUNG_NAKEDROCKS"][1][#ret["CH3_DUNG_NAKEDROCKS"][1]+1] = { ["ITM_ANTIDOTE"] = 60 }
@@ -557,6 +596,7 @@ do
 	ret["CH3_DUNG_NAKEDROCKS"][3][#ret["CH3_DUNG_NAKEDROCKS"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH3_DUNG_NAKEDROCKS"][3][#ret["CH3_DUNG_NAKEDROCKS"][3]+1] = { ["5 shilders"] = 100 }
 	ret["CH3_DUNG_NAKEDROCKS_OUTSIDE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_DUNG_NAKEDROCKS_OUTSIDE"
 	ret["CH3_DUNG_NAKEDROCKS_OUTSIDE"][1]={}
 	ret["CH3_DUNG_NAKEDROCKS_OUTSIDE"][1].Total=0
 	ret["CH3_DUNG_NAKEDROCKS_OUTSIDE"][2]={}
@@ -564,6 +604,7 @@ do
 	ret["CH3_DUNG_NAKEDROCKS_OUTSIDE"][3]={}
 	ret["CH3_DUNG_NAKEDROCKS_OUTSIDE"][3].Total=0
 	ret["CH3_HUB_JENNIFER"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_HUB_JENNIFER"
 	ret["CH3_HUB_JENNIFER"][1]={}
 	ret["CH3_HUB_JENNIFER"][1].Total=0
 	ret["CH3_HUB_JENNIFER"][2]={}
@@ -571,6 +612,7 @@ do
 	ret["CH3_HUB_JENNIFER"][3]={}
 	ret["CH3_HUB_JENNIFER"][3].Total=0
 	ret["CH3_HUB_YASATHAR"] = {}
+	ret.Maps[#ret.Maps+1] = "CH3_HUB_YASATHAR"
 	ret["CH3_HUB_YASATHAR"][1]={}
 	ret["CH3_HUB_YASATHAR"][1].Total=0
 	ret["CH3_HUB_YASATHAR"][2]={}
@@ -578,6 +620,7 @@ do
 	ret["CH3_HUB_YASATHAR"][3]={}
 	ret["CH3_HUB_YASATHAR"][3].Total=0
 	ret["CH4_CITY_FELIXIUM"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_CITY_FELIXIUM"
 	ret["CH4_CITY_FELIXIUM"][1]={}
 	ret["CH4_CITY_FELIXIUM"][1].Total=0
 	ret["CH4_CITY_FELIXIUM"][2]={}
@@ -585,6 +628,7 @@ do
 	ret["CH4_CITY_FELIXIUM"][3]={}
 	ret["CH4_CITY_FELIXIUM"][3].Total=0
 	ret["CH4_CITY_RAYAL"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_CITY_RAYAL"
 	ret["CH4_CITY_RAYAL"][1]={}
 	ret["CH4_CITY_RAYAL"][1].Total=0
 	ret["CH4_CITY_RAYAL"][2]={}
@@ -592,6 +636,7 @@ do
 	ret["CH4_CITY_RAYAL"][3]={}
 	ret["CH4_CITY_RAYAL"][3].Total=0
 	ret["CH4_DUNG_BLACKPRISON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_BLACKPRISON"
 	ret["CH4_DUNG_BLACKPRISON"][1]={}
 	ret["CH4_DUNG_BLACKPRISON"][1].Total=0
 	ret["CH4_DUNG_BLACKPRISON"][2]={}
@@ -599,6 +644,7 @@ do
 	ret["CH4_DUNG_BLACKPRISON"][3]={}
 	ret["CH4_DUNG_BLACKPRISON"][3].Total=0
 	ret["CH4_DUNG_DARKSTORAGE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_DARKSTORAGE"
 	ret["CH4_DUNG_DARKSTORAGE"][1]={}
 	ret["CH4_DUNG_DARKSTORAGE"][1].Total=1
 	ret["CH4_DUNG_DARKSTORAGE"][1][#ret["CH4_DUNG_DARKSTORAGE"][1]+1] = { ["ITM_APPLE"] = 1 }
@@ -609,6 +655,7 @@ do
 	ret["CH4_DUNG_DARKSTORAGE"][3].Total=0
 	ret["CH4_DUNG_DARKSTORAGE"][3][#ret["CH4_DUNG_DARKSTORAGE"][3]+1] = { ["ITM_APPLE"] = 0 }
 	ret["CH4_DUNG_DARKSTORAGE_ALDARUS"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_DARKSTORAGE_ALDARUS"
 	ret["CH4_DUNG_DARKSTORAGE_ALDARUS"][1]={}
 	ret["CH4_DUNG_DARKSTORAGE_ALDARUS"][1].Total=0
 	ret["CH4_DUNG_DARKSTORAGE_ALDARUS"][2]={}
@@ -616,6 +663,7 @@ do
 	ret["CH4_DUNG_DARKSTORAGE_ALDARUS"][3]={}
 	ret["CH4_DUNG_DARKSTORAGE_ALDARUS"][3].Total=0
 	ret["CH4_DUNG_DARKSTORAGE_JERACKO"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_DARKSTORAGE_JERACKO"
 	ret["CH4_DUNG_DARKSTORAGE_JERACKO"][1]={}
 	ret["CH4_DUNG_DARKSTORAGE_JERACKO"][1].Total=547
 	ret["CH4_DUNG_DARKSTORAGE_JERACKO"][1][#ret["CH4_DUNG_DARKSTORAGE_JERACKO"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -659,6 +707,7 @@ do
 	ret["CH4_DUNG_DARKSTORAGE_JERACKO"][3][#ret["CH4_DUNG_DARKSTORAGE_JERACKO"][3]+1] = { ["100 shilders"] = 1 }
 	ret["CH4_DUNG_DARKSTORAGE_JERACKO"][3][#ret["CH4_DUNG_DARKSTORAGE_JERACKO"][3]+1] = { ["250 shilders"] = 0 }
 	ret["CH4_DUNG_DARKSTORAGE_KIRANA"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_DARKSTORAGE_KIRANA"
 	ret["CH4_DUNG_DARKSTORAGE_KIRANA"][1]={}
 	ret["CH4_DUNG_DARKSTORAGE_KIRANA"][1].Total=547
 	ret["CH4_DUNG_DARKSTORAGE_KIRANA"][1][#ret["CH4_DUNG_DARKSTORAGE_KIRANA"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -702,6 +751,7 @@ do
 	ret["CH4_DUNG_DARKSTORAGE_KIRANA"][3][#ret["CH4_DUNG_DARKSTORAGE_KIRANA"][3]+1] = { ["100 shilders"] = 1 }
 	ret["CH4_DUNG_DARKSTORAGE_KIRANA"][3][#ret["CH4_DUNG_DARKSTORAGE_KIRANA"][3]+1] = { ["250 shilders"] = 0 }
 	ret["CH4_DUNG_DARKSTORAGE_RONDOMO"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_DARKSTORAGE_RONDOMO"
 	ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][1]={}
 	ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][1].Total=575
 	ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][1][#ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -742,6 +792,7 @@ do
 	ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][3][#ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][3]+1] = { ["2500 shilders"] = 0 }
 	ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][3][#ret["CH4_DUNG_DARKSTORAGE_RONDOMO"][3]+1] = { ["5000 shilders"] = 0 }
 	ret["CH4_DUNG_FRENDORBUSHES"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_FRENDORBUSHES"
 	ret["CH4_DUNG_FRENDORBUSHES"][1]={}
 	ret["CH4_DUNG_FRENDORBUSHES"][1].Total=322
 	ret["CH4_DUNG_FRENDORBUSHES"][1][#ret["CH4_DUNG_FRENDORBUSHES"][1]+1] = { ["ITM_APPLE"] = 5 }
@@ -767,6 +818,7 @@ do
 	ret["CH4_DUNG_FRENDORBUSHES"][3][#ret["CH4_DUNG_FRENDORBUSHES"][3]+1] = { ["50 shilders"] = 0 }
 	ret["CH4_DUNG_FRENDORBUSHES"][3][#ret["CH4_DUNG_FRENDORBUSHES"][3]+1] = { ["100 shilders"] = 0 }
 	ret["CH4_DUNG_FRUNDARMON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_FRUNDARMON"
 	ret["CH4_DUNG_FRUNDARMON"][1]={}
 	ret["CH4_DUNG_FRUNDARMON"][1].Total=0
 	ret["CH4_DUNG_FRUNDARMON"][2]={}
@@ -774,6 +826,7 @@ do
 	ret["CH4_DUNG_FRUNDARMON"][3]={}
 	ret["CH4_DUNG_FRUNDARMON"][3].Total=0
 	ret["CH4_DUNG_FRUNDARMONBASEMENT"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_FRUNDARMONBASEMENT"
 	ret["CH4_DUNG_FRUNDARMONBASEMENT"][1]={}
 	ret["CH4_DUNG_FRUNDARMONBASEMENT"][1].Total=168
 	ret["CH4_DUNG_FRUNDARMONBASEMENT"][1][#ret["CH4_DUNG_FRUNDARMONBASEMENT"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -802,6 +855,7 @@ do
 	ret["CH4_DUNG_FRUNDARMONBASEMENT"][3][#ret["CH4_DUNG_FRUNDARMONBASEMENT"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH4_DUNG_FRUNDARMONBASEMENT"][3][#ret["CH4_DUNG_FRUNDARMONBASEMENT"][3]+1] = { ["100 shilders"] = 0 }
 	ret["CH4_DUNG_FRUSKBRANDO"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_FRUSKBRANDO"
 	ret["CH4_DUNG_FRUSKBRANDO"][1]={}
 	ret["CH4_DUNG_FRUSKBRANDO"][1].Total=150
 	ret["CH4_DUNG_FRUSKBRANDO"][1][#ret["CH4_DUNG_FRUSKBRANDO"][1]+1] = { ["ITM_HERB"] = 25 }
@@ -818,6 +872,7 @@ do
 	ret["CH4_DUNG_FRUSKBRANDO"][3][#ret["CH4_DUNG_FRUSKBRANDO"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["CH4_DUNG_FRUSKBRANDO"][3][#ret["CH4_DUNG_FRUSKBRANDO"][3]+1] = { ["100 shilders"] = 100 }
 	ret["CH4_DUNG_MALABIACAVES"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_MALABIACAVES"
 	ret["CH4_DUNG_MALABIACAVES"][1]={}
 	ret["CH4_DUNG_MALABIACAVES"][1].Total=7
 	ret["CH4_DUNG_MALABIACAVES"][1][#ret["CH4_DUNG_MALABIACAVES"][1]+1] = { ["ITM_HERB"] = 1 }
@@ -840,6 +895,7 @@ do
 	ret["CH4_DUNG_MALABIACAVES"][3][#ret["CH4_DUNG_MALABIACAVES"][3]+1] = { ["100 shilders"] = 0 }
 	ret["CH4_DUNG_MALABIACAVES"][3][#ret["CH4_DUNG_MALABIACAVES"][3]+1] = { ["200 shilders"] = 0 }
 	ret["CH4_DUNG_PURPLEFOREST"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_DUNG_PURPLEFOREST"
 	ret["CH4_DUNG_PURPLEFOREST"][1]={}
 	ret["CH4_DUNG_PURPLEFOREST"][1].Total=9
 	ret["CH4_DUNG_PURPLEFOREST"][1][#ret["CH4_DUNG_PURPLEFOREST"][1]+1] = { ["ITM_APPLE"] = 2 }
@@ -865,6 +921,7 @@ do
 	ret["CH4_DUNG_PURPLEFOREST"][3][#ret["CH4_DUNG_PURPLEFOREST"][3]+1] = { ["25 shilders"] = 0 }
 	ret["CH4_DUNG_PURPLEFOREST"][3][#ret["CH4_DUNG_PURPLEFOREST"][3]+1] = { ["50 shilders"] = 0 }
 	ret["CH4_HUB_AERIA_BEACH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_HUB_AERIA_BEACH"
 	ret["CH4_HUB_AERIA_BEACH"][1]={}
 	ret["CH4_HUB_AERIA_BEACH"][1].Total=0
 	ret["CH4_HUB_AERIA_BEACH"][2]={}
@@ -872,6 +929,7 @@ do
 	ret["CH4_HUB_AERIA_BEACH"][3]={}
 	ret["CH4_HUB_AERIA_BEACH"][3].Total=0
 	ret["CH4_HUB_CAT_BEACH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_HUB_CAT_BEACH"
 	ret["CH4_HUB_CAT_BEACH"][1]={}
 	ret["CH4_HUB_CAT_BEACH"][1].Total=0
 	ret["CH4_HUB_CAT_BEACH"][2]={}
@@ -879,6 +937,7 @@ do
 	ret["CH4_HUB_CAT_BEACH"][3]={}
 	ret["CH4_HUB_CAT_BEACH"][3].Total=0
 	ret["CH4_HUB_MALABIATEMPLE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_HUB_MALABIATEMPLE"
 	ret["CH4_HUB_MALABIATEMPLE"][1]={}
 	ret["CH4_HUB_MALABIATEMPLE"][1].Total=0
 	ret["CH4_HUB_MALABIATEMPLE"][2]={}
@@ -886,6 +945,7 @@ do
 	ret["CH4_HUB_MALABIATEMPLE"][3]={}
 	ret["CH4_HUB_MALABIATEMPLE"][3].Total=0
 	ret["CH4_HUB_RAYAL_PALACE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_HUB_RAYAL_PALACE"
 	ret["CH4_HUB_RAYAL_PALACE"][1]={}
 	ret["CH4_HUB_RAYAL_PALACE"][1].Total=0
 	ret["CH4_HUB_RAYAL_PALACE"][2]={}
@@ -893,6 +953,7 @@ do
 	ret["CH4_HUB_RAYAL_PALACE"][3]={}
 	ret["CH4_HUB_RAYAL_PALACE"][3].Total=0
 	ret["CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"] = {}
+	ret.Maps[#ret.Maps+1] = "CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"
 	ret["CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"][1]={}
 	ret["CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"][1].Total=0
 	ret["CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"][2]={}
@@ -900,6 +961,7 @@ do
 	ret["CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"][3]={}
 	ret["CH4_HUB_RAYAL_PALACE_UPSTAIRS_NIGHT"][3].Total=0
 	ret["CH5_CITY_UMERINGTON"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_CITY_UMERINGTON"
 	ret["CH5_CITY_UMERINGTON"][1]={}
 	ret["CH5_CITY_UMERINGTON"][1].Total=0
 	ret["CH5_CITY_UMERINGTON"][2]={}
@@ -907,6 +969,7 @@ do
 	ret["CH5_CITY_UMERINGTON"][3]={}
 	ret["CH5_CITY_UMERINGTON"][3].Total=0
 	ret["CH5_DUNG_DYRT_DEATH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_DUNG_DYRT_DEATH"
 	ret["CH5_DUNG_DYRT_DEATH"][1]={}
 	ret["CH5_DUNG_DYRT_DEATH"][1].Total=139
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -938,6 +1001,7 @@ do
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ["100 shilders"] = 0 }
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ["5000 shilders"] = 0 }
 	ret["CH5_DUNG_DYRT_DZGJYMZA"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_DUNG_DYRT_DZGJYMZA"
 	ret["CH5_DUNG_DYRT_DZGJYMZA"][1]={}
 	ret["CH5_DUNG_DYRT_DZGJYMZA"][1].Total=0
 	ret["CH5_DUNG_DYRT_DZGJYMZA"][2]={}
@@ -945,6 +1009,7 @@ do
 	ret["CH5_DUNG_DYRT_DZGJYMZA"][3]={}
 	ret["CH5_DUNG_DYRT_DZGJYMZA"][3].Total=0
 	ret["CH5_DUNG_DYRT_FOREST"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_DUNG_DYRT_FOREST"
 	ret["CH5_DUNG_DYRT_FOREST"][1]={}
 	ret["CH5_DUNG_DYRT_FOREST"][1].Total=0
 	ret["CH5_DUNG_DYRT_FOREST"][2]={}
@@ -952,6 +1017,7 @@ do
 	ret["CH5_DUNG_DYRT_FOREST"][3]={}
 	ret["CH5_DUNG_DYRT_FOREST"][3].Total=0
 	ret["CH5_DUNG_DYRT_WASTELAND"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_DUNG_DYRT_WASTELAND"
 	ret["CH5_DUNG_DYRT_WASTELAND"][1]={}
 	ret["CH5_DUNG_DYRT_WASTELAND"][1].Total=182
 	ret["CH5_DUNG_DYRT_WASTELAND"][1][#ret["CH5_DUNG_DYRT_WASTELAND"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -977,6 +1043,7 @@ do
 	ret["CH5_DUNG_DYRT_WASTELAND"][3][#ret["CH5_DUNG_DYRT_WASTELAND"][3]+1] = { ["50 shilders"] = 1 }
 	ret["CH5_DUNG_DYRT_WASTELAND"][3][#ret["CH5_DUNG_DYRT_WASTELAND"][3]+1] = { ["100 shilders"] = 0 }
 	ret["CH5_DUNG_REDTEMPLE"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_DUNG_REDTEMPLE"
 	ret["CH5_DUNG_REDTEMPLE"][1]={}
 	ret["CH5_DUNG_REDTEMPLE"][1].Total=0
 	ret["CH5_DUNG_REDTEMPLE"][2]={}
@@ -984,6 +1051,7 @@ do
 	ret["CH5_DUNG_REDTEMPLE"][3]={}
 	ret["CH5_DUNG_REDTEMPLE"][3].Total=0
 	ret["CH5_HUB_DYRT_BEACH"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_HUB_DYRT_BEACH"
 	ret["CH5_HUB_DYRT_BEACH"][1]={}
 	ret["CH5_HUB_DYRT_BEACH"][1].Total=0
 	ret["CH5_HUB_DYRT_BEACH"][2]={}
@@ -991,6 +1059,7 @@ do
 	ret["CH5_HUB_DYRT_BEACH"][3]={}
 	ret["CH5_HUB_DYRT_BEACH"][3].Total=0
 	ret["CH5_HUB_MERMAID"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_HUB_MERMAID"
 	ret["CH5_HUB_MERMAID"][1]={}
 	ret["CH5_HUB_MERMAID"][1].Total=0
 	ret["CH5_HUB_MERMAID"][2]={}
@@ -998,6 +1067,7 @@ do
 	ret["CH5_HUB_MERMAID"][3]={}
 	ret["CH5_HUB_MERMAID"][3].Total=0
 	ret["CH5_HUB_ZONDRA"] = {}
+	ret.Maps[#ret.Maps+1] = "CH5_HUB_ZONDRA"
 	ret["CH5_HUB_ZONDRA"][1]={}
 	ret["CH5_HUB_ZONDRA"][1].Total=0
 	ret["CH5_HUB_ZONDRA"][2]={}
@@ -1005,6 +1075,7 @@ do
 	ret["CH5_HUB_ZONDRA"][3]={}
 	ret["CH5_HUB_ZONDRA"][3].Total=0
 	ret["GJ_DUNG_BOTANICA"] = {}
+	ret.Maps[#ret.Maps+1] = "GJ_DUNG_BOTANICA"
 	ret["GJ_DUNG_BOTANICA"][1]={}
 	ret["GJ_DUNG_BOTANICA"][1].Total=156
 	ret["GJ_DUNG_BOTANICA"][1][#ret["GJ_DUNG_BOTANICA"][1]+1] = { ["ITM_ALOEVERA"] = 36 }
@@ -1027,6 +1098,7 @@ do
 	ret["GJ_DUNG_BOTANICA"][3][#ret["GJ_DUNG_BOTANICA"][3]+1] = { ["ITM_POTION"] = 30 }
 	ret["GJ_DUNG_BOTANICA"][3][#ret["GJ_DUNG_BOTANICA"][3]+1] = { ["ITM_SPORES"] = 2 }
 	ret["GJ_DUNG_FACILITY"] = {}
+	ret.Maps[#ret.Maps+1] = "GJ_DUNG_FACILITY"
 	ret["GJ_DUNG_FACILITY"][1]={}
 	ret["GJ_DUNG_FACILITY"][1].Total=718
 	ret["GJ_DUNG_FACILITY"][1][#ret["GJ_DUNG_FACILITY"][1]+1] = { ["ITM_BANDAGE"] = 511 }
@@ -1046,6 +1118,7 @@ do
 	ret["GJ_DUNG_FACILITY"][3][#ret["GJ_DUNG_FACILITY"][3]+1] = { ["ITM_MEDIKIT_150"] = 0 }
 	ret["GJ_DUNG_FACILITY"][3][#ret["GJ_DUNG_FACILITY"][3]+1] = { ["ITM_NUKE"] = 1 }
 	ret["GJ_DUNG_FACILITY2"] = {}
+	ret.Maps[#ret.Maps+1] = "GJ_DUNG_FACILITY2"
 	ret["GJ_DUNG_FACILITY2"][1]={}
 	ret["GJ_DUNG_FACILITY2"][1].Total=103
 	ret["GJ_DUNG_FACILITY2"][1][#ret["GJ_DUNG_FACILITY2"][1]+1] = { ["ITM_BANDAGE"] = 26 }
@@ -1065,6 +1138,7 @@ do
 	ret["GJ_DUNG_FACILITY2"][3][#ret["GJ_DUNG_FACILITY2"][3]+1] = { ["ITM_MEDIKIT"] = 20 }
 	ret["GJ_DUNG_FACILITY2"][3][#ret["GJ_DUNG_FACILITY2"][3]+1] = { ["ITM_SUPERMEDIKIT"] = 1 }
 	ret["GJ_DUNG_MORKER"] = {}
+	ret.Maps[#ret.Maps+1] = "GJ_DUNG_MORKER"
 	ret["GJ_DUNG_MORKER"][1]={}
 	ret["GJ_DUNG_MORKER"][1].Total=119
 	ret["GJ_DUNG_MORKER"][1][#ret["GJ_DUNG_MORKER"][1]+1] = { ["ITM_AMBROSIA"] = 3 }
@@ -1090,6 +1164,7 @@ do
 	ret["GJ_DUNG_MORKER"][3][#ret["GJ_DUNG_MORKER"][3]+1] = { ["250 shilders"] = 0 }
 	ret["GJ_DUNG_MORKER"][3][#ret["GJ_DUNG_MORKER"][3]+1] = { ["500 shilders"] = 0 }
 	ret["GJ_DUNG_SUGARLAND"] = {}
+	ret.Maps[#ret.Maps+1] = "GJ_DUNG_SUGARLAND"
 	ret["GJ_DUNG_SUGARLAND"][1]={}
 	ret["GJ_DUNG_SUGARLAND"][1].Total=335
 	ret["GJ_DUNG_SUGARLAND"][1][#ret["GJ_DUNG_SUGARLAND"][1]+1] = { ["ITM_CHOCO"] = 125 }
@@ -1109,6 +1184,7 @@ do
 	ret["GJ_DUNG_SUGARLAND"][3][#ret["GJ_DUNG_SUGARLAND"][3]+1] = { ["ITM_GUM"] = 0 }
 	ret["GJ_DUNG_SUGARLAND"][3][#ret["GJ_DUNG_SUGARLAND"][3]+1] = { ["25 shilders"] = 50 }
 	ret["GJ_DUNG_UNDERWORLD"] = {}
+	ret.Maps[#ret.Maps+1] = "GJ_DUNG_UNDERWORLD"
 	ret["GJ_DUNG_UNDERWORLD"][1]={}
 	ret["GJ_DUNG_UNDERWORLD"][1].Total=5
 	ret["GJ_DUNG_UNDERWORLD"][1][#ret["GJ_DUNG_UNDERWORLD"][1]+1] = { ["ITM_AMBROSIA"] = 2 }
@@ -1125,6 +1201,7 @@ do
 	ret["GJ_DUNG_UNDERWORLD"][3][#ret["GJ_DUNG_UNDERWORLD"][3]+1] = { ["ITM_BANANA"] = 0 }
 	ret["GJ_DUNG_UNDERWORLD"][3][#ret["GJ_DUNG_UNDERWORLD"][3]+1] = { ["ITM_MYSTERIOUSPOTION"] = 1 }
 	ret["NGP_DUNG_DIGITOPIA"] = {}
+	ret.Maps[#ret.Maps+1] = "NGP_DUNG_DIGITOPIA"
 	ret["NGP_DUNG_DIGITOPIA"][1]={}
 	ret["NGP_DUNG_DIGITOPIA"][1].Total=1272
 	ret["NGP_DUNG_DIGITOPIA"][1][#ret["NGP_DUNG_DIGITOPIA"][1]+1] = { ["ITM_CHEATDEVICE"] = 2 }
@@ -1156,6 +1233,7 @@ do
 	ret["NGP_DUNG_DIGITOPIA"][3][#ret["NGP_DUNG_DIGITOPIA"][3]+1] = { ["2500 shilders"] = 0 }
 	ret["NGP_DUNG_DIGITOPIA"][3][#ret["NGP_DUNG_DIGITOPIA"][3]+1] = { ["5000 shilders"] = 0 }
 	ret["NGP_DUNG_HALLMUSIC"] = {}
+	ret.Maps[#ret.Maps+1] = "NGP_DUNG_HALLMUSIC"
 	ret["NGP_DUNG_HALLMUSIC"][1]={}
 	ret["NGP_DUNG_HALLMUSIC"][1].Total=355
 	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ["ITM_AMBROSIA"] = 3 }
@@ -1181,6 +1259,7 @@ do
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ["20 shilders"] = 100 }
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ["1000 shilders"] = 0 }
 	ret["NGP_DUNG_LOSTARC"] = {}
+	ret.Maps[#ret.Maps+1] = "NGP_DUNG_LOSTARC"
 	ret["NGP_DUNG_LOSTARC"][1]={}
 	ret["NGP_DUNG_LOSTARC"][1].Total=66
 	ret["NGP_DUNG_LOSTARC"][1][#ret["NGP_DUNG_LOSTARC"][1]+1] = { ["ITM_APPLE"] = 40 }
@@ -1197,6 +1276,7 @@ do
 	ret["NGP_DUNG_LOSTARC"][3][#ret["NGP_DUNG_LOSTARC"][3]+1] = { ["ITM_MYSTERIOUSPOTION"] = 0 }
 	ret["NGP_DUNG_LOSTARC"][3][#ret["NGP_DUNG_LOSTARC"][3]+1] = { ["ITM_POTION"] = 0 }
 	ret["NGP_DUNG_THIEFDEN"] = {}
+	ret.Maps[#ret.Maps+1] = "NGP_DUNG_THIEFDEN"
 	ret["NGP_DUNG_THIEFDEN"][1]={}
 	ret["NGP_DUNG_THIEFDEN"][1].Total=76
 	ret["NGP_DUNG_THIEFDEN"][1][#ret["NGP_DUNG_THIEFDEN"][1]+1] = { ["ITM_AMBROSIA"] = 1 }
@@ -1228,6 +1308,7 @@ do
 	ret["NGP_DUNG_THIEFDEN"][3][#ret["NGP_DUNG_THIEFDEN"][3]+1] = { ["500 shilders"] = 0 }
 	ret["NGP_DUNG_THIEFDEN"][3][#ret["NGP_DUNG_THIEFDEN"][3]+1] = { ["1000 shilders"] = 0 }
 	ret["NGP_HUB_HALLOFHEROES"] = {}
+	ret.Maps[#ret.Maps+1] = "NGP_HUB_HALLOFHEROES"
 	ret["NGP_HUB_HALLOFHEROES"][1]={}
 	ret["NGP_HUB_HALLOFHEROES"][1].Total=0
 	ret["NGP_HUB_HALLOFHEROES"][2]={}
