@@ -116,8 +116,13 @@
 	; Post fight
 	call Achievements.Award,"BOSS_ZZZZZZZ_FINAL"
 	call MapText,"DZGJYMZA_WIN"
+	chk gv.Bool.NewGamePlus,Awardngptrophy
+	jmp BlenchyGoodbye
+	:Awardngptrophy
+	call Achievements.Award,"ZZZ_NEWGAMEPLUS"
 	
 	; Blenchy's goodbye
+	:BlenchyGoodbye
 	call Map.GoToLayer,"#001","Einde"
 	call Map.HideObj,"Player"
 	call Map.ShowByLabel,"BB"
