@@ -93,6 +93,27 @@ group MScript
 		MapScript.SASKIA("Gogh")
 	end
 	
+	var Rubine
+	void NPC_RUBINE()
+		var Rubine
+		self.Rubine = self.Rubine or NIL.Use("Script/Data/General/Rubine")
+		Rubine = self.Rubine
+		string MF
+		table work
+		table prize
+		repeat
+			MF = Rubine.Maps[math.random(1,#Rubine.Maps)]
+			work = self.Rubine[MF][__skill] 
+		until work.Total>0
+		repeat
+			prize = work[math.random(1,#work)]
+		until prize.num>0
+		gv.string.Rubine_Item = prize.item
+		gv.int.Rubine_Percent = math.floor( (prize.num/work.Total) * 100)
+		gv.string.Rubine_Map  = self.Rubine[MF].Name
+		MapText("Rubine");
+	end
+	
 	void Draw()
 	end
 	

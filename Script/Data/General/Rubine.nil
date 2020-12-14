@@ -1,5 +1,5 @@
 // Rubine's Treasure Register!
-// Generated on 12/14/2020 10:48:28 PM
+// Generated on 12/14/2020 11:42:21 PM
 
 do
 	table ret
@@ -166,20 +166,18 @@ do
 	ret["CH1_DUNG_XENORBUSHES_NORTH"].Name = "Xenor Bushes - North"
 	ret.Maps[#ret.Maps+1] = "CH1_DUNG_XENORBUSHES_NORTH"
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1]={}
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][1].Total=161
+	ret["CH1_DUNG_XENORBUSHES_NORTH"][1].Total=170
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ['item'] = Item["ITM_ANTIDOTE"].Name, ['num'] = 35 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ['item'] = Item["ITM_APPLE"].Name, ['num'] = 55 }
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 25 }
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ['item'] = Item["ITM_POTION:10"].Name, ['num'] = 1 }
+	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 35 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ['item'] = "1 shilder", ['num'] = 25 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ["item"] = "5 shilders", ['num'] = 10 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][1][#ret["CH1_DUNG_XENORBUSHES_NORTH"][1]+1] = { ["item"] = "10 shilders", ['num'] = 10 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][2]={}
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][2].Total=91
+	ret["CH1_DUNG_XENORBUSHES_NORTH"][2].Total=100
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ['item'] = Item["ITM_ANTIDOTE"].Name, ['num'] = 20 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ['item'] = Item["ITM_APPLE"].Name, ['num'] = 35 }
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 0 }
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ['item'] = Item["ITM_POTION:10"].Name, ['num'] = 1 }
+	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 10 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ['item'] = "1 shilder", ['num'] = 25 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ["item"] = "5 shilders", ['num'] = 10 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][2][#ret["CH1_DUNG_XENORBUSHES_NORTH"][2]+1] = { ["item"] = "10 shilders", ['num'] = 0 }
@@ -188,7 +186,6 @@ do
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ['item'] = Item["ITM_ANTIDOTE"].Name, ['num'] = 5 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ['item'] = Item["ITM_APPLE"].Name, ['num'] = 10 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 0 }
-	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ['item'] = Item["ITM_POTION:10"].Name, ['num'] = 0 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ['item'] = "1 shilder", ['num'] = 25 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ["item"] = "5 shilders", ['num'] = 0 }
 	ret["CH1_DUNG_XENORBUSHES_NORTH"][3][#ret["CH1_DUNG_XENORBUSHES_NORTH"][3]+1] = { ["item"] = "10 shilders", ['num'] = 0 }
@@ -1034,8 +1031,7 @@ do
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ['item'] = Item["ITM_AMBROSIA"].Name, ['num'] = 1 }
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ['item'] = Item["ITM_HERB"].Name, ['num'] = 50 }
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ['item'] = Item["ITM_HOLYWATER"].Name, ['num'] = 10 }
-	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ['item'] = Item["ITM_MYSTERIOUS"].Name, ['num'] = 5 }
-	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ['item'] = Item["ITM_MYSTERIOUSPOTION"].Name, ['num'] = 25 }
+	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ['item'] = Item["ITM_MYSTERIOUSPOTION"].Name, ['num'] = 30 }
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ["item"] = "10 shilders", ['num'] = 25 }
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ["item"] = "100 shilders", ['num'] = 20 }
 	ret["CH5_DUNG_DYRT_DEATH"][1][#ret["CH5_DUNG_DYRT_DEATH"][1]+1] = { ["item"] = "5000 shilders", ['num'] = 3 }
@@ -1044,8 +1040,7 @@ do
 	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ['item'] = Item["ITM_AMBROSIA"].Name, ['num'] = 0 }
 	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ['item'] = Item["ITM_HERB"].Name, ['num'] = 10 }
 	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ['item'] = Item["ITM_HOLYWATER"].Name, ['num'] = 10 }
-	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ['item'] = Item["ITM_MYSTERIOUS"].Name, ['num'] = 5 }
-	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ['item'] = Item["ITM_MYSTERIOUSPOTION"].Name, ['num'] = 0 }
+	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ['item'] = Item["ITM_MYSTERIOUSPOTION"].Name, ['num'] = 5 }
 	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ["item"] = "10 shilders", ['num'] = 25 }
 	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ["item"] = "100 shilders", ['num'] = 20 }
 	ret["CH5_DUNG_DYRT_DEATH"][2][#ret["CH5_DUNG_DYRT_DEATH"][2]+1] = { ["item"] = "5000 shilders", ['num'] = 0 }
@@ -1054,7 +1049,6 @@ do
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ['item'] = Item["ITM_AMBROSIA"].Name, ['num'] = 0 }
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ['item'] = Item["ITM_HERB"].Name, ['num'] = 0 }
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ['item'] = Item["ITM_HOLYWATER"].Name, ['num'] = 0 }
-	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ['item'] = Item["ITM_MYSTERIOUS"].Name, ['num'] = 0 }
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ['item'] = Item["ITM_MYSTERIOUSPOTION"].Name, ['num'] = 0 }
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ["item"] = "10 shilders", ['num'] = 25 }
 	ret["CH5_DUNG_DYRT_DEATH"][3][#ret["CH5_DUNG_DYRT_DEATH"][3]+1] = { ["item"] = "100 shilders", ['num'] = 0 }
@@ -1168,22 +1162,19 @@ do
 	ret["GJ_DUNG_FACILITY"].Name = "Scientific Facility"
 	ret.Maps[#ret.Maps+1] = "GJ_DUNG_FACILITY"
 	ret["GJ_DUNG_FACILITY"][1]={}
-	ret["GJ_DUNG_FACILITY"][1].Total=718
+	ret["GJ_DUNG_FACILITY"][1].Total=867
 	ret["GJ_DUNG_FACILITY"][1][#ret["GJ_DUNG_FACILITY"][1]+1] = { ['item'] = Item["ITM_BANDAGE"].Name, ['num'] = 511 }
-	ret["GJ_DUNG_FACILITY"][1][#ret["GJ_DUNG_FACILITY"][1]+1] = { ['item'] = Item["ITM_MEDIKIT"].Name, ['num'] = 100 }
-	ret["GJ_DUNG_FACILITY"][1][#ret["GJ_DUNG_FACILITY"][1]+1] = { ['item'] = Item["ITM_MEDIKIT_150"].Name, ['num'] = 1 }
+	ret["GJ_DUNG_FACILITY"][1][#ret["GJ_DUNG_FACILITY"][1]+1] = { ['item'] = Item["ITM_MEDIKIT"].Name, ['num'] = 250 }
 	ret["GJ_DUNG_FACILITY"][1][#ret["GJ_DUNG_FACILITY"][1]+1] = { ['item'] = Item["ITM_NUKE"].Name, ['num'] = 106 }
 	ret["GJ_DUNG_FACILITY"][2]={}
 	ret["GJ_DUNG_FACILITY"][2].Total=616
 	ret["GJ_DUNG_FACILITY"][2][#ret["GJ_DUNG_FACILITY"][2]+1] = { ['item'] = Item["ITM_BANDAGE"].Name, ['num'] = 510 }
 	ret["GJ_DUNG_FACILITY"][2][#ret["GJ_DUNG_FACILITY"][2]+1] = { ['item'] = Item["ITM_MEDIKIT"].Name, ['num'] = 100 }
-	ret["GJ_DUNG_FACILITY"][2][#ret["GJ_DUNG_FACILITY"][2]+1] = { ['item'] = Item["ITM_MEDIKIT_150"].Name, ['num'] = 0 }
 	ret["GJ_DUNG_FACILITY"][2][#ret["GJ_DUNG_FACILITY"][2]+1] = { ['item'] = Item["ITM_NUKE"].Name, ['num'] = 6 }
 	ret["GJ_DUNG_FACILITY"][3]={}
 	ret["GJ_DUNG_FACILITY"][3].Total=576
 	ret["GJ_DUNG_FACILITY"][3][#ret["GJ_DUNG_FACILITY"][3]+1] = { ['item'] = Item["ITM_BANDAGE"].Name, ['num'] = 500 }
 	ret["GJ_DUNG_FACILITY"][3][#ret["GJ_DUNG_FACILITY"][3]+1] = { ['item'] = Item["ITM_MEDIKIT"].Name, ['num'] = 75 }
-	ret["GJ_DUNG_FACILITY"][3][#ret["GJ_DUNG_FACILITY"][3]+1] = { ['item'] = Item["ITM_MEDIKIT_150"].Name, ['num'] = 0 }
 	ret["GJ_DUNG_FACILITY"][3][#ret["GJ_DUNG_FACILITY"][3]+1] = { ['item'] = Item["ITM_NUKE"].Name, ['num'] = 1 }
 	ret["GJ_DUNG_FACILITY2"] = {}
 	ret["GJ_DUNG_FACILITY2"].Name = "Science Facility"
@@ -1312,16 +1303,14 @@ do
 	ret["NGP_DUNG_HALLMUSIC"][1].Total=355
 	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ['item'] = Item["ITM_AMBROSIA"].Name, ['num'] = 3 }
 	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ['item'] = Item["ITM_BANANA"].Name, ['num'] = 2 }
-	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 100 }
-	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ['item'] = Item["POTIION"].Name, ['num'] = 100 }
+	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 200 }
 	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ["item"] = "20 shilders", ['num'] = 100 }
 	ret["NGP_DUNG_HALLMUSIC"][1][#ret["NGP_DUNG_HALLMUSIC"][1]+1] = { ["item"] = "1000 shilders", ['num'] = 50 }
 	ret["NGP_DUNG_HALLMUSIC"][2]={}
 	ret["NGP_DUNG_HALLMUSIC"][2].Total=201
 	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ['item'] = Item["ITM_AMBROSIA"].Name, ['num'] = 0 }
 	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ['item'] = Item["ITM_BANANA"].Name, ['num'] = 1 }
-	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 0 }
-	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ['item'] = Item["POTIION"].Name, ['num'] = 100 }
+	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 100 }
 	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ["item"] = "20 shilders", ['num'] = 100 }
 	ret["NGP_DUNG_HALLMUSIC"][2][#ret["NGP_DUNG_HALLMUSIC"][2]+1] = { ["item"] = "1000 shilders", ['num'] = 0 }
 	ret["NGP_DUNG_HALLMUSIC"][3]={}
@@ -1329,7 +1318,6 @@ do
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ['item'] = Item["ITM_AMBROSIA"].Name, ['num'] = 0 }
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ['item'] = Item["ITM_BANANA"].Name, ['num'] = 0 }
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ['item'] = Item["ITM_POTION"].Name, ['num'] = 0 }
-	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ['item'] = Item["POTIION"].Name, ['num'] = 0 }
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ["item"] = "20 shilders", ['num'] = 100 }
 	ret["NGP_DUNG_HALLMUSIC"][3][#ret["NGP_DUNG_HALLMUSIC"][3]+1] = { ["item"] = "1000 shilders", ['num'] = 0 }
 	ret["NGP_DUNG_LOSTARC"] = {}
