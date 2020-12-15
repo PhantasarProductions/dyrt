@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.06.04
+// version: 20.12.15
 // End License Information
 do
 	delegate ret
@@ -46,7 +46,7 @@ do
 				if lvl % 10 == 0 or lvl % __skill
 					RPG.GetChar("Eric").Stat("PERMPOWERUP_Strength").Value ++
 				end
-				if lvl % (__skill * 10) == 0
+				if lvl % (__skill * 15) == 0
 					RPG.GetChar("Irravonia").Stat("PERMPOWERUP_HP").Value ++
 					RPG.GetChar("Rebecca").Stat("PERMPOWERUP_HP").Value ++
 					RPG.GetChar("Eric").Stat("PERMPOWERUP_HP").Value ++
@@ -69,7 +69,7 @@ do
 				end
 			case 3
 				// Green Dragon
-				if RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value < (90/__skill)
+				if lvl % (__skill*2) == 0 and RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value < (90/__skill)
 					RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value ++
 				end
 				if lvl % __skill == 0
@@ -77,10 +77,10 @@ do
 				end
 			case 4
 				// Black Dragon
-				if RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Death").Value < (90/__skill)
+				if lvl % (__skill*2) == 0 and RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Death").Value < (90/__skill)
 					RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Death").Value ++
 				end
-				if RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Destruction").Value < (93/__skill)
+				if lvl % (__skill*2) == 0 and RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Destruction").Value < (93/__skill)
 					RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Destruction").Value ++
 				end
 				if lvl % __skill == 0
