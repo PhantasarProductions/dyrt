@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.30
+// version: 20.12.17
 // End License Information
 
 do
@@ -55,7 +55,7 @@ do
 		BloodSucker     = { Charm = { "Bat" } },
 		Claw            = { Charm = { "Tiger","Cheetah","PolarBear" } },
 		Peck            = { Charm = { "Pinguin", "Raven" }, Skill_Nature = 30 + (s*10) },
-		CrocBite        = { Charm = { "Croc" }, Skill_Nature = 10 + (10 * s) },
+		Croc_Bite       = { Charm = { "Croc" }, Skill_Nature = 10 + (10 * s) },
 		Spores          = { Charm = { "DeathCap", "Shroom" } },
 		Growl           = { Charm = { "GuardDog" } },
 		Howling         = { Charm = { "Wolf" } },
