@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.11.22
+// version: 20.12.19
 // End License Information
 
 
@@ -63,6 +63,7 @@ group MScript
 	link HIDESUBS = MScript.HideSubs
 	
 	void SHOWPART(string z)
+		CSay("Showing zone: "..z)
 		Map.VisibleOnlyByZone(z,true)
 		if z=="Slaapkamer" and gv.Bool.SpokenToOracle
 			MapScript.SASKIA("Sleep")
@@ -83,10 +84,14 @@ group MScript
 		Map.GoToLayer("NACHT","Start_Orakel")
 		Achievements.Award("SCEN_ORACLE")
 		Map.Cam(1600,800)
-		$SHOWPART("Orakel")
+		self.SHOWPART("Orakel")
 		if not Done.SpokenToOracle
 			MapText("ORACLE")
 		end
+	end
+	
+	void SHOWORAKEL()
+		self.SHOWPART("Orakel")
 	end
 	
 	void NPC_ORACLE()
@@ -119,6 +124,7 @@ group MScript
 		Map.ZA_Enter("Zone_Crack","Bergpad_Z")
 		Map.ZA_Enter("Exit_Orakel","Bergpad_N")
 		Map.ZA_Enter("BackToMain","BackToMain")
+		Map.ZA_Enter("Orakel","ShowOrakel")
 	end
 	
 	void Draw()
