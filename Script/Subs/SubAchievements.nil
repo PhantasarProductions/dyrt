@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 20.08.22
+// Version: 20.12.22
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -105,7 +105,7 @@ class AchBox
 		CSay("Listing Box")
 		self.BoxList.AddLast(self)
 		CSay("= Re-adjusting y")		
-		for ab in self.BoxList.Each			
+		for ab in self.BoxList.Each
 			if ab.y>=self.y-25
 				#+ self.y 150
 			end
@@ -189,6 +189,9 @@ group F_Achievements
 		elseif a.only_trueabyss
 			ret = ret and __trueabyss
 			AChat("= Achievement ONLY allowed in the true abyss... Are we in the true abyss? ",__trueabyss,"..... So ret must be ",ret)
+		end
+		if a.only_newgameplus
+			ret = ret and __newgameplus
 		end
 		return ret
 	end
