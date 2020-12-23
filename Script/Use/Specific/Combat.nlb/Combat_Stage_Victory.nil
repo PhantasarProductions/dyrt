@@ -75,7 +75,7 @@ group Stage_VICTORY extends Stage
 					var Chr
 					Chr = RPG.Char(ch)
 					if Chr.Points("HP").Have==0
-						if Chr.Points("HP").Have=1
+						Chr.Points("HP").Have=1
 					end
 					if Chr.Points("HP").Have<Chr.Points("HP").Maximum and Chr.Points("VIT").Have>0
 						Chr.Points("VIT").Have--
