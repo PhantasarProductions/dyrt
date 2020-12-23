@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.07.28
+// Version: 20.12.23
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -703,6 +703,18 @@ group Flow_FieldMenu
 				//Annoy("Recalc not yet done!")
 				EquipRecalc($CharTag)
 			case "Consumable"
+				if it.Heal>0 and ch.Points("HP").Have<ch.Points("HP").Maximum
+				switch it.HealType
+					case "Absolute"
+						ch.Points("HP").Have = ch.Points("HP").Have + it.Heal
+					case "Percent"
+						ch.Points("HP").Have = ch.Points("HP").Have + math.ceil( (it.Heal/100)*ch.Points("HP").Maximum)
+					default
+						Annoy("It appears this particular healing item can only be used in combat")
+				if not ($CharTag=="Merya" and math.random(1,__skill*5)==1)
+					Inventory[TagItem]--
+					gv.int.WILL_MERYA++
+				end
 			case "Key"
 				Annoy("You cannot use a key item!\n\nThey will be used automatically when needed!")
 			default
