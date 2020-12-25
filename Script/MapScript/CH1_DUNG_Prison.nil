@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.11.23
+// version: 20.12.25
 // End License Information
 
 
@@ -76,7 +76,7 @@ group MScript
 	
 	void LEAVECELL()
 		Map.GoToLayer("#006","Einde")
-		if not Done.EnterPrisonForReal
+		if not gv.Bool.EnterPrisonForReal_LeftCell_TopFloor
 			gv.Bool["RESPAWN_INITIATED"] = false
 		end		
 	end
@@ -141,6 +141,7 @@ group MScript
 	end
 	
 	
+	
 	void CONSTRUCTOR()
 		CSay("Welcome in jail!")
 		Map.ZA_Enter("Leave_Cell","LeaveCell")
@@ -152,7 +153,7 @@ group MScript
 		Map.ZA_Enter("CheckGameJolt","GJ_Open")
 		Map.ZA_Enter("To_Botanica","To_Botanica")
 		Map.ZA_Enter("StartBlenchy","SASKIA:Blenchy")
-		if not Done.EnterPrisonForReal
+		if not gv.Bool.EnterPrisonForReal_LeftCell
 			gv.Bool["RESPAWN_INITIATED"] = false
 		end
 	end
