@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:05 PM
+// Generated: 12/25/2020 10:41:31 AM
 
 do
 var retfunc()
@@ -162,7 +162,7 @@ if Foe.LoadOversoul
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=70
+	foeret.Char.Stat("BASE_Defense").Value=7
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -195,11 +195,11 @@ else
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=60
+	foeret.Char.Stat("BASE_Defense").Value=6
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
-	foeret.Char.Stat("BASE_Evasion").Value=20
+	foeret.Char.Stat("BASE_Evasion").Value=3
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
@@ -337,6 +337,8 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	default
 		error("Unknown skill "..__skill)
 end
