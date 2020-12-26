@@ -55,6 +55,12 @@ group MScript
 		Map.GoToLayer("#005","Einde")
 	end
 	
+	void TUTOR()
+		if not Done.GameJoltExclusiveTutorial_Botanica
+			MapText("TUTOR")
+		end
+	end
+	
 	void STARTBOSS()
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/Special.Wav"
@@ -73,6 +79,7 @@ group MScript
 		Map.ZA_Enter("BackNext","BackNext")
 		Map.ZA_Enter("BackPrev","BackPrev")
 		Map.ZA_Enter("ABoss","SASKIA:Boss")
+		Map.ZA_Enter("Tutor","Tutor")
 		if not Done.EnterPrisonForReal
 			gv.Bool["RESPAWN_INITIATED"] = false
 		end
