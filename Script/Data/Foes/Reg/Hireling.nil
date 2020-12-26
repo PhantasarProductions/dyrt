@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/12/2020 11:11:06 PM
+// Generated: 12/25/2020 10:54:10 PM
 
 do
 var retfunc()
@@ -170,6 +170,8 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
@@ -189,6 +191,9 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
@@ -197,12 +202,17 @@ switch __skill
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_REBECCA_POWER2X"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_REBECCA_POWER2X"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_REBECCA_POWER2X"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_REBECCA_POWER2X"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_REBECCA_POWER2X"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_BADPOTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
