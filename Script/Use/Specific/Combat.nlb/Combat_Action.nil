@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.07.29
+// Version: 20.12.27
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -304,8 +304,11 @@ group Stage_Action extends Stage
 	void PurgeTargets()
 		table newtar
 		for _,tar in ipairs(self.Act.Targets)
-			bool a = true
-			if tar.Char.Points("HP").Have==0
+			bool a = true 
+			// IT'S COMPLETELY IMPOSSIBLE tar.Char is nil (the game could never have worked at all if it was), but this has happened, and to prevent this from happening ever again (and void a impossibility in the process) I put in this!
+			// How this happened I don't know. Perhaps a jinx by Lord Voldemort or something?
+			a = a and tar.Char		
+			if a and tar.Char.Points("HP").Have==0
 				a = a and (not prefixed(tar.Tag,"FOE_"))
 				a = a and self.Act.Act.CureDeath
 			end
