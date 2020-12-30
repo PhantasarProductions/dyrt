@@ -18109,6 +18109,7 @@ Rec: ABL_HERO_REBECCA_POWER2X
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -18205,8 +18206,8 @@ Rec: ABL_HERO_REBECCA_POWER2X
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
-	Stance = CAST
+	SpellAniScript = MultiPowerStrike
+	Stance = ATTACK
 	Target = 1F
 	TriggerAfterAttack = FALSE
 	Type = Ability
@@ -18237,6 +18238,7 @@ Rec: ABL_HERO_REBECCA_POWER3X
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -18333,8 +18335,8 @@ Rec: ABL_HERO_REBECCA_POWER3X
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
-	Stance = CAST
+	SpellAniScript = MultiPowerStrike
+	Stance = ATTACK
 	Target = 1F
 	TriggerAfterAttack = FALSE
 	Type = Ability
@@ -18365,6 +18367,7 @@ Rec: ABL_HERO_REBECCA_POWER4X
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -18461,8 +18464,8 @@ Rec: ABL_HERO_REBECCA_POWER4X
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
-	Stance = CAST
+	SpellAniScript = MultiPowerStrike
+	Stance = ATTACK
 	Target = 1F
 	TriggerAfterAttack = FALSE
 	Type = Ability
@@ -18493,6 +18496,7 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -18589,8 +18593,8 @@ Rec: ABL_HERO_REBECCA_POWER5X
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
-	Stance = CAST
+	SpellAniScript = MultiPowerStrike
+	Stance = ATTACK
 	Target = 1F
 	TriggerAfterAttack = TRUE
 	Type = Ability

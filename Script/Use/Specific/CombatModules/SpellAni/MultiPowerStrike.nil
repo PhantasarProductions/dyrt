@@ -1,0 +1,67 @@
+module MultiPowerString_SpellAni
+	
+	var plaatje 
+	readonly int pcx
+	readonly int pcy
+	int tcx
+	int tcy
+	int Times 
+	readonly int FrameSkip = 4
+	int Frame = 0
+	bool Show = false
+	var SFX
+	
+	var Target
+	
+	void CONSTRUCTOR()
+		self.plaatje = LoadIfNew("GFX/Combat/SpellANI/BANG.png","SPELL_ANI_BANG")
+		self.pcx = math.floor(self.plaatje.Width/2)
+		self.pcy = math.floor(self.plaatje.Height/2)
+	end
+	
+	void Init(act)
+		if #act.Targets>1
+			error("Multi Power Strike can only handle 1 TARGET")
+		end
+		self.Target = act.Targets[1]
+		self.tcx = math.floor(self.Target.Width/2)
+		self.tcy = math.floor(self.Target.Height/2)
+		switch act.ActTag:upper()
+			case "ABL_HERO_REBECCA_POWER2X" "ABL_HERO_ERIC_POWER2X"
+				self.Times = 2
+				self.SFX = LoadNewAudio("SFX/Combat/SpellAni/PowerStrike2.wav","SPELLANI_POWERSTRIKE2")
+			case "ABL_HERO_REBECCA_POWER3X" "ABL_HERO_ERIC_POWER3X"
+				self.Times = 3
+				self.SFX = LoadNewAudio("SFX/Combat/SpellAni/PowerStrike3.wav","SPELLANI_POWERSTRIKE3")
+			case "ABL_HERO_REBECCA_POWER4X" "ABL_HERO_ERIC_POWER4X"
+				self.Times = 4
+				self.SFX = LoadNewAudio("SFX/Combat/SpellAni/PowerStrike4.wav","SPELLANI_POWERSTRIKE4")
+			case "ABL_HERO_REBECCA_POWER5X" "ABL_HERO_ERIC_POWER5X"
+				self.Times = 5
+				self.SFX = LoadNewAudio("SFX/Combat/SpellAni/PowerStrike4.wav","SPELLANI_POWERSTRIKE4")
+			default
+				self.Times = math.random(2,10)
+				self.SFX = LoadNewAudio("SFX/Combat/SpellAni/PowerStrike2.wav","SPELLANI_POWERSTRIKE2")
+				CSay("Move not recognized so times will be random!")
+		end
+		self.SFX.Play()
+	end
+	
+	bool Cycle(act)
+		bool ret = false
+		self.Frame++
+		if self.Frame % self.FrameSkip == 0
+			self.Show = not self.Show
+			if (not self.Show)
+				self.Times--
+				ret = self.Times<=0
+			end
+		end
+		if self.Show
+			__white
+			self.plaatje.Draw(self.Target.X+self.tcx-self.pcx,self.Target.Y+self.tcy-self.pcy)
+		end
+		return ret
+	end
+
+end
