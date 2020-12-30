@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Flow/MainMenu.nil
-// Version: 20.12.04
+// Version: 20.12.30
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -54,11 +54,13 @@ CSay("Setting up MainMenu")
 
 #say "MainMenu: Declare menu items and font"
 var MenuItems
-var Background
+//var Background
 var ItemFont
 var CopyFont
 var CopyText
 var Logo
+
+var SBackground
 
 int NOCLICK=15
 
@@ -72,7 +74,8 @@ ItemFont  = GetFont("MAINMENU")
 Logo = LoadImage("GFX/Alg/Dyrt_Logo.png")
 int MidXLogo
 MidXLogo = Logo.Width/2
-Background = TImage.Obtain("MENUBACK")
+//Background = TImage.Obtain("MENUBACK")
+SBackground = LoadImage("GFX/MainMenu/Background.png")
 CopyFont = LoadImageFont(FONT_Blitz)
 CopyText = CopyFont.Text("(c) "..BuildData.Copyright[2019].." Jeroen P. Broks")
 
@@ -273,9 +276,12 @@ global void BUB_Draw()
 	MidScreen.Auto()
 	
 	// Background
-	Background.Tile(0,0,Screen.Width,Screen.Height)
+	//Background.Tile(0,0,Screen.Width,Screen.Height)
+	Color(127,127,127)
+	SBackground.StretchDraw(0,0,Screen.Width,Screen.Height)
 	
 	// Logo
+	__white
 	Logo.Draw(MidScreen.X-MidXLogo,20)
 	
 	// Copyright
