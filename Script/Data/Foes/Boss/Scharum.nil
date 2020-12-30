@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 7/11/2020 11:38:01 PM
+// Generated: 12/29/2020 5:10:20 PM
 
 do
 var retfunc()
@@ -120,6 +120,8 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ITM_POTION"
 	case 3
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_MERYA_STUBSTAB"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_MERYA_STUBSTAB"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
