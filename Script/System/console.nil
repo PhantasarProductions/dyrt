@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/System/console.nil
 // Console
-// version: 20.07.19
+// version: 20.12.30
 // Copyright (C) 2019, 2020 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
@@ -148,6 +148,13 @@ group ConsoleCommands
 	void IDDQD()
 		gv.Bool.DEBUG_CHEAT_IDDQD = not gv.Bool.DEBUG_CHEAT_IDDQD
 		CSay("Mode IDDQD: "..tostring(gv.Bool.DEBUG_CHEAT_IDDQD))
+	end
+	
+	void HERMIONE()
+		gv.Bool.DEBUG_CHEAT_HERMIONE = not gv.Bool.DEBUG_CHEAT_HERMIONE
+		CSay("Mode HERMIONE: "..tostring(gv.Bool.DEBUG_CHEAT_HERMIONE))
+		// Yes, this cheat is named after Hermione Granger
+		// This because of her addiction to study
 	end
 	
 	void MUSICMEM()
