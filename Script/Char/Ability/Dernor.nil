@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.12.17
+// version: 20.12.30
 // End License Information
 
 do
@@ -59,7 +59,7 @@ do
 		Spores          = { Charm = { "DeathCap", "Shroom" } },
 		Growl           = { Charm = { "GuardDog" } },
 		Howling         = { Charm = { "Wolf" } },
-		SickBite        = { Charm = { "Salamandar" }, Skill_Bat = 15 },
+		SickBite        = { Charm = { "Salamander" }, Skill_Bat = 15 },
 		Burp            = { Charm = { "Toad" } },
 		Suicide         = { Charm = { "Lemming" } },
 		RavenPeck       = { Charm = { "Raven"}, Scharum=true, Skill_Bat=30,Skill_Nature=31 },
