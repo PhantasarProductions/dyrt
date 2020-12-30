@@ -38,6 +38,7 @@
 module SpellAni_Shuriken
 
 	var PRJ
+	var Audio
 	
 	get delegate Cycle
 		bool ret
@@ -46,12 +47,14 @@ module SpellAni_Shuriken
 			self.PRJ.Turn = false
 		end
 		return ret
+		self.Audio = LoadNewAudio("SFX/Combat/SpellAni/Shuriken.wav","SPELLANI_SHURIKEN")
 	end
 	
 	void Init(act)
 		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
 		self.PRJ.Start("GFX/Combat/SpellAni/Shuriken.png",act.Executor,act.Targets[1],false,true)
 		self.PRJ.Turn = true
+		self.Audio.Play()
 	end
 	
 	void CONSTRUCTOR()
