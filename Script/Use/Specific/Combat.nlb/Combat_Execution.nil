@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Execution.nil
-// Version: 20.11.24
+// Version: 20.12.31
 // Copyright (C) 2019, 2020 Jeroen Petrus Broks
 // 
 // ===========================
@@ -433,8 +433,12 @@ group Execution
 							#pure
 							self.skillupf[Action.Executor.Tag](i)
 							#endpure
-							if skl.Have == skl.Maximum and Action.Executor.Tag!="YoungIrravonia" and Action.Executor.Tag!="Shanda" and Action.Executor.Tag!="Kirana"
-								Achievements.Award(sprintf("SKILL_%d_%s",i,Action.Executor.Tag:upper()))
+							if skl.Have == skl.Maximum
+								if Action.Executor.Tag=="Yasathar"
+									Achievements.Award(sprintf("MAXSKILL_%d_%s",i,"ERIC"))
+								elseif Action.Executor.Tag!="YoungIrravonia" and Action.Executor.Tag!="Shanda" and Action.Executor.Tag!="Kirana"
+									Achievements.Award(sprintf("MAXSKILL_%d_%s",i,Action.Executor.Tag:upper()))
+								end
 							end
 						end
 					end
