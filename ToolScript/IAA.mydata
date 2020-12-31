@@ -17725,6 +17725,7 @@ Rec: ABL_HERO_REBECCA_CLEAVE
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
 	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
@@ -17821,7 +17822,7 @@ Rec: ABL_HERO_REBECCA_CLEAVE
 	Sellable = TRUE
 	SpellAniArgument = 
 	SpellAniFunction = 
-	SpellAniScript = 
+	SpellAniScript = Cleave
 	Stance = ATTACK
 	Target = AF
 	TriggerAfterAttack = FALSE

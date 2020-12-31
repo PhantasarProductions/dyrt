@@ -1,0 +1,65 @@
+class CleaveLine
+	readonly int x1
+	readonly int x2
+	readonly int y1
+	readonly int y2
+	void CONSTRUCTOR(AX1,AX2,AY1,AY2)
+		self.x1=AX1
+		self.x2=AX2
+		self.y1=AY1
+		self.y2=AY2
+	end
+end
+
+module SpellAni_Cleave
+
+	table lines
+	int countdown
+	
+	void CONSTRUCTOR()
+		CSay("Cleave SpellAni loaded")
+	end
+	
+	void Init()
+		int lnum
+		lnum = math.random(5,10)
+		self.lines = {}
+		for i=0,lnum
+			int st
+			st = math.random(1,6)
+			switch st
+				case 1
+					// left to top
+					self.lines[#self.lines+1] = new CleaveLine(0,math.random(10,Screen.H-10),math.random(10,Screen.W-10),0)
+				case 2
+					// right to top
+					self.lines[#self.lines+1] = new CleaveLine(Screen.W,math.random(10,Screen.H-10),math.random(10,Screen.W-10),0)
+				case 3
+					// left to bottom
+					self.lines[#self.lines+1] = new CleaveLine(0,math.random(10,Screen.H-10),math.random(10,Screen.W-10),Screen.H)
+				case 4
+					// right to bottom
+					self.lines[#self.lines+1] = new CleaveLine(Screen.W,math.random(10,Screen.H-10),math.random(10,Screen.W-10),Screen.H)
+				case 5
+					// left to right
+					self.lines[#self.lines+1] = new CleaveLine(0,math.random(10,Screen.H-10),Screen.W,math.random(10,Screen.H-10))
+				case 6
+					// top to bottom
+					self.lines[#self.lines+1] = new CleaveLine(math.random(10,Screen.W-10),0,math.random(10,Screen.W-10),Screen.H)
+				default
+					error("Invalid cleave line code: "..st)
+			end
+			self.countdown = math.random(25,75)
+		end
+	end
+	
+	bool Cycle()
+		for _,l in ipairs(self.lines)
+			Color(math.random(0,255),math.random(0,255),math.random(0,255))
+			DrawLine(l.x1,l.y1,l.x2,l.y2)
+		end
+		self.countdown--
+		return self.countdown<=0
+	end
+
+end
