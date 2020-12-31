@@ -46,8 +46,8 @@ module SpellAni_Shuriken
 		if not ret
 			self.PRJ.Turn = false
 		end
-		return ret
 		self.Audio = LoadNewAudio("SFX/Combat/SpellAni/Shuriken.wav","SPELLANI_SHURIKEN")
+		return ret
 	end
 	
 	void Init(act)
