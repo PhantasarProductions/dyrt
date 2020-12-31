@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.21
+// version: 20.12.31
 // End License Information
 
 #use "libs/tables"
@@ -84,6 +84,7 @@ module JS_SpellAni
 	int Spd
 	int Round
 	bool Klaar
+	var Geluid
 	
 	get int MidX
 		return math.ceil(Screen.W/2)
@@ -106,6 +107,7 @@ module JS_SpellAni
 			new JS_CD(ifighter)
 		end
 		self.Klaar = false
+		self.Geluid.Play()
 	end
 	
 	bool RecoverySpots()
@@ -167,6 +169,7 @@ module JS_SpellAni
 	end
 	
 	void CONSTRUCTOR()
+		self.Geluid = LoadNewAudio("SFX/Combat/SpellAni/JerackoSpin.wav","SPELLANI_JerackoSpin")
 	end
 	
 end
