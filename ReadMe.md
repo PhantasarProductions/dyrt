@@ -8,10 +8,6 @@ If you wanna keep track of what I do you can check my commits here or follow my 
 
 This (not yet complete) [Game Jolt Page](https://gamejolt.com/games/Dyrt_NET/426296) may soon show more details, or go to the [site](https://tricky.gamejolt.io/dyrt_NET)
 
-# Note
-
-Despite Github stating it, the game is NOT written in Pascal. Github notes it due to a prototype program I wrote in Pascal. The game itself doesn't use Pascal at all.
-
 # NIL Language
 
 This entire game has been written in the [NIL Programming Language](https://github.com/jpbubble/NIL-isn-t-Lua), which is a bit of an extention to Lua. The engine is the NALA engine.
