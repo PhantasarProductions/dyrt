@@ -69,6 +69,7 @@ do
 		Inferno         = { Charm = { "HellHound"}, Skill_Nature = (s+s) * s } ,
 		Dive            = { Charm = { "Eagle" }, Skill_Bat = 20 },
 		SpitPoison      = { Charm = { "Cobra" }, Skill_Bat = s },
+		Tsunami         = { Charm = { "Squid"}, Skill_Bat = 2^s, Skill_Nature = 20 * s }, 
 	
 		-- Scharum
 		MotherNature   = { Scharum = true }
