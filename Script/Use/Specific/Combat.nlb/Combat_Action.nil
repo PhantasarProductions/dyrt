@@ -344,7 +344,7 @@ group Stage_Action extends Stage
 			return true
 		end
 		if self.Act.Act.Block_Fear and self.Act.Executor.StatusChanges.Fear
-			Cancel("Action blocked by silence")
+			Cancel("Action blocked by fear")
 			return true
 		end
 		if self.Act.RemoveAP and self.Act.RemoveAP>0 and self.AP.Have<self.Act.RemoveAP
