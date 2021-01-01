@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 20.12.23
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.01.01
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -240,12 +240,17 @@ group Flow_FieldMenu
 			if ch.Points("SKILLLVL"..i).Have>0
 				int ty
 				ty = (y+10)+(i*20)
-				Color(100,100,100)
-				Rect(x+10,ty+10,w-20,10)
-				__red
-				Rect(x+10,ty+10,math.floor( (ch.Points("SKILLEXP"..i).Have/ch.Points("SKILLEXP"..i).Maximum) * (w-20) ), 10 )
+				if ch.Points("SKILLLVL"..i).Have == ch.Points("SKILLLVL"..i).Maximum
+					Color(100,127,154)				
+					Rect(x+10,ty+10,w-20,10)
+				else
+					Color(100,100,100)				
+					Rect(x+10,ty+10,w-20,10)
+					__red
+					Rect(x+10,ty+10,math.floor( (ch.Points("SKILLEXP"..i).Have/ch.Points("SKILLEXP"..i).Maximum) * (w-20) ), 10 )
+				end
 				__white
-				DarkText.Font($Font,ch.Data["SKILL"..i],x+10, ty)
+				DarkText.Font($Font,ch.Data["SKILL"..i],x+10, ty)				
 				__amber
 				DarkText.Font($Font,Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty,1)
 			end
