@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/Cleave.nil
-// Version: 20.12.31
-// Copyright (C) 2020 Jeroen Petrus Broks
+// Version: 21.01.01
+// Copyright (C) 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -39,7 +39,7 @@ class CleaveLine
 	readonly int x2
 	readonly int y1
 	readonly int y2
-	void CONSTRUCTOR(AX1,AX2,AY1,AY2)
+	void CONSTRUCTOR(AX1,AY1,AX2,AY2)
 		self.x1=AX1
 		self.x2=AX2
 		self.y1=AY1
