@@ -46,7 +46,6 @@ module SpellAni_Shuriken
 		if not ret
 			self.PRJ.Turn = false
 		end
-		self.Audio = LoadNewAudio("SFX/Combat/SpellAni/Shuriken.wav","SPELLANI_SHURIKEN")
 		return ret
 	end
 	
@@ -57,7 +56,12 @@ module SpellAni_Shuriken
 		self.Audio.Play()
 	end
 	
+
 	void CONSTRUCTOR()
+		self.Audio = LoadNewAudio("SFX/Combat/SpellAni/Shuriken.wav","SPELLANI_SHURIKEN")
+		if not self.Audi
+			CSay("Warning! Shuriken audio not properly loaded!")
+		end
 		self.PRJ = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/Projectile")
 	end
 
