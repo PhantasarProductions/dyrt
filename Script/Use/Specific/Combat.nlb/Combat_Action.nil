@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 20.12.27
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.01.01
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -337,6 +337,14 @@ group Stage_Action extends Stage
 		self.PurgeTargets()
 		if #self.Act.Targets==0
 			Cancel("No valid targets")
+			return true
+		end
+		if self.Act.Act.Block_Silence and self.Act.Executor.StatusChanges.Silence
+			Cancel("Action blocked by silence")
+			return true
+		end
+		if self.Act.Act.Block_Fear and self.Act.Executor.StatusChanges.Fear
+			Cancel("Action blocked by silence")
 			return true
 		end
 		if self.Act.RemoveAP and self.Act.RemoveAP>0 and self.AP.Have<self.Act.RemoveAP
