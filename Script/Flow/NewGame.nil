@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Flow/NewGame.nil
-// Version: 20.08.22
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.01.02
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -276,20 +276,27 @@ class NG_Lang
 	var textname
 	int x
 	int y
+	readonly bool automated = false
 	static int sx = 5
 	static int sy = 50
 	static var list
 	static var hover
 	
-	void CONSTRUCTOR(string acode, string aname)
+	void CONSTRUCTOR(string acode, string aname,aauto)
+		self.automated = aauto == true
 		self.list = self.list or new TLinkedList
 		self.list.AddLast(self)
 		self.code = acode
 		self.name = aname
-		self.textname = font.Text(aname)
+		if self.automated
+			self.textname = font.Text(aname.."  (AUTOMATED TRANSLATION!)")
+		else
+			self.textname = font.Text(aname)
+		end
 		self.x = self.sx
 		self.y = self.sy
 		self.sy = self.sy + 25
+		
 		if self.sy>Screen.Width-100
 			self.sy = 50
 			self.sx = self.sx + 150
@@ -301,7 +308,7 @@ end
 class Stage_Language
 	void CONSTRUCTOR()
 		for lcode, lname in spairs(Languages)
-			new NG_Lang(lcode,lname)
+			new NG_Lang(lcode,lname,prefixed(lname,"*"))
 		end
 	end
 	
