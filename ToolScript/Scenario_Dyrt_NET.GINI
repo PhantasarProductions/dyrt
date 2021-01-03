@@ -1,7 +1,7 @@
 [lic]
 src/Tricky Script/ToolScript/Scenario_Dyrt_NET.GINI
-Version: 20.09.21
-Copyright (C) 2019, 2020 Jeroen Petrus Broks
+Version: 21.01.02
+Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 
 ===========================
 This file is part of a project related to the Phantasar Chronicles or another
@@ -44,10 +44,12 @@ Generated: 7/19/2019 9:59:16 PM
 [vars]
 AUTHOR=Jeroen P. Broks
 COPYRIGHT=Jeroen P. Broks
-LANG1.FILE=E:\Projects\Applications\Bubble\Games\The Secrets of Dyrt\src\Tricky Private\Scenario/EN
+LANG1.FILE=E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src/Tricky Private/Scenario/EN
 LANG1.NAME=English
-LANG2.FILE=E:\Projects\Applications\Bubble\Games\The Secrets of Dyrt\src\Tricky Private\Scenario/NL
+LANG2.FILE=E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src/Tricky Private/Scenario/NL
 LANG2.NAME=Nederlands
+LANG3.FILE=E:/Projects/Applications/Bubble/Games/The Secrets of Dyrt/src/Tricky Private/Scenario/IT
+LANG3.NAME=Italiano
 LICENSE=These files and their content are property of Jeroen P. Broks and may NOT be removed without prior WRITTEN permission by the owner
 LZMA=YES
 NOTES=These files and their content are property of Jeroen P. Broks and may NOT be removed without prior WRITTEN permission by the owner
