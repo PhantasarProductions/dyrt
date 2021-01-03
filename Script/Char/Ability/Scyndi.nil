@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/Char/Ability/Scyndi.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2019, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.03
+// version: 21.01.02
 // End License Information
 
 do
@@ -73,7 +73,7 @@ do
 		Shine       = { Skill_Malabia = 1 },
 		HeavenLight = { Skill_Malabia = 3^(s+1) },
 		HellFire    = { Skill_Malabia = (3^(s+1))+1 },
-		Smite       = { Skill_Malabia = (s+2)^s},
+		Smite       = { Skill_Malabia = math.min(100,(s+2)^s)},
 		HolyShit    = { Skill_Malabia = 20*s },
 		-- Scharum
 		Pray        = { Scharum = true },
