@@ -451,6 +451,10 @@ group Respawn
 	link Layer = gv.String.Respawn_Layer
 	
 	void Reset()
+		if not Map.HasTag("Player")
+			CSay("WARNING! Player reset requested, but player object yet non-existent! -- Request ignored!")
+			return
+		end
 		Map.Obj			= "Player"
 		self.X			= Map.ObjInt.X
 		self.Y			= Map.ObjInt.Y		
