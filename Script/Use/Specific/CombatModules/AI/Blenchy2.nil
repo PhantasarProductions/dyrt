@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/Use/Specific/CombatModules/AI/Blenchy2.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.05
+// version: 21.01.02
 // End License Information
 
 
@@ -129,7 +129,7 @@ module Blenchy_AI2
 
 		// function E_IMove.Blenchy(ACTOR)
 		// if (not BlenchySpells) or (not BlenchyTurns) or BlenchyTurns==0 then return BlenchyStudy() end
-		if self.BlenchyTurns <= 0 or (not self.BlenchySpells) or (#self.BlenchySpells<0)
+		if self.BlenchyTurns <= 0 or (not self.BlenchySpells) or (#self.BlenchySpells<=0)
 			self.BlenchyStudy(foe)
 			return
 		end
