@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/4/2021 7:49:44 PM
+// Generated: 1/4/2021 10:32:45 PM
 
 do
 var retfunc()
@@ -1074,11 +1074,11 @@ foeret.Boss = true
 // Oversoul specific
 if Foe.LoadOversoul
 else
-	foeret.Char.Stat("BASE_Accuracy").Value=95
+	foeret.Char.Stat("BASE_Accuracy").Value=93
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
-	foeret.Char.Stat("BASE_Agility").Value=57
+	foeret.Char.Stat("BASE_Agility").Value=55
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
@@ -1090,7 +1090,7 @@ else
 	foeret.Char.Stat("BUFF_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Value=0
 	foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
-	foeret.Char.Stat("BASE_HP").Value=1200
+	foeret.Char.Stat("BASE_HP").Value=1100
 	foeret.Char.Stat("BUFF_HP").Value=0
 	foeret.Char.Stat( "END_HP").Value=0
 	foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
@@ -1102,7 +1102,7 @@ else
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
-	foeret.Char.Stat("BASE_Strength").Value=78
+	foeret.Char.Stat("BASE_Strength").Value=76
 	foeret.Char.Stat("BUFF_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Value=0
 	foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
@@ -1132,6 +1132,9 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
@@ -1150,6 +1153,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_HERO_IRRAVONIA_FIRE"
@@ -1165,6 +1169,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_LAZINESS"
 	default
