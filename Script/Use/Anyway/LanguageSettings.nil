@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 21.01.03
+// version: 21.01.09
 // End License Information
 
 
@@ -44,7 +44,8 @@
 
 table EnglishNames 
 global table Languages 
-Languages = { ["EN"] = "English", ["NL"] = "Dutch", ["IT"] = "*Italian" }
+//Languages = { ["EN"] = "English", ["NL"] = "Dutch", ["IT"] = "*Italian" }
+Languages = { ["EN"] = "English", ["NL"] = "Dutch" }
 
 // this works quicker
 #pure
