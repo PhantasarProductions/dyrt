@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/Use/Specific/CombatModules/AI/Aldarus_1st.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
+// version: 21.01.06
 // End License Information
 module Aldarus_AI1
 	
@@ -42,8 +42,8 @@ module Aldarus_AI1
 	void CONSTRUCTOR()
 		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
 		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
-			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Eric").Stat("END_"..st).Value
-			CSayF("%10s = %3d",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value)
+			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Eric").Stat("END_"..st).Value * (0.33*__skill)
+			CSayF("%10s = %3d",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value) 
 		end
 	end
 
