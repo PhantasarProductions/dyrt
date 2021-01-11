@@ -2,7 +2,7 @@
 ; **********************************************
 ; 
 ; src/Tricky Script/SASKIA/MapScript/NGP_DUNG_LostArc.saskia
-; (c) Jeroen Broks, 2020, All Rights Reserved.
+; (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 ; 
 ; This file contains material that is related
 ; to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.09.25
+; version: 21.01.11
 ; End License Information
 
 :OnLoad
@@ -50,7 +50,7 @@
 :NPC_SASKIA_Foxey
 	call MapText,"FOXEY"
 	mov true,WM_Unlocked.D_HallOfHeroes
-	mov true,NPG_Complete_LostArk
+	mov true,gv.Bool.NPG_Complete_LostArk
 	call Map.Kill,"NPC_SASKIA_Foxey",true
 	call Achievements.Award,"NGP_LostArk"
 	call Party.LvUp
