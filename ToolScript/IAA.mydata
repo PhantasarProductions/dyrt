@@ -38315,8 +38315,6 @@ Rec: ITM_APPLE
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
-	CauseGone = FALSE
-	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -38380,7 +38378,6 @@ Rec: ITM_APPLE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = 
-	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -38413,9 +38410,8 @@ Rec: ITM_APPLE
 	SpellAniArgument = 
 	SpellAniFunction = 
 	SpellAniScript = Sparkle
-	Stance = CAST
+	Stance = 
 	Target = 1A
-	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: ITM_BADPOTION
