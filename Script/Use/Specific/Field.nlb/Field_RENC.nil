@@ -202,9 +202,6 @@ group RENC
 			CSay("Eric is looking for trouble!")
 		elseif $Encounters<=0 or (not $AutEncOn) or ($ManEncOff)
 			return
-		elseif self.rgauge>0 and math.random(self.rgauge,self.rgauge*3)>__skill
-			// This should prevent encounters coming to early, as I'm a bit tired of most encounters coming in the "green" zone!
-			return
 		end
 		int ORate
 		ORate = $Rate
@@ -213,9 +210,13 @@ group RENC
 			$Rate=1	
 		end
 		//if __skill<3 and math.ceil((ORate/$MaxRate)*4)>=4 and (not force)
-		if math.ceil((ORate/$MaxRate)*4)>=4 and (not force)
+		self.rgauge=math.ceil((ORate/$MaxRate)*4)
+		if self.rgauge>=4 and (not force)
 			// If not in hard mode, blue guarantees no encounter (skip that hard mode, it woun't happen anyway).
 			return
+		elseif self.rgauge>0 and math.random(self.rgauge,self.rgauge*3)>__skill
+			// This should prevent encounters coming to early, as I'm a bit tired of most encounters coming in the "green" zone!
+			return		
 		end
 		if $Rate<=1 or math.random(1,math.min($Rate,2))<__skill or force
 			var kth
