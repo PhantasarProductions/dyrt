@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 10/22/2020 11:24:59 PM
+// Generated: 1/12/2021 11:20:29 PM
 
 do
 var retfunc()
@@ -140,12 +140,25 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LONESOME"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_HOUNDDOG"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_HOUNDDOG"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LONESOME"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LONESOME"
-		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LONESOME"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_LOVE_ME_TENDER"
 	case 3
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_MUSIC_KING_HOUNDDOG"
