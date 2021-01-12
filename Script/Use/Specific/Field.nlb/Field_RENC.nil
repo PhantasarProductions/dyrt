@@ -214,7 +214,7 @@ group RENC
 		if self.rgauge>=4 and (not force)
 			// If not in hard mode, blue guarantees no encounter (skip that hard mode, it woun't happen anyway).
 			return
-		elseif self.rgauge>0 and math.random(self.rgauge,self.rgauge*3)>__skill
+		elseif self.rgauge>0 and math.random(self.rgauge,self.rgauge*4)>__skill and (not force)
 			// This should prevent encounters coming to early, as I'm a bit tired of most encounters coming in the "green" zone!
 			return		
 		end
