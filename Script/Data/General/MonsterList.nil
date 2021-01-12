@@ -29,6 +29,8 @@ do
 	ret["Black Guardian"] = { ["Name"] = "Black Guardian", ["File"] = "Script/Data/Foes/Boss/BlackGuardian.nil", ["Category"] = "Boss" }
 	ret["Blenchy (1st encounter)"] = { ["Name"] = "Blenchy (1st encounter)", ["File"] = "Script/Data/Foes/Boss/Blenchy1.nil", ["Category"] = "Boss" }
 	ret["Blenchy (2nd encounter)"] = { ["Name"] = "Blenchy (2nd encounter)", ["File"] = "Script/Data/Foes/Boss/Blenchy2.nil", ["Category"] = "Boss" }
+	ret["CGA Brother"] = { ["Name"] = "CGA Brother", ["File"] = "Script/Data/Foes/Boss/CGABRO_MCW.nil", ["Category"] = "Boss" }
+	ret["CGA Brother"] = { ["Name"] = "CGA Brother", ["File"] = "Script/Data/Foes/Boss/CGABRO_RYG.nil", ["Category"] = "Boss" }
 	ret["Creep"] = { ["Name"] = "Creep", ["File"] = "Script/Data/Foes/Boss/Creep.nil", ["Category"] = "Boss" }
 	ret["Crystal"] = { ["Name"] = "Crystal", ["File"] = "Script/Data/Foes/Boss/Crystal.nil", ["Category"] = "Boss" }
 	ret["Doom Sweeper"] = { ["Name"] = "Doom Sweeper", ["File"] = "Script/Data/Foes/Boss/DoomSweeper.nil", ["Category"] = "Boss" }
@@ -64,6 +66,7 @@ do
 	ret["Super-Hag"] = { ["Name"] = "Super-Hag", ["File"] = "Script/Data/Foes/Boss/SuperHag.nil", ["Category"] = "Boss" }
 	ret["Super-Pink"] = { ["Name"] = "Super-Pink", ["File"] = "Script/Data/Foes/Boss/SuperPink.nil", ["Category"] = "Boss" }
 	ret["Super-Valkyrie"] = { ["Name"] = "Super-Valkyrie", ["File"] = "Script/Data/Foes/Boss/SuperValkyrie.nil", ["Category"] = "Boss" }
+	ret[""] = { ["Name"] = "", ["File"] = "Script/Data/Foes/Boss/TD_Jesse.nil", ["Category"] = "Boss" }
 	ret["The King"] = { ["Name"] = "The King", ["File"] = "Script/Data/Foes/Boss/TheKing.nil", ["Category"] = "Boss" }
 	ret["Turbo Candy"] = { ["Name"] = "Turbo Candy", ["File"] = "Script/Data/Foes/Boss/Turbo Candy.nil", ["Category"] = "Boss" }
 	ret["Uebermummy"] = { ["Name"] = "Uebermummy", ["File"] = "Script/Data/Foes/Boss/Ubermummy.nil", ["Category"] = "Boss" }
@@ -155,6 +158,10 @@ do
 	ret["Orc Mage"] = { ["Name"] = "Orc Mage", ["File"] = "Script/Data/Foes/Reg/OrcMage.nil", ["Category"] = "Regular" }
 	ret["Orc Rogue"] = { ["Name"] = "Orc Rogue", ["File"] = "Script/Data/Foes/Reg/OrcRogue.nil", ["Category"] = "Regular" }
 	ret["Orc Warrior"] = { ["Name"] = "Orc Warrior", ["File"] = "Script/Data/Foes/Reg/OrcWarrior.nil", ["Category"] = "Regular" }
+	ret["Packed Ghost"] = { ["Name"] = "Packed Ghost", ["File"] = "Script/Data/Foes/Reg/P_GHOST_C.nil", ["Category"] = "Regular" }
+	ret["Packed Ghost"] = { ["Name"] = "Packed Ghost", ["File"] = "Script/Data/Foes/Reg/P_GHOST_E.nil", ["Category"] = "Regular" }
+	ret["Packed Ghost"] = { ["Name"] = "Packed Ghost", ["File"] = "Script/Data/Foes/Reg/P_GHOST_M.nil", ["Category"] = "Regular" }
+	ret["Packed Ghost"] = { ["Name"] = "Packed Ghost", ["File"] = "Script/Data/Foes/Reg/P_GHOST_R.nil", ["Category"] = "Regular" }
 	ret["Pinguin"] = { ["Name"] = "Pinguin", ["File"] = "Script/Data/Foes/Reg/pinguin.nil", ["Category"] = "Regular" }
 	ret["Pinky"] = { ["Name"] = "Pinky", ["File"] = "Script/Data/Foes/Reg/Pinky.nil", ["Category"] = "Regular" }
 	ret["Polar Bear"] = { ["Name"] = "Polar Bear", ["File"] = "Script/Data/Foes/Reg/PolarBear.nil", ["Category"] = "Regular" }
@@ -172,6 +179,8 @@ do
 	ret["SnowMan"] = { ["Name"] = "SnowMan", ["File"] = "Script/Data/Foes/Reg/SnowMan.nil", ["Category"] = "Regular" }
 	ret["Squid"] = { ["Name"] = "Squid", ["File"] = "Script/Data/Foes/Reg/Squid.nil", ["Category"] = "Regular" }
 	ret["Super Toad"] = { ["Name"] = "Super Toad", ["File"] = "Script/Data/Foes/Reg/SuperToad.nil", ["Category"] = "Regular" }
+	ret["Packed Ghost"] = { ["Name"] = "Packed Ghost", ["File"] = "Script/Data/Foes/Reg/td_bandit.nil", ["Category"] = "Regular" }
+	ret["Thief"] = { ["Name"] = "Thief", ["File"] = "Script/Data/Foes/Reg/td_thief.nil", ["Category"] = "Regular" }
 	ret["Tiger"] = { ["Name"] = "Tiger", ["File"] = "Script/Data/Foes/Reg/Tiger.nil", ["Category"] = "Regular" }
 	ret["Toad"] = { ["Name"] = "Toad", ["File"] = "Script/Data/Foes/Reg/Toad.nil", ["Category"] = "Regular" }
 	ret["True Death Cap"] = { ["Name"] = "True Death Cap", ["File"] = "Script/Data/Foes/Reg/TrueDeathCap.nil", ["Category"] = "Regular" }
@@ -191,6 +200,7 @@ do
 	ret["Mountain Emperor"] = { ["Name"] = "Mountain Emperor", ["File"] = "Script/Data/Foes/Sealed/MountainEmperor.nil", ["Category"] = "Sealed Boss" }
 	ret["Orc Overlord"] = { ["Name"] = "Orc Overlord", ["File"] = "Script/Data/Foes/Sealed/OrcOverlord.nil", ["Category"] = "Sealed Boss" }
 	ret["Shadow Rogue"] = { ["Name"] = "Shadow Rogue", ["File"] = "Script/Data/Foes/Sealed/ShadowRogue.nil", ["Category"] = "Sealed Boss" }
+	ret["Juggernaut"] = { ["Name"] = "Juggernaut", ["File"] = "Script/Data/Foes/UltraBoss/Juggernaut.nil", ["Category"] = "???" }
 
 	
 	return ret
