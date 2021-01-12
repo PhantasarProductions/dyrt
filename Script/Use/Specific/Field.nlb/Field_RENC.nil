@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Field.nlb/Field_RENC.nil
-// Version: 20.12.24
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.01.12
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -61,6 +61,7 @@ group RENC
 	table RoomRate
 	int MaxRate
 	int RecalcMaxE
+	int rgauge
 	var MaxFoes
 	
 	int gx 
@@ -201,6 +202,9 @@ group RENC
 			CSay("Eric is looking for trouble!")
 		elseif $Encounters<=0 or (not $AutEncOn) or ($ManEncOff)
 			return
+		elseif self.rgauge>0 and math.random(self.rgauge,self.rgauge*3)>__skill
+			// This should prevent encounters coming to early, as I'm a bit tired of most encounters coming in the "green" zone!
+			return
 		end
 		int ORate
 		ORate = $Rate
@@ -332,8 +336,8 @@ group RENC
 			$gdeg = $gdeg - 360
 		end
 		//r,g,b = $bcol($Rate)
-		rgauge = math.ceil(($Rate/self.MaxRate)*4)
-		switch rgauge
+		self.rgauge = math.ceil(($Rate/self.MaxRate)*4)
+		switch self.rgauge
 			case 0 1
 				r,g,b = 255,0,0
 			case 2
