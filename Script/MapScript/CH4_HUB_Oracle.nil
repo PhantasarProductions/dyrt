@@ -1,0 +1,30 @@
+#use "script/use/anyway"
+group MScript
+
+	void HELLO()
+		Achievements.Award("SCEN_ORACLE")
+		if not Done.SpokenToOracle
+			MapText("ORACLE")
+		end
+	end
+	
+	void BYE()
+		Field.LoadMap("CH4_HUB_Rayal_Palace_Upstairs_Night")
+		Map.GoToLayer("NACHT","NPC_OracleHut_SPOT")
+	end
+	
+	void NPC_ORACLE()
+		MapText("AFTERORACLE")
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+	void CONSTRUCTOR()
+		Map.ZA_Enter("Hello","Hello")
+		Map.ZA_Enter("Bye","Bye")
+	end
+end

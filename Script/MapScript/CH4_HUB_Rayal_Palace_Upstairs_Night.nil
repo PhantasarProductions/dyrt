@@ -80,7 +80,7 @@ group MScript
 		Map.GoToLayer("NACHT","Start")
 	end
 	
-	void NPC_ORACLEHUT()
+	void NPC_ORACLEHUT_Dummy()
 		Map.GoToLayer("NACHT","Start_Orakel")
 		Achievements.Award("SCEN_ORACLE")
 		Map.Cam(1600,800)
@@ -88,6 +88,11 @@ group MScript
 		if not Done.SpokenToOracle
 			MapText("ORACLE")
 		end
+	end
+	
+	void NPC_ORACLEHUT()
+		Field.LoadMap("CH4_HUB_Oracle")
+		Map.GoToLayer("ORANYA","Start")
 	end
 	
 	void SHOWORAKEL()
