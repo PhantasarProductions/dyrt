@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/28/2020 6:31:17 PM
+// Generated: 1/15/2021 2:55:12 AM
 
 do
 var retfunc()
@@ -28,7 +28,7 @@ foeret.Char.Stat("BASE__RESIST_Elem_Flame").Value=2500
 foeret.Char.Stat("BUFF__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Script="SUM:BASE__RESIST_Elem_Flame,BUFF__RESIST_Elem_Flame"
-foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=-5000
+foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=-6000
 foeret.Char.Stat("BUFF__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Script="SUM:BASE__RESIST_Elem_Frost,BUFF__RESIST_Elem_Frost"
