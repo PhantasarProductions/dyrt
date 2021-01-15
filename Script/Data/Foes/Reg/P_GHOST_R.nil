@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 11/28/2020 1:22:58 AM
+// Generated: 1/15/2021 2:21:25 PM
 
 do
 var retfunc()
@@ -25,13 +25,13 @@ foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_CHEATDEVI
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_CHEATDEVICE"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_CHEATDEVICE"
 if not Foe.LoadOversoul
-	foeret.Experience = 250
+	foeret.Experience = 350
 end
 if Foe.LoadOversoul
 	if __skill==3
 		foeret.Experience = 0
 	else
-		foeret.Experience = 4000
+		foeret.Experience = 5000
 	end
 end
 foeret.Name="Packed Ghost"
