@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/15/2021 2:55:12 AM
+// Generated: 1/15/2021 1:32:03 PM
 
 do
 var retfunc()
@@ -28,7 +28,7 @@ foeret.Char.Stat("BASE__RESIST_Elem_Flame").Value=2500
 foeret.Char.Stat("BUFF__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Flame").Script="SUM:BASE__RESIST_Elem_Flame,BUFF__RESIST_Elem_Flame"
-foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=-6000
+foeret.Char.Stat("BASE__RESIST_Elem_Frost").Value=-7000
 foeret.Char.Stat("BUFF__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Value=0
 foeret.Char.Stat( "END__RESIST_Elem_Frost").Script="SUM:BASE__RESIST_Elem_Frost,BUFF__RESIST_Elem_Frost"
@@ -94,7 +94,7 @@ else
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-	foeret.Char.Stat("BASE_Defense").Value=300
+	foeret.Char.Stat("BASE_Defense").Value=200
 	foeret.Char.Stat("BUFF_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Value=0
 	foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -110,7 +110,7 @@ else
 	foeret.Char.Stat("BUFF_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Value=0
 	foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
-	foeret.Char.Stat("BASE_Resistance").Value=100
+	foeret.Char.Stat("BASE_Resistance").Value=90
 	foeret.Char.Stat("BUFF_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Value=0
 	foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
