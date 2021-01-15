@@ -1,5 +1,5 @@
 // GENERATED NIL SCRIPT!
-// Generated: 1/15/2021 2:21:25 PM
+// Generated: 1/15/2021 2:36:12 PM
 
 do
 var retfunc()
@@ -26,13 +26,13 @@ foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_CHEATDEVI
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_CHEATDEVICE"
 foeret.Steal = foeret.Steal or {} foeret.Steal[#foeret.Steal+1] = "ITM_CHEATDEVICE"
 if not Foe.LoadOversoul
-	foeret.Experience = 350
+	foeret.Experience = 550
 end
 if Foe.LoadOversoul
 	if __skill==3
 		foeret.Experience = 0
 	else
-		foeret.Experience = 5000
+		foeret.Experience = 7000
 	end
 end
 foeret.Name="Packed Ghost"
@@ -150,7 +150,7 @@ else
 	foeret.Char.Stat("BUFF_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Value=0
 	foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
-	foeret.Char.Stat("BASE_Agility").Value=200
+	foeret.Char.Stat("BASE_Agility").Value=190
 	foeret.Char.Stat("BUFF_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Value=0
 	foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
@@ -227,6 +227,7 @@ switch __skill
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ACT_ATTACK"
+		foeret.AI_Moves[#foeret.AI_Moves+1]="BTY_OBSERVE"
 	case 2
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_SNOWBALL"
 		foeret.AI_Moves[#foeret.AI_Moves+1]="ABL_FOE_SNOWBALL"
