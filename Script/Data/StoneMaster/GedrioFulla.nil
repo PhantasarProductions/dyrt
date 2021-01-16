@@ -1,8 +1,8 @@
 // License Information:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_HUB_ElfImpCastle.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// src/Tricky Script/Script/Data/StoneMaster/GedrioFulla.nil
+// (c) Jeroen Broks, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -35,41 +35,23 @@
 // version: 21.01.16
 // End License Information
 
+#use "libs/tables"
+#use "libs/strings"
 
-
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-group MScript
-	
-	void NPC_KEIZER()
-		if not Done.Spoken_To_Elven_Emperor
-			MapText("EMP")
-			WM_Unlocked.D_HIDDENBUSH = true
-			return
-		end
-		//if not gv.Bool.Chapter3Complete
-		if not gv.Bool.Chapter2Complete
-			MapText("EMPBEBACK")
-			return
-		end
-		
-		switch Map.Leader
-			case "Dernor" "Merya" "Aziella"
-				MapText("EMP"..(Map.Leader:upper()))			
-			default
-				MapScript.SASKIA("StoneMaster")
+do
+	var ret
+	ret = new CStoneMaster
+	for n,dragon in ipairs {"Red Dragon","White Dragon","Green Dragon","Black Dragon"}
+		ret.NewSkill("Eric",n,"Upgrade affinity with "..dragon)
+		ret.NewSkill("Yasathar",n,"Upgrade affinity with "..dragon)
+	end
+	for e in each({"Fire","Frost","Darkness"})
+		for c in each({"Eric","Yasathar","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella"})
+			ret.NewElement(c,e)
+			CSayF("Setting %s resistance for character %s",e,c)
 		end
 	end
 	
-	void CONSTRUCTOR()
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-	end
-	
+	CSay("Gedrio Fulla has been loaded as a Stone Master")	
+	return ret
 end
-#say "Map Script - Compiling!"
