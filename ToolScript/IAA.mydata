@@ -43004,6 +43004,8 @@ Rec: ITM_VOCALHERB
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43067,6 +43069,7 @@ Rec: ITM_VOCALHERB
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43101,6 +43104,7 @@ Rec: ITM_VOCALHERB
 	SpellAniScript = Sparkle
 	Stance = CAST
 	Target = 1A
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_AQUAMARINE
@@ -43129,6 +43133,8 @@ Rec: JWL_AQUAMARINE
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43192,6 +43198,7 @@ Rec: JWL_AQUAMARINE
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43226,6 +43233,7 @@ Rec: JWL_AQUAMARINE
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_AURINA
@@ -43254,6 +43262,8 @@ Rec: JWL_AURINA
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43317,6 +43327,7 @@ Rec: JWL_AURINA
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43351,6 +43362,7 @@ Rec: JWL_AURINA
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_BRACERS
@@ -43379,6 +43391,8 @@ Rec: JWL_BRACERS
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43411,7 +43425,7 @@ Rec: JWL_BRACERS
 	EqEric = TRUE
 	EqIrravonia = FALSE
 	EqKirana = FALSE
-	EqMerya = FALSE
+	EqMerya = TRUE
 	EQP__RESIST_Elem_Darkness = 0
 	EQP__RESIST_Elem_Earth = 0
 	EQP__RESIST_Elem_Flame = 0
@@ -43442,6 +43456,7 @@ Rec: JWL_BRACERS
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43476,6 +43491,7 @@ Rec: JWL_BRACERS
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_DIAMOND
@@ -43504,6 +43520,8 @@ Rec: JWL_DIAMOND
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43567,6 +43585,7 @@ Rec: JWL_DIAMOND
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43601,6 +43620,7 @@ Rec: JWL_DIAMOND
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_DZGJYMZA
@@ -43758,6 +43778,8 @@ Rec: JWL_EMERALD
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43821,6 +43843,7 @@ Rec: JWL_EMERALD
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = 
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43855,6 +43878,7 @@ Rec: JWL_EMERALD
 	SpellAniScript = 
 	Stance = IDLE
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_GARNET
@@ -43883,6 +43907,8 @@ Rec: JWL_GARNET
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -43946,6 +43972,7 @@ Rec: JWL_GARNET
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = 
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -43980,6 +44007,7 @@ Rec: JWL_GARNET
 	SpellAniScript = 
 	Stance = IDLE
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_GOLDENMEDALLION
@@ -44008,6 +44036,8 @@ Rec: JWL_GOLDENMEDALLION
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44071,6 +44101,7 @@ Rec: JWL_GOLDENMEDALLION
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44105,6 +44136,7 @@ Rec: JWL_GOLDENMEDALLION
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_KIRANA
@@ -44133,6 +44165,8 @@ Rec: JWL_KIRANA
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44196,6 +44230,7 @@ Rec: JWL_KIRANA
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44230,6 +44265,7 @@ Rec: JWL_KIRANA
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_ONYX
@@ -44258,6 +44294,8 @@ Rec: JWL_ONYX
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44321,6 +44359,7 @@ Rec: JWL_ONYX
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44355,6 +44394,7 @@ Rec: JWL_ONYX
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_PEARL
@@ -44383,6 +44423,8 @@ Rec: JWL_PEARL
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44446,6 +44488,7 @@ Rec: JWL_PEARL
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44480,6 +44523,7 @@ Rec: JWL_PEARL
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_RUBY
@@ -44573,7 +44617,7 @@ Rec: JWL_RUBY
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
-	EqYasathar = FALSE
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44637,6 +44681,8 @@ Rec: JWL_SAPHIRE
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44700,6 +44746,7 @@ Rec: JWL_SAPHIRE
 	EqScyndi = TRUE
 	EqShanda = FALSE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = TRUE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44734,6 +44781,7 @@ Rec: JWL_SAPHIRE
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_SHANDA_ROYALRING
@@ -44762,6 +44810,8 @@ Rec: JWL_SHANDA_ROYALRING
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44825,6 +44875,7 @@ Rec: JWL_SHANDA_ROYALRING
 	EqScyndi = FALSE
 	EqShanda = TRUE
 	Equip_Attack = ACT_ATTACK
+	EqYasathar = FALSE
 	EqYoungIrravonia = FALSE
 	GainAP = 0
 	GainEXP = 0
@@ -44859,6 +44910,7 @@ Rec: JWL_SHANDA_ROYALRING
 	SpellAniScript = 
 	Stance = CAST
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
@@ -44887,6 +44939,8 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	CauseDisease = FALSE
 	CauseExhaustion = FALSE
 	CauseFear = FALSE
+	CauseGone = FALSE
+	CauseGuard = FALSE
 	CauseParalysis = FALSE
 	CausePoison = FALSE
 	CauseSilence = FALSE
@@ -44950,6 +45004,7 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	EqScyndi = FALSE
 	EqShanda = FALSE
 	Equip_Attack = 
+	EqYasathar = FALSE
 	EqYoungIrravonia = TRUE
 	GainAP = 0
 	GainEXP = 0
@@ -44984,6 +45039,7 @@ Rec: JWL_YOUNGIRRAVONIA_BEADNECKLACE
 	SpellAniScript = 
 	Stance = IDLE
 	Target = Auto
+	TriggerAfterAttack = FALSE
 	Type = Item
 
 Rec: KEY_DARKSTORAGEKEY
