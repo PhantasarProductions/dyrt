@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Buff.nil
-// Version: 20.07.03
-// Copyright (C) 2020 Jeroen Petrus Broks
+// Version: 21.01.16
+// Copyright (C) 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -129,7 +129,7 @@ group Buffs
 				end
 			end
 		end
-		// Decrease player debuff and enemy boff
+		// Decrease player debuff and enemy buff
 		if self.EnemyLast!=self.Timer and (self.Timer % self.EnemyInterval==0)
 			self.EnemyLast=self.Timer
 			// Heroes Buff Decrease
@@ -141,6 +141,9 @@ group Buffs
 					var f
 					var stl
 					f = self.Fighter.ByTag[chtag]
+					if not f
+						break
+					end
 					ch = RPG.GetChar(chtag)
 					stl = ch.ListStats
 					for _,st in ipairs(stl)
