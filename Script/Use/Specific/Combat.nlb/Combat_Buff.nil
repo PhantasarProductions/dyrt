@@ -141,15 +141,14 @@ group Buffs
 					var f
 					var stl
 					f = self.Fighter.ByTag[chtag]
-					if not f
-						break
-					end
-					ch = RPG.GetChar(chtag)
-					stl = ch.ListStats
-					for _,st in ipairs(stl)
-						if prefixed(st,"BUFF_") and ch.Stat(st).Value<0
-							f.Permanenced[st]=0
-							++ch.Stat(st).Value
+					if f						
+						ch = RPG.GetChar(chtag)
+						stl = ch.ListStats
+						for _,st in ipairs(stl)
+							if prefixed(st,"BUFF_") and ch.Stat(st).Value<0
+								f.Permanenced[st]=0
+								++ch.Stat(st).Value
+							end
 						end
 					end
 				end
