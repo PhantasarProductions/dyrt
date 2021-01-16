@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Link/BoxText_h.nil
-// Version: 20.07.15
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.01.15
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -64,6 +64,12 @@ group TrueBoxTextGroup
 	end
 
 	void CallMe(string Scenario,string Tag,ReturnFlow,Num)
+		var RF
+		RF = Trim(ReturnFlow or CurrentFlow()):upper()
+		if RF=="FLOW_BOXTEXT" or RF=="BOXTEXT"
+			CSayF("WARNING! Dupe Boxtext request. I must ignore!")
+			return
+		end
 		if not StateExists("FLOW_BOXTEXT")
 			error("Bold thing to call the BoxText while the flow's not even been loaded, let alone any scenario file!")
 		end
