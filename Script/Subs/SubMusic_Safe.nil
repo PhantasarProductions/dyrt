@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubMusic_Safe.nil
-// Version: 20.07.18
-// Copyright (C) 2020 Jeroen Petrus Broks
+// Version: 21.02.03
+// Copyright (C) 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -117,8 +117,8 @@ end
 global void MUS_Stop()
 	if curinstance
 		curinstance.Stop()
+		curinstance.Free()
 	end
-	curinstance.Free()
 	curinstance = nil;
 end
 
