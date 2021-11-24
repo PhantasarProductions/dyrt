@@ -98,21 +98,28 @@ group MScript
 	end
 	
 	void GJ_OPEN()
-		var GJ
-		CSayF("gvgj%s",tostring(gv.Bool.GameJolt))
-		CSayF("chek%s",tostring(gj_checked))
-		CSayF("fail%s",tostring(gj_failed()))
-		if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
-			return
-		end
-		CSay("Next step - Loading the data")
+		//var GJ
+		//CSayF("gvgj%s",tostring(gv.Bool.GameJolt))
+		//CSayF("chek%s",tostring(gj_checked))
+		//CSayF("fail%s",tostring(gj_failed()))
+		//if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
+		//	return
+		//end
+		//CSay("Next step - Loading the data")
+		//gj_checked = true
+		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		//if not GJ
+		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+		//	return
+		//end
+		//if GJ.ImpureRatio>=18
+		//	Map.Kill("GameJoltBarrier")
+		//end
+		int p 
+		p = NALA_Medals:Ratio()
+		CSayF("Medal rate %03d%%",p)
 		gj_checked = true
-		GJ = NIL.Use("Secu/Include/GJSecret.nil")
-		if not GJ
-			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
-			return
-		end
-		if GJ.ImpureRatio>=18
+		if p>=18
 			Map.Kill("GameJoltBarrier")
 		end
 	end
