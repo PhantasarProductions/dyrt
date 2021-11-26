@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/AP_Nul.nil
-// Version: 20.04.28
-// Copyright (C) 2020 Jeroen Petrus Broks
+// Version: 21.11.25
+// Copyright (C) 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -36,6 +36,9 @@
 // End License Information
 do
 	bool Zet_die_AP_maar_op_nul_jongens(Act,Target)
+		if prefixed(Target.Tag:upper(),"FOE")
+			return false
+		end
 		Target.Char.Points("AP").Have = 0
 		return true
 	end
