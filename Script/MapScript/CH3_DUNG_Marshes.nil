@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH3_DUNG_Marshes.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.07.16
+// version: 21.11.26
 // End License Information
 
 #macro __LAYERS 4
@@ -96,7 +96,7 @@ group MScript
 	end
 	
 	void SCYNDISTILLOR()
-		RPG.GetChar("Scyndi").Points("SKILLLVL2").Have = 1
+		RPG.GetChar("Scyndi").Points("SKILLLVL2").Have = math.max(1,RPG.GetChar("Scyndi").Points("SKILLLVL2").Have)
 	end
 	
 	void ANGEVIN()
