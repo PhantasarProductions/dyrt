@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH3_CITY_Gagolton.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.12.12
+// version: 21.11.25
 // End License Information
 
 #say "Map Script - None!"
@@ -119,7 +119,7 @@ group MScript
 		MapScript.SASKIA("Kirana")
 	end
 	
-	void GJ_UNLOCK()
+	void GJ_UNLOCK_GoodBye()
 		var GJ
 		if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
 			return
@@ -131,6 +131,16 @@ group MScript
 			return
 		end
 		if GJ.ImpureRatio>=54
+			Map.Kill("GJ_Barrier")
+		end
+	end
+	
+	void GJ_UNLOCK()
+		int p 
+		p = NALA_Medals:Ratio()
+		CSayF("Medal rate %03d%%",p)
+		gj_checked = true
+		if p>=54
 			Map.Kill("GJ_Barrier")
 		end
 	end

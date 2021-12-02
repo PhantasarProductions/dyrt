@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH2_DUNG_MadHouse.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.10.04
+// version: 21.11.25
 // End License Information
 
 
@@ -57,7 +57,7 @@ group MScript
 		Map.GoToLayer("#001","Start")
 	end
 	
-	void GJ_OPEN()
+	void GJ_OPEN_FUCKYOU()
 		var GJ
 		//if (not gv.Bool.GameJolt) or gj_checked
 		//	return
@@ -79,6 +79,17 @@ group MScript
 			Map.Kill("GJ_Barrier")
 		end
 	end
+	
+	void GJ_OPEN()
+		int p 
+		p = NALA_Medals:Ratio()
+		CSayF("Medal rate %03d%%",p)
+		gj_checked = true
+		if p>=36
+			Map.Kill("GJ_Barrier")
+		end
+	end
+
 	
 	void GJ_ALWAYSOPEN()
 		if not gj_checked

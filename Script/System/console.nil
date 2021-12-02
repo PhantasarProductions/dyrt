@@ -1,8 +1,8 @@
 // License Information:
 // src/Tricky Script/Script/System/console.nil
 // Console
-// version: 20.12.30
-// Copyright (C) 2019, 2020 Jeroen P. Broks
+// version: 21.11.30
+// Copyright (C) 2019, 2020, 2021 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -35,6 +35,12 @@ group ConsoleCommands
 			CSayF("%6d. %s",i,s)
 		end
 		CSay("But at least this game was not coded in Python!")
+	end
+	
+	void MEDALRATIO()
+		int p 
+		p = NALA_Medals:Ratio()
+		CSayF("Medal rate %03d%%",p)
 	end
 	
 	void FLOW()

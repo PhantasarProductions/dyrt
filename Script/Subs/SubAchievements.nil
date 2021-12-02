@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 20.12.22
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.11.25
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -85,17 +85,18 @@ class AchBox
 		self.QuickList()
 		//CSay("= WTF? "..tostring(AchData[tag]))
 		assert(AchData[tag],"No achievement named `"..tag.."`")
-		CSay("= Game Jolt Check")
-		CSayF("= Startup failure: %s",tostring(gjfailed))
-		if gv.Bool.GameJolt and (not gjfailed)
-			if GameJolt.Award(tag)
-				CSay("= Contacting Game Jolt was succesful!")
-			else
-				CSay("= Contacting Game Jolt failed")
-			end
-		else
-			CSay("= Game Jolt not contacted! Either not logged in at all, or a failure on the line was detected during startup!")
-		end
+		//CSay("= Game Jolt Check")
+		//CSayF("= Startup failure: %s",tostring(gjfailed))
+		//if gv.Bool.GameJolt and (not gjfailed)
+		//	if GameJolt.Award(tag)
+		//		CSay("= Contacting Game Jolt was succesful!")
+		//	else
+		//		CSay("= Contacting Game Jolt failed")
+		//	end
+		//else
+		//	CSay("= Game Jolt not contacted! Either not logged in at all, or a failure on the line was detected during startup!")
+		//end
+		NALA_Medals:Award(tag)
 		CSay("= Configuring Box!")
 		self.Achievement = AchData[tag]
 		self.y = Screen.Height+25
@@ -161,6 +162,16 @@ group F_Achievements
 		AchBox.TxAwarded = AchBox.SysFont.Text("Achievement obtained!")
 		AchBox.Font = GetFont("BIGTEXT")
 		AchData = NIL.Use("Script/Data/General/Achievements.nil")
+		
+		NALA_Medals.Game = "Dyrt"
+		CSay("Synchronizing achievements with the medals library")
+		for k,_ in pairs(AchData)
+			if self.Awarded[k]
+				NALA_Medals:Award(k)
+				CSayF("Synchronizing: %s",k)
+			end
+		end
+		CSay("Synchronizing done")
 	end
 	
 	bool Allow(tag)

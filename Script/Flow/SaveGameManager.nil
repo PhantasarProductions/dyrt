@@ -1,7 +1,7 @@
 // License Information:
 // src/Tricky Script/Script/Flow/SaveGameManager.nil
-// Version: 20.11.24
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// Version: 21.11.25
+// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
 // This file is part of a project related to the Phantasar Chronicles or another
@@ -279,6 +279,14 @@ class SG
 			CSay("= This game is not set up to contact GJ so let's ignore it all!")
 			return false
 		end
+		if not gv.Bool.GAMEJOLTBYEBYE
+			Annoy("Game Jolt credentials were found in this savegame.\nHowever this game will no longer log in to Game Jolt to synchronize achievements with Game Jolt Trophies.\n\nThis is a permanent measure.\n\nSorry for the inconvenience!\n\nP.S. No trying to use older versions of the game won't get you in, so don't even try it!")
+			gv.Bool.GAMEJOLTBYEBYE = true
+			return false
+		elseif true
+			return false
+		end
+		// All this below will be ignored. Sorry!
 		if not GameJolt.ByResource("Secu/Sites/GameJolt")
 			Annoy("Your savegame was set up to make use of Game Jolt, however, the data I got from this game does not suppor Game Jolt support.\n\nI will let you go on, but no Game Jolt support will be there, sorry!\n\nPlease re-download and re-install the game in order to fix this issue")
 			gv.Bool.GAMEJOLT = false

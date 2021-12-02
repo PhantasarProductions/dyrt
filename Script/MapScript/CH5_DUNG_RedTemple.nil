@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH5_DUNG_RedTemple.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 20.12.05
+// version: 21.12.01
 // End License Information
 
 
@@ -69,19 +69,29 @@ group MScript
 	
 	void GJ_OPEN()
 		Map.ShowByLabel("GJ_SECRET")
-		var GJ
-		if (not gv.Bool.GameJolt) or gj_checked or gj_failed()
-			return
-		end
-		gj_checked = true
-		GJ = NIL.Use("Secu/Include/GJSecret.nil")
-		if not GJ
-			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
-			return
-		end
-		if GJ.ImpureRatio>=72
-			Map.Kill("GJ_Barrier")
+		//var GJ
+		//if (not gv.Bool.GameJolt) or gj_checked or gj_failed()
+			//return
+		//end		
+		//gj_checked = true
+		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		//if not GJ
+			//Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+			//return
+		//end
+		//if GJ.ImpureRatio>=72
+			//Map.Kill("GJ_Barrier")
 			// Map.ShowByLabel("GJ")
+		//end
+		if gj_checked
+			return
+		end
+		int p 
+		p = NALA_Medals:Ratio()
+		CSayF("Medal rate %03d%%",p)
+		gj_checked = true
+		if p>=72
+			Map.Kill("GJ_Barrier")
 		end
 	end
 	

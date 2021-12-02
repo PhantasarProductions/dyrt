@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 21.01.01
+// version: 21.11.25
 // End License Information
 
 do
@@ -41,7 +41,9 @@ do
 	
 	
 	bool gj 
-	gj = gv.Bool.GameJolt and (not __trueabyss)
+	//gj = gv.Bool.GameJolt and (not __trueabyss)
+	gj = true
+	
 	
 	table a
 	#pure	
@@ -80,6 +82,7 @@ do
 	}
 	
 	if gj then
+	
 		a.PollenRed    = { Charm = {"RedFlower"}, Skill_Nature = 25 }
 		a.PollenBlue   = { Charm = {"BlueFlower"}, Skill_Nature = 25 }
 		a.PollenPurple = { Charm = {"PurpleFlower"}, Skill_Nature = 25 }

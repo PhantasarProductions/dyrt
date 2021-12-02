@@ -1,6 +1,6 @@
 // License Information:
 // src/Tricky Script/Script/Use/Anyway/AlgemeneDefinities.nil
-// Version: 21.01.03
+// Version: 21.11.25
 // Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
 // 
 // ===========================
@@ -37,7 +37,8 @@
 
 #use "libs/strings"
 
-#macro DEVELOPMENT false
+//#macro DEVELOPMENT false
+#macro DEVELOPMENT true
 
 #macro FONT_MainMenu "Fonts/abigail.24.jfbf"
 #macro FONT_Blitz "Fonts/Blitz.jfbf"
