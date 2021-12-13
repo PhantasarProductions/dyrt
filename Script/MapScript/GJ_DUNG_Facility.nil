@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 21.11.25
+// version: 21.12.11
 // End License Information
 
 
@@ -99,7 +99,7 @@ group MScript
 		p = NALA_Medals:Ratio()
 		CSayF("Medal rate %03d%%",p)
 		gj_checked = true
-		if p>=0
+		if p>=50
 			CSay("All cool! Opening up the 2nd part!")
 			Map.Kill("GJ_Barrier")
 			LuaDoString("FLOW_FIELD","ZoneAction.AltNext.OpenNext()")
