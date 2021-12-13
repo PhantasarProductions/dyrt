@@ -38,7 +38,7 @@
 #use "libs/strings"
 
 //#macro DEVELOPMENT false
-#macro DEVELOPMENT true
+#macro DEVELOPMENT false
 
 #macro FONT_MainMenu "Fonts/abigail.24.jfbf"
 #macro FONT_Blitz "Fonts/Blitz.jfbf"
