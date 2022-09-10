@@ -2,7 +2,7 @@
 // **********************************************
 // 
 // src/Tricky Script/Script/MapScript/CH4_DUNG_DarkStorage.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// (c) Jeroen Broks, 2020, 2021, 2022, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 // 
 // **********************************************
 // 
-// version: 21.11.30
+// version: 22.08.02
 // End License Information
 
 
@@ -79,9 +79,9 @@ group MScript
 			return
 		end
 		gj_checked=true
-		int p 
-		p = NALA_Medals:Ratio()
-		CSayF("Medal rate %03d%%",p)
+		var p 
+		p = NALA_Medals:AltRatio()
+		CSayF("Medal rate %03.2f%%",p)
 		gj_checked = true
 		if p>=64
 			Map.Kill("GameJoltBarrier")
