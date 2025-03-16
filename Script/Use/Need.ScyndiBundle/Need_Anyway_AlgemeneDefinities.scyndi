@@ -1,0 +1,191 @@
+// License:
+// 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Anyway_AlgemeneDefinities.scyndi
+// 
+// 	  Version: 25.03.16 I
+// 	
+// 	  Copyright (C) 2019, 2020, 2021, 2022, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+#use "libs/sci/graphics"
+#use "libs/sci/sstring"
+#use "Libs/SCI/InterVar"
+
+//#macro DEVELOPMENT false
+extern DEVELOPMENT "false"
+
+const global string FONT_MainMenu = "Fonts/abigail.24.jfbf"
+const global string FONT_Blitz = "Fonts/Blitz.jfbf"
+
+//#macro URL_GitHub "https://github.com/PhantasarProductions/dyrt.net"
+const global string URL_GitHub = "https://github.com/PhantasarProductions/dyrt.net"
+
+locextern screen "Scyndi.class.graphics"
+extern or "or"
+extern and "and"
+extern not "not"
+
+extern __black "Scyndi.Globals.SetColor(0,0,0)"
+extern __white "Scyndi.Globals.SetColor(255,255,255)"
+extern __red "Scyndi.Globals.SetColor(255,0,0)"
+extern __ember "Scyndi.Globals.SetColor(255,180,0)"
+extern __skyblue "Scyndi.Globals.SetColor(0,180,255)"
+extern __green "Scyndi.Globals.SetColor(0,255,0)"
+extern __cyan "Scyndi.Globals.SetColor(0,255,255)"
+extern __yellow "Scyndi.Globals.SetColor(255,255,0)"
+
+
+extern __lang "Scyndi.Globals.gString.Lang"
+extern __skill "Scyndi.Globals.gInt.Skill"
+extern __cash "Scyndi.Globals.gInt.Cash"
+extern __autohelp "Scyndi.Globals.gBool.AutoHelp"
+extern __levelcap "Scyndi.Globals.gInt.LevelCap"
+extern __travellevel "Scyndi.Globals.gInt.TravelLevel"
+extern __victor "Scyndi.Globals.gBool.Victor"
+extern __newgameplus "Scyndi.Globals.gBool.NewGamePlus"
+extern __trueabyss "Scyndi.Globals.gBool.TheTrueAbyss"
+extern __magicstones "Scyndi.Globals.gInt.MagicStones"
+extern __bank "Scyndi.Globals.gInt.MoneyOnBank"
+extern __orbblack "Scyndi.Globals.gInt.BlackOrb"
+extern __EricIsYasathar "Scyndi.Globals.gBool.EricIsYasathar"
+extern __YasatharIsEric "Scyndi.Globals.gBool.EricIsYasathar"
+
+extern __kills "Scyndi.Globals.gInt.Kills"
+extern __oversoulkills "Scyndi.Globals.gInt.OversoulKills"
+
+extern __solidview "Scyndi.Globals.SetAlpha(255)"
+
+// This must be used IN string!
+#macro __onecurrency Shilder
+#macro __currency Shilders
+
+
+// When set to "true" walk requests will be ignored. I will unset this on SpawnPlayer
+extern __nowalk "Scyndi.Globals.gBool.NoWalk"
+
+
+class MidScreen
+	//static int x
+	//static int y
+	static int X
+	static int Y
+	static int ow
+	static int oh
+	static void Update()
+		MidScreen.ow = Screen.Width
+		MidScreen.oh = Screen.Height
+		MidScreen.x = Screen.Width/2
+		MidScreen.y = Screen.Height/2
+		MidScreen.X = MidScreen.x
+		MidScreen.Y = MidScreen.y
+	end	
+	static void Auto()
+		if MidScreen.ow != Screen.Width or MidScreen.oh != Screen.Height
+			MidScreen.Update()
+		end
+	end
+end
+Init
+	MidScreen.Update()
+End
+
+
+
+//NIL.Error = void(errmessage)
+//	BubbleCrash(errmessage)
+//end
+
+//--SASKIA_CHAT = CSayF
+
+
+group Arrow
+	readonly var Next
+	readonly var Prev
+	readonly var Up
+	readonly var Down
+	readonly var Cancel
+	get var Left
+		return $Next
+	end
+	get var Right
+		return $Prev
+	end
+	
+	void _CONSTRUCTOR()
+		for i,k in ipairs({[0]="Next","Prev","Up","Down","Cancel"})
+			//self[k]=TImage.Obtain(Upper(k))
+			self[k]=LoadNewImage(sprintf("GFX/Alg/%s.png",k),k)
+		end
+	end
+end
+Init
+	Arrow._Constructor()
+End
+
+//#accept gv
+QuickMeta gv
+	Index
+		Switch Upper(Key)
+			case "STRING"
+				return gString
+			case "NUM" "INT"
+				return gInt
+			case "BOOL"
+				return gBool
+			default
+				return nil
+		End
+	End
+	NewIndex
+		Lua.error("gv is read-only!")
+	End
+End
+
+quickmeta SealedDefeated
+
+	index
+		return gBool["SealedBossForCharacter"..key.."Defeated"]
+	end
+	
+	newindex
+		gBool["SealedBossForCharacter"..key.."Defeated"] = value
+	end
+	
+end
