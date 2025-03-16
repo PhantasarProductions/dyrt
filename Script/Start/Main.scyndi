@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Start/Main.scyndi
 // 
-// 	  Version: 25.03.11
+// 	  Version: 25.03.16 II
 // 	
 // 	  Copyright (C) 2019, 2022, 2025 Jeroen Petrus Broks
 // 	
@@ -85,23 +85,27 @@ Init
 		// to make the loading not appear like the system has crashed!
 	end
 	
+	CSay("Background & Banners")
 	// Background
 	LoadImage("GFX/Alg/MenuBack.png","MENUBACK")
 	
 	// Message banners
 	LoadImage("GFX/Alg/Loading.png","LOADING")
 	
+	CSay("UI")
 	// UI
 	LoadImage("GFX/Alg/Next.png","NEXT")
 	LoadImage("GFX/Alg/Prev.png","PREV")
 	LoadImage("GFX/Alg/Up.png","UP")
 	LoadImage("GFX/Alg/Down.png","DOWN")
 	
+	CSay("Fonts")
 	// BoxText Font
 	LinkFont("Fonts/Coolvetica.20.jfbf","BOXTEXT")
 	LinkFont("Fonts/Coolvetica.35.jfbf","BIGTEXT")
 	LinkFont("Fonts/Blitz.jfbf","SYSFONT")
 	
+	CSay("Mouse")
 	// Mouse pointer
 	CSay("Load the mouse pointer!!")
 	Mouse.Pointer      = "GFX/Alg/Mouse.png"
@@ -111,3 +115,8 @@ Init
 	CSay("Time to start the flow!")
 	StartFlow()
 end
+
+Global Void MainFlow()
+	CSay("Hallo wereld!")
+	GoToFlow("INTRO")
+End
