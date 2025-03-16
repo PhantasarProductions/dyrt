@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/MainMenu.scyndi
 // 
-// 	  Version: 25.03.17
+// 	  Version: 25.03.17 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -45,12 +45,16 @@
 Script
 
 #say "MainMenu: Use commands"
-#use "script/use/anyway"
-#use "Script/use/Specific/CheckTrueAbyss" as CTA
-#use "libs/linkedlist"
-#use "libs/BuildData"
 
-#macro __GameName Dyrt.NET
+//#use "script/use/anyway"
+#use "Script/Use/Need"
+#use "Script/use/Specific/CheckTrueAbyss" 
+#use "libs/linkedlist"
+//#use "libs/BuildData"
+
+extern CTA "Scyndi.Class.CheckTrueAbyss"
+
+#macro __GameName Dyrt
 
 // Headconfirm
 CSay("Setting up MainMenu")
@@ -256,16 +260,18 @@ void NOTHINGYET()
 end
 
 #say "MainMenu: Init menu items"
-new MenuItem("New Game",NewGame,true)
-new MenuItem("New Game+",NewGamePlus,CTA.Unlocked_NewGamePlus)
-new MenuItem("New Game: True Abyss",NewGameTrueAbyss,CTA.Unlocked_TrueAbyss)
-new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
-// new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
-new MenuItem("Jukebox",StartJukeBox,true)
-// new MenuItem("Websites",NOTHINGYET,true)
-// new MenuItem("Repository & Bug tracker",URL_GitHub,true)
-new MenuItem("Credits",NOTHINGYET,true)
-new MenuItem("Quit",Quit,true)
+Init
+	ni := new MenuItem("New Game",NewGame,true)
+	ni  = new MenuItem("New Game+",NewGamePlus,CTA.Unlocked_NewGamePlus)
+	ni  = new MenuItem("New Game: True Abyss",NewGameTrueAbyss,CTA.Unlocked_TrueAbyss)
+	ni  = new MenuItem("Continue a game",SGLink.OpenSG,BubSave.Exists("Save/__GameName.Directory"))
+	// new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
+	ni  = new MenuItem("Jukebox",StartJukeBox,true)
+	// new MenuItem("Websites",NOTHINGYET,true)
+	// new MenuItem("Repository & Bug tracker",URL_GitHub,true)
+	ni  = new MenuItem("Credits",NOTHINGYET,true)
+	ni  = new MenuItem("Quit",Quit,true)
+End
 
 #say "MainMenu: Let's ROCK, baby!"
 global void BUB_Arrive()
@@ -278,7 +284,8 @@ global void BUB_Draw()
 	__white
 	
 	// debug
-	Dev.ConCheck()
+	//Dev.ConCheck()
+	if (Events.AppTerminate) Sys.Quit(0)
 	
 	// Autoupdate
 	MidScreen.Auto()
@@ -333,6 +340,12 @@ global void BUB_Update()
 		ComeIntoAction()
 	end
 end
+
+Global Void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End
+	
 
 // Confirm
 CSay("MainMenu should be successfully loaded")
