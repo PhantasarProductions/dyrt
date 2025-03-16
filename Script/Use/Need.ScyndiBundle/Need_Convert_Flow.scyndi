@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Flow.scyndi
 // 	Flow
-// 	version: 25.03.11
+// 	version: 25.03.16 I
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -38,4 +38,6 @@ End
 Global Void StartFlow()
 End
 	
-	
+Global Void KillFlow(String F)
+	Sys.KillFlow("FLOW_"..F)
+End
