@@ -1,52 +1,76 @@
-// License Information:
-// **********************************************
+// License:
+// 	  src/Script/Script/Flow/Introduction.scyndi
 // 
-// src/Tricky Script/Script/Flow/Introduction.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// 	  Version: 25.03.16 VIII
+// 	
+// 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
 // 
-// This file contains material that is related
-// to a storyline that is which is strictly
-// copyrighted to Jeroen Broks.
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
 // 
-// This file may only be used in an unmodified
-// form with an unmodified version of the
-// software this file belongs to.
-// 
-// You may use this file for your study to see
-// how I solved certain things in the creation
-// of this project to see if you find valuable
-// leads for the creation of your own.
-// 
-// Mostly this file comes along with a project
-// that is for most part released under an
-// open source license and that means that if
-// you use that code with this file removed
-// from it, you can use it under that license.
-// Please check out the other files to find out
-// which license applies.
-// This file comes 'as-is' and in no possible
-// way the author can be held responsible of
-// any form of damages that may occur due to
-// the usage of this file
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
 // 
 // 
-// **********************************************
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
 // 
-// version: 20.08.18
-// End License Information
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+
+Script
 
 // Dirty code straight from the toilet!
-#accept BUB_Draw
-#accept BUB_Update
+//#accept BUB_Draw
+//#accept BUB_Update
+plua BUB_Draw
+plua BUB_Update
 
-#accept Introduction
-#accept Show
+//#accept Introduction
+//#accept Show
 
-#use "script/auto/swapkill"
+//#use "script/auto/swapkill"
 
-#use "script/use/anyway"
+//#use "script/use/anyway"
+//#use "Libs/LinkedList"
+//#use "Libs/Strings"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "Libs/Music"
 #use "Libs/LinkedList"
-#use "Libs/Strings"
+
+#use "Script/Use/Need"
+
 
 
 class Loader
@@ -66,19 +90,19 @@ class Loader
 			case "Image"
 				LoadImage(self.File,self.Tag)
 			case "ImageFont"
-				LoadImageFont(self.File,self.Tag)
+				LinkFont(self.File,self.Tag)
 			case "MousePointer"
 				Mouse[self.Tag]=self.File
 			case "InstantTune"
 				Music.Play("Music/StartUp/Introduction.wav",true)
 			case "Audio"
-				LoadAudio(self.File,self.Tag)
+				Audio.Load(self.File,self.Tag)
 			default
 				error(sprintf("%d: Loader.What = \"%s\"; File = \"%s\"; Tag=\"%s\": Can't load unknown phenomenon %s",self.id,self.What,self.File,self.Tag,self.What))
 		end		
 	end
 	
-	void CONSTRUCTOR(string awhat,string afile, string atag)
+	Constructor(string awhat,string afile, string atag)
 		self.What = awhat
 		self.File = afile
 		self.Tag  = atag
@@ -90,7 +114,7 @@ class Loader
 end
 
 group Loading
-	void CONSTRUCTOR()
+	void _Constructor()
 		Loader.List = new TLinkedList
 		// Message banners
 		new Loader("Image","GFX/Alg/Loading.png","LOADING")
@@ -179,6 +203,10 @@ group Loading
 	end
 end
 
+Init
+	Loading._Constructor()
+End
+
 group Show
 	table What2Show
 	int stage
@@ -187,32 +215,40 @@ group Show
 	
 	void MakeMe()
 		table W
-		var F
+		//var F
 		W = self.What2Show
-		F = GetFont("MAINMENU")
-		W[1] = LoadImage("GFX/Alg/Phantasar_Productions.png")
-		W[2] = LoadImage("GFX/Alg/Presents.png")
-		W[3] = F.Text("A game by: Jeroen P. Broks")
-		W[4] = F.Text("With help of: Man of Steel")
-		W[5] = F.Text("And: Widzy")
-		W[6] = LoadImage("GFX/Alg/Dyrt_Logo.png")
+		//F = GetFont("MAINMENU")
+		W[1] = LoadImage("GFX/Alg/Phantasar_Productions.png","PP_Logo")
+		W[2] = LoadImage("GFX/Alg/Presents.png","Presenteert")
+		//W[3] = F.Text("A game by: Jeroen P. Broks")
+		//W[4] = F.Text("With help of: Man of Steel")
+		//W[5] = F.Text("And: Widzy")
+		W[3] = "A game by: Jeroen P. Broks"
+		W[4] = "With help of: Man of Steel"
+		W[5] = "And: Widzy"
+		W[6] = LoadImage("GFX/Alg/Dyrt_Logo.png","Dyrt_Logo")
 	end
 	
-	void CONSTRUCTOR()
+	void _Constructor()
 		self.stage = 0
 		self.sec = os.time()
 	end
 	
+	Var IntroFont
 	void Draw()
 		if self.stage==0
 			self.MakeMe()
 			self.stage=1
 		end
 		var W
-		W = self.What2Show[self.stage]
+		W = self.What2Show[self.stage]		
 		assert(W,"Nothing on stage index "..self.stage.." (stage time: "..self.stagetime..")")
-		W.Draw((Screen.Width/2)-math.floor(W.Width/2),(Screen.Height/2)-math.floor(W.Height/2))
-		
+		if Lua.type(W)=="string"
+			IntroFont = IntroFont || GetFont("MAINMENU")
+			IntroFont.Text(W,Screen.W div 2,Screen.H div 2,2,2)
+		Else
+			W.Draw((Screen.Width div 2)-math.floor(W.Width/2),(Screen.Height div 2)-math.floor(W.Height/2))
+		End
 	end
 	
 	void Update()
@@ -221,16 +257,22 @@ group Show
 		end
 		int s
 		s = os.time()
-		if (s!=self.sec) and (self.stage<#self.What2Show)
+		//if (s!=self.sec) && (self.stage<len(self.What2Show))
+		if (s!=self.sec) && (self.stage<6)
 			self.stagetime++
-			self.stage = math.floor(self.stagetime/#self.What2Show+1)
+			//self.stage = math.floor(self.stagetime/(Len(self.What2Show)+1))
+			self.stage = (self.stagetime div (Len(Self.What2Show)+1)) div 2
 			if self.stage<1
 				self.stage=1
 			end
 			self.sec=s
 		end
+		//CSayF("Stage #%d -> Time: %d   (%d::%d)  ",stage,stagetime,s,self.sec)
 	end
 end
+Init
+	Show._Constructor()
+End
 
 group Chain
 
@@ -264,6 +306,7 @@ group Introduction
 	int g = 0
 	int b = 1
 	bool buttonhover
+	var IntroFont
 
 	void Draw()
 		self.Current.Draw()
@@ -272,21 +315,26 @@ group Introduction
 			int y
 			int w
 			int h
-			self.ContText = self.ContText or GetFont("MAINMENU").Text("Continue")
-			x = (Screen.Width/2)-math.floor(self.ContText.Width/2)
+			IntroFont = IntroFont || GetFont("MAINMENU")
+			//self.ContText = self.ContText or GetFont("MAINMENU").Text("Continue")
+			//x = (Screen.Width/2)-math.floor(self.ContText.Width/2)
 			y = math.floor(Screen.Height*0.80)
-			w = self.ContText.Width
-			h = self.ContText.Height
+			//w = self.ContText.Width
+			//h = self.ContText.Height
+			w = IntroFont.Width("Continue") 
+			h = IntroFont.Height("Continue")
+			x = (Screen.Width/2) - (w div 2)
 			$buttonhover = Mouse.X>x and Mouse.X<x+w and Mouse.Y>y and Mouse.Y<y+h
 			__black
 			Rect(x-4,y-4,w+8,h+8)
 			Color(self.r,self.g,self.b)
-			Rect(x-2,y-2,w+6,h+6,"line")
+			Rect(x-2,y-2,w+6,h+6,1)
 			Color(self.g,self.r,255-self.b)
-			self.ContText.Draw(x,y)
+			//self.ContText.Draw(x,y)
+			IntroFont.Text("Continue",x,y)
 			if (self.b%2==0)
 				self.r++
-				if $r>=255
+				if self.r>=255
 					self.b++
 					self.r=255
 				end
@@ -310,9 +358,9 @@ group Introduction
 	end
 	
 	void Update()
-		if DEVELOPMENT and Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
-			GoConsole()
-		end
+		//if DEVELOPMENT and Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
+		//	GoConsole()
+		//end
 		if $buttonhover and Mouse.HitLeft
 			self.Current = Chain
 			return
@@ -320,9 +368,19 @@ group Introduction
 		self.Current.Update()
 	end
 	
-	void CONSTRUCTOR()
+	void _Constructor()
 		BUB_Draw = self.Draw
 		BUB_Update = self.Update
 		self.Current = Loading
 	end
 end
+Init
+	Introduction._Constructor()
+End
+
+
+
+Global Void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End
