@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CheckTrueAbyss.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CheckTrueAbyss.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,48 +33,56 @@
 // 
 // **********************************************
 // 
-// version: 20.07.07
-// End License Information
-module MODULE_TRUEABYSS_CHECK
+// 
+// version: 25.03.17
+// 
+// End License
 
-	get string D
-		string t
-		t = GameHomeDir()
-		if mid(t,2,1)==":"
-			t = right(t,#t-2)
-		end
-		return t
-	end
+//module MODULE_TRUEABYSS_CHECK
+module
+
+	//get string D
+	//	string t
+	//	t = GameHomeDir()
+	//	if mid(t,2,1)==":"
+	//		t = right(t,#t-2)
+	//	end
+	//	return t
+	//end
 	
-	get string Hash
-		return HashMD5(self.D)
-	end
+	//get string Hash
+	//	return HashMD5(self.D)
+	//end
 	
 	get bool Unlocked_TrueAbyss
-		return BubbleConfig.UTTA == self.Hash
+		return false
+		//return BubbleConfig.UTTA == self.Hash
 	end
 	
 	set bool Unlocked_TrueAbyss
-		CSayF("Unlock True Abyss = %s",tostring(value))
-		if value
-			CSayF("Setting UTTA to: %s",self.Hash)
-			BubbleConfig.UTTA = self.Hash
-		else
-			BubbleConfig.UTTA = "Whatever"
-		end
+		//CSayF("Unlock True Abyss = %s",tostring(value))
+		//if value
+		//	CSayF("Setting UTTA to: %s",self.Hash)
+		//	BubbleConfig.UTTA = self.Hash
+		//else
+		//	BubbleConfig.UTTA = "Whatever"
+		//end
+		print("The True Abyss cannot yet be set!")
 	end
 	
 	get bool Unlocked_NewGamePlus
-		return BubbleConfig.UNGP == HashMD5(self.Hash)
+		//return BubbleConfig.UNGP == HashMD5(self.Hash)
+		return true
 	end
 	
 	set bool Unlocked_NewGamePlus
-		if value
-			BubbleConfig.UNGP = HashMD5(self.Hash)
-		else
-			BubbleConfig.UNGP = "Whatever"
-		end
+		//if value
+		//	BubbleConfig.UNGP = HashMD5(self.Hash)
+		//else
+		//	BubbleConfig.UNGP = "Whatever"
+		//end
+		print("The New Game+ cannot yet be set!")
 	end
 
 
-end
+//end
