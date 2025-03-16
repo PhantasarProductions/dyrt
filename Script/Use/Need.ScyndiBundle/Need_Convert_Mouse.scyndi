@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Mouse.scyndi
 // 	Mouse
-// 	version: 25.03.11
+// 	version: 25.03.16 IV
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -23,6 +23,7 @@
 // End License
 Module
 
+#use "Libs/SCI/Events"
 #use "Libs/SCI/Graphics"
 
 Group Mouse
@@ -54,5 +55,25 @@ Group Mouse
 		_ImgPointerSleep = LoadImage(Value,"DYRT_SYSTEM_MOUSEPOINTERSLEEP")
 	End
 #endregion
+	
+	Get Int X
+		Return Events.MouseX
+	End
+	
+	Get Int Y
+		Return Events.MouseY
+	End
+	
+	Void Show(Sleeping)
+		Ternary(Sleeping,_ImgPointerSleep,_ImgPointer).Draw(Events.MouseX,Events.MouseY)
+	End
+	
+	Get Bool HitLeft
+		return Events.MouseHitLeft
+	End
 
+	Get Bool HitRight
+		return Events.MouseHitRight
+	End
+	
 End
