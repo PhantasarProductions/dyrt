@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/NewGame.scyndi
 // 
-// 	  Version: 25.03.17 V
+// 	  Version: 25.03.17 VI
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -411,7 +411,7 @@ void StartTheTrueAbyss()
 	__cash = math.floor(900 / (__skill*(10^(__skill-1))))
 	//Swap.Data.ReadMe = "This is the swap data folder op\nThe Secrets of Dyrt.NET (The True Abyss)\n\n\nThis session has begin on "..os.date().."\n\nDON'T PUT ANY FILES IN THIS FOLDER!\nYou'll only get them removed when you start or load a new Dyrt.NET game!"
 	RPG.Party.Max=8
-	for i,ch in ipairs { [0]="Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+	for i,ch in Lua.ipairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
 		CSayF("Creating: %d:%s",i,ch)
 		Party.NewCharacter(ch,1)
 		RPG.Party[i] = ch
