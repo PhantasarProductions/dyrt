@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Flow.scyndi
 // 	Flow
-// 	version: 25.03.17 III
+// 	version: 25.03.17 IV
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -33,6 +33,15 @@ Global Void LoadFlow(String T,String F)
 	end
 	Sys.LoadFlow(T,F)
 End
+
+Global Void LoadState(String T,String F)
+	if ExtractExt(Upper(F))=="NIL"
+		// Lazy, but it will save me LOADS of trouble!
+		F = StripExt(F)..".lbc"
+	end
+	Sys.LoadState(T,F)
+End
+
 
 // Old NALA feature, I doubt I needed here, but in laziness, let's have it!
 Global Void StartFlow()
