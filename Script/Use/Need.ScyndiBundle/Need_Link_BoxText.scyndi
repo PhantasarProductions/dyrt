@@ -1,0 +1,151 @@
+// License:
+// 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_BoxText.scyndi
+// 
+// 	  Version: 25.03.17 IV
+// 	
+// 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+
+#use "Script/Use/Need.ScyndiBundle/NEED_Anyway_AlgemeneDefinities"
+#use "Script/Use/Need.ScyndiBundle/NEED_Convert_Flow"
+
+
+void LoadBoxText()
+	if ! StateExists("FLOW_BOXTEXT")
+		LoadFlow("BOXTEXT","Script/Flow/FlowBoxtext.nil")
+	end
+end
+
+void BTExe(string command)
+	Lua.error("BTExe is taken out of use!")
+	//LoadBoxText()
+	//LuaDoString("FLOW_BOXTEXT",command,"Call flow: BOXTEXT")
+end	
+
+Var BTCall(string command,infinity)
+	LoadBoxText()
+	r:=Sys.Call("FLOW_BOXTEXT",command,infinity)
+	return r
+End
+
+group TrueBoxTextGroup
+
+	void Load(string Scenario,string File)
+		//CWriteLine(sprintf("Loading scenario %s from file %s",Scenario,File),180,0,255)
+		CSayF("Loading scenario %s from file %s",Scenario,File)
+		//BTExe(sprintf("Scenario.LoadData(\"%s\",\"%s\", false)",Trim("Scenario/"..__lang.."/"..Scenario),Trim(File)))
+		BTCall("Scenario.LoadData",Trim("Scenario/"..__lang.."/"..Scenario),Trim(File),false)
+	end
+	
+	void LoadNew(string File,string LoadAs)
+		//BTExe(sprintf("Scenario.LoadNewData(\"%s\",\"%s\", false)",Trim("Scenario/"..__lang.."/"..File),Trim(LoadAs)))
+		BTCall("Scenario.LoadNewData",Trim("Scenario/"..__lang.."/"..File),Trim(LoadAs),false)
+	end
+
+	void CallMe(string Scenario,string Tag,ReturnFlow,Num)
+		var RF
+		RF = Upper(Trim(ReturnFlow || CurrentFlow())) //:upper()
+		if RF=="FLOW_BOXTEXT" or RF=="BOXTEXT"
+			CSay("WARNING! Dupe Boxtext request. I must ignore!")
+			return
+		end
+		if ! StateExists("FLOW_BOXTEXT")
+			Lua.error("Bold thing to call the BoxText while the flow's not even been loaded, let alone any scenario file!")
+		end
+		CSayF("Boxtext request! Scen=%s; Tag=%s",Scenario,Tag)
+		//LuaDoString("FLOW_BOXTEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 1),"Chain to flow: BOXTEXT")
+		BTCall("FlowBoxText.InitBTFlow",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num || 1)
+		GoToFlow("BOXTEXT")
+	end
+
+end
+
+// I am thinking of a way to make direct support for this in classes and groups
+// But for now, this will do ;)
+global table BoxText
+Init
+//setmetatable(BoxText,{
+	//['__call'] = void(t,infinity)
+	ddef _call
+		plua _s
+		string _scen
+		string _tag
+		plua _rf
+		plua _num
+		_s,_scen,_tag,_rf,_num = infinity
+		//TrueBoxTextGroup.CallMe(infinity)
+		TrueBoxTextGroup.CallMe(_s,_scen,_tag,_rf,_num)
+	end
+	//['__index'] = var(t,string k)
+	ddef _idx
+		plua t
+		string k
+		t,k = infinity
+		return TrueBoxTextGroup[k] 
+	end
+	//['__newindex'] = void(t,k,v)
+	ddef _nidx
+		plua t
+		string k
+		plua v
+		t,k,v = infinity
+		TrueBoxTextGroup[k]=v 
+	end
+	BoxText = SetMetaTable({},{["__call"]=_call,["__index"]=_idx,["__newindex"]=_nidx})
+//})
+end
+
+
+global void MapText(string Tag, infinity)
+	BoxText("MAP",Tag,infinity)
+end
+
+//#accept Map
+LocExtern Map "Scyndi.Class.Map"
+
+global void CharText(string Tag, infinity)
+	Tag = replace(Tag,"NPC_MTC_","")
+	BoxText("MAP",Tag.."_"..(Upper(Map.Leader)),infinity)
+end
