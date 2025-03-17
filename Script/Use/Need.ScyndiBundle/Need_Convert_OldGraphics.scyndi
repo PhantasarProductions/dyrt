@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_OldGraphics.scyndi
 // 
-// 	  Version: 25.03.16
+// 	  Version: 25.03.17 I
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -47,3 +47,4 @@ extern ImageLoaded "Graphics.HasImageTag"
 extern Screen "Scyndi.Class.Graphics"
 extern Color "Scyndi.globals.SetColor"
 extern GetFont "Scyndi.Globals.ObtainFont"
+extern LoadImageFont "Scyndi.Globals.LinkFont"
