@@ -1,0 +1,133 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Use/Need.ScyndiBundle/NEED_Anyway_LanguageSettings.scyndi
+// (c) Jeroen Broks, 2019, 2020, 2021, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.03.17 V
+// 
+// End License
+
+
+
+Script
+
+#say "Language"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+//#use "Script/Use/Link/GameVars.nil"
+#use "Libs/LinkedList"
+#use "Script/Use/Need.ScyndiBundle/Need_Anyway_AlgemeneDefinities"
+
+table EnglishNames 
+global table Languages = { ["EN"] = "English", ["NL"] = "Dutch" } 
+//Languages = { ["EN"] = "English", ["NL"] = "Dutch", ["IT"] = "*Italian" }
+//Languages = { ["EN"] = "English", ["NL"] = "Dutch" }
+
+Init
+// this works quicker
+//#pure
+//EnglishNames = {
+   EN:={}
+   EN.Eric = "Eric",
+   EN.Irravonia = "Irravonia",
+   EN.Brendor = "Brendor",
+   EN.PreScyndi = "Seelah Gandra",
+   EN.PostScyndi = "Scyndi",
+   EN.Rebecca = "Rebecca",
+   EN.Dernor = "Dernor",
+   EN.Merya = "Merya",
+   EN.Aziella = "Azi|uella",
+   EN.Shanda = "Shanda",
+   EN.Kirana = "Kirana",
+   EN.IrraShort = "Irra"
+   //}
+   //#endpure
+   EnglishNames=EN
+End
+
+global table Names
+table LangToNames 
+table MetaNames
+
+#say "What more?"
+void ignore()
+end
+
+
+#say "Meta-Name Index"
+
+//MetaNames.__index = string(t,k)
+string MNI(t,k)
+	table chktable
+	string ret
+	chktable = LangToNames[__lang] || EnglishNames
+	if k=="Yasathar"
+		ret = chktable.Eric
+	else
+		ret = chktable[k] 
+	end
+	Lua.assert(ret,sprintf("No name tied for character %s in language %s or the English language table!",k,__lang))
+	return ret
+end
+
+//#say "No new index!"
+//MetaNames.__newindex = string(t,k,v)
+Void MNNI(t,k,v)
+	Lua.error("Name Table is read-only")
+end
+
+
+
+//MetaNames.__call = void(t,lang)
+void MNC(t,lang)
+	for k,_ in pairs(EnglishNames)
+		switch k
+			case "PostScyndi" "PreScyndi"
+				gString.Scyndi = Names.PreScyndi
+				gString.SCYNDI = Names.PreScyndi
+				CSayF("For now Scyndi will be called %s as her new name will be chosen later, after all",gString.SCYNDI)
+			case "Yasathar"
+				gString.Yasathar = Names.Eric
+			default
+				gString[Upper(k)] = Names[k]
+				gString[k] = Names[k]
+				CSayF("$%s = %s",Upper(k),gString[Upper(k)])
+		end
+	end
+end
+
+//setmetatable(Names,MetaNames)
+Init
+	Names = SetMetaTable(Names,{ ["__index"]=MNI,["__newindex"]=MNNI,["__call"]=MNC } )
+End
