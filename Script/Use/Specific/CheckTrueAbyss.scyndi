@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.03.17
+// version: 25.03.17 I
 // 
 // End License
 
@@ -72,7 +72,7 @@ module
 	
 	get bool Unlocked_NewGamePlus
 		//return BubbleConfig.UNGP == HashMD5(self.Hash)
-		return true
+		return false
 	end
 	
 	set bool Unlocked_NewGamePlus
