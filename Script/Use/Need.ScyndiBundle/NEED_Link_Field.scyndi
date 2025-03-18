@@ -1,90 +1,117 @@
-// License Information:
-// src/Tricky Script/Script/Use/Link/Field_h.nil
-// Version: 21.01.05
-// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
+// License:
+// 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
+// 	  Version: 25.03.18 V
+// 	
+// 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
 // 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
 // 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
 
-#use "libs/strings"
 
-#accept Map
+Module
 
-quickmeta group MapObjTex
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
+
+
+
+
+//#accept Map
+LocExtern __MAP "Scyndi.Class.Map"
+
+quickmeta MapObjTex
 	index
-		Map.Obj=key
-		return Map.ObjString.Texture
+		__Map.Obj=key
+		return __Map.ObjString.Texture
 	end
 	
 	newindex
-		Map.Obj=key
-		Map.ObjString.Texture = value
+		__Map.Obj=key
+		__Map.ObjString.Texture = value
 	end
 end
 
 void FieldCheck()
-	assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
+	Lua.assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
 end
 
 void FLD_Exe(string do_it)
 	FieldCheck()
-	LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+	//LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+	Lua.error("FLD_Exe out of use, so I won't be able to execute: "..do_it)
 end
 
 string FLD_GetString(string vr)
 	FieldCheck()
-	return LuaGetString("FLOW_FIELD",vr)
+	//return LuaGetString("FLOW_FIELD",vr)
+	Lua.error("FLD_String out of use, so I cannot retrieve: "..vr)
 end
 
 int FLD_GetInt(string vr)
 	FieldCheck()
-	return LuaGetInt("FLOW_FIELD",vr)
+	//return LuaGetInt("FLOW_FIELD",vr)
+	Lua.error("FLD_Int out of use, so I cannot retrieve: "..vr)
 end
 
 bool FLD_GetBool(string vr)
 	FieldCheck()
-	return LuaGetBool("FLOW_FIELD",vr)
+	//return LuaGetBool("FLOW_FIELD",vr)
+	Lua.error("FLD_Bool out of use, so I cannot retrieve: "..vr)
 end
 
+Var FLD_Call(string cmd,infinity)
+	FieldCheck()
+	r:=Sys.Call(cmd,infinity)
+	return r
+End
+
 group Map
-	link Script = MapScript
+	//link Script = MapScript
 	readonly table Data
 	
 	void ZA_New(string event,string zone,string Action,infinity)
 		string params
 		string actiondelegate
 		table ActSplit
-		ActSplit = split(Action,":")
-		for i,v in pairs {infinity}
+		ActSplit = xsplit(Action,":")
+		for i,v in Lua.ipairs {infinity}
 			if i>1 
 				params = params .. ", "
 			end
@@ -97,45 +124,50 @@ group Map
 					error(sprintf("ZA_New(): Type '"..type(v).."' (parameter #%d) cannot be transferred through this linking routing!",i))
 			end
 		end
-		assert(#ActSplit>0,"Action error in ZA_New")
-		if #ActSplit==1
-			ActSplit[2] = ActSplit[1]
-			ActSplit[1] = "MAPSCRIPT"
+		assert(Len(ActSplit)>0,"Action error in ZA_New")
+		if len(ActSplit)==1
+			//ActSplit[2] = ActSplit[1]
+			//ActSplit[1] = "MAPSCRIPT"
+			ActSplit[1] = ActSplit[0]
+			ActSplit[0] = "MAPSCRIPT"
 		end
-		switch ActSplit[1]:upper()
+		switch Upper(ActSplit[0])
 			case "MAPSCRIPT"
-				actiondelegate = sprintf("MapScript.%s",ActSplit[2])
+				actiondelegate = sprintf("MapScript.%s",ActSplit[1])
 			case "SASKIA"
 				actiondelegate = sprintf("MapScript.SASKIA")
 				if params!=""
 					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
 				end
-				CSay(NIL.LuaSerialize("ActSplit",ActSplit))
+				//CSay(NIL.LuaSerialize("ActSplit",ActSplit))
 				params = "'"..ActSplit[2].."'"
 			default
-				error(sprintf("I don't know how to handle: %s",ActSplit[1]))
+				Luaerror(sprintf("I don't know how to handle: %s",ActSplit[0]))
 		end
 		if params==""
-			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
+			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
+			FLD_Call(ZoneAction,Trim(event),Trim(zone),actiondelegate)
 		else
-			FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
+			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
+			FLD_Call(ZoneAction,Trim(event),Trim(zone),actiondelegate,infinity)
 		end
 	end
 	
 	void ZA_Enter(string zone, string action,infinity)
-		$ZA_New("Enter",zone,action,infinity)
+		ZA_New("Enter",zone,action,infinity)
 	end
 	
 	void ZA_Leave(string zone, string action,infinity)
-		$ZA_New("Leave",zone,action,infinity)
+		ZA_New("Leave",zone,action,infinity)
 	end
 
 	void ZA_Cycle(string zone, string action,infinity)
-		$ZA_Cycle("Leave",zone,action,infinity)
+		ZA_Cycle("Leave",zone,action,infinity)
 	end
 	
 	void LoadAltNext(string AN)
-		FLD_Exe(sprintf("ZoneAction.LoadAltNext(trim(\"%s\"))",AN))
+		//FLD_Exe(sprintf("ZoneAction.LoadAltNext(trim(\"%s\"))",AN))
+		FLD_Call("ZoneAction.LoadAltNext",AN)
 	end
 	
 	void TieGenerator()
@@ -166,9 +198,9 @@ group Map
 	
 	void GoToLayer(string Layer,string Exit,AltWind)
 		CSayF("Map.GoToLayer('%s','%s','%s');",Layer:upper(),Exit,tostring(AltWind))
-		$Kill("PLAYER")		
+		Kill("PLAYER")		
 		FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer:upper()))
-		$SpawnPlayer(trim(Exit),AltWind)
+		SpawnPlayer(trim(Exit),AltWind)
 	end
 	
 	void ShowByZone(string zone)
@@ -201,9 +233,10 @@ group Map
 		//temp = LuaGetString("FLOW_FIELD","NIL.LuaSerialize('temp',FlowField.Map.Kthura.Tags)")
 		//error(temp)
 		temp = "return "..LuaGetString("FLOW_FIELD","FlowField.Map.SerieTags")
-		#pure
-		f = (loadstring or load)(temp)
-		#endpure
+		//#pure
+		//f = (loadstring or load)(temp)
+		//#endpure
+		f = Lua.load(temp)
 		assert(f,"Tag list not properly acquired!")
 		return f()
 	end
@@ -216,13 +249,15 @@ group Map
 		int i = 0
 		table tags
 		tags = self.TagList
-		return var()
+		//return var()
+		ddef ret
 			i++
 			if not tags[i]
 				return nil;
 			end
 			return tags[i]
 		end
+		return ret
 	end
 	
 	void HideByLabel(string label)
@@ -254,11 +289,13 @@ group Map
 	end
 	
 	get int PlayerX
-		return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.X")
+		//return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.X")
+		Return Lua.Scyndi.Class.Player.X
 	end
 	
 	get int PlayerY
-		return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Y")
+		//return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Y")
+		Return Lua.Scyndi.Class.Player.Y
 	end
 	
 	get string PlayerWind
@@ -277,8 +314,15 @@ group Map
 		FLD_Exe("FieldMap.Show('"..tag.."')")
 	end
 	
-	link HideObj = Map.Hide
-	link ShowObj = Map.Show
+	//link HideObj = Map.Hide
+	//link ShowObj = Map.Show
+	void HideObj(string tag)
+		Hide(tag)
+	end
+	
+	void Show(string tag)
+		Show(tag0
+	end
 	
 	void Cam(int x,int y)
 		FLD_Exe(sprintf("FlowField.Map.ScrollX = %d\nFlowField.Map.ScrollY = %d",x,y))
@@ -356,56 +400,61 @@ group Map
 	table ObjBool
 	table ObjData
 	
-	void CONSTRUCTOR()
+	void _CONSTRUCTOR()
 		CSay("Obj linking metatables")
-		setmetatable(self.ObjString,{
-			["__index"] = string(s,string k)
-				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")]",k))
-			end,
-			["__newindex"] = void(s,string k,string v)
-				//CSay(sprintf("==> Flow.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
-				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
-			end
-		})
-		setmetatable(self.ObjInt,{
-			["__index"] = int(s,string k)
-				return FLD_GetInt(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")]",k))
-			end,
-			["__newindex"] = void(s,string k,int v)
-				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %d",k,v))
-			end
-		})
-		setmetatable(self.ObjBool,{
-			["__index"] = boolean(s,string k)
-				return FLD_GetBool(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")]",k))
-			end,
-			["__newindex"] = void(s,string k,bool v)
-				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")] = %s",k,tostring(v)))
-			end
-		})
-		setmetatable(self.ObjData,{
-			["__index"] = string(s,string k)
-				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")]",k))
-			end,
-			["__newindex"] = void(s,string k,string v)
-				//CSay(sprintf("==> Flow.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
-				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
-			end
-			
-		})
+//		Not only does Scyndi not support this syntax at all, the code is also inefficient in the way Kthura works here, so another approach is needed.		
+//		setmetatable(self.ObjString,{
+//			["__index"] = string(s,string k)
+//				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,string v)
+//				//CSay(sprintf("==> Flow.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+//			end
+//		})
+//		setmetatable(self.ObjInt,{
+//			["__index"] = int(s,string k)
+//				return FLD_GetInt(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,int v)
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %d",k,v))
+//			end
+//		})
+//		setmetatable(self.ObjBool,{
+//			["__index"] = boolean(s,string k)
+//				return FLD_GetBool(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,bool v)
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")] = %s",k,tostring(v)))
+//			end
+//		})
+//		setmetatable(self.ObjData,{
+//			["__index"] = string(s,string k)
+//				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,string v)
+//				//CSay(sprintf("==> Flow.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
+//			end
+//			
+//		})
+#say "\007TODO! ObjString/Int/Bool/Data"
 	end
 		
 	get string Leader
-		FieldCheck()
-		return LuaGetString("FLOW_FIELD","FlowField.Leader")
+		//FieldCheck()
+		//return LuaGetString("FLOW_FIELD","FlowField.Leader")
+		return gstring.FIELD_LEADER
 	end
 	
 	set string Leader
-		FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
+		//FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
+		gstring.FIELD_LEADER = value
 	end
 
 	void WipeSASKIA()
-		FLD_Exe("SASKIA.Wipe()")
+		//FLD_Exe("SASKIA.Wipe()")
+		FLD_Call("SASKIA.Wipe")
 	end
 	
 	get bool RENC_Inf
@@ -420,9 +469,9 @@ group Map
 		return LuaGetBool("FLOW_FIELD",sprintf("FieldMap.Kthura.Blocked(%d,%d,%s)",x,y,tostring(real==true)))
 	end
 	
-	void NewClickable(string Tag,int x, int y, string script,param)
+	void NewClickable(string Tag,int x, int y, string _script,param)
 		string p
-		if not param
+		if ! param
 			p = "nil"
 		elseif type(param)=="string" 
 			p = '"'..param..'"'
@@ -431,41 +480,80 @@ group Map
 		else
 			error("Invalid type for parameters: "..type(param))
 		end
-		FLD_Exe(sprintf("Clickables('%s',%d,%d,MapScript.%s,%s)",Tag,x,y,script,p))
+		//FLD_Exe(sprintf("Clickables('%s',%d,%d,MapScript.%s,%s)",Tag,x,y,script,p))
 		// Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y,FlowField.BlackOrb)
+		FLD_Call("Clickables",Tag,x,y,_script,param)
 	end
 end
 
 group Player
-	link X = Map.PlayerX
-	link Y = Map.PlayerY
+	//link X = Map.PlayerX
+	//link Y = Map.PlayerY
+	Get Int X
+		return Ternary(Kthura.HasObj("PLAYER")),Kthura.Obj.Player.X,-1)
+	End
+	Get Int Y
+		return Ternary(Kthura.HasObj("PLAYER")),Kthura.Obj.Player.Y,-1)
+	End
+	Set Int X
+		if Kthura.HasObj("PLAYER")
+			Kthura.Obj.Player.X=Value
+		End
+	End	
+	Set Int Y
+		if Kthura.HasObj("PLAYER")
+			Kthura.Obj.Player.Y=Value
+		End
+	End	
 end
 
 
 group Respawn
 	
-	link Initiated = gv.Bool.Respawn_Initiated
-	link X = gv.Num.Respawn_X
-	link Y = gv.Num.Respawn_Y
-	link Map = gv.String.Respawn_Map
-	link Layer = gv.String.Respawn_Layer
+	//link Initiated = gv.Bool.Respawn_Initiated
+	//link X = gv.Num.Respawn_X
+	//link Y = gv.Num.Respawn_Y
+	//link Map = gv.String.Respawn_Map
+	//link Layer = gv.String.Respawn_Layer
+	Get Bool Initiated
+		return gbool.Respawn_Initiated
+	End
+	Get Int X 
+		return gint.Respawn_X
+	End
+	Get Int Y
+		return gint.Respawn_Y
+	end
+	Get String Map
+		return gstring.Respawn_Map
+	End
+	Get String Layer
+		return gString.Respawn_Layer
+	End
+	
 	
 	void Reset()
-		if not Map.HasTag("Player")
+		//if not Map.HasTag("Player")
+		if !Kthura.HasObj("PLAYER")
 			CSay("WARNING! Player reset requested, but player object yet non-existent! -- Request ignored!")
 			return
 		end
-		Map.Obj			= "Player"
-		self.X			= Map.ObjInt.X
-		self.Y			= Map.ObjInt.Y		
-		self.Map		= Map.MapFile
-		self.Layer		= Map.Layer
-		self.Initiated	= true
+		//Map.Obj			= "Player"
+		//self.X			= Map.ObjInt.X
+		//self.Y			= Map.ObjInt.Y		
+		//self.Map		= Map.MapFile
+		//self.Layer		= Map.Layer
+		//self.Initiated	= true
+		gint.Respawn_X      = Kthura.Obj.PLAYER.X
+		gint.Respawn_Y      = Kthura.Obj.PLAYER.X
+		gStr.Respawn_Map    = StripDir(Kthura.LastLoadedMap)
+		gstr.Respawn_Layer  = StripDir(Kthura.Layer)
+		gbool.Initiated     = true		
 	end
 	
 	void AutoSet()
-		if not self.Initiated
-			self.Reset()
+		if ! Respawn.Initiated
+			Respawn.Reset()
 		end
 	end
 	
@@ -492,7 +580,7 @@ end
 
 group Field
 
-	link Map = Map
+	//link Map = Map
 
 	link ZA_Enter = Map.ZA_Enter
 	link ZA_Leave = Map.ZA_Leave
