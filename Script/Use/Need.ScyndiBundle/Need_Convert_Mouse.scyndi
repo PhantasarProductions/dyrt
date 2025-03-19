@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Mouse.scyndi
 // 	Mouse
-// 	version: 25.03.17 II
+// 	version: 25.03.18
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -80,6 +80,10 @@ Group Mouse
 
 	Get Bool HitRight
 		return Events.MouseHitRight
+	End
+	
+	Get Bool HeldLeft
+		Return Events.MouseDownLeft
 	End
 	
 End
