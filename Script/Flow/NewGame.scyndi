@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/NewGame.scyndi
 // 
-// 	  Version: 25.03.17 VII
+// 	  Version: 25.03.19 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -46,6 +46,7 @@
 Script
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
 #use "Libs/SCI/InterVar"
 #use "Libs/SCI/Graphics"
@@ -63,8 +64,9 @@ var Background = ObtainImage("MENUBACK")
 table stages
 global int stage = 1
 Init
+	CSay("Clear INTERVAR")
 	//gvClearAll()
-	gClear
+	gClear()
 End	
 
 //var font
@@ -242,27 +244,31 @@ class Stage_Skill
 	int hover = 0
 	
 	CONSTRUCTOR()
-		self.skillnames = { [1]=BigFont.iText("Stay away from me!!!"), [2]=BigFont.iiText("Bring it on!"), [3]=BigFont.iText("There is no life in the VOID!") }
-		self.skilldesc = { [1]={Font.Text("In this mode the game is heavily simplefied"),[2]=Font.Text("More bonusses, quicker level gaining and more stuff will help you to get on the way"), [3]=Font.Text("This mode is intended for beginners!") }, {Font.Text("In this mode you'll get the game the way it was intended")}, {Font.Text("Think you are though?"),Font.Text("Can you beat Dr. Nim without cheating?"),Font.Text("Are you ready for the ultimate madness?"),Font.Text("If it's a hard game you want, a hard game you get!"),Font.Text("This mode is for the tough guys who need a life!") } }
+		CSay("Skill Init - Stage #1")
+		self.skillnames = { [1]=BigFont.iText("Stay away from me!!!"), [2]=BigFont.iText("Bring it on!"), [3]=BigFont.iText("There is no life in the VOID!") }
+		self.skilldesc = { [1]={[0]=Font.iText("In this mode the game is heavily simplefied"),Font.iText("More bonusses, quicker level gaining and more stuff will help you to get on the way"),Font.iText("This mode is intended for beginners!") }, [2]={[0]=Font.iText("In this mode you'll get the game the way it was intended")}, [3]={[0]=Font.iText("Think you are though?"),Font.iText("Can you beat Dr. Nim without cheating?"),Font.iText("Are you ready for the ultimate madness?"),Font.iText("If it's a hard game you want, a hard game you get!"),Font.iText("This mode is for the tough guys who need a life!") } }
 		// The text here must be in REVERSED order!
+		CSay("Skill Init - Stage #2")
 		sk:={}
 		self.skillnotes = sk 
-			sk+=Font.Text("affected by this, as well. So therefore make your choice WISELY!"),
-			sk+=Font.Text("Inventory space and level up tables and much more things, are")
-			sk+=Font.Text("This difficulty does not just affect enemy strength, you know!")
-			sk+=Font.Text("Please note that you can NOT change this later") 
+			sk+=Font.iText("affected by this, as well. So therefore make your choice WISELY!")
+			sk+=Font.iText("Inventory space and level up tables and much more things, are")
+			sk+=Font.iText("This difficulty does not just affect enemy strength, you know!")
+			sk+=Font.iText("Please note that you can NOT change this later") 
 		//}
+		CSay("Skill Init - Stage #3")
 		for i=1,3			
-			self.skillpic[i] = LoadImage("gfx/skill/"..i..".png")
+			self.skillpic[i] = LoadImage("gfx/skill/"..i..".png","SKILL_"..i)
 			
 		end
+		CSay("Skill Init - Done")
 	end
 	
 	void draw()
 		self.hover=0
 		for i=1,3 
 			__white
-			self.skillpic[i]['Draw'](20,i*150)
+			self.skillpic[i]["Draw"](20,i*150)
 			if Mouse.Y>i*150 and Mouse.Y<(i+1)*150
 				self.hover=i
 				for idx,txt in ipairs(self.skilldesc[i])
@@ -279,7 +285,8 @@ class Stage_Skill
 	end
 	
 	void update()
-		if Mouse.HeldLeft
+		//if Mouse.HeldLeft
+		if Mouse.HitLeft
 			if self.hover>0
 				gInt.Skill=self.hover
 				stage = stage + 1
@@ -290,6 +297,7 @@ class Stage_Skill
 end
 
 Init
+	CSay("Adding Stage: Skill")
 	//stages[#stages+1] = new Stage_Skill
 	stages+=New Stage_Skill()
 End
@@ -361,6 +369,7 @@ end
 
 Init
 	//stages[#stages+1] = new Stage_Language
+	CSay("Adding Stage: Language")
 	stages += new Stage_Language()
 End
 
@@ -462,6 +471,7 @@ end
 
 Init
 	// stages[#stages+1] = new Stage_StartGame
+	CSay("Adding State: Start Game")
 	stages += new Stage_StartGame()
 End
 
@@ -489,7 +499,7 @@ global void BUB_Draw()
 	__white
 	
 	// debug
-	Dev.ConCheck()
+	//Dev.ConCheck()
 	
 	// Autoupdate
 	MidScreen.Auto()
@@ -498,7 +508,7 @@ global void BUB_Draw()
 	Background.Tile(0,0,Screen.Width,Screen.Height)
 
 	// Execute Stage Draw
-	stages[stage]['draw']()
+	stages[stage]["draw"]()
 	
 	// Mouse
 	__white
@@ -506,14 +516,19 @@ global void BUB_Draw()
 end
 
 global void BUB_Update()
-	stages[stage]['update']()
+	stages[stage]["update"]()
 end
 
 Global Void MainFlow()
 	BUB_Update()
 	BUB_Draw()
+	QuitRequest()
 End
 
 Init
+	CSay("Setting stage to 0")
 	stage=0
+	CSay("Event Flush")
+	Events.Flush()
+	CSay("Let's get ready to rumble!")
 end
