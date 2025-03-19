@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Flow.scyndi
 // 	Flow
-// 	version: 25.03.17 V
+// 	version: 25.03.19 II
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -24,6 +24,7 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
 
 extern CurrentFlow "Lua.SCI_CurrentFlow"
@@ -55,3 +56,12 @@ Global Void KillFlow(String F)
 End
 
 extern StateExists "Scyndi.Class.Sys.HasState"
+
+Global Void QuitRequest()
+	If Events.AppTerminate() 
+		Table QM={[0]="Do you really want to quit adventuring?","Are you really a coward?","You're sure you don't want to unravel this mystery?","So you are a yellow chicken after all?","Don't quit. There's an ogre awaiting you when yo do!","So you'd rather play with word processors and spreadsheets than with swords and magic?"}
+		If Sys.Yes(QM[math.random(0,len(QM)-1)])
+			Sys.Exit(0)
+		End
+	End
+End
