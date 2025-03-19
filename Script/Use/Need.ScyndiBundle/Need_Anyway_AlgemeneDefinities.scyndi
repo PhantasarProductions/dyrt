@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Anyway_AlgemeneDefinities.scyndi
 // 
-// 	  Version: 25.03.16 I
+// 	  Version: 25.03.18 I
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2022, 2025 Jeroen Petrus Broks
 // 	
@@ -188,4 +188,13 @@ quickmeta SealedDefeated
 		gBool["SealedBossForCharacter"..key.."Defeated"] = value
 	end
 	
+end
+
+// Used several times. Perhaps obsolete, but still handy to have
+global string SafeString(string s)
+	string r
+	for i=1,len(s)
+		r+=sprintf("\\%03d",Lua.string.ascii(mid(r,i,1)))
+	end
+	return r
 end
