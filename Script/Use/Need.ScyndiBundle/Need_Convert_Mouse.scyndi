@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Mouse.scyndi
 // 	Mouse
-// 	version: 25.03.18
+// 	version: 25.03.19
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -64,9 +64,12 @@ Group Mouse
 		Return Events.MouseY
 	End
 	
+	Bool Sleeping = False
+	
 	Table PA = {}	
-	Void Show(Sleeping)
-		Sleeping = Sleeping == true
+	Void Show()
+	//Void Show(Sleeping)
+	//	Sleeping = Sleeping == true
 		_ImgPointerSleep = _ImgPointerSleep || ObtainImage("DYRT_SYSTEM_MOUSEPOINTERSLEEP")
 		_ImgPointer = _ImgPointer || ObtainImage("DYRT_SYSTEM_MOUSEPOINTER")
 		PA[Sleeping] = Ternary(Sleeping,_ImgPointerSleep,_ImgPointer)
