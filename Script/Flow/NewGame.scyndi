@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/NewGame.scyndi
 // 
-// 	  Version: 25.03.19 I
+// 	  Version: 25.03.19 II
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -339,7 +339,7 @@ class NG_Lang
 end
 
 class Stage_Language
-	void CONSTRUCTOR()
+	CONSTRUCTOR()
 		for lcode, lname in spairs(Languages)
 			onzin:=new NG_Lang(lcode,lname,prefixed(lname,"*"))
 		end
@@ -355,6 +355,9 @@ class Stage_Language
 			end
 			lang.textname.Draw(lang.x,lang.y)
 		end
+		font.text("Scenario language",Graphics.W div 2,5,2)
+		font.text("This only affects the scenario.",Graphics.W div 2,graphics.h-60,2,1)
+		font.text("System messages, item/spell names etc will remain in English.",Graphics.W div 2,graphics.h-30,2,1)
 	end
 	
 	void update()
