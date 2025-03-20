@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/Field.nlb/Field_OnyxBang.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_OnyxBang.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,32 +33,45 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.03.20 IV
+// 
+// End License
+
+
+Script
+
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Kthura"
+
 #use "libs/xmath"
+LocExtern FlowField "Scyndi.Class.FlowField"
+LocExtern Map "Scyndi.Class.Map"
 
 group OnyxBang
 
 	int aftellen
-	var Audio
+	var AudioEffect = Audio.LoadNew("SFX/Scenario/OnyxBang.wav","ONYX_BANG")
 	
-	link Kthura = FlowField.Map.Kthura
+	//link Kthura = FlowField.Map.Kthura
 	
-	void CONSTRUCTOR()
-		self.Audio = LoadAudio("SFX/Scenario/OnyxBang.wav")
-	end
+	//void CONSTRUCTOR()
+	//	self.Audio = LoadAudio("SFX/Scenario/OnyxBang.wav")
+	//end
 	
 	void Start()
 		$aftellen = 720
 		Map.ShowObj("OnyxBang")
-		self.Audio.Play()
+		AudioEffect.Play()
 	end
 	
-	get boolean Going
-		#- self.aftellen 2
-		self.Kthura.Obj = "OnyxBang"
-		self.Kthura.ObjInt.ScaleX = math.abs(math.floor(xmath.sin(self.aftellen)*1000))
-		self.Kthura.ObjInt.ScaleY = self.Kthura.ObjInt.ScaleX
+	get bool Going
+		self.aftellen -= 2
+		//self.Kthura.Obj = "OnyxBang"
+		//self.Kthura.ObjInt.ScaleX = math.abs(math.floor(xmath.sin(self.aftellen)*1000))
+		//self.Kthura.ObjInt.ScaleY = self.Kthura.ObjInt.ScaleX
+		Kthura.Obj.OnyxBang.ScaleX = math.abs(math.floor(xmath.sin(self.aftellen)*1000))
+		Kthura.Obj.OnyxBang.ScaleY = self.Kthura.ObjInt.ScaleX
 		if self.aftellen<=0
 			Map.HideObj("OnyxBang")
 			return false
