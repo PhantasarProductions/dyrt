@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.03.20 VII
+// 	  Version: 25.03.25 IX
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -49,25 +49,33 @@ Script
 
 #use "Libs/SCI/Sys"
 #use "Libs/SCI/JCR6"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/GINIE"
 #use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
 
 #use "Script/Use/Need"
 //#use "Script/Use/Specific/Field" as XFIELDX
 #use "Script/Use/Specific/XFieldX"
 #use "libs/KettingKaart"
 #use "libs/saskia"
-#use "libs/strings"
-#use "libs/tables"
-#use "libs/Roman"
+//#use "libs/strings"
+//#use "libs/tables"
+#use "libs/RomanNumbers"
 #use "libs/LinkedList"
 #use "libs/xmath"
+#use "libs/music"
+
+LocExtern tonumber "tonumber"
 
 
 global bool FLOW_FIELD = true
 
+plua PermaChanges = GINIE.CreateNew("Map_PermaChanges")
 
 // Requires linked list, so I need this to be last!
-#use "Script/Use/MiniMessages"
+#use "Script/Use/Misc/MiniMessages"
 
 #macro __player FlowField.Map.Kthura.Actor.Player
 
@@ -89,7 +97,8 @@ var XPand(t, i)
 	end
 end
 
-#accept FlowField
+//#accept FlowField
+LocExtern FlowField "Scyndi.Class.FlowField"
 class Clickables
 	static var List
 	static var Map
@@ -116,11 +125,11 @@ class Clickables
 		self.Layer = FlowField.Map.Kthura.Layer
 		self.Tag = Tag
 		self.ArriveParam = { infinity }
-		CSayF("Clickable %s;\n%s",tostring(Arrive),NIL.LuaSerialize("* Param",self.ArriveParam))
+		//CSayF("Clickable %s;\n%s",tostring(Arrive),NIL.LuaSerialize("* Param",self.ArriveParam))
 		if Arrive==nil or Arrive==""
 			return
 		end
-		if type(Arrive)=='function'
+		if type(Arrive)=="function"
 			self.ArriveDelegate = Arrive
 			return
 		end
@@ -166,33 +175,33 @@ class Clickables
 	static var Clicked(int x, int y)
 		var M
 		M = $Map
-		with M
+		//with M
 			for cl in Clickables.List.Each
 				// Crash prevention for once an object was removed!
-				if $HasTag(cl.Tag) and cl.Layer == FlowField.Map.Kthura.Layer
-					$Obj = cl.Tag
+				if M.HasTag(cl.Tag) and cl.Layer == FlowField.Map.Kthura.Layer
+					M.Obj = cl.Tag
 					//-- if cl.Layer==$Layer and 
-					switch $ObjString.Kind
+					switch M.ObjString.Kind
 						case "Zone" "TiledArea"
-							if x>$ObjInt.x and x<$ObjInt.x+$ObjInt.w and y>$ObjInt.y and y<$ObjInt.y+$ObjInt.h
+							if x>M.ObjInt.x and x<M.ObjInt.x+M.ObjInt.w and y>M.ObjInt.y and y<M.ObjInt.y+M.ObjInt.h
 								return cl
 							end
 						case "Obstacle"
 							int hw
-							hw = math.floor($ObjInt.ObjectWidth/2)
-							if x>$ObjInt.x-hw and x<$ObjInt.x+hw and y>$ObjInt.y-$ObjInt.ObjectHeight and y<$ObjInt.y
+							hw = math.floor(M.ObjInt.ObjectWidth/2)
+							if x>M.ObjInt.x-hw and x<M.ObjInt.x+hw and y>M.ObjInt.y-M.ObjInt.ObjectHeight and y<M.ObjInt.y
 								return cl
 							end
 						case "Pic"
-						if x>$ObjInt.x and y>$ObjInt.y and x<$ObjInt.ObjectWidth and y<$ObjInt.ObjectHeight
+						if x>M.ObjInt.x and y>M.ObjInt.y and x<M.ObjInt.ObjectWidth and y<M.ObjInt.ObjectHeight
 							return cl
 						end
 						default
-							error("Unknown object kind ("..$ObjString.Kind..") as clickable!")
+							error("Unknown object kind ("..M.ObjString.Kind..") as clickable!")
 					end
 				end
 			end
-		end
+		//end
 		return nil;
 	end
 end
@@ -290,15 +299,17 @@ class Fader
 			default
 				error(sprintf("Unknown fader stage #%d",Current.stage))
 		end
-		GraphColor.Red   = Current.alpha
-		GraphColor.Green = Current.alpha
-		GraphColor.Blue  = Current.alpha
-		GraphColor.Alpha = Current.alpha
+		//GraphColor.Red   = Current.alpha
+		//GraphColor.Green = Current.alpha
+		//GraphColor.Blue  = Current.alpha
+		//GraphColor.Alpha = Current.alpha
+		SetColor(Current.alpha,Current.alpha,Current.alpha,Current.alpha)
 		// This set up looks awkward, but I did it this way, to easily add more possibilities if they are required
 		switch clname
 			case "TImage" "TGraphText"
 				Current.show.Draw(Current.x,Current.y)
-				GraphColor.Alpha = 255
+				//GraphColor.Alpha = 255
+				SetAlpha(255)
 			default
 				error("?HUH HUH HUH?\nImpossible to have class "..clname.."\n\nHow the fuck did this get past the first check!\n\nMust be a bug! Please report!")
 		end
@@ -311,8 +322,8 @@ group FieldMap
 	string LoadedMap
 	// var CurrentLayer
 	
-	link Script = MapScript
-	var Kthura
+	//link Script = MapScript
+	//var Kthura
 	var Saskia
 	
 	get int ScrollX
@@ -340,53 +351,59 @@ group FieldMap
 	end
 	
 	get int TravelLevel
-		return tonumber(self.Kthura.Data.Travel_Level) or 1
+		return tonumber(self.Kthura.Data.Travel_Level) || 1
 	end
 	
 	void Kill(string tag,permanent)
 		string m
 		m = "MAPCHANGES."..FieldMap.LoadedMap
 		if permanent
-			Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..tag.."\")\n"
+			//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..tag.."\")\n"
+			PermaChanges.Add(StripDir(Kthura.LastLoaded),"Kills."..Kthura.CurrentLayer,tag)
 			CSay("Permanent kill, object tagged: "..tag)
 		else	
 			CSay("Temporary kill, object tagged: "..tag)
 		end
-		$Kthura.Kill(tag)
-		if $Kthura.HasTag("AziellaArrowObject")
-			$Kthura.Kill("AziellaArrowObject")
+		Kthura.Kill(tag)
+		if Kthura.HasObj("AziellaArrowObject")
+			Kthura.Kill("AziellaArrowObject")
 			CSay("Shooting Terminated! Due to killing: "..tag)
 		end
 	end
 	
 	void KillSwap()
-		string m
-		m = "MAPCHANGES."..FieldMap.LoadedMap
-		Swap.Data[m] = "print('Killed')"
+		//string m
+		//m = "MAPCHANGES."..FieldMap.LoadedMap
+		//Swap.Data[m] = "print('Killed')"
+		PermaChanges.Clear()
 	end
 	
 	void KillSwapMap(string m)
-		m = "MAPCHANGES."..m
-		Swap.Data[m] = "print('Killed by the swap killer!')\n\n"
+		//m = "MAPCHANGES."..m
+		//Swap.Data[m] = "print('Killed by the swap killer!')\n\n"
+		Lua.error(sprintf("KillSwapMap(\"%s\"): Function temporarily dummied!",m))
 	end
 	
 	void AddSwap(string code)
-		string m
-		m = "MAPCHANGES."..FieldMap.LoadedMap
-		Swap.Data[m] = Swap.Data[m] .. code
+		Lua.error(sprintf("AddSwap(\"%s\"): Coderot! Try another way to implement this!",code))
+		//string m
+		//m = "MAPCHANGES."..FieldMap.LoadedMap
+		//Swap.Data[m] = Swap.Data[m] .. code
 	end
 	
 	
 	void PermaKill(string tag)
-		$Kill(tag,true)
+		FieldMap.Kill(tag,true)
 	end
 	
 	void Hide(string tag)
-		$Kthura.HideObject(tag)
+		//$Kthura.HideObject(tag)
+		Kthura.Obj[tag].Visible=false
 	end
 	
 	void Show(string tag)
-		$Kthura.ShowObject(tag)
+		//$Kthura.ShowObject(tag)
+		Kthura.Obj[tag].Visible=true
 	end
 	
 	get string SerieTags
@@ -419,7 +436,8 @@ group SGLink
 	
 	void OpenSG()
 		self.LoadSGFlow()
-		LuaDoString("FLOW_SG","SG.mode = 'SAVE'","SGMode => SAVE")
+		//LuaDoString("FLOW_SG","SG.mode = 'SAVE'","SGMode => SAVE")
+		Lua.error("SGLink.OpenSG()","Linkthrough functions will have to be modified as NALA method doesn't work here!")
 		GoToFlow("SG")
 	end
 
@@ -430,7 +448,7 @@ group FlowField
 
 	bool AutoScroll = true
 	
-	link Map = FieldMap
+	//link Map = FieldMap
 	
 	var WalkArrival	
 	table WalkArrivalParams
@@ -577,7 +595,7 @@ group FlowField
 				new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
 				return
 			end
-			self.chaching = self.chaching or LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
+			self.chaching = self.chaching || Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
 			self.chaching.Play()
 			__cash = __cash + foundcash
 			new MiniMsg(mx,my,sprintf("Obtained: %d %s",foundcash, shild),0,180,255)
@@ -588,7 +606,7 @@ group FlowField
 			if Inventory[ItemTag]<__itemcap
 				Inventory[ItemTag]++
 				new MiniMsg(mx,my,sprintf("Obtained: %s", iname),180,0,255)
-				getitem = getitem or GetAudio("GETITEM")
+				getitem = getitem  || Audio.Obtain("GETITEM")
 				getitem.Play()
 				$Map.Kill(Tag,PermaKill!=false)
 			else
@@ -629,13 +647,14 @@ group FlowField
 		if _Once
 			Kth.ObjData._Stuck = "YES"
 		end
-		if _Perma and _Once
+		if _Perma && _Once
 			table y
 			string m
 			y[true] ="Yes"
 			y[false]="No"
 			m = "MAPCHANGES."..FieldMap.LoadedMap
-			Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kthura.Obj = \""..Tag.."\";\tFieldMap.Kthura.ObjString.Texture = \""..Kth.ObjString.Texture.."\";\tFieldMap.Kthura.ObjData.Set = '".._NewSet.."'; FieldMap.Kthura.ObjData.Stuck = 'Yes'\n"		
+			//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kthura.Obj = \""..Tag.."\";\tFieldMap.Kthura.ObjString.Texture = \""..Kth.ObjString.Texture.."\";\tFieldMap.Kthura.ObjData.Set = '".._NewSet.."'; FieldMap.Kthura.ObjData.Stuck = 'Yes'\n"
+			PermaChanges.Value(StripDir(Kthura.LastLoaded),"Tex."..Kthura.CurrentLayer.."."..Tag,Kthura.Obj[Tag].Texture)
 		end
 		MapScript[Tag]()
 	end
@@ -666,7 +685,7 @@ group FlowField
 					new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
 					return
 				end
-				chaching = chaching or LoadAudio("SFX/Treasure/ChaChing.wav")
+				chaching = chaching || Audio.LoadNew("SFX/Treasure/ChaChing.wav","CHACHING")
 				chaching.Play()
 				__cash = __cash + foundcash
 				new MiniMsg(mx,my,sprintf("Obtained: %d %s",foundcash, shild),0,180,255)
@@ -677,7 +696,7 @@ group FlowField
 				if Inventory[ItemTag]<__itemcap
 					Inventory[ItemTag]++
 					new MiniMsg(mx,my,sprintf("Obtained: %s", iname),180,0,255)
-					getitem = getitem or GetAudio("GETITEM")
+					getitem = getitem || Audio.Obtain("GETITEM")
 					getitem.Play()
 					// $Map.Kill(Tag,PermaKill!=false)
 				else
@@ -687,8 +706,9 @@ group FlowField
 			end
 			kth.ObjString.Texture="GFX/TEXTURES/OBJECTS/CHEST_OPEN.PNG"
 			string m
-			m = "MAPCHANGES."..FieldMap.LoadedMap
-			Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..Tag.."\")\n"
+			//m = "MAPCHANGES."..FieldMap.LoadedMap
+			//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..Tag.."\")\n"
+			PermaChanges.Add(StripDir(Kthura.LastLoaded),"Kills."..Kthura.CurrentLayer,tag)
 		end
 	end
 	
@@ -724,11 +744,12 @@ group FlowField
 		RENC.Reset(tonumber(kth.Data.Travel_Level) or 0)
 		do
 			CSay("= Map changes")
-			string m
-			delegate f
-			m = "MAPCHANGES."..FieldMap.LoadedMap
-			f = assert(NIL.Load(Swap.Data[m]))
-			f()
+			//string m
+			//delegate f
+			//m = "MAPCHANGES."..FieldMap.LoadedMap
+			//f = assert(NIL.Load(Swap.Data[m]))
+			//f()
+			CSay("\007! \x1b[93m Map changes not yet handled! -- Flow.scyndi:751 -- Github issue #300")
 		end
 		CSay("= Zone Action")
 		ZoneAction.Reset()
@@ -736,28 +757,29 @@ group FlowField
 		do
 			string scenfile
 			scenfile = "Scenario/"..__lang.."/Maps/"..MapFile
-			if JCR_EntryExists(scenfile)
-				CWriteLine("= Scenario 'MAP' >> "..scenfile,180,255,0)
+			if JCR6.EntryExists(scenfile)
+				CSay("= Scenario 'MAP' >> "..scenfile) //,180,255,0)				
 				BoxText.Load("Maps/"..MapFile,"MAP")
 			else
-				CWriteLine("= WARNING! Scenario \""..scenfile.."\" not found!",255,0,0)
+				CSay("= WARNING! Scenario \""..scenfile.."\" not found!") //,255,0,0)
 			end
 		end
 		CSay("= NIL Script")
 		do
 			string MapScriptFile 
 			MapScriptFile = "Script/MapScript/"..Trim(MapFile)..".nil"
-			if not JCR_EntryExists(MapScriptFile)
-				CWriteLine("MapScript file \""..MapScriptFile.."\" doesn't exist! Loading None.Nil in stead!",255,0,0)
+			if ! JCR6.EntryExists(MapScriptFile)
+				CSay("MapScript file \""..MapScriptFile.."\" doesn't exist! Loading None.Nil in stead!") //,255,0,0)
 				LoadState("MAP","Script/MapScript/None.nil")
 			else
-				CWriteLine("Loading MapScript file \""..MapScriptFile,0,255,0)
+				CSay("Loading MapScript file \""..MapScriptFile) //,0,255,0)
 				LoadState("MAP",MapScriptFile)
 			end
 		end
 		
 		CSay("= SAKSIA Script")
-		self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
+		//self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
+		self.Map.Saskia.LoadScript(sprintf("Kthura/%s/Behavior",Kthura.LastLoaded))
 		self.Map.Saskia.Start("OnLoad")
 		
 		table RandomTreasure
@@ -873,7 +895,7 @@ group FlowField
 		string pref
 		string rest
 		if Mid(kth.Data.Music,4,1)==":"
-			pref = string.upper(Left(kth.Data.Music,3))
+			pref = upper(Left(kth.Data.Music,3))
 			rest = Right(kth.Data.Music,len(kth.Data.Music)-4)
 			switch pref
 				case "SAS" 
@@ -905,7 +927,8 @@ group FlowField
 		FieldMap.Kthura.Draw()
 		
 		// Map Script Draw
-		LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Draw()")
+		//LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Draw()")
+		Sys.Call("MAP","MScript.Draw")
 		
 		// Fader
 		Fader.Run()
@@ -962,7 +985,7 @@ group FlowField
 			SetAlpha(255)
 		end
 		__white
-		$SFont = $SFont or LoadImageFont("Fonts/Blitz.jfbf")
+		$SFont = $SFont || LoadImageFont("Fonts/Blitz.jfbf")
 		$SFont.DrawText("Phantasar Play-Time: "..Time.PhantasarTime,5,Y) Y = Y - YMin
 		$SFont.DrawText("    Earth Play-Time: "..Time.PlayTime,5,Y) Y = Y - YMin
 		switch __cash
@@ -974,7 +997,7 @@ group FlowField
 				$SFont.DrawText(sprintf("Cash: %9d shilders",__cash) ,5,Y)
 		end
 		if gv.Bool.AllowMagicStones
-			#- Y YMin
+			Y -= YMin
 			$SFont.DrawText(sprintf("Magic Stones: %6d",__magicstones),5,Y)
 		end
 		Y = Y - YMin
@@ -1039,7 +1062,8 @@ global void BUB_Draw()
 	
 	// Draw in MapScript
 	if StateExists("MAP")
-		LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Update()")
+		//LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Update()")
+		Sys.Call("MAP","MScript.Draw")
 	end
 
 	
@@ -1089,7 +1113,8 @@ global void BUB_Update()
 	bool Acted = false
 	
 	// debug
-	Dev.ConCheck()
+	//Dev.ConCheck()
+	QuitRequest()
 	
 	// Make sure respawn is set
 	Respawn.AutoSet()
@@ -1114,7 +1139,8 @@ global void BUB_Update()
 	
 	// MapScript Update
 	if StateExists("MAP")
-		LuaDoString("MAP","MScript.Update()","LINK: MapScript.Update()")
+		//LuaDoString("MAP","MScript.Update()","LINK: MapScript.Update()")
+		Sys.Call("MAp","MScript.Update")
 	end
 	
 	// Zone Checking
@@ -1167,14 +1193,14 @@ global void BUB_Update()
 		end
 	end
 		
-	if (not FlowField.Map.Kthura.Actor.Player.Walking) 
+	if (! FlowField.Map.Kthura.Actor.Player.Walking) 
 		//and (FlowField.WalkArrival) and (FlowField.WalkArrival!="")
 		switch type(FlowField.WalkArrival)
 			case "nil"
 				//CSay("No walk arrival set, so let it be!")
 			case "string"
 				//error("WalkArrival string feature not yet implemented!")
-				CSay(NIL.LuaSerialize("Clickable Arrival script activating!\nArgs",FlowField.WalkArrivalParams))
+				//CSay(NIL.LuaSerialize("Clickable Arrival script activating!\nArgs",FlowField.WalkArrivalParams))
 				MapScript[FlowField.WalkArrival](XPand(FlowField.WalkArrivalParams))
 				//MapScript[FlowField.WalkArrival](XPand(self.ArriveParam))
 			case "function"
@@ -1254,13 +1280,14 @@ group ConsoleCommands
 		var spl
 		spl = FlowField.Map.Kthura.Tags(FlowField.Map.Kthura.Layer)
 		for i,line in ipairs(spl)
-			int r
-			int g
-			int b
-			g = math.floor( ((i+1)/len(spl)) * 255 )
-			r = 255-g
-			b = math.abs( math.sin(i) * 25 )
-			CWriteLine(line,r,g,b)
+			//int r
+			//int g
+			//int b
+			//g = math.floor( ((i+1)/len(spl)) * 255 )
+			//r = 255-g
+			//b = math.abs( math.sin(i) * 25 )
+			//CWriteLine(line,r,g,b)
+			CSay(line)
 		end
 	end
 	
@@ -1272,9 +1299,10 @@ group ConsoleCommands
 	
 	void DESTROYMAPSWAP()
 		string m
-		m = "MAPCHANGES."..trim(FieldMap.LoadedMap)
-		Swap.Data[m] = "print(\"Everything in this swap file has been destroyed by order of the big killer! So long suckers!\")\n\n"
-		CSayF("Swap file '%s' has been emptied!",m)
+		//m = "MAPCHANGES."..trim(FieldMap.LoadedMap)
+		//Swap.Data[m] = "print(\"Everything in this swap file has been destroyed by order of the big killer! So long suckers!\")\n\n"
+		//CSayF("Swap file '%s' has been emptied!",m)
+		PermaChanges.Kill(StripDir(Kthura.LastLoaded))
 	end
 	
 	void MAPDATA()
@@ -1302,23 +1330,23 @@ group ConsoleCommands
 			case "nil"
 				wing =sprintf("%s No arrival data!",wing)
 		end
-		CWriteLine(sprintf("Pure player position is: (%5d,%5d) %s",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y,wing),r,g,b)
-		CWriteLine(sprintf("Grid player position is: (%5d,%5d) %s",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32),wing),r,g,b)
-		CWriteLine(sprintf("Enounter Rate: %d/%d",RENC.Rate,RENC.MaxRate),r,g,b)
+		CSayF("Pure player position is: (%5d,%5d) %s",FlowField.Map.Kthura.Actor.Player.X,FlowField.Map.Kthura.Actor.Player.Y,wing) //,r,g,b)
+		CSayF("Grid player position is: (%5d,%5d) %s",math.floor(FlowField.Map.Kthura.Actor.Player.X/32),math.floor(FlowField.Map.Kthura.Actor.Player.Y/32),wing) //,r,g,b)
+		CSayF("Enounter Rate: %d/%d",RENC.Rate,RENC.MaxRate) //,r,g,b)
 	end
 	
 	void SAVE(A)
 		if type(A)!="string"
-			CWriteLine("NO WAY, JOSE! Save needs a string parameter!",255,0,0)
+			Print("\x1b[93mNO WAY, JOSE! Save needs a string parameter!")//,255,0,0)
 			return
 		end
 		switch Upper(A)
 			case "SPOT"
 				SGLink.OpenSG();
 			case "DIR" "LS"
-				CWriteLine("Debug save directory overview not yet available!",255,0,0)
+				Print("\x1b[93mDebug save directory overview not yet available!")//,255,0,0)
 			default
-				CWriteLine("Debug save not yet available!",255,0,0)
+				Print("\x1b[93mDebug save not yet available!") //,255,0,0)
 		end
 	end
 	
@@ -1331,18 +1359,18 @@ group ConsoleCommands
 		end
 	end
 	
-	void BLOCKMAP()
-		ShowBlockMap(FieldMap.Kthura,FieldMap.Kthura.Layer,FieldMap.ScrollX,FieldMap.ScrollY)
+	void BLOCKMAP()		
+		//ShowBlockMap(FieldMap.Kthura,FieldMap.Kthura.Layer,FieldMap.ScrollX,FieldMap.ScrollY)
 	end
 	
 	void LISTCLICKABLES()
 		int i
 		for clk in Clickables.List.Each
 			i++
-			CWriteLine("Clickable #"..i,255,180,0)
+			Print("Clickable #"..i) //,255,180,0)
 			CSay(clk[".dump"])
 		end
-		CWriteLine("Ok",0,255,255)
+		Print("Ok")
 	end
 	
 	void CREDITS()
