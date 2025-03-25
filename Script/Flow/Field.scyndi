@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.03.25 IX
+// 	  Version: 25.03.25 X
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -85,7 +85,8 @@ plua PermaChanges = GINIE.CreateNew("Map_PermaChanges")
 //end
 Init
 	CSay("Field: Set SASKIA load function")
-	SASKIA.LoadFunction = JCR6.GetString
+	//SASKIA.LoadFunction = JCR6.GetString
+	SASKIA.LoadScript = JCR6.GetString
 End
 		
 	
