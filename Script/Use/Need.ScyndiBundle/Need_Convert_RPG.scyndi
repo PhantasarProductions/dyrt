@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.03.17
+// 	  Version: 25.03.25 I
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -60,18 +60,35 @@ Group RPG_Party
 		_rpgstat.Party.Max=value
 	End
 	
-	String NumIndex(Int Key)
+	String StaticNumIndex(Int Key)
 		Return _rpgStat.Party[Key-1]
 	End
 	
-	Void NumNewIndex(Int Key,String ChT)
+	Void StaticNumNewIndex(Int Key,String ChT)
 		_rpgStat.Party[Key-1]=ChT
 	End
 End
 
+Class __RPGChar
+	ReadOnly String Tag
+End
+
+QuickMeta PureChar
+	Index
+		return _rpgStat.Char(Key)
+	End
+	NewIndex
+		Lua.error("Don't temper with PureChar")
+	End
+End
+	
+
 Group RPG
 	Get Var Party
 		Return RPG_Party
+	End
+	Get Var PureChar
+		Return Lua.Scyndi.Globals.PureChar
 	End
 	
 End
