@@ -34,12 +34,12 @@
 // **********************************************
 // 
 // 
-// version: 25.03.20 IV
+// version: 25.03.25
 // 
 // End License
 
 
-Script
+Module
 
 #use "Libs/SCI/Audio"
 #use "Libs/SCI/Kthura"
