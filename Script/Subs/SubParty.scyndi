@@ -1,84 +1,68 @@
-// License Information:
-// src/Tricky Script/Script/Subs/SubParty.nil
-// Version: 20.08.22
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
+// License:
+// 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
+// 	  Version: 25.03.25 III
+// 	
+// 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
 // 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
 // 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
 
 #say "Loading Party Sub!"
-#say "= Importing: libs/tables"
-#use "libs/tables"
-#say "= Importing: libs/strings"
-#use "libs/strings"
-#say "= Importing: libs/DarkText"
-#use "libs/DarkText"
-#say "= Importing: libs/roman"
-#use "libs/roman"
+//#say "= Importing: libs/tables"
+//#use "libs/tables"
+#say "= Importing SCI code libraries"
+#use "libs/sci/sstring"
+
+#say "= Importing libraries"
+#use "libs/romannumbers"
+
 #say "= Importing in-game stuff"
-#use "Script/Use/Anyway"
+#use "Script/Use/Need"
 #use "Script/Use/Boxes"
 #use "Script/Use/BoxPics"
 
 
-table I_ELEM
-table I_STAT
-
-I_ELEM = {
-	"None",
-	"Flame",
-	"Wind",
-	"Water",
-	"Earth",
-	"Frost",
-	"Thunder",
-	"Light",
-	"Darkness"
-}
-
-I_STAT = {
-	"Poison",
-	"Disease",
-	"Silence",
-	"Paralysis",
-	"Sleep",
-	"Exhaustion",
-	"Fear",
-	"Death",
-	"Destruction",
-	"Zombie"
-}
+table I_ELEM = { [0] = "None", "Flame", "Wind", "Water", "Earth", "Frost", "Thunder", "Light", "Darkness" }
+table I_STAT = { [0] = "Poison", "Disease", "Silence", "Paralysis", "Sleep", "Exhaustion", "Fear", "Death", "Destruction", "Zombie" }
 
 
+#Say "= Party Bars"
 class PartyBar
 	static var Font
 	readonly string Tag
@@ -90,7 +74,7 @@ class PartyBar
 	readonly int B
 	
 	void CONSTRUCTOR(string ATag,int AR,int AG,int AB)
-		self.Font     = self.Font or LoadImageFont("Fonts/Party.jfbf")
+		self.Font     = self.Font || LinkImageFont("Fonts/Party.jfbf","PARTYFONT")
 		self.Tag      = ATag
 		self.R        = AR
 		self.G        = AG
@@ -101,7 +85,8 @@ class PartyBar
 end
 
 group HPBar
-	link Font = PartyBar.Font
+	//link Font = PartyBar.Font
+	Get Var Font; return PartyBar.Font; End 
 	readonly string Tag = "HP"
 	readonly var TagIcon
 	string Char
@@ -122,16 +107,17 @@ group HPBar
 		return 0
 	end
 	
-	void CONSTRUCTOR()
+	CONSTRUCTOR()
 		self.TagIcon = LoadImage("gfx/PartyBar/HP.png")
 	end
 end
 
 table Bars
-Bars[1] = HPBar
-Bars[2] = new PartyBar("AP",0,180,255)
-Bars[3] = new PartyBar("VIT",255,180,0)
-
+Init
+	Bars[1] = HPBar
+	Bars[2] = new PartyBar("AP",0,180,255)
+	Bars[3] = new PartyBar("VIT",255,180,0)
+End
 
 
 
@@ -155,27 +141,27 @@ group SubParty
 	
 	#say "= Constructor"
 	void CONSTRUCTOR()
-		self.StatSubs = {
-			"BASE_",          // Base stat, defined by level
-			"PERMPOWERUP_",   // Some items can give you a permanent powerup. Going up skill levels can also affect this!
-			"BUFF_",          // Stat buffs (negative numbers can be used for debuffs)
-			"EQUIP_",         // Calculated whenever equipment changes
-			"END_"            // End result when all other fields have been added together
-		}
+		self.StatSubs = {}
+		self.StatSubs +=	"BASE_"          // Base stat, defined by level
+		self.StatSubs +=	"PERMPOWERUP_"   // Some items can give you a permanent powerup. Going up skill levels can also affect this!
+		self.StatSubs +=	"BUFF_"          // Stat buffs (negative numbers can be used for debuffs)
+		self.StatSubs +=	"EQUIP_"         // Calculated whenever equipment changes
+		self.StatSubs +=	"END_"           // End result when all other fields have been added together
+		//}
 		self.AudioLevelUp = GetAudio("LEVELUP")
 	end
 	
-	string SubCollecto(string stat)
-		string ret
-		for sub in each(self.StatSubs)
-			if sub!="END_" then 
-				if ret!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
-				ret = ret .. sub .. stat 
-			end
-		end
-		ret = "SUM:"..ret 
-		return ret
-	end
+	//string SubCollecto(string stat)
+	//	string ret
+	//	for sub in each(self.StatSubs)
+	//		if sub!="END_" then 
+	//			if ret!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
+	//			ret = ret .. sub .. stat 
+	//		end
+	//	end
+	//	ret = "SUM:"..ret 
+	//	return ret
+	//end
 
 	#say "= New Character"
 	void NewCharacter(string tag, int level)
@@ -233,16 +219,16 @@ group SubParty
 			end
 		end
 		lines = JCR_GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
-		CSayF("Parsing %s lines of LvStat data",#lines)
+		CSayF("Parsing %s lines of LvStat data",len(lines))
 		for ln,line in ipairs(lines)
 			line = Trim(line)
 			if line!=""
 				table gespleten
 				string cmd
 				string para
-				gespleten = split(line," ")
-				cmd =  trim(gespleten[1])
-				para = gespleten[2]
+				gespleten = xsplit(line," ")
+				cmd =  trim(gespleten[0])
+				para = gespleten[1]
 				// CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
@@ -420,7 +406,7 @@ group SubParty
 			end
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
 			GraphColor.Alpha = 255
-			for i=1,#Bars 
+			for i=1,Len(Bars) 
 				self.PointsBar(RPG.Party[num],num,i)
 			end
 			self.JustLeveled[CharTag] = self.JustLeveled[CharTag] or 0
