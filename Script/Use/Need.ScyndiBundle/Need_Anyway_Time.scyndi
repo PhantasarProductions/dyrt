@@ -1,0 +1,127 @@
+// License:
+// 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Anyway_Time.scyndi
+// 
+// 	  Version: 25.03.24 II
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+
+#use "libs/sci/sys"
+#use "libs/sci/sstring"
+#use "Libs/sci/intervar"
+//#use "Script/Use/Link/GameVars.nil"
+
+group Time
+
+	
+	//link Hours = gv.Int.PlayTime_Hours
+	//link Minutes = gv.Int.PlayTime_Minutes
+	//link Seconds = gv.Int.PlayTime_Seconds
+	//link Old = gv.String.PlayTime_Old
+	Get Int Hours; Return gInt.PlayTime_Hours; End
+	Get Int Minutes; Return gInt.PlayTime_Minutes; End
+	Get Int Seconds; Return gInt.PlayTime_Seconds; End
+	Get String Old; Return gStr.PlayTime_Old; End
+	Set Int Hours;  gInt.PlayTime_Hours = Value; End
+	Set Int Minutes;  gInt.PlayTime_Minutes = Value; End
+	Set Int Seconds;  gInt.PlayTime_Seconds = Value; End
+	Set String Old;  gStr.PlayTime_Old = Value; End
+	
+	
+	
+	int vectas
+	int millos
+	
+	void Reset_Old()
+		Old = os.date()
+	end
+	
+	void UpdatePhantasarTime()
+		number Millo = 4.320;
+		int secondspassed
+		int TotalMillos
+		secondspassed = $Seconds + ($Minutes * 60) + ($Hours * 60 * 60);
+		TotalMillos = math.floor((secondspassed/Millo)+0.5);  //' Calculate the total ammount of millos today
+		$vectas = math.floor(TotalMillos/1000)
+		$millos = TotalMillos % 1000
+	end
+	
+	void Update()
+		if $Old == os.date()
+			return
+		end
+		$Seconds++
+		if ($Seconds>=60)
+			$Seconds = $Seconds - 60
+			$Minutes++
+			if ($Minutes>=60)
+				$Minutes = $Minutes - 60
+				$Hours++
+			end
+		end
+		Time.UpdatePhantasarTime()
+		$Old = os.date()
+	end
+	
+	get string PlayTime
+		return sprintf("%5d:%02d:%02d",$Hours,$Minutes,$Seconds)
+	end
+	
+	get string PhantasarTime
+		string ret
+		if $vectas==1 
+			ret = "    1 vecta"
+		elseif $vectas>1
+			ret = sprintf("%5d vectas",$vectas)
+		end
+		if $vectas>0 && $millos>0; ret = ret.."; "; end
+		if $millos==1
+			ret = ret .. "  1 millo"
+		elseif $millos>0
+			ret = ret .. sprintf("%3d millos",$millos)
+		end
+		return ret
+	end
+	
+end
+
+//return ModuleTime
