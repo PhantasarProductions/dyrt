@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_RENC.scyndi
 // 
-// 	  Version: 25.03.20 IV
+// 	  Version: 25.03.22 IV
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -62,7 +62,10 @@ Module
 //#accept FlowField
 //#accept FieldMap
 LocExtern FlowField "Scyndi.Class.FlowField"
+LocExtern FieldFlow "Scyndi.Class.FlowField"
 LocExtern FlowMap   "Scyndi.Class.FlowMap"
+LocExtern FieldMap  "Scyndi.Class.FieldMap"
+LocExtern tonumber  "tonumber"
 
 // RENC = Random ENCounters
 
@@ -200,23 +203,23 @@ group RENC
 	
 	void Reset(int MapTLevel,MaxE)
 		if MapTLevel==0
-			$NoEncounters()
+			RENC.NoEncounters()
 			return
 		end
-		$RecalcMaxE = MaxE or 5
-		$MapTravelLevel = MapTLevel
-		$Recalc()
-		$Encounters = $MaxEncounters
-		$ManEncOn = true
-		$CompileFoeList()
-		$CompileAllowLayer()
-		$Infinite = false
+		RENC.RecalcMaxE = MaxE || 5
+		RENC.MapTravelLevel = MapTLevel
+		RENC.Recalc()
+		RENC.Encounters = $MaxEncounters
+		RENC.ManEncOn = true
+		RENC.CompileFoeList()
+		RENC.CompileAllowLayer()
+		RENC.Infinite = false
 	end
 	
 	void RencCheck(force)
-		if force and $AutEncOn
+		if force && RENC.AutEncOn
 			CSay("Eric is looking for trouble!")
-		elseif $Encounters<=0 or (not $AutEncOn) or ($ManEncOff)
+		elseif RENC.Encounters<=0 || (! RENC.AutEncOn) or (RENC.ManEncOff)
 			return
 		end
 		int ORate
@@ -234,7 +237,7 @@ group RENC
 			// This should prevent encounters coming to early, as I'm a bit tired of most encounters coming in the "green" zone!
 			return		
 		end
-		if $Rate<=1 or math.random(1,math.min($Rate,2))<__skill or force
+		if $Rate<=1 || math.random(1,math.min($Rate,2))<__skill || force
 			var kth
 			kth = FlowField.Map.Kthura
 			StartCombat.StartSession()
@@ -342,7 +345,8 @@ group RENC
 			$gx++
 		end
 		if $ManEncOff
-			GraphColor.Alpha = 100
+			//GraphColor.Alpha = 100
+			SetAlpha(100)
 		end
 		__white
 		Rect($gx-1,$gy-1,12,102)
@@ -373,7 +377,8 @@ group RENC
 			Rect($gx+ix,$gy+(100-bar),1,bar)
 		end
 		__white
-		GraphColor.Alpha = 255
+		//GraphColor.Alpha = 255
+		SetAlpha(255)
 		$Swords.Draw($gx-11,$gy-16)
 	end
 	
