@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Party.scyndi
 // 
-// 	  Version: 25.03.17 III
+// 	  Version: 25.03.25
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -63,6 +63,7 @@ void PtExe(string command)
 end
 
 Var ptCall(String command,Infinity)
+	LoadSub()
 	Return Sys.Call("PARTY",command,Infinity)
 End
 
