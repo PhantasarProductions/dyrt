@@ -35,24 +35,28 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-#say "Loading: BoxPics.nil"
-#use "libs/strings"
+Module
 
-var PicUnknown
+#say "Loading: BoxPics.scyndi"
+#use "Libs/SCI/JCR6"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+var PicUnknown = LoadNewImage("GFX/BoxPic/Unknown/General.png","BoxPicUnknown")
 table pics
 
-PicUnknown = LoadIfNew('GFX/BoxPic/Unknown/General.png','BoxPicUnknown')
+//PicUnknown = LoadIfNew('GFX/BoxPic/Unknown/General.png','BoxPicUnknown')
 
 global void BoxPic(int x, int y,string Char,Spec,valign) 
 	string file
 	string tag
-	file = sprintf("GFX/BoxPic/%s/%s.png",Char,Spec or "General")
-	tag = sprintf("%s.%s",Char,Spec or "GENERAL"):upper()
-	if not pics[tag]	
-		if not JCR_EntryExists(file)
-			pics[tag] = pics[tag] or PicUnknown
+	file = sprintf("GFX/BoxPic/%s/%s.png",Char,Spec || "General")
+	tag = upper(sprintf("%s.%s",Char,Spec or "GENERAL"))
+	if ! pics[tag]	
+		if ! JCR6.EntryExists(file)
+			pics[tag] = pics[tag] || PicUnknown
 		else
-			pics[tag] = pics[tag] or LoadImage(file,tag)
+			pics[tag] = pics[tag] || LoadImage(file,tag)
 		end
 	end
 	switch valign
@@ -65,4 +69,4 @@ global void BoxPic(int x, int y,string Char,Spec,valign)
 	end
 end
 
-return BoxPic
+//return BoxPic

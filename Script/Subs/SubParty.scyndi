@@ -55,7 +55,7 @@
 #say "= Importing in-game stuff"
 #use "Script/Use/Need"
 #use "Script/Use/Misc/Boxes"
-#use "Script/Use/BoxPics"
+#use "Script/Use/Misc/BoxPics"
 
 
 table I_ELEM = { [0] = "None", "Flame", "Wind", "Water", "Earth", "Frost", "Thunder", "Light", "Darkness" }
