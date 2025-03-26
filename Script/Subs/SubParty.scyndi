@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.03.25 IV
+// 	  Version: 25.03.26 XXXIV
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -42,12 +42,18 @@
 // 	  3. This notice may not be removed or altered from any source distribution.
 // End License
 
+Script
 
 #say "Loading Party Sub!"
 //#say "= Importing: libs/tables"
 //#use "libs/tables"
 #say "= Importing SCI code libraries"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/JCR6"
+#use "Libs/SCI/Audio"
 #use "libs/sci/sstring"
+#use "LIBS/SCI/GRAPHICS"
+#use "Libs/SCI/InterVar"
 
 #say "= Importing libraries"
 #use "libs/romannumbers"
@@ -57,10 +63,12 @@
 #use "Script/Use/Misc/Boxes"
 #use "Script/Use/Misc/BoxPics"
 
+locextern tonumber "tonumber"
 
 table I_ELEM = { [0] = "None", "Flame", "Wind", "Water", "Earth", "Frost", "Thunder", "Light", "Darkness" }
 table I_STAT = { [0] = "Poison", "Disease", "Silence", "Paralysis", "Sleep", "Exhaustion", "Fear", "Death", "Destruction", "Zombie" }
 
+//locExtern Font "Scyndi.Class.PartyBar.Font"
 
 #Say "= Party Bars"
 class PartyBar
@@ -73,13 +81,13 @@ class PartyBar
 	readonly int G
 	readonly int B
 	
-	void CONSTRUCTOR(string ATag,int AR,int AG,int AB)
-		self.Font     = self.Font || LinkImageFont("Fonts/Party.jfbf","PARTYFONT")
+	CONSTRUCTOR(string ATag,int AR,int AG,int AB)
+		self.Font     = self.Font || LinkFont("Fonts/Party.jfbf","PARTYFONT")
 		self.Tag      = ATag
 		self.R        = AR
 		self.G        = AG
 		self.B        = AB
-		self.TagIcon  = LoadImage(sprintf("gfx/PartyBar/%s.png",ATag))
+		self.TagIcon  = LoadImage(sprintf("gfx/PartyBar/%s.png",ATag),"STATBAR_"..ATag)
 	end
 	
 end
@@ -88,7 +96,7 @@ group HPBar
 	//link Font = PartyBar.Font
 	Get Var Font; return PartyBar.Font; End 
 	readonly string Tag = "HP"
-	readonly var TagIcon
+	readonly var TagIcon = LoadImage("gfx/PartyBar/HP.png","HPBAR_HP")
 	string Char
 	
 	get int G
@@ -107,9 +115,9 @@ group HPBar
 		return 0
 	end
 	
-	CONSTRUCTOR()
-		self.TagIcon = LoadImage("gfx/PartyBar/HP.png")
-	end
+	//CONSTRUCTOR()
+	//	self.TagIcon = LoadImage("gfx/PartyBar/HP.png")
+	//end
 end
 
 table Bars
@@ -124,6 +132,8 @@ End
 
 #say "= Starting group!"
 group SubParty
+
+	Get Var Font; return PartyBar.Font; End
 	
 	var AudioLevelUp
 	
@@ -140,15 +150,20 @@ group SubParty
 	end
 	
 	#say "= Constructor"
-	void CONSTRUCTOR()
+	void SubPartyCONSTRUCTOR()
 		self.StatSubs = {}
-		self.StatSubs +=	"BASE_"          // Base stat, defined by level
-		self.StatSubs +=	"PERMPOWERUP_"   // Some items can give you a permanent powerup. Going up skill levels can also affect this!
-		self.StatSubs +=	"BUFF_"          // Stat buffs (negative numbers can be used for debuffs)
-		self.StatSubs +=	"EQUIP_"         // Calculated whenever equipment changes
-		self.StatSubs +=	"END_"           // End result when all other fields have been added together
+		// Base stat, defined by level
+		self.StatSubs +=	"BASE_"          
+		// Some items can give you a permanent powerup. Going up skill levels can also affect this!
+		self.StatSubs +=	"PERMPOWERUP_"   
+		// Stat buffs (negative numbers can be used for debuffs)
+		self.StatSubs +=	"BUFF_"          
+		// Calculated whenever equipment changes
+		self.StatSubs +=	"EQUIP_"         
+		// End result when all other fields have been added together
+		self.StatSubs +=	"END_"           
 		//}
-		self.AudioLevelUp = GetAudio("LEVELUP")
+		self.AudioLevelUp = Audio.Obtain("LEVELUP")
 	end
 	
 	//string SubCollecto(string stat)
@@ -171,7 +186,7 @@ group SubParty
 		assert (level>0,"Level is zero or lower!")
 		table lines
 		var ch
-		ch = RPG.CreateChar(tag)
+		ch = RPG.CreateChar(tag,level)
 		
 		// Basic elemental resistance
 		for elem in each(I_ELEM)
@@ -179,10 +194,10 @@ group SubParty
 			for f in each(self.StatSubs)
 				CSayF("= Sub: %s",f)
 				ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem)).Value = 0
-				if f=="END_"
-					CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(sprintf("_RESIST_Elem_%s",elem)))
-					ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))['Script'] = self.SubCollecto(sprintf("_RESIST_Elem_%s",elem))
-				end
+				//if f=="END_"
+				//	CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(sprintf("_RESIST_Elem_%s",elem)))
+				//	ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))["Script"] = self.SubCollecto(sprintf("_RESIST_Elem_%s",elem))
+				//end
 			end
 		end
 		
@@ -190,14 +205,15 @@ group SubParty
 		for stat in each(I_STAT)
 			for f in each(self.StatSubs)
 				ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat)).Value = 0
-				if f=="END_"
-					CSayF("Scripting END__RESIST_Stat_%s => %s",stat, self.SubCollecto(sprintf("_RESIST_Stat_%s",stat)))
-					ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))['Script'] = self.SubCollecto(sprintf("_RESIST_Stat_%s",stat))
-				end
+				//if f=="END_"
+				//	CSayF("Scripting END__RESIST_Stat_%s => %s",stat, self.SubCollecto(sprintf("_RESIST_Stat_%s",stat)))
+				//	ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))["Script"] = self.SubCollecto(sprintf("_RESIST_Stat_%s",stat))
+				//end
 			end
 		end
 		
-		NIL.Use("Script/Char/Create/"..tag..".nil")
+		//NIL.Use("Script/Char/Create/"..tag..".nil")
+		Lua.Scyndi.Use("Script/Char/Create/Create_"..tag)
 		self.SetLevelStats(tag,level,true)
 		CSayF("Created new character: %s",tag)
 	end
@@ -218,7 +234,7 @@ group SubParty
 				Achievements.Award("100_"..tag)
 			end
 		end
-		lines = JCR_GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
+		lines = JCR6.GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
 		CSayF("Parsing %s lines of LvStat data",len(lines))
 		for ln,line in ipairs(lines)
 			line = Trim(line)
@@ -250,15 +266,15 @@ group SubParty
 					stat = splitmore[2]
 					for subs in each(self.StatSubs)
 						int v = 0						
-						if subs=="BASE_" then 
+						if subs=="BASE_"  
 							v = tonumber(para) or 0 
-							ch.Stat(sprintf("%s%s",subs,stat))['Value'] = v
+							ch.Stat(sprintf("%s%s",subs,stat))["Value"] = v
 						elseif subs=="END_"
 							CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
-							ch.Stat(sprintf("%s%s",subs,stat))['Script'] = self.SubCollecto(stat)
+							ch.Stat(sprintf("%s%s",subs,stat))["Script"] = self.SubCollecto(stat)
 						else
 							if not Done[sprintf("%s_%s_%s",tag,subs,stat)]
-								ch.Stat(sprintf("%s%s",subs,stat))['Value'] = 0
+								ch.Stat(sprintf("%s%s",subs,stat))["Value"] = 0
 							end
 						end
 						CSayF("%s has stat %s%s of %d",tag,subs,stat,ch.Stat(sprintf("%s%s",subs,stat)).Value)
@@ -269,17 +285,17 @@ group SubParty
 		assert(levelfound,("No level data has been found for %s level %d"):format(tag,level))
 		CSay("Configuring HP, AP and Vitality")
 		CSay("Skill: "..tostring(__skill))
-		ch.Points("HP",true)['MaxCopy'] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
-		ch.Points("AP",true)['Maximum'] = level * ({20,10,5})[__skill]; CSayF("Max  AP: %4d",ch.Points("AP").Maximum)
-		ch.Points("VIT",true)['Maximum'] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
+		ch.Points("HP",true)["MaxCopy"] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
+		ch.Points("AP",true)["Maximum"] = level * ({20,10,5})[__skill]; CSayF("Max  AP: %4d",ch.Points("AP").Maximum)
+		ch.Points("VIT",true)["Maximum"] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
 		// Not efficient, I know, but this routine only gets called when a new character 
 		// is created anyway, and that process only takes place about 11 times in the entire game!
 		for p in each({"HP","VIT"})
 			CSayF("Maxing Points %s",p)
-			ch.Points(p)['Have'] = ch.Points(p)['Maximum']
+			ch.Points(p)["Have"] = ch.Points(p)["Maximum"]
 		end
 		for i=0,4
-			if not Done[sprintf("SkillSet_%s_%d",tag,i)]
+			if ! Done[sprintf("SkillSet_%s_%d",tag,i)]
 				CSayF("Configuring Skill #%d",i)
 				ch.Points(sprintf("SKILLEXP%d",i),true).Maximum  = 10 * (10^__skill)
 				ch.Points(sprintf("SKILLEXP%d",i)     ).Have     = 0
@@ -304,7 +320,7 @@ group SubParty
 		y = self.BarBoxes[spot].y + (num * 32)
 		w = self.BarBoxes[spot].w - (128 + 16)
 		pnt = RPG.Char(Ch).Points(bar.Tag)
-		if pnt.Maximum==0 then return end
+		if pnt.Maximum==0; return; end
 		bar.Char = Ch
 		// bar back
 		Color(100,100,100)
@@ -315,7 +331,7 @@ group SubParty
 		// Icon
 		bar.TagIcon.Draw(x-30,y-20)
 		// Points
-		DarkText.Font(PartyBar.Font,tostring(pnt.Have),x+w,y-20,1,0)
+		Font.Dark(PartyBar.Font,tostring(pnt.Have),x+w,y-20,1,0)
 	end
 	
 	void BigPointsBar(string Ch, int num, int x, int y, int w)
@@ -323,7 +339,7 @@ group SubParty
 		var pnt				
 		bar = Bars[num]
 		pnt = RPG.Char(Ch).Points(bar.Tag)
-		if pnt.Maximum==0 then return end
+		if pnt.Maximum==0; return; end
 		bar.Char = Ch
 		// bar back
 		Color(100,100,100)
@@ -334,14 +350,14 @@ group SubParty
 		// Icon
 		bar.TagIcon.Draw(x-30,y-20)
 		// Points
-		DarkText.Font(PartyBar.Font,sprintf("%5d / %5d",pnt.Have,pnt.Maximum),x+w,y-20,1,0)
+		Font.Dark(PartyBar.Font,sprintf("%5d / %5d",pnt.Have,pnt.Maximum),x+w,y-20,1,0)
 	end
 	
 	#say "= Back Char"
 	table BackIco
 	void BackChar(int num)
 		var tag
-		assert(num>4 and num<=8,"Illegal BackChar number")
+		assert(num>4 && num<=8,"Illegal BackChar number")
 		self.BarBoxes[num] = self.BarBoxes[num] or new Box( Screen.Width-32, (Screen.Height-128)+((num-5)*32),32,32 )
 		self.BarBoxes[num]["Draw"]()
 		tag = RPG.Party[num]
@@ -350,11 +366,11 @@ group SubParty
 		end
 		__white
 		if num==$SelectedChar
-			$SinAlpha()
+			SubParty.SinAlpha()
 		end
 		self.BackIco[tag] = self.BackIco[tag] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",tag))
 		self.BackIco[tag].XDraw(self.BarBoxes[num].X+22,self.BarBoxes[num].Y+20)
-		GraphColor.Alpha = 255
+		SetAlpha(255)
 		if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
 			$Hover=num
 		end
@@ -384,7 +400,7 @@ group SubParty
 			$SinCount = $SinCount-360
 		end
 		RAD = math.pi * $SinCount / 180.0;
-		GraphColor.Alpha = math.abs(math.floor( (math.sin(RAD)*255) ) )
+		SetAlpha( math.abs(math.floor( (math.sin(RAD)*255) ) ) )
 	end
 	
 	#say "= Char box"
@@ -402,10 +418,10 @@ group SubParty
 		if RPG.Party[num] and RPG.Party[num]!=""
 			// Portrait
 			if num==$SelectedChar
-				$SinAlpha()
+				SubParty.SinAlpha()
 			end
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
-			GraphColor.Alpha = 255
+			SetAlpha( 255 )
 			for i=1,Len(Bars) 
 				self.PointsBar(RPG.Party[num],num,i)
 			end
@@ -435,7 +451,7 @@ group SubParty
 					self.NGPlusLvUpExtra(CharTag,level)
 				end
 			end
-			DarkText.Font(font,roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
+			Font.Dark(roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
 			// Hover Detection
 			if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
 				$Hover=num
@@ -457,20 +473,22 @@ group SubParty
 	end
 	
 	void Click()
-		if Mouse.HitLeft and $Hover>0
-			LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
-		elseif Mouse.HitRight and $Hover>0
-			LuaDoString(CurrentFlow(),sprintf("if PartyClickAlt then PartyClickAlt(%d) end",$Hover))
+		if Mouse.HitLeft && $Hover>0
+			//LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
+			Lua.error("SubParty::473 - Party Click Linkup mustbe done differently!")
+		elseif Mouse.HitRight && $Hover>0
+			//LuaDoString(CurrentFlow(),sprintf("if PartyClickAlt then PartyClickAlt(%d) end",$Hover))
+			Lua.error("SubParty::476 - Party AltClick Linkup mustbe done differently!")
 		end
 	end
 	
 	void NGPlusLvUpExtra(string CharTag,int level)
-		if not __newgameplus
+		if ! __newgameplus
 			return
 		end
 		var Char
 		Char = RPG.GetChar(CharTag)
-		for i=0,4 do
+		for i=0,4 
 			if Char.Points("SKILLLVL"..i).Have>0
 				Char.Points("SKILLEXP"..i).Inc(level)
 			end
@@ -479,6 +497,10 @@ group SubParty
 
 end
 
+Init
+	SubParty.SubPartyCONSTRUCTOR()
+End
 
-CSay(tostring(SubParty))
-#say "Compiling Party Sub!"
+
+//CSay(tostring(SubParty))
+//#say "Compiling Party Sub!"
