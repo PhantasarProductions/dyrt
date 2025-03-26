@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.03.26 XXXIV
+// 	  Version: 25.03.26 XLII
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -248,9 +248,9 @@ group SubParty
 				// CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
-				elseif cmd:upper()=="LEVEL"
+				elseif Upper(cmd)=="LEVEL"
 					chklevel = tonumber(para) or 0
-				elseif cmd:upper()=="STAT.EXPERIENCE" and chklevel==level
+				elseif Upper(cmd)=="STAT.EXPERIENCE" and chklevel==level
 					int exp
 					exp = tonumber(para) or 0
 					if pureexp
@@ -258,34 +258,36 @@ group SubParty
 					else
 						ch.Stat("Experience").Value=ch.Stat("Experience").Value+exp
 					end
-				elseif Left(cmd,5):upper()=="STAT." and chklevel==level
+				elseif Upper(Left(cmd,5))=="STAT." and chklevel==level
 					levelfound=true
 					table splitmore
 					string stat
-					splitmore = split(cmd,".")
-					stat = splitmore[2]
+					splitmore = xsplit(cmd,".")
+					stat = splitmore[1]
 					for subs in each(self.StatSubs)
 						int v = 0						
 						if subs=="BASE_"  
-							v = tonumber(para) or 0 
+							v = tonumber(para) || 0 
 							ch.Stat(sprintf("%s%s",subs,stat))["Value"] = v
+							CSayF("-> %s = %d",stat,v)
 						elseif subs=="END_"
-							CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
-							ch.Stat(sprintf("%s%s",subs,stat))["Script"] = self.SubCollecto(stat)
+							//CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
+							//ch.Stat(sprintf("%s%s",subs,stat))["Script"] = self.SubCollecto(stat)
+							CSayF("No more need to script END_%s",stat)
 						else
-							if not Done[sprintf("%s_%s_%s",tag,subs,stat)]
+							if ! Done[sprintf("%s_%s_%s",tag,subs,stat)]
 								ch.Stat(sprintf("%s%s",subs,stat))["Value"] = 0
 							end
 						end
-						CSayF("%s has stat %s%s of %d",tag,subs,stat,ch.Stat(sprintf("%s%s",subs,stat)).Value)
+						//CSayF("%s has stat %s%s of %d",tag,subs,stat,ch.Stat(sprintf("%s%s",subs,stat)).Value)
 					end
 				end
 			end
 		end
-		assert(levelfound,("No level data has been found for %s level %d"):format(tag,level))
+		assert(levelfound,sprintf("No level data has been found for %s level %d",tag,level))
 		CSay("Configuring HP, AP and Vitality")
 		CSay("Skill: "..tostring(__skill))
-		ch.Points("HP",true)["MaxCopy"] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
+		//ch.Points("HP",true)["MaxCopy"] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
 		ch.Points("AP",true)["Maximum"] = level * ({20,10,5})[__skill]; CSayF("Max  AP: %4d",ch.Points("AP").Maximum)
 		ch.Points("VIT",true)["Maximum"] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
 		// Not efficient, I know, but this routine only gets called when a new character 
