@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.03.26 XI
+// 	  Version: 25.03.26 XXII
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -90,6 +90,7 @@ Class __RPGCharStat
 	ReadOnly String StTag
 	ReadOnly String PrTag
 	ReadOnly Bool EndStat = False
+	ReadOnly Var EndRet = {}
 	
 	Get Int Value
 		If EndStat
@@ -97,9 +98,10 @@ Class __RPGCharStat
 			for sb in Each(_statsubs)
 				r+=Parent.Stat(sb..StTag)
 			End
-			return r
+			EndRet.Value=r
+			return EndRet
 		end
-		return Parent.Pure.Stat[PrTag]
+		return Parent.Pure.Stat[PrTag].Base
 	End
 	
 	Set Int Value
@@ -109,12 +111,14 @@ Class __RPGCharStat
 		End
 		Parent.Pure.Stat[PrTag] = _Value
 	End
+		
 	
 	Constructor(ouwe,String _stat)
 		PrTag=_Stat
 		EndStat=Prefixed(_Stat,"END_")
 		StTag=Ternary(EndStat,Right(_Stat,Len(_Stat)-4),_Stat)
 		Parent = Ouwe
+		CSayF("Creating Stat record %s::%s",ouwe.Tag,_stat)
 	End
 End
 
@@ -128,6 +132,17 @@ Class __RPGChar
 		StatTab[StTag] = StatTab[StTag] || new __RPGCharStat(self,StTag)
 		Return StatTab[StTag]
 	End		
+	
+	Get String Name; return Pure.Name; End
+	Set String Name; Pure.Name=Value; End
+	
+	Get Var Data; return Pure.Data; End
+	
+	Var Points(String PTag)
+		r:=Pure.Points[PTag]
+		if (PTag=="HP"); r.Maximum = self.Stat("END_HP").Value; End
+		return r
+	End
 		
 	Constructor(String _Tag)
 		Tag  = _Tag
@@ -160,5 +175,12 @@ Group RPG
 		_rpgstat.Char[T].Stat.Level = lv
 		return new __RPGChar(T)
 	End
+	
+	Var GetChar(String T)
+		return __RPGChar.Reg[T] || new __RPGChar(T)
+	End
+	
+	Get Var Char; Return RPG.GetChar; End
+	
 	
 End
