@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Create/YoungIrravonia.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Char/Create_YoungIrravonia.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.03.26
+// 
+// End License
 
+Module
 
+#use "Libs/SCI/Sys"
+#use "Script/Use/Need"
 
-#use "Script/Use/AnyWay"
+Init
 
-var yi
+plua yi
 
 yi = RPG.GetChar("YoungIrravonia")
 yi.Name = Names.Irravonia
@@ -50,3 +56,5 @@ yi.Data.Armor  = "EQA_YOUNGIRRAVONIA_DRESS"
 yi.Data.Jewel  = "JWL_YOUNGIRRAVONIA_BEADNECKLACE"
 
 CSay("Young Irravonia Configured")
+
+End
