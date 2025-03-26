@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.03.25 I
+// 	  Version: 25.03.26 XI
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -43,9 +43,25 @@
 // End License
 Module
 
+#use "Libs/SCI/Sys"
 #use "Libs/SCI/Statistician"
 
 plua _rpgstat = Statistician.CreateNew("Dyrt")
+plua _statsubs
+
+Init
+	_statsubs = {}
+	// Base stat, defined by level
+	_statsubs +=	"BASE_"          
+	// Some items can give you a permanent powerup. Going up skill levels can also affect this!
+	_statsubs +=	"PERMPOWERUP_"   
+	// Stat buffs (negative numbers can be used for debuffs)
+	_statsubs +=	"BUFF_"          
+	// Calculated whenever equipment changes
+	_statsubs +=	"EQUIP_"         
+	// End result when all other fields have been added together
+	//_statubs +=	"END_"       
+End
 
 Group RPG_Party
 	Get Var Pure
@@ -69,13 +85,60 @@ Group RPG_Party
 	End
 End
 
+Class __RPGCharStat
+	ReadOnly Var Parent
+	ReadOnly String StTag
+	ReadOnly String PrTag
+	ReadOnly Bool EndStat = False
+	
+	Get Int Value
+		If EndStat
+			int r:=0
+			for sb in Each(_statsubs)
+				r+=Parent.Stat(sb..StTag)
+			End
+			return r
+		end
+		return Parent.Pure.Stat[PrTag]
+	End
+	
+	Set Int Value
+		LocExtern _Value "_value"
+		If EndStat
+			CSayF("%s is an EndStat and can therefore not be defined. Not with %d, not with ANY value!",PrTag,_Value)
+		End
+		Parent.Pure.Stat[PrTag] = _Value
+	End
+	
+	Constructor(ouwe,String _stat)
+		PrTag=_Stat
+		EndStat=Prefixed(_Stat,"END_")
+		StTag=Ternary(EndStat,Right(_Stat,Len(_Stat)-4),_Stat)
+		Parent = Ouwe
+	End
+End
+
 Class __RPGChar
+	Static ReadOnly Table Reg = {}
 	ReadOnly String Tag
+	ReadOnly Var Pure
+	ReadOnly Table StatTab = {}
+	
+	Var Stat(String StTag)
+		StatTab[StTag] = StatTab[StTag] || new __RPGCharStat(self,StTag)
+		Return StatTab[StTag]
+	End		
+		
+	Constructor(String _Tag)
+		Tag  = _Tag
+		Pure = _rpgStat.Char[_Tag]
+		Reg[Tag] = self
+	end
 End
 
 QuickMeta PureChar
 	Index
-		return _rpgStat.Char(Key)
+		return _rpgStat.Char[Key]
 	End
 	NewIndex
 		Lua.error("Don't temper with PureChar")
@@ -89,6 +152,13 @@ Group RPG
 	End
 	Get Var PureChar
 		Return Lua.Scyndi.Globals.PureChar
+	End
+	
+	Var CreateChar(String T, int lv)
+		//CSayF("%s T = %s; %s lv = %s",Lua.type(T),T,Lua.type(lv))
+		_rpgstat.NewChar(T)
+		_rpgstat.Char[T].Stat.Level = lv
+		return new __RPGChar(T)
 	End
 	
 End
