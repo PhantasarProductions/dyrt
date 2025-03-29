@@ -116,13 +116,16 @@ group MScript
 		//if GJ.ImpureRatio>=18
 		//	Map.Kill("GameJoltBarrier")
 		//end
-		int p 
-		p = math.floor(NALA_Medals:AltRatio())
-		CSayF("Medal rate %03d%%",p)
-		gj_checked = true
-		if p>=18
-			Map.Kill("GameJoltBarrier")
-		end
+		
+		// Set to NALA! Won't work. I'll keep it for reference, so I can more easily set things up once I need to take care of this.
+		// For now, dummy, as it will only be in the way!
+		//int p 
+		//p = math.floor(NALA_Medals:AltRatio())
+		//CSayF("Medal rate %03d%%",p)
+		//gj_checked = true
+		//if p>=18
+		//	Map.Kill("GameJoltBarrier")
+		//end
 	end
 	
 	void AWOPEN()
