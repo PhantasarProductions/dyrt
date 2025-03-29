@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_ZoneAction.scyndi
 // 
-// 	  Version: 25.03.22 XII
+// 	  Version: 25.03.29
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -176,7 +176,7 @@ class ZoneAction
 				//new ZoneAction("Enter",_Zone,Action,infinity)
 				new ZoneAction("Enter",infinity)
 			end
-			KettingKaart.ZA_Etner = KEF
+			KettingKaart.ZA_Enter = KEF
 			KettingKaart.GoToLayer = Map.GoToLayer
 			KettingInitDone = true
 		end
