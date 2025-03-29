@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.03.18 XXVIII
+// 	  Version: 25.03.29 II
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -216,6 +216,10 @@ group Map
 		//return LuaGetString("FLOW_FIELD","FieldMap.LoadedMap")
 		return StripDir(Kthura.LastLoaded)
 	end
+	
+	get String LoadedMap
+		return StripDir(Kthura.LastLoaded)
+	end	
 	
 	get string Layer
 		//return LuaGetString("FLOW_FIELD","FieldMap.Kthura.Layer")
@@ -629,7 +633,8 @@ group Field
 		MapFile = Trim(MapFile)
 		SaskiaLabel = Trim(SaskiaLabel)
 		CSayF("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel)
-		FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
+		//FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
+		Sys.Call("FLOW_FIELD","FlowField.ChainMap",MapFile,SaskiaLabel)
 	end
 	
 	
