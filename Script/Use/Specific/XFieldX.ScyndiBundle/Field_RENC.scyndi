@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_RENC.scyndi
 // 
-// 	  Version: 25.03.22 IV
+// 	  Version: 25.03.29 III
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -47,6 +47,7 @@
 Module
 
 #Use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/SString"
 #use "Libs/SCI/Graphics"
 
@@ -93,19 +94,19 @@ group RENC
 	table AllowLayer
 	
 	get int Encounters
-		return self.RoomEncounters[FlowField.Map.Kthura.Layer] or 0
+		return self.RoomEncounters[Kthura.CurrentLayer] or 0
 	end
 	
-	set int Encounters
-		self.RoomEncounters[FlowField.Map.Kthura.Layer] = value
+	set int Encounters		
+		self.RoomEncounters[Kthura.CurrentLayer] = value
 	end
 	
 	get int Rate
-		return self.RoomRate[FlowField.Map.Kthura.Layer] or 0
+		return self.RoomRate[Kthura.CurrentLayer] or 0
 	end
 	
 	set int Rate
-		self.RoomRate[FlowField.Map.Kthura.Layer] = value
+		self.RoomRate[Kthura.CurrentLayer] = value
 	end
 	
 	get bool AutEncOn
@@ -154,8 +155,8 @@ group RENC
 	end
 	
 	void CompileFoeList()
-		var kth
-		kth = FlowField.Map.Kthura
+		var kth = Kthura
+		//kth = FlowField.Map.Kthura
 		$Foes = {}
 		for i=1,__skill
 			string FoeLine
@@ -179,9 +180,9 @@ group RENC
 	
 	void CompileAllowLayer()
 		table ban
-		ban = xsplit(FlowField.Map.Kthura.Data.NoEncFloors,",")
+		ban = xsplit(Kthura.Data.NoEncFloors,",")
 		$AllowLayer = {}
-		for L in FlowField.Map.Kthura.EachLayer
+		for L in Kthura.Layers.Each
 			$AllowLayer[L] = true
 			$RoomRate[L]=$MaxRate
 			$RoomEncounters[L] = $MaxEncounters
