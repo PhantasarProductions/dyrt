@@ -1,0 +1,176 @@
+// License Information:
+// **********************************************
+// 
+// src/Tricky Script/Script/MapScript/CH1_DUNG_Prison.nil
+// (c) Jeroen Broks, 2019, 2020, 2021, 2022, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// version: 22.08.02
+// End License Information
+
+Script
+
+#use "script/use/Need"
+#use "Script/Use/StartCombatMod"
+
+group StartNewPrologue
+
+	void EricIrravonia()
+		int IrraLevel
+		int IrraExperience
+		var Irra
+		Irra = RPG.GetChar("YoungIrravonia")
+		IrraLevel = Irra.Stat("Level").Value
+		IrraExperience = Irra.Stat("Experience").Value
+		Party.NewCharacter("Irravonia",IrraLevel)
+		RPG.GetChar("Irravonia").Stat("Experience").Value = IrraExperience
+		Party.NewCharacter("Eric",IrraLevel + (3 - __skill))
+		RPG.Party[1] = "Eric"
+		RPG.Party[2] = "Irravonia"
+		
+		// Da Leader
+		Field.Leader = "Eric"
+		
+		// We don't need her to take up any memory any more!
+		RPG.KillChar("YoungIrravonia")
+		
+		// Move on!
+		Field.ChainMap("CH1_Hub_EricRebeccaHome","Slaapkop","__BASE")
+		Map.SpawnPlayer("WakeEric","South")
+	end
+
+end
+
+bool gj_checked
+
+
+group MScript
+
+	link ERIC = StartNewPrologue.EricIrravonia
+	
+	void LEAVECELL()
+		Map.GoToLayer("#006","Einde")
+		if not gv.Bool.EnterPrisonForReal_LeftCell_TopFloor
+			gv.Bool["RESPAWN_INITIATED"] = false
+		end		
+	end
+	
+	void TOCELL()
+		Map.GoToLayer("#999","EnterCell")
+	end
+	
+	void SWITCH_LEVEL()
+		Map.Kill("LevelDoor",true)
+	end
+	
+	void HIDETRAVEL()
+		Map.HideByLabel("Travel")
+	end
+	
+	void SHOWTRAVEL()
+		Map.ShowByLabel("Travel")
+	end
+	
+	void GJ_OPEN()
+		//var GJ
+		//CSayF("gvgj%s",tostring(gv.Bool.GameJolt))
+		//CSayF("chek%s",tostring(gj_checked))
+		//CSayF("fail%s",tostring(gj_failed()))
+		//if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
+		//	return
+		//end
+		//CSay("Next step - Loading the data")
+		//gj_checked = true
+		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		//if not GJ
+		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+		//	return
+		//end
+		//if GJ.ImpureRatio>=18
+		//	Map.Kill("GameJoltBarrier")
+		//end
+		int p 
+		p = math.floor(NALA_Medals:AltRatio())
+		CSayF("Medal rate %03d%%",p)
+		gj_checked = true
+		if p>=18
+			Map.Kill("GameJoltBarrier")
+		end
+	end
+	
+	void AWOPEN()
+		if gj_checked
+			return
+		end
+		Map.Kill("GameJoltBarrier")
+		gj_checked = true
+	end
+	
+	void TO_BOTANICA()
+		Field.LoadMap("GJ_DUNG_Botanica")
+		Map.GoToLayer("#001","Start")
+	end
+	
+	void BOSSBLENCHY()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Blenchy.Wav"
+		StartCombat.Arena = "ZoraPrison"
+		StartCombat.Foe[1] = "Boss/Blenchy1"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	
+	
+	void CONSTRUCTOR()
+		CSay("Welcome in jail!")
+		Map.ZA_Enter("Leave_Cell","LeaveCell")
+		Map.ZA_Enter("ToCell","ToCell")
+		Map.ZA_Enter("HideTravel","HideTravel")
+		Map.ZA_Leave("TravelZone","HideTravel")
+		Map.ZA_Enter("TravelZone","ShowTravel")
+		Map.ZA_Enter("NoBarrier","AWOpen")
+		Map.ZA_Enter("CheckGameJolt","GJ_Open")
+		Map.ZA_Enter("To_Botanica","To_Botanica")
+		Map.ZA_Enter("StartBlenchy","SASKIA:Blenchy")
+		if not gv.Bool.EnterPrisonForReal_LeftCell
+			gv.Bool["RESPAWN_INITIATED"] = false
+		end
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+	
+end
