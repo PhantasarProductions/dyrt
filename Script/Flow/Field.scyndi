@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.03.25 X
+// 	  Version: 25.03.29 V
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -169,7 +169,7 @@ class Clickables
 	end
 	
 	static void Massacre()
-		Clickables.List = Clickables.List or LinkedList()
+		Clickables.List = Clickables.List || New TLinkedList()
 		Clickables.List.Clear()
 	end
 	
@@ -449,7 +449,7 @@ group FlowField
 
 	bool AutoScroll = true
 	
-	//link Map = FieldMap
+	link Map = FieldMap
 	
 	var WalkArrival	
 	table WalkArrivalParams
@@ -728,21 +728,23 @@ group FlowField
 	
 	void LoadMap(string MapFile,Layer)
 		MapFile = trim(MapFile)
-		$Map.LoadedMap=MapFile
+		//$Map.LoadedMap=MapFile
 		CSayF("Loading Map: %s",MapFile)
 		CSay ("= Clearing clickables")
 		Clickables.Massacre();
 		CSay ("= Kthura")
 		var kth
-		kth = new Kthura(MapFile)
-		if kth
-			CSay("= Success!")
-		else
-			CSay("= Fail!")
-		end
-		FieldMap.Kthura = kth
+		//kth = new Kthura(MapFile)
+		//if kth
+		//	CSay("= Success!")
+		//else
+		//	CSay("= Fail!")
+		//end
+		//FieldMap.Kthura = kth
+		Kthura.Load("Dyrt_Map","Kthura/"..MapFile)
+		Kthura.Pick("Dyrt_Map")
 		CSay("= RENC Data!")
-		RENC.Reset(tonumber(kth.Data.Travel_Level) or 0)
+		RENC.Reset(tonumber(Kthura.Data.Travel_Level) || 0)
 		do
 			CSay("= Map changes")
 			//string m
