@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_ZoneAction.scyndi
 // 
-// 	  Version: 25.03.29
+// 	  Version: 25.03.29 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -186,5 +186,9 @@ class ZoneAction
 	DESTRUCTOR
 		CSayF("%s event disposed in zone %s",self.ActEvent,self.ActZone)
 	end
+	
+	static void Ext(string Event,string Zone,AAct,infinity)
+		new ZoneAction(Event, Zone,AAct,infinity)
+	End
 	
 end
