@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.03.29 V
+// 	  Version: 25.03.30 XII
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -86,7 +86,7 @@ plua PermaChanges = GINIE.CreateNew("Map_PermaChanges")
 Init
 	CSay("Field: Set SASKIA load function")
 	//SASKIA.LoadFunction = JCR6.GetString
-	SASKIA.LoadScript = JCR6.GetString
+	CL_SASKIA.LoadFunction = JCR6.GetString
 End
 		
 	
@@ -114,8 +114,8 @@ class Clickables
 	readonly int WalkToX
 	readonly int WalkToY
 	
-	CONSTRUCTOR(string Tag,int x, int y,Arrive,infinity)
-		CSayF("= Converting object with tag %s into a clickable",Tag)
+	CONSTRUCTOR(string _Tag,int x, int y,Arrive,infinity)
+		CSayF("= Converting object with tag '%s' into a clickable (%d,%d)",_Tag,x,y)
 		table sAr
 		string aSt
 		string aFn
@@ -123,8 +123,8 @@ class Clickables
 		self.List.AddLast(self)
 		self.WalkToX = x
 		self.WalkToY = y
-		self.Layer = FlowField.Map.Kthura.Layer
-		self.Tag = Tag
+		self.Layer = Kthura.CurrentLayer //FlowField.Map.Kthura.Layer
+		self.Tag = _Tag
 		self.ArriveParam = { infinity }
 		//CSayF("Clickable %s;\n%s",tostring(Arrive),NIL.LuaSerialize("* Param",self.ArriveParam))
 		if Arrive==nil or Arrive==""
@@ -326,6 +326,7 @@ group FieldMap
 	//link Script = MapScript
 	//var Kthura
 	var Saskia
+	//Link Saskia = Lua.Scyndi.Class.Saskia
 	
 	get int ScrollX
 		return self.Kthura.ScrollX
@@ -770,10 +771,10 @@ group FlowField
 		CSay("= NIL Script")
 		do
 			string MapScriptFile 
-			MapScriptFile = "Script/MapScript/"..Trim(MapFile)..".nil"
+			MapScriptFile = "Script/MapScript/"..Trim(MapFile)..".lbc"
 			if ! JCR6.EntryExists(MapScriptFile)
 				CSay("MapScript file \""..MapScriptFile.."\" doesn't exist! Loading None.Nil in stead!") //,255,0,0)
-				LoadState("MAP","Script/MapScript/None.nil")
+				LoadState("MAP","Script/MapScript/None.lbc")
 			else
 				CSay("Loading MapScript file \""..MapScriptFile) //,0,255,0)
 				LoadState("MAP",MapScriptFile)
@@ -781,8 +782,10 @@ group FlowField
 		end
 		
 		CSay("= SAKSIA Script")
+				
 		//self.Map.Saskia = SASKIA.LoadScript(sprintf("SASKIA/MapScript/%s.saskia",Trim(MapFile)))
-		self.Map.Saskia.LoadScript(sprintf("Kthura/%s/Behavior",Kthura.LastLoaded))
+		self.Map.Saskia = Lua.Scyndi.Class.Saskia.LoadScript(sprintf(Ternary(Prefixed(Upper(Kthura.LastLoaded),"KTHURA/"),"%s/Behavior","Kthura/%s/Behavior"),Kthura.LastLoaded))
+		CSayF("= SASKIA script loaded: (%s) %s",Lua.type(self.Map.Saskia),self.Map.Saskia)
 		self.Map.Saskia.Start("OnLoad")
 		
 		table RandomTreasure
@@ -791,8 +794,8 @@ group FlowField
 			string trline
 			table tritems
 			table tritembreak
-			trline = kth.Data[sprintf("Treasure_skill%d",sklist)]
-			tritems = split(trline,";")
+			trline = kthura.Data[sprintf("Treasure_skill%d",sklist)]
+			tritems = xsplit(trline,";")
 			for item in each(tritems)
 				string name
 				int num
@@ -809,53 +812,63 @@ group FlowField
 		end
 		
 		CSay("= Compiling auto-clickables")
-		Clickables.Map = kth
-		for Lay in kth.EachLayer
+		//Clickables.Map = kth
+		oldlayer:=Kthura.CurrentLayer
+		for Lay in Kthura.Layers.Each
 			CSayF("= Clickables on Layer %s",Lay)
-			kth.Layer = Lay
-			for Tag in kth.EachTag(Lay)
+			kthura.CurrentLayer = Lay
+			//for Tag in kth.EachTag(Lay)
+			For Tag in Each(Kthura.TagList)
 				if Tag=="BlackOrb"
-					kth.Obj="BlackOrb"
-					new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y,FlowField.BlackOrb)
+					//kth.Obj="BlackOrb"
+					new Clickables("BlackOrb",kthura.Obj.BlackOrb.x, kthura.Obj.BlackOrb.y,FlowField.BlackOrb)
 				end
 				table s
-				s = split(Tag,"_")				
-				switch s[1]
+				s = xsplit(Tag,"_")				
+				switch s[0]
 					// "SAVEPOT" was the result of a bug in the Kthura editor script
 					// Fixed now, but a few maps can still suffer from that!
 					case "SAVEPOT" "SAVESPOT"
-						kth.Obj=Tag					
-						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.SaveSpot ,s[2])
+						//kth.Obj=Tag
+						O:=Kthura.Obj[Tag]
+						new Clickables(Tag,O.x, O.y+32, FlowField.SaveSpot ,s[1])
 					case "TRAVEL"
-						kth.Obj=Tag
-						new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, FlowField.TravelEmblem ,Tag)
+						//kth.Obj=Tag
+						//new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y, FlowField.TravelEmblem ,Tag)
+						O:=Kthura.Obj[Tag]
+						new Clickables(Tag,O.x, O.y+32, FlowField.TravelEmblem ,Tag)
 					case "SWITCH"
-						if not suffixed(Tag,"_SPOT")
-							kth.Obj=Tag
-							new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.ThrowSwitch ,Tag)
+						if ! suffixed(Tag,"_SPOT")
+							//kth.Obj=Tag
+							//new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.ThrowSwitch ,Tag)
+							O:=Kthura.Obj[Tag]
+							new Clickables(Tag,O.x, O.y+32, FlowField.ThrowSwitch ,Tag)
 						end
 					case "TREASURECHEST"
-						var dat
-						kth.Obj=Tag
-						dat = kth.ObjData
-						if dat["Skill"..__skill]:upper()!="TRUE" and dat["Skill"..__skill]:upper()!="YES"
+						//var dat
+						//kth.Obj=Tag
+						//dat = kth.ObjData
+						dat:=Kthura.Obj[Tag]
+						if Upper(dat.Data["Skill"..__skill])!="TRUE" && Upper(dat.Data["Skill"..__skill])!="YES"
 							self.Map.Kill(Tag)
 							CSay("= Removed chest "..Tag.." as it was not allowed in this difficulty setting!")
 						else
 							CSay("= Activated chest "..Tag)
-							new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.TreasureChest, Tag)
+							//new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.TreasureChest, Tag)
+							new Clickables(Tag,dat.x, dat.y+32, FlowField.TreasureChest, Tag)
 						end
 					case "RANDOMTREASURE"
-						kth.Obj=Tag
-						if kth.ObjString.Kind=="$RandomTreasure" || kth.ObjString.Kind=="Exit"
-							assert(Len(RandomTreasure)>0,"There are no random treasures configured so none can be placed in!")
+						//kth.Obj=Tag
+						O:=Kthura.Obj[Tag]
+						if O.Kind=="$RandomTreasure" || O.Kind=="Exit"
+							Lua.assert(Len(RandomTreasure)>0,"There are no random treasures configured so none can be placed in!")
 							if math.random(1,__skill^__skill)==1
-								kth.ObjString.Kind="Obstacle"
-								kth.ObjString.Texture='gfx/PickUps/Bag.png'
-								new Clickables(Tag,kth.ObjInt.x,kth.ObjInt.y,FlowField.Treasure,Tag,RandomTreasure[math.random(0,len(RandomTreasure)-1)],__skill==3 || (__skill==1 && math.random(1,2)==1))
+								O.Kind="Obstacle"
+								O.Texture="gfx/PickUps/Bag.png"
+								new Clickables(Tag,O.x,O.y,FlowField.Treasure,Tag,RandomTreasure[math.random(0,len(RandomTreasure)-1)],__skill==3 || (__skill==1 && math.random(1,2)==1))
 							else
 								// Preventing any future conflicts, but the spot is still usable for later!
-								kth.Kill(Tag)
+								Map.Kill(Tag)
 							end
 						else
 							CSayF("= Invalid Random Treasure \"%s\"! Ignored!",Tag)
@@ -866,16 +879,17 @@ group FlowField
 							int posy  
 							string spot
 							var cl
-							kth.Layer = Lay
-							kth.Obj=Tag
-							posx = kth.ObjInt.x
-							posy = kth.ObjInt.y + 32
+							//kthura.Layer = Lay
+							//kthura.Obj=Tag
+							O:=Kthura[Tag]
+							posx = O.x
+							posy = O.y + 32
 							CSayF("NPC Found on (%4d,%4d) >> %s",kth.ObjInt.x,kth.ObjInt.y,Tag)
 							spot = Tag.."_SPOT"
-							if kth.HasTag(spot)
+							if Kthura.HasObj(spot)
 								CSayF("Trying to configure as %s was found",spot)
-								posx = kth.ObjX(spot)
-								posy = kth.ObjY(spot)
+								posx = kthura.Obj[spot].X
+								posy = kthura.Obj[spot].Y
 							end
 							if prefixed(Tag,"NPC_MT_")
 								cl = new Clickables(Tag, posx, posy, MapText, Tag)
@@ -891,15 +905,16 @@ group FlowField
 				end
 			end
 		end
+		if OldLayer!="";Kthura.CurrentLayer=OldLayer;End
 		
 		CrackGeneration()
 		
-		
+		CSay("= Music configuration")
 		string pref
 		string rest
-		if Mid(kth.Data.Music,4,1)==":"
-			pref = upper(Left(kth.Data.Music,3))
-			rest = Right(kth.Data.Music,len(kth.Data.Music)-4)
+		if Mid(kthura.Data.Music,4,1)==":"
+			pref = upper(Left(kthura.Data.Music,3))
+			rest = Right(kthura.Data.Music,len(kthura.Data.Music)-4)
 			switch pref
 				case "SAS" 
 					self.Map.Saskia.Start(rest)
@@ -911,12 +926,13 @@ group FlowField
 					error("Unknown alternate music direction: "..pref)
 			end
 		else
-			CSayF("= Music: %s",kth.Data.Music)
-			Music.Play(kth.Data.Music)
+			CSayF("= Music: %s",kthura.Data.Music)
+			Music.Play(kthura.Data.Music)
 		end
 		if Layer
-			kth.Layer = Layer
+			kthura.CurrentLayer = Layer
 		end
+		CSay("= Loadmap complete")
 	end
 
 	void DrawScreen()
