@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH1_DUNG_Prison.nil
-// (c) Jeroen Broks, 2019, 2020, 2021, 2022, All Rights Reserved.
+// src/Script/Script/MapScript/CH1_DUNG_Prison.scyndi
+// (c) Jeroen Broks, 2019-'22, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,13 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 22.08.02
-// End License Information
+// 
+// version: 25.03.29 II
+// 
+// End License
+
 
 Script
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+
 #use "script/use/Need"
-#use "Script/Use/StartCombatMod"
+#use "Script/Use/Misc/StartCombatMod"
 
 group StartNewPrologue
 
@@ -77,8 +84,8 @@ group MScript
 	
 	void LEAVECELL()
 		Map.GoToLayer("#006","Einde")
-		if not gv.Bool.EnterPrisonForReal_LeftCell_TopFloor
-			gv.Bool["RESPAWN_INITIATED"] = false
+		if !gBool.EnterPrisonForReal_LeftCell_TopFloor
+			gBool["RESPAWN_INITIATED"] = false
 		end		
 	end
 	
@@ -153,7 +160,7 @@ group MScript
 	
 	
 	
-	void CONSTRUCTOR()
+	void _CONSTRUCTOR()
 		CSay("Welcome in jail!")
 		Map.ZA_Enter("Leave_Cell","LeaveCell")
 		Map.ZA_Enter("ToCell","ToCell")
@@ -164,8 +171,8 @@ group MScript
 		Map.ZA_Enter("CheckGameJolt","GJ_Open")
 		Map.ZA_Enter("To_Botanica","To_Botanica")
 		Map.ZA_Enter("StartBlenchy","SASKIA:Blenchy")
-		if not gv.Bool.EnterPrisonForReal_LeftCell
-			gv.Bool["RESPAWN_INITIATED"] = false
+		if ! gBool.EnterPrisonForReal_LeftCell
+			gBool["RESPAWN_INITIATED"] = false
 		end
 	end
 	
@@ -177,3 +184,8 @@ group MScript
 	
 	
 end
+
+Init
+	Print("\x1b[97mWelcome to prison")
+	MScript._CONSTRUCTOR()
+End
