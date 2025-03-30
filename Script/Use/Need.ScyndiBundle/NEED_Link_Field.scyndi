@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.03.29 II
+// 	  Version: 25.03.29 V
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -99,7 +99,7 @@ end
 
 Var FLD_Call(string cmd,infinity)
 	FieldCheck()
-	r:=Sys.Call(cmd,infinity)
+	r:=Sys.Call("FLOW_FIELD",cmd,infinity)
 	return r
 End
 
@@ -141,16 +141,16 @@ group Map
 					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
 				end
 				//CSay(NIL.LuaSerialize("ActSplit",ActSplit))
-				params = "'"..ActSplit[2].."'"
+				params = "'"..ActSplit[1].."'"
 			default
 				Lua.error(sprintf("I don't know how to handle: %s",ActSplit[0]))
 		end
 		if params==""
 			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
-			FLD_Call("ZoneAction",Trim(event),Trim(zone),actiondelegate)
+			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate)
 		else
 			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
-			FLD_Call("ZoneAction",Trim(event),Trim(zone),actiondelegate,infinity)
+			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate,infinity)
 		end
 	end
 	
