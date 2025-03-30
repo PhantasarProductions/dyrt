@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_Crack.scyndi
 // 
-// 	  Version: 25.03.20 I
+// 	  Version: 25.03.30 II
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -45,6 +45,7 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 
 
 //#use "libs/tables"
@@ -54,13 +55,15 @@ LocExtern FlowField "Scyndi.Class.FlowField"
 
 global void CrackGeneration()
 	CSay("Compiling Cracks")
-	var kth
-	kth = FlowField.Map.Kthura
-	for Lay in kth.EachLayer
+	//var kth
+	//kth = FlowField.Map.Kthura
+	OldLayer:=Kthura.CurrentLayer
+	for Lay in Kthura.Layers.Each
 		CSayF("= Cracks on Layer %s",Lay)
-		kth.Layer = Lay
+		//kth.Layer = Lay
+		Kthura.CurrentLayer=Lay
 		table cracks
-		for Tag in kth.EachTag(Lay)
+		for Tag in Each(kthura.TagList)
 			if prefixed(Tag,"CRACK_")
 				//cracks[#cracks+1] = right(Tag,#Tag-6)
 				cracks+=Right(Tag,Len(Tag)-6)
@@ -68,14 +71,18 @@ global void CrackGeneration()
 		end
 		for Tag in each(cracks)
 			int Dom
-			kth.Obj = "CRACK_"..Tag
-			Dom = kth.ObjInt.Dominance
-			kth.CreateTiledArea('gfx/MapModification/Crack.png',kth.ObjInt.X,kth.ObjInt.Y,kth.ObjInt.W,kth.ObjInt.H,"TEXCRACK_"..Tag)
-			kth.ObjInt.Dominance --
-			kth.HideByLabel(Tag)
-			kth.Obj = "TEXCRACK_"..Tag
-			kth.ObjInt.Dominance=Dom
+			ft:="CRACK_"..Tag
+			//kth.Obj = "CRACK_"..Tag
+			Dom = kthura.Obj[ft].Dominance
+			//kth.CreateTiledArea("gfx/MapModification/Crack.png",kth.ObjInt.X,kth.ObjInt.Y,kth.ObjInt.W,kth.ObjInt.H,"TEXCRACK_"..Tag)
+			wlo:=Kthura.Obj[ft]
+			cro:=Kthura.NewTiledArea(wlo.X,wlo.Y,wlo.W,wlo.H,"gfx/MapModification/Crack.png")
+			cro.Tag="TEXCRACK_"..Tag
+			wlo.Dominance --
+			kthura.HideByLabel(Tag)			
+			cro.Dominance=Dom
 		end
-	kth.Remap()
+	Kthura.Remap()
+	if OldLayer!="";Kthura.CurrentLayer=OldLayer;End
 	end
 end
