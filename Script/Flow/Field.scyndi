@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.03.30 XII
+// 	  Version: 25.03.30 XVII
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -460,9 +460,12 @@ group FlowField
 	bool AutoPlayerUpdate = true
 	
 	void UpdatePlayerTex()
-		if self.Map.Kthura.Actor.Player.Exists and self.AutoPlayerUpdate
-			self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
-		end
+		//if self.Map.Kthura.Actor.Player.Exists and self.AutoPlayerUpdate
+		//	self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
+		//end
+		If Kthura.HasObj("Player") && FlowField.AutoPlayerUpdate
+			Kthura.Obj.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(Kthura.Obj.Player.Wind)..".jpbf"
+		End
 	end
 	
 	get string Leader
@@ -967,9 +970,12 @@ group FlowField
 	
 	void SpawnPlayer(string spot,altwind)
 		__nowalk = false
-		self.Map.Kthura.Actor.Player.Spawn(spot)
+		//self.Map.Kthura.Actor.Player.Spawn(spot)
+		Kthura.Spawn("Player",spot)
 		if altwind
-			self.Map.Kthura.Actor.Player.Wind=altwind
+			//self.Map.Kthura.Actor.Player.Wind=altwind
+			Kthura.Obj.Player.Data.Wind=altwind
+			Kthura.Obj.Player.Wind=altwind
 		end
 		self.UpdatePlayerTex()
 	end
@@ -1127,8 +1133,12 @@ table mkBuffStats(ch)
 end
 
 global void BUB_Update()
-	static int eox
-	static int eoy	
+	//static int eox
+	//static int eoy
+	locExtern eox "BUB_Update_eox"
+	locExtern eoy "BUB_Update_eoy"
+	eox = eox || 0
+	eoy = eoy || 0
 	bool Acted = false
 	
 	// debug
@@ -1399,3 +1409,10 @@ group ConsoleCommands
 	end
 
 end
+
+
+Global Void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End
+	
