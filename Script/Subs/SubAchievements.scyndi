@@ -1,66 +1,79 @@
-// License Information:
-// src/Tricky Script/Script/Subs/SubAchievements.nil
-// Version: 21.11.25
-// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
+// License:
+// 	  src/Script/Script/Subs/SubAchievements.scyndi
 // 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
+// 	  Version: 25.03.31
+// 	
+// 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
 // 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
 // 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+
+#use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
+
 
 #use "libs/LinkedList"
-#use "libs/strings"
-#use "libs/tables"
-#use "script/use/anyway"
-#use "script/use/boxes"
+//#use "libs/tables"
+#use "script/use/need"
+#use "script/use/misc/boxes"
 
 
 global bool gjfailed = false
-var AchData
+global var AchData
 
 quickmeta group qmAward
 	
 	index
-		return gv.Bool["AWARDED."..key]
+		return gBool["AWARDED."..key]
 	end
 	
 	newindex
 		assert(type(value)=="boolean","Achievements awarded table requires boolean values!")
-		gv.Bool["AWARDED."..key] = value
+		gBool["AWARDED."..key] = value
 	end
 	
 end
 
 class AchBox
 
-	//link AchData = AchData
+	link AchData = Lua.Scyndi.Globals.AchData
 	static var BoxList
 	static var Font
 	static var TxAwarded
@@ -79,12 +92,12 @@ class AchBox
 		end
 	end
 	
-	void CONSTRUCTOR(string tag)
+	CONSTRUCTOR(string tag)
 		tag = trim(tag) 
 		//CWriteLine("Creating achievement box: "..tag,255,180,0) CSay(NIL.LuaSerialize("Achievements",AchData)) CWriteLine("Ok?",180,0,255) // debug line
 		self.QuickList()
 		//CSay("= WTF? "..tostring(AchData[tag]))
-		assert(AchData[tag],"No achievement named `"..tag.."`")
+		Lua.assert(AchData[tag],"No achievement named `"..tag.."`")
 		//CSay("= Game Jolt Check")
 		//CSayF("= Startup failure: %s",tostring(gjfailed))
 		//if gv.Bool.GameJolt and (not gjfailed)
@@ -101,7 +114,7 @@ class AchBox
 		self.Achievement = AchData[tag]
 		self.y = Screen.Height+25
 		self.Box = new Box(50,self.y,Screen.Width-100,70)
-		self.TxAchName = self.Font.Text(self.Achievement.Name)
+		self.TxAchName = self.Font.iText(self.Achievement.Name)
 		self.tag=tag
 		CSay("Listing Box")
 		self.BoxList.AddLast(self)
@@ -116,7 +129,7 @@ class AchBox
 		CSayF("Achievement earned: %s",tag)
 	end
 	
-	void DESTRUCTOR()
+	DESTRUCTOR
 		self.Box = nil;
 		self.TxAchName = nil;
 		CSayF("Achievement box for '%s' has been removed from the memory!",self.tag)
@@ -125,9 +138,9 @@ class AchBox
 	void Draw()
 		self.Box.Draw()
 		Color(255,180,0)
-		self.TxAwarded.Draw(Screen.Width/2,self.y+7,2,2)
+		self.TxAwarded.Draw(Graphics.Width div 2,self.y+7,2,2)
 		__white
-		self.TxAchName.Draw(Screen.Width/2,self.y+25,2,2)
+		self.TxAchName.Draw(Graphics.Width div 2,self.y+25,2,2)
 	end
 	
 	static void DrawAll()
@@ -151,11 +164,11 @@ group F_Achievements
 	//void Update()
 	//end
 	
-	link AchData = AchData
+	link AchData = Lua.Scyndi.Globals.AchData
 	link Awarded = qmAward
 	link DrawAll = AchBox.DrawAll
 	
-	void CONSTRUCTOR()
+	void __CONSTRUCTOR()
 		Box.NeverList = true
 		AchBox.BoxList = new TLinkedList
 		AchBox.SysFont = GetFont("SYSFONT")
@@ -219,13 +232,13 @@ group F_Achievements
 	int AutoCD      = 4000
 	int AutoCDReset = 4000
 	void Auto(always)
-		if always or $AutoCD==0
+		if always || $AutoCD==0
 			CSay("Auto achievement timer triggered!")
 			$AutoCD=$AutoCDReset
 			for tag,a in pairs($AchData)
 				if a.ProcessValue!="" 
 					CSayF("Tag '%s'; Wanted gv.Num.%s; Contains %9d; Must be at least: %9d; Awarded: %s; Allowed: %s",tag,a.ProcessValue,gv.Num[a.ProcessValue],a.ProcessMax,tostring(self.Awarded[tag]),tostring(self.Allow(tag)))
-					if a.ProcessMax<=gv.Num[a.ProcessValue] and (not self.Awarded[tag]) and self.Allow(tag)
+					if a.ProcessMax<=gv.Num[a.ProcessValue] && (!self.Awarded[tag]) && self.Allow(tag)
 						CSay("=> Awarded!")
 						$Award(tag)
 					end
@@ -279,6 +292,9 @@ group F_Achievements
 		end
 	end
 end
+Init
+	F_Achievement.__CONSTRUCTOR()
+End
 
 //delegate BUB_Draw
 //delegate BUB_Update
