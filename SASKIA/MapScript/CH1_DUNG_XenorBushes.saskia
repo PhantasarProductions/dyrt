@@ -67,13 +67,13 @@
 	;call FlowField.SpawnPlayer,"Start"
 	call FlowField.DoAutoScroll,true
 	
-	; Start Chapter Fader + Dungeon Fader
-	call Fader,LoadImage("Gfx/Chapter/1.png")
-	call Fader,"Xenor Bushes"
+	; Start Chapter Fader + Dungeon Fader	
+	call Fader.Create,Scyndi.Globals.LoadImage("Gfx/Chapter/1.png","Chapter 1")
+	call Fader.Create,"Xenor Bushes"
 	
 	; Start the game with a number of apples in your inventory based on your skill
-	mov 12 / gv.Number.skill,Inventory.ITM_APPLE
-	mov 6 / gv.Number.skill,Inventory.ITM_ANTIDOTE
+	mov 12 / Scyndi.Globals.gint.skill,Inventory.ITM_APPLE
+	mov 6 / Scyndi.Globals.gint.skill,Inventory.ITM_ANTIDOTE
 	
 	; Irravonia's final speech, before the game really begins
 	call BoxText,"PROLOGUE_START","IRRA"
