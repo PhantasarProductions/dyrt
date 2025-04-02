@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_Achievements.scyndi
 // 
-// 	  Version: 25.03.31 I
+// 	  Version: 25.04.02 I
 // 	
 // 	  Copyright (C) 2019, '20, 2025 Jeroen Petrus Broks
 // 	
@@ -107,6 +107,7 @@ quickmeta Achievements
 			end
 			//command = "F_Achievements."..key.."("..para..")"
 			//LuaDoString("ACHIEVEMENTS",command,"Call sub: ACHIEVEMENTS") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+			//print(sprintf("Calling F_Achievements.%s",key).." >> ",infinity) 
 			Sys.Call("ACHIEVEMENTS","F_Achievements."..key,infinity)
 		end
 		return ret
