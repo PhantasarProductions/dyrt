@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.03.26 XLII
+// 	  Version: 25.04.01 VIII
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -148,6 +148,9 @@ group SubParty
 	get int LevelCap
 		return gv.Num.LevelCap
 	end
+	
+	void SetSelectedChar(int v); SelectedChar=v; end
+	int GetSelectedChar(); return SelectedChar; End
 	
 	#say "= Constructor"
 	void SubPartyCONSTRUCTOR()
@@ -322,6 +325,16 @@ group SubParty
 		y = self.BarBoxes[spot].y + (num * 32)
 		w = self.BarBoxes[spot].w - (128 + 16)
 		pnt = RPG.Char(Ch).Points(bar.Tag)
+		switch bar.Tag
+			case "HP";	pnt.Maximum = RPG.Char(CH).Stat("END_HP").Value
+			case "AP";	pnt.Maximum = RPG.Char(Ch).Stat("Level").Value*10
+			case "VIT"	
+				switch __skill
+					case 1; pnt.Maximum = 250
+					case 2; pnt.Maximum = 100
+					case 3; pnt.Maximum = 0
+				end
+		end
 		if pnt.Maximum==0; return; end
 		bar.Char = Ch
 		// bar back
@@ -333,7 +346,7 @@ group SubParty
 		// Icon
 		bar.TagIcon.Draw(x-30,y-20)
 		// Points
-		Font.Dark(PartyBar.Font,tostring(pnt.Have),x+w,y-20,1,0)
+		PartyBar.Font.Dark(tostring(pnt.Have),x+w,y-20,1,0)
 	end
 	
 	void BigPointsBar(string Ch, int num, int x, int y, int w)
@@ -417,18 +430,20 @@ group SubParty
 		self.BarBoxes[num] = self.BarBoxes[num] or new Box( (num-1)*math.floor((Screen.Width-32)/4),Screen.Height-128,math.floor((Screen.Width-32)/4),128 )
 		self.BarBoxes[num]["Draw"]()
 		__white
-		if RPG.Party[num] and RPG.Party[num]!=""
+		if RPG.Party[num] && RPG.Party[num]!=""
 			// Portrait
 			if num==$SelectedChar
 				SubParty.SinAlpha()
 			end
 			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
 			SetAlpha( 255 )
-			for i=1,Len(Bars) 
+			LocExtern Hash "#"
+			for i=1,Hash(Bars) 
 				self.PointsBar(RPG.Party[num],num,i)
 			end
-			self.JustLeveled[CharTag] = self.JustLeveled[CharTag] or 0
-			level = RPG.Char(CharTag).Stat("Level").Value			
+			self.JustLeveled[CharTag] = self.JustLeveled[CharTag] || 0
+			//print(CharTag,RPG.Char(CharTag),RPG.Char(CharTag).Stat("Level"))
+			level = RPG.Char(CharTag).Stat("Level").Value
 			if self.JustLeveled[CharTag]>0
 				Color(math.random(0,255),math.random(0,255),math.random(0,255))
 				--self.JustLeveled[CharTag]
