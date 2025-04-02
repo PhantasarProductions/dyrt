@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Flow.scyndi
 // 	Flow
-// 	version: 25.03.19 II
+// 	version: 25.04.01
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -27,7 +27,7 @@ Module
 #use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
 
-extern CurrentFlow "Lua.SCI_CurrentFlow"
+extern CurrentFlow "SCI_CurrentFlow"
 
 Global Void LoadFlow(String T,String F)
 	if ExtractExt(Upper(F))=="NIL"
