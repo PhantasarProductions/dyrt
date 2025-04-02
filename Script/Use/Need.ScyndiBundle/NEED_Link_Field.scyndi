@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.03.30 IV
+// 	  Version: 25.04.02 III
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -117,9 +117,9 @@ group Map
 				params = params .. ", "
 			end
 			switch type(v)
-				case 'string'
-					params = params .. '"'..SafeString(v)..'"'
-				case 'number' 'boolean'
+				case "string"
+					params = params .. "\""..SafeString(v).."\""
+				case "number" "boolean"
 					params = params .. tostring(v)
 				default
 					error(sprintf("ZA_New(): Type '"..type(v).."' (parameter #%d) cannot be transferred through this linking routing!",i))
@@ -134,14 +134,14 @@ group Map
 		end
 		switch Upper(ActSplit[0])
 			case "MAPSCRIPT"
-				actiondelegate = sprintf("MapScript.%s",ActSplit[1])
+				actiondelegate = sprintf("Scyndi.Globals.MapScript.%s",ActSplit[1])
 			case "SASKIA"
-				actiondelegate = sprintf("MapScript.SASKIA")
+				actiondelegate = sprintf("Scyndi.Globals.MapScript.SASKIA")
 				if params!=""
 					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
 				end
 				//CSay(NIL.LuaSerialize("ActSplit",ActSplit))
-				params = "'"..ActSplit[1].."'"
+				params = ActSplit[1]
 			default
 				Lua.error(sprintf("I don't know how to handle: %s",ActSplit[0]))
 		end
@@ -150,7 +150,7 @@ group Map
 			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate)
 		else
 			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
-			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate,infinity)
+			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate,params)
 		end
 	end
 	
@@ -580,7 +580,7 @@ group Respawn
 		gint.Respawn_Y      = Kthura.Obj.PLAYER.X
 		gStr.Respawn_Map    = StripDir(Kthura.LastLoadedMap)
 		gstr.Respawn_Layer  = Kthura.CurrentLayer
-		gbool.Initiated     = true		
+		gbool.Respawn_Initiated = true		
 		CSayF("Respawn Reset: %s::%s (%d,%d)",gstr.Respawn_Map,gstr.Respawn_Layer,gint.Respawn_X,gint.Respawn_Y)
 	end
 	
