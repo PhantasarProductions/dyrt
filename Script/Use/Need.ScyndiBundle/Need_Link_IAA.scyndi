@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_IAA.scyndi
 // 
-// 	  Version: 25.03.23 V
+// 	  Version: 25.04.02 II
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -75,7 +75,8 @@ quickmeta Inventory
 	newindex
 		LoadSubIAA()
 		//LuaDoString("IAA","SubInventory['"..key.."'] = "..value,"Index inventory!")
-		Lua.error("Inventory not yet accessible for assigning data to "..key)
+		//Lua.error("Inventory not yet accessible for assigning data to "..key)
+		Sys.Call("IAA","SetInv",Key,value)
 	end
 	
 	index
@@ -93,10 +94,12 @@ quickmeta Inventory
 			end
 		end
 		//return LuaGetInt("IAA","SubInventory['"..key.."']")
-		Lua.error("Inventory not yet accessible for reading data from "..key)
+		//Lua.error("Inventory not yet accessible for reading data from "..key)
+		Return Sys.Call("IAA","GetInv",Key)
 	end
 	
 	call
+		// Needed to get the data for a savegame
 		LoadSubIAA()
 		//return LuaGetString("IAA","SubInventory()")
 		R:=Sys.Call("IAA","SubInventory")
