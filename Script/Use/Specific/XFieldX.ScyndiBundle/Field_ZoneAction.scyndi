@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_ZoneAction.scyndi
 // 
-// 	  Version: 25.03.29 I
+// 	  Version: 25.04.02 VII
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -44,6 +44,7 @@
 
 Module
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 #use "Script/Use/Need"
 #use "Libs/LinkedList"
 #use "Libs/KettingKaart"
@@ -145,13 +146,15 @@ class ZoneAction
 		bool ret = false
 		for Event,ZoneList in pairs($List)
 			for Zone in ZoneList.Each
-				Zone.WordtInZone = FlowField.Map.Kthura.Actor.Player.IsInZone(Zone.ActZone)
+				//Zone.WordtInZone = FlowField.Map.Kthura.Actor.Player.IsInZone(Zone.ActZone)
+				Zone.WordtInZone = Kthura.HasObj(Zone.ActZone) && Kthura.Obj.Player.InObj(Zone.ActZone)
 				if Zone.WordtInZone == $CheckDels[Event].Wordt and Zone.WasInZone == $CheckDels[Event].Was
 					switch Zone.ActType
 						case "function" "delegate"
 							Zone.Act(ZAXPand(Zone.ActParams))
 							ret=true
 						default
+							CSayF("ActType %s -> %s",ActType,Act)
 							error("No action setup yet for ActType: "..Zone.ActType)
 					end
 				end
@@ -161,7 +164,30 @@ class ZoneAction
 		return ret
 	end
 	
-	CONSTRUCTOR(string Event,string Zone,AAct,infinity)
+	CONSTRUCTOR(string Event,string Zone,_AAct,infinity)
+		plua AAct
+		if Lua.type(_AAct)=="function"
+			AAct=_AAct
+		else
+			plua afun
+			plua aerror
+			string para;
+			para="("
+			for i,p in ipairs{[0]=infinity}
+				if i>0
+					para+=","
+				end
+				para+="\""..p.."\""
+			end
+			para+=")"
+			CSayF("ZA.%s.%s -> %s%s",Event,Zone,_AAct,para)
+			afun,aerror = Lua.load(_AAct..para)
+			if (!afun)
+				Lua.error(sprintf("Zone action %s construction errror: %s",event,aerror))
+				return
+			end
+			AAct=afun
+		end
 		self.InitCheckDels()
 		self.ActEvent = Event
 		self.ActZone = Zone
