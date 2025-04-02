@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Boxes.scyndi
 // 
-// 	  Version: 25.03.25 III
+// 	  Version: 25.04.01
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -91,7 +91,7 @@ class Box
 	void Draw()
 		__white
 		int wd = 5
-		self.Back.Tile(self.x,self.y,self.w,self.h,self.ix,self.iy)
+		self.Back.Tile(self.x,self.y,self.w,self.h,0,self.ix,self.iy)
 		if self.w<20 or self.h<20
 			wd=3
 		end
