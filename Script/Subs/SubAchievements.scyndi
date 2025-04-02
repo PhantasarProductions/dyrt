@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubAchievements.scyndi
 // 
-// 	  Version: 25.03.31
+// 	  Version: 25.03.31 XIV
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -45,7 +45,10 @@
 
 Module
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Medals"
 #use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
 #use "Libs/SCI/InterVar"
 
 
@@ -54,11 +57,13 @@ Module
 #use "script/use/need"
 #use "script/use/misc/boxes"
 
+#use "Script/Data/General/Achievements"
+
 
 global bool gjfailed = false
 global var AchData
 
-quickmeta group qmAward
+quickmeta qmAward
 	
 	index
 		return gBool["AWARDED."..key]
@@ -73,7 +78,7 @@ end
 
 class AchBox
 
-	link AchData = Lua.Scyndi.Globals.AchData
+	link AchData = Lua.Scyndi.Globals.Achievements.AchDat
 	static var BoxList
 	static var Font
 	static var TxAwarded
@@ -88,7 +93,7 @@ class AchBox
 	
 	static void QuickList()
 		for k,v in pairs(AchData)
-			CWriteLine(sprintf("%s %s",type(v),k),255,180,0)
+			CSayF("%s %s",type(v),k)
 		end
 	end
 	
@@ -109,7 +114,12 @@ class AchBox
 		//else
 		//	CSay("= Game Jolt not contacted! Either not logged in at all, or a failure on the line was detected during startup!")
 		//end
-		NALA_Medals:Award(tag)
+		//NALA_Medals:Award(tag)
+		If Medals.Active
+			CSayF("Logging onto your MEDALS database!")
+			Medals.Award(tag)
+			CSayF("Current Medal Score: %d",Medals.FullScore)
+		End
 		CSay("= Configuring Box!")
 		self.Achievement = AchData[tag]
 		self.y = Screen.Height+25
@@ -121,7 +131,7 @@ class AchBox
 		CSay("= Re-adjusting y")		
 		for ab in self.BoxList.Each
 			if ab.y>=self.y-25
-				#+ self.y 150
+				self.y += 150
 			end
 		end			
 		CSay("Registering!")
@@ -164,7 +174,7 @@ group F_Achievements
 	//void Update()
 	//end
 	
-	link AchData = Lua.Scyndi.Globals.AchData
+	link AchData = Lua.Scyndi.Class.Achievements
 	link Awarded = qmAward
 	link DrawAll = AchBox.DrawAll
 	
@@ -172,15 +182,16 @@ group F_Achievements
 		Box.NeverList = true
 		AchBox.BoxList = new TLinkedList
 		AchBox.SysFont = GetFont("SYSFONT")
-		AchBox.TxAwarded = AchBox.SysFont.Text("Achievement obtained!")
+		AchBox.TxAwarded = AchBox.SysFont.iText("Achievement obtained!")
 		AchBox.Font = GetFont("BIGTEXT")
-		AchData = NIL.Use("Script/Data/General/Achievements.nil")
+		//AchData = NIL.Use("Script/Data/General/Achievements.nil")
 		
-		NALA_Medals.Game = "Dyrt"
+		//NALA_Medals.Game = "Dyrt"
 		CSay("Synchronizing achievements with the medals library")
 		for k,_ in pairs(AchData)
 			if self.Awarded[k]
-				NALA_Medals:Award(k)
+				//NALA_Medals:Award(k)
+				Medals.Award(k)
 				CSayF("Synchronizing: %s",k)
 			end
 		end
@@ -191,10 +202,11 @@ group F_Achievements
 		bool allowchat = false
 		bool ret = true
 		var a
-		void AChat(infinity)
-			if not allowchat then return end
+		//void AChat(infinity)
+		ddef AChat
+			if ! allowchat; return nil; end
 			string saysomething
-			for _,s in ipairs{infinity} do saysomething = saysomething .. tostring(s) end
+			for _,s in ipairs{infinity} ; saysomething = saysomething .. tostring(s); end
 			CSay(saysomething)
 		end
 		a = AchData[tag]
@@ -240,7 +252,7 @@ group F_Achievements
 					CSayF("Tag '%s'; Wanted gv.Num.%s; Contains %9d; Must be at least: %9d; Awarded: %s; Allowed: %s",tag,a.ProcessValue,gv.Num[a.ProcessValue],a.ProcessMax,tostring(self.Awarded[tag]),tostring(self.Allow(tag)))
 					if a.ProcessMax<=gv.Num[a.ProcessValue] && (!self.Awarded[tag]) && self.Allow(tag)
 						CSay("=> Awarded!")
-						$Award(tag)
+						Self.Award(tag)
 					end
 				end
 			end
@@ -292,8 +304,18 @@ group F_Achievements
 		end
 	end
 end
+
 Init
-	F_Achievement.__CONSTRUCTOR()
+	F_Achievements.__CONSTRUCTOR()
+	If Medals.Active
+		CSay("Medals Active")
+		CSayF("= Current Medal Score: %d",Medals.FullScore)
+		CSayF("= Max Score: %d",MedalAltScore)
+		CSayF("= Medal Ratio: %05.1f%%",MedalRatio)
+		Medals.Game="PHANTASAR_THE_SECRETS_OF_DYRT"
+	Else 
+		CSay("\x1b[93mMedals are NOT active!")
+	End
 End
 
 //delegate BUB_Draw
