@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.03.30 XVII
+// 	  Version: 25.04.02 IX
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -50,10 +50,12 @@ Script
 #use "Libs/SCI/Sys"
 #use "Libs/SCI/JCR6"
 #use "Libs/SCI/Audio"
-#use "Libs/SCI/Kthura"
 #use "Libs/SCI/GINIE"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/SString"
 #use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
 
 #use "Script/Use/Need"
 //#use "Script/Use/Specific/Field" as XFIELDX
@@ -66,6 +68,11 @@ Script
 #use "libs/LinkedList"
 #use "libs/xmath"
 #use "libs/music"
+
+
+Init
+	Events.Poll()
+End
 
 LocExtern tonumber "tonumber"
 
@@ -225,14 +232,15 @@ class Fader
 	CONSTRUCTOR(obj)
 		assert(obj,"Can't create a fader based on nothing at all!")
 		if type(obj)=="string"
-			Fader.Font = Fader.Font or LoadImageFont("Fonts/Scribish.30.jfbf")
-			self.show = Fader.Font.Text(obj)
+			Fader.Font = Fader.Font || LinkFont("Fonts/Scribish.30.jfbf","FONT_FADER")
+			self.show = Fader.Font.iText(obj)
 			self.x = math.floor(Screen.Width /2)-math.floor(self.show.Width /2)
 			self.y = math.floor(Screen.Height/2)-math.floor(self.show.Height/2)
 		elseif type(obj)=="table"
 			string clname
-			assert(obj[".classname"],"Table given doesn't appear to be a class I can use to create a fader with!")
-			clname=obj[".classname"]
+			//assert(obj[".classname"],"Table given doesn't appear to be a class I can use to create a fader with!")
+			//clname=obj[".classname"]
+			clname="TImage"
 			switch clname
 				case "TImage" "TGraphText"
 					switch clname
@@ -259,14 +267,18 @@ class Fader
 		CSayF("Fader #%d destroyed",self.ID)
 	end
 	
+	static Var Create(obj)
+		return New Fader(obj)
+	End
+	
 	static void Run()
 		var Current
-		Current = Fader.Lijst[1]
+		Current = Fader.Lijst[0]
 		if not Current
 			return
 		end
 		string clname
-		clname=Current.show[".classname"]
+		clname="TImage" //Current.show[".classname"]
 		switch Current.stage
 			case 1
 				Current.alpha++
@@ -291,7 +303,7 @@ class Fader
 				end
 			case 4
 				//for i=2,#Fader.Lijst+1
-				for i=1,len(Fader.Lijst)
+				for i=0,len(Fader.Lijst)-1
 					// +1 is to make sure the "nil" with which the list ends moves one spot down, effectively killing the last record!
 					// Changed the formula. Scyndi has a different array style after all!
 					Fader.Lijst[i-1]=Fader.Lijst[i]
@@ -325,21 +337,31 @@ group FieldMap
 	
 	//link Script = MapScript
 	//var Kthura
+	
+	// Code rot detection, as FieldMap.Kthura should NOT be used anymore!
+	Get Var Kthura
+		printf("\x1b[94,41mFieldMap.Kthura called!\x1b[0m\n\x1b[97m%s\n\n",Lua.debug.traceback())
+		Lua.error("FieldMap.Kthura called! Sorry, not allowed!")
+		return nil
+	End
+	
 	var Saskia
 	//Link Saskia = Lua.Scyndi.Class.Saskia
 	
-	get int ScrollX
-		return self.Kthura.ScrollX
-	end
-	set int ScrollX
-		self.Kthura.ScrollX=value
-	end
-	get int ScrollY
-		return self.Kthura.ScrollY
-	end
-	set int ScrollY
-		self.Kthura.ScrollY=value
-	end
+	//get int ScrollX
+	//	return self.Kthura.ScrollX
+	//end
+	//set int ScrollX
+	//	self.Kthura.ScrollX=value
+	//end
+	//get int ScrollY
+	//	return self.Kthura.ScrollY
+	//end
+	//set int ScrollY
+	//	self.Kthura.ScrollY=value
+	//end
+	Link ScrollX = gint.ScrollX
+	Link ScrollY = gint.ScrollY
 	get string Layer
 		return self.Kthura.Layer
 	end
@@ -357,6 +379,7 @@ group FieldMap
 	end
 	
 	void Kill(string tag,permanent)
+		locExtern _Kthura "Scyndi.Class.Kthura"
 		string m
 		m = "MAPCHANGES."..FieldMap.LoadedMap
 		if permanent
@@ -366,9 +389,9 @@ group FieldMap
 		else	
 			CSay("Temporary kill, object tagged: "..tag)
 		end
-		Kthura.Kill(tag)
-		if Kthura.HasObj("AziellaArrowObject")
-			Kthura.Kill("AziellaArrowObject")
+		_Kthura.Kill(tag)
+		if _Kthura.HasObj("AziellaArrowObject")
+			_Kthura.Kill("AziellaArrowObject")
 			CSay("Shooting Terminated! Due to killing: "..tag)
 		end
 	end
@@ -941,12 +964,13 @@ group FlowField
 	void DrawScreen()
 		// Take care of actor (if one is there)
 		//if __player.Exists
-		if FieldMap.Kthura.HasTag("Player")
+		if Kthura.HasObj("Player")
 			self.UpdatePlayerTex()
 		end
 	
 		// Draw Map
-		FieldMap.Kthura.Draw()
+		//FieldMap.Kthura.Draw()
+		Kthura.Draw(self.Map.ScrollX,self.Map.ScrollY)
 		
 		// Map Script Draw
 		//LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Draw()")
@@ -989,57 +1013,62 @@ group FlowField
 	end
 	
 	void DoAutoScroll(force)
-		if not force
-			if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
+		if ! force
+			//if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
+			if (!Kthura.HasObj("Player")) || self.AutoScroll
 				return
 			end
 		end
-		self.Map.ScrollX = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
-		self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
+		//self.Map.ScrollX = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
+		//self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
+		self.Map.ScrollX = Kthura.Obj.Player.X - (Graphics.Width  div 2)
+		self.Map.ScrollY = Kthura.Obj.Player.Y - (Graphics.Height div 2)
 	end
 	
 	void FieldStats()
 		int Y
 		int YMin = 20
 		Y = (Screen.Height-128)-YMin
-		if prefixed(self.Map.Kthura.Layer,"#")
-			self.BigNumbers = self.BigNumbers or LoadImageFont("Fonts/ECN.jfbf")
+		//print("Begin",Kthura.CurrentLayer)
+		if prefixed(Kthura.CurrentLayer,"#")
+			self.BigNumbers = self.BigNumbers || LinkFont("Fonts/ECN.jfbf","FONT_ECN")
 			Color(180,0,255)
 			SetAlpha(100)
-			self.BigNumbers.DrawText(right(self.Map.Kthura.Layer,len(self.Map.Kthura.Layer)-1),10,Y-120)
+			self.BigNumbers.Text(right(Kthura.CurrentLayer,len(Kthura.CurrentLayer)-1),10,Y-120)
 			SetAlpha(255)
 		end
+		//print("End  ",Kthura.CurrentLayer)
 		__white
 		$SFont = $SFont || LoadImageFont("Fonts/Blitz.jfbf")
-		$SFont.DrawText("Phantasar Play-Time: "..Time.PhantasarTime,5,Y) Y = Y - YMin
-		$SFont.DrawText("    Earth Play-Time: "..Time.PlayTime,5,Y) Y = Y - YMin
+		$SFont.Text("Phantasar Play-Time: "..Time.PhantasarTime,5,Y) Y = Y - YMin
+		$SFont.Text("    Earth Play-Time: "..Time.PlayTime,5,Y) Y = Y - YMin
 		switch __cash
 			case 0
-				$SFont.DrawText("You don't have any money, right now!",5,Y)
+				$SFont.Text("You don't have any money, right now!",5,Y)
 			case 1
-				$SFont.DrawText(sprintf("Cash: %9d shilder",1) ,5,Y)
+				$SFont.Text(sprintf("Cash: %9d shilder",1) ,5,Y)
 			default
-				$SFont.DrawText(sprintf("Cash: %9d shilders",__cash) ,5,Y)
+				$SFont.Text(sprintf("Cash: %9d shilders",__cash) ,5,Y)
 		end
-		if gv.Bool.AllowMagicStones
+		if gBool.AllowMagicStones
 			Y -= YMin
-			$SFont.DrawText(sprintf("Magic Stones: %6d",__magicstones),5,Y)
+			$SFont.Text(sprintf("Magic Stones: %6d",__magicstones),5,Y)
 		end
 		Y = Y - YMin
-		$SFont.DrawText("Level Cap: "..Roman(__levelcap),5,Y)
+		$SFont.Text("Level Cap: "..Roman(__levelcap),5,Y)
 		Y = Y - YMin
-		$SFont.DrawText("Traveler's level: "..Roman(__travellevel),5,Y)
+		$SFont.Text("Traveler's level: "..Roman(__travellevel),5,Y)
 		if __orbblack>0
 			Y = Y - YMin
-			$SFont.DrawText(sprintf("Black Orbs: %d",__orbblack),5,Y)
+			$SFont.Text(sprintf("Black Orbs: %d",__orbblack),5,Y)
 		end
 		if __trueabyss
 			Y = Y - YMin
-			$SFont.DrawText("Abyss Score: "..Roman(gv.Int.TrueAbyssScore),5,Y)
+			$SFont.Text("Abyss Score: "..Roman(gv.Int.TrueAbyssScore),5,Y)
 		end
 		if __newgameplus
 			Y = Y - YMin
-			$SFont.DrawText("Name Game+",5,Y)
+			$SFont.Text("Name Game+",5,Y)
 		end
 	end
 	
@@ -1075,10 +1104,10 @@ global void BUB_Draw()
 	FlowField.DoAutoScroll()
 	
 	// Dominance remap
-	if Map.HasTag("Player") and math.abs(rmy-__player.Y)>40
-		FlowField.Map.Kthura.RemapDominance()
-		rmy = __player.Y
-	end
+	//if Map.HasTag("Player") && math.abs(rmy-Kthura.Obj.Player.Y)>40
+	//	FlowField.Map.Kthura.RemapDominance()
+//		rmy = __player.Y
+	//end
 	
 	
 	// This function will draw the screen minus the character bar
@@ -1174,7 +1203,7 @@ global void BUB_Update()
 	
 	// Zone Checking
 	Acted = ZoneAction.CheckAll()
-	if ZoneAction.AltNext and ZoneAction.AltNext.Cycle
+	if ZoneAction.AltNext && ZoneAction.AltNext.Cycle
 		ZoneAction.AltNext.Cycle()
 	end
 	
@@ -1222,7 +1251,8 @@ global void BUB_Update()
 		end
 	end
 		
-	if (! FlowField.Map.Kthura.Actor.Player.Walking) 
+	//if (! FlowField.Map.Kthura.Actor.Player.Walking)
+	if (!Kthura.Obj.Player.Walking)
 		//and (FlowField.WalkArrival) and (FlowField.WalkArrival!="")
 		switch type(FlowField.WalkArrival)
 			case "nil"
