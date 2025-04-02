@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.03.26 XXII
+// 	  Version: 25.04.03
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -96,12 +96,13 @@ Class __RPGCharStat
 		If EndStat
 			int r:=0
 			for sb in Each(_statsubs)
-				r+=Parent.Stat(sb..StTag)
+				r+=Parent.Stat(sb..StTag).Value
 			End
 			EndRet.Value=r
-			return EndRet
+			//return EndRet
+			return r
 		end
-		return Parent.Pure.Stat[PrTag].Base
+		return Parent.Pure.Stat[PrTag]
 	End
 	
 	Set Int Value
@@ -142,6 +143,11 @@ Class __RPGChar
 		r:=Pure.Points[PTag]
 		if (PTag=="HP"); r.Maximum = self.Stat("END_HP").Value; End
 		return r
+	End
+	
+	//      LISTSTATS
+	Get Var ListStats
+		return Pure.ListOfStats
 	End
 		
 	Constructor(String _Tag)
