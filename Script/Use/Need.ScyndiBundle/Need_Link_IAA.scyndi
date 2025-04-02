@@ -46,6 +46,7 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
 #use "Libs/SCI/InterVar"
 
@@ -61,6 +62,7 @@ LocExtern __skill "Scyndi.Globals.gInt.Skill"
 
 void LoadSubIAA()
 	if ! StateExists("IAA")
+		Events.Poll()
 		CSay("Loading sub: IAA")
 		LoadState("IAA","Script/Subs/SubIAA.nil")
 	end
