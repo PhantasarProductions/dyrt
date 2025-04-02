@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.02 IX
+// 	  Version: 25.04.02 XV
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -181,31 +181,36 @@ class Clickables
 	end
 	
 	static var Clicked(int x, int y)
-		var M
-		M = $Map
+		//var M
+		//M = $Map
 		//with M
 			for cl in Clickables.List.Each
 				// Crash prevention for once an object was removed!
-				if M.HasTag(cl.Tag) and cl.Layer == FlowField.Map.Kthura.Layer
-					M.Obj = cl.Tag
-					//-- if cl.Layer==$Layer and 
-					switch M.ObjString.Kind
+				if Kthura.HasObj(cl.Tag) && cl.Layer == Kthura.CurrentLayer
+					//M.Obj = cl.Tag
+					//-- if cl.Layer==$Layer and
+					MObj:=Kthura.Obj[cl.Tag]
+					switch MObj.Kind
 						case "Zone" "TiledArea"
-							if x>M.ObjInt.x and x<M.ObjInt.x+M.ObjInt.w and y>M.ObjInt.y and y<M.ObjInt.y+M.ObjInt.h
+							if x>MObj.x && x<MObj.x+MObj.w && y>MObj.y && y<MObj.y+MObj.h
 								return cl
 							end
 						case "Obstacle"
-							int hw
-							hw = math.floor(M.ObjInt.ObjectWidth/2)
-							if x>M.ObjInt.x-hw and x<M.ObjInt.x+hw and y>M.ObjInt.y-M.ObjInt.ObjectHeight and y<M.ObjInt.y
+							//int hw
+							//hw = math.floor(M.ObjInt.ObjectWidth/2)
+							//if x>M.ObjInt.x-hw and x<M.ObjInt.x+hw and y>M.ObjInt.y-M.ObjInt.ObjectHeight and y<M.ObjInt.y
+							//	return cl
+							//end
+							if Kthura.InObj(cl.Tag,x,y)
 								return cl
 							end
 						case "Pic"
-						if x>M.ObjInt.x and y>M.ObjInt.y and x<M.ObjInt.ObjectWidth and y<M.ObjInt.ObjectHeight
-							return cl
-						end
+							Lua.error("No pic support for clickable! Can this be changed please?")
+						//if x>M.ObjInt.x and y>M.ObjInt.y and x<M.ObjInt.ObjectWidth and y<M.ObjInt.ObjectHeight
+						//	return cl
+						//end
 						default
-							error("Unknown object kind ("..M.ObjString.Kind..") as clickable!")
+							error("Unknown object kind ("..MObj.Kind..") as clickable!")
 					end
 				end
 			end
@@ -1210,8 +1215,9 @@ global void BUB_Update()
 	if (not __trueabyss) and Mouse.HitLeft and PA[FlowField.Leader].Click(1,Mouse.X,Mouse.Y)
 		CSay("Personal action took over, so ignore the walking requests!")
 	elseif (Mouse.Y<Screen.Height-128 and Mouse.HitLeft) and (not __nowalk)
-		var clobj
-		clobj = Clickables.Clicked(FlowField.Map.Kthura.ScrollX + Mouse.X,FlowField.Map.Kthura.ScrollY + Mouse.Y)
+		//var clobj
+		//clobj = Clickables.Clicked(FlowField.Map.Kthura.ScrollX + Mouse.X,FlowField.Map.Kthura.ScrollY + Mouse.Y)
+		clobj := Clickables.Clicked(gint.ScrollX+Mouse.X,gint.ScrollY+Mouse.Y)
 		if clobj
 			bool cando
 			// Todo: Here I'll handle stuff like clickable objects
@@ -1241,12 +1247,13 @@ global void BUB_Update()
 			end
 		else 
 			// When all options are gone, let's just walk
-			int wtx
-			int wty
-			wtx = FlowField.Map.Kthura.ScrollX + Mouse.X
-			wty = FlowField.Map.Kthura.ScrollY + Mouse.Y
+			int wtx:=gint.ScrollX + Mouse.X
+			int wty:=gint.ScrollY + Mouse.Y
+			//wtx = FlowField.Map.Kthura.ScrollX + Mouse.X
+			//wty = FlowField.Map.Kthura.ScrollY + Mouse.Y
 			CSayF("Player has requested to walk to (%d,%d)",wtx,wty)
-			FlowField.Map.Kthura.Actor.Player.WalkTo(wtx,wty)
+			//FlowField.Map.Kthura.Actor.Player.WalkTo(wtx,wty)
+			Kthura.Obj.Player.Walkto(wtx,wty)
 			FlowField.WalkArrival = nil;
 		end
 	end
@@ -1272,10 +1279,10 @@ global void BUB_Update()
 		end
 		FlowField.WalkArrival = nil;
 	elseif not Acted
-		int enx
-		int eny
-		enx = math.floor(FlowField.Map.Kthura.Actor.Player.X/32)
-		eny = math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)
+		int enx := Kthura.Obj.Player.X div 32
+		int eny := Kthura.Obj.Player.Y div 32
+		//enx = math.floor(FlowField.Map.Kthura.Actor.Player.X/32)
+		//eny = math.floor(FlowField.Map.Kthura.Actor.Player.Y/32)
 		if enx!=eox or eny!=eoy
 			RENC.RencCheck()
 		end
