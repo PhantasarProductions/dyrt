@@ -2,7 +2,7 @@
 ; **********************************************
 ; 
 ; src/Tricky Script/SASKIA/MapScript/CH1_HUB_IrravoniaHome.saskia
-; (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+; (c) Jeroen Broks, 2019, 2020, 2025 All Rights Reserved.
 ; 
 ; This file contains material that is related
 ; to a storyline that is which is strictly
@@ -32,7 +32,7 @@
 ; 
 ; **********************************************
 ; 
-; version: 20.07.09
+; version: 25.04.01
 ; End License Information
 
 
@@ -45,18 +45,22 @@
 	;That scenario is no longer needed, and this way the memory
 	;will also be cleaned up. SASKIA runs in Lua after all and
 	;Lua features a GARBAGE collector
+	call Party.Recover,"YoungIrravonia"
 	call BoxText.Load,"GENSCEN/CH1/STARTIRRAVONIA","PROLOGUE_START"
 	
 	;And Let's fire things up
 	;Shouldn't be needed, but just to make sure
-	mov "GANG",FieldMap.Kthura.Layer
+	group 2
+		mov "GANG",Kthura.CurrentLayer
+		call CSay,"Op de gang!"
 	call BoxText,"PROLOGUE_START","I"
-	mov "HUISKAMER",FieldMap.Kthura.Layer
+	mov "HUISKAMER",Kthura.CurrentLayer
 	call BoxText,"PROLOGUE_START","J"
-	mov "GANG",FieldMap.Kthura.Layer
-	call FieldMap.Kthura.Kill,"Irravonia",false
-	call GoToSleep,4000
-	mov "HUISKAMER",FieldMap.Kthura.Layer
+	mov "GANG",Kthura.CurrentLayer
+	call Map.Kill,"Irravonia",false
+	;call GoToSleep,4000
+	call Sys.Sleep,4000
+	mov "HUISKAMER",Kthura.CurrentLayer
 	call BoxText,"PROLOGUE_START","K"
 	
 	;And lastly let's chain to the forest
