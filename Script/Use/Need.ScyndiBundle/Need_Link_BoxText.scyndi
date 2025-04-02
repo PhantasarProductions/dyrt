@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_BoxText.scyndi
 // 
-// 	  Version: 25.03.17 IV
+// 	  Version: 25.04.02 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -46,6 +46,7 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
 
 #use "Script/Use/Need.ScyndiBundle/NEED_Anyway_AlgemeneDefinities"
@@ -54,6 +55,7 @@ Module
 
 void LoadBoxText()
 	if ! StateExists("FLOW_BOXTEXT")
+		Events.Poll()
 		LoadFlow("BOXTEXT","Script/Flow/FlowBoxtext.nil")
 	end
 end
@@ -96,7 +98,7 @@ group TrueBoxTextGroup
 		end
 		CSayF("Boxtext request! Scen=%s; Tag=%s",Scenario,Tag)
 		//LuaDoString("FLOW_BOXTEXT",sprintf("FlowBoxText.InitBTFlow(\"%s\", \"%s\", \"%s\", %d)",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num or 1),"Chain to flow: BOXTEXT")
-		BTCall("FlowBoxText.InitBTFlow",Trim(Scenario),Trim(Tag),Trim(ReturnFlow or CurrentFlow()),Num || 1)
+		BTCall("FlowBoxText.InitBTFlow",Trim(Scenario),Trim(Tag),Trim(ReturnFlow || CurrentFlow()),Num || 1)
 		GoToFlow("BOXTEXT")
 	end
 
@@ -116,7 +118,7 @@ Init
 		plua _num
 		_s,_scen,_tag,_rf,_num = infinity
 		//TrueBoxTextGroup.CallMe(infinity)
-		TrueBoxTextGroup.CallMe(_s,_scen,_tag,_rf,_num)
+		TrueBoxTextGroup.CallMe(_scen,_tag,_rf,_num)
 	end
 	//['__index'] = var(t,string k)
 	ddef _idx
