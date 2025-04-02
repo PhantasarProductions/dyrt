@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Party.scyndi
 // 
-// 	  Version: 25.03.25
+// 	  Version: 25.04.02 II
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -90,7 +90,8 @@ group Party
 	end
 	
 	void ShowBar()
-		PtExe("SubParty.CharBar()")
+		//PtExe("SubParty.CharBar()")
+		PtCall("SubParty.CharBar")
 	end
 	
 	set string SelectedCharacterTag
@@ -109,7 +110,8 @@ group Party
 
 	set int SelectedCharacter
 		// TODO: Change!
-		PtExe(sprintf("SubParty.SelectedChar = %d",value))
+		//PtExe(sprintf("SubParty.SelectedChar = %d",value))
+		PtCall("SubParty.SetSelectedChar",value)
 	end
 	
 	
@@ -146,5 +148,18 @@ group Party
 			end
 		end
 	end
+	
+	void Recover(string ChT="*ALL*")
+		if ChT=="*ALL*"
+			for i=1, 8 
+				if RPG.Party[i] && RPG.Party[i]!=""
+					self.Recover(RPG.Party[i])
+				end
+			end
+			return
+		end
+		RPG.Char(ChT).Points("HP").Have=RPG.Char(ChT).Points("HP").Maximum
+		RPG.Char(ChT).Points("VIT").Have=RPG.Char(ChT).Points("VIT").Maximum
+	End
 
 end
