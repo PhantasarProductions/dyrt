@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Start/Main.scyndi
 // 
-// 	  Version: 25.03.16 II
+// 	  Version: 25.04.02
 // 	
 // 	  Copyright (C) 2019, 2022, 2025 Jeroen Petrus Broks
 // 	
@@ -49,6 +49,7 @@
 Script
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/Graphics"
 
 #use "Script/Use/Need"
@@ -58,6 +59,7 @@ Script
 #macro __showtime false
 
 Init
+	Events.Poll()
 	CSay("")
 	CSay("Welcome to Phantasar!")
 	CSay("Join us on our travel to Dyrt!");
@@ -114,6 +116,7 @@ Init
 	// Let's rock, and roll!!!
 	CSay("Time to start the flow!")
 	StartFlow()
+	Events.Poll()
 end
 
 Global Void MainFlow()
