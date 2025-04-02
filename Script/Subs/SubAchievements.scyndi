@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubAchievements.scyndi
 // 
-// 	  Version: 25.03.31 XIV
+// 	  Version: 25.04.02 V
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -78,7 +78,8 @@ end
 
 class AchBox
 
-	link AchData = Lua.Scyndi.Globals.Achievements.AchDat
+	//link AchData = Lua.Scyndi.Globals.Achievements.AchDat
+	static get var AchData; return Lua.Scyndi.Class.Achievements.AchDat; end
 	static var BoxList
 	static var Font
 	static var TxAwarded
@@ -97,12 +98,12 @@ class AchBox
 		end
 	end
 	
-	CONSTRUCTOR(string tag)
-		tag = trim(tag) 
+	CONSTRUCTOR(string _tag)
+		_tag = trim(_tag) 
 		//CWriteLine("Creating achievement box: "..tag,255,180,0) CSay(NIL.LuaSerialize("Achievements",AchData)) CWriteLine("Ok?",180,0,255) // debug line
 		self.QuickList()
 		//CSay("= WTF? "..tostring(AchData[tag]))
-		Lua.assert(AchData[tag],"No achievement named `"..tag.."`")
+		Lua.assert(AchData[_tag],"No achievement named `".._tag.."`")
 		//CSay("= Game Jolt Check")
 		//CSayF("= Startup failure: %s",tostring(gjfailed))
 		//if gv.Bool.GameJolt and (not gjfailed)
@@ -117,15 +118,15 @@ class AchBox
 		//NALA_Medals:Award(tag)
 		If Medals.Active
 			CSayF("Logging onto your MEDALS database!")
-			Medals.Award(tag)
+			Medals.Award(_tag)
 			CSayF("Current Medal Score: %d",Medals.FullScore)
 		End
 		CSay("= Configuring Box!")
-		self.Achievement = AchData[tag]
+		self.Achievement = AchData[_tag]
 		self.y = Screen.Height+25
 		self.Box = new Box(50,self.y,Screen.Width-100,70)
 		self.TxAchName = self.Font.iText(self.Achievement.Name)
-		self.tag=tag
+		self.tag=_tag
 		CSay("Listing Box")
 		self.BoxList.AddLast(self)
 		CSay("= Re-adjusting y")		
@@ -136,7 +137,7 @@ class AchBox
 		end			
 		CSay("Registering!")
 		self.Awarded[tag] = true
-		CSayF("Achievement earned: %s",tag)
+		CSayF("Achievement earned: %s",_tag)
 	end
 	
 	DESTRUCTOR
@@ -233,7 +234,7 @@ group F_Achievements
 	end
 	
 	void Award(string tag)
-		tag = tag:upper()
+		tag = Upper(tag)
 		if self.Awarded[tag]
 			return
 		end
