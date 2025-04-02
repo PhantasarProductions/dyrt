@@ -45,10 +45,15 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/Sstring"
 
 #use "Script/Use/Need.ScyndiBundle/NEED_Convert_Flow"
 #use "Script/Use/Need.ScyndiBundle/NEED_Convert_RPG"
+
+Init
+	Events.Poll()
+End
 
 void LoadSub()
 	if ! StateExists("PARTY")
