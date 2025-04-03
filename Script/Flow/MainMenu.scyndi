@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/MainMenu.scyndi
 // 
-// 	  Version: 25.03.17 XXX
+// 	  Version: 25.04.03
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -107,17 +107,19 @@ End
 group SGLink
 
 	void LoadSGFlow()
-		if not StateExists("FLOW_SG")
+		if ! StateExists("FLOW_SG")
 			CSay("Loading flow: FLOW_SG")
-			LoadFlow("SG","Script/Flow/SaveGameManager.nil")
+			//LoadFlow("SG","Script/Flow/SaveGameManager.nil")
+			LoadFlow("SG","Script/Flow/FlowSaveGame.lbc")
 		end
 	end
 	
 	void OpenSG()
-		//self.LoadSGFlow()
+		self.LoadSGFlow()
 		//LuaDoString("FLOW_SG","SG.mode = 'LOAD'","SGMode => LOAD")
 		//GoToFlow("SG")
-		Lua.error("OpenSG not yet available")
+		//Lua.error("OpenSG not yet available")
+		Sys.Call("FLOW_SG","ComeToLoad")
 	end
 	
 	bool Allow()
