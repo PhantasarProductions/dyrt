@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubIAA.scyndi
 // 
-// 	  Version: 25.04.02 IV
+// 	  Version: 25.04.03
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -60,7 +60,7 @@ Init
 	// Should keep Linux calm, as its quick "no response" messages can be a bit annoying!"
 End
 
-table trueInventory
+Table trueInventory
 
 quickmeta SubInventory
 	index
@@ -88,9 +88,9 @@ quickmeta SubInventory
 	end
 	
 	call
-		string ret = "Inventory['*CLEAR*']=1\n\n"
+		string ret = "Scyndi.Globals.Inventory['*CLEAR*']=1\n\n"
 		for k,v in spairs(trueInventory)
-			ret = ret .. "Inventory['"..k.."'] = "..sprintf("%d\n",v)
+			ret = ret .. "Scyndi.Globals.Inventory['"..k.."'] = "..sprintf("%d\n",v)
 		end
 		return ret
 	end
@@ -107,6 +107,8 @@ end
 // Interstate callback
 global void SetInv(string Key,Int Num); SubInventory[Key]=num; End
 global int  GetInv(string Key); Return SubInventory[key]; End
+
+
 
 // No need for complicated meta stuff
 global table SubAbilitiesMastered
