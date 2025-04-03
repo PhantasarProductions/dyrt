@@ -77,6 +77,9 @@
 	
 	; Irravonia's final speech, before the game really begins
 	call BoxText,"PROLOGUE_START","IRRA"
+	
+	call Respawn.Reset
+	
 	end
 	
 	; Of course, I should've put everything put in above in the NIL script, but what the HECK! :P
