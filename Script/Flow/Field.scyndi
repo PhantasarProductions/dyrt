@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.02 XV
+// 	  Version: 25.04.03
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -453,7 +453,8 @@ group FieldMap
 	
 end
 
-string fieldleader
+//string fieldleader
+Extern FieldLeader "Scyndi.Globals.gstr.Field_Leader"
 
 group SGLink
 
@@ -499,9 +500,9 @@ group FlowField
 	get string Leader
 		bool found
 		for i=1,8
-			found = found or (RPG.Party[i]==fieldleader)
+			found = found || (RPG.Party[i]==fieldleader)
 		end
-		if (not fieldleader) or fieldleader == "" or (not found)
+		if (not fieldleader) || fieldleader == "" or (not found)
 			fieldleader = RPG.Party[1]
 		end
 		//self.UpdatePlayerTex()
