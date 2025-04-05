@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.04.02 III
+// 	  Version: 25.04.05 I
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -288,7 +288,9 @@ group Map
 	end
 	
 	void StopWalking()
-		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
+		//FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
+		Kthura.Obj.Player.StopWalking()
+		Sys.Call("FLOW_FIELD","FlowField.WipeWalkArrival")
 	end
 	
 	void WalkTo(A,B,C)
