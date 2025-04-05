@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.03
+// 	  Version: 25.04.05 X
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -389,7 +389,7 @@ group FieldMap
 		m = "MAPCHANGES."..FieldMap.LoadedMap
 		if permanent
 			//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..tag.."\")\n"
-			PermaChanges.Add(StripDir(Kthura.LastLoaded),"Kills."..Kthura.CurrentLayer,tag)
+			PermaChanges.Add(StripDir(_Kthura.LastLoaded),"Kills.".._Kthura.CurrentLayer,tag)
 			CSay("Permanent kill, object tagged: "..tag)
 		else	
 			CSay("Temporary kill, object tagged: "..tag)
@@ -488,6 +488,10 @@ group FlowField
 	
 	bool AutoPlayerUpdate = true
 	
+	void WipeWalkArrival()
+		WalkArrival = nil
+	End
+	
 	void UpdatePlayerTex()
 		//if self.Map.Kthura.Actor.Player.Exists and self.AutoPlayerUpdate
 		//	self.Map.Kthura.Actor.Player.Texture = "gfx/actors/heroes/"..trim(self.Leader).."."..trim(self.Map.Kthura.Actor.Player.Wind)..".jpbf"
@@ -551,7 +555,7 @@ group FlowField
 			if RPG.Party[i] and RPG.Party[i]!=""
 				string ch
 				ch=RPG.Party[i]
-				switch col:upper()			
+				switch Upper(col)			
 					case "RED"
 						if __skill!=3
 							RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
@@ -583,7 +587,12 @@ group FlowField
 				end
 			end
 		end
-		SGLink.OpenSG()
+		//SGLink.OpenSG()
+		if !StateExists("FLOW_SG")
+			CSay("Loading flow: FLOW_SG")			
+			LoadFlow("SG","Script/Flow/FlowSaveGame.lbc")
+		end
+		Sys.Call("FLOW_SG","ComeToSave")
 	end
 	
 	void TravelEmblem(string tag)
@@ -613,14 +622,14 @@ group FlowField
 		static var getitem
 		int mx
 		int my
-		var kth
-		kth = FieldMap.Kthura
-		mx = kth.ObjInt.X - FieldMap.ScrollX
-		my = kth.ObjInt.Y - FieldMap.ScrollY
-		ItemTag = ItemTag:upper()
+		//var kth
+		//kth = FieldMap.Kthura
+		mx = kthura.Obj[tag].X - FieldMap.ScrollX
+		my = kthura.Obj[Tag].Y - FieldMap.ScrollY
+		ItemTag = Upper(ItemTag)
 		if prefixed(ItemTag,"CASH:")
 			int foundcash 
-			foundcash = tonumber(split(ItemTag,":")[2]) or 1
+			foundcash = tonumber(xsplit(ItemTag,":")[1]) || 0
 			string shild = "shilders"
 			if foundcash == 1 
 				shild = 'shilder'
@@ -1021,7 +1030,7 @@ group FlowField
 	void DoAutoScroll(force)
 		if ! force
 			//if (not self.Map.Kthura.Actor.Player.Exists) or (not self.AutoScroll)
-			if (!Kthura.HasObj("Player")) || self.AutoScroll
+			if (!Kthura.HasObj("Player")) || (!self.AutoScroll)
 				return
 			end
 		end
@@ -1228,8 +1237,8 @@ global void BUB_Update()
 			// can already be scripted
 			CSayF("Clicked '%s', so going into alternate action!",clobj.Tag)
 			CSayF("As a result player should walk to (%d,%d)",clobj.WalkToX,clobj.WalkToY)
-			
-			cando = FlowField.Map.Kthura.Actor.Player.WalkTo(clobj.WalkToX,clobj.WalkToY) or (xmath.Pythagoras(clobj.WalkToX,clobj.WalkToY,Map.PlayerX,Map.PlayerY)<40)
+			Kthura.Obj.Player.WalkTo(clobj.WalkToX,clobj.WalkToY)
+			cando = (Kthura.Obj.Player.Walking) || (xmath.Pythagoras(clobj.WalkToX,clobj.WalkToY,Map.PlayerX,Map.PlayerY)<40)
 			if cando
 				CSay("Walk is possible, so let's do it!")
 				if clobj.ArriveDelegate
