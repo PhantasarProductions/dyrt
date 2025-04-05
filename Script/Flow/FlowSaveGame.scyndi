@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FlowSaveGame.scyndi
 // 
-// 	  Version: 25.04.04 VIII
+// 	  Version: 25.04.05 III
 // 	
 // 	  Copyright (C) // License Information:, 2025 Jeroen Petrus Broks
 // 	
@@ -353,9 +353,12 @@ void Action_Load(int Spot)
 	End
 	ILF()
 	CSay("Loading the map")
-	//print(S.Text["Player.ini"],"\n",PlD.Value("Map","Map"),PlD.Value("Map","Layer"),Pld.IntValue("Player","X"),Pld.IntValue("Player","Y"))
+	//print(S.Text["Player.ini"],"\n",PlD.Value("Map","Map"),PlD.Value("Map","Layer"),PlD.Value("Map","Map"),PlD.Value("Map","Layer"),)
 	//print(S.Text["Variables.ini"])
-	Lua.error("FlowSaveGame.Scyndi::355 - Please come back for the player placement load")
+	Sys.LoadFlow("FIELD","Script/Flow/Field.lbc")
+	Sys.Call("FLOW_FIELD","FlowField.LoadMap",StripDir(PlD.Value("Map","Map")),PlD.Value("Map","Layer"))
+	Kthura.Spawn("PLAYER",PlD.IntValue("Player","X"),PlD.IntValue("Player","Y"))
+	//Lua.error("FlowSaveGame.Scyndi::355 - Please come back for the player placement load")
 	//Map.GoToMapXY(StripDir(PlD.Value("Map","Map")),PlD.Value("Map","Layer"),Pld.IntValue("Player","X"),Pld.IntValue("Player","Y"));
 	//Lua.error("Chain to game from a loaded game has not yet been scripted")
 	CSay("All done, time to go to the field")
