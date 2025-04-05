@@ -1,48 +1,61 @@
-// License Information:
-// src/Tricky Script/Script/Flow/FieldMenu.nil
-// Version: 21.01.01
-// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
+// License:
+// 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
+// 	  Version: 25.04.05 VIII
+// 	
+// 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
 // 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
 // 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
 
-#use "Script/Use/Anyway"
-#use "Script/Use/Boxes"
-#use "Script/Use/BoxPics"
-#use "Script/Use/AutoHelp"
-#use "Script/Use/EquipRecalc"
-#use "libs/tables"
-#use "libs/DarkText"
-#use "libs/Roman"
+
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+
+#use "Script/Use/Need"
+#use "Script/Use/Misc/Boxes"
+#use "Script/Use/Misc/BoxPics"
+#use "Script/Use/Misc/AutoHelp"
+#use "Script/Use/Misc/EquipRecalcModule"
+//#use "libs/tables"
+//#use "libs/DarkText"
+#use "libs/RomanNumbers"
 #use "libs/DateTime"
 
 #macro __TopBarHeight 55
@@ -51,31 +64,32 @@
 table I_ELEM
 table I_STAT
 
-I_ELEM = {
+Init
+	I_ELEM={}
 //	"None", // invisible
-	"Flame",
-	"Wind",
-	"Water",
-	"Earth",
-	"Frost",
-	"Thunder",
-	"Light",
-	"Darkness"
-}
+	I_ELEM+="Flame"
+	I_ELEM+="Wind"
+	I_ELEM+="Water"
+	I_ELEM+="Earth"
+	I_ELEM+="Frost"
+	I_ELEM+="Thunder"
+	I_ELEM+="Light"
+	I_ELEM+="Darkness"
 
-I_STAT = {
-	"Poison",
-	"Disease",
-	"Silence",
-	"Paralysis",
-	"Sleep",
-	"Exhaustion",
-	"Confusion",
-	"Fear",
-	"Death",
-	"Destruction",
-	"Zombie"
-}
+
+	I_STAT = {}
+	I_STAT+="Poison"
+	I_STAT+="Disease"
+	I_STAT+="Silence"
+	I_STAT+="Paralysis"
+	I_STAT+="Sleep"
+	I_STAT+="Exhaustion"
+	I_STAT+="Confusion"
+	I_STAT+="Fear"
+	I_STAT+="Death"
+	I_STAT+="Destruction"
+	I_STAT+="Zombie"
+End
 
 
 
@@ -159,28 +173,31 @@ group Flow_FieldMenu
 		ubox = ubox or $LeftBox
 		BoxPic(ubox.x+10,ubox.y+10,$CharTag,"GENERAL","top")
 		__amber
-		DarkText.Font($BigFont,ch.Name,ubox.x+125, ubox.y+15)
+		BigFont.Dark(ch.Name,ubox.x+125, ubox.y+15)
 		if __skill==3 
 			m=2
 		end
 		for i=1,m
-			LuaDoString("PARTY",sprintf("SubParty.BigPointsBar(trim(\"%s\"), %d, %d, %d, %d)",$CharTag,i,ubox.x+125,ubox.y+40+(i*20),ubox.w-150))
+			//LuaDoString("PARTY",sprintf("SubParty.BigPointsBar(trim(\"%s\"), %d, %d, %d, %d)",$CharTag,i,ubox.x+125,ubox.y+40+(i*20),ubox.w-150))
+			Sys.Call("PARTY","SubParty.BigPointBar",trim(CharTag),i,ubox.x+125,ubox.y+40+(i*20),ubox.w-150)
 		end
 		for i,s in ipairs($BaseStats)
 			__white
 			xy = (ubox.y+120)+(i*15)
-			DarkText.Font($Font,s,ubox.x+10,xy)
+			//Font.Dark(s,ubox.x+10,xy)
+			Font.Dark(s,ubox.x+10,xy)
 			__amber
-			DarkText.Font($Font,$strstat($CharTag,s),(ubox.x+ubox.w)-10,xy,1)
+			//Font.Dark($strstat($CharTag,s),(ubox.x+ubox.w)-10,xy,1)
+			Font.Dark(strstat($CharTag,s),(ubox.x+ubox.w)-10,xy,1)
 		end
 		xy = xy + 30
 		__white
 		level = ch.Stat("Level").Value
-		DarkText.Font($Font,"EXP to next level:",ubox.x+10,xy)
-		DarkText.Font($Font,"Level:",ubox.x+10,xy+20)
+		Font.Dark("EXP to next level:",ubox.x+10,xy)
+		Font.Dark("Level:",ubox.x+10,xy+20)
 		if level>=__levelcap or $CharTag=="Kirana" or $CharTag=="Shanda"
 			__red
-			DarkText.Font($Font,"---",(ubox.x+ubox.w)-10,xy,1)
+			Font.Dark("---",(ubox.x+ubox.w)-10,xy,1)
 			if $CharTag=="Kirana" or $CharTag=="Shanda"
 				__skyblue
 			elseif level==__levelcap
@@ -188,21 +205,21 @@ group Flow_FieldMenu
 			end
 		else
 			__amber
-			DarkText.Font($Font,tostring(ch.Stat("Experience").Value),(ubox.x+ubox.w)-10,xy,1)
+			Font.Dark(tostring(ch.Stat("Experience").Value),(ubox.x+ubox.w)-10,xy,1)
 			__green
 		end
-		DarkText.Font($Font,Roman(ch.Stat("Level").Value),(ubox.x+ubox.w)-10,xy+20,1)
+		Font.Dark(Roman(ch.Stat("Level").Value),(ubox.x+ubox.w)-10,xy+20,1)
 		__white
-		DarkText.Font($Font,"Weapon",(ubox.x+10),(ubox.ey-70))
-		DarkText.Font($Font,"Armor",(ubox.x+10),(ubox.ey-50))
-		DarkText.Font($Font,"Jewelry",(ubox.x+10),(ubox.ey-30))
+		Font.Dark("Weapon",(ubox.x+10),(ubox.ey-70))
+		Font.Dark("Armor",(ubox.x+10),(ubox.ey-50))
+		Font.Dark("Jewelry",(ubox.x+10),(ubox.ey-30))
 		__amber
-		DarkText.Font($Font,Item[ch.Data.Weapon].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-70)
-		DarkText.Font($Font,Item[ch.Data.Armor].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-50)
+		Font.Dark(Item[ch.Data.Weapon].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-70)
+		Font.Dark(Item[ch.Data.Armor].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-50)
 		if ch.Data.Jewel==""
-			DarkText.Font($Font,"---",(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
+			Font.Dark("---",(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
 		else
-			DarkText.Font($Font,Item[ch.Data.Jewel].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
+			Font.Dark(Item[ch.Data.Jewel].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
 		end
 		if Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-70 and Mouse.Y<ubox.ey-50 
 			$InvItemHover = Item[ch.Data.Weapon]
@@ -222,8 +239,8 @@ group Flow_FieldMenu
 		cx = ubox.x+(ubox.w/2)
 		cy = ubox.h+(ubox.h/2)
 		__red
-		DarkText.Font($BigFont,"The requested feature has",cx,cy-25,2)
-		DarkText.Font($BigFont,"not yet been implemented!",cx,cy+25,2)
+		BigFont.Dark("The requested feature has",cx,cy-25,2)
+		BigFont.Dark("not yet been implemented!",cx,cy+25,2)
 	end
 	
 	void Status(ubox)
@@ -250,9 +267,9 @@ group Flow_FieldMenu
 					Rect(x+10,ty+10,math.floor( (ch.Points("SKILLEXP"..i).Have/ch.Points("SKILLEXP"..i).Maximum) * (w-20) ), 10 )
 				end
 				__white
-				DarkText.Font($Font,ch.Data["SKILL"..i],x+10, ty)				
+				Font.Dark(ch.Data["SKILL"..i],x+10, ty)				
 				__amber
-				DarkText.Font($Font,Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty,1)
+				Font.Dark(Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty,1)
 			end
 		end
 		
@@ -260,18 +277,18 @@ group Flow_FieldMenu
 			int ty
 			ty = (y+200)+(i*20)
 			__white
-			DarkText.Font($Font,sprintf("%s resistance",elem),x+10,ty)
+			Font.Dark(sprintf("%s resistance",elem),x+10,ty)
 			__amber
-			DarkText.Font($Font,ch.Stat( sprintf("END__RESIST_Elem_%s",elem) ).Value.."%",(x+10)+(w-20),ty,1)
+			Font.Dark(ch.Stat( sprintf("END__RESIST_Elem_%s",elem) ).Value.."%",(x+10)+(w-20),ty,1)
 		end
 
 		for i,stat in ipairs(I_STAT)
 			int ty
 			ty = (y+450)+(i*20)
 			__white
-			DarkText.Font($Font,sprintf("%s resistance",stat),x+10,ty)
+			Font.Dark(sprintf("%s resistance",stat),x+10,ty)
 			__amber
-			DarkText.Font($Font,ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value.."%",(x+10)+(w-20),ty,1)
+			Font.Dark(ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value.."%",(x+10)+(w-20),ty,1)
 		end
 		
 	end
@@ -291,20 +308,20 @@ group Flow_FieldMenu
 		end
 		$InvItemLastHelp = { ['Hover'] = $InvItemHover, ['Help'] = {} }
 		Help = $InvItemLastHelp.Help
-		Help[#Help+1] = $InvItemHover.Name
-		Help[#Help+1] = $InvItemHover.Description
+		Help += $InvItemHover.Name
+		Help += $InvItemHover.Description
 		
 		with HV
 			if $Type=="Item"
-				Help[#Help+1] = "Item type: "..$ItemType
+				Help += "Item type: "..$ItemType
 				for i=1,8 do
 					string c
 					c = RPG.Party[i]
 					if c and c!=""
-						//Help[#Help+1] = "Checking: "..c
-						// Help[#Help+1] = sprintf("Eq%s = %s",c,HV["Eq"..c])
+						//Help += "Checking: "..c
+						// Help += sprintf("Eq%s = %s",c,HV["Eq"..c])
 						if HV["Eq"..c]
-							Help[#Help+1] = "Can be equipped by: "..RPG.GetChar(c).Name
+							Help += "Can be equipped by: "..RPG.GetChar(c).Name
 						end
 					end
 				end
@@ -312,39 +329,39 @@ group Flow_FieldMenu
 			if $Heal and $Heal>0 
 				switch $HealType
 					case "Absolute"
-						Help[#Help+1]=sprintf("Heals %d HP",$Heal)
+						Help += sprintf("Heals %d HP",$Heal)
 					case "Percent"
-						Help[#Help+1]=sprintf("Heals %d%% of max HP",$Heal)
+						Help += sprintf("Heals %d%% of max HP",$Heal)
 					case "Stat"
-						Help[#Help+1]=sprintf("Heals several HP. Modifier based on %s",$HealStat)
+						Help += sprintf("Heals several HP. Modifier based on %s",$HealStat)
 					default
-						Help[#Help+1]=sprintf("Unknown healing specifier! You've likely encountered a bug: %s",$HealType)
+						Help += sprintf("Unknown healing specifier! You've likely encountered a bug: %s",$HealType)
 				end
 			end
 			if $Attack and $Attack>0
-				Help[#Help+1] = sprintf("%s attack, power %3d%% of %s, against target's %s",$AttackType,$Attack,$AttackStat,$DefenseStat)
+				Help += sprintf("%s attack, power %3d%% of %s, against target's %s",$AttackType,$Attack,$AttackStat,$DefenseStat)
 				if $Element and $Element!="" and $Element!="None"
-					Help[#Help+1] = sprintf("- Attack based on element %s",$Element)
+					Help += sprintf("- Attack based on element %s",$Element)
 				end
 				if $AttackCancel
-					Help[#Help+1] = sprintf("- Cancel effect")
+					Help += sprintf("- Cancel effect")
 				end
 			end
 			
 		end
 		for k,v in spairs($InvItemHover)
 			if prefixed(k,"Cause") and v
-				Help[#Help+1]="Causes "..Right(k,#k-5)
+				Help += "Causes "..Right(k,Len(k)-5)
 			elseif prefixed(k,"Cure") and v
-				Help[#Help+1]="Cures "..Right(k,#k-4)
+				Help += "Cures "..Right(k,Len(k)-4)
 			end
 			if prefixed(k,"Buff")
 				string stat
-				stat = Right(k,#k-4)
+				stat = Right(k,len(k)-4)
 				if v>0
-					Help[#Help+1]=sprintf("Raises %s by %4d%%",stat,v)
+					Help += sprintf("Raises %s by %4d%%",stat,v)
 				elseif v<0
-					Help[#Help+1]=sprintf("Lowers %s by %4d%%",stat,math.abs(v))
+					Help += sprintf("Lowers %s by %4d%%",stat,math.abs(v))
 				end
 			end
 		end
@@ -367,7 +384,7 @@ group Flow_FieldMenu
 				default
 					Targets = Targets.."???"
 			end
-			Help[#Help+1] = Targets
+			Help += Targets
 		end
 	end
 	
@@ -405,9 +422,9 @@ group Flow_FieldMenu
 					else
 						__white
 					end
-					DarkText.Font($Font,Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5+ind,ubox.y+y)
+					Font.Dark(Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5+ind,ubox.y+y)
 					__amber
-					DarkText.Font($Font,sprintf("%5d",Inventory[itemtag]),ubox.x+(ubox.w-40-ind),ubox.y+y,1)
+					Font.Dark(sprintf("%5d",Inventory[itemtag]),ubox.x+(ubox.w-40-ind),ubox.y+y,1)
 				end
 				y = y + 20
 			end
@@ -475,10 +492,10 @@ group Flow_FieldMenu
 				else
 					__white
 				end
-				DarkText.Font($Font,Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5+ind,ubox.y+y)
+				Font.Dark(Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5+ind,ubox.y+y)
 				if Item[stag].AP_Cost and Item[stag].AP_Cost>0
 					Color(0,180,255)
-					DarkText.Font($Font,tostring(Item[stag].AP_Cost),ubox.x+ubox.w-10,ubox.y+y,1)
+					Font.Dark(tostring(Item[stag].AP_Cost),ubox.x+ubox.w-10,ubox.y+y,1)
 				end
 			elseif need.Start
 				//$ItemHover = nil;
@@ -487,52 +504,52 @@ group Flow_FieldMenu
 				//$ItemHover = nil;
 				if hovering
 					Color(170,170,107)
-					DarkText.Font($Font,"?????",ubox.x+5+5,ubox.y+y)
+					Font.Dark("?????",ubox.x+5+5,ubox.y+y)
 				else
 					Color(127,127,127)
-					DarkText.Font($Font,"?????",ubox.x+5,ubox.y+y)
+					Font.Dark("?????",ubox.x+5,ubox.y+y)
 				end
 				if hovering
 					table Help
 					Help = {"In order to unlock this ability you need:"}
-					$InvItemLastHelp = { ['Help'] = Help }
+					$InvItemLastHelp = { ["Help"] = Help }
 					for k,v in spairs(need)
 						switch k
 							case "Scharum"
-								Help[#Help+1] = "= To defeat Scharum"
+								Help += "= To defeat Scharum"
 							case "SealedBoss"
 								if __trueabyss
-									Help[#Help+1] = "= Complete all 100 levels and if you are lucky you may get this one... who knows?"
+									Help += "= Complete all 100 levels and if you are lucky you may get this one... who knows?"
 								else
-									Help[#Help+1] = "= To defeat a certain sealed boss"
+									Help += "= To defeat a certain sealed boss"
 								end
 							case "BoolVar" "NumVar"
-								Help[#Help+1] = "= To have reached a certain spot in the scenario"
+								Help += "= To have reached a certain spot in the scenario"
 							case "Charm"
-								if #v==1
-									Help[#Help+1] = "= To charm a "..v[1]
+								if len(v)==1
+									Help += "= To charm a "..v[1]
 								else
 									string q
 									for chi,chf in ipairs(v)
-										if chi==#v
+										if chi==len(v)
 											q = q .. " or "
 										elseif chi!=1
 											q = q .. ", "
 										end
 										q = q .. chf
 									end
-									Help[#Help+1] = "= To charm a "..q
+									Help += "= To charm a "..q
 								end
 							default
 								if prefixed(k,"Skill_")
 									bool found
 									for i=0,4 do
-										found = found or ch.Points(sprintf("SKILLLVL%d",i)).Have>0 and prefixed(ch.Data[sprintf("SKILL%d",i)],right(k,#k-6))
+										found = found || ch.Points(sprintf("SKILLLVL%d",i)).Have>0 && prefixed(ch.Data[sprintf("SKILL%d",i)],right(k,len(k)-6))
 									end
 									if found
-										Help[#Help+1] = "= To have "..right(k,#k-6).." on level ".. Roman(v) .." or higher"
+										Help += "= To have "..right(k,len(k)-6).." on level ".. Roman(v) .." or higher"
 									else
-										Help[#Help+1] = "= ????"
+										Help += "= ????"
 									end
 								end
 						end
@@ -572,7 +589,7 @@ group Flow_FieldMenu
 		self.ChaChing = self.ChaChing or LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
 		Stock = self.CurrentStock // I am lazy!
 		__amber
-		DarkText.Font($Font,Stock.Name,ubox.x+10,ubox.y+10)
+		Font.Dark(Stock.Name,ubox.x+10,ubox.y+10)
 		int y
 		y = ubox.y + 40
 		for i=1,20
@@ -595,9 +612,9 @@ group Flow_FieldMenu
 					$LM_ActionArgs	= tag
 
 				end
-				DarkText.Font($Font,itmd.Name,ubox.x+idnt,y)
+				Font.Dark(itmd.Name,ubox.x+idnt,y)
 				__amber
-				DarkText.Font($Font,tostring(Inventory[tag]),(ubox.x+ubox.w)-idnt,y,1)
+				Font.Dark(tostring(Inventory[tag]),(ubox.x+ubox.w)-idnt,y,1)
 				Color(0,180,255)
 				DarkText.Font($BlitzFont,sprintf("Buy price: %9d shilders",Item[tag].BuyPrice),ubox.x+math.floor((ubox.w-40)/2),y)
 				#+ y 20
@@ -730,7 +747,7 @@ group Flow_FieldMenu
 
 	end
 	
-	void CONSTRUCTOR()
+	_CONSTRUCTOR()
 	
 		CSay("Constructing Field menu!")
 	
@@ -819,13 +836,14 @@ group Flow_FieldMenu
 		
 		CSay("= Configuring Situation Data!")
 		for k,t in pairs(self.situations)
-			CSayF("Situation %s has %d menu items (help not counted)",k,#t.MenuItems)
-			t.MenuItems[#t.MenuItems+1] = tablecopy(help)
-			CSayF("Situation %s has %d menu items (help included)",k,#t.MenuItems)
+			CSayF("Situation %s has %d menu items (help not counted)",k,Len(t.MenuItems))
+			//t.MenuItems[#t.MenuItems+1] = tablecopy(help)
+			t.MenuItems += tablecopy(help)
+			CSayF("Situation %s has %d menu items (help included)",k,Len(t.MenuItems))
 			int width
-			width = (Screen.Width / #t.MenuItems)
+			width = (Screen.Width div len(t.MenuItems))
 			for i,item in pairs(t.MenuItems)
-				item.x = ((i*width)-math.floor(width/2)-24)
+				item.x = ((i*width)-math.floor(width div 2)-24)
 			end
 		end
 		
@@ -880,11 +898,15 @@ group Flow_FieldMenu
 
 end
 
+Init
+	Flow_FieldMenu._Constructor
+End	
 
 
 
 
-with Flow_FieldMenu
+//No support with yet, however I guess I should implement it... somehow.
+//with Flow_FieldMenu
 
 	global void BUB_Draw()
 		bool bd_debug = false
@@ -900,7 +922,7 @@ with Flow_FieldMenu
 		
 		// Item bar
 		dchat("Itembar")
-		$ItemBar()
+		Flow_FieldMenu.ItemBar()
 		
 		// Party Sub
 		dchat("Party")
@@ -908,22 +930,22 @@ with Flow_FieldMenu
 		
 		// Left Tab
 		dchat("Left panel")
-		if type($situations[$situation].citem.Left)=="function"
+		if type(Flow_FieldMenu.situations[$situation].citem.Left)=="function"
 			dchat("= Custom")
-			$situations[$situation].citem.Left($LeftBox)
+			Flow_FieldMenu.situations[$situation].citem.Left(Flow_FieldMenu.LeftBox)
 		else
 			dchat("= base")
-			$BasePanel($LeftBox)
+			Flow_FieldMenu.BasePanel($LeftBox)
 		end
 		
 		// Right Tab
 		dchat("Right panel")
 		if type($situations[$situation].citem.Right)=="function"
 			dchat("= Custom")
-			$situations[$situation].citem.Right($RightBox)
+			Flow_FieldMenusituations[$situation].citem.Right(Flow_FieldMenuRightBox)
 		else
 			dchat("= base")
-			$NotYetImplemented($RightBox)
+			Flow_FieldMenu.NotYetImplemented($RightBox)
 		end
 		
 		// Draw all achievement boxes
@@ -941,30 +963,30 @@ with Flow_FieldMenu
 	global void BUB_Update()
 		Dev.ConCheck()
 		
-		if $ItemHover and Mouse.HitLeft
-			if $ItemHover.Action
-				$ItemHover.Action()
+		if Flow_FieldMenu.ItemHover && Mouse.HitLeft
+			if Flow_FieldMenu.ItemHover.Action
+				Flow_FieldMenu.ItemHover.Action()
 			end
-			if not $ItemHover.NoTab
-				$situations[$situation].citem = $ItemHover
+			if ! Flow_FieldMenu.ItemHover.NoTab
+				Flow_FieldMenu.situations[$situation].citem = $ItemHover
 			end
-			//CSay(NIL.LuaSerialize("Clicked Menu Item",$ItemHover))
+			//CSay(NIL.LuaSerialize("Clicked Menu Item",Flow_FieldMenu.ItemHover))
 		end
 		
-		if $LM_Action and Mouse.HitLeft
-			$LM_Action($LM_ActionArgs)
+		if Flow_FieldMenu.LM_Action and Mouse.HitLeft
+			Flow_FieldMenu.LM_Action(Flow_FieldMenu.LM_ActionArgs)
 		end
-		$LM_Action = nil;
+		Flow_FieldMenu.LM_Action = nil;
 		
 		Party.Click()
 	end
 	
 	global void PartyClick(int num)
-		if num==$CharNum
-			GoToFlow($situations[$situation].Return)
-		elseif not prefixed($situation,"COMBAT_")
-			$CharNum = num
+		if num==Flow_FieldMenu.CharNum
+			GoToFlow(Flow_FieldMenu.situations[Flow_FieldMenu.situation].Return)
+		elseif not prefixed(Flow_FieldMenu.situation,"COMBAT_")
+			Flow_FieldMenu.CharNum = num
 		end
 	end
 	
-end
+//end
