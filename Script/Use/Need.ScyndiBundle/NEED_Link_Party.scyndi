@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Party.scyndi
 // 
-// 	  Version: 25.04.08 I
+// 	  Version: 25.04.09
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -112,7 +112,7 @@ group Party
 	set int SelectedCharacter
 		// TODO: Change!
 		//PtExe(sprintf("SubParty.SelectedChar = %d",value))
-		CSayF("Party: set int SelectedCharacter = %d",value)
+		//CSayF("Party: set int SelectedCharacter = %d",value)
 		PtCall("SubParty.SetSelectedChar",value)
 	end
 	
