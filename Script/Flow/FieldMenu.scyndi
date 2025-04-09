@@ -310,7 +310,7 @@ group Flow_FieldMenu
 			end
 		Else
 			SetColor(0,180,255)
-			Font.Dark("Resistances",y+200,x+(w div 2),2)
+			Font.Dark("Resistances",x+(w div 2),y+200,2)
 			
 			for i,elem in ipairs(I_ELEM)
 				int ty
