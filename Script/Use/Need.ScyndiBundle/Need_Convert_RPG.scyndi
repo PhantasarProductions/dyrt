@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.04.03
+// 	  Version: 25.04.08 VI
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -77,6 +77,9 @@ Group RPG_Party
 	End
 	
 	String StaticNumIndex(Int Key)
+		if Key<1
+			print("\x1b[5,91mBad Key!\n\x1b[97m"..Lua.debug.traceback())
+		end
 		Return _rpgStat.Party[Key-1]
 	End
 	
@@ -153,7 +156,8 @@ Class __RPGChar
 	Constructor(String _Tag)
 		Tag  = _Tag
 		Pure = _rpgStat.Char[_Tag]
-		Reg[Tag] = self
+		//Reg[_Tag] = self
+		CSayF("Created char record: %s",_Tag)
 	end
 End
 
@@ -162,7 +166,7 @@ QuickMeta PureChar
 		return _rpgStat.Char[Key]
 	End
 	NewIndex
-		Lua.error("Don't temper with PureChar")
+		Lua.error("Don't tamper with PureChar")
 	End
 End
 	
@@ -183,7 +187,10 @@ Group RPG
 	End
 	
 	Var GetChar(String T)
-		return __RPGChar.Reg[T] || new __RPGChar(T)
+		//return __RPGChar.Reg[T] || new __RPGChar(T)
+		__RPGChar.Reg[T] = __RPGChar.Reg[T] || new __RPGChar(T)
+		//print(Sys.StateName,T,__RPGChar.Reg[T],__RPGChar.Reg[T].Stat) // Debug
+		return __RPGChar.Reg[T]
 	End
 	
 	Get Var Char; Return RPG.GetChar; End
