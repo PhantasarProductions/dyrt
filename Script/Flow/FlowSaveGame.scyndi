@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FlowSaveGame.scyndi
 // 
-// 	  Version: 25.04.05 III
+// 	  Version: 25.04.08
 // 	
 // 	  Copyright (C) // License Information:, 2025 Jeroen Petrus Broks
 // 	
@@ -97,7 +97,7 @@ init
 	CSay("Configuring icon pics")
 	Pics = {}
 	for ch in each { [0]="Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
-		Pics += LoadNewImage(sprintf("GFX/BoxPic/%s/General.png",ch),sprintf("SAVEGAME_ICON_%s",Upper(ch)))
+		Pics += LoadNewImage(sprintf("GFX/BoxPic/%s/125.png",ch),sprintf("SAVEGAME_ICON_%s",Upper(ch)))
 	End
 end
 
