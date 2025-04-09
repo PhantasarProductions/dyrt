@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.04.03
+// 	  Version: 25.04.08 II
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -149,7 +149,10 @@ group SubParty
 		return gv.Num.LevelCap
 	end
 	
-	void SetSelectedChar(int v); SelectedChar=v; end
+	void SetSelectedChar(int v)
+		SelectedChar=v
+		CSayF("SubParty.SetSelectedChar(%d)\t\x1b[92m%d",v,SelectedChar)
+	end
 	int GetSelectedChar(); return SelectedChar; End
 	
 	#say "= Constructor"
@@ -365,7 +368,7 @@ group SubParty
 		// Icon
 		bar.TagIcon.Draw(x-30,y-20)
 		// Points
-		Font.Dark(PartyBar.Font,sprintf("%5d / %5d",pnt.Have,pnt.Maximum),x+w,y-20,1,0)
+		Font.Dark(sprintf("%5d / %5d",pnt.Have,pnt.Maximum),x+w,y-20,1,0)
 	end
 	
 	#say "= Back Char"
@@ -492,10 +495,13 @@ group SubParty
 	void Click()
 		if Mouse.HitLeft && $Hover>0
 			//LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
-			Lua.error("SubParty::473 - Party Click Linkup mustbe done differently!")
+			//Lua.error("SubParty::473 - Party Click Linkup mustbe done differently!")
+			CSayF("SubParty.Click() - Hover: %d",Hover)
+			Sys.Call(CurrentFlow(),"DirtyCallBack","PartyClick",Hover)
 		elseif Mouse.HitRight && $Hover>0
 			//LuaDoString(CurrentFlow(),sprintf("if PartyClickAlt then PartyClickAlt(%d) end",$Hover))
-			Lua.error("SubParty::476 - Party AltClick Linkup mustbe done differently!")
+			//Lua.error("SubParty::476 - Party AltClick Linkup mustbe done differently!")
+			Sys.Call(CurrentFlow(),"DirtyCallBack","PartyClickAlt",Hover)
 		end
 	end
 	
