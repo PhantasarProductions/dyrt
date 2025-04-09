@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Anyway_AlgemeneDefinities.scyndi
 // 
-// 	  Version: 25.03.18 I
+// 	  Version: 25.04.06
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2022, 2025 Jeroen Petrus Broks
 // 	
@@ -66,6 +66,7 @@ extern __black "Scyndi.Globals.SetColor(0,0,0)"
 extern __white "Scyndi.Globals.SetColor(255,255,255)"
 extern __red "Scyndi.Globals.SetColor(255,0,0)"
 extern __ember "Scyndi.Globals.SetColor(255,180,0)"
+extern __amber "Scyndi.Globals.SetColor(255,180,0)"
 extern __skyblue "Scyndi.Globals.SetColor(0,180,255)"
 extern __green "Scyndi.Globals.SetColor(0,255,0)"
 extern __cyan "Scyndi.Globals.SetColor(0,255,255)"
