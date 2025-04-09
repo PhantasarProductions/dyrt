@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.04.09 I
+// 	  Version: 25.04.09 IV
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -435,7 +435,7 @@ group Flow_FieldMenu
 		bool allowscrolldown
 		y = -$InvItemScrollY
 		Lua.Scyndi.Use("Script/Use/Misc/IAAList")
-		$InvItemList = $InvItemList || Lua.Scyndi.Class.IAAList//NIL.Use("Script/Use/iaalist.nil")
+		$InvItemList = $InvItemList || Lua.Scyndi.Class.IAAList.Lijst  //NIL.Use("Script/Use/iaalist.nil")
 		//Viewport(ubox.x,ubox.y,ubox.w,ubox.h) // Microsoft messed this up! Cool, huh?
 		$InvItemHover = nil;
 		for itemtag in each($InvItemList)
@@ -504,8 +504,9 @@ group Flow_FieldMenu
 		var abls
 		int y
 		var ch
-		Lua.Scyndi.Use("Script/Char/Ability/Abl_"..self.CharTag)
-		abls = Lua.Scyndi.Class["Abl_"..self.CharTag]
+		string AChT := Ternary(self.CharTag=="Shanda", "YoungIrravonia",self.CharTag)  
+		Lua.Scyndi.Use("Script/Char/Ability/Abl_"..AChT)
+		abls = Lua.Scyndi.Class["Abl_"..AChT].Lijst
 		//abls = NIL.Use("Script/Char/Ability/"..self.CharTag)
 		ch = RPG.GetChar(self.CharTag)
 		y = 5
