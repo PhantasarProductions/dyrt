@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/MiniMessages.scyndi
 // 
-// 	  Version: 25.03.22 VIII
+// 	  Version: 25.04.09 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -71,8 +71,8 @@ class MiniMsg
 		return math.abs( 0.5 * MiniMsg.TheSin() ) + 0.5
 	end
 	
-	static void MyColor(int r, int g, int b)
-		SetColor( math.floor(r * MiniMsg.Modifier() ), math.floor(g * MiniMsg.Modifier() ), math.floor(b * MiniMsg.Modifier() ) )
+	static void MyColor(int _r, int _g, int _b)
+		SetColor( math.floor(_r * MiniMsg.Modifier() ), math.floor(_g * MiniMsg.Modifier() ), math.floor(_b * MiniMsg.Modifier() ) )
 	end
 	
 	static var Font
@@ -102,8 +102,10 @@ class MiniMsg
 		self.B = cb || 255
 		self.msg = message
 		//self.msgfnt = self.Font.Text(message)
-		self.Y = starty - self.msgfnt.Height
-		self.X = startx - math.floor(self.msgfnt.Width/2)
+		//self.Y = starty - self.msgfnt.Height
+		//self.X = startx - math.floor(self.msgfnt.Width/2)
+		Y = starty - Font.Height(message)
+		X = startx - (Font.Width(message) div 2)
 		if self.X<10 
 			self.X=10
 		end
