@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_IAA.scyndi
 // 
-// 	  Version: 25.04.02 II
+// 	  Version: 25.04.09
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -173,7 +173,7 @@ end
 PLUA QIU(String k)
 	Lua.Scyndi.Use(k)
 	r:=StripDir(k)
-	return Lua.Scyndi.Class[r]
+	return Lua.Scyndi.Class[r].IAADATA
 end
 
 quickmeta Item
