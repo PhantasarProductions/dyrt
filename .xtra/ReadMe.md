@@ -1,4 +1,4 @@
-# The .xtra folder
+# The Extra folder
 
 This folder contains stuff the game itself does not need. 
 
