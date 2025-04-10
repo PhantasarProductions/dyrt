@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Arena.scyndi
 // 
-// 	  Version: 25.04.10 III
+// 	  Version: 25.04.10 IV
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -61,7 +61,7 @@ class ActPos
 	get int Y
 		return self.y
 	end
-	void CONSTRUCTOR(string tag,int setx, int sety,real)
+	CONSTRUCTOR(string tag,int setx, int sety,real)
 		if real!=true
 			self.x=RelPos.X[setx]
 			self.y=RelPos.Y[sety]

@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
 // 
-// 	  Version: 25.04.10 II
+// 	  Version: 25.04.10 XVII
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -46,6 +46,12 @@ Module
 
 //#use "libs/tables"
 
+#use "Libs/SCI/Sys"
+
+#use "Script/Use/Need"
+
+LocExtern CStatus "Scyndi.Globals.CStatus"
+LocExtern Combat_Status "Scyndi.Class.Combat_status"
 
 class Fighter
 	table Permanenced
@@ -105,16 +111,17 @@ class Fighter
 	
 	abstract void Draw()
 	abstract string GetTeamName()
-	abstract void Init()
+	abstract void InitFighter()
 	abstract bool PosHover(int x,int y)
 	abstract void Icon(int dx,int dy)
 	readonly string Tag
-	final get string TeamName
+	//final
+	get string TeamName
 		return self.GetTeamName()
 	end
 	
 	static delegate ForAll()
-		int iteridx = 0
+		int iteridx = -1
 		table iter
 		for TeamTag,TeamTable in spairs(self.Team)
 			for MemTag,MemData in spairs(TeamTable)
@@ -123,27 +130,30 @@ class Fighter
 				iter += { ["Team"] = TeamTag, ["Member"] = MemTag } 
 			end
 		end
-		#pure
-		return function()
-		#endpure
+		//#pure
+		//return function()
+		//#endpure
+		ddef ForAllRet
 			iteridx++
-			#pure
-			if iter[iteridx] then
+			//#pure
+			if iter[iteridx] 
 				return iter[iteridx].Team,iter[iteridx].Member,self.Team[iter[iteridx].Team][iter[iteridx].Member]
 			else
 				return nil,nil,nil;
 			end
 		end
-		#endpure
+		return ForAllRet
+		//#endpure
 	end
 	
 	static delegate ForAllQuick()
 		int team = 1
 		int heronum
 		int foenum
-		#pure
-		return function()
-		#endpure
+		//#pure
+		//return function()
+		//#endpure
+		ddef FAQR
 			repeat
 				switch team
 					case 1
@@ -167,9 +177,10 @@ class Fighter
 						error("WTF!!!!! Invalid team number!")
 				end
 			forever
-		#pure
+		//#pure
 		end
-		#endpure
+		//#endpure
+		return FAQR
 	end
 	
 	void PreInput()
@@ -182,7 +193,8 @@ class Fighter
 	
 	var HP
 
-	final void CONSTRUCTOR(string aTag)
+	//final void 
+	CONSTRUCTOR(string aTag)
 		self.ByTag = Fighter.ByTag // static variables do not seem to transfer so well... I must fix that!
 		self.Tag=aTag
 		self.Team = Fighter.Team // As a result of a bug with statics in extendable classes, this will have to make sure the right class is always there!
@@ -196,8 +208,12 @@ class Fighter
 		table qstats
 		
 		
-		self.StatusChanges = setmetatable({},{
-			["__index"] = var(s,string k)
+		//self.StatusChanges = setmetatable({},{		
+			//["__index"] = var(s,string k)
+			ddef scm_index		
+				plua s
+				string k
+				s,k = infinity
 				string ku
 				self.HP = self.HP or self.Char.Points("HP")
 				
@@ -261,7 +277,7 @@ class Fighter
 						//return var()
 						ddef ret_QEACH						
 							idx++
-							if idx>=len(stats)
+							if idx>=len(qstats)
 								return nil,nil,nil;
 							end
 							return qstats[idx].k,qstats[idx].v
@@ -273,8 +289,14 @@ class Fighter
 						end
 						return self.StatusChangesRealTable[ku]
 				end
-			end,
-			["__newindex"] = void(s,string k,v)
+			end
+			
+			ddef scm_newindex
+			//["__newindex"] = void(s,string k,v)
+				plua s
+				plua v
+				string k
+				s,k,v = infinity
 				stat_modified = true
 				CSay("Modified: "..self.Tag)
 				k = k:upper()
@@ -307,8 +329,10 @@ class Fighter
 							self.StatusChangesRealTable[k] = nil;
 						end
 				end
-			end,
-			["__tostring"] = string(s)
+			end
+			//["__tostring"] = string(s)
+			ddef scm_tostring
+				s:=infinity
 				string ret
 				for k,_ in s.Each
 					if ret!=""
@@ -318,7 +342,8 @@ class Fighter
 				end
 				return ret
 			end
-		})
+		//})
+		self.StatusChanges = setmetatable({},{["__index"]=scm_index,["__newindex"]=scm_newindex,["__tostring"]=scm_tostring})
 		self.Init()
 	end
 	
@@ -327,14 +352,16 @@ end
 
 // Is is to tackle a few forwarding issues NIL suffers from
 global var fw_Fighter
-#pure
+Init
+//#pure
 fw_Fighter = Fighter
-#endpure
+//#endpure
 
-#pure
-Defeated.F = Fighter
-#endpure
+//#pure
+Lua.Scyndi.AllIdentifiers.Defeated.F = Fighter
+//#endpure
 
-#pure 
-Buffs.Fighter = Fighter
-#endpure
+//#pure 
+Lua.Scyndi.Class.Buffs.Fighter = Fighter
+//#endpure
+End
