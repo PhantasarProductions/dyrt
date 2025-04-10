@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
 // 
-// 	  Version: 25.04.10 I
+// 	  Version: 25.04.10 II
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -222,14 +222,15 @@ class Fighter
 							return CStatus.Oversoul
 						end
 					case "GENEACH"
-						int i=0
-						return var()
+						int i=-1
+						//return var()
+						ddef ret_each
 							string k
 							string uk
 							var v
 							repeat
 								i++
-								if i>#Combat_Status.SN
+								if i>=Len(Combat_Status.SN)
 									return nil,nil;
 								end								
 								k = Combat_Status.SN[i]
@@ -245,24 +246,27 @@ class Fighter
 								end
 							forever
 						end
+						return ret_each
 					case "QEACH" "EACH"
 						if stat_modified
 							CSay("Modified, so regenerating QEACH table: "..self.Tag)
 							qstats = {}
 							stat_modified = false
 							for k,v,i in self.StatusChanges.GenEach
-								CSayF("QEACH Generation:%03d.%03d: %s",#qstats+1,i,k)
-								qstats[#qstats+1]={['k']=k,['v']=v}
+								CSayF("QEACH Generation:%03d.%03d: %s",len(qstats),i,k)
+								qstats+={["k"]=k,["v"]=v}
 							end
 						end
-						int idx = 0
-						return var()
+						int idx = -1
+						//return var()
+						ddef ret_QEACH						
 							idx++
-							if idx>#qstats
+							if idx>=len(stats)
 								return nil,nil,nil;
 							end
 							return qstats[idx].k,qstats[idx].v
 						end
+						return ret_QEACH
 					default
 						if self.HP.Have==0
 							self.StatusChangesRealTable[ku]=nil;
