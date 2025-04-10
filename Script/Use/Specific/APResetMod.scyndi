@@ -34,36 +34,43 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
-#use "libs/strings"
 
-do
+Module
+
+#use "Libs/SCI/SString"
+
+init
 	table r
 	int s
 	s = __skill
-	#pure
-	r = {
-		YoungIrravonia = { 0, 0, 0, 0, 0 },
-		Eric = {2 , 1, 1, 1, 1 },
-		Irravonia =  { 0, 3, 3, 3, 3},
-		Brendor = { 1, 0, 0, 0, 0},
-		Scyndi = { 1, 3, 2, 1, 1},
-		Rebecca = { 4, 0, 0, 0, 0},
-		Dernor = {1, 3, 0, 0, 0},
-		Merya = {2, 2, 0, 0, 0},
-		Aziella = {1.5,1.5,0, 0, 0 },
-		Yasathar = {5,1.5,1.5,1.5,1.5},
-		Shanda = {0,0,0,0,0},
-		Kirana = {90/s,90/s,90/s,90/s,90/s}
-		}
-	#endpure
+	//#pure
+	//r = {
+		r.YoungIrravonia = { 0, 0, 0, 0, 0 }
+		r.Eric = {2 , 1, 1, 1, 1 }
+		r.Irravonia =  { 0, 3, 3, 3, 3}
+		r.Brendor = { 1, 0, 0, 0, 0}
+		r.Scyndi = { 1, 3, 2, 1, 1}
+		r.Rebecca = { 4, 0, 0, 0, 0}
+		r.Dernor = {1, 3, 0, 0, 0}
+		r.Merya = {2, 2, 0, 0, 0}
+		r.Aziella = {1.5,1.5,0, 0, 0 }
+		r.Yasathar = {5,1.5,1.5,1.5,1.5}
+		r.Shanda = {0,0,0,0,0}
+		r.Kirana = {90/s,90/s,90/s,90/s,90/s}
+	//	}
+	//#endpure
 	if __newgameplus 
-		for _,ch in ipairs { "Irravonia","Scyndi" }
+		for _,ch in ipairs { [0]="Irravonia","Scyndi" }
 			for i,v in ipairs(ch)
 				ch[i] = v * (4-__skill)
 			end
 		end
 	end
-		
+end
+
+
+
+
 	void ResetCharAP(string Tag)
 		var ch
 		int tot
@@ -87,7 +94,7 @@ do
 		end
 	end
 	
-	void ___APReset()
+	global void ___APReset()
 		for chi = 1,8
 			if RPG.Party[chi] and RPG.Party[chi]!=""
 				ResetCharAP(RPG.Party[chi])
@@ -95,5 +102,5 @@ do
 		end
 	end
 	
-	return ___APReset
-end
+	//return ___APReset
+//end
