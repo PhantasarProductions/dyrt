@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.10 II
+// 	  Version: 25.04.10 XXIV
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -44,15 +44,27 @@
 
 Module
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/JCR6"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
 
 #use "libs/xmath"
 //#use "libs/strings"
 #use "script/use/Need"
 #use "script/use/Misc/BoxPics"
 
+#use "Script/Use/Misc/SkillN_Num"
+
 #accept CombatTime
 #accept Charm
+
+#accept ActPos
+#accept Fighter
+#accept End_Combat
+#accept Stage
+#accept Combat_Status
 
 class Hero extends Fighter
 	
@@ -122,13 +134,13 @@ class Hero extends Fighter
 		end
 		string f
 		f = sprintf("GFX/Combat/Fighters/Hero/%s.%s",self.Tag,self.Houding)
-		if JCR_EntryExists(f..".png")
+		if JCR6.EntryExists(f..".png")
 			f = f .. ".png"
 		else
 			f = f .. ".jpbf"
 		end
 		CSayF("Loading Image/Bundle: %s",f)
-		self.Pics[self.Houding] = LoadIfNew(f,"COMBAT.HERO."..self.Tag..".HOUDING."..self.Houding)
+		self.Pics[self.Houding] = LoadNewImage(f,"COMBAT.HERO."..self.Tag..".HOUDING."..self.Houding)
 		CSayF("Loading done!")
 	end
 	
@@ -204,10 +216,13 @@ class Hero extends Fighter
 	end
 	
 	void CheckLearn(Act)
-		table skl
+		//table skl
 		table chrreq
-		skl = NIL.Use("Script/Use/SkillN_Num")
-		chrreq = NIL.Use("Script/Char/Ability/"..self.Tag)
+		//skl = NIL.Use("Script/Use/SkillN_Num")
+		locExtern skl "Scyndi.Globals.SNN1"
+		//chrreq = NIL.Use("Script/Char/Ability/"..self.Tag)
+		Lua.Scyndi.Use("Script/Char/Ability/ABL_"..self.Tag)
+		chrreq = Lua.Scyndi.Class["ABL_"..self.Tag].abl
 		for ablk,abl in pairs(chrreq)
 			bool unlock = true
 			unlock = unlock and (not AbilitiesMastered[self.Tag][ablk])
@@ -261,23 +276,26 @@ class Hero extends Fighter
 						Act.Targets = {}
 						for iteam,imember,ifighter in Fighter.ForAll()
 							if iteam=="Hero"
-								Act.Targets[#Act.Targets+1]=ifighter
+								//Act.Targets[#Act.Targets+1]=ifighter
+								Act.Targets += ifighter
 							end
 						end
 					case "AF"
 						Act.Targets = {}
 						for iteam,imember,ifighter in Fighter.ForAll()
 							if iteam!="Hero"
-								Act.Targets[#Act.Targets+1]=ifighter
+								//Act.Targets[#Act.Targets+1]=ifighter
+								Act.Targets += ifighter
 							end
 						end
 					case "EV"
 						Act.Targets = {}
 						for iteam,imember,ifighter in Fighter.ForAll()
-							Act.Targets[#Act.Targets+1]=ifighter
+							//Act.Targets[#Act.Targets+1]=ifighter
+							Act.Targets += ifighter
 						end
 					default
-						error(sprintf("New Ability: Unknown target '%s' in %s",Act.Act.Target,atag))
+						Lua.error(sprintf("New Ability: Unknown target '%s' in %s",Act.Act.Target,atag))
 				end
 				Act.Learned = true
 				Act.LearnTag = ablk
@@ -291,12 +309,15 @@ class Hero extends Fighter
 		CSayF("Compiling hero '%s' for combat!",tag)
 		var myhero
 		myhero = new Hero(tag)
-		myhero.Heroes[pos or #myhero.Heroes+1] = myhero
+		//myhero.Heroes[pos or #myhero.Heroes+1] = myhero
+		myhero.Heroes[pos || len(myhero.Heroes)] = myhero
 		myhero.Char = RPG.Char(tag)
 		myhero.CharTag = tag		
 		CSay("Loading will: "..tag)
-		myhero.Will = NIL.Use("Script/Char/Will/"..tag)
-		assert(myhero.Will,"Failed to load the will for: "..tag)
+		//myhero.Will = NIL.Use("Script/Char/Will/"..tag)
+		Lua.Scyndi.Use("Script/Char/Will/Will_"..tag)
+		myhero.Will = Lua.Scyndi.Class["Will_"..tag]
+		Lua.assert(myhero.Will,"Failed to load the will for: "..tag)
 	end
 	
 	static void CompileAll()
@@ -346,14 +367,14 @@ group Stage_SelectTarget extends Stage
 	table xdata
 	bool wrongteam
 
-	void CONSTRUCTOR()
+	void __CONSTRUCTOR()
 		Stage.Stages.SELECTTARGET = self
 	end
 	
-	void ComeToMe(string aCharTag,string aItemTag,table xdata)
+	void ComeToMe(string aCharTag,string aItemTag, xdata)
 		self.CharTag = aCharTag
 		self.ItemTag = aItemTag
-		self.Item = _G.Item[aItemTag]
+		self.Item = Lua.Item[aItemTag]
 		self.Ch = RPG.Char(aCharTag)
 		self.xdata = xdata
 		Stage.Go("SELECTTARGET")
@@ -367,7 +388,7 @@ group Stage_SelectTarget extends Stage
 				if self.wrongteam
 					__red
 				end
-				DarkText.Font(CombatTime.GaugeFont,fight.Name,fight.X+80,fight.Y+20)
+				CombatTime.GaugeFont.Dark(fight.Name,fight.X+80,fight.Y+20)
 				if __skill<3 or fight.GetTeamName()=="Hero"
 					Color(100,100,100)
 					Rect(fight.X+80,fight.Y+40,100,18)
@@ -380,7 +401,7 @@ group Stage_SelectTarget extends Stage
 						Rect(fight.X+80,fight.Y+40,math.floor(100*rate),18)
 					else
 						__white
-						DarkText.Font(CombatTime.FontGauge,"?",fight.X+80+50,fight.Y+40,2,0)
+						CombatTime.FontGauge.Dark("?",fight.X+80+50,fight.Y+40,2,0)
 					end
 					__white
 					bool hstat
@@ -392,9 +413,10 @@ group Stage_SelectTarget extends Stage
 						// Still the system did crash on it despite all impossibilities.
 						// This routine simply voids that
 						if not fight.NextAct
-							DarkText.Font("?????",fight.X+80,ystat)
+							//DarkText.Font("?????",fight.X+80,ystat)
+							CombatTime.FontGauge.Dark("?????",fight.X+80,ystat)
 						else
-							DarkText.Font(CombatTime.FontGauge,Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
+							CombatTime.FontGauge.Dark(Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
 							if fight.NextAct.Targets[1].Icon
 								// it's not possible in any single way for the game to crash out on this one, 
 								// yet it did happen. This routine makes sure that if it happens the instruction is ignored.
@@ -402,36 +424,36 @@ group Stage_SelectTarget extends Stage
 								fight.NextAct.Targets[1].Icon(fight.X+40,ystat)
 							end
 						end
-						#+ ystat 20
+						ystat += 20
 					end
 					__white
 					for sk,_ in fight.StatusChanges.Each
 						hstat = true
-						DarkText.Font(CombatTime.FontGauge,sk,fight.X+80,ystat)
+						CombatTime.FontGauge.Dark(sk,fight.X+80,ystat)
 						ystat = ystat + 20
 					end
 					for _,s in ipairs(fight.Ch.ListStats)
 						if prefixed(s,"BUFF_")
 							int v
 							string n
-							n = Right(s,#s-5)
+							n = Right(s,len(s)-5)
 							v = fight.Ch.Stat(s).Value
 							if v>0
 								Color(180,255,0)
 								hstat = true
-								DarkText.Font(CombatTime.FontGauge,sprintf("%s up %d",n,v),fight.X+80,ystat)
+								CombatTime.FontGauge.Dark(sprintf("%s up %d",n,v),fight.X+80,ystat)
 								ystat = ystat + 20
 							elseif v<0
 								Color(255,0,0)
 								hstat = true
-								DarkText.Font(CombatTime.FontGauge,sprintf("%s dn %d",n,math.abs(v)),fight.X+80,ystat)
+								CombatTime.FontGauge.Dark(sprintf("%s dn %d",n,math.abs(v)),fight.X+80,ystat)
 								ystat = ystat + 20
 							end
 						end
 					end
 					if not hstat
 						Color(180,255,0)
-						DarkText.Font(CombatTime.FontGauge,"Status: Okay",fight.X+80,ystat)
+						CombatTime.FontGauge.Dark("Status: Okay",fight.X+80,ystat)
 					end
 							
 				end
@@ -512,13 +534,14 @@ group Stage_SelectTarget extends Stage
 		end
 		
 		// Cancel?
-		if Mouse.HitRight or Keyboard.Code=="Escape"
-			Stage.Go("PLAYERINPUT")
-			return
-		end
+		//if Mouse.HitRight or Keyboard.Code=="Escape"
+		//	Stage.Go("PLAYERINPUT")
+		//	return
+		//end
 		
 		// Confirmed
-		if gotone and (Mouse.HitLeft or Keyboard.Code=="Space" or Keyboard.Code=="Enter" or Keyboard.Code=="Return")
+		if gotone and (Mouse.HitLeft)
+			//or Keyboard.Code=="Space" or Keyboard.Code=="Enter" or Keyboard.Code=="Return")
 			// Configure next action
 			CSayF("Starting up linking requested action!")
 			table crap
@@ -532,14 +555,14 @@ group Stage_SelectTarget extends Stage
 			crap.Targets = {}
 			for tarkey,tarfight in pairs(self.targetted)
 				CSayF("= Executor %s uses move %s on target %s",crap.ExeTag,crap.ActTag,tarkey)
-				crap.Targets[#crap.Targets+1] = tarfight
+				crap.Targets += tarfight
 			end
 			// Character into action position
 			var MyHero
 			MyHero = Fighter.ByTag[crap.ExeTag]
 			if not MyHero
-				CSay(NIL.LuaSerialize("Fighter.ByTag",Fighter.ByTag))
-				error(sprintf("No data found on fighter tag '%s'!",crap.ExeTag))
+				//CSay(NIL.LuaSerialize("Fighter.ByTag",Fighter.ByTag))
+				Lua.error(sprintf("No data found on fighter tag '%s'!",crap.ExeTag))
 			end
 			MyHero.GaugePosition = 10001
 			MyHero.NextActSpeed = self.Item.COM2ACT
@@ -554,6 +577,9 @@ group Stage_SelectTarget extends Stage
 		end
 	end
 end
+Init
+	Stage_SelectTarget._CONSTRUCTOR()
+End
 	
 group PlayerSwitch
 	void Switch(string oud,string nieuw)
@@ -601,7 +627,7 @@ group Stage_PlayerInput extends Stage
 	end
 	
 	void StartAttack()
-		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,Item[RPG.Char(self.CharTag).Data.Weapon].Equip_Attack,{['AllowLearning']=true})
+		Stage.Stages.SELECTTARGET.ComeToMe(self.CharTag,Item[RPG.Char(self.CharTag).Data.Weapon].Equip_Attack,{["AllowLearning"]=true})
 	end
 	
 	void StartGuard()
@@ -619,7 +645,7 @@ group Stage_PlayerInput extends Stage
 	
 	void StartSwitch()
 		if self.CharTag=="Kirana"
-			Annoy("Remember, Kirana was forced up front by Scyndi and Irravonia, and may therefore NOT be switched")
+			Events.Annoy("Remember, Kirana was forced up front by Scyndi and Irravonia, and may therefore NOT be switched")
 		else
 			GoMenu(self.CharTag,"COMBAT_SWITCH")
 			Stage.Go("IDLE")
