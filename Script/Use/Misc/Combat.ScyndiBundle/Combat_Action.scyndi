@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Action.scyndi
 // 
-// 	  Version: 25.04.09
+// 	  Version: 25.04.10 XI
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -41,55 +41,28 @@
 // 	     misrepresented as being the original software.
 // 	  3. This notice may not be removed or altered from any source distribution.
 // End License
-// License Information:
-// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_Action.nil
-// Version: 21.01.01
-// Copyright (C) 2019, 2020, 2021 Jeroen Petrus Broks
-// 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
-// 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
-// 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
 
-#use "libs/tables"
-#use "libs/strings"
+Module
 
-#accept Fighter
-#accept Combat_Message
-#accept Stage_Action
-#accept Execution
+//#use "libs/tables"
+//#use "libs/strings"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+
+#use "Script/Use/Need" 
+
+LocExtern Fighter "Scyndi.AllIdentifiers.Fighter"
+LocExtern Combat_Message "Scyndi.AllIdentifiers.Combat_Message"
+LocExtern Stage_Action "Scyndi.AllIdentifiers.Stage_Action"
+LocExtern Execution "Scyndi.AllIdentifiers.Execution"
+
+LocExtern Hurt "Scyndi.Globals.Hurt"
+LocExtern Buzz "Scyndi.Globals.Buzz"
 
 // This may look a bit odd, but it prevents errors
 // I really need a kind of forwarding thing in here, I suppose
-#use "Script/Use/Specific/Combat.nlb/Combat_Arena.nil" 
-#use "Script/Use/Specific/Combat.nlb/Combat_CallBack.nil" 
+#use "$mp$/Combat_Arena" 
+#use "$mp$/Combat_CallBack" 
 
 class Actions
 
@@ -120,7 +93,7 @@ class Actions
 	table TargetTags
 	table Targets
 	
-	void CONSTRUCTOR(table data)
+	CONSTRUCTOR(data)
 		// DIRTY CODE STRAIGHT FROM HELL, but hey, due to the way NIL
 		// works out classes, this works very fine....
 		for key,value in pairs(data)
@@ -128,20 +101,19 @@ class Actions
 		end
 		
 		// Krekwakwou?
-		void Want(string field)
-			assert(data[field]!=nil and data[field]!="",sprintf("There was no data for Actions field '%s'",field))
+		//void Want(string field)
+		ddef Want
+			string Field:=Infinity
+			Lua.assert(data[field]!=nil && data[field]!="",sprintf("There was no data for Actions field '%s'",field))
 		end
 		Want("ExeTag")
 		Want("ActTag")
-		assert( 
-			(data.TargetTags or data.Targets) and 
-			(not (data.TargetTags and data.Targets) ),
-			"Invalid input for action targets")
+		assert(	(data.TargetTags || data.Targets) && (! (data.TargetTags && data.Targets) ),"Invalid input for action targets")
 		self.Act=Item[data.ActTag]
 		// Configure targets
-		if not data.Targets
+		if ! data.Targets
 			for tar in each(data.TargetTags)
-				self.Targets[#self.Targets+1] = Fighter.ByTag[tar]
+				self.Targets += Fighter.ByTag[tar]
 			end
 		end
 		// Executor
@@ -166,11 +138,11 @@ group Action_Exe
 		F = Stage_Action.Act.Executor
 		if Stage_Action.Act.RemoveItem and Stage_Action.Act.RemoveItem!="" 
 			if Inventory[ Stage_Action.Act.RemoveItem ] > 0
-				if F.Tag=="Merya" and math.random(1,(__skill^2)*2)==1
-					#pure
+				if F.Tag=="Merya" && math.random(1,(__skill^2)*2)==1
+					//#pure
 					Hurt("Personal will:","Merya",255,180,0)
 					Hurt("Conserve Items","Merya",0,180,255)
-					#endpure
+					//#endpure
 					gv.Int.WILL_MERYA++
 					F.Char.Points("SKILLEXP1").Have = F.Char.Points("SKILLEXP1").Have + (900/__skill)
 				else
@@ -274,8 +246,10 @@ group Action_PreMove
 				Action_SpellAni.sa_mod = nil;
 				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
 					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
-					Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
-					Action_SpellAni.sa_mod.Init(self.Act)
+					Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellAni/SPELLANI_"..self.Act.Act.SpellAniScript)
+					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod = Lua.Scyndi.Class["SPELLANI_"..self.Act.Act.SpellAniScript]
+					Action_SpellAni.sa_mod.SA_Init(self.Act)
 				else
 					CSay("No spellani, so let's not go for that!")
 				end
@@ -290,7 +264,10 @@ group Action_PreMove
 				Action_SpellAni.sa_mod = nil;
 				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
 					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
-					Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellAni/SPELLANI_"..self.Act.Act.SpellAniScript)
+					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod = Lua.Scyndi.Class["SPELLANI_"..self.Act.Act.SpellAniScript]
 					Action_SpellAni.sa_mod.Init(self.Act)
 				else
 					CSay("No spellani, so let's not go for that!")
@@ -337,10 +314,10 @@ group Stage_Action extends Stage
 
 	
 	void Cancel(string why)
-		#pure
+		//#pure
 		Hurt("Action Cancelled",self.Act.Executor.Tag,255,100,100)
 		Hurt(why,self.Act.Executor.Tag,255,90,90)
-		#endpure
+		//#endpure
 		Buzz()
 	end
 	
@@ -368,7 +345,7 @@ group Stage_Action extends Stage
 				end
 			end
 			if a
-				newtar[#newtar+1] = tar
+				newtar += tar
 			end
 		end
 		self.Act.Targets = newtar
@@ -377,30 +354,30 @@ group Stage_Action extends Stage
 	get bool Reject
 		delegate Cancel
 		Cancel = self.Cancel
-		self.PurgeTargets()
-		if #self.Act.Targets==0
+		Stage_Action.PurgeTargets()
+		if len(Act.Targets)==0
 			Cancel("No valid targets")
 			return true
 		end
-		if self.Act.Act.Block_Silence and self.Act.Executor.StatusChanges.Silence
+		if Act.Act.Block_Silence and Act.Executor.StatusChanges.Silence
 			Cancel("Action blocked by silence")
 			return true
 		end
-		if self.Act.Act.Block_Fear and self.Act.Executor.StatusChanges.Fear
+		if Act.Act.Block_Fear and Act.Executor.StatusChanges.Fear
 			Cancel("Action blocked by fear")
 			return true
 		end
-		if self.Act.RemoveAP and self.Act.RemoveAP>0 and self.AP.Have<self.Act.RemoveAP
+		if Act.RemoveAP and Act.RemoveAP>0 and AP.Have<Act.RemoveAP
 			Cancel("Not enough AP")
 			return true
 		end
-		if self.Act.RemoveItem and self.Act.RemoveItem!="" 
-			if Inventory[ self.Act.RemoveItem ] < 0
+		if Act.RemoveItem and Act.RemoveItem!="" 
+			if Inventory[ Act.RemoveItem ] < 0
 				Cancel("Out of items!")
 				return true
 			end
 		end
-		if self.Act.Executor.GaugePosition<15000
+		if Act.Executor.GaugePosition<15000
 			Cancel("Forcefully canceled")
 			return true
 		end

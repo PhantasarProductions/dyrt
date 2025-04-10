@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_AbnormalStatus.scyndi
 // 
-// 	  Version: 25.04.09
+// 	  Version: 25.04.09 IX
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -41,47 +41,16 @@
 // 	     misrepresented as being the original software.
 // 	  3. This notice may not be removed or altered from any source distribution.
 // End License
-// License Information:
-// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_AbnormalStatus.nil
-// Version: 20.07.13
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
-// 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
-// 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
-// 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
 
-#use "libs/strings"
+Module
+
+#use "Libs/SCI/SString"
+
+#use "Script/Use/Need"
 
 
-#accept fw_Fighter
+//#accept fw_Fighter
+LocExtern fw_Fighter "Scyndi.AllIdentifiers.fw_Fighter"
 
 table trstatus
 
@@ -124,7 +93,8 @@ class Combat_Status
 	delegate AltAttack
 
 	
-	static table S
+	link S = Lua.Scyndi.Globals.Combat_Status_S_MetaTable
+	//static table S
 	static table SN
 	
 	static bool UnTargetable(string ftag)
@@ -135,7 +105,7 @@ class Combat_Status
 			if ch.StatusChanges[s]
 				var st
 				st = ch.StatusChanges[s]
-				if st.UntargetableFoe and prefixed(ch.Tag,"FOE_")
+				if st.UntargetableFoe && prefixed(ch.Tag,"FOE_")
 					return true
 				end
 			end
@@ -143,38 +113,47 @@ class Combat_Status
 		return false
 	end
 	
-	void CONSTRUCTOR(string name,table junk)
+	CONSTRUCTOR(string name,junk)
 		self.Draw = DO_NOTHING
 		self.PreTurn = DO_NOTHING
 		self.AltExperience = REG_EXP
 		for s,v in pairs(junk)
 			self[s] = v
 		end
-		self.S[name:upper()] = self
-		self.SN[#self.SN+1] = name
+		self.S[Upper(name)] = self
+		//self.SN[#self.SN+1] = name
+		self.SN += name
 	end
 	
 	
 	
 end
 
-setmetatable(Combat_Status.S,{
-	["__index"] = var(s,string key)
-		key=key:upper()
+
+QuickMeta Combat_Status_S_MetaTable
+//setmetatable(Combat_Status.S,{
+//	["__index"] = var(s,string key)
+	Index
+		key=Upper(key)
 		if key=="DEATH"
-			key='FALLEN'
+			key="FALLEN"
 		end
 		assert(trstatus[key],sprintf("Status '%s' does not exist",key))
 		return trstatus[key]
-	end,
-	["__newindex"] = var(s,string key,st)
-		key=key:upper()
-		assert(st and type(st)=="table" and st[".classname"]=="Combat_Status",sprintf("Whatever you set for '%s', it's not valid as a status change",key))
+	end
+	//["__newindex"] = var(s,string key,st)
+	NewIndex
+		st:=Value
+		key=Upper(key)
+		assert(st && type(st)=="table" && st[".classname"]=="Combat_Status",sprintf("Whatever you set for '%s', it's not valid as a status change",key))
 		trstatus[key] = st
 	end
-})
+//})
+End
 global table CStatus
-CStatus = Combat_Status.S
+Init
+	CStatus = Combat_Status.S
+End
 
 
 
@@ -199,11 +178,11 @@ group Defeated
 	end
 	
 	get bool Hero
-		return $Team('Hero')
+		return Defeated.Team("Hero")
 	end
 	
 	get bool Foe
-		return $Team('Foe')
+		return Defeated.Team("Foe")
 	end
 	
 end
