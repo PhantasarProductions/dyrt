@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Buff.scyndi
 // 
-// 	  Version: 25.04.10 I
+// 	  Version: 25.04.10 III
 // 	
 // 	  Copyright (C) 2020-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -46,7 +46,8 @@ Module
 
 #use "Script/Use/Need"
 
-LocExtern Hurt "Scyndi.Globals.Hurt"
+//LocExtern Hurt "Scyndi.Globals.Hurt"
+
 
 group Buffs
 	var Fighter
@@ -196,12 +197,12 @@ group Buffs
 			f.Permanenced[stat] = 0
 			f.Ch.Stat("BUFF_"..stat).Value = math.min(f.Ch.Stat("BUFF_"..stat).Value,b)
 			//#pure
-			Hurt(stat.." down "..math.abs(b),f.Tag,255,0,0)
+			new Hurt(stat.." down "..math.abs(b),f.Tag,255,0,0)
 			//#endpure
 		elseif b>0
 			f.Ch.Stat("BUFF_"..stat).Value = math.max(f.Ch.Stat("BUFF_"..stat).Value,b)
 			//#pure
-			Hurt(stat.." up "..math.abs(b),f.Tag,180,255,0)
+			new Hurt(stat.." up "..math.abs(b),f.Tag,180,255,0)
 			//#endpure
 		end
 	end
