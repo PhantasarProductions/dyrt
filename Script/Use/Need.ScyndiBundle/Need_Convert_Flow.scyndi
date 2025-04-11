@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Flow.scyndi
 // 	Flow
-// 	version: 25.04.01
+// 	version: 25.04.10
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -53,6 +53,10 @@ End
 Global Void KillFlow(String F)
 	//Sys.KillState("FLOW_"..F)
 	Sys.PlanToKillState("FLOW_"..F)
+End
+
+Global Void GoToFlow(String F)
+	Sys.CurrentFlow=F
 End
 
 extern StateExists "Scyndi.Class.Sys.HasState"
