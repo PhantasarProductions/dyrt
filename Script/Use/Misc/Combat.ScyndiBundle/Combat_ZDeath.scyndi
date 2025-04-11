@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_ZDeath.scyndi
 // 
-// 	  Version: 25.04.09
+// 	  Version: 25.04.10 VII
 // 	
 // 	  Copyright (C) 2019 - 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -41,45 +41,17 @@
 // 	     misrepresented as being the original software.
 // 	  3. This notice may not be removed or altered from any source distribution.
 // End License
-// License Information:
-// src/Tricky Script/Script/Use/Specific/Combat.nlb/Combat_ZDeath.nil
-// Version: 20.11.21
-// Copyright (C) 2019, 2020 Jeroen Petrus Broks
-// 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
-// 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
-// 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
 
-#use "libs/strings"
-#use "script/use/minimessages"
+Module
+
+#use "Libs/SCI/Audio"
+#use "libs/sci/sstring"
+#use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+#use "script/use/misc/minimessages"
+
 #accept Fighter
 
 table DeadEnemies
@@ -177,8 +149,8 @@ void EnemyDeathFade(f)
 					end
 				end
 				if __trueabyss
-					#+Exp gv.Int.TrueAbyssScore
-					#+Exp (math.floor(Exp/(10^__skill)) * gv.Int.TrueAbyssScore)
+					Exp += gv.Int.TrueAbyssScore
+					Exp += (math.floor(Exp/(10^__skill)) * gv.Int.TrueAbyssScore)
 				end
 				if Char.Stat("Level").Value<__levelcap
 					Char.Stat("Experience").Value = Char.Stat("Experience").Value - Exp
@@ -191,19 +163,19 @@ void EnemyDeathFade(f)
 		
 		// Item or money drops
 		bool okdrop
-		if f.Drop and #f.Drop>0 and not f.StolenFrom
+		if f.Drop and len(f.Drop)>0 and not f.StolenFrom
 			int r
-			r = math.random(1,#f.Drop)
+			r = math.random(1,len(f.Drop))
 			switch type(f.Drop[r])
 				case "number"
 					if __cash<(900000000/__skill)
 						okdrop=true						
 						__cash = __cash + f.Drop[r]
 						if f.Drop[r]==1
-							LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+							Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 							new Hurt("Dropped 1 __onecurrency",tag,255,255,0)
 						elseif f.Drop[r]>0
-							LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+							Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 							new Hurt(sprintf("Dropped %d __currency",f.Drop[r]),f.Tag,255,255,0)
 						end
 					end
@@ -222,10 +194,10 @@ void EnemyDeathFade(f)
 		if (not okdrop) and  __cash<(900000000/__skill)									
 			__cash = __cash + f.Cash
 			if f.Cash==1
-				LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+				Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 				new Hurt("Dropped 1 __onecurrency!",tag,255,255,0)
 			elseif f.Cash>0
-				LoadNewAudio("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+				Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
 				new Hurt(sprintf("Dropped %d __currency!",f.Cash),f.Tag,255,255,0)
 			end
 		end // Cash if no other drop
@@ -233,78 +205,83 @@ void EnemyDeathFade(f)
 end // void
 
 
-new Combat_Status("Fallen",{
-	["OffGauge"] = true,
-	["IsDefeated"] = true,
-	["UntargetableFoe"] = true,
-	["OverDraw"] = true,
-	["Draw"] = void(f)			
-			if prefixed(f.Tag,"FOE")
-				EnemyDeathFade(f)
-			else
-				DeadPlayer(f)
-			end
-		end,
-	["AltExperience"] = int(f,int exp)
-			switch __skill
-				case 1
-					return exp
-				case 2
-					return math.floor(exp/2)
-				case 3
-					return 0
-			end
-		end,
-	["AltHeal"] = int(e,f,int i)
-			return 0
-		end,
-	["Caused"] = void(f)
-			f.Char.Points("HP").Have = 0
-		end,
-	["Cured"] = void(f)
-			f.Char.Points("HP").Have = 1
-		end	
-})
-
-new Combat_Status("Destruction",{
-	["OffGauge"] = true,
-	["IsDefeated"] = true,
-	["UntargetableFoe"] = true,
-	["OverDraw"] = true,
-	["Draw"] = void(f)
-		end,
-	["AltExperience"] = int(f,int exp)
-		end,
-	["Caused"] = void(f)
-			f.Char.Points("HP").Have = 0
-			f.StatusChanges.Destruction = false
-		end,
-	["Cured"] = void(f)
-		end	
-})
-
-new Combat_Status("Gone",{
-	["OffGauge"] = true,
-	["IsDefeated"] = true,
-	["UntargetableFoe"] = true,
-	["OverDraw"] = true,
-	["Draw"] = void(f)
-			if f.Boss
-				f.StatusChanges.Gone = false;
-			end
-		end,
-	["AltExperience"] = int(f,int exp)
-			return 0
-		end,
-	["Caused"] = void(f)
-		end,
-	["Cured"] = void(f)
-		end	
-})
-
-
-new Combat_Status("Oversoul",{
-	["Draw"] = void(f)
-		Color(200,180,255)
+Init
+//	["Draw"] = void(f)
+ddef DrawFallen
+	f:=infinity
+	if prefixed(f.Tag,"FOE")
+		EnemyDeathFade(f)
+	else
+		DeadPlayer(f)
 	end
-})
+end
+
+ddef AExp
+	plua f
+	int exp
+	f,exp=infinity
+	//	["AltExperience"] = int(f,int exp)
+	switch __skill
+		case 1
+			return exp
+		case 2
+			return math.floor(exp/2)
+		case 3
+			return 0
+	end
+end
+
+ddef AHeal; return 0; End
+	
+ddef FCause
+	f:=Infinity
+	f.Char.Points("HP").Have = 0
+End
+
+ddef FCure
+	f:=Infinity
+	f.Char.Points("HP").Have = 1
+End
+
+new Combat_Status("Fallen",{ ["OffGauge"] = true, ["IsDefeated"] = true, ["UntargetableFoe"] = true, ["OverDraw"] = true,["Draw"]=DrawFallen,["AltExperience"]=AExp,["AltHeal"]=AHeal,["Caused"]=FCause,["Cured"]=FCure})
+	//["AltHeal"] = int(e,f,int i)
+	//		return 0
+	//	end,
+	//["Caused"] = void(f)
+	//		f.Char.Points("HP").Have = 0
+	//	end,
+	//["Cured"] = void(f)
+	//		f.Char.Points("HP").Have = 1
+	//	end	
+//})
+
+ddef Nada;End
+	
+dDef DCause
+	//= void(f)
+	f:=infinity
+	f.Char.Points("HP").Have = 0
+	f.StatusChanges.Destruction = false
+end
+
+
+new Combat_Status("Destruction",{ ["OffGauge"] = true, 	["IsDefeated"] = true, 	["UntargetableFoe"] = true, 	["OverDraw"] = true, ["Draw"]=Nada,["AltExperience"]=AExp,["Caused"]=DCause,["Cured"]=Nada})
+
+dDef DrawGone
+	f:=infinity
+	if f.Boss
+		f.StatusChanges.Gone = false;
+	end
+end
+
+
+new Combat_Status("Gone",{ 	["OffGauge"] = true, ["IsDefeated"] = true, ["UntargetableFoe"] = true, ["OverDraw"] = true, ["Draw"] = DrawGone,["AltExperience"]=AExp,["Caused"]=Nada,["Cured"]=Nada})
+
+ddef DrawOversoul
+	f:=infinity
+	SetColor(200,180,255)
+End	
+
+new Combat_Status("Oversoul",{ 	["Draw"] = DrawOversoul } )
+		
+End
