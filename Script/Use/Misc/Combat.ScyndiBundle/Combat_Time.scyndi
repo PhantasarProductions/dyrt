@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Time.scyndi
 // 
-// 	  Version: 25.04.10
+// 	  Version: 25.04.10 IX
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -45,9 +45,22 @@
 Module
 
 #use "libs/collections"
-#use "libs/tables"
-#use "libs/strings"
-#use "libs/DarkText"
+//#use "libs/tables"
+//#use "libs/strings"
+//#use "libs/DarkText"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "Script/Use/Need"
+
+#Accept Stage
+#Accept Fighter
+#Accept Stage_Action
+
+LocExtern GetAudio "Audio.Obtain"
 
 group CombatTime
 
@@ -102,7 +115,8 @@ group CombatTime
 				//order[member.Agility] = order[member.Agility] or {}
 				//CSay("!")
 				w = order[member.Agility]
-				w[#w+1] = tag
+				//w[#w+1] = tag
+				w+=tag
 			end
 		end
 		int c
@@ -152,7 +166,7 @@ group CombatTime
 					case "Foe"
 						self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
 						__white
-						DarkText.Font(self.FontGauge,ifighter.Letter,dx,self.gauge_Y+40,1,0)
+						self.FontGauge.Dark(ifighter.Letter,dx,self.gauge_Y+40,1,0)
 					default
 						error("UNKNOWN GAUGE POINTER!")
 				end
