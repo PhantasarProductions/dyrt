@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_AbnormalStatus.scyndi
 // 
-// 	  Version: 25.04.09 IX
+// 	  Version: 25.04.12 II
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -93,7 +93,9 @@ class Combat_Status
 	delegate AltAttack
 
 	
-	link S = Lua.Scyndi.Globals.Combat_Status_S_MetaTable
+	//link S = Lua.Scyndi.Globals.Combat_Status_S_MetaTable
+	Static Get Var S; Return Lua.Scyndi.Globals.Combat_Status_S_MetaTable; End
+	
 	//static table S
 	static table SN
 	
@@ -145,7 +147,7 @@ QuickMeta Combat_Status_S_MetaTable
 	NewIndex
 		st:=Value
 		key=Upper(key)
-		assert(st && type(st)=="table" && st[".classname"]=="Combat_Status",sprintf("Whatever you set for '%s', it's not valid as a status change",key))
+		//assert(st && type(st)=="table" && st[".classname"]=="Combat_Status",sprintf("Whatever you set for '%s', it's not valid as a status change",key))
 		trstatus[key] = st
 	end
 //})
