@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.10 XXIV
+// 	  Version: 25.04.12
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -578,7 +578,7 @@ group Stage_SelectTarget extends Stage
 	end
 end
 Init
-	Stage_SelectTarget._CONSTRUCTOR()
+	Stage_SelectTarget.__CONSTRUCTOR()
 End
 	
 group PlayerSwitch
