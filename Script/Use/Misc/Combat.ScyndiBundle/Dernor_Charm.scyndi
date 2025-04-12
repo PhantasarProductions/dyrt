@@ -34,66 +34,38 @@
 // **********************************************
 // 
 // 
-// version: 25.04.09
+// version: 25.04.12 II
 // 
 // End License
-// License Information:
-// **********************************************
-// 
-// src/Tricky Script/Script/Use/Specific/Combat.nlb/Dernor_Charm.nil
-// (c) Jeroen Broks, , All Rights Reserved.
-// 
-// This file contains material that is related
-// to a storyline that is which is strictly
-// copyrighted to Jeroen Broks.
-// 
-// This file may only be used in an unmodified
-// form with an unmodified version of the
-// software this file belongs to.
-// 
-// You may use this file for your study to see
-// how I solved certain things in the creation
-// of this project to see if you find valuable
-// leads for the creation of your own.
-// 
-// Mostly this file comes along with a project
-// that is for most part released under an
-// open source license and that means that if
-// you use that code with this file removed
-// from it, you can use it under that license.
-// Please check out the other files to find out
-// which license applies.
-// This file comes 'as-is' and in no possible
-// way the author can be held responsible of
-// any form of damages that may occur due to
-// the usage of this file
-// 
-// 
-// **********************************************
-// 
-// version: 20.02.04
-// End License Information
-quickmeta group SpellCharmed
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+
+#use "script/use/need"
+
+quickmeta  SpellCharmed
 	
 	index
-		if gv.String["Dernor_SpellCharmed_"..(key:upper())]==""
+		if gv.String["Dernor_SpellCharmed_"..(Upper(Key))]==""
 			return false;
 		end
-		return gv.String["Dernor_SpellCharmed_"..(key:upper())]
+		return gv.String["Dernor_SpellCharmed_"..(Upper(Key))]
 	end
 	
 	newindex
-		gv.String["Dernor_SpellCharmed_"..(key:upper())] = value
+		gv.String["Dernor_SpellCharmed_"..(Upper(Key))] = value
 	end
 end
 
-quickmeta group Charmed
+quickmeta Charmed
 	index 
-		return gv.Bool["Dernor_FoeCharmed"..(key:upper())]
+		return gv.Bool["Dernor_FoeCharmed"..(Upper(Key))]
 	end
 	
 	newindex
-		gv.Bool["Dernor_FoeCharmed"..(key:upper())] = value!=nil and value!=false;
+		gv.Bool["Dernor_FoeCharmed"..(Upper(Key))] = value!=nil and value!=false;
 	end
 end
 
@@ -101,13 +73,15 @@ group Charm
 	
 	var Abl
 	
-	void CONSTRUCTOR()
-		self.Abl = NIL.Use("Script/Char/Ability/Dernor")
+	void _CONSTRUCTOR()
+		//self.Abl = NIL.Use("Script/Char/Ability/Dernor")
+		Lua.Scyndi.Use("Script/Char/Ability/Abl_Dernor")
+		self.Abl=Lua.Scyndi.Class.Abl_Dernor
 	end
 	
 	bool AblCharm(Act,Target)
 		string fname
-		fname = replace(Target.FromFile:upper(),"REG/","")
+		fname = replace(Upper(Target.FromFile),"REG/","")
 		// Reject if the enemy is a boss, or already charmed
 		if Target.Boss or Charmed[fname]
 			CSayF("Charm rejected: Boss Check: %s; Charmed Check: %s", tostring(Target.Boss), tostring(Charmed[fname]))
@@ -120,7 +94,7 @@ group Charm
 				CSayF("Checking for charm %s => %s",abltag,tostring(need.Charm))
 				for _,needfoe in pairs(need.Charm)
 					CSayF("Found: %s; Have: %s ==> match: %s",needfoe,fname,tostring(needfoe:upper()==fname))
-					if needfoe:upper()==fname
+					if Upper(needfoe)==fname
 						CSayF("Match %s",fname)
 						if SpellCharmed[abltag]
 							CSay("Charm rejected! Spell charm with same name appears to be executed already => "..abltag)
@@ -144,3 +118,7 @@ group Charm
 	end
 
 end
+
+Init
+	Charm._Constructor()
+End
