@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_RENC.scyndi
 // 
-// 	  Version: 25.04.05
+// 	  Version: 25.04.13
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -160,7 +160,8 @@ group RENC
 	end
 	
 	void CompileFoeList()
-		var kth = Kthura
+		//var kth = Kthura
+		LocExtern kth "Scyndi.Class.Kthura"
 		//kth = FlowField.Map.Kthura
 		$Foes = {}
 		for i=1,__skill
