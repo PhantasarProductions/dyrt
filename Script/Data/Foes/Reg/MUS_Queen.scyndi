@@ -1,0 +1,170 @@
+// Converted from NIL to Scyndi on 15 Apr 2025; 20:04:44
+
+
+Module
+
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+#accept Foe
+#accept RPG
+#accept LoadNewImage
+
+LocExtern and "and"
+LocExtern not "not"
+LocExtern __skill "gint.skill"
+
+// GENERATED NIL SCRIPT!
+// Generated: 10/22/2020 9:03:49 PM
+// Used to be: do
+Var RetFunc()
+	plua FoeRet
+	foeret = new Foe(sprintf("FOE_%d",Foe.LoadFoeID))
+	foeret.FoeID = Foe.LoadFoeID
+	foeret.Char = RPG.CreateChar(foeret.Tag)
+	foeret.AI_Module = "Default"
+	foeret.AllowOversoul = true and __skill!=1
+	foeret.Description = "She's the queen of a realm you don't know"
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Reg/MUS_Queen.png","FOE_IMAGE_000000272")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/REG/MUS_QUEEN.NEGATIVE.PNG","FOE_IMAGE_000000273")
+	foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
+	if not Foe.LoadOversoul
+		foeret.Experience = 1200
+	end
+	if Foe.LoadOversoul
+		if __skill==3
+			foeret.Experience = 0
+			else
+			foeret.Experience = 1
+		end
+	end
+	foeret.Name="Queen"
+	foeret.Boss = false
+	// Oversoul specific
+	if Foe.LoadOversoul
+		foeret.Char.Stat("BASE_Accuracy").Value=1000
+		foeret.Char.Stat("BUFF_Accuracy").Value=0
+		foeret.Char.Stat( "END_Accuracy").Value=0
+// Used to be: foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+		foeret.Char.Stat("BASE_Agility").Value=1000
+		foeret.Char.Stat("BUFF_Agility").Value=0
+		foeret.Char.Stat( "END_Agility").Value=0
+// Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+		foeret.Char.Stat("BASE_Defense").Value=1000
+		foeret.Char.Stat("BUFF_Defense").Value=0
+		foeret.Char.Stat( "END_Defense").Value=0
+// Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+		foeret.Char.Stat("BASE_Evasion").Value=750
+		foeret.Char.Stat("BUFF_Evasion").Value=0
+		foeret.Char.Stat( "END_Evasion").Value=0
+// Used to be: foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+		foeret.Char.Stat("BASE_HP").Value=2000
+		foeret.Char.Stat("BUFF_HP").Value=0
+		foeret.Char.Stat( "END_HP").Value=0
+// Used to be: foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+		foeret.Char.Stat("BASE_Intelligence").Value=500
+		foeret.Char.Stat("BUFF_Intelligence").Value=0
+		foeret.Char.Stat( "END_Intelligence").Value=0
+// Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+		foeret.Char.Stat("BASE_Resistance").Value=1000
+		foeret.Char.Stat("BUFF_Resistance").Value=0
+		foeret.Char.Stat( "END_Resistance").Value=0
+// Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+		foeret.Char.Stat("BASE_Strength").Value=550
+		foeret.Char.Stat("BUFF_Strength").Value=0
+		foeret.Char.Stat( "END_Strength").Value=0
+// Used to be: foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+		else
+		foeret.Char.Stat("BASE_Accuracy").Value=600
+		foeret.Char.Stat("BUFF_Accuracy").Value=0
+		foeret.Char.Stat( "END_Accuracy").Value=0
+// Used to be: foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+		foeret.Char.Stat("BASE_Agility").Value=500
+		foeret.Char.Stat("BUFF_Agility").Value=0
+		foeret.Char.Stat( "END_Agility").Value=0
+// Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+		foeret.Char.Stat("BASE_Defense").Value=200
+		foeret.Char.Stat("BUFF_Defense").Value=0
+		foeret.Char.Stat( "END_Defense").Value=0
+// Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+		foeret.Char.Stat("BASE_Evasion").Value=7
+		foeret.Char.Stat("BUFF_Evasion").Value=0
+		foeret.Char.Stat( "END_Evasion").Value=0
+// Used to be: foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+		foeret.Char.Stat("BASE_HP").Value=800
+		foeret.Char.Stat("BUFF_HP").Value=0
+		foeret.Char.Stat( "END_HP").Value=0
+// Used to be: foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+		foeret.Char.Stat("BASE_Intelligence").Value=300
+		foeret.Char.Stat("BUFF_Intelligence").Value=0
+		foeret.Char.Stat( "END_Intelligence").Value=0
+// Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+		foeret.Char.Stat("BASE_Resistance").Value=400
+		foeret.Char.Stat("BUFF_Resistance").Value=0
+		foeret.Char.Stat( "END_Resistance").Value=0
+// Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+		foeret.Char.Stat("BASE_Strength").Value=100
+		foeret.Char.Stat("BUFF_Strength").Value=0
+		foeret.Char.Stat( "END_Strength").Value=0
+// Used to be: foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+	end
+	// Skill specific
+	switch __skill
+		case 1
+		foeret.AI_Moves += "ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves += "ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKFREE"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves += "ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves += "ABL_MUSIC_RADIO_GAGA"
+		foeret.AI_Moves += "ABL_MUSIC_SLIGHTLYMAD"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		case 2
+		foeret.AI_Moves += "ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves += "ABL_MUS_WHO_WANTS_TO_LIVE_FOREVER"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKFREE"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves += "ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves += "ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves += "ABL_MUSIC_RADIO_GAGA"
+		foeret.AI_Moves += "ABL_MUSIC_SLIGHTLYMAD"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		case 3
+		foeret.AI_Moves += "ABL_MUSIC_BREAKFREE"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_BREAKTHROUGH"
+		foeret.AI_Moves += "ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves += "ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves += "ABL_MUSIC_I_WANT_IT_ALL"
+		foeret.AI_Moves += "ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves += "ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves += "ABL_MUSIC_MIRACLE"
+		foeret.AI_Moves += "ABL_MUSIC_RADIO_GAGA"
+		foeret.AI_Moves += "ABL_MUSIC_SLIGHTLYMAD"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		default
+		error("Unknown skill "..__skill)
+	end
+	CSay("HP Init Start");
+	foeret.Char.Points("HP",true).Maximum = foeret.Char.Stat("BASE_HP").Value
+	foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+	CSay("HP Init End");
+	CSay("Status Changes")
+	return foeret
+end
+// Used to be: return retfunc
+// Used to be: end
