@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Foes.scyndi
 // 
-// 	  Version: 25.04.10 XI
+// 	  Version: 25.04.15 III
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -49,6 +49,7 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
 
 #accept CombatTime
 #accept Combat_Start
@@ -143,7 +144,7 @@ class Foe extends Fighter
 	end
 	
 	
-	void Init()
+	void InitFighter()
 	end
 	
 	string GetTeamName()
@@ -198,8 +199,8 @@ class Foe extends Fighter
 	end
 	
 	static void Compile(int num, string FoeFile,FoeOversoul)
-		var myFoe
-		var myFoeUse
+		//var myFoe
+		//var myFoeUse
 		Buffs.maxfoenum = math.max(Buffs.maxfoenum,num)
 		if FoeOversoul
 			CSay("Due to an oversoul request let's destroy the old record!")
@@ -210,8 +211,10 @@ class Foe extends Fighter
 		Foe.LoadFoeID = num
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
 		//myFoeUse = NIL.Use("Script/Data/Foes/"..FoeFile);
-		Lua.error("Combat_Foes:213 -> Foe loader not yet present")
-		myFoe = myFoeUse()
+		//Lua.error("Combat_Foes:213 -> Foe loader not yet present")
+		Lua.Scyndi.Use("Script/Data/Foes/"..FoeFile)		
+		//myFoe = myFoeUse()
+		myFoe := Lua.Scyndi.Class[StripDir(Replace(FoeFile,"-","_"))].retfunc()
 		myFoe.FromFile = Upper(FoeFile)
 		myFoe.Char = RPG.Char(Foe.LoadFoeTag)
 		myFoe.Oversoul = FoeOversoul==true
