@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.08
+// 	  Version: 25.04.13 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -350,6 +350,8 @@ group FieldMap
 		return nil
 	End
 	
+	Link GKthura = Lua.Scyndi.Class.Kthura
+	
 	var Saskia
 	//Link Saskia = Lua.Scyndi.Class.Saskia
 	
@@ -368,7 +370,7 @@ group FieldMap
 	Link ScrollX = gint.ScrollX
 	Link ScrollY = gint.ScrollY
 	get string Layer
-		return self.Kthura.Layer
+		return GKthura.CurrentLayer
 	end
 	
 	var ToMapCoords(int x, int y)
@@ -380,7 +382,7 @@ group FieldMap
 	end
 	
 	get int TravelLevel
-		return tonumber(self.Kthura.Data.Travel_Level) || 1
+		return tonumber(GKthura.Data.Travel_Level) || 1
 	end
 	
 	void Kill(string tag,permanent)
@@ -632,7 +634,7 @@ group FlowField
 			foundcash = tonumber(xsplit(ItemTag,":")[1]) || 0
 			string shild = "shilders"
 			if foundcash == 1 
-				shild = 'shilder'
+				shild = "shilder"
 			end
 			if __cash > (300000000 / __skill)
 				new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
