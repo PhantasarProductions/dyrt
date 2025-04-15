@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
 // 
-// 	  Version: 25.04.13 I
+// 	  Version: 25.04.15
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -74,11 +74,11 @@ class Fighter
 	table StatusChanges
 	
 	get string Name
-		return self.Char.Name
+		return Me.Char.Name
 	end
 	
 	set string Name
-		self.Char.Name=value
+		Me.Char.Name=value
 	end
 	
 	get var Ch
