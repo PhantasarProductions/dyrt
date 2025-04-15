@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.12
+// 	  Version: 25.04.13 V
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -67,6 +67,8 @@ Module
 #accept Combat_Status
 
 class Hero extends Fighter
+
+	 
 	
 	static table Heroes
 	int JumpIn = 90
@@ -116,12 +118,13 @@ class Hero extends Fighter
 	end
 	
 	get int SpotNum
+		locextern mf "self"
 		for i=1,8
-			if RPG.Party[i]==self.Tag
+			if RPG.Party[i]==mf.Tag
 				return i
 			end
 		end
-		error("Party member "..self.Tag.." not found! Cannot assign a number to them!")
+		Lua.error("Party member "..self.Tag.." not found! Cannot assign a number to them!")
 	end
 	
 	string GetTeamName()
@@ -199,7 +202,8 @@ class Hero extends Fighter
 	end
 
 	
-	void Init_Heroes()
+	//void Init_Heroes()
+	void InitFighter()
 		var spot
 		spot = ActPos.Spot[sprintf("HERO%d",self.SpotNum)]
 		self.JumpIn = self.JumpIn + (len(self.Heroes)*45)
@@ -350,7 +354,7 @@ class InputMenuItem
 		self.y = ay
 		self.action = aaction
 		self.allowed = aallowed
-		self.List = self.List or new TLinkedList
+		self.List = self.List or new TLinkedList()
 		self.List.AddLast(self)
 		End_Combat.Add(self.Clean)
 	end
