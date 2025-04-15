@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.04.08 VI
+// 	  Version: 25.04.15
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -179,7 +179,7 @@ Group RPG
 		Return Lua.Scyndi.Globals.PureChar
 	End
 	
-	Var CreateChar(String T, int lv)
+	Var CreateChar(String T, int lv=1)
 		//CSayF("%s T = %s; %s lv = %s",Lua.type(T),T,Lua.type(lv))
 		_rpgstat.NewChar(T)
 		_rpgstat.Char[T].Stat.Level = lv
