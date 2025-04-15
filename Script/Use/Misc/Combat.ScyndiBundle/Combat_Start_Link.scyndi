@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Start_Link.scyndi
 // 
-// 	  Version: 25.04.10 XII
+// 	  Version: 25.04.12 I
 // 	
 // 	  Copyright (C) 2019-2020, 2025 Jeroen Petrus Broks
 // 	
@@ -87,6 +87,15 @@ group Combat_Start
 	// sequence when the player loses a fight!
 	bool NoLose = false
 end
+
+Global Void Def_Combat_Start(string DKey,DVal)
+	// Direct definition no longer possible so I have to go this way
+	Combat_Start[DKey] = DVal
+End
+
+Global Void Def_Combat_Foe(int idx,String FTag)
+	Combat_Start.Foe[idx] = FTag
+End
 
 global void DChat(string k)
 	//static int r = 255
