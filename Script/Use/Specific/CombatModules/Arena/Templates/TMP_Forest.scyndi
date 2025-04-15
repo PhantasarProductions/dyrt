@@ -1,0 +1,199 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest.scyndi
+// 
+// 	  Version: 25.04.13 VIII
+// 	
+// 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+//#use "libs/tables"
+//#use "libs/strings"
+#use "libs/RelPos"
+
+#use "Script/Use/Need"
+
+#accept tonumber
+
+//module Forest_Template_Module
+
+	table LoadComm
+	table trees
+	table textrees
+	//table texcloud
+	var texfloor
+	table texsky 
+	table texclouds
+	table clouds
+	
+	int CloudR=255
+	int CloudG=255
+	int CloudB=255
+	
+	int FloorR=255
+	int FloorG=255
+	int FloorB=255
+	
+	var texfloorfile
+	
+	
+	//void CONSTRUCTOR()
+	Init
+		// I think I need to make a quicker way to do this :P
+		for i,Enum in ipairs {[0]="Tree","Floor","Sky","Cloud"}
+			LoadComm[Enum]=i
+		end
+		texsky = {["R"]=0,["G"]=210,["B"]=225}
+	end
+		
+
+	void LoadTex(infinity)
+		int lc = 1
+		for i,v in ipairs {[0]=infinity}
+			switch Lua.type(v)
+				case "string"
+					switch lc
+						case 1
+							textrees+=LoadImage(v)
+						case 2
+							texfloor = LoadImage(v)
+							lc = 1
+						case 3
+							error("Expected color table")
+						case 4
+							texclouds+=LoadImage(v)
+						default
+							error("Unknown string situation!")
+					end
+				case "table"
+					switch lc
+						case 3
+							$texsky.R = v.R or 0
+							$texsky.G = v.G or 210
+							$texsky.B = v.B or 225
+						default
+							error("Unknown table situation")
+					end
+				case "number"
+					lc = v
+				default
+					error("Unknown forest area sitation: "..Lua.type(v).." parameter #"..i)
+			end
+		end
+	end
+	
+	void Generate()
+		//with self
+			table temptrees
+			int y 
+			y = RelPos.Y[550]
+			string tag
+			for x = 0,Screen.Width,12
+				int r
+				string tex
+				r = math.random(1,12)
+				switch r
+					case 1
+						if y>RelPos.Y[530]
+							--y
+						end
+					case 2
+						if y<RelPos.Y[600]
+							++y
+						end
+					case 3 4
+						if y>RelPos.Y[530]
+							y = y - 5
+						end
+					case 5 6
+						if y<RelPos.Y[600]
+							y = y + 5
+						end
+				end
+				tag = sprintf("%5d_%5d",y,x)
+				temptrees[tag] = { ["X"] = x, ["Y"] = y, ["Tex"] = textrees[math.random(0,len(textrees)-1)] }
+			end
+			// This set up has been done to make sure trees with a higher Y will take be more dominant, otherwise "3D issues" (as far as you can call them that) will surely arise!
+			$trees={}
+			for _,tree in spairs(temptrees)
+				trees+=tree
+			end
+			clouds={}
+			if len(texclouds)>0
+				int num
+				num = math.random(1,5)
+				for i=1,num
+					clouds +={ ["X"]=math.random(1,Screen.Width), ["Y"] = math.random(10,RelPos.Y[300]), ["Tex"]=texclouds[math.random(0,len(texclouds)-1)] }
+				end
+			end
+		//end
+	end
+	
+	void Draw()
+		static bool debugrel = false
+		int HalfY
+		HalfY = tonumber(sprintf("%d",RelPos.Y[500])) or 100
+		if not debugrel
+			CSayF("Relpos 500 = %d",HalfY) //RelPos.Y[500])
+			debugrel=true
+		end
+		// sky
+		SetColor(texsky.R,texsky.G,texsky.B)
+		Rect(0,0,Screen.Width,Screen.Height)
+		Color(CloudR,CloudG,CloudB)
+		for cloud in each(clouds)
+			cloud.Tex.Draw(cloud.X,cloud.Y)
+		end
+		// floor
+		Color(FloorR,FloorG,FloorB)
+		texfloor = texfloor or LoadImage(texfloorfile or "GFX/Textures/Road/Grass1.png")
+		texfloor.Tile(0,HalfY,Screen.Width,HalfY)
+		//texfloor.Tile(0,539,Screen.Width,539) // DEBUG! Not usable, since screen heights can differ!
+		// trees
+		for tree in each(trees)
+			tree.Tex.Draw(tree.X - (tree.Tex.Width/2),tree.Y - (tree.Tex.Height))
+		end
+	end
+
+//end
