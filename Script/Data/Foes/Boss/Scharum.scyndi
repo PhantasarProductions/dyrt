@@ -1,4 +1,4 @@
-// Converted from NIL to Scyndi on 15 Apr 2025; 20:04:44
+// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
 
 
 Module
@@ -12,7 +12,7 @@ Module
 
 LocExtern and "and"
 LocExtern not "not"
-LocExtern __skill "gint.skill"
+LocExtern __skill "Scyndi.Globals.gint.skill"
 
 // GENERATED NIL SCRIPT!
 // Generated: 12/29/2020 5:10:20 PM
