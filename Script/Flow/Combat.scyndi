@@ -50,3 +50,8 @@ Init
 End
 
 #use "Script/Use/Misc/Combat"
+
+global void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End
