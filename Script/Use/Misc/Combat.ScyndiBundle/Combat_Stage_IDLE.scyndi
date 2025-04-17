@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Stage_IDLE.scyndi
 // 
-// 	  Version: 25.04.10 III
+// 	  Version: 25.04.15
 // 	
 // 	  Copyright (C) 2019-2020, 2025 Jeroen Petrus Broks
 // 	
@@ -53,9 +53,6 @@ group Stage_IDLE extends Stage
 
 	readonly bool MouseSleep = true
 
-	void CONSTRUCTOR()
-		Stage.Stages.IDLE=self
-	end
 	
 	void Draw()
 	end
@@ -65,4 +62,9 @@ group Stage_IDLE extends Stage
 		Buffs.BuffCheck()
 	end
 	
+end
+
+
+Init
+	Stage.Stages.IDLE=Stage_IDLE
 end

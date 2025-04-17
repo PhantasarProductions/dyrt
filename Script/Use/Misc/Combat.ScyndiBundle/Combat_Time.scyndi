@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Time.scyndi
 // 
-// 	  Version: 25.04.10 IX
+// 	  Version: 25.04.16 IV
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -44,6 +44,8 @@
 
 Module
 
+#macro FreezeEnemies True
+
 #use "libs/collections"
 //#use "libs/tables"
 //#use "libs/strings"
@@ -60,7 +62,7 @@ Module
 #Accept Fighter
 #Accept Stage_Action
 
-LocExtern GetAudio "Audio.Obtain"
+LocExtern GetAudio "Scyndi.Class.Audio.Obtain"
 
 group CombatTime
 
@@ -71,20 +73,20 @@ group CombatTime
 	readonly int gauge_base_y=100
 	readonly int gauge_base_X=50
 	
-	get int gauge_x
-		return self.gauge_X
-	end
+	//get int gauge_x
+	//	return self.gauge_X
+	//end
 	
-	set int gauge_x
-		self.gauge_X = value
-	end
+	//set int gauge_x
+	//	self.gauge_X = value
+	//end
 	
-	get int gauge_y
-		return self.gauge_Y
-	end
-	set int gauge_y
-		self.gauge_Y = value
-	end
+	//get int gauge_y
+	//	return self.gauge_Y
+	//end
+	//set int gauge_y
+	//	self.gauge_Y = value
+	//end
 	
 	var ImgGauge
 	var ImgPointHero
@@ -96,10 +98,12 @@ group CombatTime
 		return self.FontGauge
 	end
 	
-	void CONSTRUCTOR()
-		self.ImgGauge = TImage.Obtain('COMBAT_TIMEGAUGE')
-		self.ImgPointHero = TImage.Obtain('COMBAT_TIMEPOINTHERO')
-		self.ImgPointFoe  = TImage.Obtain('COMBAT_TIMEPOINTFOE' )
+	void StartUp()
+		Graphics.ListImages()
+		self.ImgGauge = TImage.Obtain("COMBAT_TIMEGAUGE")
+		self.ImgPointHero = TImage.Obtain("COMBAT_TIMEPOINTHERO")
+		//self.ImgPointFoe  = TImage.Obtain("COMBAT_TIMEPOINTFOE" )
+		ImgPointFoe = LoadNewImage("GFX/Combat/UI/GaugePointFoe.png","COMBAT_TIMEPOINTFOE")
 		self.gauge_Y = -500
 		self.FontGauge = GetFont("SYSFONT")
 	end
@@ -136,7 +140,7 @@ group CombatTime
 			self.gauge_Y++
 		end
 		__white
-		self.ImgGauge.XDraw(self.gauge_X,self.gauge_Y)
+		self.ImgGauge.Draw(self.gauge_X,self.gauge_Y)
 		// This code was used in the original Dyrt game... Useless here
 		// (No NIL can handle these line, that ain't the problem)
 		// as the underlying code is completely different, but it DOES 
@@ -159,12 +163,12 @@ group CombatTime
 				dx = gx + $gauge_x
 				switch iteam
 					case "Hero"
-						self.ImgPointHero.XDraw(dx,self.gauge_Y)
+						self.ImgPointHero.Draw(dx,self.gauge_Y)
 						self.ImgGaugeIcon[imember] = self.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
 						__white
-						self.ImgGaugeIcon[imember].XDraw(dx,self.gauge_y-25)
+						self.ImgGaugeIcon[imember].Draw(dx,self.gauge_y-25)
 					case "Foe"
-						self.ImgPointFoe.XDraw (dx,self.gauge_Y+11)
+						self.ImgPointFoe.Draw (dx,self.gauge_Y+11)
 						__white
 						self.FontGauge.Dark(ifighter.Letter,dx,self.gauge_Y+40,1,0)
 					default
@@ -178,6 +182,9 @@ group CombatTime
 	
 	void UpdateGauge()
 		for iteam,imember,ifighter in Fighter.ForAllQuick()
+			if FreezeEnemies && iteam=="Foe"
+				ifighter.GaugePosition=0
+			end
 			bool offgauge
 			for _,s in ifighter.StatusChanges.QEach
 			//for _,s in pairs ( ifighter.StatusChangesRealTable )
@@ -195,8 +202,7 @@ group CombatTime
 				if ifighter.GaugePosition>10000
 					ifighter.GaugePosition = 10000
 				end
-			elseif ifighter.GaugePosition == 10000
-				// TODO: Link to AI or to Player Input
+			elseif ifighter.GaugePosition == 10000		
 				ifighter.PreInput()
 				if ifighter.StatusAltAI("")
 				elseif iteam=="Hero"
@@ -225,9 +231,13 @@ group CombatTime
 			elseif ifighter.GaugePosition == 20000
 				Stage_Action.ComeToMe(ifighter.NextAct)
 			else
-				error(sprintf("Invalid gauge position! (%09d) (%s)",ifighter.GaugePosition,ifighter.Tag))
+				Lua.error(sprintf("Invalid gauge position! (%09d) (%s)",ifighter.GaugePosition,ifighter.Tag))
 			end
 		end
 	end
 	
 end
+
+Init
+	CombatTime.StartUp()
+End

@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.04.15
+// 	  Version: 25.04.17 I
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -93,7 +93,7 @@ Class __RPGCharStat
 	ReadOnly String StTag
 	ReadOnly String PrTag
 	ReadOnly Bool EndStat = False
-	ReadOnly Var EndRet = {}
+	//ReadOnly Var EndRet 
 	
 	Get Int Value
 		If EndStat
@@ -101,7 +101,7 @@ Class __RPGCharStat
 			for sb in Each(_statsubs)
 				r+=Parent.Stat(sb..StTag).Value
 			End
-			EndRet.Value=r
+			//EndRet.Value=r
 			//return EndRet
 			return r
 		end
@@ -113,6 +113,7 @@ Class __RPGCharStat
 		If EndStat
 			CSayF("%s is an EndStat and can therefore not be defined. Not with %d, not with ANY value!",PrTag,_Value)
 		End
+		// CSayF("Stat %s::%s -> %d (%s/%s)",Parent.Tag,PrTag,_Value,Parent,Parent.Pure) // Hardcore debug
 		Parent.Pure.Stat[PrTag] = _Value
 	End
 		
@@ -130,7 +131,7 @@ Class __RPGChar
 	Static ReadOnly Table Reg = {}
 	ReadOnly String Tag
 	ReadOnly Var Pure
-	ReadOnly Table StatTab = {}
+	ReadOnly Table StatTab 
 	
 	Var Stat(String StTag)
 		StatTab[StTag] = StatTab[StTag] || new __RPGCharStat(self,StTag)
@@ -144,7 +145,10 @@ Class __RPGChar
 	
 	Var Points(String PTag)
 		r:=Pure.Points[PTag]
-		if (PTag=="HP"); r.Maximum = self.Stat("END_HP").Value; End
+		If (PTag=="HP")
+			if r.Maximum != self.Stat("END_HP").Value; CSayF("Correcting Max HP %4d -> %4d (%s)",r.Maximum, self.Stat("END_HP").Value,Tag); End
+			r.Maximum = self.Stat("END_HP").Value
+		End
 		return r
 	End
 	
@@ -154,6 +158,7 @@ Class __RPGChar
 	End
 		
 	Constructor(String _Tag)
+		StatTab = {}
 		Tag  = _Tag
 		Pure = _rpgStat.Char[_Tag]
 		//Reg[_Tag] = self
@@ -183,7 +188,8 @@ Group RPG
 		//CSayF("%s T = %s; %s lv = %s",Lua.type(T),T,Lua.type(lv))
 		_rpgstat.NewChar(T)
 		_rpgstat.Char[T].Stat.Level = lv
-		return new __RPGChar(T)
+		__RPGChar.Reg[T] = new __RPGChar(T) 
+		return __RPGChar.Reg[T]
 	End
 	
 	Var GetChar(String T)
@@ -193,7 +199,23 @@ Group RPG
 		return __RPGChar.Reg[T]
 	End
 	
-	Get Var Char; Return RPG.GetChar; End
+	Get Var EachChar
+		int i = 0
+		cl := _rpgstat.CharList
+		ddef retfun
+			if i>=len(cl); return nil; end
+			String r :=cl[i]
+			i++
+			return r
+		end
+		return retfun
+	end
 	
+	Get Var Char; Return RPG.GetChar; End
+		
+	Void KillChar(String T)
+		__RPGChar.Reg[T] = nil
+		_rpgstat.KillChar(T)
+	End
 	
 End

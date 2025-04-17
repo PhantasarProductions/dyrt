@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.13 V
+// 	  Version: 25.04.17
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -80,7 +80,8 @@ class Hero extends Fighter
 	var Will
 	
 	get number fEXP_Rate
-		return self.EXP_Rate/100
+		LocExtern _self "self"
+		return _self.EXP_Rate/100
 	end
 	
 	bool Leaving = false
@@ -90,31 +91,34 @@ class Hero extends Fighter
 	end
 	
 	get int JI_MODX
+		LocExtern this "self"
 		//int OUTX
-		if self.JumpIn>0
-			return (Screen.Width+70)-self.SpotX
+		if JumpIn>0
+			return (Screen.Width+70)-this.SpotX
 		end
 		return 0 
 	end
 	
 	get int X
-		if self.UseTemp
-			return self.TempX
+		LocExtern this "self"
+		if this.UseTemp
+			return this.TempX
 		end
-		if self.JumpIn<=0
-			return self.SpotX
+		if JumpIn<=0
+			return this.SpotX
 		end
-		return math.floor( self.SpotX + ((self.JI_MODX/90)*self.JumpIn) )
+		return math.floor( this.SpotX + ((this.JI_MODX/90)*this.JumpIn) )
 	end
 	
 	get int Y
-		if self.UseTemp
-			return self.TempY
+	LocExtern this "self"
+		if this.UseTemp
+			return this.TempY
 		end
-		if self.JumpIn<=0
-			return self.SpotY
+		if JumpIn<=0
+			return this.SpotY
 		end
-		return math.floor( self.SpotY - math.abs(xmath.sin(self.JumpIn)*50) )
+		return math.floor( this.SpotY - math.abs(xmath.sin(this.JumpIn)*50) )
 	end
 	
 	get int SpotNum
@@ -226,7 +230,7 @@ class Hero extends Fighter
 		locExtern skl "Scyndi.Globals.SNN1"
 		//chrreq = NIL.Use("Script/Char/Ability/"..self.Tag)
 		Lua.Scyndi.Use("Script/Char/Ability/ABL_"..self.Tag)
-		chrreq = Lua.Scyndi.Class["ABL_"..self.Tag].abl
+		chrreq = Lua.Scyndi.Class["ABL_"..self.Tag].Lijst
 		for ablk,abl in pairs(chrreq)
 			bool unlock = true
 			unlock = unlock and (not AbilitiesMastered[self.Tag][ablk])
@@ -317,6 +321,7 @@ class Hero extends Fighter
 		myhero.Heroes[pos || len(myhero.Heroes)] = myhero
 		myhero.Char = RPG.Char(tag)
 		myhero.CharTag = tag		
+		CSayF("HP %4d/%4d (%s)",RPG.Char(tag).Points("HP").Have,RPG.Char(tag).Points("HP").Maximum,Tag)
 		CSay("Loading will: "..tag)
 		//myhero.Will = NIL.Use("Script/Char/Will/"..tag)
 		Lua.Scyndi.Use("Script/Char/Will/Will_"..tag)
@@ -349,7 +354,7 @@ class InputMenuItem
 		self.List.Clear()
 	end
 	
-	void CONSTRUCTOR(int ax, int ay, delegate aaction, delegate aallowed)
+	CONSTRUCTOR(int ax, int ay, aaction, aallowed)
 		self.x = ax
 		self.y = ay
 		self.action = aaction
@@ -378,7 +383,7 @@ group Stage_SelectTarget extends Stage
 	void ComeToMe(string aCharTag,string aItemTag, xdata)
 		self.CharTag = aCharTag
 		self.ItemTag = aItemTag
-		self.Item = Lua.Item[aItemTag]
+		self.Item = Lua.Scyndi.Globals.Item[aItemTag]
 		self.Ch = RPG.Char(aCharTag)
 		self.xdata = xdata
 		Stage.Go("SELECTTARGET")
@@ -657,7 +662,7 @@ group Stage_PlayerInput extends Stage
 	end
 	
 
-	void CONSTRUCTOR()
+	void StartUp()
 		Stage.Stages.PLAYERINPUT=self
 		self.ImgMenu = TImage.Obtain("COMBAT_INPUTMENU")
 		
@@ -693,7 +698,7 @@ group Stage_PlayerInput extends Stage
 		for item in InputMenuItem.List.Each
 			if Mouse.X>item.x+mx and Mouse.Y>item.y+my and Mouse.X<item.x+52+mx and Mouse.Y<item.y+52+my
 				InputMenuItem.Hover = item
-				InputMenuItem.Cursor[item.allowed()].XDraw(mx+item.x,my+item.y)
+				InputMenuItem.Cursor[item.allowed()].Draw(mx+item.x,my+item.y)
 			end
 		end
 	end
@@ -705,3 +710,7 @@ group Stage_PlayerInput extends Stage
 	end
 
 end
+
+Init
+	Stage_PlayerInput.StartUp()
+End

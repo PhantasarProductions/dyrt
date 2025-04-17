@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Stage_Victory.scyndi
 // 
-// 	  Version: 25.04.12
+// 	  Version: 25.04.17 III
 // 	
 // 	  Copyright (C) 2019-2020, 2025 Jeroen Petrus Broks
 // 	
@@ -72,7 +72,7 @@ group Stage_VICTORY extends Stage
 	string old
 	int ChainTime
 
-	void CONSTRUCTOR()
+	Void Start()
 		Stage.Stages.VICTORY=self
 		self.YW   = TImage.Obtain("COMBAT_YOUWIN")
 		self.YW_Y = -100
@@ -125,10 +125,17 @@ group Stage_VICTORY extends Stage
 			Foe.TotalMassacre()
 			__victor=true
 			gv.Int.Victories++
+			CSayF("Victories: %d",gv.int.Victories)
 			APReset()
+			CSayF("Going back to the field!")
 			GoToFlow("FIELD")
+			CSayF("Killing combat flow!")
 			KillFlow("COMBAT")
 		end
 	end
 	
 end
+
+Init
+	Stage_VICTORY.Start()
+End

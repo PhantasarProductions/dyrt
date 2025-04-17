@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Foes.scyndi
 // 
-// 	  Version: 25.04.15 III
+// 	  Version: 25.04.17 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -102,11 +102,12 @@ class Foe extends Fighter
 	end
 	
 	get bool ShowHP
+		locExtern this "self"
 		switch __skill
 			case 1
 				return true
 			case 2
-				return Killed[self.FromFile]>0 
+				return Killed[this.FromFile]>0 
 				// gv.Int[sprintf('Defeated_%s',self.FromFile)]>0 // Old setting!
 			case 3
 				return false
@@ -116,26 +117,27 @@ class Foe extends Fighter
 	end
 	
 	get bool GoOversoul
-		if __skill==1 or self.Oversoul
+		LocExtern this "self"
+		if __skill==1 or this.Oversoul
 			// Make sure "Oversoul" will NEVER happen in the easy mode!
 			// And an enemy who already went oversoul should not do that again, either.
 			return false
 		end
-		CSayF("Check oversoul: File %s; Kills: %2d; Needed: %2d >> %s",self.FromFile,Killed4Oversoul[self.FromFile],(10 / (__skill-1)),tostring(Killed4Oversoul[self.FromFile]>=(10 / (__skill-1))))
-		if Killed4Oversoul[self.FromFile]>=(10 / (__skill-1))			
+		CSayF("Check oversoul: File %s; Kills: %2d; Needed: %2d >> %s",this.FromFile,Killed4Oversoul[this.FromFile],(10 / (__skill-1)),tostring(Killed4Oversoul[this.FromFile]>=(10 / (__skill-1))))
+		if Killed4Oversoul[this.FromFile]>=(10 / (__skill-1))			
 			bool go_over = true
 			CSay("= Positive! But are there not other things in order!")
-			for t,v in pairs(self.Team.Foe)
-				//if t!=self.Tag and v.FromFile:upper()==self.FromFile:upper() and (not v.Oversoul)
-				if t!=self.Tag
-					go_over = go_over and (not (v.FromFile:upper()==self.FromFile:upper() and v.Oversoul))
-					CSayF("= Same? %s; Oversoul? %s;  Still good? %s",tostring(v.FromFile:upper()==self.FromFile:upper()),tostring(v.Oversoul),tostring(go_over))
+			for t,v in pairs(this.Team.Foe)
+				//if t!=this.Tag and v.FromFile:upper()==Upper(this.FromFile) and (not v.Oversoul)
+				if t!=this.Tag
+					go_over = go_over and (not (upper(v.FromFile)==upper(this.FromFile) and v.Oversoul ) ) 
+					//CSayF("= Same? %s; Oversoul? %s;  Still good? %s",tostring(v.FromFile:upper()==Upper(this.FromFile)),tostring(v.Oversoul),tostring(go_over))
 				end
 			end			
 			if go_over
 				CSay("Let's go oversoul!")
 				Combat_Message.Msg("Oversoul!")
-				self.Compile(self.FoeID,self.FromFile,true)
+				this.Compile(this.FoeID,this.FromFile,true)
 				CombatTime.CalcSpeed()
 				return true
 			end
@@ -152,11 +154,12 @@ class Foe extends Fighter
 	end
 	
 	get string Letter
-		assert(self.FoeID>=0,"Negative Foe Number!")
-		if self.FoeID<=26
-			return lstring.char(64+self.FoeID)
-		elseif self.FoeID<=701
-			return lstring.char(64+math.floor(self.FoeID/26))..lstring.char(65+(self.FoeID%26))
+		LocExtern this "self"
+		assert(this.FoeID>=0,"Negative Foe Number!")
+		if this.FoeID<=26
+			return lstring.char(64+this.FoeID)
+		elseif this.FoeID<=701
+			return lstring.char(64+math.floor(this.FoeID/26))..lstring.char(65+(this.FoeID%26))
 		end
 		return "?"
 	end
@@ -192,7 +195,7 @@ class Foe extends Fighter
 			end
 		end
 		__white
-		if prefixed(self.FromFile:upper(),"KIDS/") and Killed["Boss/Frundarmon"]>0 
+		if prefixed(Upper(self.FromFile),"KIDS/") and Killed["Boss/Frundarmon"]>0 
 			--RPG.GetChar(self.Tag).Points("HP").Have
 			Combat_Message.Msg("Frundarmon's undead kids are fading away")
 		end
@@ -237,14 +240,16 @@ class Foe extends Fighter
 	end
 	
 	static void TotalMassacre()
+		CSay("Removing foes from memory!")
 		for ch in RPG.EachChar
 			if prefixed(ch,"FOE") 
 				RPG.KillChar(ch)
 				CSayF("Removed %s",ch)
 			end
 		end
+		CSay("Removal complete!")
 	end
-
+	
 end
 
 // Dirty, but functional!

@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
 // 
-// 	  Version: 25.04.15
+// 	  Version: 25.04.17
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -82,25 +82,25 @@ class Fighter
 	end
 	
 	get var Ch
-		return RPG.GetChar(self.Tag)
+		return RPG.GetChar(Me.Tag)
 	end
 	
 	get int X
-		if self.UseTemp
-			return self.TempX
+		if Me.UseTemp
+			return Me.TempX
 		end
-		return self.SpotX
+		return Me.SpotX
 	end
 	
 	get int Y
-		if self.UseTemp
-			return self.TempY
+		if me.UseTemp
+			return me.TempY
 		end
-		return self.SpotY
+		return me.SpotY
 	end
 	
 	get int Agility
-		return self.Char.Stat("END_Agility").Value
+		return me.Char.Stat("END_Agility").Value
 	end
 	
 	static table Team
@@ -194,6 +194,10 @@ class Fighter
 	end
 	
 	var HP
+	
+	Destructor
+		CSayF("Destroying Fighter Record: %s",Tag)
+	End
 
 	//final void 
 	CONSTRUCTOR(string aTag)
@@ -228,7 +232,7 @@ class Fighter
 					alive = true
 				end
 				// CSayF("%s (Alive Check) %04d . Alive=%s Modified=%s",self.Tag,self.HP.Have,tostring(alive),tostring(stat_modified))
-				ku = k:upper()
+				ku = upper(k)
 				switch ku
 					case "DEATH" "FALLEN"
 						if self.Char.Points("HP").Have==0
@@ -253,7 +257,7 @@ class Fighter
 									return nil,nil;
 								end								
 								k = Combat_Status.SN[i]
-								uk = k:upper()
+								uk = upper(k)
 								v = self.StatusChanges[uk]
 								if v and self.HP.Have==0 and uk!="DEATH" and uk!="FALLEN" and uk!="OVERSOUL" 
 									self.StatusChanges[uk] = false;

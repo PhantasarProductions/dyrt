@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest.scyndi
 // 
-// 	  Version: 25.04.13 VIII
+// 	  Version: 25.04.15 I
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -54,7 +54,7 @@ Module
 
 #use "Script/Use/Need"
 
-#accept tonumber
+LocExtern tonumber "tonumber"
 
 //module Forest_Template_Module
 
@@ -95,16 +95,16 @@ Module
 				case "string"
 					switch lc
 						case 1
-							textrees+=LoadImage(v)
+							textrees+=LoadNewImage(v,"ARENAFOREST::"..v)
 						case 2
-							texfloor = LoadImage(v)
+							texfloor = LoadNewImage(v,"ARENAFOREST::"..v)
 							lc = 1
 						case 3
-							error("Expected color table")
+							Lua.error("Expected color table")
 						case 4
 							texclouds+=LoadImage(v)
 						default
-							error("Unknown string situation!")
+							Lua.error("Unknown string situation!")
 					end
 				case "table"
 					switch lc

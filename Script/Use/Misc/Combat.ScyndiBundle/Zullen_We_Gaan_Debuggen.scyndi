@@ -1,0 +1,50 @@
+// License:
+// 	src/Script/Script/Use/Misc/Combat.ScyndiBundle/Zullen_We_Gaan_Debuggen.scyndi
+// 	Debug Combat
+// 	version: 25.04.16 III
+// 
+// 	Copyright (C) 2025 Jeroen P. Broks
+// 
+// 	This software is provided 'as-is', without any express or implied
+// 	warranty.  In no event will the authors be held liable for any damages
+// 	arising from the use of this software.
+// 
+// 	Permission is granted to anyone to use this software for any purpose,
+// 	including commercial applications, and to alter it and redistribute it
+// 	freely, subject to the following restrictions:
+// 
+// 	1. The origin of this software must not be misrepresented; you must not
+// 	   claim that you wrote the original software. If you use this software
+// 	   in a product, an acknowledgment in the product documentation would be
+// 	   appreciated but is not required.
+// 	2. Altered source versions must be plainly marked as such, and must not be
+// 	   misrepresented as being the original software.
+// 	3. This notice may not be removed or altered from any source distribution.
+// End License
+Module
+
+#use "Libs/SCI/Sys"
+
+
+#accept Fighter
+
+Void QDoing(String A, String B)
+	locExtern tb "Field_Debug_QDoing_TB"
+	tb=tb||10
+	String PA:=sprintf("%s: ",A)
+	tb=math.max(tb,len(PA))
+	While len(PA)<tb
+		PA+=" "
+	End
+	printf("\x1b[93m%s\x1b[96m%s\x1b[37m\n",PA,B)
+End
+
+global void DEBUG_VIEW_HP()
+	for iteam,imember,ifighter in Fighter.ForAllQuick()
+		QDoing(iteam.."::"..imember,sprintf("%4d/%4d  (%s -- %s)",ifighter.char.points("HP").have,ifighter.char.points("HP").maximum,ifighter.char.Name,ifighter.char.Tag))
+	end
+end
+
+Init
+	Sys.ConsoleLocal("HP","DEBUG_VIEW_HP")
+End

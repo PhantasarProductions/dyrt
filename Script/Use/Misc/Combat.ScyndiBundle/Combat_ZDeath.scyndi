@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_ZDeath.scyndi
 // 
-// 	  Version: 25.04.10 VII
+// 	  Version: 25.04.17 I
 // 	
 // 	  Copyright (C) 2019 - 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -68,16 +68,16 @@ void EnemyDeathFade(f)
 	string tag
 	var dF
 	tag = f.Tag
-	DeadEnemies[tag] = DeadEnemies[tag] or {['X']=1000,['Y']=1000}
+	DeadEnemies[tag] = DeadEnemies[tag] || {["X"]=1000,["Y"]=1000}
 	dF = DeadEnemies[tag]
 	if dF.X==0
 		return
 	end // get out!
 	dF.X = dF.X - 8
 	dF.Y = dF.Y + 11
-	SetScale(dF.X,dF.Y)
-	f.Image.XDraw(f.X,f.Y)
-	SetScale(1000,1000)
+	SetScale(dF.X / 1000,dF.Y / 1000)
+	f.Image.Draw(f.X,f.Y)
+	SetScale(1,1)
 	if (f.FromFile=="BOSS/KIRANA3" or f.FromFile=="BOSS/JERACKO3" or f.FromFile=="BOSS/ALDARUS3" or f.FromFile=="BOSS/RONDOMO3") and (not Done["Onyx_Death_Cry_"..f.FromFile])
 		string ft
 		ft = replace(f.FromFile,"BOSS/","")
@@ -165,7 +165,7 @@ void EnemyDeathFade(f)
 		bool okdrop
 		if f.Drop and len(f.Drop)>0 and not f.StolenFrom
 			int r
-			r = math.random(1,len(f.Drop))
+			r = math.random(0,len(f.Drop)-1)
 			switch type(f.Drop[r])
 				case "number"
 					if __cash<(900000000/__skill)
@@ -173,10 +173,10 @@ void EnemyDeathFade(f)
 						__cash = __cash + f.Drop[r]
 						if f.Drop[r]==1
 							Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
-							new Hurt("Dropped 1 __onecurrency",tag,255,255,0)
+							new Hurt("Dropped 1 shilder",tag,255,255,0)
 						elseif f.Drop[r]>0
 							Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
-							new Hurt(sprintf("Dropped %d __currency",f.Drop[r]),f.Tag,255,255,0)
+							new Hurt(sprintf("Dropped %d shilders",f.Drop[r]),f.Tag,255,255,0)
 						end
 					end
 				case "string"
