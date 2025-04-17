@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Introduction.scyndi
 // 
-// 	  Version: 25.03.17 I
+// 	  Version: 25.04.16
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -141,8 +141,8 @@ group Loading
 		new Loader("Image","gfx/Combat/UI/YouLose.png","COMBAT_YOULOSE")
 		
 		// Hero pointers
-		for _,ch in ipairs {"Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}
-			new Loader("Image",sprintf("gfx/combat/ui/GaugeIcons/%s.png",ch),sprintf("COMBAT_GAUGE_%s",ch))
+		for _,ch in ipairs {[0]="Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}
+			new Loader("Image",sprintf("gfx/combat/ui/GaugeIcons/%s.png",ch),sprintf("COMBAT_GAUGE_%s",Upper(ch)))
 		end
 	
 		// BoxText Font
