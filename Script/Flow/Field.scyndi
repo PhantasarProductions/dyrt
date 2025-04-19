@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.13 I
+// 	  Version: 25.04.19 III
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -796,7 +796,18 @@ group FlowField
 			//m = "MAPCHANGES."..FieldMap.LoadedMap
 			//f = assert(NIL.Load(Swap.Data[m]))
 			//f()
-			CSay("\007! \x1b[93m Map changes not yet handled! -- Flow.scyndi:751 -- Github issue #300")
+			//CSay("\007! \x1b[93m Map changes not yet handled! -- Flow.scyndi:751 -- Github issue #300")
+			oldl:=Kthura.CurrentLayer			
+			for Lay in Kthura.Layers.Each
+				Kthura.CurrentLayer = Lay
+				pkills:=PermaChanges.List(MapFile,"Kills."..Lay)
+				For victim in Each(pkills)
+					CSayF("- Permakill: %s (Layer: %s)",victim,Lay)
+					Kthura.Kill(victim)
+				end
+			end
+			Kthura.CurrentLayer = Ternary(oldl && oldl!="") || Kthura.CurrentLayer 
+			CSay("\007 \x1b[93m Map changes other than kills not yet handled! Flow.scyndi:810")
 		end
 		CSay("= Zone Action")
 		ZoneAction.Reset()
@@ -811,6 +822,7 @@ group FlowField
 				CSay("= WARNING! Scenario \""..scenfile.."\" not found!") //,255,0,0)
 			end
 		end
+		CSay("= MapScript - Scyndi")
 		do
 			string MapScriptFile 
 			MapScriptFile = "Script/MapScript/"..Trim(MapFile)..".lbc"
