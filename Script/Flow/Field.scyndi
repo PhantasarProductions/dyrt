@@ -811,7 +811,6 @@ group FlowField
 				CSay("= WARNING! Scenario \""..scenfile.."\" not found!") //,255,0,0)
 			end
 		end
-		CSay("= NIL Script")
 		do
 			string MapScriptFile 
 			MapScriptFile = "Script/MapScript/"..Trim(MapFile)..".lbc"
