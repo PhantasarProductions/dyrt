@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Stage_Victory.scyndi
 // 
-// 	  Version: 25.04.17 III
+// 	  Version: 25.04.17 IV
 // 	
 // 	  Copyright (C) 2019-2020, 2025 Jeroen Petrus Broks
 // 	
@@ -122,7 +122,7 @@ group Stage_VICTORY extends Stage
 			if Combat_Start.Music!="*NONE*"
 				Music.Pop()
 			end
-			Foe.TotalMassacre()
+			//Foe.TotalMassacre() // For no reason at all the foes are still being addressed after this crashing the game in the process and no way to debug. I guess I may need to clean this up in the savegame routine,then.
 			__victor=true
 			gv.Int.Victories++
 			CSayF("Victories: %d",gv.int.Victories)
