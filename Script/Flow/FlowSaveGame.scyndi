@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FlowSaveGame.scyndi
 // 
-// 	  Version: 25.04.17
+// 	  Version: 25.04.19 I
 // 	
 // 	  Copyright (C) // License Information:, 2025 Jeroen Petrus Broks
 // 	
@@ -340,6 +340,7 @@ void Action_Load(int Spot)
 	CSay("Parsing Permanent Map Changes")
 	plua PM = GINIE.CreateNew("Map_PermaChanges")
 	PM.Source = S.Text["PermaMapChanges.ini"] 
+	printf("\x1b[37m%s\n",S.Text)
 	CSay("Parsing inventory")
 	//Plua Inv = GINIE.CreateNew("INVENTORY")
 	//Inv.Source = S.Text["Inventory.ini"]
