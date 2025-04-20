@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.17
+// 	  Version: 25.04.20 II
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -183,7 +183,7 @@ class Hero extends Fighter
 		string imember
 		imember = self.Tag
 		CombatTime.ImgGaugeIcon[imember] = CombatTime.ImgGaugeIcon[imember] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",imember))
-		CombatTime.ImgGaugeIcon[self.Tag].XDraw(dx,dy+15)
+		CombatTime.ImgGaugeIcon[self.Tag].Draw(dx,dy+15)
 	end
 	
 	bool PosHover(int ax,int ay)
@@ -375,6 +375,7 @@ group Stage_SelectTarget extends Stage
 	table targetted
 	table xdata
 	bool wrongteam
+	Link IAA_Item = Lua.Scyndi.Globals.Item
 
 	void __CONSTRUCTOR()
 		Stage.Stages.SELECTTARGET = self
@@ -425,12 +426,18 @@ group Stage_SelectTarget extends Stage
 							//DarkText.Font("?????",fight.X+80,ystat)
 							CombatTime.FontGauge.Dark("?????",fight.X+80,ystat)
 						else
-							CombatTime.FontGauge.Dark(Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
-							if fight.NextAct.Targets[1].Icon
+							if !IAA_Item[fight.NextAct.ActTag]
+								// Another void?
+								SetColor(255,0,0)
+								CombatTime.FontGauge.Dark(sprintf("Error IAA: %s",fight.NextAct.ActTag),fight.X+80,ystat)
+							else
+								CombatTime.FontGauge.Dark(IAA_Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
+							end
+							if fight.NextAct.Targets[0].Icon
 								// it's not possible in any single way for the game to crash out on this one, 
 								// yet it did happen. This routine makes sure that if it happens the instruction is ignored.
 								// Yes this is safe... I couldn't happen in the first place.
-								fight.NextAct.Targets[1].Icon(fight.X+40,ystat)
+								fight.NextAct.Targets[0].Icon(fight.X+40,ystat)
 							end
 						end
 						ystat += 20
