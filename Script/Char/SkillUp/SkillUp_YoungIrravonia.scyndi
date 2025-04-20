@@ -34,10 +34,11 @@
 // **********************************************
 // 
 // 
-// version: 25.04.20 I
+// version: 25.04.20 II
 // 
 // End License
 
+#use "Libs/SCI/Sys"
 
 module
 	//delegate ret
@@ -46,4 +47,4 @@ module
 	end
 	
 	//return ret
-end
+//end
