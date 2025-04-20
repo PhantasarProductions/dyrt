@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Time.scyndi
 // 
-// 	  Version: 25.04.16 IV
+// 	  Version: 25.04.20
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -44,7 +44,7 @@
 
 Module
 
-#macro FreezeEnemies True
+#macro FreezeEnemies False
 
 #use "libs/collections"
 //#use "libs/tables"
