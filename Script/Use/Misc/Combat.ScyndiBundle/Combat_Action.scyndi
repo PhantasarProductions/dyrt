@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Action.scyndi
 // 
-// 	  Version: 25.04.16 VI
+// 	  Version: 25.04.20
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -411,17 +411,17 @@ group Stage_Action extends Stage
 				default
 					error("Action-cancellation skill error: "..__skill)
 			end
-			Stage.Go("IDLE")
+			Lua.Scyndi.Class.Stage.Go("IDLE")
 			return
 		end
 		self.Action = Action_Announce
 		Lua.Scyndi.AllIdentifiers.Stage.Go("ACTION")
 		self.Action = Action_Announce
-		if not prefixed(Act.ExeTag,"FOE_")
+		if ! prefixed(Act.ExeTag,"FOE_")
 			Icon = Act.ExeTag
 		end
 		if (Act.Learned)
-			BoxText("NEWABILITY",Act.ExeTag:upper().."1")
+			BoxText("NEWABILITY",Upper(Act.ExeTag).."1")
 			AbilitiesMastered[Act.ExeTag][Act.LearnTag] = true
 		end
 		Combat_Message.Msg(Act.Act.Name,Icon)
