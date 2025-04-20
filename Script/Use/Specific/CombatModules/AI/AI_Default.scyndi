@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/AI/AI_Default.scyndi
 // 
-// 	  Version: 25.04.15 VII
+// 	  Version: 25.04.20 I
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -86,10 +86,10 @@ module
 			// target
 			switch nitem.Target
 				case "OS"
-					nact.Targets = {foe}
+					nact.Targets = {[0]=foe}
 					GoedGekeurd=true
 				case "1A"
-					nact.Targets = {foes[math.random(0,len(foes)-1)]}
+					nact.Targets = {[0]=foes[math.random(0,len(foes)-1)]}
 					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
 				case "AA"
 					nact.Targets = {}
@@ -105,8 +105,8 @@ module
 					if maxheroes>4
 						maxheroes=4
 					end
-					nact.Targets = {heroes[math.random(0,maxheroes-1)]}
-					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+					nact.Targets = {[0]=heroes[math.random(0,maxheroes-1)]}
+					GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
 				case "AF"
 					nact.Targets = {}
 					for check in each(heroes)
