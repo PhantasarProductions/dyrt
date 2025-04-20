@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.19 III
+// 	  Version: 25.04.20
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -598,14 +598,13 @@ group FlowField
 	end
 	
 	void TravelEmblem(string tag)
-		var kth
 		int mx
 		int my
-		kth = FieldMap.Kthura
-		kth.Obj=tag
+		kth := Lua.Scyndi.Class.Kthura
+		//kth.Obj=tag
 		//mx,my = FieldMap.FromMapCoords(kth.ObjInt.X,kth.ObjInt.Y)
-		mx = kth.ObjInt.X - FieldMap.ScrollX
-		my = kth.ObjInt.Y - FieldMap.ScrollY
+		mx = kth.Obj[tag].X - FieldMap.ScrollX
+		my = kth.Obj[tag].Y - FieldMap.ScrollY
 		__travellevel++
 		__levelcap = math.min(__levelcap + (6-__skill),1000)
 		if __newgameplus
