@@ -34,16 +34,21 @@
 // 
 // version: 20.12.15
 // End License Information
-do
-	delegate ret
-	ret = void(int skill)
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Script/Use/Need"
+
+//	delegate ret
+	void SU(int skill)
 		int lvl
 		lvl = RPG.GetChar("Irravonia").Points("SKILLLVL"..skill).Have
 		CSayF("Well Irravonia! How about we check out skill #%d for ya?",skill)
 		switch skill
 			case 0
 				// Wand
-				for _,s in ipairs { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
+				for _,s in ipairs { [0]="Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
 					bool ok
 					switch s
 						case "Strength"
@@ -96,5 +101,5 @@ do
 	
 	end
 	
-	return ret
-end
+	//return ret
+//end
