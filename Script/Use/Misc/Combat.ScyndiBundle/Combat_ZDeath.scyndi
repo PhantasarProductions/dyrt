@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_ZDeath.scyndi
 // 
-// 	  Version: 25.04.17 I
+// 	  Version: 25.04.21
 // 	
 // 	  Copyright (C) 2019 - 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -58,7 +58,7 @@ table DeadEnemies
 
 void DeadPlayer(f)
 	if not f.Pics.Dead
-		f.Pics.Dead = LoadImage( sprintf("GFX/Combat/Fighters/Hero/%s.Dead.png",f.Tag) )
+		f.Pics.Dead = LoadNewImage( sprintf("GFX/Combat/Fighters/Hero/%s.Dead.png",f.Tag),"KO_PLAYER"..f.Tag )
 	end
 	f.Pics.Dead.Draw(f.X,f.Y)
 end
