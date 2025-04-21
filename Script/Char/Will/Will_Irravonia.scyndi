@@ -34,12 +34,16 @@
 // **********************************************
 // 
 // 
-// version: 25.04.21 I
+// version: 25.04.21 IV
 // 
 // End License
 
 
 module 
+
+	#use "Libs/SCI/Sys"
+
+	#use "Script/Use/Need"
 	
 	table Warded
 	
@@ -95,6 +99,9 @@ module
 			//#pure
 			//["__index"] = function(s, elem)
 			ddef widx
+				plua s
+				string elem
+				s,elem = infinity
 				return gv.Bool["IrraWarded."..elem]
 			end
 			//#endpure
@@ -136,4 +143,4 @@ module
 	// Merya
 	delegate ManipulateItemUsage
 	
-end
+//end
