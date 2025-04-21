@@ -1,0 +1,87 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_Sparkle.scyndi
+// 
+// 	  Version: 25.04.21
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+module 
+
+#use "Libs/SCI/Graphics"
+#use "Script/use/Need"
+
+	bool DrawOvertake
+	var Glitter
+	var MAudio
+	readonly int MaxCycles = 20
+	int Cycles
+	
+	// The difference between a CONSTRUCTOR and the and Init function
+	// Is that CONSTRUCTOR is only automatically loaded when this
+	// module is called fo the first time in a combat.
+	// Init will be called EVERY time a move is being performed.
+	Init
+		Glitter = LoadNewImage("GFX/Combat/SpellAni/Glitter.png","SPELLANI_Glitter")
+		<Audio = LoadNewAudio("SFX/Combat/SpellAni/Glitter.wav","SPELLANI_Glitter")
+	end	
+
+	void SA_Init(act)
+		Cycles = 0
+		MAudio.Play()
+	end
+	
+	
+	bool Cycle(act)
+		// Count on it!
+		Cycles ++
+		
+		// Draw it all!
+		for tar in each(act.Targets)
+			for i=1,35 
+				SetColor(math.random(0,255),math.random(0,255),math.random(0,255))
+				Glitter.Draw(tar.X+math.random(0,32),tar.Y+math.random(1,64))
+			end
+		end
+		__white
+		
+		return Cycles>=MaxCycles
+	end
+	
+end
