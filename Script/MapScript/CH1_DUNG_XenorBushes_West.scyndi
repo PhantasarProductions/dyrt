@@ -35,22 +35,27 @@
 // version: 20.08.22
 // End License Information
 
-#use "script/use/anyway"
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
 
 #say "Map Script - Xenor Bushes - West!"
 group MScript
 	
-	void CONSTRUCTOR()
+	void _CONSTRUCTOR()
 		CSay("Welcome to the Xenor Buses West! Let's make sure YOMAMA has been awarded!")
 		Achievements.Award("YOMAMA")
 		
-		if not Done.XenorBushesWestFirstTimeWelcome
+		if ! Done.XenorBushesWestFirstTimeWelcome
 			Respawn.Initiated = false
 			// NOTE: This will affect savegames shot before I took this measure, but it's not a big deal!
 		end
 		
 		// Corrections
-		if not Done.InitIrravoniaBaseResistances
+		if ! Done.InitIrravoniaBaseResistances
 			CSay("Init Irravonia's and Eric's base resistances!")
 			int mini
 			int maxi
@@ -73,17 +78,17 @@ group MScript
 				mini=0
 			end			
 			// Irravonia
-			for _,e in ipairs {"Flame","Water","Wind","Earth"}				
+			for _,e in ipairs {[0]="Flame","Water","Wind","Earth"}				
 				Irra.Stat("BASE__RESIST_Elem_"..e).Value = math.random(mini,maxi)
 			end
-			for _,e in ipairs {"Silence","Exhaustion","Death","Destruction"}
+			for _,e in ipairs {[0]="Silence","Exhaustion","Death","Destruction"}
 				Irra.Stat("BASE__RESIST_Stat_"..e).Value = math.random(mini,maxi)
 			end
 			// Eric			
-			for _,e in ipairs {"Flame","Frost","Dark"}
+			for _,e in ipairs {[0]="Flame","Frost","Dark"}
 				Eric.Stat("BASE__RESIST_Elem_"..e).Value = math.random(mini,maxi)
 			end
-			for _,e in ipairs {"Poison","Disease","Death","Destruction"}
+			for _,e in ipairs {[0]="Poison","Disease","Death","Destruction"}
 				Eric.Stat("BASE__RESIST_Stat_"..e).Value = math.random(mini,maxi)
 			end
 			
@@ -123,3 +128,7 @@ group MScript
 	
 end
 #say "Map Script - Compiling!"
+
+Init
+	MScript._CONSTRUCTOR()
+End
