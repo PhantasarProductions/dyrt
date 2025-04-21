@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Execution.scyndi
 // 
-// 	  Version: 25.04.20 II
+// 	  Version: 25.04.20 III
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -360,7 +360,7 @@ group Execution
 			//delegate effect
 			//effect = NIL.Use("Script/Use/Specific/CombatModules/SpellEffect/"..Action.Act.EffectScript)
 			Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellEffect/EFFECT_"..Action.Act.EffectScript)
-			effect := Lua.Scyndi.Class("EFFECT_"..Action.Act.EffectScript).DoEffect
+			effect := Lua.Scyndi.Class["EFFECT_"..Action.Act.EffectScript].DoEffect
 			assert(effect,"Something went wrong in compiling effect: "..Action.Act.EffectScript)
 			hit = effect(Action,Target,Action.Act.EffectArgument) || hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
 		end
