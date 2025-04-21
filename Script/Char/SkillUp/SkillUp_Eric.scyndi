@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Eric.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Eric.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,18 +33,23 @@
 // 
 // **********************************************
 // 
-// version: 20.12.15
-// End License Information
-do
-	delegate ret
-	ret = void(int skill)
+// 
+// version: 25.04.21 II
+// 
+// End License
+Module
+
+#use "Libs/SCI/Sys"
+#use "Script/Use/Need"
+
+	void SU(int skill)
 		int lvl
 		lvl = RPG.GetChar("Eric").Points("SKILLLVL"..skill).Have
 		CSayF("Well Eric! Let's upgrade with skill %d",skill)
 		switch skill
 			case 0
 				// Sword
-				if lvl % 10 == 0 or lvl % __skill
+				if lvl % 10 == 0 || lvl % __skill
 					RPG.GetChar("Eric").Stat("PERMPOWERUP_Strength").Value ++
 				end
 				if lvl % (__skill * 15) == 0
@@ -55,7 +61,7 @@ do
 				// Red Dragon
 				if lvl % __skill == 0
 					RPG.GetChar("Eric").Stat("PERMPOWERUP_Strength").Value ++
-					if lvl % 2
+					if lvl % 2 == 0
 						RPG.GetChar("Eric").Stat("PERMPOWERUP_Intelligence").Value ++
 					end
 				end
@@ -63,13 +69,13 @@ do
 				// White Dragon
 				if lvl % __skill == 0
 					RPG.GetChar("Eric").Stat("PERMPOWERUP_Accuracy").Value ++
-					if lvl % 2
+					if lvl % 2 == 0
 						RPG.GetChar("Eric").Stat("PERMPOWERUP_Intelligence").Value ++
 					end
 				end
 			case 3
 				// Green Dragon
-				if lvl % (__skill*2) == 0 and RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value < (90/__skill)
+				if lvl % (__skill*2) == 0 && RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value < (90/__skill)
 					RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value ++
 				end
 				if lvl % __skill == 0
@@ -77,10 +83,10 @@ do
 				end
 			case 4
 				// Black Dragon
-				if lvl % (__skill*2) == 0 and RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Death").Value < (90/__skill)
+				if lvl % (__skill*2) == 0 && RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Death").Value < (90/__skill)
 					RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Death").Value ++
 				end
-				if lvl % (__skill*2) == 0 and RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Destruction").Value < (93/__skill)
+				if lvl % (__skill*2) == 0 && RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Destruction").Value < (93/__skill)
 					RPG.GetChar("Eric").Stat("PERMPOWERUP__RESIST_Stat_Destruction").Value ++
 				end
 				if lvl % __skill == 0
@@ -90,5 +96,3 @@ do
 	
 	end
 	
-	return ret
-end
