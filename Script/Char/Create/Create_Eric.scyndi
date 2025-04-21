@@ -1,0 +1,34 @@
+
+
+Module
+
+#use "Script/Use/Need"
+
+Init
+	var Eric
+
+	Eric = RPG.GetChar("Eric")
+	Eric.Name = Names.Eric
+
+	Eric.Data["SKILL0"] = "Sword Skills"
+	Eric.Data["SKILL1"] = "Red Dragon Power"
+	Eric.Data["SKILL2"] = "White Dragon Power"
+	Eric.Data["SKILL3"] = "Green Dragon Power"
+	Eric.Data["SKILL4"] = "Black Dragon Power"
+
+
+	// The dragon skills will be put in once Eric actually obtains them!
+
+	if __newgameplus
+		for i=0,4
+			Eric.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
+			Eric.Points(sprintf("SKILLLVL%d",i),true).Have    = 1
+		end
+	end
+
+
+	Eric.Data.Weapon = "EQW_ERICREBECCA_SHORTSWORD"
+	Eric.Data.Armor  = "EQA_SHIRT"
+	Eric.Data.Jewel  = "JWL_BRACERS"
+	
+End	
