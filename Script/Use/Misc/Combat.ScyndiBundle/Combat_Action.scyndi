@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Action.scyndi
 // 
-// 	  Version: 25.04.20
+// 	  Version: 25.04.21
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -268,7 +268,7 @@ group Action_PreMove
 					Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellAni/SPELLANI_"..self.Act.Act.SpellAniScript)
 					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
 					Action_SpellAni.sa_mod = Lua.Scyndi.Class["SPELLANI_"..self.Act.Act.SpellAniScript]
-					Action_SpellAni.sa_mod.Init(self.Act)
+					Action_SpellAni.sa_mod.SA_Init(self.Act)
 				else
 					CSay("No spellani, so let's not go for that!")
 				end
