@@ -35,26 +35,31 @@
 // version: 20.04.28
 // End License Information
 
+Script
 
-#use "Script/Use/AnyWay"
-var Irra
+#use "Script/Use/Need"
 
-Irra = RPG.GetChar("Irravonia")
-Irra.Name = Names.Irravonia
+Init
+	var Irra
 
-Irra.Data["SKILL0"] = "Wand Wielding"
-Irra.Data["SKILL1"] = "Fire Magic"
-Irra.Data["SKILL2"] = "Wind Magic"
-Irra.Data["SKILL3"] = "Water Magic"
-Irra.Data["SKILL4"] = "Earth Magic"
+	Irra = RPG.GetChar("Irravonia")
+	Irra.Name = Names.Irravonia
 
-for i=0,4
-	Irra.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
-	Irra.Points(sprintf("SKILLLVL%d",i),true).Maximum = 10000
-	Irra.Points(sprintf("SKILLLVL%d",i),true).Minimum = 1
-end
+	Irra.Data["SKILL0"] = "Wand Wielding"
+	Irra.Data["SKILL1"] = "Fire Magic"
+	Irra.Data["SKILL2"] = "Wind Magic"
+	Irra.Data["SKILL3"] = "Water Magic"
+	Irra.Data["SKILL4"] = "Earth Magic"
+
+	for i=0,4
+		Irra.Points(sprintf("SKILLEXP%d",i),true).Have    = 1
+		Irra.Points(sprintf("SKILLLVL%d",i),true).Maximum = 10000
+		Irra.Points(sprintf("SKILLLVL%d",i),true).Minimum = 1
+	end
 
 
-Irra.Data.Weapon = "EQW_IRRAVONIA_WAND_MISSILE"
-Irra.Data.Armor  = "EQA_GIRL_DRESS"
-Irra.Data.Jewel  = "JWL_YOUNGIRRAVONIA_BEADNECKLACE"
+	Irra.Data.Weapon = "EQW_IRRAVONIA_WAND_MISSILE"
+	Irra.Data.Armor  = "EQA_GIRL_DRESS"
+	Irra.Data.Jewel  = "JWL_YOUNGIRRAVONIA_BEADNECKLACE"
+	
+End	
