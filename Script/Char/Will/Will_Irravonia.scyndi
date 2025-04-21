@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Irravonia.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Will/Will_Irravonia.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,13 @@
 // 
 // **********************************************
 // 
-// version: 20.07.14
-// End License Information
-module Will_Irravonia
+// 
+// version: 25.04.21 I
+// 
+// End License
+
+
+module 
 	
 	table Warded
 	
@@ -42,14 +47,14 @@ module Will_Irravonia
 		string old
 		old = gv.String.IrraWard
 		repeat
-			self.Ward = ({"Flame","Wind","Water","Earth"})[math.random(1,4)]
+			Ward = ({"Flame","Wind","Water","Earth"})[math.random(1,4)]
 		until old!=gv.String.IrraWard
-		CSay("Irravonia will ward: "..self.Ward)
+		CSay("Irravonia will ward: "..Ward)
 	end
 	
 	get string Ward
 		if gv.String.IrraWard==""
-			self.MkWard()
+			MkWard()
 		end
 		return gv.String.IrraWard
 	end
@@ -66,29 +71,34 @@ module Will_Irravonia
 		RPG.GetChar("Irravonia").Points("AP").Have = value
 	end
 		
-	void CONSTRUCTOR()
-		setmetatable(self.Warded,{
-			["__newindex"] = void(s,string elem,bool value)
+	Init
+		//setmetatable(Warded,{
+		//	["__newindex"] = void(s,string elem,bool value)
+			ddef wnidx
+				plua s
+				string elem
+				bool value
+				s,elem,value = infinity
 				gv.Bool["IrraWarded."..elem] = value
 				bool yes = true
-				for _,e in ipairs {"Flame","Wind","Water","Earth"}
-					yes = yes and self.Warded[e]
+				for _,e in ipairs {[0]="Flame","Wind","Water","Earth"}
+					yes = yes && Warded[e]
 				end
 				if yes
 					Achievements.Award("WILL_IRRAVONIA")
 				end
-			end,
+			end
 			
 			// for some (odd) reason NIL 
 			// didn't recognize the function defintion here, so let's 
-			// make Lua do it by itself.
-			#pure
-			["__index"] = function(s, elem)
+			// make Lua do it by it
+			//#pure
+			//["__index"] = function(s, elem)
+			ddef widx
 				return gv.Bool["IrraWarded."..elem]
 			end
-			#endpure
-			
-		})
+			//#endpure
+			SetMetaTable(Warded,{["__index"]=widx,["__newindex"]=wnidx	})
 	end
 	
 	// Scyndi
@@ -103,16 +113,16 @@ module Will_Irravonia
 	// Irravonia, Brendor
 	int DamageManipulation(Action,int Damage,string Element)
 		CSay("Will Irravonia ward this?")
-		if Element:upper()!=self.Ward:upper()
-			CSayF("No.... Element doesn't match! (%s != %s)",Element:upper(),self.Ward:upper())
+		if Upper(Element)!=Upper(Ward)
+			CSayF("No.... Element doesn't match! (%s != %s)",Upper(Element),Upper(Ward))
 			return Damage
 		end
 		new Hurt("Personal will:","Irravonia",255,180,0)
 		new Hurt("Elemental ward","Irravonia",0,180,255)
 		if __skill!=3
-			#+ self.AP Damage
+			 AP += Damage
 		end
-		self.MkWard()
+		MkWard()
 		return 0
 	end
 
