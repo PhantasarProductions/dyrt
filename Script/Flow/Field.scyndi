@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.20
+// 	  Version: 25.04.21 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -934,10 +934,10 @@ group FlowField
 							var cl
 							//kthura.Layer = Lay
 							//kthura.Obj=Tag
-							O:=Kthura[Tag]
+							O:=Kthura.Obj[Tag]
 							posx = O.x
 							posy = O.y + 32
-							CSayF("NPC Found on (%4d,%4d) >> %s",kth.ObjInt.x,kth.ObjInt.y,Tag)
+							CSayF("NPC Found on (%4d,%4d) >> %s",kthura.Obj[Tag].x,kthura.Obj[Tag].y,Tag)
 							spot = Tag.."_SPOT"
 							if Kthura.HasObj(spot)
 								CSayF("Trying to configure as %s was found",spot)
