@@ -50,13 +50,12 @@
 	call MapText,"YOUNG_IRRA_BOSS_B"
 	call MapScript.YoungIrraBoss
 	group 4
-	call Music.Stop
-	call Map.Kill,"YoMama",true
-	call Map.GoToLayer,"DARKNESS","Start"
-	call BoxText.Load,"GENSCEN/CH1/YOUNGIRRAVONIAEND","YOUNGIRRAEND"
+		call Music.Stop
+		call Map.Kill,"YoMama",true
+		call Map.GoToLayer,"DARKNESS","Start"
+		call BoxText.Load,"GENSCEN/CH1/YOUNGIRRAVONIAEND","YOUNGIRRAEND"
 	call BoxText,"YOUNGIRRAEND","DARK"
-	call Field.ChainMap,"ch1_hub_ericrebeccahome","YoungIrraEnd","__BASE"
-	;call error,"The post-boss has not yet been scripted"
+	call Field.ChainMap,"ch1_hub_ericrebeccahome","YoungIrraEnd","__BASE"	
 	end
 
 :Prologue
