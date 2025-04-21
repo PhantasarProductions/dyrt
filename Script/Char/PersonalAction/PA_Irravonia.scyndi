@@ -34,14 +34,20 @@
 // **********************************************
 // 
 // 
-// version: 25.04.21
+// version: 25.04.21 IV
 // 
 // End License
 
 #use "libs/sci/sys"
+#use "Libs/sci/kthura"
 #use "libs/sci/sstring"
+#use "libs/sci/graphics"
+
+#use "script/use/need"
 
 module
+
+	locextern __player "Scyndi.Class.Kthura.Obj.Player"
 
 	var Img
 	int X
@@ -53,14 +59,14 @@ module
 	
 	void IrraFly(int mix,int miy)
 		CSayF("Irravonia is to fly... Check: (%3d,%3d)!",mix,miy)
-		if FieldMap.Kthura.Blocked(__player.X+(mix*96),__player.Y+(miy*96),true)
+		if Kthura.Blocked(__player.X+(mix*96),__player.Y+(miy*96),true)
 			CWriteLine(sprintf("Request denied. Position (%5d,%5d) is blocked!",__player.X+(mix*96),__player.Y+(miy*96)),255,0,0)
 			return
 		end
 		bool yeah
-		for tag in FieldMap.Kthura.EachTag()
+		for tag in Kthura.EachTag
 			if prefixed(tag,"IrraFly_") 
-				yeah = yeah or FieldMap.Kthura.InObj(tag,__player.X+(mix*32),__player.Y+(miy*32))
+				yeah = yeah || Kthura.InObj(tag,__player.X+(mix*32),__player.Y+(miy*32))
 			end
 		end
 		if yeah
@@ -94,7 +100,7 @@ module
 	end
 	
 	Init
-		Img = LoadImage("GFX/PersAction/Irravonia.png")
+		Img = LoadImage("GFX/PersAction/Irravonia.png","PA_Irra")
 		X = Screen.Width -300
 		Y = Screen.Height-400
 	end
