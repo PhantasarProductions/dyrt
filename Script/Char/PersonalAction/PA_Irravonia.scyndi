@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/PersonalAction/Irravonia.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Char/PersonalAction/PA_Irravonia.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,16 +33,23 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.21
+// 
+// End License
 
-#use "libs/strings"
+#use "libs/sci/sys"
+#use "libs/sci/sstring"
 
-module Irravonia_Personal_Action
+module
 
 	var Img
 	int X
 	int Y
+	
+	void CWriteLine(String A)
+		CSay(A)
+	End
 	
 	void IrraFly(int mix,int miy)
 		CSayF("Irravonia is to fly... Check: (%3d,%3d)!",mix,miy)
@@ -61,34 +69,34 @@ module Irravonia_Personal_Action
 	end
 	
 	void Draw()
-		self.Img.Draw(self.X,self.Y)
+		Img.Draw(X,Y)
 	end
 	
-	bool Click(int but,int x, int y)
+	bool Click(int but,int _x, int _y)
 		bool ret
-		ret = x>self.X and y>self.Y and x<self.X+200 and y<self.Y+200
+		ret = _x>X and _y>Y and _x<X+200 and _y<Y+200
 		if ret
 			// left
-			if x<self.X+25 and y>self.Y+25 and y<self.Y+175
-				self.IrraFly(-1, 0)
+			if _x<X+25 and _y>Y+25 and _y<Y+175
+				IrraFly(-1, 0)
 			// right
-			elseif x>self.X-175 and y>self.Y+25 and y<self.Y+175
-				self.IrraFly( 1, 0)
+			elseif _x>X-175 and _y>Y+25 and _y<Y+175
+				IrraFly( 1, 0)
 			// up
-			elseif y<self.Y+25 and x>self.X+25 and x<self.X+175
-				self.IrraFly( 0,-1)
+			elseif _y<Y+25 and _x>X+25 and _x<X+175
+				IrraFly( 0,-1)
 			// down
-			elseif y>self.Y+175 and x>self.X+25 and x<self.X+175
-				self.IrraFly( 0, 1)
+			elseif _y>Y+175 and _x>X+25 and _x<X+175
+				IrraFly( 0, 1)
 			end
 		end
 		return ret
 	end
 	
-	void CONSTRUCTOR()
-		self.Img = LoadImage("GFX/PersAction/Irravonia.png")
-		self.X = Screen.Width -300
-		self.Y = Screen.Height-400
+	Init
+		Img = LoadImage("GFX/PersAction/Irravonia.png")
+		X = Screen.Width -300
+		Y = Screen.Height-400
 	end
 
-end
+//end
