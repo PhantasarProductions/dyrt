@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.21 I
+// version: 25.04.21 VII
 // 
 // End License
 
@@ -45,12 +45,15 @@ Table Lijst
 
 #use "Script/Use/Need"
 
+#accept CSay
+#accept CSayF
+
 Init
 	//int s
 	//s = __skill
 	locExtern s "Scyndi.Globals.gint.skill"
 	locExtern abls "Scyndi.Class.Abl_Eric.Lijst"
-	var abls
+	//var abls
 
 	//#pure
 	abls = {}
@@ -75,11 +78,11 @@ Init
 		abls.NeutPoison   = { ["Skill_Green Dragon"] = 1 + s }
 		abls.BioHazard    = { ["Skill_Green Dragon"] = 8 }
 		abls.Vitalize     = { ["Skill_Green Dragon"] = 5 * s }
-		abls.Bact         = { ["Skill_Green Dragon"] = math.min((s*2)^s,60), Skill_Sword=s*5 }
+		abls.Bact         = { ["Skill_Green Dragon"] = math.min((s*2)^s,60), ["Skill_Sword"]=s*5 }
 		
 		// Black
 		abls.Darkness     = { ["Skill_Black Dragon"] = 1 }
-		abls.["Void"]     = { ["Skill_Black Dragon"] = 5*s }
+		abls["Void"]     = { ["Skill_Black Dragon"] = 5*s }
 		abls.Phantom      = { ["Skill_Black Dragon"] = 7*s }
 		abls.DVision      = { ["Skill_Black Dragon"] = 4^s }
 		abls.Evil         = { ["Skill_Black Dragon"] = 30*s }
@@ -100,4 +103,9 @@ Init
 		abls.Yasathar = { ["BoolVar"] = "EricIsYasathar" }
 	end
 	//return abls
+	
+	CSay("Eric's abilities received")
+	for k,v in spairs(Lijst)
+		CSayF("Eric has: %s -> %s",v,k)
+	end
 end
