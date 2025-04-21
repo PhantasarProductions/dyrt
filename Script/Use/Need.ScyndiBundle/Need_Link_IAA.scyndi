@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_IAA.scyndi
 // 
-// 	  Version: 25.04.09
+// 	  Version: 25.04.21
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -123,12 +123,13 @@ quickmeta CharAbilitiesMastered
 		assert(CA_CHAR!="","Illegal meta group call!")
 		assert(type(value)=="boolean","Boolean value expected!")
 		LoadSubIAA()
-		Lua.error(sprintf("CharAbilitiesMastered not yet accessible for assinging %s to %s",value,key))
-		if value==true
-			//LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = true",CA_CHAR,key) )			
-		else
-			//LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = nil",CA_CHAR,key) )
-		end
+		//Lua.error(sprintf("CharAbilitiesMastered not yet accessible for assinging %s to %s",value,key))
+		//if value==true
+		//	//LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = true",CA_CHAR,key) )			
+		//else
+		//	//LuaDoString("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] = nil",CA_CHAR,key) )
+		//end
+		gbool[sprintf("AbilityMastered::%s::%s",CA_Char,key)] = Value
 		CA_CHAR=""
 	end
 	
@@ -137,7 +138,8 @@ quickmeta CharAbilitiesMastered
 		assert(CA_CHAR!="","Illegal meta group call!")
 		bool ret
 		//ret = LuaGetBool("IAA",sprintf("SubAbilitiesMastered[trim(\"%s\")][trim(\"%s\")] == true",CA_CHAR,key) )
-		Lua.error(sprintf("CharAbilitiesMastered not yet accessible for reading from %s",key))
+		//Lua.error(sprintf("CharAbilitiesMastered not yet accessible for reading from %s",key))
+		ret = gbool[sprintf("AbilityMastered::%s::%s",CA_Char,key)]
 		CA_CHAR=""
 		return ret
 	end
@@ -145,7 +147,7 @@ end
 
 quickmeta AbilitiesMastered
 	index
-		Lua.error(sprintf("AbilitiesMastered not yet accessible for reading from %s",key))
+		//Lua.error(sprintf("AbilitiesMastered not yet accessible for reading from %s",key))
 		assert(CA_CHAR=="","Cyclic Abilities Mastered Call! ("..CA_CHAR..")")
 		CA_CHAR=key
 		if key=="Yasathar"
@@ -159,7 +161,7 @@ quickmeta AbilitiesMastered
 		error("New indexes cannot be created in Abilities Mastered!")
 	end
 	call
-		Lua.error("AbilitiesMastered not yet accessible forCALLING")
+		Lua.error("AbilitiesMastered not yet accessible for CALLING")
 		//return LuaGetString("IAA","NIL.LuaSerialize(\"SubAbilitiesMastered\",SubAbilitiesMastered)")
 	end
 end
