@@ -1,42 +1,8 @@
-// License Information:
-// **********************************************
-// 
-// src/Tricky Script/Script/Char/Will/Eric.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
-// 
-// This file contains material that is related
-// to a storyline that is which is strictly
-// copyrighted to Jeroen Broks.
-// 
-// This file may only be used in an unmodified
-// form with an unmodified version of the
-// software this file belongs to.
-// 
-// You may use this file for your study to see
-// how I solved certain things in the creation
-// of this project to see if you find valuable
-// leads for the creation of your own.
-// 
-// Mostly this file comes along with a project
-// that is for most part released under an
-// open source license and that means that if
-// you use that code with this file removed
-// from it, you can use it under that license.
-// Please check out the other files to find out
-// which license applies.
-// This file comes 'as-is' and in no possible
-// way the author can be held responsible of
-// any form of damages that may occur due to
-// the usage of this file
-// 
-// 
-// **********************************************
-// 
-// version: 20.07.11
-// End License Information
-module Will_Eric
+
+
+module 
 	
-	readonly number below
+	number below
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -56,7 +22,7 @@ module Will_Eric
 		end
 		// This is a boss! Get out unless it's round #2 against Lord Dzgjymza
 		string fil
-		fil = foe.FromFile:upper()
+		fil = Upper(foe.FromFile)
 		if (not prefixed(fil,"REG/")) and fil!="BOSS/DZGJYMZA2"
 			CSay("Boss! No coup de grace!")
 			return
@@ -97,16 +63,15 @@ module Will_Eric
 	delegate ManipulateItemUsage
 	
 	
-	void CONSTRUCTOR()
+	Init
 		switch __skill
 			case 1
-				self.below = 0.25
+				below = 0.25
 			case 2
-				self.below = 0.08
+				below = 0.08
 			case 3
-				self.below = 0.03
+				below = 0.03
 			default
-				error("Eric's Will: Unknown skill: "..__skill)
+				Lua.error("Eric's Will: Unknown skill: "..__skill)
 		end
 	end
-end
