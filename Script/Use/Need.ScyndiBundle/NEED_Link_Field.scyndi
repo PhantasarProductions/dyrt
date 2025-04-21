@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.04.20
+// 	  Version: 25.04.21
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -636,7 +636,8 @@ group Field
 	Get Delegate WipeSASKIA; return Map.WipeSASKIA; End
 
 	void LoadMap(string MapFile)
-		FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
+		//FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
+		Sys.Call("FLOW_FIELD","FlowField.LoadMap",MapFile)
 	end
 
 	void ChainMap(string MapFile,string SaskiaLabel)
