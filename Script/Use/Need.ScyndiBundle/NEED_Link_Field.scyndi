@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.04.05 I
+// 	  Version: 25.04.20
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -295,9 +295,12 @@ group Map
 	
 	void WalkTo(A,B,C)
 		if type(A)=="string"
-			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(trim(\"%s\"))",A))
+			//FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(trim(\"%s\"))",A))
+			Kthura.Obj.Player.WalkTo(A)
 		else
-			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(%d,%d,%s)",A,B,tostring(C!=false)))
+			//FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(%d,%d,%s)",A,B,tostring(C!=false)))
+			// I need to sort out what that boolean for C used to be. I think it was about precision or no precision. 
+			Kthura.Obj.Player.WalkTo(A,B)
 		end
 	end
 	
