@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.04.09 IV
+// 	  Version: 25.04.21
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -555,7 +555,7 @@ group Flow_FieldMenu
 				end
 				if hovering
 					table Help
-					Help = {"In order to unlock this ability you need:"}
+					Help = {[0]="Locked ability","In order to unlock this ability you need:"}
 					$InvItemLastHelp = { ["Help"] = Help }
 					for k,v in spairs(need)
 						switch k
