@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/AI/AI_Default.scyndi
 // 
-// 	  Version: 25.04.20 I
+// 	  Version: 25.04.21
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -90,7 +90,7 @@ module
 					GoedGekeurd=true
 				case "1A"
 					nact.Targets = {[0]=foes[math.random(0,len(foes)-1)]}
-					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+					GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
 				case "AA"
 					nact.Targets = {}
 					for check in each(foes)
