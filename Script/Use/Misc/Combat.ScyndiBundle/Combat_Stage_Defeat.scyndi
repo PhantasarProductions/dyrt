@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Stage_Defeat.scyndi
 // 
-// 	  Version: 25.04.10 III
+// 	  Version: 25.04.20
 // 	
 // 	  Copyright (C) 2019-2020, 2025 Jeroen Petrus Broks
 // 	
@@ -110,7 +110,7 @@ group Stage_DEFEAT extends Stage
 			if Combat_Start.Music!="*NONE*"
 				Music.Pop()
 			end
-			Foe.TotalMassacre()
+			//Foe.TotalMassacre()
 			__victor=false
 			APReset()
 			GoToFlow("FIELD")
