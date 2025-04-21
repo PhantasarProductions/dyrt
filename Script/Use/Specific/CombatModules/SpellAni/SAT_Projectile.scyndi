@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SAT_Projectile.scyndi
 // 
-// 	  Version: 25.04.21 III
+// 	  Version: 25.04.21 IV
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -70,7 +70,7 @@ module
 	void Start(string Image,Exe,Tar,aTurn,aHC)
 		Turn = aTurn!=false && aTurn!=nil;
 		HotCenter = aHC!=false && aHC!=nil;
-		PrjImage = LoadNewImage(Image,sprintf("PROJECTILE_%s_%s_%s",replace(Image:upper(),"/","_"),tostring(Turn),tostring(HotCenter)))
+		PrjImage = LoadNewImage(Image,sprintf("PROJECTILE_%s_%s_%s",replace(Upper(Image),"/","_"),tostring(Turn),tostring(HotCenter)))
 		ex = Exe.X
 		ey = Exe.Y
 		tx = Tar.X
