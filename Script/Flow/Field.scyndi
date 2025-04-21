@@ -311,7 +311,7 @@ class Fader
 				for i=0,len(Fader.Lijst)-1
 					// +1 is to make sure the "nil" with which the list ends moves one spot down, effectively killing the last record!
 					// Changed the formula. Scyndi has a different array style after all!
-					Fader.Lijst[i-1]=Fader.Lijst[i]
+					Fader.Lijst[i]=Fader.Lijst[i+1]
 				end
 				CSayF("Fader #%d has been removed from the list, and will eventually be caught by the garbage collector!",Current.ID)
 			default
