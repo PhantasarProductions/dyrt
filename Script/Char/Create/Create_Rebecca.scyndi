@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Ability/Rebecca.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// src/Script/Script/Char/Create/Create_Rebecca.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,27 +33,33 @@
 // 
 // **********************************************
 // 
-// version: 20.07.30
-// End License Information
-do
-	int s
-	s = __skill
-	table RebAbl
-	#pure
-	RebAbl = {
-		QuickStrike = { Start=true },
-		Power2x = { Skill_Sword=5 },
-		Power3x = { Skill_Sword=10*s },
-		Power4x = { Skill_Sword=15*s },
-		Cleave  = { Skill_Sword=19+(s*s) },
-		WarShout = { Skill_Sword=8*(s*s) },
-		Focus = { Scharum = true },
-		Power5x = { SealedBoss = true },
-		Lay    =  { NumVar = {'KILLED_BOSS_ALDARUS3',1} }
-	}
-	#endpure
-	if __trueabyss
-		RebAbl.Lay = { ['NumVar'] = {"TrueAbyssScore",15*(__skill+1) } }
-	end
-	return RebAbl
-end
+// 
+// version: 25.04.22 II
+// 
+// End License
+
+
+Module
+
+#use "Script/Use/Need"
+Init
+
+var Rebecca
+
+Rebecca = RPG.GetChar("Rebecca")
+Rebecca.Name = Names.Rebecca
+
+Rebecca.Data["SKILL0"] = "Sword Skills"
+
+//for i=0,4
+	Rebecca.Points(sprintf("SKILLLVL%d",0),true).Maximum = 10000
+	Rebecca.Points(sprintf("SKILLEXP%d",0),true).Have    = 1
+	Rebecca.Points(sprintf("SKILLLVL%d",0),true).Minimum = 9 div __skill
+//end
+
+
+Rebecca.Data.Weapon = "EQW_ERICREBECCA_SHORTSWORD"
+Rebecca.Data.Armor  = "EQA_SHIRT"
+Rebecca.Data.Jewel  = "JWL_BRACERS"
+
+End

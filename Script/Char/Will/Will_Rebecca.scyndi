@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Rebecca.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Will/Will_Rebecca.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.07.10
-// End License Information
-module Will_Rebecca
+// 
+// version: 25.04.22 II
+// 
+// End License
+
+module
+
+	#use "Libs/SCI/Sys"
+	
+	#use "Script/Use/Need"
+
+	#accept gv
+	#accept Hurt
+	
 	
 	int count
 	
@@ -46,20 +58,20 @@ module Will_Rebecca
 	
 	// Eric, Rebecca
 	void AfterAttack(Action)
-		if self.count==0
-			self.count = 3^__skill
+		if count==0
+			count = 3^__skill
 		end
-		if math.random(1,self.count)==1
+		if math.random(1,count)==1
 			new Hurt("Personal will:",Action.Executor.Tag,255,180,0)
 			new Hurt("Strike Streak",Action.Executor.Tag,0,180,255)
 			Action.Executor.NextAct = new Actions({["ExeTag"] = Action.Executor.Tag, ["ActTag"]=Action.ActTag, ["Targets"]=Action.Targets})
 			Action.Executor.GaugePosition = 15000
 			Action.Executor.NextActSpeed  =   800
 			Action.DontResetGauge = true
-			self.count++
+			count++
 			gv.Int.WILL_REBECCA++
 		elseif __skill!=3
-			self.count=0
+			count=0
 		end
 	end
 	
@@ -75,8 +87,7 @@ module Will_Rebecca
 	// Merya
 	delegate ManipulateItemUsage
 	
-	void CONSTRUCTOR()
+	Init
 		CSay("Rebecca's will loaded!")
 	end
 	
-end

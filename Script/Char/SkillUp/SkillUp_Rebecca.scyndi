@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Rebecca.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Rebecca.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,11 +33,22 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-do
-	delegate ret
-	ret = void(int skill)
+// 
+// version: 25.04.22 III
+// 
+// End License
+
+Module
+
+#accept CSay
+#Accept RPG
+
+#use "Script/Use/Need"
+
+//do
+//	delegate ret
+	//ret = void(int skill)
+	void SU(Int Skill)
 		int lvl
 		CSay("Go! Rebecca! Go!")
 		lvl = RPG.GetChar("Rebecca").Points("SKILLLVL"..skill).Have
@@ -45,5 +57,5 @@ do
 		end
 	end
 	
-	return ret
-end
+	//return ret
+//end
