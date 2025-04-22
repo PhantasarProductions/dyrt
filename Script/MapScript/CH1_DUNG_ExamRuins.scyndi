@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH1_DUNG_ExamRuins.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH1_DUNG_ExamRuins.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,16 +33,28 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
+// 
+// version: 25.04.22 VIII
+// 
+// End License
 
-#use "Script/Use/StartCombatMod"
-#use "script/use/anyway"
+
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+
+#use "Libs/Music"
 #use "libs/collections"
-#use "libs/Roman"
+#use "libs/Romannumbers"
+
+
+#use "Script/Use/Misc/StartCombatMod"
+#use "script/use/Need"
+
 
 // Since MapScripts have their own VMs or "states", this macro only affects this mapscript
-#macro hier_puzzleopgelost gv.Bool.Done_Die_Puzzle_Exam_Ruins_Solved
+#macro hier_puzzleopgelost gBool.Done_Die_Puzzle_Exam_Ruins_Solved
 
 bool killed_exit
 
@@ -71,15 +84,15 @@ group MScript
 	end
 	
 	void NPC_IRRAVONIA()
-		MapText(sprintf("IRRA_%s",Field.Leader:upper()))
+		MapText(sprintf("IRRA_%s",Upper(Field.Leader) ) )
 	end
 	
 	void NPC_ZACK()
-		MapText(sprintf("ZACK_%s",Field.Leader:upper()))
+		MapText(sprintf("ZACK_%s",Upper(Field.Leader)))
 	end
 	
 	void NPC_SWORDS()
-		MapText(sprintf("SWORDS_%s",Field.Leader:upper()))
+		MapText(sprintf("SWORDS_%s",Upper(Field.Leader)))
 	end
 	
 	void SHOWSECRET()
@@ -152,10 +165,10 @@ group MScript
 		self.PuzzleUser.SetValue(x,y,not self.PuzzleUser.GetValue(x,y))
 		Map.Obj = sprintf("B%d%d",x+1,y+1)
 		if self.PuzzleUser.GetValue(x,y)
-			CSayF("Switch (%d,%d)/%s%d turned on",x,y,string.char(x+65),y+1)
+			CSayF("Switch (%d,%d)/%s%d turned on",x,y,lstring.char(x+65),y+1)
 			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Green.png"
 		else
-			CSayF("Switch (%d,%d)/%s%d turned off",x,y,string.char(x+65),y+1)
+			CSayF("Switch (%d,%d)/%s%d turned off",x,y,lstring.char(x+65),y+1)
 			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Blue.png"
 		end
 		self.CheckPuzzleCorrect()
@@ -204,10 +217,10 @@ group MScript
 				error("Invalid roll: "..n)
 		end
 		CSayF("Puzzle init roll: %d",n)
-		for x=0,2 do for y=0,2 do
+		for x=0,2; for y=0,2 
 			CSayF("Activate B%d%d (%d,%d)",x+1,y+1,x,y)
 			Map.Click(sprintf("B%d%d",x+1,y+1),"PUZ_Button",x,y)
-		end end
+		end; end
 	end
 	
 	void SWITCH_OPEN_BOSS()
@@ -262,30 +275,31 @@ group MScript
 	void Draw()
 	end
 	
-	void CONSTRUCTOR()
-		if not Done.CreateRebecca
-			self.CreateRebecca()
-			Respawn.Initiated = false
-		end
-		Map.ZA_Enter("Enter_SECRET","ShowSecret")
-		Map.ZA_Enter( "Show_SECRET","ShowSecret")
-		Map.ZA_Enter("Leave_SECRET","HideSecret")
-		Map.ZA_Enter( "Hide_SECRET","HideSecret")
-		
-		Map.ZA_Enter("GoEastJustin","Lobby2EastSection")
-		Map.ZA_Enter("To_Lobby",    "EastSection2Lobby")
-		Map.ZA_Enter("To_North",    "EnterNorthRoom")
-		Map.ZA_Enter("To_South",    "LeaveNorthRoom")
-		Map.ZA_Enter("ToBoss",      "ToBoss")
-		Map.ZA_Enter("ToLobbyFromBoss","Boss2Lobby")
-		
-		Map.ZA_Enter("StartZone",   "StartZone")
-		
-		Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
-		
-		if not gv.Bool.Chapter1Complete
-			Map.ZA_Enter("StartBoss",   "SASKIA:Boss")
-		end
+end	
+	
+Init
+	if not Done.CreateRebecca
+		MScript.CreateRebecca()
+		Respawn.Initiated = false
 	end
-
+	Map.ZA_Enter("Enter_SECRET","ShowSecret")
+	Map.ZA_Enter( "Show_SECRET","ShowSecret")
+	Map.ZA_Enter("Leave_SECRET","HideSecret")
+	Map.ZA_Enter( "Hide_SECRET","HideSecret")
+	
+	Map.ZA_Enter("GoEastJustin","Lobby2EastSection")
+	Map.ZA_Enter("To_Lobby",    "EastSection2Lobby")
+	Map.ZA_Enter("To_North",    "EnterNorthRoom")
+	Map.ZA_Enter("To_South",    "LeaveNorthRoom")
+	Map.ZA_Enter("ToBoss",      "ToBoss")
+	Map.ZA_Enter("ToLobbyFromBoss","Boss2Lobby")
+	
+	Map.ZA_Enter("StartZone",   "StartZone")
+	
+	Map.ZA_Enter("PUZ_Init",    "InitPuzzle")
+		
+	if not gv.Bool.Chapter1Complete
+		Map.ZA_Enter("StartBoss",   "SASKIA:Boss")
+	end
 end
+
