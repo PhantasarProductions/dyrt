@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.04.21
+// 	  Version: 25.04.22
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -554,6 +554,9 @@ group Respawn
 	//link Layer = gv.String.Respawn_Layer
 	Get Bool Initiated
 		return gbool.Respawn_Initiated
+	End
+	set Bool Initiated
+		gbool.Respawn_Initiated = Value
 	End
 	Get Int X 
 		return gint.Respawn_X
