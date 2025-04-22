@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.22 VIII
+// version: 25.04.22 IX
 // 
 // End License
 
@@ -278,9 +278,16 @@ group MScript
 end	
 	
 Init
-	if not Done.CreateRebecca
+	if ! Done.CreateRebecca
 		MScript.CreateRebecca()
 		Respawn.Initiated = false
+	end
+	if ! Done.RebeccaFullHP
+		Rebecca   := RPG.GetChar("Rebecca")
+		RebeccaHP := Rebecca.Points("HP")
+		RebeccaVT := Rebecca.Points("VIT")
+		RebeccaHP.Have = RebeccaHP.Maximum
+		RebeccaVT.Have = RebeccaVT.Maximum
 	end
 	Map.ZA_Enter("Enter_SECRET","ShowSecret")
 	Map.ZA_Enter( "Show_SECRET","ShowSecret")
