@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.04.23
+// 	  Version: 25.04.23 V
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -760,7 +760,7 @@ group Flow_FieldMenu
 		CSayF("%s wants to use %s",$CharTag,TagItem)		
 		var it
 		var ch
-		TagItem = TagItem:upper()
+		TagItem = Upper(TagItem)
 		it = Item[TagItem]
 		ch = RPG.GetChar($CharTag)
 		switch it.ItemType
@@ -834,14 +834,15 @@ group Flow_FieldMenu
 		self.situations["COMBAT_ITEMS"]	["MenuItems"] = { [0] =	{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" } }
 		self.situations["COMBAT_ITEMS"] ["Return"] = "COMBAT"
 				//["ItemAction"] = void(string TagItem)
-				DDef ItemAction
+				DDef ItemActionCMBT
 						String TagItem := Infinity
 						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
-						Lua.assert("FieldMenu:791 - Items in combat not yet possible!")
+						//Lua.error("FieldMenu:791 - Items in combat not yet possible!")
 						//LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveItem=trim('%s')})",self.CharTag,TagItem,TagItem),"Send Item to Combat FLow!")
+						Sys.Call("FLOW_COMBAT","Stage.Stages.SELECTTARGET.ComeToMe",trim(CharTag),Trim(TagItem),"RemoveItem",Trim(TagItem))
 						GoToFlow($situations[$situation].Return)
 				end
-		self.situations["COMBAT_ITEMS"].ItemAction = ItemAction				
+		self.situations["COMBAT_ITEMS"].ItemAction = ItemActionCMBT				
 		self.situations["COMBAT_ABILITIES"] = {}
 		self.situations["COMBAT_ABILITIES"]	["MenuItems"] = {[0]={ ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" }}
 //				["AblAction"] = void(string TagItem)
@@ -849,7 +850,8 @@ group Flow_FieldMenu
 						String TagItem := Infinity
 						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
 						//LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveAP=%d})",self.CharTag,TagItem,Item[TagItem].AP_Cost or 0),"Send Ability to Combat FLow!")
-						Lua.Assert("FieldMenu::803 - Abilities in combat not yet possible!")
+						//Lua.error("FieldMenu::803 - Abilities in combat not yet possible!")
+						Sys.Call("FLOW_COMBAT","Stage.Stages.SELECTTARGET.ComeToMe",trim(CharTag),Trim(TagItem),"RemoveAP",Item[TagItem].AP_Cost || 0)
 						GoToFlow($situations[$situation].Return)
 				end
 		self.situations["COMBAT_ABILITIES"].AblAction = AblAction
@@ -1033,8 +1035,10 @@ End
 			//CSay(NIL.LuaSerialize("Clicked Menu Item",Flow_FieldMenu.ItemHover))
 		end
 		
-		if Flow_FieldMenu.LM_Action and Mouse.HitLeft
+		if Flow_FieldMenu.LM_Action && Mouse.HitLeft
 			Flow_FieldMenu.LM_Action(Flow_FieldMenu.LM_ActionArgs)
+		elif Mouse.HitLeft
+			CSayF("No action for mousehit")
 		end
 		Flow_FieldMenu.LM_Action = nil;
 		

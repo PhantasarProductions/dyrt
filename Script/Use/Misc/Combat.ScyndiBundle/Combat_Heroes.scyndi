@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.21
+// 	  Version: 25.04.23 IV
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -382,7 +382,19 @@ group Stage_SelectTarget extends Stage
 		Stage.Stages.SELECTTARGET = self
 	end
 	
-	void ComeToMe(string aCharTag,string aItemTag, xdata)
+	void ComeToMe(string aCharTag,string aItemTag, infinity)
+		plua xdata
+		fi:=NewArray(infinity)
+		print(len(fi),infinity) // DEBUG!
+		if Lua.type(fi[0])=="table"
+			xdata=fi[0]
+		else
+			xdata={}
+			for i=0,len(fi)-1,2
+				xdata[fi[i]]=fi[i+1]
+				CSayF("SELECTTARGET.ComeToMe (%02d:%02d) -> %s %s = %s",i,i+1,Lua.type(fi[i+1]),fi[i],fi[i+1])
+			end
+		end
 		self.CharTag = aCharTag
 		self.ItemTag = aItemTag
 		self.Item = Lua.Scyndi.Globals.Item[aItemTag]
