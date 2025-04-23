@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.22 IX
+// version: 25.04.23 IX
 // 
 // End License
 
@@ -42,10 +42,11 @@
 Script
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/InterVar"
 
 #use "Libs/Music"
-#use "libs/collections"
+//#use "libs/collections"
 #use "libs/Romannumbers"
 
 
@@ -57,6 +58,26 @@ Script
 #macro hier_puzzleopgelost gBool.Done_Die_Puzzle_Exam_Ruins_Solved
 
 bool killed_exit
+
+
+// The GOOD way didn't work, so let's go for the bad way.
+// Saves me a lot of changing code!
+class FuckArray
+	Table Tab
+	Constructor(String NegeerT,int NegeerX, Int NegeerY)
+		Tab = {}
+	End
+	Void SetValue(Int X, Int Y, Bool V)
+		Tab[Y]=Tab[Y] || {}
+		Tab[Y][X]=V
+	End
+	Bool GetValue(Int X,Int Y)
+		if Tab[Y]; return Tab[Y][X]; End
+		return False
+	End
+End
+		
+	
 
 group MScript
 
@@ -132,25 +153,26 @@ group MScript
 			for y=0,2
 				check1 = check1 and (self.PuzzleUser.GetValue(  x,y) == self.PuzzleCorrect.GetValue(x,y))
 				check2 = check2 and (self.PuzzleUser.GetValue(2-y,x) == self.PuzzleCorrect.GetValue(x,y))
-				CSayF("Check(%d,%d) => %s",  x,y,tostring(check1))
-				CSayF("Check(%d,%d) => %s",2-y,x,tostring(check2))
+				CSayF("Check1(%d,%d) %6s%6s => %s",  x,y,self.PuzzleUser.GetValue(  x,y),self.PuzzleCorrect.GetValue(x,y),tostring(check1))
+				CSayF("Check2(%d,%d) %6s%6s => %s",2-y,x,self.PuzzleUser.GetValue(2-y,x),self.PuzzleCorrect.GetValue(x,y),tostring(check2))
 			end
 		end
 		if check1 or check2
 			hier_puzzleopgelost = true
 			Achievements.Award("PUZ_DIEDIE")
-			string addswapdata = "// Puzzle\n\nFieldMap.Kthura.Layer='#006\'\n\n";
-			for x=0,2	
-				for y=0,2
-					string tex = 'GFX/Textures/JewelButtons/Blue.png'
-					if self.PuzzleUser.GetValue(x,y)
-						tex = 'GFX/Textures/JewelButtons/Green.png'
-					end
-					addswapdata = addswapdata .. sprintf("\tPosition (%d,%d)\n\t\tFieldMap.Kthura.Obj = 'B%d%d'\n\t\tFieldMap.Kthura.ObjString='%s'\n\n",x,y,x+1,y+1,tex)
-				end
-			end
-			addswapdata = "\n\n"
-			Map.AddSwap(addswapdata)
+			
+			//string addswapdata = "// Puzzle\n\nFieldMap.Kthura.Layer='#006\'\n\n";
+			//for x=0,2	
+			//	for y=0,2
+			//		string tex = 'GFX/Textures/JewelButtons/Blue.png'
+			//		if self.PuzzleUser.GetValue(x,y)
+			//			tex = 'GFX/Textures/JewelButtons/Green.png'
+			//		end
+			//		addswapdata = addswapdata .. sprintf("\tPosition (%d,%d)\n\t\tFieldMap.Kthura.Obj = 'B%d%d'\n\t\tFieldMap.Kthura.ObjString='%s'\n\n",x,y,x+1,y+1,tex)
+			//	end
+			//end
+			//addswapdata = "\n\n"
+			//Map.AddSwap(addswapdata)
 			Map.Kill("Puz_Deur",true)
 			return 
 		end
@@ -163,13 +185,14 @@ group MScript
 		end
 		CSay("("..type(x)..':'..tostring(x)..", "..type(y)..":"..tostring(y)..")")
 		self.PuzzleUser.SetValue(x,y,not self.PuzzleUser.GetValue(x,y))
-		Map.Obj = sprintf("B%d%d",x+1,y+1)
+		//Map.Obj = sprintf("B%d%d",x+1,y+1)
+		MO:=Kthura.Obj[sprintf("B%d%d",x+1,y+1)]
 		if self.PuzzleUser.GetValue(x,y)
 			CSayF("Switch (%d,%d)/%s%d turned on",x,y,lstring.char(x+65),y+1)
-			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Green.png"
+			MO.Texture = "GFX/Textures/JewelButtons/Green.png"
 		else
 			CSayF("Switch (%d,%d)/%s%d turned off",x,y,lstring.char(x+65),y+1)
-			Map.ObjString.Texture = "GFX/Textures/JewelButtons/Blue.png"
+			MO.Texture = "GFX/Textures/JewelButtons/Blue.png"
 		end
 		self.CheckPuzzleCorrect()
 	end
@@ -184,8 +207,8 @@ group MScript
 		var PC
 		n = math.random(1,6)
 		gv.String.EXAPUZZLESIGN = Roman(n)
-		self.PuzzleCorrect = new MArray("bool",3,3)
-		self.PuzzleUser = new MArray("bool",3,3)
+		self.PuzzleCorrect = new FuckArray("bool",3,3)
+		self.PuzzleUser = new FuckArray("bool",3,3)
 		PC = self.PuzzleCorrect
 		switch n
 			case 1
@@ -214,11 +237,11 @@ group MScript
 					PC.SetValue(2,i,true)
 				end 
 			default
-				error("Invalid roll: "..n)
+				Lua.error("Invalid roll: "..n)
 		end
 		CSayF("Puzzle init roll: %d",n)
 		for x=0,2; for y=0,2 
-			CSayF("Activate B%d%d (%d,%d)",x+1,y+1,x,y)
+			CSayF("Activate B%d%d (%d,%d)  (%s)",x+1,y+1,x,y,PC.GetValue(x,y))
 			Map.Click(sprintf("B%d%d",x+1,y+1),"PUZ_Button",x,y)
 		end; end
 	end
@@ -227,7 +250,7 @@ group MScript
 		Map.Layer="#001"
 		Map.Kill("Deur",true)
 		Map.Layer="#007"
-		MapText("ENDSW_"..Field.Leader:upper())
+		MapText("ENDSW_"..Upper(Field.Leader))
 	end
 	
 	void TOBOSS()
