@@ -35,10 +35,11 @@
 // version: 20.04.28
 // End License Information
 
+Module
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
+#say "Map Script - Doubline!"
+#use "script/use/Need"
 group MScript
 	
 	void CONSTRUCTOR()
