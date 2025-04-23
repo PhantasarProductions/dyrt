@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Arena.scyndi
 // 
-// 	  Version: 25.04.10 IV
+// 	  Version: 25.04.23 II
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -97,12 +97,12 @@ group Arena
 				new ActPos("HERO1",800,650)
 				new ActPos("HERO2",850,750)
 			case 3
-				new ActPos("HERO1",800,667)
-				new ActPos("HERO2",825,733)
-				new ActPos("HERO3",850,800)
+				new ActPos("HERO1",800,550)
+				new ActPos("HERO2",825,650)
+				new ActPos("HERO3",850,750)
 			case 4
 				for i=0,4
-					new ActPos(sprintf("HERO%d",i+1),800+(i*25),600+(i*50))
+					new ActPos(sprintf("HERO%d",i+1),800+(i*25),600+(i*45))
 				end
 			default
 				error(sprintf("Unknown number of heroes to deal with (%d)",CountHero))
@@ -111,8 +111,8 @@ group Arena
 		for i=0,23
 			int x
 			int y
-			x = (math.floor(i/3)*60)+25
-			y = ((i%3)*110)+550
+			x = (math.floor(i/3)*65)+25
+			y = ((i%3)*100)+550
 			new ActPos(sprintf("FOE_%d",i+1),x,y)
 		end
 	end
