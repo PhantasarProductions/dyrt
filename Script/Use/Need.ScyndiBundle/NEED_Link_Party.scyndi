@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Party.scyndi
 // 
-// 	  Version: 25.04.09
+// 	  Version: 25.04.23 II
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -47,6 +47,7 @@ Module
 #use "Libs/SCI/Sys"
 #use "Libs/SCI/Events"
 #use "Libs/SCI/Sstring"
+#use "Libs/SCI/InterVar"
 
 #use "Script/Use/Need.ScyndiBundle/NEED_Convert_Flow"
 #use "Script/Use/Need.ScyndiBundle/NEED_Convert_RPG"
@@ -102,19 +103,20 @@ group Party
 		end
 	end
 
-	get int SelectedCharacter
-		LoadSub()
+	//get int SelectedCharacter
+	//	LoadSub()
 		//return LuaGetInt("PARTY","SubParty.SelectedChar")
-		r:=PtCall("SubParty.GetSelectedChar")
-		return r
-	end
+	//	r:=PtCall("SubParty.GetSelectedChar")
+	//	return r
+	//end
 
-	set int SelectedCharacter
+	//set int SelectedCharacter
 		// TODO: Change!
 		//PtExe(sprintf("SubParty.SelectedChar = %d",value))
 		//CSayF("Party: set int SelectedCharacter = %d",value)
-		PtCall("SubParty.SetSelectedChar",value)
-	end
+	//	PtCall("SubParty.SetSelectedChar",value)
+	//end
+	Link SelectedCharacter = gint.Party_StatusBar_SelectedCharacter
 	
 	
 	int CharSpot(string tag)
