@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_GoToMenu.scyndi
 // 
-// 	  Version: 25.04.08 II
+// 	  Version: 25.04.23
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -70,7 +70,7 @@ global void GoMenu(char,string situation)
 	switch type(char)
 		case "number"
 			Party.SelectedCharacter = char
-			CSayF("GeMenu((int)%d,%s)",char,situation)
+			CSayF("GoMenu( (int)%d ,\"%s\")",char,situation)
 		case "string"
 			int i=0
 			repeat
@@ -79,7 +79,7 @@ global void GoMenu(char,string situation)
 				end
 				i++
 			until char==RPG.Party[i]
-			CSayF("GeMenu((string)%s,%s) -> %d",char,situation,i)
+			CSayF("GeMenu((string)\"%s\",\"%s\") -> %d",char,situation,i)
 			Party.SelectedCharacter = i
 	end
 	//LuaDoString("FLOW_FIELDMENU",sprintf("Flow_FieldMenu.situation = trim(\"%s\")",situation:upper()))
