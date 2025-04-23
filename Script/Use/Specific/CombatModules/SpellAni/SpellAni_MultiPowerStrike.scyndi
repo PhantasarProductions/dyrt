@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_MultiPowerStrike.scyndi
 // 
-// 	  Version: 25.04.23 III
+// 	  Version: 25.04.23 VI
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -64,17 +64,17 @@ module
 	
 	var Target
 	
-	void CONSTRUCTOR()
+	Init
 		plaatje = LoadNewImage("GFX/Combat/SpellANI/BANG.png","SPELL_ANI_BANG")
 		pcx = math.floor(plaatje.Width/2)
 		pcy = math.floor(plaatje.Height/2)
 	end
 	
-	void Init(act)
+	void SA_Init(act)
 		if Len(act.Targets)>1
 			Lua.error("Multi Power Strike can only handle 1 TARGET")
 		end
-		Target = act.Targets[1]
+		Target = act.Targets[0]
 		tcx = math.floor(Target.Width/2)
 		tcy = math.floor(Target.Height/2)
 		switch Upper(act.ActTag)
