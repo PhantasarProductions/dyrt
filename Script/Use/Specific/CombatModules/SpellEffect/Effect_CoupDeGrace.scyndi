@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/CoupDeGrace.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_CoupDeGrace.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,15 +33,17 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
-do
-	bool Zet_die_HP_maar_op_0_jongens(Act,Target)
+// 
+// version: 25.04.23
+// 
+// End License
+
+
+Module
+	bool DoEffect(Act,Target)
 		Target.Char.Points("HP").Minimum = 0
 		Target.Char.Points("HP").Have = 0
 		new Hurt("Coup De Grace!",Target.Tag,255,180,90)
 		return true
 	end
 	
-	return Zet_die_HP_maar_op_0_jongens
-end
