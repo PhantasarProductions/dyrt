@@ -69,7 +69,7 @@
 	end
 
 :Boss
-	Call MapText,"BOSS_"..Field.Leader:upper()
+	Call MapText,"BOSS_"..Scyndi.Class.Field.Leader:upper()
 	call MapScript.StartBoss
 	; please note that all SASKIA scripts get terminated 
 	; if you lose a battle, and due to that no checkups are required 
