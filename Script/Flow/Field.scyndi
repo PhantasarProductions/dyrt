@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.23 IV
+// 	  Version: 25.04.23 VI
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -1136,6 +1136,11 @@ end
 int rmy
 
 global void BUB_Draw()
+	If Sys.CurrentFlow!="FLOW_FIELD" 
+		CSayF("BUB_Draw() cancelled! Field is now \"%s\"!",Sys.CurrentFlow)
+		Return
+	End
+	
 	// AutoScroll
 	FlowField.DoAutoScroll()
 	
