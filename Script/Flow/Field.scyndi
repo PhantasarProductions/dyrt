@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.22 I
+// 	  Version: 25.04.23 IV
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -156,23 +156,26 @@ class Clickables
 		end
 	end
 	
-	static void FromTag(string Tag, string func, infinity)
+	static void FromTag(string _Tag, string func, infinity)
 		int x
 		int y
-		var M
-		M = self.Map
-		if self.Map.HasTag(Tag.."_SPOT")
-			M.Obj = Tag.."_SPOT"
-			x = M.ObjInt.x
-			y = M.ObjInt.y
-		elseif self.Map.HasTag(Tag)
-			M.Obj = Tag
-			x = M.ObjInt.x
-			y = M.ObjInt.y
+		//var M
+		//M = self.Map
+		//if self.Map.HasTag(Tag.."_SPOT")
+		if Kthura.HasObj(_Tag.."_SPOT")
+			//M.Obj = Tag.."_SPOT"
+			M:=Kthura.Obj[_Tag.."_SPOT"]
+			x = M.x
+			y = M.y
+		elseif Kthura.HasObj(_Tag)
+			//M.Obj = Tag
+			M:=Kthura.Obj[_Tag]
+			x = M.x
+			y = M.y
 		else
-			error("No object \""..Tag.."\" found to turn into a clickable")
+			Lua.error("No object \"".._Tag.."\" found to turn into a clickable")
 		end
-		new Clickables(Tag,x,y,func,infinity)
+		new Clickables(_Tag,x,y,func,infinity)
 	end
 	
 	static void Massacre()
@@ -669,14 +672,15 @@ group FlowField
 		string	_NewSet
 		bool	_Perma
 		bool	_Once
-		bool	_Stuck
-		var		Kth		
-		Kth = $Map.Kthura
-		Kth.Obj = Tag
-		_Set   = Kth.ObjData.Set:upper()
-		_Perma = Kth.ObjData.Permanent:upper()=="YES" or Kth.ObjData.Permanent:upper()=="TRUE"
-		_Once  = Kth.ObjData.Once:upper()     =="YES" or Kth.ObjData.Once:upper()     =="TRUE"
-		_Stuck = Kth.ObjData.Stuck:upper()    =="YES" or Kth.ObjData.Stuck:upper()    =="TRUE"
+		bool	_Stuck		
+		//var		Kth		
+		//Kth = $Map.Kthura
+		Kth := Lua.Scyndi.Class.Kthura
+		KthObj := Kth.Obj[Tag]
+		_Set   = Upper(KthObj.Data.Set)
+		_Perma = Upper(KthObj.Data.Permanent)=="YES" || Upper(KthObj.Data.Permanent)=="TRUE"
+		_Once  = Upper(KthObj.Data.Once)     =="YES" || Upper(KthObj.Data.Once)     =="TRUE"
+		_Stuck = Upper(KthObj.Data.Stuck)    =="YES" || Upper(KthObj.Data.Stuck)    =="TRUE" || gbool[sprintf("Switch_Stuck_%s_%s_%s",Kth.LastLoadedMap,Kth.CurrentLayer,Tag)]
 		if _Stuck
 			BoxText.Load("System/Switch","SYS.SWITCH")
 			BoxText("SYS.SWITCH","STUCK")
@@ -688,19 +692,20 @@ group FlowField
 			case "RIGHT"
 				_NewSet = "Left"
 			default
-				error("Switch.Set must contain either \"LEFT\" or \"RIGHT\"! Not \"".._Set.."\"!")
+				Lua.error("Switch.Set must contain either \"LEFT\" or \"RIGHT\"! Not \"".._Set.."\"!")
 		end
-		Kth.ObjData.Set = _NewSet
-		Kth.ObjString.Texture = "GFX/Textures/Switches/".._NewSet..".png"
+		KthObj.Data.Set = _NewSet
+		KthObj.Texture = "GFX/Textures/Switches/".._NewSet..".png"
 		if _Once
-			Kth.ObjData._Stuck = "YES"
+			//Kth.ObjData._Stuck = "YES"
+			 gbool[sprintf("Switch_Stuck_%s_%s_%s",Kth.LastLoadedMap,Kth.CurrentLayer,Tag)] = True
 		end
 		if _Perma && _Once
 			table y
-			string m
+			//string m
 			y[true] ="Yes"
 			y[false]="No"
-			m = "MAPCHANGES."..FieldMap.LoadedMap
+			//m = "MAPCHANGES."..FieldMap.LoadedMap
 			//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kthura.Obj = \""..Tag.."\";\tFieldMap.Kthura.ObjString.Texture = \""..Kth.ObjString.Texture.."\";\tFieldMap.Kthura.ObjData.Set = '".._NewSet.."'; FieldMap.Kthura.ObjData.Stuck = 'Yes'\n"
 			PermaChanges.Value(StripDir(Kthura.LastLoaded),"Tex."..Kthura.CurrentLayer.."."..Tag,Kthura.Obj[Tag].Texture)
 		end
