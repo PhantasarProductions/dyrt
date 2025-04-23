@@ -35,22 +35,13 @@
 // version: 20.08.23
 // End License Information
 
-#use "script/use/anyway"
+Script
+
+#use "script/use/need"
 
 #say "Map Script - None!"
 group MScript
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("Leave","SOUTH")
-		Map.ZA_Enter("ToDoubline","NORTH")
-		if __newgameplus
-			Map.ZA_Enter("ToLostArc","ToLostArc")
-			CSay("New Game Plus - So link field to lost ark activated")
-		end
-		if not Done.FirstTimeInXenorBushesNorth
-			Respawn.Initiated = false
-		end
-	end
 	
 	void NGPSECRETREMOVE()
 		if __newgameplus
@@ -97,5 +88,19 @@ group MScript
 	void Update()
 	end
 	
+end
+
+
+
+Init
+	Map.ZA_Enter("Leave","SOUTH")
+	Map.ZA_Enter("ToDoubline","NORTH")
+	if __newgameplus
+		Map.ZA_Enter("ToLostArc","ToLostArc")
+		CSay("New Game Plus - So link field to lost ark activated")
+	end
+	if not Done.FirstTimeInXenorBushesNorth
+		Respawn.Initiated = false
+	end
 end
 #say "Map Script - Compiling!"
