@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.04.23 V
+// 	  Version: 25.04.24 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -631,8 +631,10 @@ group Flow_FieldMenu
 	
 	void StoreBuy(ubox)
 		var Stock
-		Lua.error("FieldMenu::588","Store loader not yet present")
+		//Lua.error("FieldMenu::588 -- Store loader not yet present")
 		//self.CurrentStock = self.CurrentStock or NIL.Use(sprintf("Script/Data/Stores/%s",self.CurrentStore) )
+		Lua.Scyndi.Use(sprintf("Script/Data/Stores/Store_%s",self.CurrentStore))
+		self.CurrentStock = Lua.Scyndi.Class["Store_"..self.CurrentStore].Stock
 		self.ChaChing = self.ChaChing || Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
 		Stock = self.CurrentStock // I am lazy!
 		__amber
@@ -1054,6 +1056,12 @@ End
 	end
 	
 //end
+
+// This function was needed in SCI because the NALA method n longer works
+Global Void ForStore(String TagStore)
+	Flow_FieldMenu.CurrentStore = trim(TagStore)
+	Flow_FieldMenu.CurrentStock = nil
+End	
 
 Global Void MainFlow()
 	BUB_Update()
