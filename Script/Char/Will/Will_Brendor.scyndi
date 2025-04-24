@@ -34,30 +34,33 @@
 // **********************************************
 // 
 // 
-// version: 25.04.24
+// version: 25.04.25 III
 // 
 // End License
 
 module 
 
 	#accept CSay
+	#accept Fighter
+	
+	#use "Script/Use/Need"
 	
 	// Data
 	int count
 	
 	Init
-		self.count = __skill^__skill
+		count = __skill^__skill
 		if __skill==3
-			self.count = math.max(gv.Int.BrendorCount,self.count)
+			count = math.max(gv.Int.BrendorCount,count)
 		end
 	end
 	
 	get int Blocked
-		return self.count
+		return count
 	end
 	
 	set int Blocked
-		self.count = math.min(value,100000)
+		count = math.min(value,100000)
 		if __skill==3
 			gv.Int.BrendorCount = value
 		end
@@ -77,7 +80,7 @@ module
 	// Irravonia, Brendor
 	int DamageManipulation(Action,int Damage,string Element)
 		CSay("Brendor Block - Check")
-		if math.random(0,self.count)!=1 
+		if math.random(0,count)!=1 
 			CSay("Chance roll not right!")
 			return Damage
 		end
@@ -85,7 +88,7 @@ module
 			CSay("Rondomo fight... This can spook the 'bound to lose' effect")
 			return Damage
 		end
-		self.PointsBlocked = math.min(self.PointsBlocked+Damage,1000000000)
+		PointsBlocked = math.min(PointsBlocked+Damage,1000000000)
 		new Hurt("Personal will:","Brendor",255,180,0)
 		new Hurt("Total Block","Brendor",0,180,255)		
 		return 0
