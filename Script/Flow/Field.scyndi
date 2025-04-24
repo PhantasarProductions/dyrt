@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.23 VI
+// 	  Version: 25.04.24
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -189,7 +189,7 @@ class Clickables
 		//with M
 			for cl in Clickables.List.Each
 				// Crash prevention for once an object was removed!
-				if Kthura.HasObj(cl.Tag) && cl.Layer == Kthura.CurrentLayer
+				if Kthura.HasObj(cl.Tag) && Upper(cl.Layer) == Upper(Kthura.CurrentLayer)
 					//M.Obj = cl.Tag
 					//-- if cl.Layer==$Layer and
 					MObj:=Kthura.Obj[cl.Tag]
@@ -587,10 +587,11 @@ group FlowField
 						self.ResetBuffs()
 						RPG.Char(ch).Points("VIT").Have = RPG.Char(ch).Points("VIT").Maximum
 						RPG.Char(ch).Points("HP").Have = RPG.Char(ch).Points("HP").Maximum
-						gv.String.Respawn_Map = $Map.LoadedMap
-						gv.String.Respawn_Layer = $Map.Layer
-						gv.Int.Respawn_X = self.Map.Kthura.Actor.Player.X
-						gv.Int.Respawn_Y = self.Map.Kthura.Actor.Player.Y
+						LocExtern KthuraFuck "Scyndi.Class.Kthura"
+						gv.String.Respawn_Map = StripDir(KthuraFuck.LastLoadedMap)
+						gv.String.Respawn_Layer = Upper(KthuraFuck.CurrentLayer)
+						gv.Int.Respawn_X = KthuraFuck.Obj.Player.X
+						gv.Int.Respawn_Y = KthuraFuck.Obj.Player.Y
 					default
 						error("Unknown savegame color code: "..col)
 				end
@@ -1136,7 +1137,7 @@ end
 int rmy
 
 global void BUB_Draw()
-	If Sys.CurrentFlow!="FLOW_FIELD" 
+	If Sys.CurrentFlow!="FLOW_FIELD" && Sys.CurrentFlow!="FLOW_BOXTEXT" 
 		CSayF("BUB_Draw() cancelled! Field is now \"%s\"!",Sys.CurrentFlow)
 		Return
 	End
