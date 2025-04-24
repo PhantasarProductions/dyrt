@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/ShandaDung.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/ARENA_ShandaDung.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,8 +33,11 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.24 II
+// 
+// End License
+
 
 module 
 
@@ -44,7 +48,7 @@ module
 	
 	Init
 		//Dung       = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Dungeon")
-		Dung.Wall  = "GFX/Textures/ShandaDungeon/GFX/Textures/ShandaDungeon/BackWall3_Line.png"
+		Dung.Wall  = "GFX/Textures/ShandaDungeon/BackWall3_Line.png"
 		Dung.Floor = "GFX/Textures/ShandaDungeon/FloorYDYMIBzGreen.png"
 		Dung.TorchBurn = false
 		Dung.TorchOff  = true
@@ -55,4 +59,3 @@ module
 		Dung.Draw()
 	end
 
-end
