@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Shanda.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Will/Will_Shanda.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,26 @@
 // 
 // **********************************************
 // 
-// version: 20.07.10
-// End License Information
+// 
+// version: 25.04.24 II
+// 
+// End License
+
+
+
+#use "Script/Use/Need"
+
+#accept CSay
 
 #macro ShandaHPHav RPG.GetChar("Shanda").Points("HP").Have
 #macro ShandaHPMax RPG.GetChar("Shanda").Points("HP").Maximum
+#macro ShandaAPHav RPG.GetChar("Shanda").Points("AP").Have
+#macro ShandaAPMax RPG.GetChar("Shanda").Points("AP").Maximum
 
 
-module Will_Shanda
+module
+
+	ReadOnly Var Comrades = {[0]="Eric","Irravonia","Rebecca"}
 	
 	// Scyndi
 	delegate AfterEnemyAttack
@@ -73,14 +86,22 @@ module Will_Shanda
 		new Hurt("Regeneration",  'Shanda',  0,180,255)
 		new Hurt(tostring(i),     'Shanda',  0,255,  0)
 		ShandaHPHav = ShandaHPHav + i
+		Int M = os.time()
+		while ShandaAPHave>0
+			M = (M+1) % (__skill*3)
+			ShandaAPHave--
+			C:=Comrades[M]
+			if C
+				RPG.GetChar(C).Points("AP").Have++
+			end
+		end
 	end
 	
 	// Merya
 	delegate ManipulateItemUsage
 	
-	void CONSTRUCTOR()
-		CSay("Nu wil ik eens weten! Is het systeem een leugenaar?")
-		CSay(tostring(self.PreInput))
-	end
+	//void CONSTRUCTOR()
+	//	CSay("Nu wil ik eens weten! Is het systeem een leugenaar?")
+	//	CSay(tostring(self.PreInput))
+	//end
 	
-end
