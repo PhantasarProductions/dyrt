@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.24
+// version: 25.04.24 II
 // 
 // End License
 
@@ -104,15 +104,6 @@ group MScript
 	end
 
 	
-	Init
-		Map.ZA_Enter("StartTut","STARTTUTORIAL")
-		Map.ZA_Enter("TutFly","TUTFLY")
-		Map.ZA_Enter("Goal","GOAL")
-		Map.ZA_Enter("StartBlenchy","StartBlenchy")
-		if ! Done.Done_ShandaDungRespawnReset
-			Respawn.Initiated = false
-		end
-	end
 	
 	void Draw()
 	end
@@ -121,4 +112,15 @@ group MScript
 	end
 	
 end
+
+Init
+	Map.ZA_Enter("StartTut","STARTTUTORIAL")
+	Map.ZA_Enter("TutFly","TUTFLY")
+	Map.ZA_Enter("Goal","GOAL")
+	Map.ZA_Enter("StartBlenchy","StartBlenchy")
+	if ! Done.Done_ShandaDungRespawnReset
+		Respawn.Initiated = false
+	end
+end
+
 #say "Map Script - Compiling!"
