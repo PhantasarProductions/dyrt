@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Dungeon.scyndi
 // 
-// 	  Version: 25.04.22 V
+// 	  Version: 25.04.24 II
 // 	
 // 	  Copyright (C) 2019, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -50,6 +50,11 @@
 
 Module
 
+	bool Torches = true
+	bool TorchBurn = true
+	bool TorchOff = true	
+
+
 //#pure 
 //local
 //#endpure
@@ -78,6 +83,9 @@ class Torch_ARENA_DUNGEON
 	end
 	
 	void Draw()
+		if TorchOff || (!TorchBurn)
+			self.Frame=0
+		end
 		self.pic.Draw(self.x,(Screen.Height/2)-self.y,self.Frame)
 		if self.animate
 			self.skip++
@@ -108,9 +116,6 @@ end
 
 //module Arena_Dungeon
 
-	bool Torches = true
-	bool TorchBurn = true
-	bool TorchOff = true	
 	get var ImgTorchBurn 
 		return LoadNewImage("gfx/Textures/Objects/Toorts/Brandend.jpbf","DungArenaTorchBurning")
 	end
