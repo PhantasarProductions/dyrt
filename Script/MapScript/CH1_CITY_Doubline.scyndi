@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH1_CITY_Doubline.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/MapScript/CH1_CITY_Doubline.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,22 +33,35 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.23 VI
+// 
+// End License
 
 Module
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
 
 #say "Map Script - Doubline!"
 #use "script/use/Need"
+
+
+
+Init
+	CSay("Welcome to Doubline!")
+	Map.ZA_Enter("Leave","LEAVE")
+	if ! gv.Bool.GagoltonEmpty
+		Kthura.CurrentLayer="DOWNTOWN"
+		Map.Kill("NPC_ShopHoer2")
+	end
+end
+
+
 group MScript
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("Leave","LEAVE")
-		if not gv.Bool.GagoltonEmpty
-			Map.Kill("NPC_ShopHoer2")
-		end
-	end
 	
 	void LEAVE()
 		if not gv.Bool.Chapter1Complete
@@ -91,7 +105,7 @@ group MScript
 			MapText("TOSHANDA_Q")
 		elseif gv.Bool.Done_Doubline_GoneToShanda
 			MapText("TOSHANDA_D")
-		elseif Yes("Are you ready to go to the Queen of the \"Forgotten Realm\"?")
+		elseif Events.Yes("Are you ready to go to the Queen of the \"Forgotten Realm\"?")
 			gv.Bool.Done_Doubline_GoneToShanda = true
 			MapScript.SASKIA("GoTo_Shanda")
 		else
