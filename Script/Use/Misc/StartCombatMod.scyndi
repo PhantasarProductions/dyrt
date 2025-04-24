@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/StartCombatMod.scyndi
 // 
-// 	  Version: 25.04.13
+// 	  Version: 25.04.24
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -96,7 +96,8 @@ QuickMeta StartCombatFoeRX
 		CombatLoaded()
 		assert(type(key)=="number" and type(value)=="number","Invalid RX key/value")
 		//LuaDoString("FLOW_Combat","Combat_Start.RX["..key.."] = "..qv(value))
-		Lua.error("FoeRX:StartCombatFoeRX definition cannot yet be done due to link up issues not yet being properly adressed!")
+		//Lua.error("FoeRX:StartCombatFoeRX definition cannot yet be done due to link up issues not yet being properly adressed!")
+		Sys.Call("FLOW_COMBAT","Def_Combat_Start2","RX",key,Value)
 	end
 end
 
@@ -105,7 +106,8 @@ QuickMeta StartCombatFoeRY
 		CombatLoaded()
 		assert(type(key)=="number" and type(value)=="number","Invalid RY key/value")
 		//LuaDoString("FLOW_Combat","Combat_Start.RY["..key.."] = "..qv(value))
-		Lua.error("FoeRY:StartCombatFoeRY definition cannot yet be done due to link up issues not yet being properly adressed!")
+		//Lua.error("FoeRY:StartCombatFoeRY definition cannot yet be done due to link up issues not yet being properly adressed!")
+		Sys.Call("FLOW_COMBAT","Def_Combat_Start2","RY",key,Value)
 	end
 end
 
