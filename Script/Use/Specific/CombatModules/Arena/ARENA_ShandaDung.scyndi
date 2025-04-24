@@ -35,21 +35,24 @@
 // version: 20.04.28
 // End License Information
 
-module Exa_Arena
+module 
 
-	var Dung
+	#use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Dungeon"
+
+	//var Dung
+	LocExtern Dung "Scyndi.Class.TMP_Dungeon"
 	
-	void CONSTRUCTOR()
-		self.Dung       = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Dungeon")
-		self.Dung.Wall  = "GFX/Textures/ShandaDungeon/TheyoudontthinkyourmonitorisbrokengreenBackWall3.png"
-		self.Dung.Floor = "GFX/Textures/ShandaDungeon/FloorYDYMIBzGreen.png"
-		self.Dung.TorchBurn = false
-		self.Dung.TorchOff  = true
-		self.Dung.Init()
+	Init
+		//Dung       = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Dungeon")
+		Dung.Wall  = "GFX/Textures/ShandaDungeon/GFX/Textures/ShandaDungeon/BackWall3_Line.png"
+		Dung.Floor = "GFX/Textures/ShandaDungeon/FloorYDYMIBzGreen.png"
+		Dung.TorchBurn = false
+		Dung.TorchOff  = true
+		Dung.DInit()
 	end
 	
 	void Draw() 
-		self.Dung.Draw()
+		Dung.Draw()
 	end
 
 end
