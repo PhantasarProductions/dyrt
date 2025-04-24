@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.21 IV
+// version: 25.04.24 III
 // 
 // End License
 
@@ -57,15 +57,21 @@ module
 		CSay(A)
 	End
 	
+	Bool PBlocked(int PBX,int PBY)
+		return Kthura.Block(PBX div 32,PBY div 32)
+	End
+	
 	void IrraFly(int mix,int miy)
 		CSayF("Irravonia is to fly... Check: (%3d,%3d)!",mix,miy)
-		if Kthura.Blocked(__player.X+(mix*96),__player.Y+(miy*96),true)
+		if PBlocked(__player.X+(mix*96),__player.Y+(miy*96)) //,true)
 			CWriteLine(sprintf("Request denied. Position (%5d,%5d) is blocked!",__player.X+(mix*96),__player.Y+(miy*96)),255,0,0)
-			return
+			//for i=0,100
+			//	CSayF("(%5d,%5d) -> %3d(%5d) %s",__Player.X,__player.Y,i,__Player.X-i,Kthura.Blocked(__Player.X-i,__Player.Y))
+			//return
 		end
-		bool yeah
+		bool yeah = false
 		for tag in Kthura.EachTag
-			if prefixed(tag,"IrraFly_") 
+			if prefixed(Upper(tag),"IRRAFLY_") 
 				yeah = yeah || Kthura.InObj(tag,__player.X+(mix*32),__player.Y+(miy*32))
 			end
 		end

@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/PersonalAction/Brendor.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Brendor.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,46 +33,27 @@
 // 
 // **********************************************
 // 
-// version: 20.06.04
-// End License Information
+// 
+// version: 25.04.24 II
+// 
+// End License
 
-#use "libs/strings"
+Module
 
-module Brendor_Personal_Action
+#use "Script/Use/Need"
 
-	var Img
-	int X
-	int Y
-	
-	void Crack(string tag)
-		FieldMap.Kill(tag,true)
-		FieldMap.Kill("TEX"..tag)
-		FieldMap.Kthura.ShowByLabel(right(tag,#tag-6))
+#accept CSay
+
+Void SU(Int Skill)
+	int lvl
+	CSay("Go! Brendor! Go!")
+	lvl = RPG.GetChar("Brendor").Points("SKILLLVL"..skill).Have
+	RPG.GetChar("Brendor").Stat("PERMPOWERUP_Strength").Value = RPG.GetChar("Brendor").Stat("PERMPOWERUP_Strength").Value + ( 4 - __skill)
+	if lvl % __skill
+		RPG.GetChar("Brendor").Stat("PERMPOWERUP_Defense").Value ++ 
 	end
-	
-	void Draw()
-		self.Img.Draw(self.X,self.Y)
+	if lvl % (__skill ^ 2)
+		RPG.GetChar("Brendor").Stat("PERMPOWERUP_HP").Value ++ 
 	end
-	
-	bool Click(int but,int x, int y)
-		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
-			return false;
-		end
-		for tag in FieldMap.Kthura.EachTag()
-			for i=__player.Y-64,__player.Y
-				if prefixed(tag,"CRACK_") and FieldMap.Kthura.InObj(tag,__player.X,i)
-					self.Crack(tag)
-					return true
-				end
-			end
-		end
-	end
-	
-	void CONSTRUCTOR()
-		self.Img = LoadImage("GFX/PersAction/Brendor.png")
-		self.X = Screen.Width -300
-		self.Y = Screen.Height-400
-
-	end
-
 end
+	

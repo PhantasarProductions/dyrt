@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Create/Brendor.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Char/PersonalAction/PA_Brendor.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,25 +33,56 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-
-#use "Script/Use/AnyWay"
-
-var Brendor
-
-Brendor = RPG.GetChar("Brendor")
-Brendor.Name = Names.Brendor
-
-Brendor.Data["SKILL0"] = "Hammer Skills"
-
-//for i=0,4
-	Brendor.Points(sprintf("SKILLEXP%d",0),true).Have    = 1
-	Brendor.Points(sprintf("SKILLLVL%d",0),true).Max     = 10000
-	Brendor.Points(sprintf("SKILLLVL%d",0),true).Minimum = 9 / __skill
-//end
+// 
+// version: 25.04.24 II
+// 
+// End License
 
 
-Brendor.Data.Weapon = "EQW_BRENDOR_HAMMER"
-Brendor.Data.Armor  = "EQA_SHIRT"
-Brendor.Data.Jewel  = "JWL_BRACERS"
+module
+
+#use "Script/Use/Need"
+
+#accept Kthura
+#accept LoadImage
+#accept Prefixed
+#accept Graphics
+#accept FieldMap
+
+locExtern __Player "Scyndi.Class.Kthura.Obj.Player"
+
+	var Img
+	int X
+	int Y
+	
+	void Crack(string tag)
+		FieldMap.Kill(tag,true)
+		FieldMap.Kill("TEX"..tag)
+		Kthura.ShowByLabel(right(tag,len(tag)-6))
+	end
+	
+	void Draw()
+		Img.Draw(X,Y)
+	end
+	
+	bool Click(int but,int _x, int _y)
+		if _x<X || _y<Y || _x>X+200 || _y>Y+200
+			return false;
+		end
+		for tag in FieldMap.Kthura.EachTag
+			for i=__player.Y-64,__player.Y
+				if prefixed(tag,"CRACK_") && Kthura.InObj(tag,__player.X,i)
+					Crack(tag)
+					return true
+				end
+			end
+		end
+	end
+	
+	Init
+		Img = LoadImage("GFX/PersAction/Brendor.png","PA_Brendor")
+		X = Graphics.Width -300
+		Y = Graphics.Height-400
+
+	end
+

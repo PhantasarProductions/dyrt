@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Brendor.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Char/Ability/Abl_Brendor.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,23 +33,23 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.24 III
+// 
+// End License
 
-do
-	delegate ret
-	ret = void(int skill)
-		int lvl
-		CSay("Go! Brendor! Go!")
-		lvl = RPG.GetChar("Brendor").Points("SKILLLVL"..skill).Have
-		RPG.GetChar("Brendor").Stat("PERMPOWERUP_Strength").Value = RPG.GetChar("Brendor").Stat("PERMPOWERUP_Strength").Value + ( 4 - __skill)
-		if lvl % __skill
-			RPG.GetChar("Brendor").Stat("PERMPOWERUP_Defense").Value ++ 
-		end
-		if lvl % (__skill ^ 2)
-			RPG.GetChar("Brendor").Stat("PERMPOWERUP_HP").Value ++ 
-		end
-	end
-	
-	return ret
+
+Module
+
+Table Lijst
+
+#use "Script/Use/Need"
+
+Init
+	locExtern s "Scyndi.Globals.gint.skill"
+	locExtern a "Scyndi.Class.Abl_Brendor.Lijst"
+	a.Charge = { ["Skill_Hammer"]=s*5 }
+	a.HammerSmash = { ["Skill_Hammer"]=5^s },
+	a.Focus = { ["Scharum"] = true },
+	a.QuakeStrike = { ["SealedBoss"] = true }
 end
