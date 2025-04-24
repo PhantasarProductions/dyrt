@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.24 II
+// version: 25.04.24 V
 // 
 // End License
 
@@ -82,14 +82,14 @@ module
 			case 3
 				i = 3
 		end
-		new Hurt("Personal will:",'Shanda',255,180,  0)
-		new Hurt("Regeneration",  'Shanda',  0,180,255)
-		new Hurt(tostring(i),     'Shanda',  0,255,  0)
+		new Hurt("Personal will:","Shanda",255,180,  0)
+		new Hurt("Regeneration",  "Shanda",  0,180,255)
+		new Hurt(tostring(i),     "Shanda",  0,255,  0)
 		ShandaHPHav = ShandaHPHav + i
 		Int M = os.time()
-		while ShandaAPHave>0
+		while ShandaAPHav>0
 			M = (M+1) % (__skill*3)
-			ShandaAPHave--
+			ShandaAPHav--
 			C:=Comrades[M]
 			if C
 				RPG.GetChar(C).Points("AP").Have++
