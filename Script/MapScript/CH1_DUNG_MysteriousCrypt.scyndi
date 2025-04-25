@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH1_DUNG_MysteriousCrypt.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/MapScript/CH1_DUNG_MysteriousCrypt.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,17 +33,25 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.26 VII
+// 
+// End License
+
+Script
 
 #say "Map Script - None!"
-#use "script/use/anyway"
-#use "libs/tables"
-#use "Script/Use/StartCombatMod"
+
+#use "libs/sci/sys"
+#use "libs/sci/intervar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 
 void Twisted()
 	MapScript.SASKIA("Twisted")
 end
+
 
 group MScript
 	
@@ -56,17 +65,7 @@ group MScript
 	delegate SWITCH_SWEIGHT
 	delegate SWITCH_SWNINE
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("ResetBlue","ResetBlue")
-		Map.ZA_Enter("TUT_Break","TUT_BREAK")
-		Map.ZA_Enter("BOSS_Scorpion","SASKIA_BOSS")
-		Map.ZA_Enter("EindPunt","The_End")
-		Map.ZA_Enter("MerchantBegone","MerchantBegone")
-		Map.ZA_Enter("Leave","Leave")
-		for _,s in pairs {"ONE","TWO","FOUR","FIVE","SIX","SEVEN", "EIGHT", "NINE" }
-			self["SWITCH_SW"..s] = Twisted
-		end
-	end
+	
 	
 	void SWITCH_SWTHREE()
 		Map.Kill("PuzDoor",true)
@@ -75,9 +74,9 @@ group MScript
 	void CREATEBRENDOR()
 		number lvl = 4 - __skill
 		for chn in each({"Eric","Irravonia","Rebecca"})
-			#+ lvl RPG.GetChar(chn).Stat("Level").Value
+			lvl += RPG.GetChar(chn).Stat("Level").Value
 		end
-		#+ lvl (lvl*({0.25,0,-0.75})[__skill])
+		lvl += (lvl*({0.25,0,-0.75})[__skill])
 		var Brendor
 		Party.NewCharacter("Brendor",math.ceil(lvl))
 		Brendor = RPG.GetChar("Brendor")
@@ -91,6 +90,10 @@ group MScript
 		RPG.Party[2] = ""
 		RPG.Party[3] = ""
 		RPG.Party[4] = ""
+		BHP:=RPG.GetChar("Brendor").Points("HP")
+		BHP.Have = BHP.Maximum
+		BVP:=RPG.GetChar("Brendor").Points("VIT")
+		BVP.Have = BVP.Maximum
 		RPG.KillChar("Shanda") // She was only a guest char, and she'll never be in the party again, so why keep her in the memory?
 	end
 	
@@ -105,7 +108,7 @@ group MScript
 	end
 	
 	void NPC_SWORDS()
-		#+ Inventory.EQW_ERICREBECCA_SWORD 2
+		Inventory.EQW_ERICREBECCA_SWORD += 2
 		Map.Kill("NPC_SWORDS",true)
 	end
 	
@@ -149,6 +152,12 @@ group MScript
 			Map.Kill("NPC_Merchant",true)
 			CSay("Merchant permanently removed!")
 		end
+		if !Done.BrendorRecoverFirstTime && RPG.Party[1]=="Brendor"
+			BHP:=RPG.GetChar("Brendor").Points("HP")
+			BHP.Have = BHP.Maximum
+			BVP:=RPG.GetChar("Brendor").Points("VIT")
+			BVP.Have = BVP.Maximum
+		end
 	end
 	
 	void Draw()
@@ -158,4 +167,18 @@ group MScript
 	end
 	
 end
+
+Init
+	Map.ZA_Enter("ResetBlue","ResetBlue")
+	Map.ZA_Enter("TUT_Break","TUT_BREAK")
+	Map.ZA_Enter("BOSS_Scorpion","SASKIA_BOSS")
+	Map.ZA_Enter("EindPunt","The_End")
+	Map.ZA_Enter("MerchantBegone","MerchantBegone")
+	Map.ZA_Enter("Leave","Leave")
+	for _,s in pairs {"ONE","TWO","FOUR","FIVE","SIX","SEVEN", "EIGHT", "NINE" }
+		MScript["SWITCH_SW"..s] = Twisted
+	end
+	
+end
+
 #say "Map Script - Compiling!"
