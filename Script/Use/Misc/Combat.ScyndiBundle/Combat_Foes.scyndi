@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Foes.scyndi
 // 
-// 	  Version: 25.04.23
+// 	  Version: 25.04.25 II
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -59,6 +59,8 @@ Module
 
 #use "Script/Use/Need"
 
+
+
 class Foe extends Fighter
 
 	// Parameters all Foe data scripts respond to
@@ -70,7 +72,16 @@ class Foe extends Fighter
 	static table StatSubs 
 
 	// Foe specific data
-	table AI_Moves
+	Var AI_Moves_Real
+	Get Var AI_Moves
+		locExtern AMR "self.AI_Moves_Real" 
+		AMR = AMR || {}
+		return AMR
+	End
+	Set Var AI_Moves
+		locExtern AMR "self.AI_Moves_Real" 
+		AMR = value
+	End
 	string AI_Module
 	var AI_Data
 	table Fatal
