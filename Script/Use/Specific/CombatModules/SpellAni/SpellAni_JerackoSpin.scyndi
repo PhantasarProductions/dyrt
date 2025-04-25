@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.24 IX
+// version: 25.04.25 I
 // 
 // End License
 
@@ -172,11 +172,12 @@ end
 			F.SpotX = MidX+math.floor(xmath.sin(D.Deg)*300)
 			F.SpotY = MidY+math.floor(xmath.cos(D.Deg)*300)
 		end
-		Deg = (Deg+Spd)%360
-		//if Deg>=360
-		//	#- Deg 360
-		//	Round++
-		//end
+		//Deg = (Deg+Spd)%360
+		Deg+=Spd
+		if Deg>=360
+			Deg -= 360
+			Round++
+		end
 		if Round<9 && Spd<12
 			Spd++
 		elseif Round>10 && Spd>1
