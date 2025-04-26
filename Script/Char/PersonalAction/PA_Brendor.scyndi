@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.24 II
+// version: 25.04.26
 // 
 // End License
 
@@ -69,7 +69,7 @@ locExtern __Player "Scyndi.Class.Kthura.Obj.Player"
 		if _x<X || _y<Y || _x>X+200 || _y>Y+200
 			return false;
 		end
-		for tag in FieldMap.Kthura.EachTag
+		for tag in Kthura.EachTag
 			for i=__player.Y-64,__player.Y
 				if prefixed(tag,"CRACK_") && Kthura.InObj(tag,__player.X,i)
 					Crack(tag)
