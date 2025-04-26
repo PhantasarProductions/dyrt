@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SAT_Explosion.scyndi
 // 
-// 	  Version: 25.04.26
+// 	  Version: 25.04.26 III
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -45,7 +45,7 @@
 
 module
 
-#use "Libs/Graphics"
+#use "Libs/SCI/Graphics"
 
 	int R = 255
 	int G = 255
@@ -67,7 +67,7 @@ module
 	end
 	
 	bool Cycle()
-		Color(R,G,B)
+		SetColor(R,G,B)
 		for _,Target in pairs(Targets)
 			explosion.Draw(Target.X+math.ceil(Target.Width/2)-32,Target.Y+Target.Height-64,frame)
 		end
@@ -79,4 +79,3 @@ module
 		return frame>16
 	end
 
-end
