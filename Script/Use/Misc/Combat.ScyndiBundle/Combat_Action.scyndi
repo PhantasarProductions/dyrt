@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Action.scyndi
 // 
-// 	  Version: 25.04.21
+// 	  Version: 25.04.26 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -201,15 +201,20 @@ group Action_SpellAni
 	var sa_mod
 	
 	void Draw()
-		// TODO: Execute NIL script if applicable
-		// TODO: Execute SASKIA script if applicable
-		if (not self.sa_mod) or (self.sa_mod.Cycle(Stage_Action.Act))
+		
+		if self.sa_mod && lua.type(self.sa_mod.Cycle)!="function"
+			CSayF("\007Da fuck!? Cycle is %s! That should not be possible!",self.sa_mod.Cycle)
+			Stage_Action.Stage = Action_Exe
+		End
+		if (! self.sa_mod) || (self.sa_mod.Cycle(Stage_Action.Act))
 			Stage_Action.Stage = Action_Exe
 		end
+		
+		
 	end
 	
 	void Update()
-		// TODO: Check if no more spellani scripts are running, either SASKIA or NIL
+		
 		
 	end
 	

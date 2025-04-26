@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.24
+// 	  Version: 25.04.26 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -195,14 +195,16 @@ class Hero extends Fighter
 	
 	
 	get int Height
+	LocExtern _Self "self"
 		var Image
-		Image = self.Pics[self.Houding]
+		Image = _self.Pics[_self.Houding]
 		return Image.Height
 	end
 	
 	get int Width
+		LocExtern _Self "self"
 		var Image
-		Image = self.Pics[self.Houding]
+		Image = _self.Pics[_self.Houding]
 		return Image.Width
 	end
 
