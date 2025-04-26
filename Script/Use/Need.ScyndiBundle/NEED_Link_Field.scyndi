@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.04.26
+// 	  Version: 25.04.26 I
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -604,8 +604,10 @@ group Respawn
 	
 	void Wipe()
 		Kthura.Obj.Player.StopWalking()
-		FLD_Exe("SASKIA.Wipe()") // Make sure all SASKIA sessions will terminate!
-		FLD_Exe(sprintf("FlowField.LoadMap(trim(\"%s\"))",self.Map))
+		//FLD_Exe("SASKIA.Wipe()") // Make sure all SASKIA sessions will terminate!
+		//FLD_Exe(sprintf("FlowField.LoadMap(trim(\"%s\"))",self.Map))
+		Sys.Call("SASKIA.Wipe")
+		Sys.Call("FlowField.LoadMap",Trim(gstring.Respawn_Map))
 		Map.Layer = self.Layer
 		FLD_Exe(sprintf("FlowField.CoordSpawnPlayer(%4d,%4d)",self.X,self.Y))
 		switch(__skill)
