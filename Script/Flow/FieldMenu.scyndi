@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.04.24 I
+// 	  Version: 25.04.27 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -733,6 +733,7 @@ group Flow_FieldMenu
 		x = ubox.x + 10
 		y = ubox.y + 10
 		$SwitchHover = ""
+		//CSayF("Switch.%s - %d till %d",situation,s_min,s_max)
 		for i = s_min,s_max
 			__white
 			string tag
@@ -823,7 +824,7 @@ group Flow_FieldMenu
 			tmp += { ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" }
 			tmp += { ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" }
 			tmp += { ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" }
-			tmp += { ["IconFile"]="Switch", ["Right"]=self.JustSwitch, ["Help"]="Switch chacters" }
+			tmp += { ["IconFile"]="Switch", ["Right"]=self.SwitchChar, ["Help"]="Switch chacters" }
 			tmp += { ["IconFile"]="Trophies", ["Right"]=self.ViewAchievements, ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
 			//tmp += { ["IconFile"] = "Exit", ["Action"] = self.Quit, ["Help"]="Quit the game", ["NoTab"]=true}
 				 
@@ -877,7 +878,7 @@ group Flow_FieldMenu
 			
 			// ["BANK"] = {["MenuItems"] = {} } // unused
 			self.situations["COMBAT_SWITCH"] = {}
-			self.situations["COMBAT_SWITCH"]["MenuItems"] = {[0]={ ["IconFile"] = "Switch", ["Right"]=self.JustSwitch, ["Help"]="Switch chacters" } }
+			self.situations["COMBAT_SWITCH"]["MenuItems"] = {[0]={ ["IconFile"] = "Switch", ["Right"]=self.SwitchChar, ["Help"]="Switch chacters" } }
 			self.situations["COMBAT_SWITCH"]["SwitchRange"] = {5,8},
 			self.situations["COMBAT_SWITCH"]["SwitchAction"] = self.CombatSwitch
 			self.situations["COMBAT_SWITCH"]["Return"] = "COMBAT"					
