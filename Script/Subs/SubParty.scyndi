@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.04.23
+// 	  Version: 25.04.26
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -388,7 +388,7 @@ group SubParty
 			SubParty.SinAlpha()
 		end
 		self.BackIco[tag] = self.BackIco[tag] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",tag))
-		self.BackIco[tag].XDraw(self.BarBoxes[num].X+22,self.BarBoxes[num].Y+20)
+		self.BackIco[tag].Draw(self.BarBoxes[num].X+22,self.BarBoxes[num].Y+20)
 		SetAlpha(255)
 		if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
 			$Hover=num
