@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.26 I
+// version: 25.04.26 III
 // 
 // End License
 
@@ -47,7 +47,7 @@ module
 	//var Dung
 	locExtern Dung "Scyndi.Class.TMP_Dungeon"
 	
-	var Weniaria = LoadImage("GFX/Textures/Obstacles/StatueWeniaria.png")
+	var Weniaria = LoadNewImage("GFX/Textures/Obstacles/StatueWeniaria.png","Weniaria")
 	
 	Init
 		Weniaria.HotBottomCenter()
@@ -61,6 +61,6 @@ module
 	void Draw() 
 		Dung.Draw()
 		SetColor(255,255,255)
-		Weniaria.Draw(Graphics.Width div 2,(Graphics.Height div 2) + 25)
+		Weniaria.Draw(Graphics.Width div 2,(Graphics.Height div 2) + 100)
 	end
 
