@@ -1,0 +1,186 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/PersonalAction/PA_Scyndi.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.26 IX
+// 
+// End License
+
+//#use "libs/strings"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "Script/Use/Need"
+
+Module
+
+	#accept CSay
+	#accept CSayF
+	#accept FieldFlow
+	#accept FlowField
+	#accept FieldMap
+
+	LocExtern __player "Scyndi.Class.Kthura.Obj.Player"
+	
+	var Img
+	int X
+	int Y
+	bool HookMove
+	int HookMoveX
+	int HookMoveY
+	
+	void Draw()
+		Img.Draw(X,Y)
+		Color(255,180,0)
+		if HookMove
+			int px
+			int py
+			int hx
+			int hy
+			px = (__player.X - FlowField.Map.ScrollX) // + 16
+			py = (__player.Y - FlowField.Map.ScrollY) - 32
+			hx = HookMoveX - FlowField.Map.ScrollX //+ 16
+			hy = HookMoveY - FlowField.Map.ScrollY //- 16
+			Line(px,py,hx,hy)
+			if not __player.Moving
+				HookMove=false
+			end
+//			if (HookMoveX!=__player.X and HookMoveY!=__player.Y) or math.abs(HookMoveX-__player.X)<70 or math.abs(HookMoveY-__player.Y)<70 
+//				HookMove = false
+//			elseif HookMoveX<__player.X
+//				Rect(HookMoveX,HookMoveY,HookMoveX-__player.X,1)
+//			elseif HookMoveX>__player.X
+//				Rect(__player.X,HookMoveY,__player.X-HookMoveX,1)
+//			elseif HookMoveY<__player.Y
+//				Rect(HookMove.X,HookMove.Y,1,HookMoveY-__player.Y)
+//			elseif HookMoveY>__player.Y
+//				Rect(HookMove.X,__player.Y,1,__player.Y-HookMoveY)
+//			end
+			__white
+		end
+	end
+	
+	void HookOn(int _X, int _Y)
+		int wx
+		int wy
+		wx = __player.X
+		wy = __player.Y
+		HookMove=false
+		bool skip
+		bool foundhook
+		CSay("Trying to find a Scyndi Hook Spot!")
+		repeat
+			skip = false
+			foundhook = false
+			wx += _X
+			wy += _Y
+			CSayF("Testing (%5d,%5d) Mv(%d,%d) ",wx,wy,_X,_Y)
+			for tag in FieldMap.Kthura.EachTag()
+				skip = skip or ( prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy) )
+				// CSayF("= Checking zone: %s; For Scyndi and in there: %s; Skip: %s",tag,tostring(prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy)),tostring(skip) )
+				if prefixed(tag,"ScyndiHookSpot_") 
+					foundhook = true
+					var m
+					//m = FieldFlow.Map.Kthura
+					//m.Obj = tag
+					mo:=Kthura.Obj[tag]
+					if math.abs(wx-mo.X)<30 and math.abs(wy-mo.Y)<30
+						if X<0
+							HookMoveX = mo.X //+16
+							HookMoveY = mo.Y-16
+							HookMove  = true
+							__player.Y = HookMoveY
+							__player.MoveTo(HookMoveX,HookMoveY)
+						elseif X>0
+							HookMoveX = mo.X //+16
+							HookMoveY = mo.Y-16
+							HookMove  = true
+							__player.Y = HookMoveY
+							__player.MoveTo(HookMoveX,HookMoveY)
+						elseif Y<0
+							HookMoveX = mo.X
+							HookMoveY = mo.Y-16
+							HookMove  = true
+							__player.X = HookMoveX
+							__player.MoveTo(HookMoveX,HookMoveY+32)
+						elseif Y>0
+							HookMoveX = mo.X
+							HookMoveY = mo.Y-16
+							HookMove  = true
+							__player.X = HookMoveX
+							__player.MoveTo(HookMoveX,HookMoveY-32)
+						end
+					end
+				end
+			end
+			if HookMove
+				return
+			end
+			if not foundhook
+				CSay("No need to keep on scanning if there isn't any hookspot at all in this place!")
+				return
+			end
+		until (not skip) and FieldMap.Kthura.Blocked(wx,wy,true)
+	end
+	
+	bool Click(int but,int _x, int _y)
+		bool ret
+		ret = _x>X and _y>Y and _x<X+200 and _y<Y+200
+		if ret
+			// left
+			if _x<X+25 and _y>Y+25 and _y<Y+175
+				HookOn(-1, 0)
+			// right
+			elseif _x>X-175 and _y>Y+25 and _y<Y+175
+				HookOn( 1, 0)
+			// up
+			elseif _y<Y+ 25 and _x>X+25 and _x<X+175
+				HookOn( 0,-1)
+			// down
+			elseif _y>Y+175 and _x>X+25 and _x<X+175
+				HookOn( 0, 1)
+			end
+		end
+		return ret
+	end
+	
+	Init
+		Img = LoadImage("GFX/PersAction/Scyndi.png")
+		X = Screen.Width -300
+		Y = Screen.Height-400
+	end
+
+//end
