@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.26 VII
+// version: 25.04.26 IX
 // 
 // End License
 
@@ -55,6 +55,7 @@ end
 
 group MScript
 	
+
 	delegate SWITCH_SWONE
 	delegate SWITCH_SWTWO
 	// I did NOT forget number three! There's a joke behind this :P
@@ -73,10 +74,11 @@ group MScript
 	
 	void CREATEBRENDOR()
 		number lvl = 4 - __skill
-		for chn in each({"Eric","Irravonia","Rebecca"})
+		for chn in each({[0]="Eric","Irravonia","Rebecca"})
 			lvl += RPG.GetChar(chn).Stat("Level").Value
 		end
 		lvl += (lvl*({0.25,0,-0.75})[__skill])
+		gBool.LevelOkBrendor=true
 		var Brendor
 		Party.NewCharacter("Brendor",math.ceil(lvl))
 		Brendor = RPG.GetChar("Brendor")
@@ -158,6 +160,17 @@ group MScript
 			BVP:=RPG.GetChar("Brendor").Points("VIT")
 			BVP.Have = BVP.Maximum
 		end
+		If !Done.LevelOkayBrendor
+			number lvl = 4 - __skill
+			for chn in each({[0]="Eric","Irravonia","Rebecca"})
+				lvl += RPG.GetChar(chn).Stat("Level").Value
+			end
+			lvl += (lvl*({0.25,0,-0.75})[__skill])
+			//RPG.GetChar("Brendor").Stat("Level").Value=lvl
+			Party.SetLevelStats("Brendor", lvl)
+			CSayF("Brendor's level corrected to %d",lvl)
+		end
+
 	end
 	
 	void Draw()
