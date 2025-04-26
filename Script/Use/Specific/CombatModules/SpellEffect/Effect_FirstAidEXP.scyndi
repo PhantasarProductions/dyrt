@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/FirstAidEXP.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_FirstAidEXP.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,21 +33,29 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.26 V
+// 
+// End License
 
-do 
-	bool FirstAidWeniariaExperience(Act)
+Module
+
+#accept RPG
+
+#use "Script/Use/Need"
+
+//do 
+	bool DoEffect(Act)
 		var Scyndi
 		Scyndi = RPG.GetChar("Scyndi")
-		if Act.ExeTag=="Scyndi" and Scyndi.Points("SKILLLVL1").Have>0
+		if Act.ExeTag=="Scyndi" && Scyndi.Points("SKILLLVL1").Have>0
 			var EXP
 			EXP = Scyndi.Points("SKILLEXP1")
-			#+ EXP.Have math.random(12/__skill,120/__skill)
+			EXP.Have += math.random(12/__skill,120/__skill)
 			return true
 		end
 		return false
 	end
 	
-	return FirstAidWeniariaExperience
-end
+	
+//end
