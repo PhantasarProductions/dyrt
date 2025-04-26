@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.24
+// 	  Version: 25.04.27 III
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -716,24 +716,25 @@ group FlowField
 	void TreasureChest(string Tag)
 		static var chaching
 		static var getitem
-		var kth
-		var dat
-		kth = FieldMap.Kthura
-		kth.Obj = Tag
-		dat = kth.ObjData
-		if kth.ObjString.Texture:upper()=="GFX/TEXTURES/OBJECTS/CHEST_CLOSED.PNG"
+		kth := Lua.Scyndi.Class.Kthura
+		//var dat
+		//kth = FieldMap.Kthura
+		//kth.Obj = Tag
+		ktho := Kth.Obj[Tag]
+		dat := kthO.Data
+		if Upper(kthO.Texture)=="GFX/TEXTURES/OBJECTS/CHEST_CLOSED.PNG"
 			string ItemTag
 			int mx
 			int my
-			mx = kth.ObjInt.X - FieldMap.ScrollX
-			my = kth.ObjInt.Y - FieldMap.ScrollY
-			ItemTag = dat.Treasure:upper()
+			mx = kthO.X - FieldMap.ScrollX
+			my = kthO.Y - FieldMap.ScrollY
+			ItemTag = Upper(dat.Treasure)
 			if prefixed(ItemTag,"CASH:")
 				int foundcash 
 				foundcash = tonumber(split(ItemTag,":")[2]) or 1
 				string shild = "shilders"
 				if foundcash == 1 
-					shild = 'shilder'
+					shild = "shilder"
 				end
 				if __cash > (300000000 / __skill)
 					new MiniMsg(mx,my,sprintf("OVERLOADED: %d %s",foundcash, shild),255,0,0)
@@ -758,11 +759,12 @@ group FlowField
 					return
 				end
 			end
-			kth.ObjString.Texture="GFX/TEXTURES/OBJECTS/CHEST_OPEN.PNG"
+			//kthO.Texture="GFX/TEXTURES/OBJECTS/CHEST_OPEN.PNG"
+			Map.Kill(Tag,true)
 			string m
 			//m = "MAPCHANGES."..FieldMap.LoadedMap
 			//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\tFieldMap.Kill(\""..Tag.."\")\n"
-			PermaChanges.Add(StripDir(Kthura.LastLoaded),"Kills."..Kthura.CurrentLayer,tag)
+			//PermaChanges.Add(StripDir(Kthura.LastLoaded),"Kills."..Kthura.CurrentLayer,tag)
 		end
 	end
 	
@@ -916,7 +918,7 @@ group FlowField
 							self.Map.Kill(Tag)
 							CSay("= Removed chest "..Tag.." as it was not allowed in this difficulty setting!")
 						else
-							CSay("= Activated chest "..Tag)
+							CSay("= Activated chest "..Tag.." on layer "..Lay)
 							//new Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y+32, FlowField.TreasureChest, Tag)
 							new Clickables(Tag,dat.x, dat.y+32, FlowField.TreasureChest, Tag)
 						end
