@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.03.29 II
+// version: 25.04.27 V
 // 
 // End License
 
@@ -42,6 +42,7 @@
 Script
 
 #use "Libs/SCI/Sys"
+#Use "Libs/SCI/Medals"
 #use "Libs/SCI/InterVar"
 
 #use "script/use/Need"
@@ -75,7 +76,7 @@ group StartNewPrologue
 
 end
 
-bool gj_checked
+bool medal_checked
 
 
 group MScript
@@ -105,16 +106,16 @@ group MScript
 		Map.ShowByLabel("Travel")
 	end
 	
-	void GJ_OPEN()
+	void Medal_Open()
 		//var GJ
 		//CSayF("gvgj%s",tostring(gv.Bool.GameJolt))
-		//CSayF("chek%s",tostring(gj_checked))
+		//CSayF("chek%s",tostring(medal_checked))
 		//CSayF("fail%s",tostring(gj_failed()))
-		//if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
+		//if (not gv.Bool.GameJolt) or medal_checked or (gj_failed())
 		//	return
 		//end
 		//CSay("Next step - Loading the data")
-		//gj_checked = true
+		//medal_checked = true
 		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
 		//if not GJ
 		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
@@ -129,22 +130,29 @@ group MScript
 		//int p 
 		//p = math.floor(NALA_Medals:AltRatio())
 		//CSayF("Medal rate %03d%%",p)
-		//gj_checked = true
+		//medal_checked = true
 		//if p>=18
 		//	Map.Kill("GameJoltBarrier")
 		//end
+		LocExtern WantRatio "18"
+		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
+		if MedalRatio>=WantRatio
+			Map.Kill("MedalBarrier",false)
+			CSayF("-> Open Sesame!")
+		End
+		medal_checked=true
 	end
 	
 	void AWOPEN()
-		if gj_checked
+		if medal_checked
 			return
 		end
-		Map.Kill("GameJoltBarrier")
-		gj_checked = true
+		Map.Kill("MedalBarrier")
+		medal_checked = true
 	end
 	
 	void TO_BOTANICA()
-		Field.LoadMap("GJ_DUNG_Botanica")
+		Field.LoadMap("MDL_DUNG_Botanica")
 		Map.GoToLayer("#001","Start")
 	end
 	
@@ -168,7 +176,7 @@ group MScript
 		Map.ZA_Leave("TravelZone","HideTravel")
 		Map.ZA_Enter("TravelZone","ShowTravel")
 		Map.ZA_Enter("NoBarrier","AWOpen")
-		Map.ZA_Enter("CheckGameJolt","GJ_Open")
+		Map.ZA_Enter("CheckMedal","Medal_Open")
 		Map.ZA_Enter("To_Botanica","To_Botanica")
 		Map.ZA_Enter("StartBlenchy","SASKIA:Blenchy")
 		if ! gBool.EnterPrisonForReal_LeftCell
