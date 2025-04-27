@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
 // 
-// 	  Version: 25.04.24
+// 	  Version: 25.04.27 II
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -122,6 +122,10 @@ class Fighter
 		return me.GetTeamName()
 	end
 	
+	static void SetGaugePosition(string _Tag,Int newvalue)
+		Fighter.ByTag[_Tag].GaugePosition = NewValue
+	End
+	
 	static delegate ForAll()
 		int iteridx = -1
 		table iter
@@ -209,6 +213,8 @@ class Fighter
 		self.Team[self.TeamName][aTag] = self
 		CSay("= Added to team: "..self.TeamName.."/"..tostring(self.Team))
 		self.ByTag[aTag]=self
+		StatusChanges = {}
+		StatusChangesRealTable = {}
 		
 		bool stat_modified = true
 		bool alive
@@ -353,6 +359,8 @@ class Fighter
 		self.StatusChanges = setmetatable({},{["__index"]=scm_index,["__newindex"]=scm_newindex,["__tostring"]=scm_tostring})
 		self.InitFighter()
 	end
+	
+	
 	
 end
 
