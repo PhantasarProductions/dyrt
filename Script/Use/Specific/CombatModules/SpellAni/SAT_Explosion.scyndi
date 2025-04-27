@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SAT_Explosion.scyndi
 // 
-// 	  Version: 25.04.26 III
+// 	  Version: 25.04.27
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -76,6 +76,6 @@ module
 			tijd=0
 			frame++
 		end
-		return frame>16
+		return frame>=16
 	end
 
