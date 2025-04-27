@@ -1,0 +1,104 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/MapScript/MDL_Dung_Botanica.scyndi
+// (c) Jeroen Broks, 2019, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.27 III
+// 
+// End License
+
+
+Script
+
+#say "Map Script - Botanica!"
+
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
+group MScript
+	
+	void TOPRISON()
+		Field.LoadMap("CH1_DUNG_Prison")
+		Map.GoToLayer("#001","From_Botanica")
+	end
+	
+	void BACKNEXT()
+		Map.GoToLayer("#002","WayBackStart")
+	end
+	
+	void BACKPREV()
+		Map.GoToLayer("#005","Einde")
+	end
+	
+	void TUTOR()
+		if not Done.MedalExclusiveTutorial_Botanica
+			MapText("TUTOR")
+		end
+	end
+	
+	void STARTBOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Special.Wav"
+		StartCombat.Arena = "Botanica"
+		StartCombat.Foe[1] = "Boss/Audrey"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+
+	
+	
+	
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+
+Init
+	Map.ZA_Enter("ToPrison","ToPrison")
+	Map.ZA_Enter("BackNext","BackNext")
+	Map.ZA_Enter("BackPrev","BackPrev")
+	Map.ZA_Enter("ABoss","SASKIA:Boss")
+	Map.ZA_Enter("Tutor","Tutor")
+	if ! Done.EnterPrisonForReal
+		gv.Bool["RESPAWN_INITIATED"] = false
+	end
+end
+
+#say "Map Script - Compiling!"

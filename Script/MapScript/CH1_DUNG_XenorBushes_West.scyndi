@@ -1,0 +1,137 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/MapScript/CH1_DUNG_XenorBushes_West.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.22 II
+// 
+// End License
+
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+
+#say "Map Script - Xenor Bushes - West!"
+group MScript
+	
+	void _CONSTRUCTOR()
+		CSay("Welcome to the Xenor Buses West! Let's make sure YOMAMA has been awarded!")
+		Achievements.Award("YOMAMA")
+		
+		if ! Done.XenorBushesWestFirstTimeWelcome
+			Respawn.Initiated = false
+			// NOTE: This will affect savegames shot before I took this measure, but it's not a big deal!
+		end
+		
+		// Corrections
+		if ! Done.InitIrravoniaBaseResistances
+			CSay("Init Irravonia's and Eric's base resistances!")
+			int mini
+			int maxi
+			var Irra
+			var Eric
+			mini = 30 / __skill
+			maxi = 90 / __skill
+			Eric = RPG.GetChar("Eric")
+			Irra = RPG.GetChar("Irravonia")
+			if __newgameplus
+				CSay("Bonus for New Game+")
+				mini = mini * (4-__skill)
+				maxi = maxi * (4-__skill)
+				for i=1,4 
+					Eric.Points("SKILLLVL"..i).Have = 1
+					CSayF("Dragon #%d initiated for New Game+",i)
+				end
+			end
+			if __skill==3
+				mini=0
+			end			
+			// Irravonia
+			for _,e in ipairs {[0]="Flame","Water","Wind","Earth"}				
+				Irra.Stat("BASE__RESIST_Elem_"..e).Value = math.random(mini,maxi)
+			end
+			for _,e in ipairs {[0]="Silence","Exhaustion","Death","Destruction"}
+				Irra.Stat("BASE__RESIST_Stat_"..e).Value = math.random(mini,maxi)
+			end
+			// Eric			
+			for _,e in ipairs {[0]="Flame","Frost","Dark","Darkness"}
+				Eric.Stat("BASE__RESIST_Elem_"..e).Value = math.random(mini,maxi)
+			end
+			for _,e in ipairs {[0]="Poison","Disease","Death","Destruction"}
+				Eric.Stat("BASE__RESIST_Stat_"..e).Value = math.random(mini,maxi)
+			end
+			
+		end
+		
+		// Zone Actions
+		Map.ZA_Enter("Leave_West","WEST")
+		Map.ZA_Enter("ToExam","EXAM")
+	end
+		
+	// Seems that the wrong direction came in... What the heck, haha!
+	void WEST()
+		if gv.Bool.XenorBushesWestDone
+			WorldMap.Delisto()
+		else
+			MapText("PLEASE_DONT_GO")
+			Map.WalkTo("Start")
+		end
+	end
+		
+	void EXAM()
+		if not Done.XenorBushesWestDone
+			//error("Chain not working yet")
+			Field.ChainMap("CH1_DUNG_ExamRuins","FirstTime","#001")
+			Map.GoToLayer("#001","Start")
+			//Map.SpawnPlayer("Start")
+		else
+			WorldMap.Delisto()
+		end
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+#say "Map Script - Compiling!"
+
+Init
+	MScript._CONSTRUCTOR()
+End

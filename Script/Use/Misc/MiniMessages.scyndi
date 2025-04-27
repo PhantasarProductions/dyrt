@@ -1,0 +1,170 @@
+// License:
+// 	  src/Script/Script/Use/Misc/MiniMessages.scyndi
+// 
+// 	  Version: 25.04.09 I
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
+//#use "Libs/DarkText"
+#use "Libs/LinkedList"
+
+LocExtern Screen "Scyndi.Class.Graphics"
+
+class MiniMsg
+
+	static int sinner
+	
+	static number radbraker()
+		return sinner * (math.pi/180) 
+	end
+	
+	static number TheSin()
+		if sinner>=360
+			sinner = sinner - 360
+		end
+		return math.sin( MiniMSg.radbraker() )
+	end
+	
+	static number Modifier()
+		return math.abs( 0.5 * MiniMsg.TheSin() ) + 0.5
+	end
+	
+	static void MyColor(int _r, int _g, int _b)
+		SetColor( math.floor(_r * MiniMsg.Modifier() ), math.floor(_g * MiniMsg.Modifier() ), math.floor(_b * MiniMsg.Modifier() ) )
+	end
+	
+	static var Font
+	static var List
+	
+	
+	static int LastY
+	
+	static int AutoCount
+	
+	int R
+	int G
+	int B
+	string msg
+	var msgfnt
+	int X
+	int Y
+	int CD1 = 250
+	int CD2 = 500
+	int ID
+	
+	CONSTRUCTOR(int startx, int starty, string message, cr, cg, cb)
+		self.Font = self.Font || ObtainFont("SYSFONT")
+		self.List = self.List || new TLinkedList()
+		self.R = cr || 255
+		self.G = cg || 255
+		self.B = cb || 255
+		self.msg = message
+		//self.msgfnt = self.Font.Text(message)
+		//self.Y = starty - self.msgfnt.Height
+		//self.X = startx - math.floor(self.msgfnt.Width/2)
+		Y = starty - Font.Height(message)
+		X = startx - (Font.Width(message) div 2)
+		if self.X<10 
+			self.X=10
+		end
+		if self.Y<10
+			self.Y=10
+		end
+		self.AutoCount++
+		self.ID=self.AutoCount
+		CSayF("MiniMessage %d created",self.ID)
+		self.List.AddLast(self)
+	end
+	
+	static var CreateCenter(string msg,r,g,b)
+		return new MiniMsg(Screen.W/2,Screen.H/2,msg,r,g,b)
+	end
+	
+	DESTRUCTOR
+		// Debug to see if the memory is indeed properly released!
+		CSayF("MiniMessage %d destroyed!   CD(%d,%d)",self.ID,self.CD1,self.CD2)
+	end
+	
+	void Draw()
+		int oldx
+		int oldy
+		oldx = $X
+		oldy = $Y
+		if $CD1<=0
+			if $X>10
+				//$X--
+				X -= math.max( (X-10) div 10, 1)
+			end
+			if $Y>$LastY
+				//$Y--
+				Y -= math.max( math.abs(LastY-Y) div 10, 1) 
+			elseif $Y<$LastY
+				//$Y++
+				Y += math.max( math.abs(Y-LastY) div 10, 1)
+			end
+			if oldx==$X && oldy==$Y
+				--$CD2
+			end
+		else
+			--$CD1
+		end
+		MiniMsg.MyColor(R,G,B)
+		//DarkText.Text($msgfnt,$X,$Y)
+		Font.Dark(msg,X,Y)
+	end
+	
+	static void DrawAll()
+		self.List = self.List || new TLinkedList()
+		$LastY=10
+		MiniMsg.sinner++
+		for msg,lnk in $List.Each
+			msg.Draw()
+			if msg.CD2==0
+				lnk.UnLink()
+			end
+			$LastY = $LastY+25
+		end
+	end
+end

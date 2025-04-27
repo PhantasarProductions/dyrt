@@ -47,12 +47,15 @@
 :Shanda
 	group 2
 		mov "Corridor",Map.Layer
+		mov 0,gv.int.ScrollY
 		call MapText,"A"
 	group 2
 		call Map.Kill,"Banthosor"
 		call MapText,"B"
 	group 2
 		mov "Shanda",Map.Layer
+		mov 0,gv.int.ScrollY
+		mov 0,gv.int.ScrollX
 		call MapText,"C"
 	group 4
 		call MapScript.CreateShanda

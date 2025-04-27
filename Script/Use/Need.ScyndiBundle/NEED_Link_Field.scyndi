@@ -1,0 +1,719 @@
+// License:
+// 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
+// 
+// 	  Version: 25.04.26 I
+// 	
+// 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
+
+#use "Script/Use/Need.ScyndiBundle/NEED_Anyway_AlgemeneDefinities"
+#use "Script/Use/Need.ScyndiBundle/NEED_Convert_Flow"
+
+
+//#accept Map
+LocExtern __MAP "Scyndi.Class.Map"
+
+quickmeta MapObjTex
+	index
+		__Map.Obj=key
+		return __Map.ObjString.Texture
+	end
+	
+	newindex
+		__Map.Obj=key
+		__Map.ObjString.Texture = value
+	end
+end
+
+void FieldCheck()
+	Lua.assert(StateExists("FLOW_FIELD"),"Request to field done, while the field flow has not yet been loaded")
+end
+
+void FLD_Exe(string do_it)
+	FieldCheck()
+	//LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD") // Since the Lua and NIL instructions would both be the same, using NIL is pointless and would only down the real-time performance.
+	Lua.error("FLD_Exe out of use, so I won't be able to execute: "..do_it)
+end
+
+string FLD_GetString(string vr)
+	FieldCheck()
+	//return LuaGetString("FLOW_FIELD",vr)
+	Lua.error("FLD_String out of use, so I cannot retrieve: "..vr)
+end
+
+int FLD_GetInt(string vr)
+	FieldCheck()
+	//return LuaGetInt("FLOW_FIELD",vr)
+	Lua.error("FLD_Int out of use, so I cannot retrieve: "..vr)
+end
+
+bool FLD_GetBool(string vr)
+	FieldCheck()
+	//return LuaGetBool("FLOW_FIELD",vr)
+	Lua.error("FLD_Bool out of use, so I cannot retrieve: "..vr)
+end
+
+Var FLD_Call(string cmd,infinity)
+	FieldCheck()
+	r:=Sys.Call("FLOW_FIELD",cmd,infinity)
+	return r
+End
+
+group Map
+	//link Script = MapScript
+	readonly table Data
+	
+	void ZA_New(string event,string zone,string Action,infinity)
+		string params
+		string actiondelegate
+		table ActSplit
+		ActSplit = xsplit(Action,":")
+		for i,v in Lua.ipairs {infinity}
+			if i>1 
+				params = params .. ", "
+			end
+			switch type(v)
+				case "string"
+					params = params .. "\""..SafeString(v).."\""
+				case "number" "boolean"
+					params = params .. tostring(v)
+				default
+					error(sprintf("ZA_New(): Type '"..type(v).."' (parameter #%d) cannot be transferred through this linking routing!",i))
+			end
+		end
+		assert(Len(ActSplit)>0,"Action error in ZA_New")
+		if len(ActSplit)==1
+			//ActSplit[2] = ActSplit[1]
+			//ActSplit[1] = "MAPSCRIPT"
+			ActSplit[1] = ActSplit[0]
+			ActSplit[0] = "MAPSCRIPT"
+		end
+		switch Upper(ActSplit[0])
+			case "MAPSCRIPT"
+				actiondelegate = sprintf("Scyndi.Globals.MapScript.%s",ActSplit[1])
+			case "SASKIA"
+				actiondelegate = sprintf("Scyndi.Globals.MapScript.SASKIA")
+				if params!=""
+					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
+				end
+				//CSay(NIL.LuaSerialize("ActSplit",ActSplit))
+				params = ActSplit[1]
+			default
+				Lua.error(sprintf("I don't know how to handle: %s",ActSplit[0]))
+		end
+		if params==""
+			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s)",event,zone,actiondelegate))
+			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate)
+		else
+			//FLD_Exe(sprintf("ZoneAction(trim(\"%s\"),trim(\"%s\"),%s,%s)",event,zone,actiondelegate,params))
+			FLD_Call("ZoneAction.ext",Trim(event),Trim(zone),actiondelegate,params)
+		end
+	end
+	
+	void ZA_Enter(string zone, string action,infinity)
+		Map.ZA_New("Enter",zone,action,infinity)
+	end
+	
+	void ZA_Leave(string zone, string action,infinity)
+		Map.ZA_New("Leave",zone,action,infinity)
+	end
+
+	void ZA_Cycle(string zone, string action,infinity)
+		Map.ZA_New("Cycle",zone,action,infinity)
+	end
+	
+	void LoadAltNext(string AN)
+		//FLD_Exe(sprintf("ZoneAction.LoadAltNext(trim(\"%s\"))",AN))
+		FLD_Call("ZoneAction.LoadAltNext",AN)
+	end
+	
+	void TieGenerator()
+		FLD_Exe("KthuraGenerator.SetMap(FieldMap.Kthura.ID)")
+	end
+	
+	void Generate(string Layer)
+		FLD_Exe(sprintf("KthuraGenerator.Generate(trim(\"%s\"))",Layer))
+	end
+	
+	void Kill(string objtag, perma)
+		//FLD_Exe(sprintf("FieldMap.Kill(trim(\"%s\"),%s)",objtag,tostring(perma==true)))
+		FLD_Call("FieldMap.Kill",objtag,perma==true)
+	end
+		
+	
+	void VisibleOnlyByZone(string tag,bool inzone)
+		FLD_Exe(sprintf("FieldMap.Kthura.VisibleOnlyByZone(trim(\"%s\"),%s)",tag,tostring(inzone)))
+	end
+	
+	void SpawnPlayer(string spot,altwind)
+		if altwind
+			assert(type(altwind)=="string","If 'altwind' is set, it MUST be a string. Got "..type(altwind))
+			//FLD_Exe(sprintf("FlowField.SpawnPlayer(trim(\"%s\"),\"%s\")",trim(spot),altwind))
+			FLD_Call("FlowField.SpawnPlayer",Trim(spot),altwind)
+		else
+			//FLD_Exe(sprintf("FlowField.SpawnPlayer(trim(\"%s\"))",trim(spot)))
+			FLD_Call("FlowField.SpawnPlayer",Trim(spot))
+		end
+	end
+	
+	void GoToLayer(string Layer,string Exit,AltWind)
+		CSayF("Map.GoToLayer('%s','%s','%s');",Upper(Layer),Exit,tostring(AltWind))
+		Map.Kill("PLAYER")		
+		//FLD_Exe(sprintf("FieldMap.Kthura.Layer = trim(\"%s\")",Layer:upper()))
+		Kthura.CurrentLayer=Layer
+		Map.SpawnPlayer(trim(Exit),AltWind)
+	end
+	
+	void ShowByZone(string zone)
+		FLD_Exe(sprintf("FieldMap.Kthura.ShowByZone(trim(\"%s\"))",zone))
+	end
+	
+	void HideByZone(string zone)
+		FLD_Exe(sprintf("FieldMap.Kthura.HideByZone(trim(\"%s\"))",zone))
+	end
+	
+	get string MapFile
+		//return LuaGetString("FLOW_FIELD","FieldMap.LoadedMap")
+		return StripDir(Kthura.LastLoaded)
+	end
+	
+	get String LoadedMap
+		return StripDir(Kthura.LastLoaded)
+	end	
+	
+	get string Layer
+		//return LuaGetString("FLOW_FIELD","FieldMap.Kthura.Layer")
+		return Kthura.CurrentLayer
+	end
+	
+	set string Layer
+		//FLD_Exe("FieldMap.Kthura.Layer = \""..value.."\"")
+		Kthura.CurrentLayer = Value
+	end
+	
+	//get string PlayerWind
+	//	return LuaGetString("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Wind")
+	//end
+
+	
+	get string PlayerWind
+		//return LuaGetString("FlowField.Map.Kthura.Actor.Player.Wind")
+		return gstr.PLAYER_Wind
+	end
+	
+	get table TagList
+		//string temp
+		//delegate f
+		//temp = LuaGetString("FLOW_FIELD","NIL.LuaSerialize('temp',FlowField.Map.Kthura.Tags)")
+		//error(temp)
+		//temp = "return "..LuaGetString("FLOW_FIELD","FlowField.Map.SerieTags")
+		//#pure
+		//f = (loadstring or load)(temp)
+		//#endpure
+		//f = Lua.load(temp)
+		//assert(f,"Tag list not properly acquired!")
+		//return f()
+		return Kthura.TagList
+	end
+	
+	get table Tags
+		return Kthura.TagList
+	end
+	
+	get delegate EachTag
+		int i = 0
+		table tags
+		tags = self.TagList
+		//return var()
+		ddef ret
+			i++
+			if not tags[i]
+				return nil;
+			end
+			return tags[i]
+		end
+		return ret
+	end
+	
+	void HideByLabel(string label)
+		//FLD_Exe(sprintf("FlowField.Map.Kthura.HideByLabel(trim('%s'))",label))
+		Kthura.HideByLabel(Label)
+	end
+
+	void ShowByLabel(string label)		
+		//FLD_Exe(sprintf("FlowField.Map.Kthura.ShowByLabel(trim('%s'))",label))
+		Kthura.ShowByLabel(Label)
+	end
+	
+	void StopWalking()
+		//FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
+		Kthura.Obj.Player.StopWalking()
+		Sys.Call("FLOW_FIELD","FlowField.WipeWalkArrival")
+	end
+	
+	void WalkTo(A,B,C)
+		if type(A)=="string"
+			//FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(trim(\"%s\"))",A))
+			Kthura.Obj.Player.WalkTo(A)
+		else
+			//FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.WalkTo(%d,%d,%s)",A,B,tostring(C!=false)))
+			// I need to sort out what that boolean for C used to be. I think it was about precision or no precision. 
+			Kthura.Obj.Player.WalkTo(A,B)
+		end
+	end
+	
+	void MoveTo(A,B,C)
+		if type(A)=="string"
+			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.MoveTo(trim(\"%s\"))",A))
+		else
+			FLD_Exe(sprintf("FlowField.Map.Kthura.Actor.Player.MoveTo(%d,%d,%s)",A,B,tostring(C!=false)))
+		end
+	end
+	
+	get int PlayerX
+		//return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.X")
+		Return Lua.Scyndi.Class.Player.X
+	end
+	
+	get int PlayerY
+		//return LuaGetInt("FLOW_FIELD","FlowField.Map.Kthura.Actor.Player.Y")
+		Return Lua.Scyndi.Class.Player.Y
+	end
+	
+	
+	bool HasTag(string tag)
+		//return LuaGetBool("FLOW_FIELD","FlowField.Map.Kthura.HasTag('"..tag.."')")
+		return Kthura.HasObj(tag)
+	end
+	
+	void Hide(string tag)
+		//FLD_Exe("FieldMap.Hide('"..tag.."')")
+		Kthura.Obj[Tag].visible=false
+	end
+	
+	void Show(string tag)
+		//FLD_Exe("FieldMap.Show('"..tag.."')")
+		Kthura.Obj[Tag].visible=true
+	end
+	
+	//link HideObj = Map.Hide
+	//link ShowObj = Map.Show
+	void HideObj(string tag)
+		//Hide(tag)
+		Kthura.Obj[Tag].visible=false
+	end
+	
+	void ShowObj(string tag)
+		Kthura.Obj[Tag].visible=false
+	end
+	
+	void Cam(int x,int y)
+		//FLD_Exe(sprintf("FlowField.Map.ScrollX = %d\nFlowField.Map.ScrollY = %d",x,y))
+		gint.ScrollX=x
+		gint.ScrollY=Y
+	end
+	
+	get int ScrollX
+		//return LuaGetInt('FLOW_FIELD','FlowField.Map.ScrollX')
+		return gint.ScrollX
+	end
+	
+	get int ScrollY
+		//return LuaGetInt('FLOW_FIELD','FlowField.Map.ScrollY')
+		return gint.ScrollY
+	end
+
+	get int CamX
+		return gint.ScrollX
+	end
+	
+	get int CamY
+		return gint.ScrollY
+	end
+
+	
+	set int CamX
+		//FLD_Exe(sprintf("FlowField.Map.ScrollX = %d",value))
+		ScrollX=Value
+	end
+	
+	set int CamY
+		//FLD_Exe(sprintf("FlowField.Map.ScrollY = %d",value))
+		ScrollY=Value
+	end
+	
+		
+	
+	void Click(string tag, string func, infinity)
+		//string args
+		//for i,v in ipairs { infinity }
+		//	if i>1 
+		//		args = args .. ", "
+		//	end
+		//	switch type(v)
+		//		case "number" "boolean" "nil"
+		//			args = args .. tostring(v)
+		//		case "string"
+		//			args = args .. '\\"'..v..'\\"'
+		//		default
+		//			error("Click cannot linkthrough with arguments of type ".. type(v) .. " (arg #"..i..")")
+		//	end
+		//end
+		//FLD_Exe(sprintf("Clickables.FromTag(trim(\"%s\"),trim(\"%s\"), %s)", tag, func, args))
+		FLD_Call("Clickables.FromTag",Trim(tag),Trim(Func),infinity)
+	end
+	
+	void AddSwap(string code)
+		FLD_Exe("FlowField.Map.AddSwap(\"" .. SafeString(code) .. "\")")
+	end
+	
+	void Remap()
+		FLD_Exe("FlowField.Map.Kthura.Remap()")
+	end
+	
+	void KillSwap(m)
+		//if m
+		//	FLD_Exe("FlowField.Map.KillSwapMap(\"" .. SafeString(m) .. "\")")
+		//else
+		//	FLD_Exe("FlowField.Map.KillSwap()")
+		//end
+		CSayF("KillSwap request ignored! (%s)",m)
+	end
+	
+	
+	get string Obj
+		return FLD_GetString("FlowField.Map.Kthura.Obj")
+	end
+	
+	set string Obj
+		FLD_Exe(sprintf("FlowField.Map.Kthura.Obj = trim(\"%s\")",value))
+	end
+
+	
+	table ObjString
+	table ObjInt
+	table ObjBool
+	table ObjData
+	
+	void _CONSTRUCTOR()
+		CSay("Obj linking metatables")
+//		Not only does Scyndi not support this syntax at all, the code is also inefficient in the way Kthura works here, so another approach is needed.		
+//		setmetatable(self.ObjString,{
+//			["__index"] = string(s,string k)
+//				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,string v)
+//				//CSay(sprintf("==> Flow.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjString[trim(\"%s\")] = trim(\"%s\")",k,v))
+//			end
+//		})
+//		setmetatable(self.ObjInt,{
+//			["__index"] = int(s,string k)
+//				return FLD_GetInt(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,int v)
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjInt[trim(\"%s\")] = %d",k,v))
+//			end
+//		})
+//		setmetatable(self.ObjBool,{
+//			["__index"] = boolean(s,string k)
+//				return FLD_GetBool(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,bool v)
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjBool[trim(\"%s\")] = %s",k,tostring(v)))
+//			end
+//		})
+//		setmetatable(self.ObjData,{
+//			["__index"] = string(s,string k)
+//				return FLD_GetString(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")]",k))
+//			end,
+//			["__newindex"] = void(s,string k,string v)
+//				//CSay(sprintf("==> Flow.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
+//				FLD_Exe(sprintf("FlowField.Map.Kthura.ObjData[trim(\"%s\")] = trim(\"%s\")",k,v))
+//			end
+//			
+//		})
+#say "\007TODO! ObjString/Int/Bool/Data"
+	end
+		
+	get string Leader
+		//FieldCheck()
+		//return LuaGetString("FLOW_FIELD","FlowField.Leader")
+		return gstring.FIELD_LEADER
+	end
+	
+	set string Leader
+		//FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
+		gstring.FIELD_LEADER = value
+	end
+
+	void WipeSASKIA()
+		//FLD_Exe("SASKIA.Wipe()")
+		FLD_Call("SASKIA.Wipe")
+	end
+	
+	get bool RENC_Inf
+		//return LuaGetBool("FLOW_FIELD","RENC.Infinite")
+		Lua.error("RENC_Inf is currently out of order. Please relink it, Jeroen")
+	end
+	
+	set bool RENC_Inf
+		FLD_Exe(sprintf("RENC.Infinite = %s",tostring(value)))
+	end
+	
+	bool Blocked(int x,int y,real)
+		//return LuaGetBool("FLOW_FIELD",sprintf("FieldMap.Kthura.Blocked(%d,%d,%s)",x,y,tostring(real==true)))
+		return Kthura.Block( Ternary(real,x div 32,x), Ternary(real,y div 32,y) )		
+	end
+	
+	void NewClickable(string Tag,int x, int y, string _script,param)
+		string p
+		if ! param
+			p = "nil"
+		elseif type(param)=="string" 
+			p = '"'..param..'"'
+		elseif type(param)=="number"
+			p = tostring(param)
+		else
+			error("Invalid type for parameters: "..type(param))
+		end
+		//FLD_Exe(sprintf("Clickables('%s',%d,%d,MapScript.%s,%s)",Tag,x,y,script,p))
+		// Clickables(Tag,kth.ObjInt.x, kth.ObjInt.y,FlowField.BlackOrb)
+		FLD_Call("Clickables",Tag,x,y,_script,param)
+	end
+end
+
+group Player
+	//link X = Map.PlayerX
+	//link Y = Map.PlayerY
+	Get Int X
+		return Ternary(Kthura.HasObj("PLAYER") ,Kthura.Obj.Player.X,-1)
+	End
+	Get Int Y
+		return Ternary(Kthura.HasObj("PLAYER") ,Kthura.Obj.Player.Y,-1)
+	End
+	Set Int X
+		if Kthura.HasObj("PLAYER")
+			Kthura.Obj.Player.X=Value
+		End
+	End	
+	Set Int Y
+		if Kthura.HasObj("PLAYER")
+			Kthura.Obj.Player.Y=Value
+		End
+	End	
+end
+
+
+group Respawn
+	
+	//link Initiated = gv.Bool.Respawn_Initiated
+	//link X = gv.Num.Respawn_X
+	//link Y = gv.Num.Respawn_Y
+	//link Map = gv.String.Respawn_Map
+	//link Layer = gv.String.Respawn_Layer
+	Get Bool Initiated
+		return gbool.Respawn_Initiated
+	End
+	set Bool Initiated
+		gbool.Respawn_Initiated = Value
+	End
+	Get Int X 
+		return gint.Respawn_X
+	End
+	Get Int Y
+		return gint.Respawn_Y
+	end
+	Get String Map
+		return gstring.Respawn_Map
+	End
+	Get String Layer
+		return gString.Respawn_Layer
+	End
+	
+	
+	void Reset()
+		//if not Map.HasTag("Player")
+		if !Kthura.HasObj("PLAYER")
+			CSay("WARNING! Player reset requested, but player object yet non-existent! -- Request ignored!")
+			return
+		end
+		//Map.Obj			= "Player"
+		//self.X			= Map.ObjInt.X
+		//self.Y			= Map.ObjInt.Y		
+		//self.Map		= Map.MapFile
+		//self.Layer		= Map.Layer
+		//self.Initiated	= true
+		gint.Respawn_X      = Kthura.Obj.PLAYER.X
+		gint.Respawn_Y      = Kthura.Obj.PLAYER.X
+		gStr.Respawn_Map    = StripDir(Kthura.LastLoadedMap)
+		gstr.Respawn_Layer  = Kthura.CurrentLayer
+		gbool.Respawn_Initiated = true		
+		CSayF("Respawn Reset: %s::%s (%d,%d)",gstr.Respawn_Map,gstr.Respawn_Layer,gint.Respawn_X,gint.Respawn_Y)
+	end
+	
+	void AutoSet()
+		if ! Respawn.Initiated
+			Respawn.Reset()
+		end
+	end
+	
+	void Wipe()
+		Kthura.Obj.Player.StopWalking()
+		//FLD_Exe("SASKIA.Wipe()") // Make sure all SASKIA sessions will terminate!
+		//FLD_Exe(sprintf("FlowField.LoadMap(trim(\"%s\"))",self.Map))
+		Sys.Call("SASKIA.Wipe")
+		Sys.Call("FlowField.LoadMap",Trim(gstring.Respawn_Map))
+		Map.Layer = self.Layer
+		FLD_Exe(sprintf("FlowField.CoordSpawnPlayer(%4d,%4d)",self.X,self.Y))
+		switch(__skill)
+			case 1
+				__cash--
+				if __cash<0
+					__cash=0
+				end
+			case 2
+				__cash = math.floor(__cash/2)
+			case 3
+				__cash = 0
+		end
+	end
+	
+end
+
+group Field
+
+	//link Map = Map
+
+	//link ZA_Enter = Map.ZA_Enter
+	//link ZA_Leave = Map.ZA_Leave
+	//link ZA_Cycle = Map.ZA_Cycle
+	Get Delegate ZA_Enter; return Map.ZA_Enter; End
+	Get Delegate ZA_Leave; return Map.ZA_Leave; End
+	Get Delegate ZA_Cycle; return Map.ZA_Cycle; End
+	
+	//link GoToLayer = Map.GoToLayer
+	//link SpawnPlayer = Map.SpawnPlayer
+	Get Delegate GoToLayer; return Map.GoToLayer; End
+	Get Delegate SpawnPlayer; return Map.SpawnPlayer; End
+	
+	//link WipeSASKIA = Map.WipeSASKIA
+	Get Delegate WipeSASKIA; return Map.WipeSASKIA; End
+
+	void LoadMap(string MapFile)
+		//FLD_Exe(sprintf("FlowField.LoadMap(\"%s\")",MapFile))
+		Sys.Call("FLOW_FIELD","FlowField.LoadMap",MapFile)
+	end
+
+	void ChainMap(string MapFile,string SaskiaLabel)
+		MapFile = Trim(MapFile)
+		SaskiaLabel = Trim(SaskiaLabel)
+		CSayF("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel)
+		//FLD_Exe(sprintf("FlowField.ChainMap(\"%s\",\"%s\")",MapFile,SaskiaLabel))
+		Sys.Call("FLOW_FIELD","FlowField.ChainMap",MapFile,SaskiaLabel)
+	end
+	
+	
+	//link MapData = Map.Data
+	Get Table MapData; Return Map.Data; End
+	
+	void StopWalking()
+		FLD_Exe("FlowField.Map.Kthura.Actor.Player.Walking = false\nFlowField.WalkArrival = nil")
+	end
+	
+	get string Leader
+		//FieldCheck()
+		//return LuaGetString("FLOW_FIELD","FlowField.Leader")
+		return gstring.FIELD_LEADER
+	end
+	
+	set string Leader
+		//FLD_Exe(sprintf("FlowField.Leader = '%s'",value))
+		gstring.FIELD_LEADER = Value
+	end
+	
+	//void CONSTRUCTOR()
+	//	setmetatable(self.MapData,{
+	//		['__newindex'] = void(t,string k,string v)
+	//			FLD_Exe("FlowField.Map.Kthura.Data[\""..SafeString(k) .."\"] = \""..SafeString(v) .."\"")
+	//		end,
+	//		['__index'] = string(t,string k)
+	//			FieldCheck()
+	//			return LuaGetString("FLOW_FIELD","FlowField.Map.Kthura.Data[\""..SafeString(k) .."\"]","Getting Map Meta Data")
+	//		end,
+	//		['__call'] = string(t,string k)
+	//			return $MapData[k]
+	//		end
+	//	})
+	//end	
+end
+Init
+	ddef _ni
+		plua s
+		string k
+		string v
+		s,k,v=infinity
+		Kthura.Meta[k] = v
+	end
+	ddef _i
+		plua s
+		string k
+		return Kthura.Meta[k]
+	end
+	SetMetaTable(Field.MapData,{["__call"]=_i,["__index"]=_i,["__newindex"]=_ni})	
+End
+	
+global void UseKettingKaart()
+	FLD_Exe("KettingKaart.Init(FlowField.Map.Kthura)","KettingKaart activation!")
+end
+
+global void GoToBank()
+	if ! StateExists("FLOW_BANK")
+		LoadFlow("BANK","Script/Flow/Bank.nil")
+	end
+	GoToFlow("BANK")
+end

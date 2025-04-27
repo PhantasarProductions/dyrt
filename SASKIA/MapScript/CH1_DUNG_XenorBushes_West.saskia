@@ -35,5 +35,10 @@
 ; version: 20.04.28
 ; End License Information
 :OnLoad
-	call Fader,"Xenor Bushes - West"
+	call Fader.Create,"Xenor Bushes - West"
+	chk Done.EricAndIrravoniaStartPrologueInXenorBushesAndShouldBeFullHPAsSuch,Einde
+	Call Party.Recover
+:Einde	
 	end
+	
+	

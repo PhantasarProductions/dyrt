@@ -1,0 +1,114 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/PersonalAction/PA_Irravonia.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.24 III
+// 
+// End License
+
+#use "libs/sci/sys"
+#use "Libs/sci/kthura"
+#use "libs/sci/sstring"
+#use "libs/sci/graphics"
+
+#use "script/use/need"
+
+module
+
+	locextern __player "Scyndi.Class.Kthura.Obj.Player"
+
+	var Img
+	int X
+	int Y
+	
+	void CWriteLine(String A)
+		CSay(A)
+	End
+	
+	Bool PBlocked(int PBX,int PBY)
+		return Kthura.Block(PBX div 32,PBY div 32)
+	End
+	
+	void IrraFly(int mix,int miy)
+		CSayF("Irravonia is to fly... Check: (%3d,%3d)!",mix,miy)
+		if PBlocked(__player.X+(mix*96),__player.Y+(miy*96)) //,true)
+			CWriteLine(sprintf("Request denied. Position (%5d,%5d) is blocked!",__player.X+(mix*96),__player.Y+(miy*96)),255,0,0)
+			//for i=0,100
+			//	CSayF("(%5d,%5d) -> %3d(%5d) %s",__Player.X,__player.Y,i,__Player.X-i,Kthura.Blocked(__Player.X-i,__Player.Y))
+			//return
+		end
+		bool yeah = false
+		for tag in Kthura.EachTag
+			if prefixed(Upper(tag),"IRRAFLY_") 
+				yeah = yeah || Kthura.InObj(tag,__player.X+(mix*32),__player.Y+(miy*32))
+			end
+		end
+		if yeah
+			__player.MoveTo(__player.X+(mix*96),__player.Y+(miy*96))
+		end
+	end
+	
+	void Draw()
+		Img.Draw(X,Y)
+	end
+	
+	bool Click(int but,int _x, int _y)
+		bool ret
+		ret = _x>X and _y>Y and _x<X+200 and _y<Y+200
+		if ret
+			// left
+			if _x<X+25 and _y>Y+25 and _y<Y+175
+				IrraFly(-1, 0)
+			// right
+			elseif _x>X-175 and _y>Y+25 and _y<Y+175
+				IrraFly( 1, 0)
+			// up
+			elseif _y<Y+25 and _x>X+25 and _x<X+175
+				IrraFly( 0,-1)
+			// down
+			elseif _y>Y+175 and _x>X+25 and _x<X+175
+				IrraFly( 0, 1)
+			end
+		end
+		return ret
+	end
+	
+	Init
+		Img = LoadImage("GFX/PersAction/Irravonia.png","PA_Irra")
+		X = Screen.Width -300
+		Y = Screen.Height-400
+	end
+
+//end

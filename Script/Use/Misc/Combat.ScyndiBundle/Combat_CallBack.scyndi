@@ -1,0 +1,199 @@
+// License:
+// 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_CallBack.scyndi
+// 
+// 	  Version: 25.04.23 III
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+
+//#use "libs/tables"
+
+#use "Script/Use/Need"
+#use "Script/Use/Misc/MiniMessages"
+
+//#accept Fighter
+//#accept CombatTime
+//#accept Combat_Message
+LocExtern Fighter "Lua.Scyndi.AllIdentifiers.Fighter"
+LocExtern CombatTime "Lua.Scyndi.AllIdentifiers.CombatTime"
+LocExtern Combat_Message "Lua.Scyndi.AllIdentifiers.Combat_Message"
+
+//#accept Hurt
+LocExtern Hurt "Lua.Scyndi.AllIdentifiers.Hurt"
+
+
+LocExtern Arena "Lua.Scyndi.AllIdentifiers.Arena"
+
+class Stage
+	readonly delegate Update
+	readonly delegate Draw
+
+	static var Current
+	static table Stages
+	
+	static bool NoVicCheck
+	
+	void NOTHING()
+	end
+	
+	static void Go(string n)
+		n = upper(n)
+		assert(Stage.Stages[n],"No stage labelled '"..n.."' is known")
+		Stage.Current = Stage.Stages[n]
+	end
+	
+	CONSTRUCTOR(string n, a_Update,a_Draw)
+		self.Update = a_Update || self.NOTHING
+		self.Draw = a_Draw || self.NOTHING
+		self.Stages[Upper(n)] = self
+	end
+	
+end
+
+global void BUB_Update()
+	// Stage required
+	Lua.assert(Stage.Current,"COMBAT::BUB_Update(): No stage set!")
+	
+	// debug
+	//Dev.ConCheck()
+	
+	
+	// Victory Check
+	LocExtern Defeated "Scyndi.AllIdentifiers.Defeated"
+	if ! Stage.NoVicCheck
+		if Defeated.Foe
+			Stage.Go("VICTORY")
+		elseif Defeated.Hero
+			Stage.Go("DEFEAT")
+		end
+	end
+	
+	// IDDQD
+	if gv.Bool.DEBUG_CHEAT_IDDQD
+		for i=1,8
+			if RPG.Party[i] and RPG.Party[i]!=""
+				RPG.GetChar(RPG.Party[i]).Points("HP").Have ++
+			end
+		end
+	end
+	
+	// Hermione Granger cheat
+	if gv.Bool.DEBUG_CHEAT_HERMIONE
+		for i=1,4
+			if RPG.Party[i] and RPG.Party[i]!=""
+				for s=0,4
+					var lv
+					var xp
+					lv = RPG.GetChar(RPG.Party[i]).Points("SKILLLVL"..s)
+					xp = RPG.GetChar(RPG.Party[i]).Points("SKILLEXP"..s)
+					if lv.Have>0
+						xp.Have++
+					end // if lv.Have
+				end // for s
+			end // if party
+		end // for party
+	end // If Hermione
+	Stage.Current.Update()
+	
+	QuitRequest()
+end
+
+global void BUB_Draw()
+	SCF:=Upper(Sys.CurrentFlow)
+	If SCF!="FLOW_COMBAT" && SCF!="FLOW_BOXTEXT" 
+		CSayF("BUB_Draw() for combat cancelled! Field is now \"%s\"!",Sys.CurrentFlow)
+		Return
+	End
+
+	assert(Stage.Current,"COMBAT::BUB_Draw(): No stage set!")
+	if Stage.Current[".hasmember"]("AltArena") 
+		Stage.Current.AltArena()
+	else
+		Arena.Draw()
+	end
+	
+	// Draw Fighters
+	for groupname,groupitself in pairs(Fighter.Team)
+		for team,member in spairs(groupitself)
+			__white
+			member.Draw()
+		end
+	end
+	__white
+	
+	// AfterDraw if available
+	if Arena[".hasmember"]("AfterDraw") and (not Stage.Current[".hasmember"]("AltArena") )
+		Arena.AfterDraw()
+	end
+	
+	// Stage specific Draw
+	Stage.Current.Draw()
+	
+	// Time gauge
+	CombatTime.DrawGauge()
+	
+	// Combat Messages (if there are any)
+	Combat_Message.Show()
+	MiniMsg.DrawAll()
+	
+	// Hurt messages (if there are any)
+	Hurt.DrawAll()
+	
+	// Character bar
+	Party.SelectedCharacter=0
+	Party.ShowBar()
+	
+	// Draw all achievement boxes
+	Achievements.DrawAll()
+	Achievements.Auto()
+
+	
+	// Mouse
+	__white
+	Mouse.Sleeping = Stage.Current[".hasmember"]("MouseSleep") and Stage.Current.MouseSleep==true
+	Mouse.Show()
+end
+
+global void BoxText_Back()
+	BUB_Draw()
+end

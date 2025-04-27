@@ -1,0 +1,382 @@
+// License:
+// 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
+// 
+// 	  Version: 25.04.27 II
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+//#use "libs/tables"
+
+#use "Libs/SCI/Sys"
+
+#use "Script/Use/Need"
+
+LocExtern CStatus "Scyndi.Globals.CStatus"
+LocExtern Combat_Status "Scyndi.Class.Combat_status"
+
+class Fighter
+	ReadOnly Var Me
+
+	table Permanenced
+	table Instant
+	int SpotX
+	int SpotY
+	int TempX
+	int TempY
+	bool UseTemp = false
+	int SpeedBonus = 0
+	
+	var Char
+	int GaugePosition
+	int NextActSpeed
+	var NextAct
+	
+	table StatusChangesRealTable
+	table StatusChanges
+	
+	get string Name
+		return Me.Char.Name
+	end
+	
+	set string Name
+		Me.Char.Name=value
+	end
+	
+	get var Ch
+		return RPG.GetChar(Me.Tag)
+	end
+	
+	get int X
+		if Me.UseTemp
+			return Me.TempX
+		end
+		return Me.SpotX
+	end
+	
+	get int Y
+		if me.UseTemp
+			return me.TempY
+		end
+		return me.SpotY
+	end
+	
+	get int Agility
+		return me.Char.Stat("END_Agility").Value
+	end
+	
+	static table Team
+	static table ByTag
+	
+	bool StatusAltAI(string AltAI)
+		// TODO: The real code please!
+		return false
+	end
+	
+	abstract void Draw()
+	abstract string GetTeamName()
+	abstract void InitFighter()
+	abstract bool PosHover(int x,int y)
+	abstract void Icon(int dx,int dy)
+	readonly string Tag
+	//final
+	get string TeamName
+		return me.GetTeamName()
+	end
+	
+	static void SetGaugePosition(string _Tag,Int newvalue)
+		Fighter.ByTag[_Tag].GaugePosition = NewValue
+	End
+	
+	static delegate ForAll()
+		int iteridx = -1
+		table iter
+		for TeamTag,TeamTable in spairs(self.Team)
+			for MemTag,MemData in spairs(TeamTable)
+				// No data! Very important as the Lua garbage collector
+				// Has a bug when multi-references through tables are there
+				iter += { ["Team"] = TeamTag, ["Member"] = MemTag } 
+			end
+		end
+		//#pure
+		//return function()
+		//#endpure
+		ddef ForAllRet
+			iteridx++
+			//#pure
+			if iter[iteridx] 
+				return iter[iteridx].Team,iter[iteridx].Member,self.Team[iter[iteridx].Team][iter[iteridx].Member]
+			else
+				return nil,nil,nil;
+			end
+		end
+		return ForAllRet
+		//#endpure
+	end
+	
+	static delegate ForAllQuick()
+		int team = 1
+		int heronum
+		int foenum
+		//#pure
+		//return function()
+		//#endpure
+		ddef FAQR
+			repeat
+				switch team
+					case 1
+						string h
+						heronum++						
+						h = RPG.Party[heronum] or ""
+						if heronum>4 or (not  RPG.Party[heronum]) or RPG.Party[heronum]==""
+							team = 2
+						else
+							return "Hero",h,Fighter.ByTag[h]
+						end
+					case 2
+						string h						
+						foenum++
+						h = "FOE_"..foenum
+						if not Fighter.ByTag[h]
+							return nil,nil,nil;
+						end
+						return "Foe",h,Fighter.ByTag[h]
+					default
+						error("WTF!!!!! Invalid team number!")
+				end
+			forever
+		//#pure
+		end
+		//#endpure
+		return FAQR
+	end
+	
+	void PreInput()
+		for k,s in self.StatusChanges.Each
+			if s.PreInput
+				s.PreInput(self)
+			end
+		end
+	end
+	
+	var HP
+	
+	Destructor
+		CSayF("Destroying Fighter Record: %s",Tag)
+	End
+
+	//final void 
+	CONSTRUCTOR(string aTag)
+		self.Me=self
+		self.ByTag = Fighter.ByTag // static variables do not seem to transfer so well... I must fix that!
+		self.Tag=aTag
+		self.Team = Fighter.Team // As a result of a bug with statics in extendable classes, this will have to make sure the right class is always there!
+		self.Team[self.TeamName] = self.Team[self.TeamName] or {}
+		self.Team[self.TeamName][aTag] = self
+		CSay("= Added to team: "..self.TeamName.."/"..tostring(self.Team))
+		self.ByTag[aTag]=self
+		StatusChanges = {}
+		StatusChangesRealTable = {}
+		
+		bool stat_modified = true
+		bool alive
+		table qstats
+		
+		
+		//self.StatusChanges = setmetatable({},{		
+			//["__index"] = var(s,string k)
+			ddef scm_index		
+				plua s
+				string k
+				s,k = infinity
+				string ku
+				self.HP = self.HP or self.Char.Points("HP")
+				
+				if self.HP.Have==0 and alive
+					stat_modified = true
+					alive = false
+				elseif self.HP.Have!=0 and (not alive)
+					stat_modified = true
+					alive = true
+				end
+				// CSayF("%s (Alive Check) %04d . Alive=%s Modified=%s",self.Tag,self.HP.Have,tostring(alive),tostring(stat_modified))
+				ku = upper(k)
+				switch ku
+					case "DEATH" "FALLEN"
+						if self.Char.Points("HP").Have==0
+							return CStatus.Death
+						else
+							return nil;
+						end
+					case "OVERSOUL"
+						if prefixed(self.Tag,"FOE_") and self.Oversoul
+							return CStatus.Oversoul
+						end
+					case "GENEACH"
+						int i=-1
+						//return var()
+						ddef ret_each
+							string k
+							string uk
+							var v
+							repeat
+								i++
+								if i>=Len(Combat_Status.SN)
+									return nil,nil;
+								end								
+								k = Combat_Status.SN[i]
+								uk = upper(k)
+								v = self.StatusChanges[uk]
+								if v and self.HP.Have==0 and uk!="DEATH" and uk!="FALLEN" and uk!="OVERSOUL" 
+									self.StatusChanges[uk] = false;
+									v=nil;
+									CSay(self.Tag..": Nullfied status "..k.."! Out of HP!")
+								end
+								if v
+									return k,v,i
+								end
+							forever
+						end
+						return ret_each
+					case "QEACH" "EACH"
+						if stat_modified
+							CSay("Modified, so regenerating QEACH table: "..self.Tag)
+							qstats = {}
+							stat_modified = false
+							for k,v,i in self.StatusChanges.GenEach
+								CSayF("QEACH Generation:%03d.%03d: %s",len(qstats),i,k)
+								qstats+={["k"]=k,["v"]=v}
+							end
+						end
+						int idx = -1
+						//return var()
+						ddef ret_QEACH						
+							idx++
+							if idx>=len(qstats)
+								return nil,nil,nil;
+							end
+							return qstats[idx].k,qstats[idx].v
+						end
+						return ret_QEACH
+					default
+						if self.HP.Have==0
+							self.StatusChangesRealTable[ku]=nil;
+						end
+						return self.StatusChangesRealTable[ku]
+				end
+			end
+			
+			ddef scm_newindex
+			//["__newindex"] = void(s,string k,v)
+				plua s
+				plua v
+				string k
+				s,k,v = infinity
+				stat_modified = true
+				CSay("Modified: "..self.Tag)
+				k = upper(k)
+				assert(k!="EACH","Cannot use EACH when defining")
+				switch k
+					case "DEATH" "FALLEN"
+						if v and self.Char.Points("HP").Have>0
+							self.Char.Points("HP").Have = 0
+							new Hurt("Death",self.Tag,255,0,0)
+						elseif (not v) and (self.StatusChanges.UNDEAD or self.StatusChanges.ZOMBIE)
+							self.Char.Points("HP").Have = 0
+							new Hurt("Destroyed",self.Tag,255,0,0)
+						elseif self.Char.Points("HP").Have == 0 and (not v) and (not prefixed(self.Tag,"FOE_"))
+							self.Char.Points("HP").Have = 1
+							new Hurt("Revive",self.Tag,255,0,0)
+						end
+					case "OVERSOUL"
+						error("Oversoul is a read-only automated setting in status changes table")
+					default
+						if v
+							assert(CStatus[k],"No status labelled: "..k)
+							self.StatusChangesRealTable[k] = CStatus[k]
+							// new Hurt(k,self.Tag,255,100,100)
+							CSayF("Status %s attached to character: %s",k,self.Tag)
+						else
+							//if self.StatusChangesRealTable[k]
+							//	new Hurt("Cure: "..k,self.Tag,180,255,000)
+							//end
+							CSayF("Status %s removed to character: %s",k,self.Tag)
+							self.StatusChangesRealTable[k] = nil;
+						end
+				end
+			end
+			//["__tostring"] = string(s)
+			ddef scm_tostring
+				s:=infinity
+				string ret
+				for k,_ in s.Each
+					if ret!=""
+						ret = ret .. "; "
+					end
+					ret = ret .. k
+				end
+				return ret
+			end
+		//})
+		self.StatusChanges = setmetatable({},{["__index"]=scm_index,["__newindex"]=scm_newindex,["__tostring"]=scm_tostring})
+		self.InitFighter()
+	end
+	
+	
+	
+end
+
+
+// Is is to tackle a few forwarding issues NIL suffers from
+global var fw_Fighter
+Init
+//#pure
+fw_Fighter = Fighter
+//#endpure
+
+//#pure
+Lua.Scyndi.AllIdentifiers.Defeated.F = Fighter
+//#endpure
+
+//#pure 
+Lua.Scyndi.Class.Buffs.Fighter = Fighter
+//#endpure
+End

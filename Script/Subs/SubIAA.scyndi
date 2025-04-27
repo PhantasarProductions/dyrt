@@ -1,0 +1,123 @@
+// License:
+// 	  src/Script/Script/Subs/SubIAA.scyndi
+// 
+// 	  Version: 25.04.03
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Script
+
+
+#say "Translating: SubIAA.nil"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/SString"
+
+#use "Script/Use/Need"
+//#use "libs/tables"
+//##use "libs/strings"
+
+Init
+	Events.Poll()
+	// Should keep Linux calm, as its quick "no response" messages can be a bit annoying!"
+End
+
+Table trueInventory
+
+quickmeta SubInventory
+	index
+		assert(type(key)=="string","Illegal inventory key")
+		//CSay(NIL.LuaSerialize("Inventory",trueInventory))
+		return trueInventory[trim(upper(key))] || 0
+	end
+	
+	newindex
+		assert(type(key)=="string","Illegal inventory key")
+		assert(type(value)=="number" and math.floor(value)==value and value>=0,"Illegal inventory number of items!")
+		key = upper(trim(key))
+		if key=="*CLEAR*"
+			// Dirty, yet safe and quick
+			trueInventory = {}
+			CSay("Clear inventory!")
+		elseif value==0
+			CSayF("Item %s has been removed from the inventory!",key)
+			trueInventory[key]=nil;
+		else
+			CSayF("Item %s is now set to %d",key,value)
+			trueInventory[key]=value
+			//CSay(NIL.LuaSerialize("Inventory",trueInventory))
+		end
+	end
+	
+	call
+		string ret = "Scyndi.Globals.Inventory['*CLEAR*']=1\n\n"
+		for k,v in spairs(trueInventory)
+			ret = ret .. "Scyndi.Globals.Inventory['"..k.."'] = "..sprintf("%d\n",v)
+		end
+		return ret
+	end
+	
+	//len
+	//	int count = 0
+	//	for k,v in pairs(trueInventory)
+	//		count++
+	//	end
+	//	return count
+	//end
+end
+
+// Interstate callback
+global void SetInv(string Key,Int Num); SubInventory[Key]=num; End
+global int  GetInv(string Key); Return SubInventory[key]; End
+
+
+
+// No need for complicated meta stuff
+global table SubAbilitiesMastered
+
+// This will override the settings in the IAA linker file
+// This is loaded first, but as '#pure' uses pure Lua code NIL will
+// never know I did this. Please note, NEVER do this yourself unless 
+// you know what you doing! This is pretty dirty code!
+//#pure
+//Inventory = SubInventory
+//#endpure
+// Scyndi doesn't accept this, though, so I gotta dummy this and work it out differently

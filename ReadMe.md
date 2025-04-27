@@ -1,16 +1,7 @@
-# The Secrets Of Dyrt.NET
+Dyrt - Scyndi's creative interpreter
+More info later!
 
-This is the repository of the script of the RPG game "The Secrets Of Dyrt". It's a revision of a game with the same name, and will run in the .NET framework.
-
-More information will be revealed later.
-If you wanna keep track of what I do you can check my commits here or follow my [Live Devlog](http://tricky1975.github.io/DevLogs/Dyrt/Dyrt.NET_DevLog_Page_1.html).
+Current Status: Work in progress!
 
 
-This (not yet complete) [Game Jolt Page](https://gamejolt.com/games/Dyrt_NET/426296) may soon show more details, or go to the [site](https://tricky.gamejolt.io/dyrt_NET)
-
-# NIL Language
-
-This entire game has been written in the [NIL Programming Language](https://github.com/jpbubble/NIL-isn-t-Lua), which is a bit of an extention to Lua. The engine is the NALA engine.
-
-
-![](https://i.imgur.com/8aQmtzC.png)
+![Scyndi](https://camo.githubusercontent.com/72145fde26eac9da15b0544a2a56d58796d28643dd0cb9f28cb20703969182c0/68747470733a2f2f692e696d6775722e636f6d2f3861516d747a432e706e67)

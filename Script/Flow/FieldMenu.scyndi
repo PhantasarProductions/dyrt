@@ -1,0 +1,1074 @@
+// License:
+// 	  src/Script/Script/Flow/FieldMenu.scyndi
+// 
+// 	  Version: 25.04.27 V
+// 	
+// 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
+
+#use "Script/Use/Need"
+#use "Script/Use/Misc/Boxes"
+#use "Script/Use/Misc/BoxPics"
+#use "Script/Use/Misc/AutoHelp"
+#use "Script/Use/Misc/EquipRecalcModule"
+//#use "libs/tables"
+//#use "libs/DarkText"
+#use "libs/RomanNumbers"
+#use "libs/DateTime"
+#use "Libs/XTable"
+
+#macro __TopBarHeight 55
+
+
+table I_ELEM
+table I_STAT
+
+Extern BigScreen "false"
+Get Bool SmallScreen; return !BigScreen; End
+
+Init
+	I_ELEM={}
+//	"None", // invisible
+	I_ELEM+="Flame"
+	I_ELEM+="Wind"
+	I_ELEM+="Water"
+	I_ELEM+="Earth"
+	I_ELEM+="Frost"
+	I_ELEM+="Thunder"
+	I_ELEM+="Light"
+	I_ELEM+="Darkness"
+
+
+	I_STAT = {}
+	I_STAT+="Poison"
+	I_STAT+="Disease"
+	I_STAT+="Silence"
+	I_STAT+="Paralysis"
+	I_STAT+="Sleep"
+	I_STAT+="Exhaustion"
+	I_STAT+="Confusion"
+	I_STAT+="Fear"
+	I_STAT+="Death"
+	I_STAT+="Destruction"
+	I_STAT+="Zombie"
+End
+
+
+
+#Say "Group Flow_FieldMenu"
+group Flow_FieldMenu
+
+	table situations
+	string situation
+	
+	void SetSituation(string ns)
+		Flow_FieldMenu.situation = ns
+	end
+	
+	delegate LM_Action
+	var LM_ActionArgs
+
+	
+	var ItemHover
+	
+	var BigFont
+	var Font
+	var BlitzFont
+	
+	var TopBox
+	var LeftBox
+	var RightBox
+	
+	var ArUp
+	var ArDown
+	
+	table BaseStats
+	
+	//link CharNum = Party.SelectedCharacter
+	link CharNum = gint.Party_StatusBar_SelectedCharacter
+	get string CharTag 
+		//CSayF("Getting Chartag %d!",$CharNum)
+		if(Flow_FieldMenu.CharNum<1)
+			CSayF("\x1b[5mWARNING!\n\x1b[0m\x1b[93mCharNum = %d\nSetting to 1\n",Flow_FieldMenu.CharNum)
+			Flow_FieldMenu.CharNum=1
+		end
+		ret:= RPG.Party[Flow_FieldMenu.CharNum]
+		return ret
+	end
+	
+	string strstat(string chtag,string stat)
+		if chtag=="Shanda"
+			return "???"
+		end
+		if chtag=="Kirana"
+			switch stat
+				case "Strength"
+					return "Weak"
+				case "Defense"
+					return "Fragile"
+				case "Intelligence"
+					return "Dumb"
+				case "Resistance"
+					return "Awful"
+				case "Agility"
+					return "Fast (if afraid)"
+				case "Accuracy"
+					return "Miss"
+				case "Evasion"
+					return "Hard to miss"
+				default
+					return "Terrible"
+			end
+		end		 
+		int s 
+		ch := RPG.Char(chtag)
+		
+		s = ch.Stat("END_"..stat).Value
+		return sprintf("%5d",s)
+	end
+	
+	//void Quit()
+	//	if Yes("Do you really want to quit?")
+	//		Bye()
+	//	end
+	//end
+	
+	void BasePanel(ubox)
+		var ch
+		int m=3
+		int xy
+		int level
+		//CSay("...")
+		//CSay("CHARTAG = "..$CharTag)
+		__white
+		ch = RPG.Char($CharTag)
+		ubox = ubox or $LeftBox
+		BoxPic(ubox.x+10,ubox.y+10,$CharTag,"GENERAL","top")
+		__amber
+		BigFont.Dark(ch.Name,ubox.x+125, ubox.y+15)
+		if __skill==3 
+			m=2
+		end
+		for i=1,m
+			//LuaDoString("PARTY",sprintf("SubParty.BigPointsBar(trim(\"%s\"), %d, %d, %d, %d)",$CharTag,i,ubox.x+125,ubox.y+40+(i*20),ubox.w-150))
+			Sys.Call("PARTY","SubParty.BigPointsBar",trim(CharTag),i,ubox.x+125,ubox.y+40+(i*20),ubox.w-150)
+		end
+		for i,s in ipairs($BaseStats)
+			__white
+			xy = (ubox.y+120)+(i*15)
+			//Font.Dark(s,ubox.x+10,xy)
+			Font.Dark(s,ubox.x+10,xy)
+			__amber
+			//Font.Dark($strstat($CharTag,s),(ubox.x+ubox.w)-10,xy,1)
+			Font.Dark(self.strstat($CharTag,s),(ubox.x+ubox.w)-10,xy,1)
+		end
+		xy = xy + 30
+		__white
+		level = ch.Stat("Level").Value
+		Font.Dark("EXP to next level:",ubox.x+10,xy)
+		Font.Dark("Level:",ubox.x+10,xy+20)
+		if level>=__levelcap or $CharTag=="Kirana" or $CharTag=="Shanda"
+			__red
+			Font.Dark("---",(ubox.x+ubox.w)-10,xy,1)
+			if $CharTag=="Kirana" or $CharTag=="Shanda"
+				__skyblue
+			elseif level==__levelcap
+				__amber
+			end
+		else
+			__amber
+			Font.Dark(tostring(ch.Stat("Experience").Value),(ubox.x+ubox.w)-10,xy,1)
+			__green
+		end
+		Font.Dark(Roman(ch.Stat("Level").Value),(ubox.x+ubox.w)-10,xy+20,1)
+		__white
+		Font.Dark("Weapon",(ubox.x+10),(ubox.ey-70))
+		Font.Dark("Armor",(ubox.x+10),(ubox.ey-50))
+		Font.Dark("Jewelry",(ubox.x+10),(ubox.ey-30))
+		__amber
+		Font.Dark(Item[ch.Data.Weapon].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-70)
+		Font.Dark(Item[ch.Data.Armor].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-50)
+		if ch.Data.Jewel==""
+			Font.Dark("---",(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
+		else
+			Font.Dark(Item[ch.Data.Jewel].Name,(ubox.x+math.floor(ubox.w*0.25)),ubox.ey-30)
+		end
+		if Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-70 and Mouse.Y<ubox.ey-50 
+			$InvItemHover = Item[ch.Data.Weapon]
+			self.GenIAAHelp()
+		elseif Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-50 and Mouse.Y<ubox.ey-30 
+			$InvItemHover = Item[ch.Data.Armor]
+			self.GenIAAHelp()
+		elseif Mouse.X>ubox.x and Mouse.X<ubox.ex and Mouse.Y>ubox.ey-30 and Mouse.Y<ubox.ey-10 
+			$InvItemHover = Item[ch.Data.Jewel]
+			self.GenIAAHelp()
+		end
+	end
+	
+	void NotYetImplemented(ubox)
+		int cx
+		int cy
+		cx = ubox.x+(ubox.w/2)
+		cy = ubox.h+(ubox.h/2)
+		__red
+		BigFont.Dark("The requested feature has",cx,cy-25,2)
+		BigFont.Dark("not yet been implemented!",cx,cy+25,2)
+	end
+	
+	void Status(ubox)
+		var ch
+		int x
+		int y
+		int w
+		x = ubox.x
+		y = ubox.y
+		w = ubox.w
+		ch = RPG.Char($CharTag)
+		ch.Points("SKILLLVL0").Minimum = 1
+		for i=0,4
+			if ch.Points("SKILLLVL"..i).Have>0
+				int ty
+				ty = (y+10)+(i*20)
+				if ch.Points("SKILLLVL"..i).Have == ch.Points("SKILLLVL"..i).Maximum
+					Color(100,127,154)				
+					Rect(x+10,ty+10,w-20,10)
+				else
+					Color(100,100,100)				
+					Rect(x+10,ty+10,w-20,10)
+					__red
+					Rect(x+10,ty+10,math.floor( (ch.Points("SKILLEXP"..i).Have/ch.Points("SKILLEXP"..i).Maximum) * (w-20) ), 10 )
+				end
+				__white
+				Font.Dark(ch.Data["SKILL"..i],x+10, ty)				
+				__amber
+				Font.Dark(Roman(ch.Points("SKILLLVL"..i).Have),(x+10)+(w-20),ty,1)
+			end
+		end
+		
+		If BigScreen
+			for i,elem in ipairs(I_ELEM)
+				int ty
+				ty = (y+200)+(i*20)
+				__white
+				Font.Dark(sprintf("%s resistance",elem),x+10,ty)
+				__amber
+				Font.Dark(ch.Stat( sprintf("END__RESIST_Elem_%s",elem) ).Value.."%",(x+10)+(w-20),ty,1)
+			end
+
+			for i,stat in ipairs(I_STAT)
+				int ty
+				ty = (y+450)+(i*20)
+				__white
+				Font.Dark(sprintf("%s resistance",stat),x+10,ty)
+				__amber
+				Font.Dark(ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value.."%",(x+10)+(w-20),ty,1)
+			end
+		Else
+			SetColor(0,180,255)
+			Font.Dark("Resistances",x+(w div 2),y+200,2)
+			
+			for i,elem in ipairs(I_ELEM)
+				int ty
+				ty = (y+230)+((i+1)*20)
+				__white
+				Font.Dark(sprintf("%s resistance",elem),x+10,ty)
+				__amber
+				Font.Dark(ch.Stat( sprintf("END__RESIST_Elem_%s",elem) ).Value.."%",(x+10)+((w div 2)-20),ty,1)
+			end
+
+			for i,stat in ipairs(I_STAT)
+				int ty
+				ty = (y+230)+((i+1)*20)
+				__white
+				Font.Dark(sprintf("%s resistance",stat),(x+10)+(w div 2),ty)
+				__amber
+				Font.Dark(ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value.."%",(x+10)+(w-20),ty,1)
+			end
+		End
+		
+	end
+		
+	int InvItemScrollY = 0
+	var InvItemHover
+	var InvItemList
+	var InvItemLastHelp
+	
+	void GenIAAHelp()
+		var Help		
+		var HV
+		HV = self.InvItemHover
+		if $InvItemLastHelp and $InvItemLastHelp.Hover==$InvItemHover 
+			ShowAutoHelp($InvItemLastHelp.Help)
+			return
+		end
+		$InvItemLastHelp = { ["Hover"] = $InvItemHover, ["Help"] = {} }
+		Help =  InvItemLastHelp.Help
+		Help += InvItemHover.Name
+		Help += InvItemHover.Description
+		
+		//with HV
+			if HV.Type=="Item"
+				Help += "Item type: "..HV.ItemType
+				for i=1,8 
+					string c
+					c = RPG.Party[i]
+					if c and c!=""
+						//Help += "Checking: "..c
+						// Help += sprintf("Eq%s = %s",c,HV["Eq"..c])
+						if HV["Eq"..c]
+							Help += "Can be equipped by: "..RPG.GetChar(c).Name
+						end
+					end
+				end
+			end
+			if HV.Heal and HV.Heal>0 
+				switch HV.HealType
+					case "Absolute"
+						Help += sprintf("Heals %d HP",HV.Heal)
+					case "Percent"
+						Help += sprintf("Heals %d%% of max HP",HV.Heal)
+					case "Stat"
+						Help += sprintf("Heals several HP. Modifier based on %s",HV.HealStat)
+					default
+						Help += sprintf("Unknown healing specifier! You've likely encountered a bug: %s",HV.HealType)
+				end
+			end
+			if HV.Attack and HV.Attack>0
+				Help += sprintf("%s attack, power %3d%% of %s, against target's %s",HV.AttackType,HV.Attack,HV.AttackStat,HV.DefenseStat)
+				if HV.Element and HV.Element!="" and HV.Element!="None"
+					Help += sprintf("- Attack based on element %s",HV.Element)
+				end
+				if HV.AttackCancel
+					Help += sprintf("- Cancel effect")
+				end
+			end
+			
+		//end//with
+		for k,v in spairs($InvItemHover)
+			if prefixed(k,"Cause") and v
+				Help += "Causes "..Right(k,Len(k)-5)
+			elseif prefixed(k,"Cure") and v
+				Help += "Cures "..Right(k,Len(k)-4)
+			end
+			if prefixed(k,"Buff")
+				string stat
+				stat = Right(k,len(k)-4)
+				if v>0
+					Help += sprintf("Raises %s by %4d%%",stat,v)
+				elseif v<0
+					Help += sprintf("Lowers %s by %4d%%",stat,math.abs(v))
+				end
+			end
+		end
+		// Targets must be last!!!
+		if ($InvItemHover.Type=="Item" and $InvItemHover.ItemType=="Consumable" ) or ($InvItemHover.Type=="Ability")
+			string Targets = "Targets: "
+			switch $InvItemHover.Target
+				case "OS"
+					Targets = Targets.."Self"
+				case "EV"
+					Targets = Targets.."Everybody"
+				case "1A"
+					Targets = Targets.."One ally"
+				case "AA"
+					Targets = Targets.."All allies"
+				case "1F"
+					Targets = Targets.."One foe"
+				case "AF"
+					Targets = Targets.."All foes"
+				default
+					Targets = Targets.."???"
+			end
+			Help += Targets
+		end
+	end
+	
+	void Items(ubox)
+		self.ChaChing = self.ChaChing || Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
+		int y 
+		bool allowscrollup
+		bool allowscrolldown
+		y = -$InvItemScrollY
+		Lua.Scyndi.Use("Script/Use/Misc/IAAList")
+		$InvItemList = $InvItemList || Lua.Scyndi.Class.IAAList.Lijst  //NIL.Use("Script/Use/iaalist.nil")
+		//Viewport(ubox.x,ubox.y,ubox.w,ubox.h) // Microsoft messed this up! Cool, huh?
+		$InvItemHover = nil;
+		for itemtag in each($InvItemList)
+			int ind = 0
+			if Inventory[itemtag]>0
+				if y>=0 and y+35<ubox.h
+					if $situations[$situation].ItemSellPrice and Item[itemtag].Sellable
+						Color(0,180,255)
+						BlitzFont.Dark(sprintf("Sell price: %9d shilders",math.ceil(Item[itemtag].BuyPrice/__skill)),ubox.x+math.floor((ubox.w-40)/2),ubox.y+y+4)
+					end
+					if Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+(ubox.w-50) and Mouse.Y<y+20+ubox.y
+						$InvItemHover = Item[itemtag]
+						//#pure
+						//--[[
+						//$ItemHover = $ItemHover or {}
+						//$ItemHover.InvItem = $InvItemHover
+						//$ItemHover.TagItem = itemtag
+						//$ItemHover.Action  = $situations[$situation].ItemAction
+						//]]
+						//#endpure
+						$LM_Action		= $situations[$situation].ItemAction
+						$LM_ActionArgs	= itemtag
+						Color(100,180,255)
+						ind = 5
+					else
+						__white
+					end
+					Font.Dark(Item[itemtag].Name or sprintf("Unnamed item <<%s>>",itemtag),ubox.x+5+ind,ubox.y+y)
+					__amber
+					Font.Dark(sprintf("%5d",Inventory[itemtag]),ubox.x+(ubox.w-40-ind),ubox.y+y,1)
+				end
+				y = y + 20
+			end
+		end
+		if $InvItemHover
+			self.GenIAAHelp()
+		else 
+			//$ItemHover = nil;
+		end
+		allowscrollup = $InvItemScrollY!=0
+		allowscrolldown = y+35>ubox.h 		
+		if allowscrollup
+			__amber
+			if Mouse.X>ubox.x+(ubox.w-40) and Mouse.Y>ubox.y+10 and Mouse.Y<ubox.y+40
+				__white
+				if Mouse.HeldLeft
+					self.InvItemScrollY =- 4
+				end
+			end
+			self.ArUp.Draw(ubox.x+(ubox.w-40),ubox.y+10)
+		end
+		if allowscrolldown
+			__amber
+			if Mouse.X>ubox.x+(ubox.w-40) and Mouse.Y>ubox.y+(ubox.h-50) and Mouse.Y<ubox.y+ubox.h
+				__white
+				if Mouse.HeldLeft
+					 self.InvItemScrollY += 4
+				end
+			end
+			self.ArDown.Draw(ubox.x+(ubox.w-40),ubox.y+(ubox.h-50))
+		end
+		//Viewport()
+	end
+	
+	void Abilities(ubox)
+		var abls
+		int y
+		var ch
+		string AChT := Ternary(self.CharTag=="Shanda", "YoungIrravonia",self.CharTag)  
+		Lua.Scyndi.Use("Script/Char/Ability/Abl_"..AChT)
+		abls = Lua.Scyndi.Class["Abl_"..AChT].Lijst
+		//abls = NIL.Use("Script/Char/Ability/"..self.CharTag)
+		ch = RPG.GetChar(self.CharTag)
+		y = 5
+		for tag,need in spairs(abls)
+			int ind = 0
+			string stag
+			bool hovering
+			if self.CharTag=="Yasathar"
+				stag = "ABL_HERO_Eric_"..tag
+			else
+				stag = "ABL_HERO_"..self.CharTag.."_"..tag
+			end
+			hovering = Mouse.X>ubox.x and Mouse.Y>y+ubox.y and Mouse.X<ubox.x+ubox.w and Mouse.Y<y+19+ubox.y
+			if AbilitiesMastered[self.CharTag][tag]
+				if hovering
+					//$ItemHover = $ItemHover or {}
+					//$ItemHover.InvItem = $InvItemHover
+					//$ItemHover.TagItem = stag
+					//$ItemHover.Action  = $situations[$situation].AblAction
+					$InvItemHover=Item[stag]
+					self.GenIAAHelp()
+					ShowAutoHelp($InvItemLastHelp.Help)
+					$LM_Action		= $situations[$situation].AblAction
+					$LM_ActionArgs	= stag
+					Color(100,180,255)
+					ind = 5
+				else
+					__white
+				end
+				Font.Dark(Item[stag].Name or sprintf("Unnamed ability <<%s>>",tag),ubox.x+5+ind,ubox.y+y)
+				if Item[stag].AP_Cost and Item[stag].AP_Cost>0
+					Color(0,180,255)
+					Font.Dark(tostring(Item[stag].AP_Cost),ubox.x+ubox.w-10,ubox.y+y,1)
+				end
+			elseif need.Start
+				//$ItemHover = nil;
+				AbilitiesMastered[self.CharTag][tag] = true
+			else
+				//$ItemHover = nil;
+				if hovering
+					Color(170,170,107)
+					Font.Dark("?????",ubox.x+5+5,ubox.y+y)
+				else
+					Color(127,127,127)
+					Font.Dark("?????",ubox.x+5,ubox.y+y)
+				end
+				if hovering
+					table Help
+					Help = {[0]="Locked ability","In order to unlock this ability you need:"}
+					$InvItemLastHelp = { ["Help"] = Help }
+					for k,v in spairs(need)
+						switch k
+							case "Scharum"
+								Help += "= To defeat Scharum"
+							case "SealedBoss"
+								if __trueabyss
+									Help += "= Complete all 100 levels and if you are lucky you may get this one... who knows?"
+								else
+									Help += "= To defeat a certain sealed boss"
+								end
+							case "BoolVar" "NumVar"
+								Help += "= To have reached a certain spot in the scenario"
+							case "Charm"
+								if len(v)==1
+									Help += "= To charm a "..v[1]
+								else
+									string q
+									for chi,chf in ipairs(v)
+										if chi==len(v)
+											q = q .. " or "
+										elseif chi!=1
+											q = q .. ", "
+										end
+										q = q .. chf
+									end
+									Help += "= To charm a "..q
+								end
+							default
+								if prefixed(k,"Skill_")
+									bool found
+									for i=0,4 
+										found = found || ch.Points(sprintf("SKILLLVL%d",i)).Have>0 && prefixed(ch.Data[sprintf("SKILL%d",i)],right(k,len(k)-6))
+									end
+									if found
+										Help += "= To have "..right(k,len(k)-6).." on level ".. Roman(v) .." or higher"
+									else
+										Help += "= ????"
+									end
+								end
+						end
+					end
+					ShowAutoHelp(Help)
+				end
+			end
+			y = y + 20
+		end
+	end
+	
+	void ViewAchievements(ubox)
+		Achievements.Overview(ubox.x,ubox.y,ubox.w,ubox.h)
+	end
+	
+	void PerformBuy(string tag)
+		if Inventory[tag]>=__itemcap
+			CSayF("Cannot buy %s ... Overloaded %2d/%2d",tag,Inventory[tag],__itemcap)
+			return
+		end
+		if __cash<Item[tag].BuyPrice
+			CSayF("Cannot buy %s ... Not enough money (%9d; need %9d)",tag,__cash,Item[tag].BuyPrice)
+			return
+		end
+		self.ChaChing.Play()
+		CSayF("Buying %s",tag)
+		Inventory[tag]++
+		__cash -= Item[tag].BuyPrice
+	end
+	
+	string CurrentStore
+	var CurrentStock
+	var ChaChing
+	
+	void StoreBuy(ubox)
+		var Stock
+		//Lua.error("FieldMenu::588 -- Store loader not yet present")
+		//self.CurrentStock = self.CurrentStock or NIL.Use(sprintf("Script/Data/Stores/%s",self.CurrentStore) )
+		Lua.Scyndi.Use(sprintf("Script/Data/Stores/Store_%s",self.CurrentStore))
+		self.CurrentStock = Lua.Scyndi.Class["Store_"..self.CurrentStore].Stock
+		self.ChaChing = self.ChaChing || Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing")
+		Stock = self.CurrentStock // I am lazy!
+		__amber
+		Font.Dark(Stock.Name,ubox.x+10,ubox.y+10)
+		int y
+		y = ubox.y + 40
+		for i = 1,20
+			string tag := Stock[sprintf("Stock%02d",i)]
+			var itmd
+			bool hover := false
+			bool gottag := tag && tag!="" && tag!="-".."-"
+			cOut("");
+			//if true
+			if gottag
+				int idnt = 10
+				hover = Mouse.X>ubox.x && Mouse.Y>y && Mouse.X<ubox.x+ubox.w && Mouse.Y<y+20
+				itmd = Item[tag]
+				__white
+				if hover 
+					idnt = 15
+					Color(120,180,255)
+					$InvItemHover=Item[tag]
+					self.GenIAAHelp()
+					ShowAutoHelp($InvItemLastHelp.Help)
+					$LM_Action		= self.PerformBuy
+					$LM_ActionArgs	= tag
+				end // If Hover
+				Font.Dark(itmd.Name,ubox.x+idnt,y)
+				__amber
+				Font.Dark(tostring(Inventory[tag]),(ubox.x+ubox.w)-idnt,y,1)
+				Color(0,180,255)
+				BlitzFont.Dark(sprintf("Buy price: %9d shilders",Item[tag].BuyPrice),ubox.x+math.floor((ubox.w-40)/2),y)
+				y += 20
+			end // if Tag
+		end // For i
+		__white
+		BlitzFont.Dark(sprintf("Cash: %9d shilders",__cash),ubox.x+5,(ubox.y+ubox.h)-15)
+	end // Void StoreBuy
+	
+	string SwitchHover
+	void JustSwitch()
+		if $SwitchHover=="" or (not $SwitchHover)
+			return
+		end
+		if $CharTag=="Kirana"
+			Events.Annoy("Since Kirana has been forced up front by Scyndi and Irravonia, you cannot switch her!")
+			return
+		end
+		string swp
+		swp = $CharTag
+		int i1
+		int i2
+		for i = 1,8
+			if RPG.Party[i]==swp
+				i1 = i
+			elseif RPG.Party[i]==$SwitchHover
+				i2 = i
+			end
+		end
+		RPG.Party[i2]=swp
+		RPG.Party[i1]=$SwitchHover		
+	end
+	
+	void CombatSwitch()
+		string swp1
+		string swp2
+		swp1 = $CharTag
+		swp2 = $SwitchHover
+		CSayF("Combat Switch '%s' => '%s'",tostring(swp1),tostring(swp2))
+		if swp1==swp2 or (not swp2) or swp2==""
+			CSay("No switch")
+			//LuaDoString("FLOW_COMBAT",'Stage.Go("IDLE")')
+			Sys.Call("FLOW_COMBAT","Stage.Go","IDLE")
+			GoToFlow("COMBAT")
+			return
+		end
+		self.JustSwitch() // This has to be done anyway
+		// And below the link back to combat
+		//Lua.error("FieldMenu.Scyndi::672 -> Link up code to combat not yet brought in properly")
+		//LuaDoString("FLOW_COMBAT",sprintf("PlayerSwitch.Switch(trim('%s'),trim('%s'))",swp1,swp2))
+		//LuaDoString("FLOW_COMBAT","CombatTime.CalcSpeed()")
+		//LuaDoString("FLOW_COMBAT","Fighter.ByTag['"..swp2.."'].GaugePosition = 9876")
+		//LuaDoString("FLOW_COMBAT",'Stage.Go("IDLE")')
+		Sys.Call("FLOW_COMBAT","PlayerSwitch.Switch",Trim(swp1),Trim(swp2))
+		Sys.Call("FLOW_COMBAT","CombatTime.CalcSpeed")
+		Sys.Call("FLOW_COMBAT","Fighter.SetGaugePosition",swp2,9876)
+		Sys.Call("FLOW_COMBAT","Stage.Go","IDLE")
+		GoToFlow("COMBAT")
+	end
+	
+	void SwitchChar(ubox)
+		var sit
+		sit = $situations[$situation]
+		int s_min
+		int s_max
+		s_min = (sit.SwitchRange or {})[1] or 1
+		s_max = (sit.SwitchRange or {})[2] or 8
+		int y 
+		int x 
+		x = ubox.x + 10
+		y = ubox.y + 10
+		$SwitchHover = ""
+		//CSayF("Switch.%s - %d till %d",situation,s_min,s_max)
+		for i = s_min,s_max
+			__white
+			string tag
+			bool allow
+			tag = RPG.Party[i] or ""
+			allow = tag != $CharTag and tag != "" and tag != "Shanda" and tag !="Kirana"
+			if allow
+				SetAlpha(255)
+				if Mouse.X>x and Mouse.Y>y and Mouse.X<x+100 and Mouse.Y<y+100
+					$LM_Action	 =  $situations[$situation].SwitchAction //self.JustSwitch
+					$SwitchHover = tag
+				end
+			else
+				SetAlpha( 50 )
+			end
+			BoxPic(x,y,tag,"GENERAL","top")
+			SetAlpha( 255 )
+			y += 100
+			if y+100 > ubox.y+ubox.h
+				y = ubox.y + 10
+				x += 100
+			end
+		end
+	end
+	
+	void FieldItemAction(string TagItem)
+		CSayF("%s wants to use %s",$CharTag,TagItem)		
+		var it
+		var ch
+		TagItem = Upper(TagItem)
+		it = Item[TagItem]
+		ch = RPG.GetChar($CharTag)
+		switch it.ItemType
+			case "Weapon" "Armor" "Jewel"
+				if not it["Eq"..$CharTag]
+					Events.Annoy(ch.Name.." cannot equip that item")
+					return
+				end
+				Inventory[ch.Data[it.ItemType]]++
+				Inventory[TagItem]--
+				ch.Data[it.ItemType]=TagItem
+				//Annoy("Recalc not yet done!")
+				EquipRecalc($CharTag)
+			case "Consumable"
+				if it.Heal>0 and ch.Points("HP").Have<ch.Points("HP").Maximum
+					switch it.HealType
+						case "Absolute"
+							ch.Points("HP").Have = ch.Points("HP").Have + it.Heal
+						case "Percent"
+							ch.Points("HP").Have = ch.Points("HP").Have + math.ceil( (it.Heal/100)*ch.Points("HP").Maximum)
+						default
+							Events.Annoy("It appears this particular healing item can only be used in combat")
+					end
+					if ! ($CharTag=="Merya" and math.random(1,__skill*5)==1)
+						Inventory[TagItem]--
+						gint.WILL_MERYA++
+					end
+				end
+			case "Key"
+				Events.Annoy("You cannot use a key item!\n\nThey will be used automatically when needed!")
+			default
+				Events.Annoy("ERROR!\n\nUnknown item type ("..it.ItemType..")!\n\nMost likely a bug! Please report!")
+		end
+
+	end
+	
+	#say "CONSTRUCTOR START"
+	void _CONSTRUCTOR()
+	
+		CSay("Constructing Field menu!")
+	
+		CSay("= void ToggleHelp")
+		//void ToggleHelp()
+		ddef ToggleHelp
+			__autohelp = not __autohelp
+		end
+		
+		CSay("= Help table")
+		table help
+		help = { ["IconFile"] = "Help", ["Action"] = ToggleHelp, ["Help"]="Toggles help text on/off", ["NoTab"]=true}
+		
+		CSay("= Situation definitions!")
+		// situations
+		self.situations = {} 
+		self.situations	["FIELD"] = {} 
+		self.situations	["FIELD"] ["MenuItems"] = {}
+			tmp := self.situations	["FIELD"] ["MenuItems"]
+			tmp += { ["IconFile"]="Status", ["Right"]=self.Status, ["Help"]="Shows all statistics and data" }
+			tmp += { ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" }
+			tmp += { ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" }
+			tmp += { ["IconFile"]="Switch", ["Right"]=self.SwitchChar, ["Help"]="Switch chacters" }
+			tmp += { ["IconFile"]="Trophies", ["Right"]=self.ViewAchievements, ["Help"]="Overview of achievements you can obtain, and how to obtain them" }
+			//tmp += { ["IconFile"] = "Exit", ["Action"] = self.Quit, ["Help"]="Quit the game", ["NoTab"]=true}
+				 
+		self.situations	["FIELD"] ["SwitchRange"] = {1,8}
+		self.situations	["FIELD"] ["SwitchAction"] = self.JustSwitch
+		self.situations	["FIELD"] ["ItemAction"] = self.FieldItemAction,
+		self.situations	["FIELD"] ["Return"] = "FIELD" 
+			
+		self.situations["COMBAT_ITEMS"] = {}
+		self.situations["COMBAT_ITEMS"]	["MenuItems"] = { [0] =	{ ["IconFile"]="Items", ["Right"]=self.Items, ["Help"]="Shows your inventory" } }
+		self.situations["COMBAT_ITEMS"] ["Return"] = "COMBAT"
+				//["ItemAction"] = void(string TagItem)
+				DDef ItemActionCMBT
+						String TagItem := Infinity
+						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
+						//Lua.error("FieldMenu:791 - Items in combat not yet possible!")
+						//LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveItem=trim('%s')})",self.CharTag,TagItem,TagItem),"Send Item to Combat FLow!")
+						Sys.Call("FLOW_COMBAT","Stage.Stages.SELECTTARGET.ComeToMe",trim(CharTag),Trim(TagItem),"RemoveItem",Trim(TagItem))
+						GoToFlow($situations[$situation].Return)
+				end
+		self.situations["COMBAT_ITEMS"].ItemAction = ItemActionCMBT				
+		self.situations["COMBAT_ABILITIES"] = {}
+		self.situations["COMBAT_ABILITIES"]	["MenuItems"] = {[0]={ ["IconFile"]="Abilities", ["Right"]=self.Abilities, ["Help"]="Shows a character's abilities (if they actually got them)" }}
+//				["AblAction"] = void(string TagItem)
+				dDef AblAction
+						String TagItem := Infinity
+						assert(StateExists("FLOW_COMBAT"),"Combat session not started!")
+						//LuaDoString("FLOW_COMBAT",sprintf("Stage.Stages.SELECTTARGET.ComeToMe(trim('%s'),trim('%s'),{RemoveAP=%d})",self.CharTag,TagItem,Item[TagItem].AP_Cost or 0),"Send Ability to Combat FLow!")
+						//Lua.error("FieldMenu::803 - Abilities in combat not yet possible!")
+						Sys.Call("FLOW_COMBAT","Stage.Stages.SELECTTARGET.ComeToMe",trim(CharTag),Trim(TagItem),"RemoveAP",Item[TagItem].AP_Cost || 0)
+						GoToFlow($situations[$situation].Return)
+				end
+		self.situations["COMBAT_ABILITIES"].AblAction = AblAction
+		self.situations["COMBAT_ABILITIES"]["Return"] = "COMBAT"
+			
+		self.situations["SHOP"] = {["MenuItems"] = {} }
+			self.situations["SHOP"]["MenuItems"] += { ["IconFile"]="Buy", ["Right"]=self.StoreBuy, ["Help"]="Buy items from this merchant" }
+			self.situations["SHOP"]["MenuItems"] += { ["IconFile"]="Sell", ["Right"]=self.Items, ["Help"]="Sells items to this merchant" }
+				
+			//	["ItemAction"] = void(string itemtag)
+				ddef ItemAction
+					string itemtag:=Infinity
+					// Sell Item //
+					__cash = __cash + math.ceil(Item[itemtag].BuyPrice/__skill)
+					Inventory[itemtag]--
+					self.ChaChing.Play()
+				end
+				self.situations["SHOP"].ItemAction=ItemAction
+				self.situations["SHOP"]["ItemSellPrice"]=true
+				self.situations["SHOP"]["Return"]="FIELD"
+			
+			// ["BANK"] = {["MenuItems"] = {} } // unused
+			self.situations["COMBAT_SWITCH"] = {}
+			self.situations["COMBAT_SWITCH"]["MenuItems"] = {[0]={ ["IconFile"] = "Switch", ["Right"]=self.SwitchChar, ["Help"]="Switch chacters" } }
+			self.situations["COMBAT_SWITCH"]["SwitchRange"] = {5,8},
+			self.situations["COMBAT_SWITCH"]["SwitchAction"] = self.CombatSwitch
+			self.situations["COMBAT_SWITCH"]["Return"] = "COMBAT"					
+			self.situations["STONEMASTER"] = { }
+			self.situations["STONEMASTER"]["MenuItems"] = { [0]={}}
+				Lua.Scyndi.Use("Script/Use/Specific/StoneMaster")
+				tmp = self.situations.STONEMASTER["MenuItems"][0]
+				tmp		["IconFile"] = "StoneMaster" 
+				//tmp		["Left"] = NIL.Use("Script/Use/Specific/StoneMaster").Panel,
+				tmp		["Left"] = Lua.Scyndi.Class.MStoneMaster.Panel
+				tmp		["Right"] = self.Status, 
+				tmp		["Help"]="Can this stone master help you get better?" 
+				self.situations["STONEMASTER"]["Return"]="FIELD"
+		CSay("= Configuring Situation Data!")
+		for k,t in pairs(self.situations)
+			Lua.assert(t.MenuItems,sprintf("Sitation %s has no MenuItems!",k))
+			CSayF("Situation %s has %d menu items (help not counted)",k,Len(t.MenuItems))
+			//t.MenuItems[#t.MenuItems+1] = tablecopy(help)
+			t.MenuItems += tablecopy(help)
+			CSayF("Situation %s has %d menu items (help included)",k,Len(t.MenuItems))
+			int width
+			width = (Screen.Width div len(t.MenuItems))
+			for i,item in pairs(t.MenuItems)
+				item.x = (((i+1)*width)-math.floor(width div 2)-24)
+				CSayF("- Item %d -> x = %d",i+1,item.x)
+			end
+		end
+		
+		// ScreenBoxes
+		CSay("= Creating work boxes")
+		self.TopBox = new Box(0,0,Screen.Width,__TopBarHeight)
+		self.LeftBox = new Box(0,__TopBarHeight,math.floor(Screen.Width/2),(Screen.Height-128)-__TopBarHeight)
+		self.RightBox = new Box(math.floor(Screen.Width/2),__TopBarHeight,math.floor(Screen.Width/2),(Screen.Height-128)-__TopBarHeight)
+		
+		// Fonts
+		CSay("= Import Big font")
+		self.BigFont = GetFont("BIGTEXT")
+		assert(self.BigFont,"Font import failed!")
+		CSay("= Import Normal font")
+		self.Font = GetFont("BOXTEXT")
+		assert(self.Font,"Font import failed!")
+		CSay("= Import Sys font")
+		self.BlitzFont = GetFont("SYSFONT")
+		assert(self.BlitzFont,"Font import failed!")
+		
+		// Arrows
+		CSay("Retrieving scroll arrows")
+		self.ArUp     = TImage.Obtain("UP")
+		self.ArDown   = TImage.Obtain("DOWN")
+		
+		CSay("= Construction of field menu done!")
+		
+		
+		// Base Stats
+		self.BaseStats = { [0]="Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
+	end
+	#say "CONSTRUCTOR END"
+	
+	void ItemBar()
+		$ItemHover = nil;
+		assert($situations[$situation],sprintf("Situation %s unknown!",$situation) )
+		__white
+		for idx,item in ipairs($situations[$situation].MenuItems)
+			$situations[$situation].citem = $situations[$situation].citem or item
+			if $situations[$situation].citem == item and Now.Second % 2 == 0
+				SetAlpha(100)
+			end
+			Lua.assert(item.IconFile,"No iconfile -> "..situation.."; index #"..idx)
+			item.Icon = item.Icon || LoadNewImage(sprintf("GFX/MenuIcons/%s.png",item.IconFile),sprintf("MENUITEM_%s",Upper(item.IconFile) ) )
+			assert(item.Icon,sprintf("Icon for %s not present!",item.IconFile) )
+			item.Icon.Draw(item.x,4)
+			if Mouse.X>item.x and Mouse.Y>4 and Mouse.X<item.x+48 and Mouse.Y<52
+				$ItemHover=item			
+				ShowAutoHelp(item.Help || "No help text available")
+			end
+			SetAlpha(255)
+		end
+	end
+
+end
+
+Init
+	Flow_FieldMenu._Constructor()
+End	
+
+
+
+
+//No support with yet, however I guess I should implement it... somehow.
+//with Flow_FieldMenu
+
+	global void BUB_Draw()
+		bool bd_debug = false
+		//void dchat(string msg)
+		ddef dchat
+			msg:=infinity
+			if bd_debug
+				CSay("DEBUG BUB_DRAW:> "..msg)
+			end
+		end
+	
+		// Draw all the boxes
+		dchat("Boxes")
+		Box.DrawAll()
+		
+		// Item bar
+		dchat("Itembar")
+		Flow_FieldMenu.ItemBar()
+		
+		// Party Sub
+		dchat("Party")
+		Party.ShowBar()
+		
+		// Left Tab
+		dchat("Left panel")
+		if type(Flow_FieldMenu.situations[Flow_FieldMenu.Situation].citem.Left)=="function"
+			dchat("= Custom")
+			Flow_FieldMenu.situations[Flow_FieldMenu.Situation].citem.Left(Flow_FieldMenu.LeftBox)
+		else
+			dchat("= base")
+			Flow_FieldMenu.BasePanel(Flow_FieldMenu.LeftBox)
+		end
+		
+		// Right Tab
+		dchat("Right panel")
+		if type(Flow_FieldMenu.Situations[Flow_FieldMenu.Situation].citem.Right)=="function"
+			dchat("= Custom")
+			Flow_FieldMenu.situations[Flow_FieldMenu.Situation].citem.Right(Flow_FieldMenu.RightBox)
+		else
+			dchat("= base")
+			Flow_FieldMenu.NotYetImplemented(Flow_FieldMenu.RightBox)
+		end
+		
+		// Draw all achievement boxes
+		Achievements.DrawAll()
+
+		
+		// Show Mouse
+		dchat("Mouse")
+		__white
+		Mouse.Show()
+		
+		dchat("Done")
+	end
+	
+	global void BUB_Update()
+		//Dev.ConCheck()
+		QuitRequest()
+		
+		if Flow_FieldMenu.ItemHover && Mouse.HitLeft
+			if Flow_FieldMenu.ItemHover.Action
+				Flow_FieldMenu.ItemHover.Action()
+			end
+			if ! Flow_FieldMenu.ItemHover.NoTab
+				Flow_FieldMenu.situations[Flow_FieldMenu.situation].citem = Flow_FieldMenu.ItemHover
+			end
+			//CSay(NIL.LuaSerialize("Clicked Menu Item",Flow_FieldMenu.ItemHover))
+		end
+		
+		if Flow_FieldMenu.LM_Action && Mouse.HitLeft
+			Flow_FieldMenu.LM_Action(Flow_FieldMenu.LM_ActionArgs)
+		elif Mouse.HitLeft
+			CSayF("No action for mousehit")
+		end
+		Flow_FieldMenu.LM_Action = nil;
+		
+		Party.Click()
+	end
+	
+	global void PartyClick(int num)
+		if num==Flow_FieldMenu.CharNum
+			GoToFlow(Flow_FieldMenu.situations[Flow_FieldMenu.situation].Return)
+		elseif not prefixed(Flow_FieldMenu.situation,"COMBAT_")
+			Flow_FieldMenu.CharNum = num
+		end
+	end
+	
+//end
+
+// This function was needed in SCI because the NALA method n longer works
+Global Void ForStore(String TagStore)
+	Flow_FieldMenu.CurrentStore = trim(TagStore)
+	Flow_FieldMenu.CurrentStock = nil
+End	
+
+Global Void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End

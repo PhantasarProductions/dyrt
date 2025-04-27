@@ -1,0 +1,470 @@
+// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+
+
+Module
+
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+#accept Foe
+#accept RPG
+#accept LoadNewImage
+
+LocExtern and "and"
+LocExtern not "not"
+LocExtern __skill "Scyndi.Globals.gint.skill"
+
+// GENERATED NIL SCRIPT!
+// Generated: 7/12/2020 11:11:06 PM
+// Used to be: do
+Var RetFunc()
+	plua FoeRet
+	foeret = new Foe(sprintf("FOE_%d",Foe.LoadFoeID))
+	foeret.FoeID = Foe.LoadFoeID
+	foeret.Char = RPG.CreateChar(foeret.Tag)
+	foeret.AI_Module = "Default"
+	foeret.AllowOversoul = true and __skill!=1
+	foeret.Description = "They watch the forest hoping for\nvictims to rob!"
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/reg/Highwayman.png","FOE_IMAGE_000000254")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/REG/HIGHWAYMAN.NEGATIVE.PNG","FOE_IMAGE_000000255")
+	foeret.Cash = 500
+	foeret.Drop = foeret.Drop || {}
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_BRIMSTONE"
+	 foeret.Drop += "ITM_PEPPER"
+	 foeret.Drop += "ITM_PEPPER"
+	 foeret.Drop += "ITM_PEPPER"
+	 foeret.Drop += "ITM_ANTIDOTE"
+	 foeret.Drop += "ITM_ANTIDOTE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	 foeret.Drop += "ITM_APPLE"
+	if not Foe.LoadOversoul
+		foeret.Experience = 200
+	end
+	if Foe.LoadOversoul
+		if __skill==3
+			foeret.Experience = 0
+			else
+			foeret.Experience = 200
+		end
+	end
+	foeret.Name="Highwayman"
+	foeret.Char.Stat("BASE__RESIST_Stat_Death").Value=75
+	foeret.Char.Stat("BUFF__RESIST_Stat_Death").Value=0
+	foeret.Char.Stat( "END__RESIST_Stat_Death").Value=0
+// Used to be: foeret.Char.Stat( "END__RESIST_Stat_Death").Script="SUM:BASE__RESIST_Stat_Death,BUFF__RESIST_Stat_Death"
+	foeret.Char.Stat("BASE__RESIST_Stat_Destruction").Value=95
+	foeret.Char.Stat("BUFF__RESIST_Stat_Destruction").Value=0
+	foeret.Char.Stat( "END__RESIST_Stat_Destruction").Value=0
+// Used to be: foeret.Char.Stat( "END__RESIST_Stat_Destruction").Script="SUM:BASE__RESIST_Stat_Destruction,BUFF__RESIST_Stat_Destruction"
+	foeret.Char.Stat("BASE__RESIST_Stat_Disease").Value=0
+	foeret.Char.Stat("BUFF__RESIST_Stat_Disease").Value=0
+	foeret.Char.Stat( "END__RESIST_Stat_Disease").Value=0
+// Used to be: foeret.Char.Stat( "END__RESIST_Stat_Disease").Script="SUM:BASE__RESIST_Stat_Disease,BUFF__RESIST_Stat_Disease"
+	foeret.Char.Stat("BASE__RESIST_Stat_Poison").Value=0
+	foeret.Char.Stat("BUFF__RESIST_Stat_Poison").Value=0
+	foeret.Char.Stat( "END__RESIST_Stat_Poison").Value=0
+// Used to be: foeret.Char.Stat( "END__RESIST_Stat_Poison").Script="SUM:BASE__RESIST_Stat_Poison,BUFF__RESIST_Stat_Poison"
+	foeret.Char.Stat("BASE__RESIST_Stat_Zombie").Value=80
+	foeret.Char.Stat("BUFF__RESIST_Stat_Zombie").Value=0
+	foeret.Char.Stat( "END__RESIST_Stat_Zombie").Value=0
+// Used to be: foeret.Char.Stat( "END__RESIST_Stat_Zombie").Script="SUM:BASE__RESIST_Stat_Zombie,BUFF__RESIST_Stat_Zombie"
+	foeret.Boss = false
+	// Oversoul specific
+	if Foe.LoadOversoul
+		foeret.Char.Stat("BASE_Accuracy").Value=900
+		foeret.Char.Stat("BUFF_Accuracy").Value=0
+		foeret.Char.Stat( "END_Accuracy").Value=0
+// Used to be: foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+		foeret.Char.Stat("BASE_Agility").Value=500
+		foeret.Char.Stat("BUFF_Agility").Value=0
+		foeret.Char.Stat( "END_Agility").Value=0
+// Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+		foeret.Char.Stat("BASE_Defense").Value=30
+		foeret.Char.Stat("BUFF_Defense").Value=0
+		foeret.Char.Stat( "END_Defense").Value=0
+// Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+		foeret.Char.Stat("BASE_Evasion").Value=250
+		foeret.Char.Stat("BUFF_Evasion").Value=0
+		foeret.Char.Stat( "END_Evasion").Value=0
+// Used to be: foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+		foeret.Char.Stat("BASE_HP").Value=600
+		foeret.Char.Stat("BUFF_HP").Value=0
+		foeret.Char.Stat( "END_HP").Value=0
+// Used to be: foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+		foeret.Char.Stat("BASE_Intelligence").Value=140
+		foeret.Char.Stat("BUFF_Intelligence").Value=0
+		foeret.Char.Stat( "END_Intelligence").Value=0
+// Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+		foeret.Char.Stat("BASE_Resistance").Value=40
+		foeret.Char.Stat("BUFF_Resistance").Value=0
+		foeret.Char.Stat( "END_Resistance").Value=0
+// Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+		foeret.Char.Stat("BASE_Strength").Value=98
+		foeret.Char.Stat("BUFF_Strength").Value=0
+		foeret.Char.Stat( "END_Strength").Value=0
+// Used to be: foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+		else
+		foeret.Char.Stat("BASE_Accuracy").Value=200
+		foeret.Char.Stat("BUFF_Accuracy").Value=0
+		foeret.Char.Stat( "END_Accuracy").Value=0
+// Used to be: foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+		foeret.Char.Stat("BASE_Agility").Value=120
+		foeret.Char.Stat("BUFF_Agility").Value=0
+		foeret.Char.Stat( "END_Agility").Value=0
+// Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+		foeret.Char.Stat("BASE_Defense").Value=2
+		foeret.Char.Stat("BUFF_Defense").Value=0
+		foeret.Char.Stat( "END_Defense").Value=0
+// Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+		foeret.Char.Stat("BASE_Evasion").Value=25
+		foeret.Char.Stat("BUFF_Evasion").Value=0
+		foeret.Char.Stat( "END_Evasion").Value=0
+// Used to be: foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+		foeret.Char.Stat("BASE_HP").Value=256
+		foeret.Char.Stat("BUFF_HP").Value=0
+		foeret.Char.Stat( "END_HP").Value=0
+// Used to be: foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+		foeret.Char.Stat("BASE_Intelligence").Value=95
+		foeret.Char.Stat("BUFF_Intelligence").Value=0
+		foeret.Char.Stat( "END_Intelligence").Value=0
+// Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+		foeret.Char.Stat("BASE_Resistance").Value=40
+		foeret.Char.Stat("BUFF_Resistance").Value=0
+		foeret.Char.Stat( "END_Resistance").Value=0
+// Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+		foeret.Char.Stat("BASE_Strength").Value=95
+		foeret.Char.Stat("BUFF_Strength").Value=0
+		foeret.Char.Stat( "END_Strength").Value=0
+// Used to be: foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+	end
+	// Skill specific
+	switch __skill
+		case 1
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_OBSERVE"
+		foeret.AI_Moves += "ITM_ALOEVERA"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_POTION"
+		case 2
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_LAZINESS"
+		foeret.AI_Moves += "BTY_OBSERVE"
+		foeret.AI_Moves += "ITM_ALOEVERA"
+		foeret.AI_Moves += "ITM_ALOEVERA"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_APPLE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		case 3
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "BTY_OBSERVE"
+		foeret.AI_Moves += "ITM_ALOEVERA"
+		foeret.AI_Moves += "ITM_ALOEVERA"
+		foeret.AI_Moves += "ITM_ALOEVERA"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_BRIMSTONE"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		foeret.AI_Moves += "ITM_POTION"
+		default
+		error("Unknown skill "..__skill)
+	end
+	CSay("HP Init Start");
+	foeret.Char.Points("HP",true).Maximum = foeret.Char.Stat("BASE_HP").Value
+	foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+	CSay("HP Init End");
+	CSay("Status Changes")
+	return foeret
+end
+// Used to be: return retfunc
+// Used to be: end

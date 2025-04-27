@@ -1,0 +1,138 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/AI/AI_Default.scyndi
+// 
+// 	  Version: 25.04.21
+// 	
+// 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+//#use "libs/tables"
+//#use "libs/strings"
+
+#use "Libs/SCI/SString"
+
+
+#use "Script/use/Need"
+
+
+#accept Fighter
+
+module 
+	
+	void Decide(foe)
+		int TimeOut = 10000
+		var act
+		var nact
+		var nitem
+		bool GoedGekeurd
+		
+		table heroes
+		table foes
+		
+		Lua.assert(len(foe.AI_Moves)>0,"There are no moves assigned to foe: "..foe.Tag)
+		
+		for tag,hero in pairs(Fighter.Team.Hero)
+			heroes+=hero
+		end
+		for tag,ifoe in pairs(Fighter.Team.Foe)
+			foes+=ifoe
+		end
+		
+		repeat
+			// start
+			act = foe.AI_Moves[math.random(0,len(foe.AI_Moves)-1)]
+			nact = {}
+			nitem = Item[act]
+			nact.ActTag = act
+			nact.ExeTag = foe.Tag
+			
+			// target
+			switch nitem.Target
+				case "OS"
+					nact.Targets = {[0]=foe}
+					GoedGekeurd=true
+				case "1A"
+					nact.Targets = {[0]=foes[math.random(0,len(foes)-1)]}
+					GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
+				case "AA"
+					nact.Targets = {}
+					for check in each(foes)
+						if check.Char.Points("HP").Have>0
+							nact.Targets+=check
+						end
+					end
+					GoedGekeurd = len(nact.Targets)>0
+				case "1F"
+					int maxheroes
+					maxheroes = len(heroes)
+					if maxheroes>4
+						maxheroes=4
+					end
+					nact.Targets = {[0]=heroes[math.random(0,maxheroes-1)]}
+					GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
+				case "AF"
+					nact.Targets = {}
+					for check in each(heroes)
+						if check.Char.Points("HP").Have>0
+							nact.Targets+=check
+						end
+					end
+					GoedGekeurd = len(nact.Targets)>0
+				case "EV"
+					nact.Targets = {}
+					for iteam,imember,ifighter in Fighter.ForAll()
+						nact.Targets+=ifighter
+					end
+					GoedGekeurd = len(nact.Targets)>0
+				default
+					Lua.error(sprintf("Unknown target type '%s'!",nitem.Target))
+			end
+			
+			
+			// Time out error. This to prevent infinite loops on bugs.
+			TimeOut--
+			Lua.assert(GoedGekeurd || TimeOut>0,"Default AI timeout!")
+		until GoedGekeurd
+		foe.NextAct = new Actions(nact)
+		foe.NextActSpeed = nitem.COM2ACT
+		foe.GaugePosition = 10001
+	end
+
+//end

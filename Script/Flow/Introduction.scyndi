@@ -1,0 +1,386 @@
+// License:
+// 	  src/Script/Script/Flow/Introduction.scyndi
+// 
+// 	  Version: 25.04.16
+// 	
+// 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+
+Script
+
+// Dirty code straight from the toilet!
+//#accept BUB_Draw
+//#accept BUB_Update
+plua BUB_Draw
+plua BUB_Update
+
+//#accept Introduction
+//#accept Show
+
+//#use "script/auto/swapkill"
+
+//#use "script/use/anyway"
+//#use "Libs/LinkedList"
+//#use "Libs/Strings"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "Libs/Music"
+#use "Libs/LinkedList"
+
+#use "Script/Use/Need"
+
+
+
+class Loader
+
+	static var List
+	static int Max
+	
+	readonly string What
+	readonly string File
+	readonly string Tag
+	readonly int id
+	int drawn
+	
+	void Run()
+		CSayF("%4d/%4d: Loading %s '%s' to reference:%s",self.id,self.Max,self.What,self.File,self.Tag)
+		switch self.What
+			case "Image"
+				LoadImage(self.File,self.Tag)
+			case "ImageFont"
+				LinkFont(self.File,self.Tag)
+			case "MousePointer"
+				Mouse[self.Tag]=self.File
+			case "InstantTune"
+				Music.Play("Music/StartUp/Introduction.wav",true)
+			case "Audio"
+				Audio.Load(self.File,self.Tag)
+			default
+				error(sprintf("%d: Loader.What = \"%s\"; File = \"%s\"; Tag=\"%s\": Can't load unknown phenomenon %s",self.id,self.What,self.File,self.Tag,self.What))
+		end		
+	end
+	
+	Constructor(string awhat,string afile, string atag)
+		self.What = awhat
+		self.File = afile
+		self.Tag  = atag
+		self.List.AddLast(self)
+		self.Max  = self.List.Count
+		self.id   = self.Max
+	end
+
+end
+
+group Loading
+	void _Constructor()
+		Loader.List = new TLinkedList
+		// Message banners
+		new Loader("Image","GFX/Alg/Loading.png","LOADING")
+
+		// Background
+		new Loader("Image","GFX/Alg/MenuBack.png","MENUBACK")
+	
+	
+		// UI
+		new Loader("Image","GFX/Alg/Next.png","NEXT")
+		new Loader("Image","GFX/Alg/Prev.png","PREV")
+		new Loader("Image","GFX/Alg/Up.png","UP")
+		new Loader("Image","GFX/Alg/Down.png","DOWN")
+		new Loader("Image","GFX/Alg/Close.png","CANCEL")
+		
+		// Combat UI
+		new Loader("Image","GFX/Combat/UI/TimeGauge.png","COMBAT_TIMEGAUGE")
+		new Loader("Image","gfx/combat/ui/GaugePointHero.png","COMBAT_TIMEPOINTHERO")
+		new Loader("Image","gfx/combat/ui/GaugePointFoe.png" ,"COMBAT_TIMEPOINTFOE")
+		new Loader("Image","gfx/Combat/UI/InputMenu.png","COMBAT_INPUTMENU")
+		new Loader("Image","gfx/Combat/UI/Cursor_true.png","COMBAT_INPUTCURSOR_true")
+		new Loader("Image","gfx/Combat/UI/Cursor_false.png","COMBAT_INPUTCURSOR_false")
+		new Loader("Image","gfx/Combat/UI/YouWin.png","COMBAT_YOUWIN")
+		new Loader("Image","gfx/Combat/UI/YouLose.png","COMBAT_YOULOSE")
+		
+		// Hero pointers
+		for _,ch in ipairs {[0]="Eric","Yasathar","Irravonia","YoungIrravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Shanda","Kirana"}
+			new Loader("Image",sprintf("gfx/combat/ui/GaugeIcons/%s.png",ch),sprintf("COMBAT_GAUGE_%s",Upper(ch)))
+		end
+	
+		// BoxText Font
+		new Loader("ImageFont","Fonts/Coolvetica.20.jfbf","BOXTEXT")
+		new Loader("ImageFont","Fonts/Coolvetica.35.jfbf","BIGTEXT")
+		new Loader("ImageFont","Fonts/Blitz.jfbf","SYSFONT")
+		new Loader("ImageFont",FONT_MainMenu,"MAINMENU")
+		
+		// Audio
+		new Loader("Audio","SFX/Treasure/Item.wav","GETITEM")
+		new Loader("Audio","SFX/Combat/Signal.Wav","COMBATSIGNAL")
+		new Loader("Audio","Music/Original/Victory.wav","VICTORY_TUNE")
+		new Loader("Audio","SFX/Party/LevelUp.Wav","LEVELUP")
+		new Loader("Audio","SFX/General/Buzz.wav","BUZZ")
+		
+		//Mouse.Pointer      = "GFX/Alg/Mouse.png"
+		//Mouse.SleepPointer = "GFX/Alg/Mouse_Sleep.png"
+		new Loader("MousePointer","GFX/Alg/Mouse.png","Pointer")
+		new Loader("MousePointer","GFX/Alg/Mouse_Sleep.png","SleepPointer")
+		
+		new Loader("InstantTune","","")
+	end
+	
+	var Loading	
+	
+	var CLink
+	get var Obj
+		return self.CLink.MyObject
+	end
+	
+	void Update()
+		self.CLink = self.CLink or Loader.List.First
+		if $Obj.drawn<4
+			return
+		end
+		self.Obj.Run()
+		self.CLink = self.CLink.Next
+		if not self.CLink
+			Introduction.Current = Show
+		end
+	end
+	
+	void Draw()
+		int g
+				
+		if (not self.Loading) and ImageLoaded("LOADING")
+			self.Loading =  TImage.Obtain("LOADING")
+		elseif self.Loading
+			__white
+			self.Loading.Draw((Screen.Width/2)-(self.Loading.Width/2),(Screen.Height/2)-(self.Loading.Width/2))
+		end
+		Color(70,70,70)
+		Rect(0,Screen.Height-10,Screen.Width,10)
+		g = math.floor( (self.Obj.id/self.Obj.Max) * 255)
+		Color(255-g,g,0)
+		Rect(0,Screen.Height-10,math.floor ((self.Obj.id/self.Obj.Max) * Screen.Width),10)
+		$Obj.drawn++
+	end
+end
+
+Init
+	Loading._Constructor()
+End
+
+group Show
+	table What2Show
+	int stage
+	int stagetime
+	int sec 
+	
+	void MakeMe()
+		table W
+		//var F
+		W = self.What2Show
+		//F = GetFont("MAINMENU")
+		W[1] = LoadImage("GFX/Alg/Phantasar_Productions.png","PP_Logo")
+		W[2] = LoadImage("GFX/Alg/Presents.png","Presenteert")
+		//W[3] = F.Text("A game by: Jeroen P. Broks")
+		//W[4] = F.Text("With help of: Man of Steel")
+		//W[5] = F.Text("And: Widzy")
+		W[3] = "A game by: Jeroen P. Broks"
+		W[4] = "With help of: Man of Steel"
+		W[5] = "And: Widzy"
+		W[6] = LoadImage("GFX/Alg/Dyrt_Logo.png","Dyrt_Logo")
+	end
+	
+	void _Constructor()
+		self.stage = 0
+		self.sec = os.time()
+	end
+	
+	Var IntroFont
+	void Draw()
+		if self.stage==0
+			self.MakeMe()
+			self.stage=1
+		end
+		var W
+		W = self.What2Show[self.stage]		
+		assert(W,"Nothing on stage index "..self.stage.." (stage time: "..self.stagetime..")")
+		if Lua.type(W)=="string"
+			IntroFont = IntroFont || GetFont("MAINMENU")
+			IntroFont.Text(W,Screen.W div 2,Screen.H div 2,2,2)
+		Else
+			W.Draw((Screen.Width div 2)-math.floor(W.Width/2),(Screen.Height div 2)-math.floor(W.Height/2))
+		End
+	end
+	
+	void Update()
+		if self.stage==0
+			return
+		end
+		int s
+		s = os.time()
+		//if (s!=self.sec) && (self.stage<len(self.What2Show))
+		if (s!=self.sec) && (self.stage<6)
+			self.stagetime++
+			//self.stage = math.floor(self.stagetime/(Len(self.What2Show)+1))
+			self.stage = (self.stagetime div (Len(Self.What2Show)+1)) div 2
+			if self.stage<1
+				self.stage=1
+			end
+			self.sec=s
+		end
+		//CSayF("Stage #%d -> Time: %d   (%d::%d)  ",stage,stagetime,s,self.sec)
+	end
+end
+Init
+	Show._Constructor()
+End
+
+group Chain
+
+	int CountDown=10
+
+	void DoLoad()
+		LoadFlow("MAINMENU","Script/Flow/MainMenu.nil")
+		GoToFlow("MAINMENU")
+		KillFlow("INTRO")
+	end
+	
+	void Draw()
+		Loading.Loading.Draw((Screen.Width/2)-(Loading.Loading.Width/2),(Screen.Height/2)-(Loading.Loading.Width/2))
+		--self.CountDown
+	end
+	
+	void Update()
+		if self.CountDown>0
+			return
+		end
+		self.DoLoad()
+	end
+end
+
+
+group Introduction
+
+	var Current
+	var ContText
+	int r = 255
+	int g = 0
+	int b = 1
+	bool buttonhover
+	var IntroFont
+
+	void Draw()
+		self.Current.Draw()
+		if self.Current!=Loading and self.Current!=Chain
+			int x
+			int y
+			int w
+			int h
+			IntroFont = IntroFont || GetFont("MAINMENU")
+			//self.ContText = self.ContText or GetFont("MAINMENU").Text("Continue")
+			//x = (Screen.Width/2)-math.floor(self.ContText.Width/2)
+			y = math.floor(Screen.Height*0.80)
+			//w = self.ContText.Width
+			//h = self.ContText.Height
+			w = IntroFont.Width("Continue") 
+			h = IntroFont.Height("Continue")
+			x = (Screen.Width/2) - (w div 2)
+			$buttonhover = Mouse.X>x and Mouse.X<x+w and Mouse.Y>y and Mouse.Y<y+h
+			__black
+			Rect(x-4,y-4,w+8,h+8)
+			Color(self.r,self.g,self.b)
+			Rect(x-2,y-2,w+6,h+6,1)
+			Color(self.g,self.r,255-self.b)
+			//self.ContText.Draw(x,y)
+			IntroFont.Text("Continue",x,y)
+			if (self.b%2==0)
+				self.r++
+				if self.r>=255
+					self.b++
+					self.r=255
+				end
+			else
+				self.r--
+				if $r<=0
+					self.b++
+					self.r=0
+				end
+			end
+			if self.b>=255
+				self.b=0
+			end
+			self.g=255-self.r
+			__white
+			Mouse.Show()
+			// GetFont("MAINMENU").DrawText("Mouse: ("..Mouse.X..","..Mouse.Y..")",0,0)
+		else 
+			$buttonhover=false
+		end
+	end
+	
+	void Update()
+		//if DEVELOPMENT and Keyboard.Held("LeftShift") and Keyboard.Held("RightShift") and Keyboard.Held("Subtract")
+		//	GoConsole()
+		//end
+		if $buttonhover and Mouse.HitLeft
+			self.Current = Chain
+			return
+		end
+		self.Current.Update()
+	end
+	
+	void _Constructor()
+		BUB_Draw = self.Draw
+		BUB_Update = self.Update
+		self.Current = Loading
+	end
+end
+Init
+	Introduction._Constructor()
+End
+
+
+
+Global Void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End

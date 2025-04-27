@@ -1,0 +1,105 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/Will/Will_Brendor.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.25 III
+// 
+// End License
+
+module 
+
+	#accept CSay
+	#accept Fighter
+	
+	#use "Script/Use/Need"
+	
+	// Data
+	int count
+	
+	Init
+		count = __skill^__skill
+		if __skill==3
+			count = math.max(gv.Int.BrendorCount,count)
+		end
+	end
+	
+	get int Blocked
+		return count
+	end
+	
+	set int Blocked
+		count = math.min(value,100000)
+		if __skill==3
+			gv.Int.BrendorCount = value
+		end
+	end	
+	
+	link PointsBlocked = gv.Int.WillBrendor
+	
+	// Scyndi
+	delegate AfterEnemyAttack
+	
+	// Dernor
+	delegate AfterBeingHurt
+	
+	// Eric, Rebecca
+	delegate AfterAttack
+	
+	// Irravonia, Brendor
+	int DamageManipulation(Action,int Damage,string Element)
+		CSay("Brendor Block - Check")
+		if math.random(0,count)!=1 
+			CSay("Chance roll not right!")
+			return Damage
+		end
+		if Fighter.ByTag.FOE_1 && Upper(Fighter.ByTag.FOE_1.FromFile)=="BOSS/RONDOMO"
+			CSay("Rondomo fight... This can spook the 'bound to lose' effect")
+			return Damage
+		end
+		PointsBlocked = math.min(PointsBlocked+Damage,1000000000)
+		new Hurt("Personal will:","Brendor",255,180,0)
+		new Hurt("Total Block","Brendor",0,180,255)		
+		return 0
+	end
+	
+	// Aziella
+	delegate Targeted
+	
+	// Kirana
+	delegate PreInput
+	
+	// Merya
+	delegate ManipulateItemUsage
+	

@@ -1,0 +1,285 @@
+// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+
+
+Module
+
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+#accept Foe
+#accept RPG
+#accept LoadNewImage
+
+LocExtern and "and"
+LocExtern not "not"
+LocExtern __skill "Scyndi.Globals.gint.skill"
+
+// GENERATED NIL SCRIPT!
+// Generated: 7/13/2020 11:42:30 PM
+// Used to be: do
+Var RetFunc()
+	plua FoeRet
+	foeret = new Foe(sprintf("FOE_%d",Foe.LoadFoeID))
+	foeret.FoeID = Foe.LoadFoeID
+	foeret.Char = RPG.CreateChar(foeret.Tag)
+	foeret.AI_Module = "Default"
+	foeret.AllowOversoul = true and __skill!=1
+	foeret.Description = "This one can be pretty dangerous"
+	foeret.Fatal["Darkness"] = true
+	foeret.Fatal["Earth"] = true
+	foeret.Fatal["Flame"] = true
+	foeret.Fatal["Frost"] = true
+	foeret.Fatal["Light"] = true
+	foeret.Fatal["Magical"] = false
+	foeret.Fatal["Physical"] = false
+	foeret.Fatal["Thunder"] = true
+	foeret.Fatal["Water"] = true
+	foeret.Fatal["Wind"] = true
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Reg/Goblin.png","FOE_IMAGE_000000238")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/REG/GOBLIN.NEGATIVE.PNG","FOE_IMAGE_000000239")
+	foeret.Cash = 5
+	foeret.Drop = foeret.Drop || {}
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_POTION"
+	 foeret.Drop += "ITM_PHOENIX"
+	 foeret.Drop += "ITM_PHOENIX"
+	 foeret.Drop += "ITM_PHOENIX"
+	if not Foe.LoadOversoul
+		foeret.Experience = 200
+	end
+	if Foe.LoadOversoul
+		if __skill==3
+			foeret.Experience = 0
+			else
+			foeret.Experience = 250
+		end
+	end
+	foeret.Name="Goblin Warrior"
+	foeret.Boss = false
+	// Oversoul specific
+	if Foe.LoadOversoul
+		foeret.Char.Stat("BASE_Accuracy").Value=40
+		foeret.Char.Stat("BUFF_Accuracy").Value=0
+		foeret.Char.Stat( "END_Accuracy").Value=0
+// Used to be: foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+		foeret.Char.Stat("BASE_Agility").Value=1000
+		foeret.Char.Stat("BUFF_Agility").Value=0
+		foeret.Char.Stat( "END_Agility").Value=0
+// Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+		foeret.Char.Stat("BASE_Defense").Value=10
+		foeret.Char.Stat("BUFF_Defense").Value=0
+		foeret.Char.Stat( "END_Defense").Value=0
+// Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+		foeret.Char.Stat("BASE_Evasion").Value=75
+		foeret.Char.Stat("BUFF_Evasion").Value=0
+		foeret.Char.Stat( "END_Evasion").Value=0
+// Used to be: foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+		foeret.Char.Stat("BASE_HP").Value=500
+		foeret.Char.Stat("BUFF_HP").Value=0
+		foeret.Char.Stat( "END_HP").Value=0
+// Used to be: foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+		foeret.Char.Stat("BASE_Intelligence").Value=20
+		foeret.Char.Stat("BUFF_Intelligence").Value=0
+		foeret.Char.Stat( "END_Intelligence").Value=0
+// Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+		foeret.Char.Stat("BASE_Resistance").Value=30
+		foeret.Char.Stat("BUFF_Resistance").Value=0
+		foeret.Char.Stat( "END_Resistance").Value=0
+// Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+		foeret.Char.Stat("BASE_Strength").Value=80
+		foeret.Char.Stat("BUFF_Strength").Value=0
+		foeret.Char.Stat( "END_Strength").Value=0
+// Used to be: foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+		else
+		foeret.Char.Stat("BASE_Accuracy").Value=20
+		foeret.Char.Stat("BUFF_Accuracy").Value=0
+		foeret.Char.Stat( "END_Accuracy").Value=0
+// Used to be: foeret.Char.Stat( "END_Accuracy").Script="SUM:BASE_Accuracy,BUFF_Accuracy"
+		foeret.Char.Stat("BASE_Agility").Value=80
+		foeret.Char.Stat("BUFF_Agility").Value=0
+		foeret.Char.Stat( "END_Agility").Value=0
+// Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
+		foeret.Char.Stat("BASE_Defense").Value=10
+		foeret.Char.Stat("BUFF_Defense").Value=0
+		foeret.Char.Stat( "END_Defense").Value=0
+// Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
+		foeret.Char.Stat("BASE_Evasion").Value=50
+		foeret.Char.Stat("BUFF_Evasion").Value=0
+		foeret.Char.Stat( "END_Evasion").Value=0
+// Used to be: foeret.Char.Stat( "END_Evasion").Script="SUM:BASE_Evasion,BUFF_Evasion"
+		foeret.Char.Stat("BASE_HP").Value=250
+		foeret.Char.Stat("BUFF_HP").Value=0
+		foeret.Char.Stat( "END_HP").Value=0
+// Used to be: foeret.Char.Stat( "END_HP").Script="SUM:BASE_HP,BUFF_HP"
+		foeret.Char.Stat("BASE_Intelligence").Value=20
+		foeret.Char.Stat("BUFF_Intelligence").Value=0
+		foeret.Char.Stat( "END_Intelligence").Value=0
+// Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
+		foeret.Char.Stat("BASE_Resistance").Value=30
+		foeret.Char.Stat("BUFF_Resistance").Value=0
+		foeret.Char.Stat( "END_Resistance").Value=0
+// Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
+		foeret.Char.Stat("BASE_Strength").Value=75
+		foeret.Char.Stat("BUFF_Strength").Value=0
+		foeret.Char.Stat( "END_Strength").Value=0
+// Used to be: foeret.Char.Stat( "END_Strength").Script="SUM:BASE_Strength,BUFF_Strength"
+	end
+	// Skill specific
+	switch __skill
+		case 1
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		case 2
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER3X"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		case 3
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER2X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER3X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER3X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER3X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER3X"
+		foeret.AI_Moves += "ABL_HERO_REBECCA_POWER4X"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		foeret.AI_Moves += "ACT_ATTACK"
+		default
+		error("Unknown skill "..__skill)
+	end
+	CSay("HP Init Start");
+	foeret.Char.Points("HP",true).Maximum = foeret.Char.Stat("BASE_HP").Value
+	foeret.Char.Points("HP").Have = foeret.Char.Points("HP").Maximum
+	CSay("HP Init End");
+	CSay("Status Changes")
+	return foeret
+end
+// Used to be: return retfunc
+// Used to be: end

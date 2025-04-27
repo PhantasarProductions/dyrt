@@ -1,0 +1,389 @@
+// License:
+// 	  src/Script/Script/Flow/MainMenu.scyndi
+// 
+// 	  Version: 25.04.03
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Script
+
+#say "MainMenu: Use commands"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/Graphics"
+
+//#use "script/use/anyway"
+#use "Script/Use/Need"
+#use "Script/use/Specific/CheckTrueAbyss" 
+
+#use "Libs/Music"
+#use "libs/linkedlist"
+//#use "libs/BuildData"
+
+extern CTA "Scyndi.Class.CheckTrueAbyss"
+
+#macro __GameName Dyrt
+
+// Headconfirm
+Init
+	CSay("Setting up MainMenu")
+End
+
+// declarations and definitions
+
+#macro marge_menu_y 170
+#macro dist_menu_y 40
+
+#say "MainMenu: Declare menu items and font"
+var MenuItems
+//var Background
+var ItemFont
+var CopyFont
+var CopyText
+var Logo
+
+var SBackground
+
+int NOCLICK=15
+
+int MidXLogo
+
+#say "MainMenu: Define them"
+Init
+	CSay("Define Menu Items")
+	MenuItems = new TLinkedList()
+
+#say "Load assets"
+	CSay('Load font: FONT_MainMenu')
+	ItemFont  = GetFont("MAINMENU")
+	Logo = LoadImage("GFX/Alg/Dyrt_Logo.png")
+	MidXLogo = Logo.Width/2
+	//Background = TImage.Obtain("MENUBACK")
+	SBackground = LoadImage("GFX/MainMenu/Background.png","Background_MainMenu")
+	CopyFont = LoadImageFont(FONT_Blitz)
+	CopyText = CopyFont.IText("(c) 2019-2025 Jeroen P. Broks")
+End	
+
+
+#say "SGLink"
+group SGLink
+
+	void LoadSGFlow()
+		if ! StateExists("FLOW_SG")
+			CSay("Loading flow: FLOW_SG")
+			//LoadFlow("SG","Script/Flow/SaveGameManager.nil")
+			LoadFlow("SG","Script/Flow/FlowSaveGame.lbc")
+		end
+	end
+	
+	void OpenSG()
+		self.LoadSGFlow()
+		//LuaDoString("FLOW_SG","SG.mode = 'LOAD'","SGMode => LOAD")
+		//GoToFlow("SG")
+		//Lua.error("OpenSG not yet available")
+		Sys.Call("FLOW_SG","ComeToLoad")
+	end
+	
+	bool Allow()
+		// Is there a savegame?
+		Return False
+	End
+
+end
+
+
+
+#say "Let's set up the menu item action functions!"
+
+void ToGitHub()
+	Sys.OpenURL(URL_GitHub)
+end
+
+void StartNewGame(bool plus,bool TrueAbyss)
+	LoadFlow("NEWGAME","Script/Flow/NewGame.nil")
+	if plus
+		//LuaDoString("FLOW_NEWGAME","NewGamePlus()")
+		Sys.Call("FLOW_NEWGAME","NewGamePlus")
+	end
+	if TrueAbyss
+		//LuaDoString("FLOW_NEWGAME","NewGameTrueAbyss()")
+		Sys.Call("FLOW_NEWGAME","NewGameTrueAbyss")
+	end
+	GoToFlow("NEWGAME")
+	KillFlow("MAINMENU")
+end
+
+void NewGame()
+	if not Events.Yes("Do you really want to start a new game?")
+		return
+	end
+	StartNewGame(false,false)
+end
+
+void NewGamePlus()
+	if not Events.Yes("Do you really want to start a new game+?")
+		return
+	end
+	StartNewGame(true,false)
+end
+
+void NewGameTrueAbyss()
+	if not Events.Yes("Do you really want to start a new game in the True Abyss?\n\nPlease note, you cannot get into the normal game from the True Abyss, so I do recommend different save slots for these games")
+		return
+	end
+	StartNewGame(false,true)
+end
+
+
+void StartJukeBox()
+	//LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
+	//LuaDoString("FLOW_JUKEBOX","GROUP_JukeBox.ReturnFlow='MAINMENU'")
+	//GoToFlow("JUKEBOX")
+	Lua.error("Jukebox not yet available")
+end
+
+
+
+#say "MainMenu: class MenuItem"
+//CSay("Create class")
+class MenuItem
+	static int count = 0
+	static var Current
+	static int oldmousex
+	static int oldmousey
+	readonly int id
+	readonly string Caption
+	readonly var CaptionText
+	readonly var Action
+	readonly bool available
+	
+	CONSTRUCTOR(string capt, act, bool avail)
+		CSay("Menu Item constructor called")
+		self.Caption = capt
+		self.Action = act
+		self.id = MenuItem.count
+		self.available = avail
+		MenuItem.count = MenuItem.count + 1
+		MenuItem.Current = MenuItem.Current or self;
+		self.CaptionText = ItemFont.IText(capt)
+		MenuItems.AddLast(self)
+		CSayF("Created menu item #%d: %s",self.id,capt)		
+	end
+	
+	DESTRUCTOR
+		CSayF("Destroying menu item \"%s\"",self.Caption)
+	end
+	
+	get int x
+		return MidScreen.x
+	end
+	
+	get int y
+		return marge_menu_y + (id * dist_menu_y)
+	end
+	
+	int cdu(int val,cd)
+		return math.ceil(val-(val*cd))
+	end
+	
+	void Draw()
+		var cdu
+		cdu = self.cdu
+		number cd
+		cd = math.abs((self.Current.id-self.id)/MenuItems.Count)
+		if self.available
+			Color(cdu(180,cd),cdu(255,cd),0)
+		else
+			Color(cdu(255,cd),0,0)
+		end
+		if self.id==self.Current.id
+			Rect(10,self.y,Screen.Width-20,dist_menu_y,1)
+		end
+		self.CaptionText.Draw(self.x,self.y,2,0)
+		if (self.oldmousex!=Mouse.X or self.oldmousey!=Mouse.Y) and Mouse.Y>self.y and Mouse.Y<self.y+dist_menu_y
+			self.Current=self
+		end
+	end
+	
+	static void UpdateMouse()
+		MenuItem.oldmousex=Mouse.X
+		MenuItem.oldmousey=Mouse.Y
+	end
+	
+	static void Next()
+		for item in MenuItems.Each
+			if item.id==MenuItem.Current.id+1
+				MenuItem.Current=item
+				// error("NEXT") // debug
+				return
+			end
+		end
+	end
+
+	static void Previous()
+		for item in MenuItems.Each
+			if item.id==MenuItem.Current.id-1
+				MenuItem.Current=item
+				//error("PREVIOUS") // debug
+				return
+			end
+		end
+	end
+	
+end
+
+void Quit()
+	if Events.Yes("Do you really want to quit?")
+		//Bye()
+		Sys.Quit(0)
+	end
+end
+
+#say "MainMenu: temp void"
+// Temp function for bug prevention!
+void NOTHINGYET()
+end
+
+#say "MainMenu: Init menu items"
+Init
+	ni := new MenuItem("New Game",NewGame,true)
+	ni  = new MenuItem("New Game+",NewGamePlus,CTA.Unlocked_NewGamePlus)
+	ni  = new MenuItem("New Game: True Abyss",NewGameTrueAbyss,CTA.Unlocked_TrueAbyss)
+	ni  = new MenuItem("Continue a game",SGLink.OpenSG,SGLink.Allow)
+	// new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
+	ni  = new MenuItem("Jukebox",StartJukeBox,true)
+	// new MenuItem("Websites",NOTHINGYET,true)
+	// new MenuItem("Repository & Bug tracker",URL_GitHub,true)
+	ni  = new MenuItem("Credits",NOTHINGYET,true)
+	ni  = new MenuItem("Quit",Quit,true)
+End
+
+#say "MainMenu: Let's ROCK, baby!"
+global void BUB_Arrive()
+	CSay("Main Menu Flow activated")	
+	Music.Play("Music/StartUp/MainMenu.wav")
+	MidScreen.Update()
+	CSay("Ready?")
+end
+
+global void BUB_Draw()
+	//CSay("Draw")
+	__white
+	
+	// debug
+	//Dev.ConCheck()
+	if (Events.AppTerminate()) 
+		Sys.Quit(0)
+	end
+	
+	// Autoupdate
+	MidScreen.Auto()
+	
+	// Background
+	//Background.Tile(0,0,Screen.Width,Screen.Height)
+	Color(127,127,127)
+	SBackground.Stretch(0,0,Screen.Width,Screen.Height)
+	
+	// Logo
+	__white
+	Logo.Draw(MidScreen.X-MidXLogo,20)
+	
+	// Copyright
+	CopyText.Draw(MidScreen.X,Screen.Height-25,2,0)
+	
+	// Version
+	Color(80,80,80)
+	CopyFont.Text("Version: "..DyrtVersion.Version,2,Screen.Height-26)
+	
+	// Menu Items
+	for item in MenuItems.Each
+		item.Draw()
+	end
+	MenuItem.UpdateMouse()
+	
+	
+	// Mouse pointer (must be last)
+	__white
+	Mouse.Show()
+end
+
+void ComeIntoAction()
+	if (MenuItem.Current.available) 
+		MenuItem.Current.Action()
+	end
+end
+
+global void BUB_Update()
+	//CSay("Update")
+	math.random(1,10) // just a measure to make sure the randomizer is always different!
+	if NOCLICK>0
+		NOCLICK--
+		return
+	end
+	//switch Keyboard.Name
+	//	case "Down"
+	//		MenuItem.Next()
+	//	case "Up"
+	//		MenuItem.Previous()
+	//	case "Enter" "Space"
+	//		ComeIntoAction()
+	//	case "Escape"
+	//		CSay("Note! Quit feature not available yet!")
+	//end
+	if Mouse.HitLeft
+		ComeIntoAction()
+	end
+end
+
+Global Void MainFlow()
+	BUB_Update()
+	BUB_Draw()
+End
+	
+
+Init
+	CSay("New Arrival")
+	BUB_Arrive()
+End
+
+// Confirm
+//CSay("MainMenu should be successfully loaded")
+#say "MainMenu:Translation done!"

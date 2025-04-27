@@ -1,0 +1,452 @@
+// License:
+// 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Action.scyndi
+// 
+// 	  Version: 25.04.26 I
+// 	
+// 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+//#use "libs/tables"
+//#use "libs/strings"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+
+#use "Script/Use/Need" 
+
+LocExtern Fighter "Scyndi.AllIdentifiers.Fighter"
+LocExtern Combat_Message "Scyndi.AllIdentifiers.Combat_Message"
+LocExtern Stage_Action "Scyndi.AllIdentifiers.Stage_Action"
+LocExtern Execution "Scyndi.AllIdentifiers.Execution"
+
+LocExtern Hurt "Scyndi.Globals.Hurt"
+LocExtern Buzz "Scyndi.Globals.Buzz"
+
+// This may look a bit odd, but it prevents errors
+// I really need a kind of forwarding thing in here, I suppose
+#use "$mp$/Combat_Arena" 
+#use "$mp$/Combat_CallBack" 
+
+class Actions
+
+	// Executor
+	string ExeNameTeam
+	string ExeTag
+	var Executor
+	bool ExeAnim
+	
+	// Action itself
+	string ActTag
+	var Act
+	
+	// Extra data
+	string RemoveItem
+	int RemoveAP
+	bool BlockIfSilenced
+	bool AllowLearning
+	string LearnTag
+	bool Learned
+	bool Countered = false
+	bool DontResetGauge
+	
+	static int ActionCounter
+	
+	
+	// Targets
+	table TargetTags
+	table Targets
+	
+	CONSTRUCTOR(data)
+		// DIRTY CODE STRAIGHT FROM HELL, but hey, due to the way NIL
+		// works out classes, this works very fine....
+		for key,value in pairs(data)
+			self[key] = value
+		end
+		
+		// Krekwakwou?
+		//void Want(string field)
+		ddef Want
+			string Field:=Infinity
+			Lua.assert(data[field]!=nil && data[field]!="",sprintf("There was no data for Actions field '%s'",field))
+		end
+		Want("ExeTag")
+		Want("ActTag")
+		assert(	(data.TargetTags || data.Targets) && (! (data.TargetTags && data.Targets) ),"Invalid input for action targets")
+		self.Act=Item[data.ActTag]
+		// Configure targets
+		if ! data.Targets
+			for tar in each(data.TargetTags)
+				self.Targets += Fighter.ByTag[tar]
+			end
+		end
+		// Executor
+		self.Executor = Fighter.ByTag[data.ExeTag]
+		// Act
+		self.ActTag = data.ActTag
+		self.Act = Item[data.ActTag]
+		
+		// Debug
+		//CSayF("ACTION Created:\n%s",self[".dump"])
+	end
+	
+end
+
+group Action_Exe
+	void Draw()
+	end
+	
+	void Update()
+		bool ok = true
+		var F
+		F = Stage_Action.Act.Executor
+		if Stage_Action.Act.RemoveItem and Stage_Action.Act.RemoveItem!="" 
+			if Inventory[ Stage_Action.Act.RemoveItem ] > 0
+				if F.Tag=="Merya" && math.random(1,(__skill^2)*2)==1
+					//#pure
+					Hurt("Personal will:","Merya",255,180,0)
+					Hurt("Conserve Items","Merya",0,180,255)
+					//#endpure
+					gv.Int.WILL_MERYA++
+					F.Char.Points("SKILLEXP1").Have = F.Char.Points("SKILLEXP1").Have + (900/__skill)
+				else
+					Inventory[ Stage_Action.Act.RemoveItem ]--
+				end
+			else
+				ok = false
+				Combat_Message.Msg("Out of items!")
+			end
+		end
+		// if Stage_Action.Act.RemoveAP and Stage_Action.Act.RemoveAP!=""
+		if Stage_Action.Act.RemoveAP and Stage_Action.Act.RemoveAP>0
+			var Ch 
+			var AP 
+			CSayF("Remove AP: %s; Tag: %s",tostring(Stage_Action.Act.RemoveAP),tostring(F.Tag))
+			Ch = RPG.GetChar(F.Tag)
+			AP = Ch.Points("AP")
+			if AP.Have<Stage_Action.Act.RemoveAP
+				Combat_Message.Msg("Out of AP!")
+				ok=false
+			else
+				AP.Inc(0-Stage_Action.Act.RemoveAP)
+			end
+		end
+		if ok
+			Actions.ActionCounter++
+			CSayF("Action execution #%4d",Actions.ActionCounter)
+			if Actions.ActionCounter==1 and (not prefixed(Stage_Action.Act.Executor.Tag,"FOE_"))
+				Achievements.Award("COMBAT_FIRST")
+			end
+			Execution.Exec(Stage_Action.Act)
+		end
+		if Stage_Action.Act.DontResetGauge
+			Stage_Action.Act.DontResetGauge = false
+		else
+			F.GaugePosition = 0
+			F.NextAct = nil;
+		end
+		if not prefixed(F.Tag,"FOE_")
+			F.Frame = 0
+			F.Houding = "IDLE"
+		end
+		Stage.Go("IDLE")
+		for i=5,8
+			string bck
+			bck = RPG.Party[i]
+			if bck and bck!=""
+				RPG.GetChar(bck).Points("AP").Have++
+			end
+		end
+	end
+end
+
+group Action_SpellAni
+	
+	var sa_mod
+	
+	void Draw()
+		
+		if self.sa_mod && lua.type(self.sa_mod.Cycle)!="function"
+			CSayF("\007Da fuck!? Cycle is %s! That should not be possible!",self.sa_mod.Cycle)
+			Stage_Action.Stage = Action_Exe
+		End
+		if (! self.sa_mod) || (self.sa_mod.Cycle(Stage_Action.Act))
+			Stage_Action.Stage = Action_Exe
+		end
+		
+		
+	end
+	
+	void Update()
+		
+		
+	end
+	
+end
+
+group Action_PreMove
+
+	int Jump = 0
+	bool Jumping = false
+	int skiptimer = 16
+
+	get var Action
+		return Stage_Action
+	end
+	
+	get var Act
+		return self.Action.Act
+	end
+
+	void Draw()
+		
+	end
+	
+	void Update()
+		if $skiptimer>0
+			$skiptimer--
+			return
+		end
+		$skiptimer=16
+		if prefixed(self.Act.ExeTag,"FOE_")
+			self.Act.Executor.FlickStance++
+			if self.Act.Executor.FlickStance>5
+				self.Act.Executor.FlickStance = 0
+				Action_SpellAni.sa_mod = nil;
+				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
+					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
+					Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellAni/SPELLANI_"..self.Act.Act.SpellAniScript)
+					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod = Lua.Scyndi.Class["SPELLANI_"..self.Act.Act.SpellAniScript]
+					Action_SpellAni.sa_mod.SA_Init(self.Act)
+				else
+					CSay("No spellani, so let's not go for that!")
+				end
+				Stage_Action.Stage = Action_SpellAni
+			end
+		else			
+			self.Act.Executor.Houding = self.Act.Act.Stance
+			self.Act.Executor.AutoLoadPic()
+			self.Act.Executor.Frame++
+			if self.Act.Executor.Frame>=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames
+				self.Act.Executor.Frame=self.Act.Executor.Pics[self.Act.Executor.Houding].Frames-1
+				Action_SpellAni.sa_mod = nil;
+				if self.Act.Act.SpellAniScript and self.Act.Act.SpellAniScript!=""
+					CSayF("Loading Spellani: %s ",self.Act.Act.SpellAniScript)
+					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellAni/SPELLANI_"..self.Act.Act.SpellAniScript)
+					//Action_SpellAni.sa_mod = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/"..self.Act.Act.SpellAniScript)
+					Action_SpellAni.sa_mod = Lua.Scyndi.Class["SPELLANI_"..self.Act.Act.SpellAniScript]
+					Action_SpellAni.sa_mod.SA_Init(self.Act)
+				else
+					CSay("No spellani, so let's not go for that!")
+				end
+				Stage_Action.Stage = Action_SpellAni
+			end
+		end
+	end
+end
+
+group Action_Announce
+	
+	int CountDown = 6
+	
+	void Draw()
+	end
+	
+	void Update()
+		self.CountDown--
+		if self.CountDown<=0
+			self.CountDown=6
+			Stage_Action.Stage=Action_PreMove
+			Action_PreMove.Jump = 0
+		end
+	end
+end
+
+group Stage_Action extends Stage
+
+	var Action
+	var Stage
+	var Act
+		
+	get var AP
+		if prefixed(self.Act.Executor.Tag,"FOE_")
+			return 0
+		end
+		return self.Act.Executor.Char.Points("AP")
+	end
+
+	get var HP
+		return self.Act.Executor.Char.Points("HP")
+	end
+
+	
+	void Cancel(string why)
+		//#pure
+		new Hurt("Action Cancelled",self.Act.Executor.Tag,255,100,100)
+		new Hurt(why,self.Act.Executor.Tag,255,90,90)
+		//#endpure
+		Buzz()
+	end
+	
+	void PurgeTargets()
+		table newtar
+		for _,tar in ipairs(self.Act.Targets)
+			bool a = true 
+			// IT'S COMPLETELY IMPOSSIBLE tar.Char is nil (the game could never have worked at all if it was), but this has happened, and to prevent this from happening ever again (and void a impossibility in the process) I put in this!
+			// How this happened I don't know. Perhaps a jinx by Lord Voldemort or something?
+			a = a and tar.Char		
+			if a and tar.Char.Points("HP").Have==0
+				a = a and (not prefixed(tar.Tag,"FOE_"))
+				a = a and self.Act.Act.CureDeath
+			end
+			if not prefixed(tar.Tag,"FOE_")
+				int i
+				repeat
+					i++
+					if i>4
+						a = false
+					end
+				until i>8 or RPG.Party[i]==tar.Tag
+				if tar.Will.Targeted
+					a = a and tar.Will.Targeted(self.Act)
+				end
+			end
+			if a
+				newtar += tar
+			end
+		end
+		self.Act.Targets = newtar
+	end
+		
+	get bool Reject
+		delegate Cancel
+		Cancel = self.Cancel
+		Stage_Action.PurgeTargets()
+		if len(Act.Targets)==0
+			Cancel("No valid targets")
+			return true
+		end
+		if Act.Act.Block_Silence and Act.Executor.StatusChanges.Silence
+			Cancel("Action blocked by silence")
+			return true
+		end
+		if Act.Act.Block_Fear and Act.Executor.StatusChanges.Fear
+			Cancel("Action blocked by fear")
+			return true
+		end
+		if Act.RemoveAP and Act.RemoveAP>0 and AP.Have<Act.RemoveAP
+			Cancel("Not enough AP")
+			return true
+		end
+		if Act.RemoveItem and Act.RemoveItem!="" 
+			if Inventory[ Act.RemoveItem ] < 0
+				Cancel("Out of items!")
+				return true
+			end
+		end
+		if Act.Executor.GaugePosition<15000
+			Cancel("Forcefully canceled")
+			return true
+		end
+		return false
+	end
+		
+	void ComeToMe(Act)
+		var Icon
+		self.Act = Act		
+		assert(Act,"No action!")
+		if self.Reject
+			switch __skill
+				case 1
+					if prefixed(self.Act.Executor.Tag,"FOE_")
+						self.Act.Executor.GaugePosition = 0
+					else
+						self.Act.Executor.GaugePosition = 7000
+					end
+				case 2
+					if prefixed(self.Act.Executor.Tag,"FOE_")
+						self.Act.Executor.GaugePosition = 5000
+					else
+						self.Act.Executor.GaugePosition = 5000
+					end
+				case 3
+					if prefixed(self.Act.Executor.Tag,"FOE_")
+						self.Act.Executor.GaugePosition = -1000
+					else
+						self.Act.Executor.GaugePosition = 8000
+					end
+				default
+					error("Action-cancellation skill error: "..__skill)
+			end
+			Lua.Scyndi.Class.Stage.Go("IDLE")
+			return
+		end
+		self.Action = Action_Announce
+		Lua.Scyndi.AllIdentifiers.Stage.Go("ACTION")
+		self.Action = Action_Announce
+		if ! prefixed(Act.ExeTag,"FOE_")
+			Icon = Act.ExeTag
+		end
+		if (Act.Learned)
+			BoxText("NEWABILITY",Upper(Act.ExeTag).."1")
+			AbilitiesMastered[Act.ExeTag][Act.LearnTag] = true
+		end
+		Combat_Message.Msg(Act.Act.Name,Icon)
+		self.Stage = Action_Announce
+	end
+
+	void Draw()
+		self.Stage.Draw()
+	end
+	
+	void Update()
+		self.Stage.Update()
+	end
+
+	void StartUp()
+		Lua.Scyndi.AllIdentifiers.Stage.Stages.ACTION = self
+	end
+
+end
+
+Init
+	Stage_Action.StartUp()
+End

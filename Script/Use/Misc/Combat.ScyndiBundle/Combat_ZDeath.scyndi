@@ -1,0 +1,287 @@
+// License:
+// 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_ZDeath.scyndi
+// 
+// 	  Version: 25.04.21 I
+// 	
+// 	  Copyright (C) 2019 - 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+#use "Libs/SCI/Audio"
+#use "libs/sci/sstring"
+#use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+#use "script/use/misc/minimessages"
+
+#accept Fighter
+
+table DeadEnemies
+
+void DeadPlayer(f)
+	if not f.Pics.Dead
+		f.Pics.Dead = LoadNewImage( sprintf("GFX/Combat/Fighters/Hero/%s.Dead.png",f.Tag),"KO_PLAYER"..f.Tag )
+	end
+	f.Pics.Dead.Draw(f.X,f.Y)
+end
+
+void EnemyDeathFade(f)
+	// error("I find your lack of obedience disturbing!") // debug!
+	string tag
+	var dF
+	tag = f.Tag
+	DeadEnemies[tag] = DeadEnemies[tag] || {["X"]=1000,["Y"]=1000}
+	dF = DeadEnemies[tag]
+	if dF.X==0
+		return
+	end // get out!
+	dF.X = dF.X - 8
+	dF.Y = dF.Y + 11
+	SetScale(dF.X / 1000,dF.Y / 1000)
+	f.Image.Draw(f.X,f.Y)
+	SetScale(1,1)
+	if (f.FromFile=="BOSS/KIRANA3" or f.FromFile=="BOSS/JERACKO3" or f.FromFile=="BOSS/ALDARUS3" or f.FromFile=="BOSS/RONDOMO3") and (not Done["Onyx_Death_Cry_"..f.FromFile])
+		string ft
+		ft = replace(f.FromFile,"BOSS/","")
+		ft = replace(ft,"3","")
+		MapText("DIE_"..ft)
+	end
+	if dF.X==0
+	
+		// Kills
+		__kills++
+		Killed[f.FromFile]++
+		if f.Oversoul
+			Killed4Oversoul[f.FromFile]=0
+			gv.Int.OversoulKills++
+		elseif gv.Bool.AllowOversoul and f.AllowOversoul
+			Killed4Oversoul[f.FromFile]++
+		end
+		
+		// Magic Stone Drops
+		if gv.Bool.AllowMagicStones and ( (__kills % (4^__skill)==0) or (__trueabyss and __kills%(gv.Int.TrueAbyssScore*__skill)==0  ) or (f.Oversoul and __skill==2) or (__newgameplus and __skill!=3 and  __kills%(__skill*5)==0) )
+			__magicstones++
+			new MiniMsg(10,Screen.H-150,"Magic Stone Dropped!",0,180,255)
+		end
+		
+		// Recover stolen money
+		if __skill!=3 and f.StolenCash>0
+			__cash = __cash + f.StolenCash
+			new MiniMsg(10,Screen.H-150,sprintf("%d stolen shilders recovered!",f.StolenCash),0,180,255)
+			f.StolenCash = 0 
+		end
+		if __skill!=3
+			for _,it_tag in ipairs(f.StolenItems)
+				new MiniMsg(10,Screen.H-150,sprintf("Stolen %s recovered!",Item[it_tag].Name),0,180,255)
+				Inventory[it_tag]++
+			end
+			f.StolenItems = {}
+		end
+		
+		// Experience points (if applicable)
+		//for tag,hero in pairs(Fighter.Team.Hero)
+		for i = 1,8
+			string tag
+			var hero
+			var Char
+			tag = RPG.Party[i]
+			if tag and tag!=""
+				hero = Fighter.Team.Hero[tag]
+				Char = RPG.GetChar(tag)
+				int Exp 
+				Exp = f.Experience
+				if __newgameplus
+					Exp = Exp + (Exp/__skill+1)
+				end
+				if hero
+					for S in hero.StatusChanges.Each
+						if S.AltExperience
+							Exp = S.AltExperience(hero,S)
+						end
+					end // for S
+					Exp = math.ceil(Exp*hero.fEXP_Rate)
+				else
+					switch __skill
+						case 1
+							Exp = math.ceil(Exp * 0.99)
+						case 2
+							Exp = math.ceil(Exp * 0.80)
+						case 3
+							Exp = math.ceil(Exp * 0.25)
+					end
+				end
+				if __trueabyss
+					Exp += gv.Int.TrueAbyssScore
+					Exp += (math.floor(Exp/(10^__skill)) * gv.Int.TrueAbyssScore)
+				end
+				if Char.Stat("Level").Value<__levelcap
+					Char.Stat("Experience").Value = Char.Stat("Experience").Value - Exp
+					if Party.CharSpot(tag)<5
+						new Hurt(sprintf("Experience %d",Exp),tag,255,255,0)
+					end // in range of screen check
+				end // if not on cap
+			end // if in party!
+		end // for
+		
+		// Item or money drops
+		bool okdrop
+		if f.Drop and len(f.Drop)>0 and not f.StolenFrom
+			int r
+			r = math.random(0,len(f.Drop)-1)
+			switch type(f.Drop[r])
+				case "number"
+					if __cash<(900000000/__skill)
+						okdrop=true						
+						__cash = __cash + f.Drop[r]
+						if f.Drop[r]==1
+							Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+							new Hurt("Dropped 1 shilder",tag,255,255,0)
+						elseif f.Drop[r]>0
+							Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+							new Hurt(sprintf("Dropped %d shilders",f.Drop[r]),f.Tag,255,255,0)
+						end
+					end
+				case "string"
+					string itag
+					itag = f.Drop[r]
+					if Inventory[itag]<Inventory.__CAP__
+						Inventory[itag]++
+						okdrop=true
+						new Hurt(sprintf("Dropped %s",Item[itag].Name),f.Tag,255,255,0)
+					end
+				default
+					error("Invalid item drop!")
+			end // switch
+		end // Drop check
+		if (not okdrop) and  __cash<(900000000/__skill)									
+			__cash = __cash + f.Cash
+			if f.Cash==1
+				Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+				new Hurt("Dropped 1 shilder!",tag,255,255,0)
+			elseif f.Cash>0
+				Audio.LoadNew("SFX/Treasure/ChaChing.wav","Cash_ChaChing").Play()
+				new Hurt(sprintf("Dropped %d shilders!",f.Cash),f.Tag,255,255,0)
+			end
+		end // Cash if no other drop
+	end // if X scale zero
+end // void
+
+
+Init
+//	["Draw"] = void(f)
+ddef DrawFallen
+	f:=infinity
+	if prefixed(f.Tag,"FOE")
+		EnemyDeathFade(f)
+	else
+		DeadPlayer(f)
+	end
+end
+
+ddef AExp
+	plua f
+	int exp
+	f,exp=infinity
+	//	["AltExperience"] = int(f,int exp)
+	switch __skill
+		case 1
+			return exp
+		case 2
+			return math.floor(exp/2)
+		case 3
+			return 0
+	end
+end
+
+ddef AHeal; return 0; End
+	
+ddef FCause
+	f:=Infinity
+	f.Char.Points("HP").Have = 0
+End
+
+ddef FCure
+	f:=Infinity
+	f.Char.Points("HP").Have = 1
+End
+
+new Combat_Status("Fallen",{ ["OffGauge"] = true, ["IsDefeated"] = true, ["UntargetableFoe"] = true, ["OverDraw"] = true,["Draw"]=DrawFallen,["AltExperience"]=AExp,["AltHeal"]=AHeal,["Caused"]=FCause,["Cured"]=FCure})
+	//["AltHeal"] = int(e,f,int i)
+	//		return 0
+	//	end,
+	//["Caused"] = void(f)
+	//		f.Char.Points("HP").Have = 0
+	//	end,
+	//["Cured"] = void(f)
+	//		f.Char.Points("HP").Have = 1
+	//	end	
+//})
+
+ddef Nada;End
+	
+dDef DCause
+	//= void(f)
+	f:=infinity
+	f.Char.Points("HP").Have = 0
+	f.StatusChanges.Destruction = false
+end
+
+
+new Combat_Status("Destruction",{ ["OffGauge"] = true, 	["IsDefeated"] = true, 	["UntargetableFoe"] = true, 	["OverDraw"] = true, ["Draw"]=Nada,["AltExperience"]=AExp,["Caused"]=DCause,["Cured"]=Nada})
+
+dDef DrawGone
+	f:=infinity
+	if f.Boss
+		f.StatusChanges.Gone = false;
+	end
+end
+
+
+new Combat_Status("Gone",{ 	["OffGauge"] = true, ["IsDefeated"] = true, ["UntargetableFoe"] = true, ["OverDraw"] = true, ["Draw"] = DrawGone,["AltExperience"]=AExp,["Caused"]=Nada,["Cured"]=Nada})
+
+ddef DrawOversoul
+	f:=infinity
+	SetColor(200,180,255)
+End	
+
+new Combat_Status("Oversoul",{ 	["Draw"] = DrawOversoul } )
+		
+End

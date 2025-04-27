@@ -40,12 +40,15 @@
 
 
 :Blenchy
+	;call Map.Cam,0,208
 	group 2
-	call Map.Cam,0,0
+	mov 208,gv.Int.ScrollY
 	call BoxText,"BLENCHY","A"
+	mov 208,gv.Int.ScrollY
 	call OnyxBang.Start
 	call Map.ShowObj,"Jeracko"
 :OnyxBang
+	mov 208,gv.Int.ScrollY
 	;This should cause a loop until the Bang is over... Hopefully!
 	chk OnyxBang.Going,OnyxBang
 	call BoxText,"BLENCHY","B"

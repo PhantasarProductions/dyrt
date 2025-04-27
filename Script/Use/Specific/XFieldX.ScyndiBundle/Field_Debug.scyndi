@@ -1,0 +1,87 @@
+// License:
+// 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_Debug.scyndi
+// 
+// 	  Version: 25.04.04
+// 	
+// 	  Copyright (C) 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+Module
+
+// These features are only of value to debug in the Field Flow.
+// Written from scratch for the SCI version of "The Secrets of Dyrt".
+
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+Void QDoing(String A, String B)
+	locExtern tb "Field_Debug_QDoing_TB"
+	tb=tb||10
+	String PA:=sprintf("%s: ",A)
+	tb=math.max(tb,len(PA))
+	While len(PA)<tb
+		PA+=" "
+	End
+	printf("\x1b[93m%s\x1b[96m%s\x1b[37m\n",PA,B)
+End
+
+Global Void Field_Debug_MyPos()
+	QDoing("Loaded Map",Kthura.LastLoadedMap)
+	QDoing("Layer",Kthura.CurrentLayer)
+	QDoing("Cam",sprintf("(%4d,%4d)",gint.ScrollX,gint.ScrollY))
+	QDoing("Player",sprintf("(%4d,%4d)",Kthura.Obj.Player.X,Kthura.Obj.Player.Y))
+End
+
+Global Void Field_Debug_Save()
+	QDoing("Opening","Savegame Manager")
+	if !Sys.HasState("FLOW_SG")
+		CSay("Loading flow: FLOW_SG")
+		Sys.LoadFlow("SG","Script/Flow/FlowSaveGame.lbc")
+	end
+	Sys.Call("FLOW_SG","ComeToSave")
+	print("Please go back to the game window!")
+	Sys.EndConsole()
+End
+
+Init
+	Sys.ConsoleLocal("SAVE","Field_DEBUG_SAVE")
+	Sys.ConsoleLocal("MYPOS","Field_DEBUG_MYPOS")
+End
+	

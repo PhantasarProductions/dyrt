@@ -38,11 +38,14 @@
 	end
 
 :YoungIrraEnd
-	group 3
+	call CSay,"Finale Event: Young Irravonia!"
+	group 4
 		call Map.Kill,"NPC_Wendy"
+		call CSay,"Wendy removed! Spawning Irravonia!"
 		call Map.SpawnPlayer,"YoungIrraStart"
 		call BoxText,"YOUNGIRRAEND","A"
 	call Achievements.Award,"YOMAMA"
+	call CSay,"Show Tephonar!"
 	call MapScript.SHOWTEPHONDAR
 	call BoxText,"YOUNGIRRAEND","B"
 	call CSay,"End of scenario B, let's go back to prison!"

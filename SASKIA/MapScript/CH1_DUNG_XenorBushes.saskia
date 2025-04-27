@@ -50,13 +50,12 @@
 	call MapText,"YOUNG_IRRA_BOSS_B"
 	call MapScript.YoungIrraBoss
 	group 4
-	call Music.Stop
-	call Map.Kill,"YoMama",true
-	call Map.GoToLayer,"DARKNESS","Start"
-	call BoxText.Load,"GENSCEN/CH1/YOUNGIRRAVONIAEND","YOUNGIRRAEND"
+		call Music.Stop
+		call Map.Kill,"YoMama",true
+		call Map.GoToLayer,"DARKNESS","Start"
+		call BoxText.Load,"GENSCEN/CH1/YOUNGIRRAVONIAEND","YOUNGIRRAEND"
 	call BoxText,"YOUNGIRRAEND","DARK"
-	call Field.ChainMap,"ch1_hub_ericrebeccahome","YoungIrraEnd","__BASE"
-	;call error,"The post-boss has not yet been scripted"
+	call Field.ChainMap,"ch1_hub_ericrebeccahome","YoungIrraEnd","__BASE"	
 	end
 
 :Prologue
@@ -67,16 +66,19 @@
 	;call FlowField.SpawnPlayer,"Start"
 	call FlowField.DoAutoScroll,true
 	
-	; Start Chapter Fader + Dungeon Fader
-	call Fader,LoadImage("Gfx/Chapter/1.png")
-	call Fader,"Xenor Bushes"
+	; Start Chapter Fader + Dungeon Fader	
+	call Fader.Create,Scyndi.Globals.LoadImage("Gfx/Chapter/1.png","Chapter 1")
+	call Fader.Create,"Xenor Bushes"
 	
 	; Start the game with a number of apples in your inventory based on your skill
-	mov 12 / gv.Number.skill,Inventory.ITM_APPLE
-	mov 6 / gv.Number.skill,Inventory.ITM_ANTIDOTE
+	mov 12 / Scyndi.Globals.gint.skill,Inventory.ITM_APPLE
+	mov 6 / Scyndi.Globals.gint.skill,Inventory.ITM_ANTIDOTE
 	
 	; Irravonia's final speech, before the game really begins
 	call BoxText,"PROLOGUE_START","IRRA"
+	
+	call Respawn.Reset
+	
 	end
 	
 	; Of course, I should've put everything put in above in the NIL script, but what the HECK! :P

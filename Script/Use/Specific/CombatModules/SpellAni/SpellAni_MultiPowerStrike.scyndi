@@ -1,0 +1,116 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_MultiPowerStrike.scyndi
+// 
+// 	  Version: 25.04.23 VI
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+module 
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Graphics"
+
+#use "Script/Use/Need"
+
+
+	
+	var plaatje 
+	readonly int pcx
+	readonly int pcy
+	int tcx
+	int tcy
+	int Times 
+	readonly int FrameSkip = 4
+	int Frame = 0
+	bool Show = false
+	var SFX
+	
+	var Target
+	
+	Init
+		plaatje = LoadNewImage("GFX/Combat/SpellANI/BANG.png","SPELL_ANI_BANG")
+		pcx = math.floor(plaatje.Width/2)
+		pcy = math.floor(plaatje.Height/2)
+	end
+	
+	void SA_Init(act)
+		if Len(act.Targets)>1
+			Lua.error("Multi Power Strike can only handle 1 TARGET")
+		end
+		Target = act.Targets[0]
+		tcx = math.floor(Target.Width/2)
+		tcy = math.floor(Target.Height/2)
+		switch Upper(act.ActTag)
+			case "ABL_HERO_REBECCA_POWER2X" "ABL_HERO_ERIC_POWER2X"
+				Times = 2
+				SFX = Audio.LoadNew("SFX/Combat/SpellAni/PowerStrike2.wav","SPELLANI_POWERSTRIKE2")
+			case "ABL_HERO_REBECCA_POWER3X" "ABL_HERO_ERIC_POWER3X"
+				Times = 3
+				SFX = Audio.LoadNew("SFX/Combat/SpellAni/PowerStrike3.wav","SPELLANI_POWERSTRIKE3")
+			case "ABL_HERO_REBECCA_POWER4X" "ABL_HERO_ERIC_POWER4X"
+				Times = 4
+				SFX = Audio.LoadNew("SFX/Combat/SpellAni/PowerStrike4.wav","SPELLANI_POWERSTRIKE4")
+			case "ABL_HERO_REBECCA_POWER5X" "ABL_HERO_ERIC_POWER5X"
+				Times = 5
+				SFX = Audio.LoadNew("SFX/Combat/SpellAni/PowerStrike4.wav","SPELLANI_POWERSTRIKE4")
+			default
+				Times = math.random(2,10)
+				SFX = Audio.LoadNew("SFX/Combat/SpellAni/PowerStrike2.wav","SPELLANI_POWERSTRIKE2")
+				CSay("Move not recognized so times will be random!")
+		end
+		SFX.Play()
+	end
+	
+	bool Cycle(act)
+		bool ret = false
+		Frame++
+		if Frame % FrameSkip == 0
+			Show = ! Show
+			if (! Show)
+				Times--
+				ret = Times<=0
+			end
+		end
+		if Show
+			__white
+			plaatje.Draw(Target.X+tcx-pcx,Target.Y+tcy-pcy)
+		end
+		return ret
+	end

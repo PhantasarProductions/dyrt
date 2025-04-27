@@ -1,0 +1,106 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Use/Specific/CombatModules/Arena/ARENA_Botanica.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.27 III
+// 
+// End License
+
+
+Module
+
+#use "Libs/SCI/Graphics"
+
+#use "libs/LinkedList"
+
+#use "script/use/need"
+
+class TBlaadje
+	int x
+	int y
+	int degrees
+	static var blaadje
+	
+	void Draw()
+		__white
+		//Rotate.Deg = self.degrees
+		self.blaadje.Draw(self.x,self.y,degrees)
+		//Rotate.Deg = 0
+	end
+	
+	CONSTRUCTOR(int _x,int _y)
+		self.x = _x
+		self.y = _y
+		self.degrees = -math.random(85,95)
+	end
+end
+
+//module ARENA_Botanica
+
+	var blaadje
+	var gras
+	var list
+	
+	Init
+		list = new TLinkedList()
+		int x 
+		int y 
+		x = -40
+		y = -50
+		int midy
+		midy = math.floor(Graphics.H / 2)
+		blaadje = LoadNewImage("gfx/Textures/Botanica/Leaf.png","Arena_Blaadje")
+		gras = LoadNewImage("GFX/Textures/Road/Grass1.png","Arena_Grasveldje")
+		TBlaadje.blaadje = blaadje
+		repeat
+			var blad
+			blad = new TBlaadje(x,y)
+			list.AddLast(blad)
+			y -= math.random(70,180)
+			if y<0
+				y = midy
+				x += math.random(20,70)
+			end
+		until x>Graphics.W
+	end
+	
+	void Draw()
+		gras.Tile(0,math.floor(Graphics.H/2)-100,Graphics.W,math.floor(Graphics.H/2)+100)
+		for blad in list.Each
+			blad.Draw()
+		end
+	end
+
+//end

@@ -1,0 +1,488 @@
+// License:
+// 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Execution.scyndi
+// 
+// 	  Version: 25.04.20 III
+// 	
+// 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+MODULE
+
+//#use "libs/tables"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+
+#use "libs/xmath"
+#use "libs/RomanNumbers"
+#use "$mp$/Combat_Hurt"
+#use "Script/Use/Need"
+#use "Script/Use/Misc/MiniMessages"
+
+//#accept Instant
+LocExtern Instant "Scyndi.AllIdentifiers.Instant"
+LocExtern Buffs "Scyndi.Class.Buffs" 
+
+group Execution
+
+	bool Helpless(Target)
+		// TODO: Render helpless if status changes ask for that!
+		return false
+	end
+
+	void Attack(Exe,Tar,Act)
+	
+		// declarations
+		delegate rand
+		int base
+		int adie
+		int defb
+		int ddie
+		int totaldef
+		int totaldmg
+		int dmg
+		int enddmg
+		bool fatal
+		number elmod
+		
+		var TarChar
+		TarChar = RPG.Char(Tar.Tag)
+		
+		// Calculate damage
+		rand = math.random
+		base = math.ceil(RPG.Char(Exe.Tag).Stat(sprintf("END_%s",Act.Act.AttackStat)).Value*(Act.Act.Attack/100))
+		// local base = Combat_Stat(TGROUP,TACTOR,abl.AttackStat); CSay("AttackStat = "..abl.AttackStat); CSay("base = "..base)
+		// if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
+		adie = rand(1,math.max(2,math.ceil(base/2)))
+		defb = RPG.Char(Tar.Tag).Stat(sprintf("END_%s",Act.Act.DefenseStat)).Value //Combat_Stat(TACT["TargetGroup"],target,Act.Act.DefenseStat)
+		ddie = rand(0,math.max(1,math.floor(defb/5)))
+		totaldmg = base + adie
+		totaldef = defb + ddie
+		dmg = xmath.round(totaldmg-totaldef); if dmg<1 ; dmg=1; end
+		
+		// Modify by attack type
+		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.Act.AttackType]
+		enddmg = dmg - (math.floor(dmg * (TarChar.Stat(sprintf("END__RESIST_Elem_%s",Act.Act.AttackType)).Value/100)))
+		
+		// Modify by element type
+		fatal = fatal || ( prefixed(Tar.Tag,"FOE_") && Tar.Fatal[Act.Act.Element] )
+		elmod = TarChar.Stat(sprintf("END__RESIST_Elem_%s",Act.Act.Element)).Value
+		enddmg = dmg - (math.floor(dmg * (elmod/100)))
+		
+		// Show what damage done
+		if fatal
+			enddmg = TarChar.Points("HP").Have
+			new Hurt("Death",Tar.Tag,255,0,0)
+		elseif enddmg<0
+			new Hurt(enddmg,Tar.Tag,0,255,0)
+		elseif elmod<0
+			new Hurt(enddmg,Tar.Tag,255,0,0)
+		elseif elmod==100
+			enddmg = 0
+			new Hurt("Immune",Tar.Tag,255,180,0)
+		elseif elmod>0
+			new Hurt(enddmg,Tar.Tag,255,180,0)
+		else
+			new Hurt(enddmg,Tar.Tag)
+		end
+		
+		if (not prefixed(Tar.Tag,"FOE_"))
+			number a
+			a = enddmg/TarChar.Points("HP").Maximum
+			switch __skill
+				case 1
+					a = a * 25
+				case 2
+					a = a * 15
+				case 3
+					a = a * 5
+			end
+			Tar.Char.Points("AP").Inc(math.abs(math.ceil(a)))
+		end
+		if (not prefixed(Tar.Tag,"FOE_")) && Tar.Will.DamageManipulation
+			enddmg = Tar.Will.DamageManipulation(Act,enddmg,Act.Act.Element)
+		end
+		for sn,status in Tar.StatusChanges.Each
+			if status.AltAttack	
+				enddmg = status.AltAttack(Exe,Tar,enddmg)
+				CSayF("AltAttack due to status %s sets the heal value to %d",sn,enddmg)
+			else
+				CSayF("No AltAttack in status %s",sn)
+			end
+		end
+
+		//Tar.Char.Points("HP").Dec(enddmg)
+		Tar.Char.Points("HP").Have-=enddmg
+		if gv.Bool.DEBUG_CHEAT_JACKTHERIPPER && ( prefixed(Tar.Tag,"FOE_") )
+			CSay("Killing foe due to the Jack The Ripper mode")
+			Tar.Char.Points("HP").Have = 0
+		end
+		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,Tar.Char.Points("HP").Have)
+		if prefixed(Tar.Tag,"FOE_") and Tar.AI_Data[".hasmember"]("Hurt")
+			Tar.AI_Data.Hurt(Tar,Act.Act.Element,enddmg, Act)
+		end
+	end
+	
+	void AltAttack(Exe, Tar,int dmg,string element,Act)
+		bool fatal
+		int enddmg
+		number elmod
+		
+		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[element]
+		enddmg = dmg - (math.floor(dmg * (Tar.Char.Stat(sprintf("END__RESIST_Elem_%s",element)).Value/100)))
+		
+		for sn,status in Tar.StatusChanges.Each
+			if status.AltAttack	
+				enddmg = status.AltAttack(Exe,Tar,enddmg)
+				CSayF("AltAttack due to status %s sets the heal value to %d",sn,enddmg)
+			else
+				CSayF("No AltAttack in status %s",sn)
+			end
+		end
+		
+		if (not prefixed(Tar.Tag,"FOE_")) && Tar.Will.DamageManipulation
+			enddmg = Tar.Will.DamageManipulation(Act,enddmg,element)
+		end
+		
+		// Show what damage done
+		if fatal
+			enddmg = Tar.Char.Points("HP").Have
+			new Hurt("Death",Tar.Tag,255,0,0)
+		elseif enddmg<0
+			new Hurt(math.abs(enddmg),Tar.Tag,0,255,0)
+		elseif elmod<0
+			new Hurt(enddmg,Tar.Tag,255,0,0)
+		elseif elmod==100
+			enddmg = 0
+			new Hurt("Immune",Tar.Tag,255,180,0)
+		elseif elmod>0
+			new Hurt(enddmg,Tar.Tag,255,180,0)
+		else
+			new Hurt(enddmg,Tar.Tag)
+		end
+		
+		if (not prefixed(Tar.Tag,"FOE_"))
+			number a
+			a = enddmg/Tar.Char.Points("HP").Maximum
+			switch __skill
+				case 1
+					a = a * 25
+				case 2
+					a = a * 15
+				case 3
+					a = a * 5
+			end
+			Tar.Char.Points("AP").Inc(math.abs(math.ceil(a)))
+		end
+		
+		Tar.Char.Points("HP").Dec(enddmg)
+		
+		if (not prefixed(Tar.Tag,"FOE_")) and enddmg>0 and Tar.Will.AfterBeingHurt
+			Tar.Will.AfterBeingHurt()
+		end
+		
+	end
+	
+	void Heal(Exe,Tar,Act)
+		int hvalue
+		var HPTar
+		var ChExe
+		var ChTar
+		ChExe = RPG.Char(Exe.Tag)
+		ChTar = RPG.Char(Tar.Tag)
+		HPTar = RPG.Char(Tar.Tag).Points("HP")
+		switch Act.Act.HealType
+			case "Absolute"
+				hvalue = Act.Act.Heal
+			case "Percent"
+				hvalue = math.ceil( (Act.Act.Heal/100) * HPTar.Maximum )
+			case "Stat"
+				hvalue = math.ceil( (Act.Act.Heal/100) * ChExe.Stat(sprintf("END_%s",Act.Act.HealStat)).Value )
+			default
+				error(sprintf("Heal type %s unknown",Act.Act.HealType))
+		end
+		for sn,status in Tar.StatusChanges.Each
+			if status.AltHeal				
+				hvalue = status.AltHeal(Exe,Tar,hvalue)
+				CSayF("AltHeal due to status %s sets the heal value to %d",sn,hvalue)
+			else
+				CSayF("No AltHeal in status %s",sn)
+			end
+		end
+		if hvalue==0
+			new Hurt("No effect!",Tar.Tag,255,255,255)
+		elseif hvalue<0
+			new Hurt(math.abs(hvalue),Tar.Tag,255,255,255)
+		else
+			new Hurt(hvalue,Tar.Tag,0,255,0)
+		end
+		HPTar.Have = HPTar.Have + hvalue
+	end
+	
+	void TrueExec(Action,Target)
+		// Before we begin
+		bool hit
+		var Executor
+		string TarTag
+		string ExeTag
+		TarTag=Target.Tag
+		ExeTag=Action.Executor.Tag
+		Executor = Action.Executor
+		assert(Action,"Execution.TrueExec(): I need action and a target!")
+		assert(Executor,"Execution.TrueExec(): HEY! Were's the executor?")
+		// Accuracy Check
+		if Action.Act.AccuracyCheck && (not self.Helpless(Target))
+			int acc
+			int eva
+			acc = math.random(1,math.max(RPG.Char(ExeTag).Stat("END_Accuracy").Value,2))
+			eva = math.random(0,math.max(2,math.floor(RPG.Char(TarTag).Stat("END_Evasion").Value/5)))
+			if eva>acc
+				new Hurt("Miss",Target.Tag,127,127,127)
+				return
+			end			
+		end
+		
+		// Cure status changes (must after accuracy check be first always).
+		for k,v in pairs(Action.Act)
+			if prefixed(k,"Cure") && v
+				string stc
+				stc = right(k,len(k)-4)
+				if Target.StatusChanges[stc]
+					Target.StatusChanges[stc] = nil;
+					new Hurt("Cure "..stc,Target.Tag,180,255,0)
+					hit = true
+				end
+			end
+		end
+		
+		// Calculate attack and damage
+		if Action.Act.Attack>0
+			string Alt
+			Alt = Action.Act.AttackAlt
+			if Action.Act.AttackAlt=="" or Action.Act.AttackAlt==nil; Alt="None"; end
+			switch Alt
+				case "None"
+					self.Attack(Executor,Target,Action)
+				case "PercentOppMaxHP"
+					int atk
+					atk = math.max(1,math.floor(Target.Char.Points("HP").Maximum * (Action.Act.Attack/100)))
+					self.AltAttack(Executor,Target,atk,Action.Act.Element,Action)
+				default
+					error("Unknown AttackAlt: "..Alt)
+			end
+			hit = true
+			if not Action.Countered
+				Instant[Target.Instant.ATTACK](Target,Action)
+				Action.Countered = Instant.Done
+			end
+			for i=1,4
+				if RPG.Party[i] and RPG.Party[i]!=""
+					var CheckPlay
+					CheckPlay = Buffs.Fighter.ByTag[RPG.Party[i]]
+					if CheckPlay.Will.AfterEnemyAttack
+						CheckPlay.Will.AfterEnemyAttack()
+					end
+				end
+			end
+		end
+		
+		// Cancel
+		if Action.Act.AttackCancel and Target.GaugePosition>10000
+			Target.GaugePosition = 0
+			new Hurt("Cancel",Target.Tag,255,255,0)
+			if ! Action.Countered
+				CSay("Do we counter this cancel?")
+				Instant[Target.Instant.CANCEL](Target,Action)
+				Action.Countered = Instant.Done
+				CSayF(">>> %s",tostring(Action.Countered))
+			end
+		end
+		
+		// Calculate healing
+		if Action.Act.Heal>0
+			Self.Heal(Executor,Target,Action)
+			if not Action.Countered				
+				Instant[Target.Instant.HEALING](Target,Action)
+				Action.Countered = Instant.Done
+			end
+			hit = true
+		end
+		
+		// Buffs/Debuffs
+		for k,v in pairs(Action.Act)
+			if prefixed(k,"Buff") and v!=0
+				string s
+				s = Right(k,len(k)-4)
+				Buffs.BuffProcent(Target,s,v)
+				hit = true
+			end
+		end
+
+		
+		// Effect Script
+		if Action.Act.EffectScript and Action.Act.EffectScript!=""
+			//delegate effect
+			//effect = NIL.Use("Script/Use/Specific/CombatModules/SpellEffect/"..Action.Act.EffectScript)
+			Lua.Scyndi.Use("Script/Use/Specific/CombatModules/SpellEffect/EFFECT_"..Action.Act.EffectScript)
+			effect := Lua.Scyndi.Class["EFFECT_"..Action.Act.EffectScript].DoEffect
+			assert(effect,"Something went wrong in compiling effect: "..Action.Act.EffectScript)
+			hit = effect(Action,Target,Action.Act.EffectArgument) || hit // Must be this way around or the effect is never executed if something that counts as a hit has happened before!
+		end
+		
+		// Cause status changes (must always be the last before the hit check)
+		for k,v in pairs(Action.Act)
+			if prefixed(k,"Cause") and v
+				string stc
+				string stc2
+				stc = right(k,len(k)-5)
+				stc2 = stc
+				if stc=="Curse"
+					stc2="Silence"
+				end
+				if stc=="Death" and (Target.StatusChanges.Zombie or Target.StatusChanges.Undead)
+					new Hurt("Immune!",Target.Tag)
+				elseif not Target.StatusChanges[stc] and math.random(0,99) >= Target.Char.Stat("END__RESIST_Stat_"..stc2).Value
+					Target.StatusChanges[stc] = true
+					new Hurt(stc.."!",Target.Tag,255,100,60)
+					hit = true
+				end
+			end
+		end
+
+		
+		// If not hit, make note of a miss
+		if ! hit
+			new Hurt("Miss",Target.Tag,127,127,127)
+		end
+		
+	end
+	
+	table skillupf
+
+	void Exec(Action)
+		Lua.assert(Action,"Execution.Exec(nil): I need action!")
+		for tar in each(Action.Targets)
+			self.TrueExec(Action,tar)
+		end
+		if not prefixed(Action.Executor.Tag,"FOE_")
+			CSay("After move care!")
+			Action.Executor.Char.Points("AP").Inc(Action.Act.GainAP)
+			if __trueabyss and __skill!=3
+				Action.Executor.Char.Points("AP").Inc(math.ceil(gv.Int.TrueAbyssScore/(5^__skill)))
+			end
+			for i=0,4
+				CSayF("= Skill #%d",i)
+				if Action.Act[sprintf("GainSkill%dAll",i)] or arraycontains(xsplit(Action.Act[sprintf("GainSkill%dChar",i)] || "",";"),Action.Executor.Tag)
+					var skp
+					var skl
+					skp = Action.Executor.Char.Points(sprintf("SKILLEXP%d",i))
+					skl = Action.Executor.Char.Points(sprintf("SKILLLVL%d",i))
+					if skl.Have>0
+						skp.Inc(Action.Act[sprintf("GainSkill%d",i)])
+						if __trueabyss
+							skp.Inc(gv.Int.TrueAbyssScore*(4-__skill))
+						end
+						if __newgameplus
+							skp.Inc(Action.Act[sprintf("GainSkill%d",i)] * (3-__skill))
+						end
+						if skp.Have >= skp.Maximum and skl.Have < skl.Maximum
+							skp.Have = 0
+							skl.Have ++
+							Party.LvUpSound()
+							if __newgameplus and Action.Executor.Char.Stat("Level").Value < __levelcap
+								CSayF("Skill level up, extra EXP bonus for character %s?",Action.Executor.Tag)
+								number b = 0
+								switch Action.Executor.Tag
+									case "Eric" "Scyndi" "Irravonia"
+										b = skl.Have
+									case "Rebecca" "Brendor"
+										b = skl.Have * 5
+									case "Aziella" "Dernor" "Merya"
+										b = math.ceil(skl.Have * 3.75) // this may change, but for now this will do!
+									default
+										b = 0
+								end
+								CSayF("= %d extra experience points granted for skill level because of New Game+",b)
+								Action.Executor.Char.Stat("Experience").Value = Action.Executor.Char.Stat("Experience").Value - b
+							end
+							int R
+							int G
+							R = 255 - (i * 63)
+							G = 255 - R
+							new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("%s's %s level %s",Action.Executor.Char.Name,Action.Executor.Char.Data[sprintf("SKILL%d",i)], Roman(skl.Have)),R,G,0)
+							if !self.skillupf[Action.Executor.Tag]
+								//							= self.skillupf[Action.Executor] or NIL.Use("Script/Char/SkillUp/"..Action.Executor.Tag)
+								Lua.Scyndi.Use("Script/Char/SkillUp/SkillUp_"..Action.Executor.Tag)
+								self.skillupf[Action.Executor.Tag] = Lua.Scyndi.Class["SkillUp_"..Action.Executor.Tag].SU
+							end
+							skp.Maximum = (10 * (10^__skill)) + (5*(skl.Have*__skill))
+							//#pure
+							self.skillupf[Action.Executor.Tag](i)
+							//#endpure
+							if skl.Have == skl.Maximum
+								if Action.Executor.Tag=="Yasathar"
+									Achievements.Award(sprintf("MAXSKILL_%d_%s",i,"ERIC"))
+								elseif Action.Executor.Tag!="YoungIrravonia" and Action.Executor.Tag!="Shanda" and Action.Executor.Tag!="Kirana"
+									Achievements.Award(sprintf("MAXSKILL_%d_%s",i,Action.Executor.Tag:upper()))
+								end
+							end
+						end
+					end
+				end
+			end
+			if Action.Learned
+				AbilitiesMastered[Action.ExeTag][Action.LearnTag] = true
+				CSayF("AbilitiesMastered['%s']['%s'] = true",Action.ExeTag,Action.LearnTag)
+				new MiniMsg(Action.Executor.X,Action.Executor.Y,sprintf("Learned '%s'!",Action.Act.Name))
+			end
+			CSay("AfterAttack "..tostring(Action.Act.TriggerAfterAttack).."! Not foe: "..tostring(not prefixed(Action.Executor.Tag,"FOE_")))
+			if Action.Act.TriggerAfterAttack and (not prefixed(Action.Executor.Tag,"FOE_")) 
+				assert(Action.Executor.Will,"No will for "..Action.Executor.Tag)
+				if Action.Executor.Will.AfterAttack
+					CSay("Performing!")
+					Action.Executor.Will.AfterAttack(Action)
+				else
+					CSay("No afteraction for this executor: "..Action.Executor.Tag)
+				end
+			else
+				CSay("AfterAction rejected!")
+			end
+		end
+	end
+end

@@ -1,0 +1,195 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Dungeon.scyndi
+// 
+// 	  Version: 25.04.24 II
+// 	
+// 	  Copyright (C) 2019, 2021, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+#use "Libs/SCI/Graphics"
+
+#use "libs/LinkedList"
+
+#use "Script/Use/Need"
+
+Module
+
+	bool Torches = true
+	bool TorchBurn = true
+	bool TorchOff = true	
+
+
+//#pure 
+//local
+//#endpure
+
+LocExtern Torch "Scyndi.Class.Torch_ARENA_DUNGEON"
+
+class Torch_ARENA_DUNGEON
+	int x
+	int y
+	var pic
+	int spd
+	int skip
+	int Frame
+	bool animate
+	
+	static var list
+	
+	CONSTRUCTOR()
+		list = list || new TLinkedList()
+		self.list.AddLast(self)
+		self.Frame = math.random(1,5)
+	end
+	
+	static Var __Call()
+		return new Torch_ARENA_DUNGEON()
+	end
+	
+	void Draw()
+		if TorchOff || (!TorchBurn)
+			self.Frame=0
+		end
+		self.pic.Draw(self.x,(Screen.Height/2)-self.y,self.Frame)
+		if self.animate
+			self.skip++
+			if self.skip>=self.spd
+				self.skip=0
+				int wtd
+				wtd = math.random(1,10)
+				switch wtd
+					case 1
+						if self.spd>7
+							self.spd --
+						end
+					case 2
+						if self.spd<12
+							self.spd++
+						end
+				end
+			end
+			self.Frame++
+			if (self.Frame>=self.pic.Frames)
+				self.Frame = 0
+			end
+		end
+	end
+	
+end
+
+
+//module Arena_Dungeon
+
+	get var ImgTorchBurn 
+		return LoadNewImage("gfx/Textures/Objects/Toorts/Brandend.jpbf","DungArenaTorchBurning")
+	end
+	
+	get var ImgTorchOff
+		return LoadNewImage("gfx/Textures/Objects/Toorts/Uit.png"      ,"DungArenaTorchNotBurning")
+	end
+	
+	link TorchList = Torch.list
+	
+	string Wall
+	string Floor
+	
+	var ImgWall
+	var ImgFloor
+	
+	//void CONSTRUCTOR()
+	//	TorchList = new TLinkedList()
+	//end
+	
+	void DInit()
+		Lua.assert(Wall!="" and Floor!="","Missing arena data!")
+		ImgWall  = LoadImage(Wall,"CArenaDungWall")
+		ImgFloor = LoadImage(Floor,"CArenaDungFloor")
+		// The tags force a C# garbage collecting once other stuff is loaded!
+		if Torches
+			Lua.assert(TorchBurn or TorchOff,"Invalid torches setting. One of them must be true, or the torches in general must be turned off!")
+			int tx
+			var trc
+			int au
+			tx = math.random(64,120)
+			repeat			
+				//trc = Torch() // Why doesn't this work? Yup, no  reason at all!
+				trc = new Torch_ARENA_DUNGEON()
+				trc.x = tx
+				trc.y = math.random(20,50)
+				trc.spd = math.random(6,12)
+				if Torches
+					bool ok
+					repeat
+						au = math.random(1,2)
+						switch au
+							case 1
+								if TorchBurn
+									trc.pic = ImgTorchBurn
+									trc.animate = true
+									ok = true
+								end
+							case 2
+								if TorchOff
+									trc.pic = ImgTorchOff
+									trc.animate = false
+									ok = true
+								end
+						end
+					until ok
+				end
+				tx = tx + math.random(60,200)
+			until tx >= Screen.Width-64
+		end
+	end
+	
+	void Draw()
+		int sy
+		int ey
+		ey = math.floor(Screen.Height/2)
+		sy = ey - (4 * 32)
+		ImgFloor.Tile(0,ey,Screen.Width,ey)
+		for y = sy,ey,32
+			ImgWall.Tile(0,y,Screen.Width,64)
+		end
+		for trc in Torch.list.Each
+			trc.Draw()
+		end
+	end
+
+//end

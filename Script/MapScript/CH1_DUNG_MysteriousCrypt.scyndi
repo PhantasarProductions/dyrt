@@ -1,0 +1,197 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/MapScript/CH1_DUNG_MysteriousCrypt.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.26 IX
+// 
+// End License
+
+Script
+
+#say "Map Script - None!"
+
+#use "libs/sci/sys"
+#use "libs/sci/intervar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
+
+void Twisted()
+	MapScript.SASKIA("Twisted")
+end
+
+
+group MScript
+	
+
+	delegate SWITCH_SWONE
+	delegate SWITCH_SWTWO
+	// I did NOT forget number three! There's a joke behind this :P
+	delegate SWITCH_SWFOUR
+	delegate SWITCH_SWFIVE
+	delegate SWITCH_SWSIX
+	delegate SWITCH_SWSEVEN
+	delegate SWITCH_SWEIGHT
+	delegate SWITCH_SWNINE
+	
+	
+	
+	void SWITCH_SWTHREE()
+		Map.Kill("PuzDoor",true)
+	end
+	
+	void CREATEBRENDOR()
+		number lvl = 4 - __skill
+		for chn in each({[0]="Eric","Irravonia","Rebecca"})
+			lvl += RPG.GetChar(chn).Stat("Level").Value
+		end
+		lvl += (lvl*({0.25,0,-0.75})[__skill])
+		gBool.LevelOkBrendor=true
+		var Brendor
+		Party.NewCharacter("Brendor",math.ceil(lvl))
+		Brendor = RPG.GetChar("Brendor")
+		Brendor.Stat("BASE__RESIST_Stat_Fear").Value = 99 - (10*__skill)
+		Brendor.Stat("BASE__RESIST_Stat_Exhaustion").Value = 54 / __skill
+		Brendor.Stat("BASE__RESIST_Stat_Poison").Value = 99 - (3*__skill)
+		Brendor.Stat("BASE__RESIST_Stat_Disease").Value = 92 - (6*__skill)
+		Brendor.Stat("BASE__RESIST_Stat_Death").Value = math.random(0,math.ceil(99 / __skill))
+		Brendor.Stat("BASE__RESIST_Stat_Destruction").Value = math.random(0,math.ceil(69 / __skill))
+		RPG.Party[1] = "Brendor"
+		RPG.Party[2] = ""
+		RPG.Party[3] = ""
+		RPG.Party[4] = ""
+		BHP:=RPG.GetChar("Brendor").Points("HP")
+		BHP.Have = BHP.Maximum
+		BVP:=RPG.GetChar("Brendor").Points("VIT")
+		BVP.Have = BVP.Maximum
+		RPG.KillChar("Shanda") // She was only a guest char, and she'll never be in the party again, so why keep her in the memory?
+	end
+	
+	void NPC_MERCHANT()
+		MapScript.SASKIA("Merchant")
+	end
+	
+	void RESETBLUE()
+		if not Done.Done_Init_Brendor_MysteriousCrypt_VeryOwnRespawn
+			Respawn.Initiated = false
+		end
+	end
+	
+	void NPC_SWORDS()
+		Inventory.EQW_ERICREBECCA_SWORD += 2
+		Map.Kill("NPC_SWORDS",true)
+	end
+	
+	void TUT_BREAK()
+		if not Done.Done_Tutorial_Brendor_Break
+			MapText("TUT_BREAK")
+		end		
+	end
+	
+	void BOSS()
+		StartCombat.StartSession()
+		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
+		StartCombat.Arena = "MysteriousCrypt"
+		StartCombat.Foe[1] = "Boss/Big_Scorpion"
+		StartCombat.NoLose = false
+		StartCombat.FoeIDDQD = false
+		StartCombat.Ready()
+	end
+	
+	void SASKIA_BOSS()
+		MapScript.SASKIA("Boss")
+	end
+	
+	void THE_END()
+		if Done.Done_MysteriousCrypt_Completed
+			return
+		end
+		BoxText.Load("GENSCEN/CH1/ENDCRYPT","ENDCRYPT")
+		Map.WalkTo("Fin")
+		MapScript.SASKIA("EndCrypt")
+	end
+	
+	void LEAVE()
+		if gv.Bool.Chapter1Complete
+			WorldMap.Delisto()
+		end
+	end
+	
+	void MERCHANTBEGONE()
+		if gv.Bool.Chapter1Complete and (not Done.Killed_MysteriousCrypt_Merchant)
+			Map.Kill("NPC_Merchant",true)
+			CSay("Merchant permanently removed!")
+		end
+		if !Done.BrendorRecoverFirstTime && RPG.Party[1]=="Brendor"
+			BHP:=RPG.GetChar("Brendor").Points("HP")
+			BHP.Have = BHP.Maximum
+			BVP:=RPG.GetChar("Brendor").Points("VIT")
+			BVP.Have = BVP.Maximum
+		end
+		If !Done.LevelOkayBrendor
+			number lvl = 4 - __skill
+			for chn in each({[0]="Eric","Irravonia","Rebecca"})
+				lvl += RPG.GetChar(chn).Stat("Level").Value
+			end
+			lvl += (lvl*({0.25,0,-0.75})[__skill])
+			//RPG.GetChar("Brendor").Stat("Level").Value=lvl
+			Party.SetLevelStats("Brendor", lvl)
+			CSayF("Brendor's level corrected to %d",lvl)
+		end
+
+	end
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+
+Init
+	Map.ZA_Enter("ResetBlue","ResetBlue")
+	Map.ZA_Enter("TUT_Break","TUT_BREAK")
+	Map.ZA_Enter("BOSS_Scorpion","SASKIA_BOSS")
+	Map.ZA_Enter("EindPunt","The_End")
+	Map.ZA_Enter("MerchantBegone","MerchantBegone")
+	Map.ZA_Enter("Leave","Leave")
+	for _,s in pairs {"ONE","TWO","FOUR","FIVE","SIX","SEVEN", "EIGHT", "NINE" }
+		MScript["SWITCH_SW"..s] = Twisted
+	end
+	
+end
+
+#say "Map Script - Compiling!"

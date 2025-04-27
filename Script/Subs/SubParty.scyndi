@@ -1,0 +1,530 @@
+// License:
+// 	  src/Script/Script/Subs/SubParty.scyndi
+// 
+// 	  Version: 25.04.26
+// 	
+// 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Script
+
+#say "Loading Party Sub!"
+//#say "= Importing: libs/tables"
+//#use "libs/tables"
+#say "= Importing SCI code libraries"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/JCR6"
+#use "Libs/SCI/Audio"
+#use "libs/sci/sstring"
+#use "LIBS/SCI/GRAPHICS"
+#use "Libs/SCI/InterVar"
+
+#say "= Importing libraries"
+#use "libs/romannumbers"
+
+#say "= Importing in-game stuff"
+#use "Script/Use/Need"
+#use "Script/Use/Misc/Boxes"
+#use "Script/Use/Misc/BoxPics"
+
+locextern tonumber "tonumber"
+
+table I_ELEM = { [0] = "None", "Flame", "Wind", "Water", "Earth", "Frost", "Thunder", "Light", "Darkness" }
+table I_STAT = { [0] = "Poison", "Disease", "Silence", "Paralysis", "Sleep", "Exhaustion", "Fear", "Death", "Destruction", "Zombie" }
+
+//locExtern Font "Scyndi.Class.PartyBar.Font"
+
+#Say "= Party Bars"
+class PartyBar
+	static var Font
+	readonly string Tag
+	readonly var TagIcon
+	
+	string Char
+	readonly int R
+	readonly int G
+	readonly int B
+	
+	CONSTRUCTOR(string ATag,int AR,int AG,int AB)
+		self.Font     = self.Font || LinkFont("Fonts/Party.jfbf","PARTYFONT")
+		self.Tag      = ATag
+		self.R        = AR
+		self.G        = AG
+		self.B        = AB
+		self.TagIcon  = LoadImage(sprintf("gfx/PartyBar/%s.png",ATag),"STATBAR_"..ATag)
+	end
+	
+end
+
+group HPBar
+	//link Font = PartyBar.Font
+	Get Var Font; return PartyBar.Font; End 
+	readonly string Tag = "HP"
+	readonly var TagIcon = LoadImage("gfx/PartyBar/HP.png","HPBAR_HP")
+	string Char
+	
+	get int G
+		var HP
+		int C
+		HP = RPG.Char(self.Char).Points("HP")
+		C = math.floor( (HP.Have/HP.Maximum)*255 )
+		return C
+	end
+	
+	get int R
+		return 255-self.G
+	end
+	
+	get int B
+		return 0
+	end
+	
+	//CONSTRUCTOR()
+	//	self.TagIcon = LoadImage("gfx/PartyBar/HP.png")
+	//end
+end
+
+table Bars
+Init
+	Bars[1] = HPBar
+	Bars[2] = new PartyBar("AP",0,180,255)
+	Bars[3] = new PartyBar("VIT",255,180,0)
+End
+
+
+
+
+#say "= Starting group!"
+group SubParty
+
+	Get Var Font; return PartyBar.Font; End
+	
+	var AudioLevelUp
+	
+	table StatSubs
+	table BarBoxes
+	
+	table JustLeveled
+	
+	//int SelectedChar
+	Link SelectedChar = gint.Party_StatusBar_SelectedCharacter
+	int Hover
+	
+	get int LevelCap
+		return gv.Num.LevelCap
+	end
+	
+	void SetSelectedChar(int v)
+		SelectedChar=v
+		//CSayF("SubParty.SetSelectedChar(%d)\t\x1b[92m%d",v,SelectedChar)
+	end
+	int GetSelectedChar(); return SelectedChar; End
+	
+	#say "= Constructor"
+	void SubPartyCONSTRUCTOR()
+		self.StatSubs = {}
+		// Base stat, defined by level
+		self.StatSubs +=	"BASE_"          
+		// Some items can give you a permanent powerup. Going up skill levels can also affect this!
+		self.StatSubs +=	"PERMPOWERUP_"   
+		// Stat buffs (negative numbers can be used for debuffs)
+		self.StatSubs +=	"BUFF_"          
+		// Calculated whenever equipment changes
+		self.StatSubs +=	"EQUIP_"         
+		// End result when all other fields have been added together
+		self.StatSubs +=	"END_"           
+		//}
+		self.AudioLevelUp = Audio.Obtain("LEVELUP")
+	end
+	
+	//string SubCollecto(string stat)
+	//	string ret
+	//	for sub in each(self.StatSubs)
+	//		if sub!="END_" then 
+	//			if ret!="" then ret = ret .."," end //self.SubCollecto = self.SubCollecto .. "," end
+	//			ret = ret .. sub .. stat 
+	//		end
+	//	end
+	//	ret = "SUM:"..ret 
+	//	return ret
+	//end
+
+	#say "= New Character"
+	void NewCharacter(string tag, int level)
+		tag = trim(tag)
+		CSayF("Creating character %s with level %d",tag,level)
+		tag=trim(tag)
+		assert (level>0,"Level is zero or lower!")
+		table lines
+		var ch
+		ch = RPG.CreateChar(tag,level)
+		
+		// Basic elemental resistance
+		for elem in each(I_ELEM)
+			CSayF("- Element: %s",elem)
+			for f in each(self.StatSubs)
+				CSayF("= Sub: %s",f)
+				ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem)).Value = 0
+				//if f=="END_"
+				//	CSayF("Scripting END_RESIST_Elem_%s => %s",elem, self.SubCollecto(sprintf("_RESIST_Elem_%s",elem)))
+				//	ch.Stat(sprintf("%s_RESIST_Elem_%s",f,elem))["Script"] = self.SubCollecto(sprintf("_RESIST_Elem_%s",elem))
+				//end
+			end
+		end
+		
+		// Basic Status Change Resistance
+		for stat in each(I_STAT)
+			for f in each(self.StatSubs)
+				ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat)).Value = 0
+				//if f=="END_"
+				//	CSayF("Scripting END__RESIST_Stat_%s => %s",stat, self.SubCollecto(sprintf("_RESIST_Stat_%s",stat)))
+				//	ch.Stat(sprintf("%s_RESIST_Stat_%s",f,stat))["Script"] = self.SubCollecto(sprintf("_RESIST_Stat_%s",stat))
+				//end
+			end
+		end
+		
+		//NIL.Use("Script/Char/Create/"..tag..".nil")
+		Lua.Scyndi.Use("Script/Char/Create/Create_"..tag)
+		self.SetLevelStats(tag,level,true)
+		CSayF("Created new character: %s",tag)
+	end
+	
+	#say "= Set level stats"
+	void SetLevelStats(string tag, int level,pureexp)
+		var ch
+		table lines
+		bool levelfound = false
+		int chklevel
+		tag = trim(tag)
+		ch = RPG.Char(tag)
+		ch.Stat("Level").Value=level
+		if level>=100 and tag!="YoungIrravonia" and tag!="Kirana" and tag!="Shanda"
+			if tag=="Yasathar"
+				Achievements.Award("100_ERIC")
+			else
+				Achievements.Award("100_"..tag)
+			end
+		end
+		lines = JCR6.GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
+		CSayF("Parsing %s lines of LvStat data",len(lines))
+		for ln,line in ipairs(lines)
+			line = Trim(line)
+			if line!=""
+				table gespleten
+				string cmd
+				string para
+				gespleten = xsplit(line," ")
+				cmd =  trim(gespleten[0])
+				para = gespleten[1]
+				// CSayF("%5d   Raw = %s; Instruction = '%s'; Parameter = '%s'; chklevel = %4d (must be %4d)",ln,line,cmd,para,chklevel,level)
+				if cmd=="REM"
+					// Alright, move along, there's nothing to see here!
+				elseif Upper(cmd)=="LEVEL"
+					chklevel = tonumber(para) or 0
+				elseif Upper(cmd)=="STAT.EXPERIENCE" and chklevel==level
+					int exp
+					exp = tonumber(para) or 0
+					if pureexp
+						ch.Stat("Experience").Value=exp
+					else
+						ch.Stat("Experience").Value=ch.Stat("Experience").Value+exp
+					end
+				elseif Upper(Left(cmd,5))=="STAT." and chklevel==level
+					levelfound=true
+					table splitmore
+					string stat
+					splitmore = xsplit(cmd,".")
+					stat = splitmore[1]
+					for subs in each(self.StatSubs)
+						int v = 0						
+						if subs=="BASE_"  
+							v = tonumber(para) || 0 
+							ch.Stat(sprintf("%s%s",subs,stat))["Value"] = v
+							CSayF("-> %s = %d",stat,v)
+						elseif subs=="END_"
+							//CSayF("Scripting END_%s => %s",stat, self.SubCollecto(stat))
+							//ch.Stat(sprintf("%s%s",subs,stat))["Script"] = self.SubCollecto(stat)
+							CSayF("No more need to script END_%s",stat)
+						else
+							if ! Done[sprintf("%s_%s_%s",tag,subs,stat)]
+								ch.Stat(sprintf("%s%s",subs,stat))["Value"] = 0
+							end
+						end
+						//CSayF("%s has stat %s%s of %d",tag,subs,stat,ch.Stat(sprintf("%s%s",subs,stat)).Value)
+					end
+				end
+			end
+		end
+		assert(levelfound,sprintf("No level data has been found for %s level %d",tag,level))
+		CSay("Configuring HP, AP and Vitality")
+		CSay("Skill: "..tostring(__skill))
+		//ch.Points("HP",true)["MaxCopy"] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
+		ch.Points("AP",true)["Maximum"] = level * ({20,10,5})[__skill]; CSayF("Max  AP: %4d",ch.Points("AP").Maximum)
+		ch.Points("VIT",true)["Maximum"] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
+		// Not efficient, I know, but this routine only gets called when a new character 
+		// is created anyway, and that process only takes place about 11 times in the entire game!
+		for p in each({"HP","VIT"})
+			CSayF("Maxing Points %s",p)
+			ch.Points(p)["Have"] = ch.Points(p)["Maximum"]
+		end
+		for i=0,4
+			if ! Done[sprintf("SkillSet_%s_%d",tag,i)]
+				CSayF("Configuring Skill #%d",i)
+				ch.Points(sprintf("SKILLEXP%d",i),true).Maximum  = 10 * (10^__skill)
+				ch.Points(sprintf("SKILLEXP%d",i)     ).Have     = 0
+				ch.Points(sprintf("SKILLLVL%d",i),true).Maximum  = ({1000,250,100})[__skill]
+				if ch.Points(sprintf("SKILLLVL%d",i)     ).Have == 0
+					ch.Points(sprintf("SKILLLVL%d",i) ).Have     = 0
+				end
+			else
+				CSayF("Skill $%d already configured! No need to do it again!",i)
+			end
+		end
+	end
+
+	void PointsBar(string Ch,int spot, int num)
+		int x
+		int y
+		var bar
+		var pnt		
+		int w
+		bar = Bars[num]
+		x = self.BarBoxes[spot].x + 128
+		y = self.BarBoxes[spot].y + (num * 32)
+		w = self.BarBoxes[spot].w - (128 + 16)
+		pnt = RPG.Char(Ch).Points(bar.Tag)
+		switch bar.Tag
+			case "HP";	pnt.Maximum = RPG.Char(CH).Stat("END_HP").Value
+			case "AP";	pnt.Maximum = RPG.Char(Ch).Stat("Level").Value*10
+			case "VIT"	
+				switch __skill
+					case 1; pnt.Maximum = 250
+					case 2; pnt.Maximum = 100
+					case 3; pnt.Maximum = 0
+				end
+		end
+		if pnt.Maximum==0; return; end
+		bar.Char = Ch
+		// bar back
+		Color(100,100,100)
+		Rect(x,y,w,5)
+		// bar color + bar
+		Color(bar.R,bar.G,bar.B)
+		Rect(x,y,math.floor( (pnt.Have/pnt.Maximum) * w ), 5 )
+		// Icon
+		bar.TagIcon.Draw(x-30,y-20)
+		// Points
+		PartyBar.Font.Dark(tostring(pnt.Have),x+w,y-20,1,0)
+	end
+	
+	void BigPointsBar(string Ch, int num, int x, int y, int w)
+		var bar
+		var pnt				
+		bar = Bars[num]
+		pnt = RPG.Char(Ch).Points(bar.Tag)
+		if pnt.Maximum==0; return; end
+		bar.Char = Ch
+		// bar back
+		Color(100,100,100)
+		Rect(x,y,w,5)
+		// bar color + bar
+		Color(bar.R,bar.G,bar.B)
+		Rect(x,y,math.floor( (pnt.Have/pnt.Maximum) * w ), 5 )
+		// Icon
+		bar.TagIcon.Draw(x-30,y-20)
+		// Points
+		Font.Dark(sprintf("%5d / %5d",pnt.Have,pnt.Maximum),x+w,y-20,1,0)
+	end
+	
+	#say "= Back Char"
+	table BackIco
+	void BackChar(int num)
+		var tag
+		assert(num>4 && num<=8,"Illegal BackChar number")
+		self.BarBoxes[num] = self.BarBoxes[num] or new Box( Screen.Width-32, (Screen.Height-128)+((num-5)*32),32,32 )
+		self.BarBoxes[num]["Draw"]()
+		tag = RPG.Party[num]
+		if (not tag) or tag==""
+			return
+		end
+		__white
+		if num==$SelectedChar
+			SubParty.SinAlpha()
+		end
+		self.BackIco[tag] = self.BackIco[tag] or TImage.Obtain(sprintf("COMBAT_GAUGE_%s",tag))
+		self.BackIco[tag].Draw(self.BarBoxes[num].X+22,self.BarBoxes[num].Y+20)
+		SetAlpha(255)
+		if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
+			$Hover=num
+		end
+		string CharTag
+		int level
+		CharTag=tag // Laziness in its purest form, but it saves me a lot of bugs....
+		if RPG.Char(CharTag).Stat("Experience").Value<=0 and RPG.Char(CharTag).Stat("Level").Value < self.LevelCap
+			// int ondernul
+			// ondernul = RPG.Char(CharTag).Stat("Experience").Value
+			RPG.Char(CharTag).Stat("Level").Value++
+			level =  RPG.Char(CharTag).Stat("Level").Value
+			self.JustLeveled[CharTag] = 320
+			SubParty.SetLevelStats(CharTag,level)
+			//SubParty.AudioLevelUp.Play()
+			CSayF("On spot number #%d, character '%s' has gone up to level %04d/%s",num,tag,level,roman(level))
+			self.NGPlusLvUpExtra(CharTag,level)
+		end
+	end
+	
+	// Unfortunately Lua has no support for static variables, 
+	// so neither has NIL
+	int SinCount
+	void SinAlpha()
+		number RAD
+		$SinCount++
+		if $SinCount>=360
+			$SinCount = $SinCount-360
+		end
+		RAD = math.pi * $SinCount / 180.0;
+		SetAlpha( math.abs(math.floor( (math.sin(RAD)*255) ) ) )
+	end
+	
+	#say "= Char box"
+	void Char(int num)
+		// Chartag
+		string CharTag
+		int level
+		var font
+		font = GetFont("BOXTEXT")
+		CharTag = RPG.Party[num]
+		// Box
+		self.BarBoxes[num] = self.BarBoxes[num] or new Box( (num-1)*math.floor((Screen.Width-32)/4),Screen.Height-128,math.floor((Screen.Width-32)/4),128 )
+		self.BarBoxes[num]["Draw"]()
+		__white
+		if RPG.Party[num] && RPG.Party[num]!=""
+			// Portrait
+			if num==$SelectedChar
+				SubParty.SinAlpha()
+			end
+			BoxPic(self.BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
+			SetAlpha( 255 )
+			LocExtern Hash "#"
+			for i=1,Hash(Bars) 
+				self.PointsBar(RPG.Party[num],num,i)
+			end
+			self.JustLeveled[CharTag] = self.JustLeveled[CharTag] || 0
+			//print(CharTag,RPG.Char(CharTag),RPG.Char(CharTag).Stat("Level"))
+			level = RPG.Char(CharTag).Stat("Level").Value
+			if self.JustLeveled[CharTag]>0
+				Color(math.random(0,255),math.random(0,255),math.random(0,255))
+				--self.JustLeveled[CharTag]
+			elseif CharTag=="Kirana" or CharTag=="Shanda"
+				Color(180,0,255)
+				// Kirana and Shanda will as guest characters NOT level up!
+				// The blue color will indicate this... in a way... ;)
+			elseif level>self.LevelCap
+				Color(255,0,0)
+			elseif level==self.LevelCap
+				Color(255,180,0)
+			else
+				__white
+				if RPG.Char(CharTag).Stat("Experience").Value<=0
+					// int ondernul
+					// ondernul = RPG.Char(CharTag).Stat("Experience").Value
+					RPG.Char(CharTag).Stat("Level").Value++
+					level =  RPG.Char(CharTag).Stat("Level").Value
+					self.JustLeveled[CharTag] = 320
+					SubParty.SetLevelStats(CharTag,level)
+					SubParty.AudioLevelUp.Play()
+					self.NGPlusLvUpExtra(CharTag,level)
+				end
+			end
+			Font.Dark(roman(level),self.BarBoxes[num].x+4,Screen.Height-20)
+			// Hover Detection
+			if Mouse.X>$BarBoxes[num].x and Mouse.y>$BarBoxes[num].y and Mouse.X<$BarBoxes[num].x+$BarBoxes[num].w and Mouse.Y<$BarBoxes[num].y+$BarBoxes[num].h
+				$Hover=num
+			end
+		end
+	end
+	
+	#say "= Entire bar"	
+	void CharBar()
+		$Hover=0
+		for i=1,8
+			switch i
+				case 1 2 3 4
+					self.Char(i)
+				case 5 6 7 8
+					self.BackChar(i)
+			end
+		end
+	end
+	
+	void Click()
+		if Mouse.HitLeft && $Hover>0
+			//LuaDoString(CurrentFlow(),sprintf("if PartyClick then PartyClick(%d) end",$Hover))
+			//Lua.error("SubParty::473 - Party Click Linkup mustbe done differently!")
+			CSayF("SubParty.Click() - Hover: %d",Hover)
+			Sys.Call(CurrentFlow(),"DirtyCallBack","PartyClick",Hover)
+		elseif Mouse.HitRight && $Hover>0
+			//LuaDoString(CurrentFlow(),sprintf("if PartyClickAlt then PartyClickAlt(%d) end",$Hover))
+			//Lua.error("SubParty::476 - Party AltClick Linkup mustbe done differently!")
+			Sys.Call(CurrentFlow(),"DirtyCallBack","PartyClickAlt",Hover)
+		end
+	end
+	
+	void NGPlusLvUpExtra(string CharTag,int level)
+		if ! __newgameplus
+			return
+		end
+		var Char
+		Char = RPG.GetChar(CharTag)
+		for i=0,4 
+			if Char.Points("SKILLLVL"..i).Have>0
+				Char.Points("SKILLEXP"..i).Inc(level)
+			end
+		end
+	end
+
+end
+
+Init
+	SubParty.SubPartyCONSTRUCTOR()
+End
+
+
+//CSay(tostring(SubParty))
+//#say "Compiling Party Sub!"

@@ -1,0 +1,221 @@
+// License:
+// 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
+// 
+// 	  Version: 25.04.17 II
+// 	
+// 	  Copyright (C) 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Statistician"
+
+plua _rpgstat = Statistician.CreateNew("Dyrt")
+plua _statsubs
+
+Init
+	_statsubs = {}
+	// Base stat, defined by level
+	_statsubs +=	"BASE_"          
+	// Some items can give you a permanent powerup. Going up skill levels can also affect this!
+	_statsubs +=	"PERMPOWERUP_"   
+	// Stat buffs (negative numbers can be used for debuffs)
+	_statsubs +=	"BUFF_"          
+	// Calculated whenever equipment changes
+	_statsubs +=	"EQUIP_"         
+	// End result when all other fields have been added together
+	//_statubs +=	"END_"       
+End
+
+Group RPG_Party
+	Get Var Pure
+		Return _rpgstat
+	End
+	
+	Get Int Max
+		Return _rpgstat.Party.Max
+	End
+	
+	Set Int Max
+		_rpgstat.Party.Max=value
+	End
+	
+	String StaticNumIndex(Int Key)
+		if Key<1
+			print("\x1b[5,91mBad Key!\n\x1b[97m"..Lua.debug.traceback())
+		end
+		Return _rpgStat.Party[Key-1]
+	End
+	
+	Void StaticNumNewIndex(Int Key,String ChT)
+		_rpgStat.Party[Key-1]=ChT
+	End
+End
+
+Class __RPGCharStat
+	ReadOnly Var Parent
+	ReadOnly String StTag
+	ReadOnly String PrTag
+	ReadOnly Bool EndStat = False
+	//ReadOnly Var EndRet 
+	
+	Get Int Value
+		If EndStat
+			int r:=0
+			for sb in Each(_statsubs)
+				r+=Parent.Stat(sb..StTag).Value
+			End
+			//EndRet.Value=r
+			//return EndRet
+			return r
+		end
+		return Parent.Pure.Stat[PrTag]
+	End
+	
+	Set Int Value
+		LocExtern _Value "_value"
+		If EndStat
+			CSayF("%s is an EndStat and can therefore not be defined. Not with %d, not with ANY value!",PrTag,_Value)
+		End
+		// CSayF("Stat %s::%s -> %d (%s/%s)",Parent.Tag,PrTag,_Value,Parent,Parent.Pure) // Hardcore debug
+		Parent.Pure.Stat[PrTag] = _Value
+	End
+		
+	
+	Constructor(ouwe,String _stat)
+		PrTag=_Stat
+		EndStat=Prefixed(_Stat,"END_")
+		StTag=Ternary(EndStat,Right(_Stat,Len(_Stat)-4),_Stat)
+		Parent = Ouwe
+		CSayF("Creating Stat record %s::%s",ouwe.Tag,_stat)
+	End
+End
+
+Class __RPGChar
+	Static ReadOnly Table Reg = {}
+	ReadOnly String Tag
+	ReadOnly Var Pure
+	ReadOnly Table StatTab 
+	
+	Var Stat(String StTag)
+		StatTab[StTag] = StatTab[StTag] || new __RPGCharStat(self,StTag)
+		Return StatTab[StTag]
+	End		
+	
+	Get String Name; return Pure.Name; End
+	Set String Name; Pure.Name=Value; End
+	
+	Get Var Data; return Pure.Data; End
+	
+	Var Points(String PTag)
+		r:=Pure.Points[PTag]
+		If (PTag=="HP")
+			if r.Maximum != self.Stat("END_HP").Value; CSayF("Correcting Max HP %4d -> %4d (%s)",r.Maximum, self.Stat("END_HP").Value,Tag); End
+			r.Maximum = self.Stat("END_HP").Value
+		End
+		return r
+	End
+	
+	//      LISTSTATS
+	Get Var ListStats
+		return Pure.ListOfStats
+	End
+		
+	Constructor(String _Tag)
+		StatTab = {}
+		Tag  = _Tag
+		Pure = _rpgStat.Char[_Tag]
+		//Reg[_Tag] = self
+		CSayF("Created char record: %s",_Tag)
+	end
+End
+
+QuickMeta PureChar
+	Index
+		return _rpgStat.Char[Key]
+	End
+	NewIndex
+		Lua.error("Don't tamper with PureChar")
+	End
+End
+	
+
+Group RPG
+	Get Var Party
+		Return RPG_Party
+	End
+	Get Var PureChar
+		Return Lua.Scyndi.Globals.PureChar
+	End
+	
+	Var CreateChar(String T, int lv=1)
+		//CSayF("%s T = %s; %s lv = %s",Lua.type(T),T,Lua.type(lv))
+		_rpgstat.NewChar(T)
+		_rpgstat.Char[T].Stat.Level = lv
+		__RPGChar.Reg[T] = new __RPGChar(T) 
+		return __RPGChar.Reg[T]
+	End
+	
+	Var GetChar(String T)
+		//return __RPGChar.Reg[T] || new __RPGChar(T)
+		__RPGChar.Reg[T] = __RPGChar.Reg[T] || new __RPGChar(T)
+		//print(Sys.StateName,T,__RPGChar.Reg[T],__RPGChar.Reg[T].Stat) // Debug
+		return __RPGChar.Reg[T]
+	End
+	
+	Get Var EachChar
+		int i = 0
+		cl := _rpgstat.CharList
+		ddef retfun
+			if i>=len(cl); return nil; end
+			String r :=cl[i]
+			i++
+			return r
+		end
+		return retfun
+	end
+	
+	Get Var Char; Return RPG.GetChar; End
+		
+	Void KillChar(String T)
+		__RPGChar.Reg[T] = nil
+		_rpgstat.KillChar(T)
+	End
+	
+End

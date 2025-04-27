@@ -1,0 +1,88 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/PersonalAction/PA_Rebecca.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.22 III
+// 
+// End License
+
+#use "Script/Use/Need"
+
+#accept LoadImage
+#accept SetAlpha
+#accept FieldMap
+#accept RENC
+
+module
+	var Img
+	int X
+	int Y
+	
+	get bool Enabled
+		switch __skill
+			case 1
+				return __travellevel >= FieldMap.TravelLevel 
+			case 2
+				return __travellevel > FieldMap.TravelLevel 
+			case 3
+				return __travellevel > FieldMap.TravelLevel + 2
+		end
+	end
+
+	
+	void Draw()
+		if not Enabled
+			SetAlpha(100)
+		end
+		Img.Draw(X,Y)
+		SetAlpha(255)
+	end
+	
+	bool Click(int but,int _x, int _y)
+		bool ret
+		ret = _x>X and _y>Y and _x<X+200 and _y<Y+200
+		if ret && Enabled
+			RENC.Encounters = 0
+		end
+		return ret
+	end
+	
+	Init
+		Img = LoadImage("GFX/PersAction/Rebecca.png","PA_REBECCA")
+		X = Screen.Width -300
+		Y = Screen.Height-400
+		
+	end
+

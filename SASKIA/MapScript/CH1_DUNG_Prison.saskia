@@ -72,7 +72,7 @@ end
 	mov "#999",Map.Layer
 	call CSay,"En daar gaan we weer naar de gevangenis!"
 	call BoxText,"EXAM_END","C"
-	Call Map.KillSwap,"CH1_DUNG_XenorBushes_North"
+	;Call Map.KillSwap,"CH1_DUNG_XenorBushes_North"
 	group 3
 		call Field.ChainMap,"CH1_DUNG_XenorBushes_North","StartToDoubline","#001"
 		call Map.GoToLayer,"#001","Start"

@@ -1,0 +1,92 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/Ability/Abl_Irravonia.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.04.21 II
+// 
+// End License
+
+
+Module
+
+Table Lijst
+
+#use "Script/Use/Need"
+
+Init
+	//int s
+	//s = __skill
+	locExtern s "Scyndi.Globals.gint.skill"
+	locExtern a "Scyndi.Class.Abl_Irravonia.Lijst"
+	var abls
+	
+
+	a = {}
+	
+	// Water
+	a.Heal       = { ["Skill_Water"] = 1, ["Start"] = true }
+	a.Splash     = { ["Skill_Water"] = 5 }
+	a.Tsunami    = { ["Skill_Water"] = 15 }
+	
+	// Fire
+	a.Fire       = { ["Skill_Fire"]  = 1, ["Start"] = true }
+	a.Fireblast  = { ["Skill_Fire"]  = 15 }
+	a.Inferno    = { ["Skill_Fire"]  = 25 }
+	
+	// Wind
+	a.Breeze     = { ["Skill_Wind"]  = 1, ["Start"] = true }
+	a.BlowAway   = { ["Skill_Wind"]  = 5}
+	a.Hurricane  = { ["Skill_Wind"]  = 15 }
+	
+	// Earth
+	a.Rock       = { ["Skill_Earth"] = 1, ["Start"] = true }
+	a.Quake      = { ["Skill_Earth"] = 15 }
+	a.IDDQD      = { ["Skill_Earth"] = 30 }
+	
+	// Scharum
+	a.MagicStrike = { ["Scharum"] = true }
+	
+	// Sealed Boss
+	a.Catastrophe = { ["SealedBoss"] = true }
+	
+	// Combination spells
+	a.Meditation  = { ["Skill_Water"] = 20,  ["Skill_Fire"] = 20, ["Skill_Wind"] = 20, ["Skill_Earth"] = 20 }
+	a.Blizzard    = { ["Skill_Water"] = 55,  ["Skill_Wind"] = 45 }
+	a.Yggdrassil  = { ["Skill_Water"] = 65,  ["Skill_Earth"] = 50 }
+	a.Mjollnir    = { ["Skill_Fire"]  = 65,  ["Skill_Wind"] = 70 }
+	a.Vesuvius    = { ["Skill_Fire"]  = 75,  ["Skill_Earth"] = 80 }
+	a.Dispell     = { ["Skill_Water"] = 3*s, ["Skill_Fire"] = 3*s, ["Skill_Wind"] = 3*s, ["Skill_Earth"] = 3*s }
+	
+end

@@ -1,0 +1,3328 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Data/General/Achievements.scyndi
+// (c) Jeroen Broks, 2019-'21, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.03.31 VII
+// 
+// End License
+Module
+
+
+Class AchRecord
+	Bool Allow_TrueAbyss
+	Bool AutoProcess
+	Bool Hidden
+	String Description
+	String Name
+	Bool Only_NewGamePlus
+	Bool Only_TrueAbyss
+	Int ProcessMax
+	String ProcessValue
+	String ProcessString
+	Bool Require_Medals
+	Bool Skill_1
+	Bool Skill_2
+	Bool Skill_3
+	Bool Skill_Check
+End
+
+Table AchDat = {}
+
+Init
+
+LocExtern AchData "Scyndi.Class.Achievements.AchDat"
+
+AchDat.BOSS_CRYSTAL = new AchRecord()
+AchDat.BOSS_CRYSTAL.hidden = false
+AchDat.BOSS_CRYSTAL.allow_trueabyss = false
+AchDat.BOSS_CRYSTAL.AutoProcess = true
+AchDat.BOSS_CRYSTAL.Description = "Defeat the Crystal in the caves of the Naked Rocks"
+AchDat.BOSS_CRYSTAL.Name = "Crystal Clear!"
+AchDat.BOSS_CRYSTAL.only_trueabyss = false
+AchDat.BOSS_CRYSTAL.ProcessMax = 1
+AchDat.BOSS_CRYSTAL.only_newgameplus = false
+AchDat.BOSS_CRYSTAL.skill_3 = true
+AchDat.BOSS_CRYSTAL.skill_2 = true
+AchDat.BOSS_CRYSTAL.skill_1 = true
+AchDat.BOSS_CRYSTAL.ProcessValue = "KILLED_BOSS_CRYSTAL"
+AchDat.BOSS_CRYSTAL.Require_Medals = false
+AchDat.BOSS_CRYSTAL.ProcessString = ""
+AchDat.BOSS_CRYSTAL.skill_check = false
+
+
+AchDat.MAXSKILL_4_SCYNDI = new AchRecord()
+AchDat.MAXSKILL_4_SCYNDI.hidden = false
+AchDat.MAXSKILL_4_SCYNDI.allow_trueabyss = true
+AchDat.MAXSKILL_4_SCYNDI.AutoProcess = false
+AchDat.MAXSKILL_4_SCYNDI.Description = "Max level Scyndi with Malabia"
+AchDat.MAXSKILL_4_SCYNDI.Name = "Love, shine a light!"
+AchDat.MAXSKILL_4_SCYNDI.only_trueabyss = false
+AchDat.MAXSKILL_4_SCYNDI.ProcessMax = 0
+AchDat.MAXSKILL_4_SCYNDI.only_newgameplus = false
+AchDat.MAXSKILL_4_SCYNDI.skill_3 = false
+AchDat.MAXSKILL_4_SCYNDI.skill_2 = false
+AchDat.MAXSKILL_4_SCYNDI.skill_1 = false
+AchDat.MAXSKILL_4_SCYNDI.ProcessValue = ""
+AchDat.MAXSKILL_4_SCYNDI.Require_Medals = false
+AchDat.MAXSKILL_4_SCYNDI.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_4_SCYNDI.skill_check = false
+
+
+AchDat.OVERSOUL_0025 = new AchRecord()
+AchDat.OVERSOUL_0025.hidden = false
+AchDat.OVERSOUL_0025.allow_trueabyss = true
+AchDat.OVERSOUL_0025.AutoProcess = true
+AchDat.OVERSOUL_0025.Description = "Defeat 25 enemies in *Oversoul* state"
+AchDat.OVERSOUL_0025.Name = "I've got blues in my heart; I've got blues in my soul!"
+AchDat.OVERSOUL_0025.only_trueabyss = false
+AchDat.OVERSOUL_0025.ProcessMax = 25
+AchDat.OVERSOUL_0025.ProcessString = "You need {Max}. and you have {Value}"
+AchDat.OVERSOUL_0025.skill_3 = true
+AchDat.OVERSOUL_0025.skill_2 = true
+AchDat.OVERSOUL_0025.ProcessValue = "OversoulKills"
+AchDat.OVERSOUL_0025.skill_1 = false
+AchDat.OVERSOUL_0025.Require_Medals = false
+AchDat.OVERSOUL_0025.skill_check = true
+
+
+AchDat.SCYNDI_MALABIA = new AchRecord()
+AchDat.SCYNDI_MALABIA.hidden = true
+AchDat.SCYNDI_MALABIA.allow_trueabyss = false
+AchDat.SCYNDI_MALABIA.AutoProcess = false
+AchDat.SCYNDI_MALABIA.Description = "Obtain the power of the Goddess Malabia"
+AchDat.SCYNDI_MALABIA.Name = "C'est la vie!"
+AchDat.SCYNDI_MALABIA.only_trueabyss = false
+AchDat.SCYNDI_MALABIA.ProcessMax = 0
+AchDat.SCYNDI_MALABIA.ProcessString = "{Value} of {Max}"
+AchDat.SCYNDI_MALABIA.skill_3 = true
+AchDat.SCYNDI_MALABIA.skill_2 = true
+AchDat.SCYNDI_MALABIA.ProcessValue = ""
+AchDat.SCYNDI_MALABIA.skill_1 = true
+AchDat.SCYNDI_MALABIA.Require_Medals = false
+AchDat.SCYNDI_MALABIA.skill_check = false
+
+
+AchDat.MAXSKILL_2_IRRAVONIA = new AchRecord()
+AchDat.MAXSKILL_2_IRRAVONIA.hidden = false
+AchDat.MAXSKILL_2_IRRAVONIA.allow_trueabyss = true
+AchDat.MAXSKILL_2_IRRAVONIA.AutoProcess = false
+AchDat.MAXSKILL_2_IRRAVONIA.Description = "Have Irravonia's wind level to the max"
+AchDat.MAXSKILL_2_IRRAVONIA.Name = "Fangad av en Stormvind"
+AchDat.MAXSKILL_2_IRRAVONIA.only_trueabyss = false
+AchDat.MAXSKILL_2_IRRAVONIA.ProcessMax = 0
+AchDat.MAXSKILL_2_IRRAVONIA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_2_IRRAVONIA.skill_3 = false
+AchDat.MAXSKILL_2_IRRAVONIA.skill_2 = false
+AchDat.MAXSKILL_2_IRRAVONIA.ProcessValue = ""
+AchDat.MAXSKILL_2_IRRAVONIA.skill_1 = false
+AchDat.MAXSKILL_2_IRRAVONIA.Require_Medals = false
+AchDat.MAXSKILL_2_IRRAVONIA.skill_check = false
+
+
+AchDat.BOSS_SHECKLOCK1 = new AchRecord()
+AchDat.BOSS_SHECKLOCK1.hidden = false
+AchDat.BOSS_SHECKLOCK1.allow_trueabyss = false
+AchDat.BOSS_SHECKLOCK1.AutoProcess = true
+AchDat.BOSS_SHECKLOCK1.Description = "Defeat Sheck-Lock in the hidden forest"
+AchDat.BOSS_SHECKLOCK1.Name = "Your new name is *Mid-Boss*"
+AchDat.BOSS_SHECKLOCK1.only_trueabyss = false
+AchDat.BOSS_SHECKLOCK1.ProcessMax = 1
+AchDat.BOSS_SHECKLOCK1.ProcessString = ""
+AchDat.BOSS_SHECKLOCK1.skill_3 = true
+AchDat.BOSS_SHECKLOCK1.skill_2 = true
+AchDat.BOSS_SHECKLOCK1.ProcessValue = "KILLED_BOSS_SHECKLOCK1"
+AchDat.BOSS_SHECKLOCK1.skill_1 = true
+AchDat.BOSS_SHECKLOCK1.Require_Medals = false
+AchDat.BOSS_SHECKLOCK1.skill_check = false
+
+
+AchDat.GJ_COMPLETE_UNDERWORLD = new AchRecord()
+AchDat.GJ_COMPLETE_UNDERWORLD.hidden = false
+AchDat.GJ_COMPLETE_UNDERWORLD.allow_trueabyss = false
+AchDat.GJ_COMPLETE_UNDERWORLD.AutoProcess = false
+AchDat.GJ_COMPLETE_UNDERWORLD.Description = "Complete the underworld"
+AchDat.GJ_COMPLETE_UNDERWORLD.Name = "Requiesce in pace"
+AchDat.GJ_COMPLETE_UNDERWORLD.only_trueabyss = false
+AchDat.GJ_COMPLETE_UNDERWORLD.ProcessMax = 0
+AchDat.GJ_COMPLETE_UNDERWORLD.ProcessString = "{Value} of {Max}"
+AchDat.GJ_COMPLETE_UNDERWORLD.skill_3 = true
+AchDat.GJ_COMPLETE_UNDERWORLD.skill_2 = true
+AchDat.GJ_COMPLETE_UNDERWORLD.ProcessValue = ""
+AchDat.GJ_COMPLETE_UNDERWORLD.skill_1 = true
+AchDat.GJ_COMPLETE_UNDERWORLD.Require_Medals = true
+AchDat.GJ_COMPLETE_UNDERWORLD.skill_check = false
+
+
+AchDat["100_DERNOR"] = new AchRecord()
+AchDat["100_DERNOR"].hidden = false
+AchDat["100_DERNOR"].allow_trueabyss = true
+AchDat["100_DERNOR"].AutoProcess = false
+AchDat["100_DERNOR"].Description = "Dernor to level C or higher"
+AchDat["100_DERNOR"].Name = "Little gamers, boo-rah-room!?"
+AchDat["100_DERNOR"].only_trueabyss = false
+AchDat["100_DERNOR"].ProcessMax = 0
+AchDat["100_DERNOR"].ProcessString = "{Value} of {Max}"
+AchDat["100_DERNOR"].skill_3 = true
+AchDat["100_DERNOR"].skill_2 = true
+AchDat["100_DERNOR"].ProcessValue = ""
+AchDat["100_DERNOR"].skill_1 = true
+AchDat["100_DERNOR"].Require_Medals = false
+AchDat["100_DERNOR"].skill_check = false
+
+
+AchDat.BOSS_JERACKO_1 = new AchRecord()
+AchDat.BOSS_JERACKO_1.hidden = true
+AchDat.BOSS_JERACKO_1.allow_trueabyss = false
+AchDat.BOSS_JERACKO_1.AutoProcess = true
+AchDat.BOSS_JERACKO_1.Description = "Defeat Jeracko in Shanda's Dungeons"
+AchDat.BOSS_JERACKO_1.Name = "May I crush your skull please?"
+AchDat.BOSS_JERACKO_1.only_trueabyss = false
+AchDat.BOSS_JERACKO_1.ProcessMax = 1
+AchDat.BOSS_JERACKO_1.ProcessString = ""
+AchDat.BOSS_JERACKO_1.skill_3 = false
+AchDat.BOSS_JERACKO_1.skill_2 = false
+AchDat.BOSS_JERACKO_1.ProcessValue = "KILLED_BOSS_JERACKO"
+AchDat.BOSS_JERACKO_1.skill_1 = false
+AchDat.BOSS_JERACKO_1.Require_Medals = false
+AchDat.BOSS_JERACKO_1.skill_check = false
+
+
+AchDat.SCEN_BLACKPRISON = new AchRecord()
+AchDat.SCEN_BLACKPRISON.hidden = false
+AchDat.SCEN_BLACKPRISON.allow_trueabyss = false
+AchDat.SCEN_BLACKPRISON.AutoProcess = false
+AchDat.SCEN_BLACKPRISON.Description = "Release the prisoner of the Black Prison and complete that dungeon"
+AchDat.SCEN_BLACKPRISON.Name = "Serious Black!"
+AchDat.SCEN_BLACKPRISON.only_trueabyss = false
+AchDat.SCEN_BLACKPRISON.ProcessMax = 0
+AchDat.SCEN_BLACKPRISON.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_BLACKPRISON.skill_3 = true
+AchDat.SCEN_BLACKPRISON.skill_2 = true
+AchDat.SCEN_BLACKPRISON.ProcessValue = ""
+AchDat.SCEN_BLACKPRISON.skill_1 = true
+AchDat.SCEN_BLACKPRISON.Require_Medals = false
+AchDat.SCEN_BLACKPRISON.skill_check = false
+
+
+AchDat.BOSS_WALKURE = new AchRecord()
+AchDat.BOSS_WALKURE.hidden = false
+AchDat.BOSS_WALKURE.allow_trueabyss = false
+AchDat.BOSS_WALKURE.AutoProcess = true
+AchDat.BOSS_WALKURE.Description = "Defeat the Super Valkyrie"
+AchDat.BOSS_WALKURE.Name = "Ritt Der Walkuere"
+AchDat.BOSS_WALKURE.only_trueabyss = false
+AchDat.BOSS_WALKURE.ProcessMax = 1
+AchDat.BOSS_WALKURE.ProcessString = ""
+AchDat.BOSS_WALKURE.skill_3 = true
+AchDat.BOSS_WALKURE.skill_2 = true
+AchDat.BOSS_WALKURE.ProcessValue = "KILLED_BOSS_SUPERVALKYRIE"
+AchDat.BOSS_WALKURE.skill_1 = true
+AchDat.BOSS_WALKURE.Require_Medals = true
+AchDat.BOSS_WALKURE.skill_check = false
+
+
+AchDat.SEALED_GIGALICH = new AchRecord()
+AchDat.SEALED_GIGALICH.hidden = false
+AchDat.SEALED_GIGALICH.allow_trueabyss = false
+AchDat.SEALED_GIGALICH.AutoProcess = true
+AchDat.SEALED_GIGALICH.Description = "Defeat the Giga-Lich"
+AchDat.SEALED_GIGALICH.Name = "Gigantic"
+AchDat.SEALED_GIGALICH.only_trueabyss = false
+AchDat.SEALED_GIGALICH.ProcessMax = 1
+AchDat.SEALED_GIGALICH.ProcessString = ""
+AchDat.SEALED_GIGALICH.skill_3 = true
+AchDat.SEALED_GIGALICH.skill_2 = true
+AchDat.SEALED_GIGALICH.ProcessValue = "KILLED_SEALED_GIGALICH"
+AchDat.SEALED_GIGALICH.skill_1 = true
+AchDat.SEALED_GIGALICH.Require_Medals = false
+AchDat.SEALED_GIGALICH.skill_check = false
+
+
+AchDat.CHAPTER2 = new AchRecord()
+AchDat.CHAPTER2.hidden = false
+AchDat.CHAPTER2.allow_trueabyss = false
+AchDat.CHAPTER2.AutoProcess = false
+AchDat.CHAPTER2.Description = "Complete chapter 2"
+AchDat.CHAPTER2.Name = "The Four Dragons"
+AchDat.CHAPTER2.only_trueabyss = false
+AchDat.CHAPTER2.ProcessMax = 0
+AchDat.CHAPTER2.ProcessString = "{Value} of {Max}"
+AchDat.CHAPTER2.skill_3 = true
+AchDat.CHAPTER2.skill_2 = true
+AchDat.CHAPTER2.ProcessValue = ""
+AchDat.CHAPTER2.skill_1 = true
+AchDat.CHAPTER2.Require_Medals = false
+AchDat.CHAPTER2.skill_check = false
+
+
+AchDat.SEALED_HOBGOBLIN = new AchRecord()
+AchDat.SEALED_HOBGOBLIN.hidden = false
+AchDat.SEALED_HOBGOBLIN.allow_trueabyss = false
+AchDat.SEALED_HOBGOBLIN.AutoProcess = true
+AchDat.SEALED_HOBGOBLIN.Description = "Defeat the HobGoblin"
+AchDat.SEALED_HOBGOBLIN.Name = "Time is money, friend!"
+AchDat.SEALED_HOBGOBLIN.only_trueabyss = false
+AchDat.SEALED_HOBGOBLIN.ProcessMax = 1
+AchDat.SEALED_HOBGOBLIN.ProcessString = ""
+AchDat.SEALED_HOBGOBLIN.skill_3 = true
+AchDat.SEALED_HOBGOBLIN.skill_2 = true
+AchDat.SEALED_HOBGOBLIN.ProcessValue = "KILLED_SEALED_HobGoblin"
+AchDat.SEALED_HOBGOBLIN.skill_1 = true
+AchDat.SEALED_HOBGOBLIN.Require_Medals = false
+AchDat.SEALED_HOBGOBLIN.skill_check = false
+
+
+AchDat.SCEN_FRENDORBUSHES = new AchRecord()
+AchDat.SCEN_FRENDORBUSHES.hidden = false
+AchDat.SCEN_FRENDORBUSHES.allow_trueabyss = false
+AchDat.SCEN_FRENDORBUSHES.AutoProcess = false
+AchDat.SCEN_FRENDORBUSHES.Description = "Complete the Frendor Busehs"
+AchDat.SCEN_FRENDORBUSHES.Name = "Run (through the) Forest! Run!"
+AchDat.SCEN_FRENDORBUSHES.only_trueabyss = false
+AchDat.SCEN_FRENDORBUSHES.ProcessMax = 0
+AchDat.SCEN_FRENDORBUSHES.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_FRENDORBUSHES.skill_3 = true
+AchDat.SCEN_FRENDORBUSHES.skill_2 = true
+AchDat.SCEN_FRENDORBUSHES.ProcessValue = ""
+AchDat.SCEN_FRENDORBUSHES.skill_1 = true
+AchDat.SCEN_FRENDORBUSHES.Require_Medals = false
+AchDat.SCEN_FRENDORBUSHES.skill_check = false
+
+
+AchDat.BOSS_BLACKDRAGON = new AchRecord()
+AchDat.BOSS_BLACKDRAGON.hidden = false
+AchDat.BOSS_BLACKDRAGON.allow_trueabyss = false
+AchDat.BOSS_BLACKDRAGON.AutoProcess = true
+AchDat.BOSS_BLACKDRAGON.Description = "Defeat the black guardian"
+AchDat.BOSS_BLACKDRAGON.Name = "Black Magic"
+AchDat.BOSS_BLACKDRAGON.only_trueabyss = false
+AchDat.BOSS_BLACKDRAGON.ProcessMax = 1
+AchDat.BOSS_BLACKDRAGON.only_newgameplus = false
+AchDat.BOSS_BLACKDRAGON.skill_3 = true
+AchDat.BOSS_BLACKDRAGON.skill_2 = true
+AchDat.BOSS_BLACKDRAGON.skill_1 = true
+AchDat.BOSS_BLACKDRAGON.ProcessValue = "KILLED_BOSS_BLACKDRAGON"
+AchDat.BOSS_BLACKDRAGON.Require_Medals = false
+AchDat.BOSS_BLACKDRAGON.ProcessString = ""
+AchDat.BOSS_BLACKDRAGON.skill_check = false
+
+
+AchDat.BOSS_WHITEDRAGON = new AchRecord()
+AchDat.BOSS_WHITEDRAGON.hidden = false
+AchDat.BOSS_WHITEDRAGON.allow_trueabyss = false
+AchDat.BOSS_WHITEDRAGON.AutoProcess = true
+AchDat.BOSS_WHITEDRAGON.Description = "Defeat the white dragon"
+AchDat.BOSS_WHITEDRAGON.Name = "I'm dreaming of a white dragon"
+AchDat.BOSS_WHITEDRAGON.only_trueabyss = false
+AchDat.BOSS_WHITEDRAGON.ProcessMax = 1
+AchDat.BOSS_WHITEDRAGON.ProcessString = ""
+AchDat.BOSS_WHITEDRAGON.skill_3 = true
+AchDat.BOSS_WHITEDRAGON.skill_2 = true
+AchDat.BOSS_WHITEDRAGON.ProcessValue = "KILLED_BOSS_WHITEDRAGON"
+AchDat.BOSS_WHITEDRAGON.skill_1 = true
+AchDat.BOSS_WHITEDRAGON.Require_Medals = false
+AchDat.BOSS_WHITEDRAGON.skill_check = false
+
+
+AchDat["100_SCYNDI"] = new AchRecord()
+AchDat["100_SCYNDI"].hidden = false
+AchDat["100_SCYNDI"].allow_trueabyss = true
+AchDat["100_SCYNDI"].AutoProcess = false
+AchDat["100_SCYNDI"].Description = "Seelah Gandra to level C or higher"
+AchDat["100_SCYNDI"].Name = "It's not easy being green"
+AchDat["100_SCYNDI"].only_trueabyss = false
+AchDat["100_SCYNDI"].ProcessMax = 0
+AchDat["100_SCYNDI"].ProcessString = "{Value} of {Max}"
+AchDat["100_SCYNDI"].skill_3 = true
+AchDat["100_SCYNDI"].skill_2 = true
+AchDat["100_SCYNDI"].ProcessValue = ""
+AchDat["100_SCYNDI"].skill_1 = true
+AchDat["100_SCYNDI"].Require_Medals = false
+AchData["100_SCYNDI"].skill_check = false
+
+
+AchDat.VIC_10000 = new AchRecord()
+AchDat.VIC_10000.hidden = false
+AchDat.VIC_10000.allow_trueabyss = true
+AchDat.VIC_10000.AutoProcess = true
+AchDat.VIC_10000.Description = "Win 10000 battles"
+AchDat.VIC_10000.Name = "The boy who live! Come to die!"
+AchDat.VIC_10000.only_trueabyss = false
+AchDat.VIC_10000.ProcessMax = 10000
+AchDat.VIC_10000.ProcessString = "{Value} of {Max}"
+AchDat.VIC_10000.skill_3 = true
+AchDat.VIC_10000.skill_2 = true
+AchDat.VIC_10000.ProcessValue = "Victories"
+AchDat.VIC_10000.skill_1 = true
+AchDat.VIC_10000.Require_Medals = false
+AchDat.VIC_10000.skill_check = false
+
+
+AchDat.KILL_GHOST = new AchRecord()
+AchDat.KILL_GHOST.hidden = false
+AchDat.KILL_GHOST.allow_trueabyss = true
+AchDat.KILL_GHOST.AutoProcess = true
+AchDat.KILL_GHOST.Description = "Defeat 250 (regular) ghosts"
+AchDat.KILL_GHOST.Name = "Who you're gonna call?"
+AchDat.KILL_GHOST.only_trueabyss = false
+AchDat.KILL_GHOST.ProcessMax = 250
+AchDat.KILL_GHOST.ProcessString = "{Value} of {Max} ghosts busted!"
+AchDat.KILL_GHOST.skill_3 = false
+AchDat.KILL_GHOST.skill_2 = false
+AchDat.KILL_GHOST.ProcessValue = "KILLED_REG_GHOST"
+AchDat.KILL_GHOST.skill_1 = false
+AchDat.KILL_GHOST.Require_Medals = false
+AchDat.KILL_GHOST.skill_check = false
+
+
+AchDat.KILL_ORCS = new AchRecord()
+AchDat.KILL_ORCS.hidden = false
+AchDat.KILL_ORCS.allow_trueabyss = true
+AchDat.KILL_ORCS.AutoProcess = true
+AchDat.KILL_ORCS.Description = "Kill 100 (regluar) Orcs"
+AchDat.KILL_ORCS.Name = "The age of the orc is over. The time of men has come!"
+AchDat.KILL_ORCS.only_trueabyss = false
+AchDat.KILL_ORCS.ProcessMax = 100
+AchDat.KILL_ORCS.ProcessString = "{Value} of {Max} Orcs are dead!"
+AchDat.KILL_ORCS.skill_3 = false
+AchDat.KILL_ORCS.skill_2 = false
+AchDat.KILL_ORCS.ProcessValue = "KILLED_REG_ORC"
+AchDat.KILL_ORCS.skill_1 = false
+AchDat.KILL_ORCS.Require_Medals = false
+AchDat.KILL_ORCS.skill_check = false
+
+
+AchDat.GJ_COMPLETE_SUGARLAND = new AchRecord()
+AchDat.GJ_COMPLETE_SUGARLAND.hidden = true
+AchDat.GJ_COMPLETE_SUGARLAND.allow_trueabyss = false
+AchDat.GJ_COMPLETE_SUGARLAND.AutoProcess = false
+AchDat.GJ_COMPLETE_SUGARLAND.Description = "Complete Sugarland"
+AchDat.GJ_COMPLETE_SUGARLAND.Name = "Sweet Dreams are made of this! Who am I to disagree?"
+AchDat.GJ_COMPLETE_SUGARLAND.only_trueabyss = false
+AchDat.GJ_COMPLETE_SUGARLAND.ProcessMax = 0
+AchDat.GJ_COMPLETE_SUGARLAND.ProcessString = "{Value} of {Max}"
+AchDat.GJ_COMPLETE_SUGARLAND.skill_3 = true
+AchDat.GJ_COMPLETE_SUGARLAND.skill_2 = true
+AchDat.GJ_COMPLETE_SUGARLAND.ProcessValue = ""
+AchDat.GJ_COMPLETE_SUGARLAND.skill_1 = true
+AchDat.GJ_COMPLETE_SUGARLAND.Require_Medals = true
+AchDat.GJ_COMPLETE_SUGARLAND.skill_check = false
+
+
+AchDat.ABYSS_BOSS080 = new AchRecord()
+AchDat.ABYSS_BOSS080.hidden = false
+AchDat.ABYSS_BOSS080.allow_trueabyss = true
+AchDat.ABYSS_BOSS080.AutoProcess = false
+AchDat.ABYSS_BOSS080.Description = "Defeat the boss on the True Abyss, Floor #060"
+AchDat.ABYSS_BOSS080.Name = "True Abyss Boss - Floor #080"
+AchDat.ABYSS_BOSS080.only_trueabyss = true
+AchDat.ABYSS_BOSS080.ProcessMax = 0
+AchDat.ABYSS_BOSS080.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS080.skill_3 = true
+AchDat.ABYSS_BOSS080.skill_2 = true
+AchDat.ABYSS_BOSS080.ProcessValue = ""
+AchDat.ABYSS_BOSS080.skill_1 = true
+AchDat.ABYSS_BOSS080.Require_Medals = false
+AchDat.ABYSS_BOSS080.skill_check = false
+
+
+AchDat.GJ_COMPLETE_FACILITY = new AchRecord()
+AchDat.GJ_COMPLETE_FACILITY.hidden = true
+AchDat.GJ_COMPLETE_FACILITY.allow_trueabyss = false
+AchDat.GJ_COMPLETE_FACILITY.AutoProcess = false
+AchDat.GJ_COMPLETE_FACILITY.Description = "Complete the science facility"
+AchDat.GJ_COMPLETE_FACILITY.Name = "I wish I could forget all about the facility"
+AchDat.GJ_COMPLETE_FACILITY.only_trueabyss = false
+AchDat.GJ_COMPLETE_FACILITY.ProcessMax = 0
+AchDat.GJ_COMPLETE_FACILITY.ProcessString = "{Value} of {Max}"
+AchDat.GJ_COMPLETE_FACILITY.skill_3 = true
+AchDat.GJ_COMPLETE_FACILITY.skill_2 = true
+AchDat.GJ_COMPLETE_FACILITY.ProcessValue = ""
+AchDat.GJ_COMPLETE_FACILITY.skill_1 = true
+AchDat.GJ_COMPLETE_FACILITY.Require_Medals = true
+AchDat.GJ_COMPLETE_FACILITY.skill_check = false
+
+
+AchDat.ABYSS_SCORE_0050 = new AchRecord()
+AchDat.ABYSS_SCORE_0050.hidden = false
+AchDat.ABYSS_SCORE_0050.allow_trueabyss = true
+AchDat.ABYSS_SCORE_0050.AutoProcess = true
+AchDat.ABYSS_SCORE_0050.Description = "Abyss Score L"
+AchDat.ABYSS_SCORE_0050.Name = "Abyss Score L"
+AchDat.ABYSS_SCORE_0050.only_trueabyss = true
+AchDat.ABYSS_SCORE_0050.ProcessMax = 50
+AchDat.ABYSS_SCORE_0050.ProcessString = ""
+AchDat.ABYSS_SCORE_0050.skill_3 = true
+AchDat.ABYSS_SCORE_0050.skill_2 = true
+AchDat.ABYSS_SCORE_0050.ProcessValue = "TRUEABYSSSCORE"
+AchDat.ABYSS_SCORE_0050.skill_1 = true
+AchDat.ABYSS_SCORE_0050.Require_Medals = false
+AchDat.ABYSS_SCORE_0050.skill_check = false
+
+
+AchDat.SECDUNG_BASEMENT = new AchRecord()
+AchDat.SECDUNG_BASEMENT.hidden = true
+AchDat.SECDUNG_BASEMENT.allow_trueabyss = false
+AchDat.SECDUNG_BASEMENT.AutoProcess = false
+AchDat.SECDUNG_BASEMENT.Description = "Complete the secret dungeon Frundarmon's Basement"
+AchDat.SECDUNG_BASEMENT.Name = "Tales from the basement"
+AchDat.SECDUNG_BASEMENT.only_trueabyss = false
+AchDat.SECDUNG_BASEMENT.ProcessMax = 0
+AchDat.SECDUNG_BASEMENT.ProcessString = "{Value} of {Max}"
+AchDat.SECDUNG_BASEMENT.skill_3 = true
+AchDat.SECDUNG_BASEMENT.skill_2 = true
+AchDat.SECDUNG_BASEMENT.ProcessValue = ""
+AchDat.SECDUNG_BASEMENT.skill_1 = true
+AchDat.SECDUNG_BASEMENT.Require_Medals = false
+AchDat.SECDUNG_BASEMENT.skill_check = false
+
+
+AchDat.VIC_00100 = new AchRecord()
+AchDat.VIC_00100.hidden = false
+AchDat.VIC_00100.allow_trueabyss = true
+AchDat.VIC_00100.AutoProcess = true
+AchDat.VIC_00100.Description = "Win 100 battles"
+AchDat.VIC_00100.Name = "Say 'hello' to my little friend"
+AchDat.VIC_00100.only_trueabyss = false
+AchDat.VIC_00100.ProcessMax = 100
+AchDat.VIC_00100.ProcessString = "{Value} of {Max}"
+AchDat.VIC_00100.skill_3 = true
+AchDat.VIC_00100.skill_2 = true
+AchDat.VIC_00100.ProcessValue = "Victories"
+AchDat.VIC_00100.skill_1 = true
+AchDat.VIC_00100.Require_Medals = false
+AchDat.VIC_00100.skill_check = false
+
+
+AchDat.NGP_DIGITOPIA = new AchRecord()
+AchDat.NGP_DIGITOPIA.hidden = false
+AchDat.NGP_DIGITOPIA.allow_trueabyss = false
+AchDat.NGP_DIGITOPIA.AutoProcess = false
+AchDat.NGP_DIGITOPIA.Description = "Complete Digitopia"
+AchDat.NGP_DIGITOPIA.Name = "Let's get DIGITAL!"
+AchDat.NGP_DIGITOPIA.only_trueabyss = false
+AchDat.NGP_DIGITOPIA.ProcessMax = 0
+AchDat.NGP_DIGITOPIA.only_newgameplus = false
+AchDat.NGP_DIGITOPIA.skill_3 = true
+AchDat.NGP_DIGITOPIA.skill_2 = true
+AchDat.NGP_DIGITOPIA.skill_1 = true
+AchDat.NGP_DIGITOPIA.ProcessValue = ""
+AchDat.NGP_DIGITOPIA.Require_Medals = false
+AchDat.NGP_DIGITOPIA.ProcessString = "{Value} of {Max}"
+AchDat.NGP_DIGITOPIA.skill_check = false
+
+
+AchDat.ABYSS_BOSS050 = new AchRecord()
+AchDat.ABYSS_BOSS050.hidden = false
+AchDat.ABYSS_BOSS050.allow_trueabyss = true
+AchDat.ABYSS_BOSS050.AutoProcess = false
+AchDat.ABYSS_BOSS050.Description = "Defeat the boss on the True Abyss, Floor #050"
+AchDat.ABYSS_BOSS050.Name = "True Abyss Boss - Floor #050"
+AchDat.ABYSS_BOSS050.only_trueabyss = true
+AchDat.ABYSS_BOSS050.ProcessMax = 0
+AchDat.ABYSS_BOSS050.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS050.skill_3 = true
+AchDat.ABYSS_BOSS050.skill_2 = true
+AchDat.ABYSS_BOSS050.ProcessValue = ""
+AchDat.ABYSS_BOSS050.skill_1 = true
+AchDat.ABYSS_BOSS050.Require_Medals = false
+AchDat.ABYSS_BOSS050.skill_check = false
+
+
+AchDat.BOSS_BIGSALAMANDER = new AchRecord()
+AchDat.BOSS_BIGSALAMANDER.hidden = false
+AchDat.BOSS_BIGSALAMANDER.allow_trueabyss = false
+AchDat.BOSS_BIGSALAMANDER.AutoProcess = true
+AchDat.BOSS_BIGSALAMANDER.Description = "Defeat the big salamander in the marshes"
+AchDat.BOSS_BIGSALAMANDER.Name = "Bunda! Identify yourselves!"
+AchDat.BOSS_BIGSALAMANDER.only_trueabyss = false
+AchDat.BOSS_BIGSALAMANDER.ProcessMax = 1
+AchDat.BOSS_BIGSALAMANDER.ProcessString = ""
+AchDat.BOSS_BIGSALAMANDER.skill_3 = true
+AchDat.BOSS_BIGSALAMANDER.skill_2 = true
+AchDat.BOSS_BIGSALAMANDER.ProcessValue = "KILLED_BOSS_BIGSALAMANDER"
+AchDat.BOSS_BIGSALAMANDER.skill_1 = true
+AchDat.BOSS_BIGSALAMANDER.Require_Medals = false
+AchDat.BOSS_BIGSALAMANDER.skill_check = false
+
+
+AchDat.CASH_000100000 = new AchRecord()
+AchDat.CASH_000100000.hidden = false
+AchDat.CASH_000100000.allow_trueabyss = true
+AchDat.CASH_000100000.AutoProcess = true
+AchDat.CASH_000100000.Description = "Have 500,000+ shilders in cash"
+AchDat.CASH_000100000.Name = "I'm flithy stinking rich!"
+AchDat.CASH_000100000.only_trueabyss = false
+AchDat.CASH_000100000.ProcessMax = 500000
+AchDat.CASH_000100000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_000100000.skill_3 = false
+AchDat.CASH_000100000.skill_2 = false
+AchDat.CASH_000100000.ProcessValue = "CASH"
+AchDat.CASH_000100000.skill_1 = false
+AchDat.CASH_000100000.Require_Medals = false
+AchDat.CASH_000100000.skill_check = false
+
+
+AchDat.MAXSKILL_0_MERYA = new AchRecord()
+AchDat.MAXSKILL_0_MERYA.hidden = false
+AchDat.MAXSKILL_0_MERYA.allow_trueabyss = true
+AchDat.MAXSKILL_0_MERYA.AutoProcess = false
+AchDat.MAXSKILL_0_MERYA.Description = "Bring Merya's dagger skills to the max level"
+AchDat.MAXSKILL_0_MERYA.Name = "Do not insult a girl with knives"
+AchDat.MAXSKILL_0_MERYA.only_trueabyss = false
+AchDat.MAXSKILL_0_MERYA.ProcessMax = 0
+AchDat.MAXSKILL_0_MERYA.only_newgameplus = false
+AchDat.MAXSKILL_0_MERYA.skill_3 = false
+AchDat.MAXSKILL_0_MERYA.skill_2 = false
+AchDat.MAXSKILL_0_MERYA.skill_1 = false
+AchDat.MAXSKILL_0_MERYA.ProcessValue = ""
+AchDat.MAXSKILL_0_MERYA.Require_Medals = false
+AchDat.MAXSKILL_0_MERYA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_MERYA.skill_check = false
+
+
+AchDat.SCEN_REDSTAFF = new AchRecord()
+AchDat.SCEN_REDSTAFF.hidden = false
+AchDat.SCEN_REDSTAFF.allow_trueabyss = false
+AchDat.SCEN_REDSTAFF.AutoProcess = false
+AchDat.SCEN_REDSTAFF.Description = "Obtain the red staff"
+AchDat.SCEN_REDSTAFF.Name = "For the night is dark and full of terrors!"
+AchDat.SCEN_REDSTAFF.only_trueabyss = false
+AchDat.SCEN_REDSTAFF.ProcessMax = 0
+AchDat.SCEN_REDSTAFF.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_REDSTAFF.skill_3 = true
+AchDat.SCEN_REDSTAFF.skill_2 = true
+AchDat.SCEN_REDSTAFF.ProcessValue = ""
+AchDat.SCEN_REDSTAFF.skill_1 = true
+AchDat.SCEN_REDSTAFF.Require_Medals = false
+AchDat.SCEN_REDSTAFF.skill_check = false
+
+
+AchDat.CASH_000005000 = new AchRecord()
+AchDat.CASH_000005000.hidden = false
+AchDat.CASH_000005000.allow_trueabyss = true
+AchDat.CASH_000005000.AutoProcess = true
+AchDat.CASH_000005000.Description = "Have 5000+ shilders in cash"
+AchDat.CASH_000005000.Name = "She works hard for the money!"
+AchDat.CASH_000005000.only_trueabyss = false
+AchDat.CASH_000005000.ProcessMax = 5000
+AchDat.CASH_000005000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_000005000.skill_3 = false
+AchDat.CASH_000005000.skill_2 = false
+AchDat.CASH_000005000.ProcessValue = "CASH"
+AchDat.CASH_000005000.skill_1 = false
+AchDat.CASH_000005000.Require_Medals = false
+AchDat.CASH_000005000.skill_check = false
+
+
+AchDat.BOSS_MORT = new AchRecord()
+AchDat.BOSS_MORT.hidden = true
+AchDat.BOSS_MORT.allow_trueabyss = false
+AchDat.BOSS_MORT.AutoProcess = true
+AchDat.BOSS_MORT.Description = "Defeat Mort"
+AchDat.BOSS_MORT.Name = "Personne n'echappe a la mort"
+AchDat.BOSS_MORT.only_trueabyss = false
+AchDat.BOSS_MORT.ProcessMax = 1
+AchDat.BOSS_MORT.ProcessString = ""
+AchDat.BOSS_MORT.skill_3 = true
+AchDat.BOSS_MORT.skill_2 = true
+AchDat.BOSS_MORT.ProcessValue = "KILLED_BOSS_Mort"
+AchDat.BOSS_MORT.skill_1 = true
+AchDat.BOSS_MORT.Require_Medals = false
+AchDat.BOSS_MORT.skill_check = false
+
+
+AchDat.SCEN_BEGIN = new AchRecord()
+AchDat.SCEN_BEGIN.hidden = false
+AchDat.SCEN_BEGIN.allow_trueabyss = false
+AchDat.SCEN_BEGIN.AutoProcess = false
+AchDat.SCEN_BEGIN.Description = "Succesfully start a new game"
+AchDat.SCEN_BEGIN.Name = "In the beginning ...."
+AchDat.SCEN_BEGIN.only_trueabyss = false
+AchDat.SCEN_BEGIN.ProcessMax = 0
+AchDat.SCEN_BEGIN.ProcessString = "{Value} or {Max}"
+AchDat.SCEN_BEGIN.skill_3 = false
+AchDat.SCEN_BEGIN.skill_2 = false
+AchDat.SCEN_BEGIN.ProcessValue = ""
+AchDat.SCEN_BEGIN.skill_1 = false
+AchDat.SCEN_BEGIN.Require_Medals = false
+AchDat.SCEN_BEGIN.skill_check = false
+
+
+AchDat["100_MERYA"] = new AchRecord()
+AchDat["100_MERYA"].hidden = false
+AchDat["100_MERYA"].allow_trueabyss = true
+AchDat["100_MERYA"].AutoProcess = false
+AchDat["100_MERYA"].Description = "Merya to level C or higher"
+AchDat["100_MERYA"].Name = "Wat dijn is, mijn is!"
+AchDat["100_MERYA"].only_trueabyss = false
+AchDat["100_MERYA"].ProcessMax = 0
+AchDat["100_MERYA"].ProcessString = "{Value} of {Max}"
+AchDat["100_MERYA"].skill_3 = true
+AchDat["100_MERYA"].skill_2 = true
+AchDat["100_MERYA"].ProcessValue = ""
+AchDat["100_MERYA"].skill_1 = true
+AchDat["100_MERYA"].Require_Medals = false
+AchDat["100_MERYA"].skill_check = false
+
+
+AchDat.BOSS_ARACHNITA_THIEF = new AchRecord()
+AchDat.BOSS_ARACHNITA_THIEF.hidden = true
+AchDat.BOSS_ARACHNITA_THIEF.allow_trueabyss = false
+AchDat.BOSS_ARACHNITA_THIEF.AutoProcess = true
+AchDat.BOSS_ARACHNITA_THIEF.Description = "Defeat the Archnita Thief"
+AchDat.BOSS_ARACHNITA_THIEF.Name = "The spiderman is having you for dinner tonight"
+AchDat.BOSS_ARACHNITA_THIEF.only_trueabyss = false
+AchDat.BOSS_ARACHNITA_THIEF.ProcessMax = 1
+AchDat.BOSS_ARACHNITA_THIEF.ProcessString = ""
+AchDat.BOSS_ARACHNITA_THIEF.skill_3 = true
+AchDat.BOSS_ARACHNITA_THIEF.skill_2 = true
+AchDat.BOSS_ARACHNITA_THIEF.ProcessValue = "KILLED_BOSS_ARACHNITATHIEF"
+AchDat.BOSS_ARACHNITA_THIEF.skill_1 = true
+AchDat.BOSS_ARACHNITA_THIEF.Require_Medals = true
+AchDat.BOSS_ARACHNITA_THIEF.skill_check = false
+
+
+AchDat.MAXSKILL_4_IRRAVONIA = new AchRecord()
+AchDat.MAXSKILL_4_IRRAVONIA.hidden = false
+AchDat.MAXSKILL_4_IRRAVONIA.allow_trueabyss = true
+AchDat.MAXSKILL_4_IRRAVONIA.AutoProcess = false
+AchDat.MAXSKILL_4_IRRAVONIA.Description = "Have Irravonia's Earth skills level to the max"
+AchDat.MAXSKILL_4_IRRAVONIA.Name = "I ain't afraid of no quake!"
+AchDat.MAXSKILL_4_IRRAVONIA.only_trueabyss = false
+AchDat.MAXSKILL_4_IRRAVONIA.ProcessMax = 0
+AchDat.MAXSKILL_4_IRRAVONIA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_4_IRRAVONIA.skill_3 = false
+AchDat.MAXSKILL_4_IRRAVONIA.skill_2 = false
+AchDat.MAXSKILL_4_IRRAVONIA.ProcessValue = ""
+AchDat.MAXSKILL_4_IRRAVONIA.skill_1 = false
+AchDat.MAXSKILL_4_IRRAVONIA.Require_Medals = false
+AchDat.MAXSKILL_4_IRRAVONIA.skill_check = false
+
+
+AchDat.CASH_000025000 = new AchRecord()
+AchDat.CASH_000025000.hidden = false
+AchDat.CASH_000025000.allow_trueabyss = true
+AchDat.CASH_000025000.AutoProcess = true
+AchDat.CASH_000025000.Description = "Have 50000+ shilders in cash"
+AchDat.CASH_000025000.Name = "If I were a rich man!"
+AchDat.CASH_000025000.only_trueabyss = false
+AchDat.CASH_000025000.ProcessMax = 50000
+AchDat.CASH_000025000.only_newgameplus = false
+AchDat.CASH_000025000.skill_3 = false
+AchDat.CASH_000025000.skill_2 = false
+AchDat.CASH_000025000.skill_1 = false
+AchDat.CASH_000025000.ProcessValue = "CASH"
+AchDat.CASH_000025000.Require_Medals = false
+AchDat.CASH_000025000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_000025000.skill_check = false
+
+
+AchDat.BOSS_ALDARUS2 = new AchRecord()
+AchDat.BOSS_ALDARUS2.hidden = true
+AchDat.BOSS_ALDARUS2.allow_trueabyss = false
+AchDat.BOSS_ALDARUS2.AutoProcess = true
+AchDat.BOSS_ALDARUS2.Description = "Defeat Aldarus in the Dark Storage"
+AchDat.BOSS_ALDARUS2.Name = "En garde again , monsieur!"
+AchDat.BOSS_ALDARUS2.only_trueabyss = false
+AchDat.BOSS_ALDARUS2.ProcessMax = 1
+AchDat.BOSS_ALDARUS2.ProcessString = ""
+AchDat.BOSS_ALDARUS2.skill_3 = true
+AchDat.BOSS_ALDARUS2.skill_2 = true
+AchDat.BOSS_ALDARUS2.ProcessValue = "KILLED_BOSS_ALDARUS2"
+AchDat.BOSS_ALDARUS2.skill_1 = true
+AchDat.BOSS_ALDARUS2.Require_Medals = false
+AchDat.BOSS_ALDARUS2.skill_check = false
+
+
+AchDat.PUZ_MEMORYRONDOMO = new AchRecord()
+AchDat.PUZ_MEMORYRONDOMO.hidden = false
+AchDat.PUZ_MEMORYRONDOMO.allow_trueabyss = false
+AchDat.PUZ_MEMORYRONDOMO.AutoProcess = false
+AchDat.PUZ_MEMORYRONDOMO.Description = "Solve two memory puzzles"
+AchDat.PUZ_MEMORYRONDOMO.Name = "Memory! All alone in the moonlight!"
+AchDat.PUZ_MEMORYRONDOMO.only_trueabyss = false
+AchDat.PUZ_MEMORYRONDOMO.ProcessMax = 0
+AchDat.PUZ_MEMORYRONDOMO.ProcessString = "{Value} of {Max}"
+AchDat.PUZ_MEMORYRONDOMO.skill_3 = true
+AchDat.PUZ_MEMORYRONDOMO.skill_2 = true
+AchDat.PUZ_MEMORYRONDOMO.ProcessValue = ""
+AchDat.PUZ_MEMORYRONDOMO.skill_1 = true
+AchDat.PUZ_MEMORYRONDOMO.Require_Medals = false
+AchDat.PUZ_MEMORYRONDOMO.skill_check = false
+
+
+AchDat.SECDUNG_DEATH = new AchRecord()
+AchDat.SECDUNG_DEATH.hidden = false
+AchDat.SECDUNG_DEATH.allow_trueabyss = false
+AchDat.SECDUNG_DEATH.AutoProcess = false
+AchDat.SECDUNG_DEATH.Description = ""
+AchDat.SECDUNG_DEATH.Name = "Death becomes her!"
+AchDat.SECDUNG_DEATH.only_trueabyss = false
+AchDat.SECDUNG_DEATH.ProcessMax = 0
+AchDat.SECDUNG_DEATH.ProcessString = "{Value} of {Max}"
+AchDat.SECDUNG_DEATH.skill_3 = true
+AchDat.SECDUNG_DEATH.skill_2 = true
+AchDat.SECDUNG_DEATH.ProcessValue = ""
+AchDat.SECDUNG_DEATH.skill_1 = true
+AchDat.SECDUNG_DEATH.Require_Medals = false
+AchDat.SECDUNG_DEATH.skill_check = false
+
+
+AchDat.BOSS_GIANTTIGER = new AchRecord()
+AchDat.BOSS_GIANTTIGER.hidden = false
+AchDat.BOSS_GIANTTIGER.allow_trueabyss = false
+AchDat.BOSS_GIANTTIGER.AutoProcess = true
+AchDat.BOSS_GIANTTIGER.Description = "Beat the giant tiger"
+AchDat.BOSS_GIANTTIGER.Name = "Eye of the tiger"
+AchDat.BOSS_GIANTTIGER.only_trueabyss = false
+AchDat.BOSS_GIANTTIGER.ProcessMax = 1
+AchDat.BOSS_GIANTTIGER.ProcessString = "Encounter the tiger and be a survivor!"
+AchDat.BOSS_GIANTTIGER.skill_3 = false
+AchDat.BOSS_GIANTTIGER.skill_2 = false
+AchDat.BOSS_GIANTTIGER.ProcessValue = "KILLED_BOSS_BIGTIGER"
+AchDat.BOSS_GIANTTIGER.skill_1 = false
+AchDat.BOSS_GIANTTIGER.Require_Medals = false
+AchDat.BOSS_GIANTTIGER.skill_check = false
+
+
+AchDat.BOSS_JERACKO_2 = new AchRecord()
+AchDat.BOSS_JERACKO_2.hidden = true
+AchDat.BOSS_JERACKO_2.allow_trueabyss = false
+AchDat.BOSS_JERACKO_2.AutoProcess = true
+AchDat.BOSS_JERACKO_2.Description = "Defeat Jeracko in the Dark Storage"
+AchDat.BOSS_JERACKO_2.Name = "Can I crush your skill again, please?"
+AchDat.BOSS_JERACKO_2.only_trueabyss = false
+AchDat.BOSS_JERACKO_2.ProcessMax = 1
+AchDat.BOSS_JERACKO_2.ProcessString = ""
+AchDat.BOSS_JERACKO_2.skill_3 = true
+AchDat.BOSS_JERACKO_2.skill_2 = true
+AchDat.BOSS_JERACKO_2.ProcessValue = "KILLED_BOSS_Jeracko2"
+AchDat.BOSS_JERACKO_2.skill_1 = true
+AchDat.BOSS_JERACKO_2.Require_Medals = false
+AchDat.BOSS_JERACKO_2.skill_check = false
+
+
+AchDat.BOSS_REDGUARDIAN = new AchRecord()
+AchDat.BOSS_REDGUARDIAN.hidden = false
+AchDat.BOSS_REDGUARDIAN.allow_trueabyss = false
+AchDat.BOSS_REDGUARDIAN.AutoProcess = true
+AchDat.BOSS_REDGUARDIAN.Description = "Defeat the red guardian"
+AchDat.BOSS_REDGUARDIAN.Name = "Red hot chilli peppers"
+AchDat.BOSS_REDGUARDIAN.only_trueabyss = false
+AchDat.BOSS_REDGUARDIAN.ProcessMax = 1
+AchDat.BOSS_REDGUARDIAN.ProcessString = ""
+AchDat.BOSS_REDGUARDIAN.skill_3 = true
+AchDat.BOSS_REDGUARDIAN.skill_2 = true
+AchDat.BOSS_REDGUARDIAN.ProcessValue = "KILLED_BOSS_REDGUARDIAN"
+AchDat.BOSS_REDGUARDIAN.skill_1 = true
+AchDat.BOSS_REDGUARDIAN.Require_Medals = false
+AchDat.BOSS_REDGUARDIAN.skill_check = false
+
+
+AchDat.PUZ_FLYRAINBOW = new AchRecord()
+AchDat.PUZ_FLYRAINBOW.hidden = false
+AchDat.PUZ_FLYRAINBOW.allow_trueabyss = false
+AchDat.PUZ_FLYRAINBOW.AutoProcess = false
+AchDat.PUZ_FLYRAINBOW.Description = "Fly your way over the many holes in Shanda's dungeon"
+AchDat.PUZ_FLYRAINBOW.Name = "Vlieg met me mee naar de regenboog, rainbow!"
+AchDat.PUZ_FLYRAINBOW.only_trueabyss = false
+AchDat.PUZ_FLYRAINBOW.ProcessMax = 0
+AchDat.PUZ_FLYRAINBOW.ProcessString = "{Value} of {Max}"
+AchDat.PUZ_FLYRAINBOW.skill_3 = true
+AchDat.PUZ_FLYRAINBOW.skill_2 = true
+AchDat.PUZ_FLYRAINBOW.ProcessValue = ""
+AchDat.PUZ_FLYRAINBOW.skill_1 = true
+AchDat.PUZ_FLYRAINBOW.Require_Medals = false
+AchDat.PUZ_FLYRAINBOW.skill_check = false
+
+
+AchDat["100_IRRAVONIA"] = new AchRecord()
+AchDat["100_IRRAVONIA"].hidden = false
+AchDat["100_IRRAVONIA"].allow_trueabyss = true
+AchDat["100_IRRAVONIA"].AutoProcess = false
+AchDat["100_IRRAVONIA"].Description = "Irravonia to level C or higher"
+AchDat["100_IRRAVONIA"].Name = "Or are you looking to the woman in the red dress?"
+AchDat["100_IRRAVONIA"].only_trueabyss = false
+AchDat["100_IRRAVONIA"].ProcessMax = 0
+AchDat["100_IRRAVONIA"].ProcessString = "{Value} of {Max}"
+AchDat["100_IRRAVONIA"].skill_3 = true
+AchDat["100_IRRAVONIA"].skill_2 = true
+AchDat["100_IRRAVONIA"].ProcessValue = ""
+AchDat["100_IRRAVONIA"].skill_1 = true
+AchDat["100_IRRAVONIA"].Require_Medals = false
+AchDat["100_IRRAVONIA"].skill_check = false
+
+
+AchDat.MAXSKILL_1_IRRAVONIA = new AchRecord()
+AchDat.MAXSKILL_1_IRRAVONIA.hidden = false
+AchDat.MAXSKILL_1_IRRAVONIA.allow_trueabyss = true
+AchDat.MAXSKILL_1_IRRAVONIA.AutoProcess = false
+AchDat.MAXSKILL_1_IRRAVONIA.Description = "Have Irravonia's fire level on the max"
+AchDat.MAXSKILL_1_IRRAVONIA.Name = "We don't need to water, let the motherf**r burn!"
+AchDat.MAXSKILL_1_IRRAVONIA.only_trueabyss = false
+AchDat.MAXSKILL_1_IRRAVONIA.ProcessMax = 0
+AchDat.MAXSKILL_1_IRRAVONIA.only_newgameplus = false
+AchDat.MAXSKILL_1_IRRAVONIA.skill_3 = false
+AchDat.MAXSKILL_1_IRRAVONIA.skill_2 = false
+AchDat.MAXSKILL_1_IRRAVONIA.skill_1 = false
+AchDat.MAXSKILL_1_IRRAVONIA.ProcessValue = ""
+AchDat.MAXSKILL_1_IRRAVONIA.Require_Medals = false
+AchDat.MAXSKILL_1_IRRAVONIA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_1_IRRAVONIA.skill_check = false
+
+
+AchDat.MAXSKILL_0_IRRAVONIA = new AchRecord()
+AchDat.MAXSKILL_0_IRRAVONIA.hidden = false
+AchDat.MAXSKILL_0_IRRAVONIA.allow_trueabyss = true
+AchDat.MAXSKILL_0_IRRAVONIA.AutoProcess = false
+AchDat.MAXSKILL_0_IRRAVONIA.Description = "Have Irravonia's wand skills to the max level"
+AchDat.MAXSKILL_0_IRRAVONIA.Name = "Priori Incantatum"
+AchDat.MAXSKILL_0_IRRAVONIA.only_trueabyss = false
+AchDat.MAXSKILL_0_IRRAVONIA.ProcessMax = 0
+AchDat.MAXSKILL_0_IRRAVONIA.only_newgameplus = false
+AchDat.MAXSKILL_0_IRRAVONIA.skill_3 = false
+AchDat.MAXSKILL_0_IRRAVONIA.skill_2 = false
+AchDat.MAXSKILL_0_IRRAVONIA.skill_1 = false
+AchDat.MAXSKILL_0_IRRAVONIA.ProcessValue = ""
+AchDat.MAXSKILL_0_IRRAVONIA.Require_Medals = false
+AchDat.MAXSKILL_0_IRRAVONIA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_IRRAVONIA.skill_check = false
+
+
+AchDat.NGP_THIEFDEN = new AchRecord()
+AchDat.NGP_THIEFDEN.hidden = false
+AchDat.NGP_THIEFDEN.allow_trueabyss = false
+AchDat.NGP_THIEFDEN.AutoProcess = false
+AchDat.NGP_THIEFDEN.Description = "Complete the Thief's Den"
+AchDat.NGP_THIEFDEN.Name = "I'm not a thief! I'm a TREASURE HUNTER!"
+AchDat.NGP_THIEFDEN.only_trueabyss = false
+AchDat.NGP_THIEFDEN.ProcessMax = 0
+AchDat.NGP_THIEFDEN.only_newgameplus = true
+AchDat.NGP_THIEFDEN.skill_3 = true
+AchDat.NGP_THIEFDEN.skill_2 = true
+AchDat.NGP_THIEFDEN.skill_1 = true
+AchDat.NGP_THIEFDEN.ProcessValue = ""
+AchDat.NGP_THIEFDEN.Require_Medals = false
+AchDat.NGP_THIEFDEN.ProcessString = "{Value} of {Max}"
+AchDat.NGP_THIEFDEN.skill_check = false
+
+
+AchDat.GJ_COMPLETE_MORKER = new AchRecord()
+AchDat.GJ_COMPLETE_MORKER.hidden = true
+AchDat.GJ_COMPLETE_MORKER.allow_trueabyss = false
+AchDat.GJ_COMPLETE_MORKER.AutoProcess = false
+AchDat.GJ_COMPLETE_MORKER.Description = "Complete Moeker forest"
+AchDat.GJ_COMPLETE_MORKER.Name = "It's a dark world, after all!"
+AchDat.GJ_COMPLETE_MORKER.only_trueabyss = false
+AchDat.GJ_COMPLETE_MORKER.ProcessMax = 0
+AchDat.GJ_COMPLETE_MORKER.ProcessString = "{Value} of {Max}"
+AchDat.GJ_COMPLETE_MORKER.skill_3 = true
+AchDat.GJ_COMPLETE_MORKER.skill_2 = true
+AchDat.GJ_COMPLETE_MORKER.ProcessValue = ""
+AchDat.GJ_COMPLETE_MORKER.skill_1 = true
+AchDat.GJ_COMPLETE_MORKER.Require_Medals = true
+AchDat.GJ_COMPLETE_MORKER.skill_check = false
+
+
+AchDat.ABYSS_BOSS040 = new AchRecord()
+AchDat.ABYSS_BOSS040.hidden = false
+AchDat.ABYSS_BOSS040.allow_trueabyss = true
+AchDat.ABYSS_BOSS040.AutoProcess = false
+AchDat.ABYSS_BOSS040.Description = "Defeat the boss on the True Abyss, Floor #040"
+AchDat.ABYSS_BOSS040.Name = "True Abyss Boss - Floor #040"
+AchDat.ABYSS_BOSS040.only_trueabyss = true
+AchDat.ABYSS_BOSS040.ProcessMax = 0
+AchDat.ABYSS_BOSS040.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS040.skill_3 = true
+AchDat.ABYSS_BOSS040.skill_2 = true
+AchDat.ABYSS_BOSS040.ProcessValue = ""
+AchDat.ABYSS_BOSS040.skill_1 = true
+AchDat.ABYSS_BOSS040.Require_Medals = false
+AchDat.ABYSS_BOSS040.skill_check = false
+
+
+AchDat.ABYSS_SCORE_1000 = new AchRecord()
+AchDat.ABYSS_SCORE_1000.hidden = false
+AchDat.ABYSS_SCORE_1000.allow_trueabyss = true
+AchDat.ABYSS_SCORE_1000.AutoProcess = true
+AchDat.ABYSS_SCORE_1000.Description = "Abyss Score M"
+AchDat.ABYSS_SCORE_1000.Name = "Abyss Score M"
+AchDat.ABYSS_SCORE_1000.only_trueabyss = true
+AchDat.ABYSS_SCORE_1000.ProcessMax = 1000
+AchDat.ABYSS_SCORE_1000.only_newgameplus = false
+AchDat.ABYSS_SCORE_1000.skill_3 = true
+AchDat.ABYSS_SCORE_1000.skill_2 = true
+AchDat.ABYSS_SCORE_1000.skill_1 = true
+AchDat.ABYSS_SCORE_1000.ProcessValue = "TRUEABYSSSCORE"
+AchDat.ABYSS_SCORE_1000.Require_Medals = false
+AchDat.ABYSS_SCORE_1000.ProcessString = ""
+AchDat.ABYSS_SCORE_1000.skill_check = false
+
+
+AchDat.ABYSS_BOSS010 = new AchRecord()
+AchDat.ABYSS_BOSS010.hidden = false
+AchDat.ABYSS_BOSS010.allow_trueabyss = true
+AchDat.ABYSS_BOSS010.AutoProcess = false
+AchDat.ABYSS_BOSS010.Description = "Defeat the boss on the True Abyss, Floor #010"
+AchDat.ABYSS_BOSS010.Name = "True Abyss Boss - Floor #010"
+AchDat.ABYSS_BOSS010.only_trueabyss = true
+AchDat.ABYSS_BOSS010.ProcessMax = 0
+AchDat.ABYSS_BOSS010.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS010.skill_3 = true
+AchDat.ABYSS_BOSS010.skill_2 = true
+AchDat.ABYSS_BOSS010.ProcessValue = ""
+AchDat.ABYSS_BOSS010.skill_1 = true
+AchDat.ABYSS_BOSS010.Require_Medals = false
+AchDat.ABYSS_BOSS010.skill_check = false
+
+
+AchDat.BOSS_SHADOWSWEEPER = new AchRecord()
+AchDat.BOSS_SHADOWSWEEPER.hidden = false
+AchDat.BOSS_SHADOWSWEEPER.allow_trueabyss = false
+AchDat.BOSS_SHADOWSWEEPER.AutoProcess = true
+AchDat.BOSS_SHADOWSWEEPER.Description = "Defeat the Swadow Sweeper in Weniaria's Tempe"
+AchDat.BOSS_SHADOWSWEEPER.Name = "Shadow Hearts"
+AchDat.BOSS_SHADOWSWEEPER.only_trueabyss = false
+AchDat.BOSS_SHADOWSWEEPER.ProcessMax = 1
+AchDat.BOSS_SHADOWSWEEPER.only_newgameplus = false
+AchDat.BOSS_SHADOWSWEEPER.skill_3 = true
+AchDat.BOSS_SHADOWSWEEPER.skill_2 = true
+AchDat.BOSS_SHADOWSWEEPER.skill_1 = true
+AchDat.BOSS_SHADOWSWEEPER.ProcessValue = "KILLED_BOSS_SHADOWSWEEPER"
+AchDat.BOSS_SHADOWSWEEPER.Require_Medals = false
+AchDat.BOSS_SHADOWSWEEPER.ProcessString = ""
+AchDat.BOSS_SHADOWSWEEPER.skill_check = false
+
+
+AchDat.CHAPTER4 = new AchRecord()
+AchDat.CHAPTER4.hidden = false
+AchDat.CHAPTER4.allow_trueabyss = false
+AchDat.CHAPTER4.AutoProcess = false
+AchDat.CHAPTER4.Description = "Complete chapter 4"
+AchDat.CHAPTER4.Name = "Revelations"
+AchDat.CHAPTER4.only_trueabyss = false
+AchDat.CHAPTER4.ProcessMax = 0
+AchDat.CHAPTER4.ProcessString = "{Value} of {Max}"
+AchDat.CHAPTER4.skill_3 = true
+AchDat.CHAPTER4.skill_2 = true
+AchDat.CHAPTER4.ProcessValue = ""
+AchDat.CHAPTER4.skill_1 = true
+AchDat.CHAPTER4.Require_Medals = false
+AchDat.CHAPTER4.skill_check = false
+
+
+AchDat.BOSS_ZZZZZZZ_FINAL = new AchRecord()
+AchDat.BOSS_ZZZZZZZ_FINAL.hidden = true
+AchDat.BOSS_ZZZZZZZ_FINAL.allow_trueabyss = false
+AchDat.BOSS_ZZZZZZZ_FINAL.AutoProcess = true
+AchDat.BOSS_ZZZZZZZ_FINAL.Description = "Defeat the final boss"
+AchDat.BOSS_ZZZZZZZ_FINAL.Name = "The Final Boss"
+AchDat.BOSS_ZZZZZZZ_FINAL.only_trueabyss = false
+AchDat.BOSS_ZZZZZZZ_FINAL.ProcessMax = 1
+AchDat.BOSS_ZZZZZZZ_FINAL.ProcessString = ""
+AchDat.BOSS_ZZZZZZZ_FINAL.skill_3 = true
+AchDat.BOSS_ZZZZZZZ_FINAL.skill_2 = true
+AchDat.BOSS_ZZZZZZZ_FINAL.ProcessValue = "KILLED_BOSS_DZGJYMZA2"
+AchDat.BOSS_ZZZZZZZ_FINAL.skill_1 = true
+AchDat.BOSS_ZZZZZZZ_FINAL.Require_Medals = false
+AchDat.BOSS_ZZZZZZZ_FINAL.skill_check = false
+
+
+AchDat.GJ_START_FACILITY = new AchRecord()
+AchDat.GJ_START_FACILITY.hidden = false
+AchDat.GJ_START_FACILITY.allow_trueabyss = false
+AchDat.GJ_START_FACILITY.AutoProcess = false
+AchDat.GJ_START_FACILITY.Description = "Find a dungeon which is clearly copied from Star Story"
+AchDat.GJ_START_FACILITY.Name = "I'd rather marry an Astrilopup with scabbies!"
+AchDat.GJ_START_FACILITY.only_trueabyss = false
+AchDat.GJ_START_FACILITY.ProcessMax = 0
+AchDat.GJ_START_FACILITY.ProcessString = "{Value} of {Max}"
+AchDat.GJ_START_FACILITY.skill_3 = true
+AchDat.GJ_START_FACILITY.skill_2 = true
+AchDat.GJ_START_FACILITY.ProcessValue = ""
+AchDat.GJ_START_FACILITY.skill_1 = true
+AchDat.GJ_START_FACILITY.Require_Medals = true
+AchDat.GJ_START_FACILITY.skill_check = false
+
+
+AchDat.BOSS_CREEP = new AchRecord()
+AchDat.BOSS_CREEP.hidden = false
+AchDat.BOSS_CREEP.allow_trueabyss = false
+AchDat.BOSS_CREEP.AutoProcess = true
+AchDat.BOSS_CREEP.Description = "Defeat the Creep in the MadHouse"
+AchDat.BOSS_CREEP.Name = "Jeepers Creepers"
+AchDat.BOSS_CREEP.only_trueabyss = false
+AchDat.BOSS_CREEP.ProcessMax = 1
+AchDat.BOSS_CREEP.ProcessString = ""
+AchDat.BOSS_CREEP.skill_3 = true
+AchDat.BOSS_CREEP.skill_2 = true
+AchDat.BOSS_CREEP.ProcessValue = "KILLED_BOSS_CREEP"
+AchDat.BOSS_CREEP.skill_1 = true
+AchDat.BOSS_CREEP.Require_Medals = false
+AchDat.BOSS_CREEP.skill_check = false
+
+
+AchDat.BOSS_BLACKGUARDIAN = new AchRecord()
+AchDat.BOSS_BLACKGUARDIAN.hidden = false
+AchDat.BOSS_BLACKGUARDIAN.allow_trueabyss = false
+AchDat.BOSS_BLACKGUARDIAN.AutoProcess = true
+AchDat.BOSS_BLACKGUARDIAN.Description = "Defeat the black guardian"
+AchDat.BOSS_BLACKGUARDIAN.Name = "Black Sabbath"
+AchDat.BOSS_BLACKGUARDIAN.only_trueabyss = false
+AchDat.BOSS_BLACKGUARDIAN.ProcessMax = 1
+AchDat.BOSS_BLACKGUARDIAN.ProcessString = ""
+AchDat.BOSS_BLACKGUARDIAN.skill_3 = true
+AchDat.BOSS_BLACKGUARDIAN.skill_2 = true
+AchDat.BOSS_BLACKGUARDIAN.ProcessValue = "KILLED_BOSS_BLACKGUARDIAN"
+AchDat.BOSS_BLACKGUARDIAN.skill_1 = true
+AchDat.BOSS_BLACKGUARDIAN.Require_Medals = false
+AchDat.BOSS_BLACKGUARDIAN.skill_check = false
+
+
+AchDat.NGP_LOSTARK = new AchRecord()
+AchDat.NGP_LOSTARK.hidden = false
+AchDat.NGP_LOSTARK.allow_trueabyss = false
+AchDat.NGP_LOSTARK.AutoProcess = false
+AchDat.NGP_LOSTARK.Description = "Complete the New Game+ Dungeon: The Lost Ark"
+AchDat.NGP_LOSTARK.Name = "Raiders of the Lost Ark"
+AchDat.NGP_LOSTARK.only_trueabyss = false
+AchDat.NGP_LOSTARK.ProcessMax = 0
+AchDat.NGP_LOSTARK.ProcessString = "{Value} of {Max}"
+AchDat.NGP_LOSTARK.skill_3 = true
+AchDat.NGP_LOSTARK.skill_2 = true
+AchDat.NGP_LOSTARK.ProcessValue = ""
+AchDat.NGP_LOSTARK.skill_1 = true
+AchDat.NGP_LOSTARK.Require_Medals = false
+AchDat.NGP_LOSTARK.skill_check = false
+
+
+AchDat.KILL_02500 = new AchRecord()
+AchDat.KILL_02500.hidden = false
+AchDat.KILL_02500.allow_trueabyss = true
+AchDat.KILL_02500.AutoProcess = true
+AchDat.KILL_02500.Description = "Kill 2500 enemies"
+AchDat.KILL_02500.Name = "Grim Reaper"
+AchDat.KILL_02500.only_trueabyss = false
+AchDat.KILL_02500.ProcessMax = 2500
+AchDat.KILL_02500.ProcessString = "{Value} of {Max}"
+AchDat.KILL_02500.skill_3 = false
+AchDat.KILL_02500.skill_2 = false
+AchDat.KILL_02500.ProcessValue = "KILLS"
+AchDat.KILL_02500.skill_1 = false
+AchDat.KILL_02500.Require_Medals = false
+AchDat.KILL_02500.skill_check = false
+
+
+AchDat.ABYSS_BOSS100 = new AchRecord()
+AchDat.ABYSS_BOSS100.hidden = false
+AchDat.ABYSS_BOSS100.allow_trueabyss = true
+AchDat.ABYSS_BOSS100.AutoProcess = false
+AchDat.ABYSS_BOSS100.Description = "Defeat the boss on the True Abyss, Floor #090"
+AchDat.ABYSS_BOSS100.Name = "True Abyss Boss - Floor #100"
+AchDat.ABYSS_BOSS100.only_trueabyss = true
+AchDat.ABYSS_BOSS100.ProcessMax = 0
+AchDat.ABYSS_BOSS100.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS100.skill_3 = true
+AchDat.ABYSS_BOSS100.skill_2 = true
+AchDat.ABYSS_BOSS100.ProcessValue = ""
+AchDat.ABYSS_BOSS100.skill_1 = true
+AchDat.ABYSS_BOSS100.Require_Medals = false
+AchDat.ABYSS_BOSS100.skill_check = false
+
+
+AchDat.CHAPTER5 = new AchRecord()
+AchDat.CHAPTER5.hidden = false
+AchDat.CHAPTER5.allow_trueabyss = false
+AchDat.CHAPTER5.AutoProcess = false
+AchDat.CHAPTER5.Description = "Complete chapter 5"
+AchDat.CHAPTER5.Name = "The Ruins Of Dyrt"
+AchDat.CHAPTER5.only_trueabyss = false
+AchDat.CHAPTER5.ProcessMax = 0
+AchDat.CHAPTER5.ProcessString = "{Value} of {Max}"
+AchDat.CHAPTER5.skill_3 = true
+AchDat.CHAPTER5.skill_2 = true
+AchDat.CHAPTER5.ProcessValue = ""
+AchDat.CHAPTER5.skill_1 = true
+AchDat.CHAPTER5.Require_Medals = false
+AchDat.CHAPTER5.skill_check = false
+
+
+AchDat.MAXSKILL_1_DERNOR = new AchRecord()
+AchDat.MAXSKILL_1_DERNOR.hidden = false
+AchDat.MAXSKILL_1_DERNOR.allow_trueabyss = true
+AchDat.MAXSKILL_1_DERNOR.AutoProcess = false
+AchDat.MAXSKILL_1_DERNOR.Description = "Max level with Dernor's nature skills"
+AchDat.MAXSKILL_1_DERNOR.Name = "Mother Nature is a bitch"
+AchDat.MAXSKILL_1_DERNOR.only_trueabyss = false
+AchDat.MAXSKILL_1_DERNOR.ProcessMax = 0
+AchDat.MAXSKILL_1_DERNOR.only_newgameplus = false
+AchDat.MAXSKILL_1_DERNOR.skill_3 = false
+AchDat.MAXSKILL_1_DERNOR.skill_2 = false
+AchDat.MAXSKILL_1_DERNOR.skill_1 = false
+AchDat.MAXSKILL_1_DERNOR.ProcessValue = ""
+AchDat.MAXSKILL_1_DERNOR.Require_Medals = false
+AchDat.MAXSKILL_1_DERNOR.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_1_DERNOR.skill_check = false
+
+
+AchDat.ZZZ_NEWGAMEPLUS = new AchRecord()
+AchDat.ZZZ_NEWGAMEPLUS.hidden = false
+AchDat.ZZZ_NEWGAMEPLUS.allow_trueabyss = false
+AchDat.ZZZ_NEWGAMEPLUS.AutoProcess = false
+AchDat.ZZZ_NEWGAMEPLUS.Description = "Complete the New Game +"
+AchDat.ZZZ_NEWGAMEPLUS.Name = "Why code in C when there's C++"
+AchDat.ZZZ_NEWGAMEPLUS.only_trueabyss = false
+AchDat.ZZZ_NEWGAMEPLUS.ProcessMax = 0
+AchDat.ZZZ_NEWGAMEPLUS.only_newgameplus = true
+AchDat.ZZZ_NEWGAMEPLUS.skill_3 = true
+AchDat.ZZZ_NEWGAMEPLUS.skill_2 = true
+AchDat.ZZZ_NEWGAMEPLUS.skill_1 = true
+AchDat.ZZZ_NEWGAMEPLUS.ProcessValue = ""
+AchDat.ZZZ_NEWGAMEPLUS.Require_Medals = false
+AchDat.ZZZ_NEWGAMEPLUS.ProcessString = "{Value} of {Max}"
+AchDat.ZZZ_NEWGAMEPLUS.skill_check = false
+
+
+AchDat.WILL_DERNOR = new AchRecord()
+AchDat.WILL_DERNOR.hidden = false
+AchDat.WILL_DERNOR.allow_trueabyss = true
+AchDat.WILL_DERNOR.AutoProcess = true
+AchDat.WILL_DERNOR.Description = "Make Dernor use his Willpower 25 times"
+AchDat.WILL_DERNOR.Name = "The power of the mind"
+AchDat.WILL_DERNOR.only_trueabyss = false
+AchDat.WILL_DERNOR.ProcessMax = 25
+AchDat.WILL_DERNOR.ProcessString = "{Value} of {Max}"
+AchDat.WILL_DERNOR.skill_3 = true
+AchDat.WILL_DERNOR.skill_2 = true
+AchDat.WILL_DERNOR.ProcessValue = "WILL_DERNOR"
+AchDat.WILL_DERNOR.skill_1 = true
+AchDat.WILL_DERNOR.Require_Medals = false
+AchDat.WILL_DERNOR.skill_check = false
+
+
+AchDat.BOSS_DOOMSWEEPER = new AchRecord()
+AchDat.BOSS_DOOMSWEEPER.hidden = false
+AchDat.BOSS_DOOMSWEEPER.allow_trueabyss = false
+AchDat.BOSS_DOOMSWEEPER.AutoProcess = true
+AchDat.BOSS_DOOMSWEEPER.Description = "Defeat the Doom Sweeper in the Red Temple"
+AchDat.BOSS_DOOMSWEEPER.Name = "The Temple of Doom"
+AchDat.BOSS_DOOMSWEEPER.only_trueabyss = false
+AchDat.BOSS_DOOMSWEEPER.ProcessMax = 1
+AchDat.BOSS_DOOMSWEEPER.ProcessString = ""
+AchDat.BOSS_DOOMSWEEPER.skill_3 = true
+AchDat.BOSS_DOOMSWEEPER.skill_2 = true
+AchDat.BOSS_DOOMSWEEPER.ProcessValue = "KILLED_BOSS_DOOMSWEEPER"
+AchDat.BOSS_DOOMSWEEPER.skill_1 = true
+AchDat.BOSS_DOOMSWEEPER.Require_Medals = false
+AchDat.BOSS_DOOMSWEEPER.skill_check = false
+
+
+AchDat.BOSS_EXHURU = new AchRecord()
+AchDat.BOSS_EXHURU.hidden = false
+AchDat.BOSS_EXHURU.allow_trueabyss = false
+AchDat.BOSS_EXHURU.AutoProcess = true
+AchDat.BOSS_EXHURU.Description = "Defeat the boss in the science facility"
+AchDat.BOSS_EXHURU.Name = "I'll be back!"
+AchDat.BOSS_EXHURU.only_trueabyss = false
+AchDat.BOSS_EXHURU.ProcessMax = 1
+AchDat.BOSS_EXHURU.ProcessString = ""
+AchDat.BOSS_EXHURU.skill_3 = true
+AchDat.BOSS_EXHURU.skill_2 = true
+AchDat.BOSS_EXHURU.ProcessValue = "KILLED_BOSS_EXHURU"
+AchDat.BOSS_EXHURU.skill_1 = true
+AchDat.BOSS_EXHURU.Require_Medals = false
+AchDat.BOSS_EXHURU.skill_check = false
+
+
+AchDat.BOSS_GREEENDRAGON = new AchRecord()
+AchDat.BOSS_GREEENDRAGON.hidden = false
+AchDat.BOSS_GREEENDRAGON.allow_trueabyss = false
+AchDat.BOSS_GREEENDRAGON.AutoProcess = true
+AchDat.BOSS_GREEENDRAGON.Description = "Defeat the green dragon"
+AchDat.BOSS_GREEENDRAGON.Name = "Ten green bottles are hanging on the wall!"
+AchDat.BOSS_GREEENDRAGON.only_trueabyss = false
+AchDat.BOSS_GREEENDRAGON.ProcessMax = 1
+AchDat.BOSS_GREEENDRAGON.ProcessString = ""
+AchDat.BOSS_GREEENDRAGON.skill_3 = true
+AchDat.BOSS_GREEENDRAGON.skill_2 = true
+AchDat.BOSS_GREEENDRAGON.ProcessValue = "KILLED_BOSS_GREENDRAGON"
+AchDat.BOSS_GREEENDRAGON.skill_1 = true
+AchDat.BOSS_GREEENDRAGON.Require_Medals = false
+AchDat.BOSS_GREEENDRAGON.skill_check = false
+
+
+AchDat.MAXSKILL_0_REBECCA = new AchRecord()
+AchDat.MAXSKILL_0_REBECCA.hidden = false
+AchDat.MAXSKILL_0_REBECCA.allow_trueabyss = true
+AchDat.MAXSKILL_0_REBECCA.AutoProcess = false
+AchDat.MAXSKILL_0_REBECCA.Description = "Bring Rebecca's sword skills to the maximum level"
+AchDat.MAXSKILL_0_REBECCA.Name = "The Sword of Justice"
+AchDat.MAXSKILL_0_REBECCA.only_trueabyss = false
+AchDat.MAXSKILL_0_REBECCA.ProcessMax = 0
+AchDat.MAXSKILL_0_REBECCA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_REBECCA.skill_3 = false
+AchDat.MAXSKILL_0_REBECCA.skill_2 = false
+AchDat.MAXSKILL_0_REBECCA.ProcessValue = ""
+AchDat.MAXSKILL_0_REBECCA.skill_1 = false
+AchDat.MAXSKILL_0_REBECCA.Require_Medals = false
+AchDat.MAXSKILL_0_REBECCA.skill_check = false
+
+
+AchDat.BOSS_BLENCHY_1 = new AchRecord()
+AchDat.BOSS_BLENCHY_1.hidden = true
+AchDat.BOSS_BLENCHY_1.allow_trueabyss = false
+AchDat.BOSS_BLENCHY_1.AutoProcess = true
+AchDat.BOSS_BLENCHY_1.Description = "Defeat Blenchy in Zoraman Prison"
+AchDat.BOSS_BLENCHY_1.Name = "Bitter Tears"
+AchDat.BOSS_BLENCHY_1.only_trueabyss = false
+AchDat.BOSS_BLENCHY_1.ProcessMax = 1
+AchDat.BOSS_BLENCHY_1.ProcessString = ""
+AchDat.BOSS_BLENCHY_1.skill_3 = true
+AchDat.BOSS_BLENCHY_1.skill_2 = true
+AchDat.BOSS_BLENCHY_1.ProcessValue = "KILLED_BOSS_BLENCHY1"
+AchDat.BOSS_BLENCHY_1.skill_1 = true
+AchDat.BOSS_BLENCHY_1.Require_Medals = false
+AchDat.BOSS_BLENCHY_1.skill_check = false
+
+
+AchDat.CHAPTER1 = new AchRecord()
+AchDat.CHAPTER1.hidden = false
+AchDat.CHAPTER1.allow_trueabyss = false
+AchDat.CHAPTER1.AutoProcess = false
+AchDat.CHAPTER1.Description = "Complete Chapter 1"
+AchDat.CHAPTER1.Name = "The Dark Servants"
+AchDat.CHAPTER1.only_trueabyss = false
+AchDat.CHAPTER1.ProcessMax = 0
+AchDat.CHAPTER1.ProcessString = "{Value} of {Max}"
+AchDat.CHAPTER1.skill_3 = true
+AchDat.CHAPTER1.skill_2 = true
+AchDat.CHAPTER1.ProcessValue = ""
+AchDat.CHAPTER1.skill_1 = true
+AchDat.CHAPTER1.Require_Medals = false
+AchDat.CHAPTER1.skill_check = false
+
+
+AchDat.ABYSS_SCORE_0100 = new AchRecord()
+AchDat.ABYSS_SCORE_0100.hidden = false
+AchDat.ABYSS_SCORE_0100.allow_trueabyss = true
+AchDat.ABYSS_SCORE_0100.AutoProcess = true
+AchDat.ABYSS_SCORE_0100.Description = "Abyss Score C"
+AchDat.ABYSS_SCORE_0100.Name = "Abyss Score C"
+AchDat.ABYSS_SCORE_0100.only_trueabyss = true
+AchDat.ABYSS_SCORE_0100.ProcessMax = 100
+AchDat.ABYSS_SCORE_0100.ProcessString = ""
+AchDat.ABYSS_SCORE_0100.skill_3 = true
+AchDat.ABYSS_SCORE_0100.skill_2 = true
+AchDat.ABYSS_SCORE_0100.ProcessValue = "TRUEABYSSSCORE"
+AchDat.ABYSS_SCORE_0100.skill_1 = true
+AchDat.ABYSS_SCORE_0100.Require_Medals = false
+AchDat.ABYSS_SCORE_0100.skill_check = false
+
+
+AchDat.MAXSKILL_0_ERIC = new AchRecord()
+AchDat.MAXSKILL_0_ERIC.hidden = false
+AchDat.MAXSKILL_0_ERIC.allow_trueabyss = true
+AchDat.MAXSKILL_0_ERIC.AutoProcess = false
+AchDat.MAXSKILL_0_ERIC.Description = "Bring Eric's sword skills to the maximum level"
+AchDat.MAXSKILL_0_ERIC.Name = "Mysterious as the dark side of the moon"
+AchDat.MAXSKILL_0_ERIC.only_trueabyss = false
+AchDat.MAXSKILL_0_ERIC.ProcessMax = 0
+AchDat.MAXSKILL_0_ERIC.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_ERIC.skill_3 = false
+AchDat.MAXSKILL_0_ERIC.skill_2 = false
+AchDat.MAXSKILL_0_ERIC.ProcessValue = ""
+AchDat.MAXSKILL_0_ERIC.skill_1 = false
+AchDat.MAXSKILL_0_ERIC.Require_Medals = false
+AchDat.MAXSKILL_0_ERIC.skill_check = false
+
+
+AchDat.MAXSKILL_0_SCYNDI = new AchRecord()
+AchDat.MAXSKILL_0_SCYNDI.hidden = false
+AchDat.MAXSKILL_0_SCYNDI.allow_trueabyss = true
+AchDat.MAXSKILL_0_SCYNDI.AutoProcess = false
+AchDat.MAXSKILL_0_SCYNDI.Description = "Max level Scyndi's whip skills"
+AchDat.MAXSKILL_0_SCYNDI.Name = "What was briefly yours is now mine"
+AchDat.MAXSKILL_0_SCYNDI.only_trueabyss = false
+AchDat.MAXSKILL_0_SCYNDI.ProcessMax = 0
+AchDat.MAXSKILL_0_SCYNDI.only_newgameplus = false
+AchDat.MAXSKILL_0_SCYNDI.skill_3 = false
+AchDat.MAXSKILL_0_SCYNDI.skill_2 = false
+AchDat.MAXSKILL_0_SCYNDI.skill_1 = false
+AchDat.MAXSKILL_0_SCYNDI.ProcessValue = ""
+AchDat.MAXSKILL_0_SCYNDI.Require_Medals = false
+AchDat.MAXSKILL_0_SCYNDI.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_SCYNDI.skill_check = false
+
+
+AchDat.SECDUNG_ABYSS = new AchRecord()
+AchDat.SECDUNG_ABYSS.hidden = false
+AchDat.SECDUNG_ABYSS.allow_trueabyss = false
+AchDat.SECDUNG_ABYSS.AutoProcess = false
+AchDat.SECDUNG_ABYSS.Description = "Complete the optional dungeon: The Abyss"
+AchDat.SECDUNG_ABYSS.Name = "Beyond infinity!"
+AchDat.SECDUNG_ABYSS.only_trueabyss = false
+AchDat.SECDUNG_ABYSS.ProcessMax = 0
+AchDat.SECDUNG_ABYSS.ProcessString = "{Value} of {Max}"
+AchDat.SECDUNG_ABYSS.skill_3 = true
+AchDat.SECDUNG_ABYSS.skill_2 = true
+AchDat.SECDUNG_ABYSS.ProcessValue = ""
+AchDat.SECDUNG_ABYSS.skill_1 = true
+AchDat.SECDUNG_ABYSS.Require_Medals = false
+AchDat.SECDUNG_ABYSS.skill_check = false
+
+
+AchDat.OVERSOUL_0700 = new AchRecord()
+AchDat.OVERSOUL_0700.hidden = false
+AchDat.OVERSOUL_0700.allow_trueabyss = true
+AchDat.OVERSOUL_0700.AutoProcess = true
+AchDat.OVERSOUL_0700.Description = "Defeat 700 enemy in *Oversoul* state"
+AchDat.OVERSOUL_0700.Name = "The 7 horcruxes"
+AchDat.OVERSOUL_0700.only_trueabyss = false
+AchDat.OVERSOUL_0700.ProcessMax = 700
+AchDat.OVERSOUL_0700.ProcessString = "You need {Max}. and you have {Value}"
+AchDat.OVERSOUL_0700.skill_3 = true
+AchDat.OVERSOUL_0700.skill_2 = true
+AchDat.OVERSOUL_0700.ProcessValue = "OversoulKills"
+AchDat.OVERSOUL_0700.skill_1 = false
+AchDat.OVERSOUL_0700.Require_Medals = false
+AchDat.OVERSOUL_0700.skill_check = true
+
+
+AchDat.BOSS_OCEANGOB = new AchRecord()
+AchDat.BOSS_OCEANGOB.hidden = false
+AchDat.BOSS_OCEANGOB.allow_trueabyss = false
+AchDat.BOSS_OCEANGOB.AutoProcess = true
+AchDat.BOSS_OCEANGOB.Description = "Defeat the Ocean Goblin"
+AchDat.BOSS_OCEANGOB.Name = "My Bonnie is over the ocean"
+AchDat.BOSS_OCEANGOB.only_trueabyss = false
+AchDat.BOSS_OCEANGOB.ProcessMax = 1
+AchDat.BOSS_OCEANGOB.only_newgameplus = true
+AchDat.BOSS_OCEANGOB.skill_3 = true
+AchDat.BOSS_OCEANGOB.skill_2 = true
+AchDat.BOSS_OCEANGOB.skill_1 = true
+AchDat.BOSS_OCEANGOB.ProcessValue = "KILLED_BOSS_OCEANGOBLIN"
+AchDat.BOSS_OCEANGOB.Require_Medals = false
+AchDat.BOSS_OCEANGOB.ProcessString = ""
+AchDat.BOSS_OCEANGOB.skill_check = false
+
+
+AchDat.ABYSS_COMPLETE_3 = new AchRecord()
+AchDat.ABYSS_COMPLETE_3.hidden = false
+AchDat.ABYSS_COMPLETE_3.allow_trueabyss = true
+AchDat.ABYSS_COMPLETE_3.AutoProcess = false
+AchDat.ABYSS_COMPLETE_3.Description = "Complete the True Abyss in the Hard mode"
+AchDat.ABYSS_COMPLETE_3.Name = "The Trye Abyss - Hard"
+AchDat.ABYSS_COMPLETE_3.only_trueabyss = true
+AchDat.ABYSS_COMPLETE_3.ProcessMax = 0
+AchDat.ABYSS_COMPLETE_3.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_COMPLETE_3.skill_3 = true
+AchDat.ABYSS_COMPLETE_3.skill_2 = false
+AchDat.ABYSS_COMPLETE_3.ProcessValue = ""
+AchDat.ABYSS_COMPLETE_3.skill_1 = false
+AchDat.ABYSS_COMPLETE_3.Require_Medals = false
+AchDat.ABYSS_COMPLETE_3.skill_check = true
+
+
+AchDat.ABYSS_COMPLETE = new AchRecord()
+AchDat.ABYSS_COMPLETE.hidden = false
+AchDat.ABYSS_COMPLETE.allow_trueabyss = true
+AchDat.ABYSS_COMPLETE.AutoProcess = false
+AchDat.ABYSS_COMPLETE.Description = "Complete the True Abyss"
+AchDat.ABYSS_COMPLETE.Name = "I reject your reality and substitute my own"
+AchDat.ABYSS_COMPLETE.only_trueabyss = true
+AchDat.ABYSS_COMPLETE.ProcessMax = 0
+AchDat.ABYSS_COMPLETE.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_COMPLETE.skill_3 = true
+AchDat.ABYSS_COMPLETE.skill_2 = true
+AchDat.ABYSS_COMPLETE.ProcessValue = ""
+AchDat.ABYSS_COMPLETE.skill_1 = true
+AchDat.ABYSS_COMPLETE.Require_Medals = false
+AchDat.ABYSS_COMPLETE.skill_check = false
+
+
+AchDat.PUZ_180 = new AchRecord()
+AchDat.PUZ_180.hidden = false
+AchDat.PUZ_180.allow_trueabyss = false
+AchDat.PUZ_180.AutoProcess = false
+AchDat.PUZ_180.Description = "Hit the first target in Malabia's Cave"
+AchDat.PUZ_180.Name = "ONE HUNDRED AND EEEEEEEEIGHTY!"
+AchDat.PUZ_180.only_trueabyss = false
+AchDat.PUZ_180.ProcessMax = 0
+AchDat.PUZ_180.ProcessString = "{Value} of {Max}"
+AchDat.PUZ_180.skill_3 = true
+AchDat.PUZ_180.skill_2 = true
+AchDat.PUZ_180.ProcessValue = ""
+AchDat.PUZ_180.skill_1 = true
+AchDat.PUZ_180.Require_Medals = false
+AchDat.PUZ_180.skill_check = false
+
+
+AchDat.BOSS_SHECKLOCK2 = new AchRecord()
+AchDat.BOSS_SHECKLOCK2.hidden = false
+AchDat.BOSS_SHECKLOCK2.allow_trueabyss = false
+AchDat.BOSS_SHECKLOCK2.AutoProcess = true
+AchDat.BOSS_SHECKLOCK2.Description = "Defeat Sheck-Lock in the Marshes"
+AchDat.BOSS_SHECKLOCK2.Name = "Hello again, Mid-Boss!"
+AchDat.BOSS_SHECKLOCK2.only_trueabyss = false
+AchDat.BOSS_SHECKLOCK2.ProcessMax = 1
+AchDat.BOSS_SHECKLOCK2.ProcessString = ""
+AchDat.BOSS_SHECKLOCK2.skill_3 = true
+AchDat.BOSS_SHECKLOCK2.skill_2 = true
+AchDat.BOSS_SHECKLOCK2.ProcessValue = "KILLED_BOSS_SHECKLOCK2"
+AchDat.BOSS_SHECKLOCK2.skill_1 = true
+AchDat.BOSS_SHECKLOCK2.Require_Medals = false
+AchDat.BOSS_SHECKLOCK2.skill_check = false
+
+
+AchDat.SCEN_AERIA = new AchRecord()
+AchDat.SCEN_AERIA.hidden = false
+AchDat.SCEN_AERIA.allow_trueabyss = false
+AchDat.SCEN_AERIA.AutoProcess = false
+AchDat.SCEN_AERIA.Description = "Set foot on Aeria"
+AchDat.SCEN_AERIA.Name = "Ty ymor syrfa dal Aerya"
+AchDat.SCEN_AERIA.only_trueabyss = false
+AchDat.SCEN_AERIA.ProcessMax = 0
+AchDat.SCEN_AERIA.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_AERIA.skill_3 = true
+AchDat.SCEN_AERIA.skill_2 = true
+AchDat.SCEN_AERIA.ProcessValue = ""
+AchDat.SCEN_AERIA.skill_1 = true
+AchDat.SCEN_AERIA.Require_Medals = false
+AchDat.SCEN_AERIA.skill_check = false
+
+
+AchDat.MAXSKILL_3_IRRAVONIA = new AchRecord()
+AchDat.MAXSKILL_3_IRRAVONIA.hidden = false
+AchDat.MAXSKILL_3_IRRAVONIA.allow_trueabyss = true
+AchDat.MAXSKILL_3_IRRAVONIA.AutoProcess = false
+AchDat.MAXSKILL_3_IRRAVONIA.Description = "Have Irravonia's water skills to the max"
+AchDat.MAXSKILL_3_IRRAVONIA.Name = "This world of water"
+AchDat.MAXSKILL_3_IRRAVONIA.only_trueabyss = false
+AchDat.MAXSKILL_3_IRRAVONIA.ProcessMax = 0
+AchDat.MAXSKILL_3_IRRAVONIA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_3_IRRAVONIA.skill_3 = false
+AchDat.MAXSKILL_3_IRRAVONIA.skill_2 = false
+AchDat.MAXSKILL_3_IRRAVONIA.ProcessValue = ""
+AchDat.MAXSKILL_3_IRRAVONIA.skill_1 = false
+AchDat.MAXSKILL_3_IRRAVONIA.Require_Medals = false
+AchDat.MAXSKILL_3_IRRAVONIA.skill_check = false
+
+
+AchDat.SCEN_KIRANAPARTY = new AchRecord()
+AchDat.SCEN_KIRANAPARTY.hidden = true
+AchDat.SCEN_KIRANAPARTY.allow_trueabyss = false
+AchDat.SCEN_KIRANAPARTY.AutoProcess = false
+AchDat.SCEN_KIRANAPARTY.Description = "Recruit Kirana (temporarily) for your party"
+AchDat.SCEN_KIRANAPARTY.Name = "May the forced be with you"
+AchDat.SCEN_KIRANAPARTY.only_trueabyss = false
+AchDat.SCEN_KIRANAPARTY.ProcessMax = 0
+AchDat.SCEN_KIRANAPARTY.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_KIRANAPARTY.skill_3 = true
+AchDat.SCEN_KIRANAPARTY.skill_2 = true
+AchDat.SCEN_KIRANAPARTY.ProcessValue = ""
+AchDat.SCEN_KIRANAPARTY.skill_1 = true
+AchDat.SCEN_KIRANAPARTY.Require_Medals = false
+AchDat.SCEN_KIRANAPARTY.skill_check = false
+
+
+AchDat.BOSS_CYBERASTRILOPUP = new AchRecord()
+AchDat.BOSS_CYBERASTRILOPUP.hidden = true
+AchDat.BOSS_CYBERASTRILOPUP.allow_trueabyss = false
+AchDat.BOSS_CYBERASTRILOPUP.AutoProcess = true
+AchDat.BOSS_CYBERASTRILOPUP.Description = "Defeat the cyberastrilopup"
+AchDat.BOSS_CYBERASTRILOPUP.Name = "Resistance is futile"
+AchDat.BOSS_CYBERASTRILOPUP.only_trueabyss = false
+AchDat.BOSS_CYBERASTRILOPUP.ProcessMax = 1
+AchDat.BOSS_CYBERASTRILOPUP.ProcessString = ""
+AchDat.BOSS_CYBERASTRILOPUP.skill_3 = true
+AchDat.BOSS_CYBERASTRILOPUP.skill_2 = true
+AchDat.BOSS_CYBERASTRILOPUP.ProcessValue = "KILLED_REG_CYBERASTRILOPUP"
+AchDat.BOSS_CYBERASTRILOPUP.skill_1 = true
+AchDat.BOSS_CYBERASTRILOPUP.Require_Medals = true
+AchDat.BOSS_CYBERASTRILOPUP.skill_check = false
+
+
+AchDat.ZZZ_FINISH2 = new AchRecord()
+AchDat.ZZZ_FINISH2.hidden = false
+AchDat.ZZZ_FINISH2.allow_trueabyss = false
+AchDat.ZZZ_FINISH2.AutoProcess = false
+AchDat.ZZZ_FINISH2.Description = "Complete game in the CASUAL difficulty setting"
+AchDat.ZZZ_FINISH2.Name = "Mission accomplished!"
+AchDat.ZZZ_FINISH2.only_trueabyss = false
+AchDat.ZZZ_FINISH2.ProcessMax = 0
+AchDat.ZZZ_FINISH2.ProcessString = "{Value} of {Max}"
+AchDat.ZZZ_FINISH2.skill_3 = true
+AchDat.ZZZ_FINISH2.skill_2 = true
+AchDat.ZZZ_FINISH2.ProcessValue = ""
+AchDat.ZZZ_FINISH2.skill_1 = true
+AchDat.ZZZ_FINISH2.Require_Medals = false
+AchDat.ZZZ_FINISH2.skill_check = false
+
+
+AchDat.KILL_WOLF = new AchRecord()
+AchDat.KILL_WOLF.hidden = false
+AchDat.KILL_WOLF.allow_trueabyss = true
+AchDat.KILL_WOLF.AutoProcess = true
+AchDat.KILL_WOLF.Description = "Defeat 50 wolves"
+AchDat.KILL_WOLF.Name = "Hungry like the wolf"
+AchDat.KILL_WOLF.only_trueabyss = false
+AchDat.KILL_WOLF.ProcessMax = 50
+AchDat.KILL_WOLF.only_newgameplus = false
+AchDat.KILL_WOLF.skill_3 = true
+AchDat.KILL_WOLF.skill_2 = true
+AchDat.KILL_WOLF.skill_1 = true
+AchDat.KILL_WOLF.ProcessValue = "KILLED_REG_WOLF"
+AchDat.KILL_WOLF.Require_Medals = false
+AchDat.KILL_WOLF.ProcessString = "{Value} of {Max} Wolves killed"
+AchDat.KILL_WOLF.skill_check = false
+
+
+AchDat.ABYSS_BOSS020 = new AchRecord()
+AchDat.ABYSS_BOSS020.hidden = false
+AchDat.ABYSS_BOSS020.allow_trueabyss = true
+AchDat.ABYSS_BOSS020.AutoProcess = false
+AchDat.ABYSS_BOSS020.Description = "Defeat the boss on the True Abyss, Floor #020"
+AchDat.ABYSS_BOSS020.Name = "True Abyss Boss - Floor #020"
+AchDat.ABYSS_BOSS020.only_trueabyss = true
+AchDat.ABYSS_BOSS020.ProcessMax = 0
+AchDat.ABYSS_BOSS020.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS020.skill_3 = true
+AchDat.ABYSS_BOSS020.skill_2 = true
+AchDat.ABYSS_BOSS020.ProcessValue = ""
+AchDat.ABYSS_BOSS020.skill_1 = true
+AchDat.ABYSS_BOSS020.Require_Medals = false
+AchDat.ABYSS_BOSS020.skill_check = false
+
+
+AchDat.ZZZ_FINISH1 = new AchRecord()
+AchDat.ZZZ_FINISH1.hidden = false
+AchDat.ZZZ_FINISH1.allow_trueabyss = false
+AchDat.ZZZ_FINISH1.AutoProcess = false
+AchDat.ZZZ_FINISH1.Description = "Complete game in the EASY difficulty setting"
+AchDat.ZZZ_FINISH1.Name = "Hey, I did a great job,didn't I?"
+AchDat.ZZZ_FINISH1.only_trueabyss = false
+AchDat.ZZZ_FINISH1.ProcessMax = 0
+AchDat.ZZZ_FINISH1.only_newgameplus = false
+AchDat.ZZZ_FINISH1.skill_3 = false
+AchDat.ZZZ_FINISH1.skill_2 = false
+AchDat.ZZZ_FINISH1.skill_1 = true
+AchDat.ZZZ_FINISH1.ProcessValue = ""
+AchDat.ZZZ_FINISH1.Require_Medals = false
+AchDat.ZZZ_FINISH1.ProcessString = "{Value} of {Max}"
+AchDat.ZZZ_FINISH1.skill_check = true
+
+
+AchDat.VIC_00001 = new AchRecord()
+AchDat.VIC_00001.hidden = false
+AchDat.VIC_00001.allow_trueabyss = true
+AchDat.VIC_00001.AutoProcess = true
+AchDat.VIC_00001.Description = "Win a battle!"
+AchDat.VIC_00001.Name = "Your first real battle! Let's see some style"
+AchDat.VIC_00001.only_trueabyss = false
+AchDat.VIC_00001.ProcessMax = 1
+AchDat.VIC_00001.ProcessString = ""
+AchDat.VIC_00001.skill_3 = true
+AchDat.VIC_00001.skill_2 = true
+AchDat.VIC_00001.ProcessValue = "Victories"
+AchDat.VIC_00001.skill_1 = true
+AchDat.VIC_00001.Require_Medals = false
+AchDat.VIC_00001.skill_check = false
+
+
+AchDat.MAXSKILL_1_SCYNDI = new AchRecord()
+AchDat.MAXSKILL_1_SCYNDI.hidden = false
+AchDat.MAXSKILL_1_SCYNDI.allow_trueabyss = true
+AchDat.MAXSKILL_1_SCYNDI.AutoProcess = false
+AchDat.MAXSKILL_1_SCYNDI.Description = "Scyndi reached max level with Weniaria"
+AchDat.MAXSKILL_1_SCYNDI.Name = "Heal the world! Make it a better place!"
+AchDat.MAXSKILL_1_SCYNDI.only_trueabyss = false
+AchDat.MAXSKILL_1_SCYNDI.ProcessMax = 0
+AchDat.MAXSKILL_1_SCYNDI.only_newgameplus = false
+AchDat.MAXSKILL_1_SCYNDI.skill_3 = false
+AchDat.MAXSKILL_1_SCYNDI.skill_2 = false
+AchDat.MAXSKILL_1_SCYNDI.skill_1 = false
+AchDat.MAXSKILL_1_SCYNDI.ProcessValue = ""
+AchDat.MAXSKILL_1_SCYNDI.Require_Medals = false
+AchDat.MAXSKILL_1_SCYNDI.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_1_SCYNDI.skill_check = false
+
+
+AchDat["100_BRENDOR"] = new AchRecord()
+AchDat["100_BRENDOR"].hidden = false
+AchDat["100_BRENDOR"].allow_trueabyss = true
+AchDat["100_BRENDOR"].AutoProcess = false
+AchDat["100_BRENDOR"].Description = "Brendor to level C or higher"
+AchDat["100_BRENDOR"].Name = "I've got the power"
+AchDat["100_BRENDOR"].only_trueabyss = false
+AchDat["100_BRENDOR"].ProcessMax = 0
+AchDat["100_BRENDOR"].ProcessString = "{Value} of {Max}"
+AchDat["100_BRENDOR"].skill_3 = true
+AchDat["100_BRENDOR"].skill_2 = true
+AchDat["100_BRENDOR"].ProcessValue = ""
+AchDat["100_BRENDOR"].skill_1 = true
+AchDat["100_BRENDOR"].Require_Medals = false
+AchDat["100_BRENDOR"].skill_check = false
+
+
+AchDat.ABYSS_BOSS030 = new AchRecord()
+AchDat.ABYSS_BOSS030.hidden = false
+AchDat.ABYSS_BOSS030.allow_trueabyss = true
+AchDat.ABYSS_BOSS030.AutoProcess = false
+AchDat.ABYSS_BOSS030.Description = "Defeat the boss on the True Abyss, Floor #030"
+AchDat.ABYSS_BOSS030.Name = "True Abyss Boss - Floor #030"
+AchDat.ABYSS_BOSS030.only_trueabyss = true
+AchDat.ABYSS_BOSS030.ProcessMax = 0
+AchDat.ABYSS_BOSS030.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS030.skill_3 = true
+AchDat.ABYSS_BOSS030.skill_2 = true
+AchDat.ABYSS_BOSS030.ProcessValue = ""
+AchDat.ABYSS_BOSS030.skill_1 = true
+AchDat.ABYSS_BOSS030.Require_Medals = false
+AchDat.ABYSS_BOSS030.skill_check = false
+
+
+AchDat.ABYSS_COMPLETE_2 = new AchRecord()
+AchDat.ABYSS_COMPLETE_2.hidden = false
+AchDat.ABYSS_COMPLETE_2.allow_trueabyss = true
+AchDat.ABYSS_COMPLETE_2.AutoProcess = false
+AchDat.ABYSS_COMPLETE_2.Description = "Complete the True Abyss in the Casual mode"
+AchDat.ABYSS_COMPLETE_2.Name = "The Trye Abyss - Casual"
+AchDat.ABYSS_COMPLETE_2.only_trueabyss = true
+AchDat.ABYSS_COMPLETE_2.ProcessMax = 0
+AchDat.ABYSS_COMPLETE_2.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_COMPLETE_2.skill_3 = false
+AchDat.ABYSS_COMPLETE_2.skill_2 = true
+AchDat.ABYSS_COMPLETE_2.ProcessValue = ""
+AchDat.ABYSS_COMPLETE_2.skill_1 = false
+AchDat.ABYSS_COMPLETE_2.Require_Medals = false
+AchDat.ABYSS_COMPLETE_2.skill_check = true
+
+
+AchDat.MAXSKILL_0_DERNOR = new AchRecord()
+AchDat.MAXSKILL_0_DERNOR.hidden = false
+AchDat.MAXSKILL_0_DERNOR.allow_trueabyss = true
+AchDat.MAXSKILL_0_DERNOR.AutoProcess = false
+AchDat.MAXSKILL_0_DERNOR.Description = "Dernor's Bat Skills to max level"
+AchDat.MAXSKILL_0_DERNOR.Name = "Bat-Man"
+AchDat.MAXSKILL_0_DERNOR.only_trueabyss = false
+AchDat.MAXSKILL_0_DERNOR.ProcessMax = 0
+AchDat.MAXSKILL_0_DERNOR.only_newgameplus = false
+AchDat.MAXSKILL_0_DERNOR.skill_3 = false
+AchDat.MAXSKILL_0_DERNOR.skill_2 = false
+AchDat.MAXSKILL_0_DERNOR.skill_1 = false
+AchDat.MAXSKILL_0_DERNOR.ProcessValue = ""
+AchDat.MAXSKILL_0_DERNOR.Require_Medals = false
+AchDat.MAXSKILL_0_DERNOR.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_DERNOR.skill_check = false
+
+
+AchDat.YOMAMA = new AchRecord()
+AchDat.YOMAMA.hidden = false
+AchDat.YOMAMA.allow_trueabyss = false
+AchDat.YOMAMA.AutoProcess = false
+AchDat.YOMAMA.Description = "Get past the Big Mama Slime"
+AchDat.YOMAMA.Name = "Yo Mama!"
+AchDat.YOMAMA.only_trueabyss = false
+AchDat.YOMAMA.ProcessMax = 0
+AchDat.YOMAMA.ProcessString = "{Value} or {Max}"
+AchDat.YOMAMA.skill_3 = false
+AchDat.YOMAMA.skill_2 = false
+AchDat.YOMAMA.ProcessValue = ""
+AchDat.YOMAMA.skill_1 = false
+AchDat.YOMAMA.Require_Medals = false
+AchDat.YOMAMA.skill_check = false
+
+
+AchDat.MAXSKILL_4_ERIC = new AchRecord()
+AchDat.MAXSKILL_4_ERIC.hidden = false
+AchDat.MAXSKILL_4_ERIC.allow_trueabyss = true
+AchDat.MAXSKILL_4_ERIC.AutoProcess = false
+AchDat.MAXSKILL_4_ERIC.Description = "Have Eric's Black Dragon skills to the maximum level"
+AchDat.MAXSKILL_4_ERIC.Name = "Black Velvet"
+AchDat.MAXSKILL_4_ERIC.only_trueabyss = false
+AchDat.MAXSKILL_4_ERIC.ProcessMax = 0
+AchDat.MAXSKILL_4_ERIC.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_4_ERIC.skill_3 = false
+AchDat.MAXSKILL_4_ERIC.skill_2 = false
+AchDat.MAXSKILL_4_ERIC.ProcessValue = ""
+AchDat.MAXSKILL_4_ERIC.skill_1 = false
+AchDat.MAXSKILL_4_ERIC.Require_Medals = false
+AchDat.MAXSKILL_4_ERIC.skill_check = false
+
+
+AchDat.KILL_THE_HIRELING = new AchRecord()
+AchDat.KILL_THE_HIRELING.hidden = false
+AchDat.KILL_THE_HIRELING.allow_trueabyss = true
+AchDat.KILL_THE_HIRELING.AutoProcess = true
+AchDat.KILL_THE_HIRELING.Description = "Kill a hireling"
+AchDat.KILL_THE_HIRELING.Name = "Kill the hireling"
+AchDat.KILL_THE_HIRELING.only_trueabyss = false
+AchDat.KILL_THE_HIRELING.ProcessMax = 1
+AchDat.KILL_THE_HIRELING.ProcessString = "Kill a hireling"
+AchDat.KILL_THE_HIRELING.skill_3 = false
+AchDat.KILL_THE_HIRELING.skill_2 = false
+AchDat.KILL_THE_HIRELING.ProcessValue = "KILLED_REG_HIRELING"
+AchDat.KILL_THE_HIRELING.skill_1 = false
+AchDat.KILL_THE_HIRELING.Require_Medals = false
+AchDat.KILL_THE_HIRELING.skill_check = false
+
+
+AchDat["100_REBECCA"] = new AchRecord()
+AchDat["100_REBECCA"].hidden = false
+AchDat["100_REBECCA"].allow_trueabyss = true
+AchDat["100_REBECCA"].AutoProcess = false
+AchDat["100_REBECCA"].Description = "Rebecca to level C or higher"
+AchDat["100_REBECCA"].Name = "I'm no man"
+AchDat["100_REBECCA"].only_trueabyss = false
+AchDat["100_REBECCA"].ProcessMax = 0
+AchDat["100_REBECCA"].ProcessString = "{Value} of {Max}"
+AchDat["100_REBECCA"].skill_3 = true
+AchDat["100_REBECCA"].skill_2 = true
+AchDat["100_REBECCA"].ProcessValue = ""
+AchDat["100_REBECCA"].skill_1 = true
+AchDat["100_REBECCA"].Require_Medals = false
+AchDat["100_REBECCA"].skill_check = false
+
+
+AchDat.ABYSS_BOSS060 = new AchRecord()
+AchDat.ABYSS_BOSS060.hidden = false
+AchDat.ABYSS_BOSS060.allow_trueabyss = true
+AchDat.ABYSS_BOSS060.AutoProcess = false
+AchDat.ABYSS_BOSS060.Description = "Defeat the boss on the True Abyss, Floor #060"
+AchDat.ABYSS_BOSS060.Name = "True Abyss Boss - Floor #060"
+AchDat.ABYSS_BOSS060.only_trueabyss = true
+AchDat.ABYSS_BOSS060.ProcessMax = 0
+AchDat.ABYSS_BOSS060.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS060.skill_3 = true
+AchDat.ABYSS_BOSS060.skill_2 = true
+AchDat.ABYSS_BOSS060.ProcessValue = ""
+AchDat.ABYSS_BOSS060.skill_1 = true
+AchDat.ABYSS_BOSS060.Require_Medals = false
+AchDat.ABYSS_BOSS060.skill_check = false
+
+
+AchDat.BOSS_KIRANA_1 = new AchRecord()
+AchDat.BOSS_KIRANA_1.hidden = true
+AchDat.BOSS_KIRANA_1.allow_trueabyss = false
+AchDat.BOSS_KIRANA_1.AutoProcess = true
+AchDat.BOSS_KIRANA_1.Description = "Defeat Kirana in the Airom Mines"
+AchDat.BOSS_KIRANA_1.Name = "Don't hit highclass girls like me"
+AchDat.BOSS_KIRANA_1.only_trueabyss = false
+AchDat.BOSS_KIRANA_1.ProcessMax = 1
+AchDat.BOSS_KIRANA_1.ProcessString = ""
+AchDat.BOSS_KIRANA_1.skill_3 = false
+AchDat.BOSS_KIRANA_1.skill_2 = false
+AchDat.BOSS_KIRANA_1.ProcessValue = "KILLED_BOSS_Kirana"
+AchDat.BOSS_KIRANA_1.skill_1 = false
+AchDat.BOSS_KIRANA_1.Require_Medals = false
+AchDat.BOSS_KIRANA_1.skill_check = false
+
+
+AchDat.BOSS_ALDARUS1 = new AchRecord()
+AchDat.BOSS_ALDARUS1.hidden = true
+AchDat.BOSS_ALDARUS1.allow_trueabyss = false
+AchDat.BOSS_ALDARUS1.AutoProcess = true
+AchDat.BOSS_ALDARUS1.Description = "Defeat Aldarus in Azquakunda Prison"
+AchDat.BOSS_ALDARUS1.Name = "En garde, monsieur!"
+AchDat.BOSS_ALDARUS1.only_trueabyss = false
+AchDat.BOSS_ALDARUS1.ProcessMax = 1
+AchDat.BOSS_ALDARUS1.ProcessString = ""
+AchDat.BOSS_ALDARUS1.skill_3 = true
+AchDat.BOSS_ALDARUS1.skill_2 = true
+AchDat.BOSS_ALDARUS1.ProcessValue = "KILLED_BOSS_ALDARUS"
+AchDat.BOSS_ALDARUS1.skill_1 = true
+AchDat.BOSS_ALDARUS1.Require_Medals = false
+AchDat.BOSS_ALDARUS1.skill_check = false
+
+
+AchDat.WILL_MERYA = new AchRecord()
+AchDat.WILL_MERYA.hidden = false
+AchDat.WILL_MERYA.allow_trueabyss = true
+AchDat.WILL_MERYA.AutoProcess = true
+AchDat.WILL_MERYA.Description = "Make Merya conserve 100 items"
+AchDat.WILL_MERYA.Name = "Collector's Item!"
+AchDat.WILL_MERYA.only_trueabyss = false
+AchDat.WILL_MERYA.ProcessMax = 100
+AchDat.WILL_MERYA.only_newgameplus = false
+AchDat.WILL_MERYA.skill_3 = true
+AchDat.WILL_MERYA.skill_2 = true
+AchDat.WILL_MERYA.skill_1 = true
+AchDat.WILL_MERYA.ProcessValue = "WILL_MERYA"
+AchDat.WILL_MERYA.Require_Medals = false
+AchDat.WILL_MERYA.ProcessString = "{Value} of {Max}"
+AchDat.WILL_MERYA.skill_check = false
+
+
+AchDat.WILL_IRRAVONIA = new AchRecord()
+AchDat.WILL_IRRAVONIA.hidden = false
+AchDat.WILL_IRRAVONIA.allow_trueabyss = true
+AchDat.WILL_IRRAVONIA.AutoProcess = false
+AchDat.WILL_IRRAVONIA.Description = "Irravonia has warded Fire, Wind, Water and Earth"
+AchDat.WILL_IRRAVONIA.Name = "The Fifth Element"
+AchDat.WILL_IRRAVONIA.only_trueabyss = false
+AchDat.WILL_IRRAVONIA.ProcessMax = 0
+AchDat.WILL_IRRAVONIA.ProcessString = ""
+AchDat.WILL_IRRAVONIA.skill_3 = true
+AchDat.WILL_IRRAVONIA.skill_2 = true
+AchDat.WILL_IRRAVONIA.ProcessValue = ""
+AchDat.WILL_IRRAVONIA.skill_1 = true
+AchDat.WILL_IRRAVONIA.Require_Medals = false
+AchDat.WILL_IRRAVONIA.skill_check = false
+
+
+AchDat.CASH_000500000 = new AchRecord()
+AchDat.CASH_000500000.hidden = false
+AchDat.CASH_000500000.allow_trueabyss = true
+AchDat.CASH_000500000.AutoProcess = true
+AchDat.CASH_000500000.Description = "Have 1,000,000+ shilders in cash"
+AchDat.CASH_000500000.Name = "Who wants to be a millionaire?"
+AchDat.CASH_000500000.only_trueabyss = false
+AchDat.CASH_000500000.ProcessMax = 1000000
+AchDat.CASH_000500000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_000500000.skill_3 = false
+AchDat.CASH_000500000.skill_2 = false
+AchDat.CASH_000500000.ProcessValue = "CASH"
+AchDat.CASH_000500000.skill_1 = false
+AchDat.CASH_000500000.Require_Medals = false
+AchDat.CASH_000500000.skill_check = false
+
+
+AchDat.WILL_ERIC = new AchRecord()
+AchDat.WILL_ERIC.hidden = false
+AchDat.WILL_ERIC.allow_trueabyss = true
+AchDat.WILL_ERIC.AutoProcess = true
+AchDat.WILL_ERIC.Description = "Make Eric perform Coup de Grace at least 5 times"
+AchDat.WILL_ERIC.Name = "Finish him! FATALITY!"
+AchDat.WILL_ERIC.only_trueabyss = false
+AchDat.WILL_ERIC.ProcessMax = 5
+AchDat.WILL_ERIC.ProcessString = "{Value} of {Max}"
+AchDat.WILL_ERIC.skill_3 = true
+AchDat.WILL_ERIC.skill_2 = true
+AchDat.WILL_ERIC.ProcessValue = "WILL_ERIC"
+AchDat.WILL_ERIC.skill_1 = true
+AchDat.WILL_ERIC.Require_Medals = false
+AchDat.WILL_ERIC.skill_check = false
+
+
+AchDat.ABYSS_SCORE_0500 = new AchRecord()
+AchDat.ABYSS_SCORE_0500.hidden = false
+AchDat.ABYSS_SCORE_0500.allow_trueabyss = true
+AchDat.ABYSS_SCORE_0500.AutoProcess = true
+AchDat.ABYSS_SCORE_0500.Description = "Abyss Score D"
+AchDat.ABYSS_SCORE_0500.Name = "Abyss Score D"
+AchDat.ABYSS_SCORE_0500.only_trueabyss = true
+AchDat.ABYSS_SCORE_0500.ProcessMax = 500
+AchDat.ABYSS_SCORE_0500.ProcessString = ""
+AchDat.ABYSS_SCORE_0500.skill_3 = true
+AchDat.ABYSS_SCORE_0500.skill_2 = true
+AchDat.ABYSS_SCORE_0500.ProcessValue = "TRUEABYSSSCORE"
+AchDat.ABYSS_SCORE_0500.skill_1 = true
+AchDat.ABYSS_SCORE_0500.Require_Medals = false
+AchDat.ABYSS_SCORE_0500.skill_check = false
+
+
+AchDat.WILL_BRENDOR = new AchRecord()
+AchDat.WILL_BRENDOR.hidden = false
+AchDat.WILL_BRENDOR.allow_trueabyss = true
+AchDat.WILL_BRENDOR.AutoProcess = true
+AchDat.WILL_BRENDOR.Description = "Make Brendor block a total of 10,000 damage"
+AchDat.WILL_BRENDOR.Name = "Solid! Solid as a rock!"
+AchDat.WILL_BRENDOR.only_trueabyss = false
+AchDat.WILL_BRENDOR.ProcessMax = 10000
+AchDat.WILL_BRENDOR.ProcessString = "{Value} of {Max}"
+AchDat.WILL_BRENDOR.skill_3 = true
+AchDat.WILL_BRENDOR.skill_2 = true
+AchDat.WILL_BRENDOR.ProcessValue = "WILLBRENDOR"
+AchDat.WILL_BRENDOR.skill_1 = true
+AchDat.WILL_BRENDOR.Require_Medals = false
+AchDat.WILL_BRENDOR.skill_check = false
+
+
+AchDat.VIC_05000 = new AchRecord()
+AchDat.VIC_05000.hidden = false
+AchDat.VIC_05000.allow_trueabyss = true
+AchDat.VIC_05000.AutoProcess = true
+AchDat.VIC_05000.Description = "Win 5000 battles"
+AchDat.VIC_05000.Name = "Long live, the KING!"
+AchDat.VIC_05000.only_trueabyss = false
+AchDat.VIC_05000.ProcessMax = 5000
+AchDat.VIC_05000.ProcessString = "{Value} of {Max}"
+AchDat.VIC_05000.skill_3 = true
+AchDat.VIC_05000.skill_2 = true
+AchDat.VIC_05000.ProcessValue = "Victories"
+AchDat.VIC_05000.skill_1 = true
+AchDat.VIC_05000.Require_Medals = false
+AchDat.VIC_05000.skill_check = false
+
+
+AchDat.BOSS_SUPERPINK = new AchRecord()
+AchDat.BOSS_SUPERPINK.hidden = false
+AchDat.BOSS_SUPERPINK.allow_trueabyss = false
+AchDat.BOSS_SUPERPINK.AutoProcess = true
+AchDat.BOSS_SUPERPINK.Description = "Defeat SuperPink in the Abyss"
+AchDat.BOSS_SUPERPINK.Name = "PINK! It's my new obsession!"
+AchDat.BOSS_SUPERPINK.only_trueabyss = false
+AchDat.BOSS_SUPERPINK.ProcessMax = 1
+AchDat.BOSS_SUPERPINK.ProcessString = ""
+AchDat.BOSS_SUPERPINK.skill_3 = true
+AchDat.BOSS_SUPERPINK.skill_2 = true
+AchDat.BOSS_SUPERPINK.ProcessValue = "KILLED_BOSS_SUPERPINK"
+AchDat.BOSS_SUPERPINK.skill_1 = true
+AchDat.BOSS_SUPERPINK.Require_Medals = false
+AchDat.BOSS_SUPERPINK.skill_check = false
+
+
+AchDat.VIC_01000 = new AchRecord()
+AchDat.VIC_01000.hidden = false
+AchDat.VIC_01000.allow_trueabyss = true
+AchDat.VIC_01000.AutoProcess = true
+AchDat.VIC_01000.Description = "Win 1000 battles"
+AchDat.VIC_01000.Name = "And He shall smite the whicked into the fiery pit!"
+AchDat.VIC_01000.only_trueabyss = false
+AchDat.VIC_01000.ProcessMax = 1000
+AchDat.VIC_01000.ProcessString = "{Value} of {Max}"
+AchDat.VIC_01000.skill_3 = true
+AchDat.VIC_01000.skill_2 = true
+AchDat.VIC_01000.ProcessValue = "Victories"
+AchDat.VIC_01000.skill_1 = true
+AchDat.VIC_01000.Require_Medals = false
+AchDat.VIC_01000.skill_check = false
+
+
+AchDat.VIC_00500 = new AchRecord()
+AchDat.VIC_00500.hidden = false
+AchDat.VIC_00500.allow_trueabyss = true
+AchDat.VIC_00500.AutoProcess = true
+AchDat.VIC_00500.Description = "Win 500 battles"
+AchDat.VIC_00500.Name = "Mein Leben!"
+AchDat.VIC_00500.only_trueabyss = false
+AchDat.VIC_00500.ProcessMax = 500
+AchDat.VIC_00500.ProcessString = "{Value} of {Max}"
+AchDat.VIC_00500.skill_3 = true
+AchDat.VIC_00500.skill_2 = true
+AchDat.VIC_00500.ProcessValue = "Victories"
+AchDat.VIC_00500.skill_1 = true
+AchDat.VIC_00500.Require_Medals = false
+AchDat.VIC_00500.skill_check = false
+
+
+AchDat.BOSS_BIGDEMONAIR = new AchRecord()
+AchDat.BOSS_BIGDEMONAIR.hidden = false
+AchDat.BOSS_BIGDEMONAIR.allow_trueabyss = false
+AchDat.BOSS_BIGDEMONAIR.AutoProcess = true
+AchDat.BOSS_BIGDEMONAIR.Description = "Defeat the big DemonAir in the lost city of Fruskbrando"
+AchDat.BOSS_BIGDEMONAIR.Name = "Hoor de wind waait door de bomen!"
+AchDat.BOSS_BIGDEMONAIR.only_trueabyss = false
+AchDat.BOSS_BIGDEMONAIR.ProcessMax = 1
+AchDat.BOSS_BIGDEMONAIR.ProcessString = ""
+AchDat.BOSS_BIGDEMONAIR.skill_3 = true
+AchDat.BOSS_BIGDEMONAIR.skill_2 = true
+AchDat.BOSS_BIGDEMONAIR.ProcessValue = "KILLED_BOSS_BIGDEMONAIR"
+AchDat.BOSS_BIGDEMONAIR.skill_1 = true
+AchDat.BOSS_BIGDEMONAIR.Require_Medals = false
+AchDat.BOSS_BIGDEMONAIR.skill_check = false
+
+
+AchDat.VIC_00050 = new AchRecord()
+AchDat.VIC_00050.hidden = false
+AchDat.VIC_00050.allow_trueabyss = true
+AchDat.VIC_00050.AutoProcess = true
+AchDat.VIC_00050.Description = "Win 50 battles"
+AchDat.VIC_00050.Name = "Against the power of Dyrt, there can be no victory!"
+AchDat.VIC_00050.only_trueabyss = false
+AchDat.VIC_00050.ProcessMax = 50
+AchDat.VIC_00050.ProcessString = "{Value} of {Max}"
+AchDat.VIC_00050.skill_3 = true
+AchDat.VIC_00050.skill_2 = true
+AchDat.VIC_00050.ProcessValue = "Victories"
+AchDat.VIC_00050.skill_1 = true
+AchDat.VIC_00050.Require_Medals = false
+AchDat.VIC_00050.skill_check = false
+
+
+AchDat.VIC_00010 = new AchRecord()
+AchDat.VIC_00010.hidden = false
+AchDat.VIC_00010.allow_trueabyss = true
+AchDat.VIC_00010.AutoProcess = true
+AchDat.VIC_00010.Description = "Win 10 battles"
+AchDat.VIC_00010.Name = "You THINK you've won! Think again!"
+AchDat.VIC_00010.only_trueabyss = false
+AchDat.VIC_00010.ProcessMax = 10
+AchDat.VIC_00010.ProcessString = "{Value} of {Max}"
+AchDat.VIC_00010.skill_3 = true
+AchDat.VIC_00010.skill_2 = true
+AchDat.VIC_00010.ProcessValue = "Victories"
+AchDat.VIC_00010.skill_1 = true
+AchDat.VIC_00010.Require_Medals = false
+AchDat.VIC_00010.skill_check = false
+
+
+AchDat.BOSS_WHITEGUARDIAN = new AchRecord()
+AchDat.BOSS_WHITEGUARDIAN.hidden = false
+AchDat.BOSS_WHITEGUARDIAN.allow_trueabyss = false
+AchDat.BOSS_WHITEGUARDIAN.AutoProcess = true
+AchDat.BOSS_WHITEGUARDIAN.Description = "Defeat the white guardian"
+AchDat.BOSS_WHITEGUARDIAN.Name = "Whitesnake"
+AchDat.BOSS_WHITEGUARDIAN.only_trueabyss = false
+AchDat.BOSS_WHITEGUARDIAN.ProcessMax = 1
+AchDat.BOSS_WHITEGUARDIAN.ProcessString = ""
+AchDat.BOSS_WHITEGUARDIAN.skill_3 = true
+AchDat.BOSS_WHITEGUARDIAN.skill_2 = true
+AchDat.BOSS_WHITEGUARDIAN.ProcessValue = "KILLED_BOSS_WHITEGUARDIAN"
+AchDat.BOSS_WHITEGUARDIAN.skill_1 = true
+AchDat.BOSS_WHITEGUARDIAN.Require_Medals = false
+AchDat.BOSS_WHITEGUARDIAN.skill_check = false
+
+
+AchDat.KILL_00007 = new AchRecord()
+AchDat.KILL_00007.hidden = false
+AchDat.KILL_00007.allow_trueabyss = true
+AchDat.KILL_00007.AutoProcess = true
+AchDat.KILL_00007.Description = "Kill 7 enemies"
+AchDat.KILL_00007.Name = "License to kill"
+AchDat.KILL_00007.only_trueabyss = false
+AchDat.KILL_00007.ProcessMax = 7
+AchDat.KILL_00007.ProcessString = "{Value} of {Max}"
+AchDat.KILL_00007.skill_3 = false
+AchDat.KILL_00007.skill_2 = false
+AchDat.KILL_00007.ProcessValue = "KILLS"
+AchDat.KILL_00007.skill_1 = false
+AchDat.KILL_00007.Require_Medals = false
+AchDat.KILL_00007.skill_check = false
+
+
+AchDat.COMBAT_VOID = new AchRecord()
+AchDat.COMBAT_VOID.hidden = false
+AchDat.COMBAT_VOID.allow_trueabyss = true
+AchDat.COMBAT_VOID.AutoProcess = true
+AchDat.COMBAT_VOID.Description = "Dump at least 25 enemies into the void"
+AchDat.COMBAT_VOID.Name = "There is no life in the void!"
+AchDat.COMBAT_VOID.only_trueabyss = false
+AchDat.COMBAT_VOID.ProcessMax = 25
+AchDat.COMBAT_VOID.ProcessString = "{Value} of {Max} enemies into the void"
+AchDat.COMBAT_VOID.skill_3 = true
+AchDat.COMBAT_VOID.skill_2 = true
+AchDat.COMBAT_VOID.ProcessValue = "VOIDED"
+AchDat.COMBAT_VOID.skill_1 = true
+AchDat.COMBAT_VOID.Require_Medals = false
+AchDat.COMBAT_VOID.skill_check = false
+
+
+AchDat.SEALED_SLIMEKING = new AchRecord()
+AchDat.SEALED_SLIMEKING.hidden = false
+AchDat.SEALED_SLIMEKING.allow_trueabyss = false
+AchDat.SEALED_SLIMEKING.AutoProcess = true
+AchDat.SEALED_SLIMEKING.Description = "Defeat H.R.M. King Slime"
+AchDat.SEALED_SLIMEKING.Name = "No mercy for the soldiers! No mercy for the king!"
+AchDat.SEALED_SLIMEKING.only_trueabyss = false
+AchDat.SEALED_SLIMEKING.ProcessMax = 1
+AchDat.SEALED_SLIMEKING.ProcessString = ""
+AchDat.SEALED_SLIMEKING.skill_3 = true
+AchDat.SEALED_SLIMEKING.skill_2 = true
+AchDat.SEALED_SLIMEKING.ProcessValue = "KILLED_SEALED_KINGSLIME"
+AchDat.SEALED_SLIMEKING.skill_1 = true
+AchDat.SEALED_SLIMEKING.Require_Medals = false
+AchDat.SEALED_SLIMEKING.skill_check = false
+
+
+AchDat.BOSS_TURBOCANDY = new AchRecord()
+AchDat.BOSS_TURBOCANDY.hidden = false
+AchDat.BOSS_TURBOCANDY.allow_trueabyss = false
+AchDat.BOSS_TURBOCANDY.AutoProcess = true
+AchDat.BOSS_TURBOCANDY.Description = "Defeat Turbo Candy in Sugarland"
+AchDat.BOSS_TURBOCANDY.Name = "Going Turbo!"
+AchDat.BOSS_TURBOCANDY.only_trueabyss = false
+AchDat.BOSS_TURBOCANDY.ProcessMax = 1
+AchDat.BOSS_TURBOCANDY.ProcessString = ""
+AchDat.BOSS_TURBOCANDY.skill_3 = true
+AchDat.BOSS_TURBOCANDY.skill_2 = true
+AchDat.BOSS_TURBOCANDY.ProcessValue = "KILLED_BOSS_TURBO CANDY"
+AchDat.BOSS_TURBOCANDY.skill_1 = true
+AchDat.BOSS_TURBOCANDY.Require_Medals = true
+AchDat.BOSS_TURBOCANDY.skill_check = false
+
+
+AchDat.PUZ_DIEDIE = new AchRecord()
+AchDat.PUZ_DIEDIE.hidden = false
+AchDat.PUZ_DIEDIE.allow_trueabyss = false
+AchDat.PUZ_DIEDIE.AutoProcess = false
+AchDat.PUZ_DIEDIE.Description = "Solve the puzzle in the Exam Ruins"
+AchDat.PUZ_DIEDIE.Name = "Die! Die! We all pass away!"
+AchDat.PUZ_DIEDIE.only_trueabyss = false
+AchDat.PUZ_DIEDIE.ProcessMax = 0
+AchDat.PUZ_DIEDIE.ProcessString = "{Value} or {Max}"
+AchDat.PUZ_DIEDIE.skill_3 = false
+AchDat.PUZ_DIEDIE.skill_2 = false
+AchDat.PUZ_DIEDIE.ProcessValue = ""
+AchDat.PUZ_DIEDIE.skill_1 = false
+AchDat.PUZ_DIEDIE.Require_Medals = false
+AchDat.PUZ_DIEDIE.skill_check = false
+
+
+AchDat["100_ERIC"] = new AchRecord()
+AchDat["100_ERIC"].hidden = false
+AchDat["100_ERIC"].allow_trueabyss = true
+AchDat["100_ERIC"].AutoProcess = false
+AchDat["100_ERIC"].Description = "Eric to level C or higher"
+AchDat["100_ERIC"].Name = "Eric Engerd"
+AchDat["100_ERIC"].only_trueabyss = false
+AchDat["100_ERIC"].ProcessMax = 0
+AchDat["100_ERIC"].ProcessString = "{Value} of {Max}"
+AchDat["100_ERIC"].skill_3 = true
+AchDat["100_ERIC"].skill_2 = true
+AchDat["100_ERIC"].ProcessValue = ""
+AchDat["100_ERIC"].skill_1 = true
+AchDat["100_ERIC"].Require_Medals = false
+AchDat["100_ERIC"].skill_check = false
+
+
+AchDat.MAXSKILL_1_ERIC = new AchRecord()
+AchDat.MAXSKILL_1_ERIC.hidden = false
+AchDat.MAXSKILL_1_ERIC.allow_trueabyss = true
+AchDat.MAXSKILL_1_ERIC.AutoProcess = false
+AchDat.MAXSKILL_1_ERIC.Description = "Get Eric's Red Dragon Skills to the maximum level"
+AchDat.MAXSKILL_1_ERIC.Name = "Vandaag is rood!"
+AchDat.MAXSKILL_1_ERIC.only_trueabyss = false
+AchDat.MAXSKILL_1_ERIC.ProcessMax = 0
+AchDat.MAXSKILL_1_ERIC.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_1_ERIC.skill_3 = false
+AchDat.MAXSKILL_1_ERIC.skill_2 = false
+AchDat.MAXSKILL_1_ERIC.ProcessValue = ""
+AchDat.MAXSKILL_1_ERIC.skill_1 = false
+AchDat.MAXSKILL_1_ERIC.Require_Medals = false
+AchDat.MAXSKILL_1_ERIC.skill_check = false
+
+
+AchDat.SEALED_GHOULKING = new AchRecord()
+AchDat.SEALED_GHOULKING.hidden = false
+AchDat.SEALED_GHOULKING.allow_trueabyss = false
+AchDat.SEALED_GHOULKING.AutoProcess = true
+AchDat.SEALED_GHOULKING.Description = "Defeat the Ghoul King"
+AchDat.SEALED_GHOULKING.Name = "Return of the Ghoul King"
+AchDat.SEALED_GHOULKING.only_trueabyss = false
+AchDat.SEALED_GHOULKING.ProcessMax = 1
+AchDat.SEALED_GHOULKING.ProcessString = ""
+AchDat.SEALED_GHOULKING.skill_3 = true
+AchDat.SEALED_GHOULKING.skill_2 = true
+AchDat.SEALED_GHOULKING.ProcessValue = "KILLED_SEALED_GHOULKING"
+AchDat.SEALED_GHOULKING.skill_1 = true
+AchDat.SEALED_GHOULKING.Require_Medals = false
+AchDat.SEALED_GHOULKING.skill_check = false
+
+
+AchDat.SEALED_EMPEROR = new AchRecord()
+AchDat.SEALED_EMPEROR.hidden = false
+AchDat.SEALED_EMPEROR.allow_trueabyss = false
+AchDat.SEALED_EMPEROR.AutoProcess = true
+AchDat.SEALED_EMPEROR.Description = "Defeat the Mountain Emperor"
+AchDat.SEALED_EMPEROR.Name = "The Mountain Empire Strikes Back!"
+AchDat.SEALED_EMPEROR.only_trueabyss = false
+AchDat.SEALED_EMPEROR.ProcessMax = 1
+AchDat.SEALED_EMPEROR.ProcessString = ""
+AchDat.SEALED_EMPEROR.skill_3 = true
+AchDat.SEALED_EMPEROR.skill_2 = true
+AchDat.SEALED_EMPEROR.ProcessValue = "KILLED_SEALED_MOUNTAINEMPEROR"
+AchDat.SEALED_EMPEROR.skill_1 = true
+AchDat.SEALED_EMPEROR.Require_Medals = false
+AchDat.SEALED_EMPEROR.skill_check = false
+
+
+AchDat.MAXSKILL_0_AZIELLA = new AchRecord()
+AchDat.MAXSKILL_0_AZIELLA.hidden = false
+AchDat.MAXSKILL_0_AZIELLA.allow_trueabyss = true
+AchDat.MAXSKILL_0_AZIELLA.AutoProcess = false
+AchDat.MAXSKILL_0_AZIELLA.Description = "Aziella max level with her crossbow skills"
+AchDat.MAXSKILL_0_AZIELLA.Name = "Now say 'hello' to my little friend!"
+AchDat.MAXSKILL_0_AZIELLA.only_trueabyss = false
+AchDat.MAXSKILL_0_AZIELLA.ProcessMax = 0
+AchDat.MAXSKILL_0_AZIELLA.only_newgameplus = false
+AchDat.MAXSKILL_0_AZIELLA.skill_3 = false
+AchDat.MAXSKILL_0_AZIELLA.skill_2 = false
+AchDat.MAXSKILL_0_AZIELLA.skill_1 = false
+AchDat.MAXSKILL_0_AZIELLA.ProcessValue = ""
+AchDat.MAXSKILL_0_AZIELLA.Require_Medals = false
+AchDat.MAXSKILL_0_AZIELLA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_AZIELLA.skill_check = false
+
+
+AchDat.SEALED_ALL = new AchRecord()
+AchDat.SEALED_ALL.hidden = false
+AchDat.SEALED_ALL.allow_trueabyss = false
+AchDat.SEALED_ALL.AutoProcess = false
+AchDat.SEALED_ALL.Description = "Defeat all the sealed bosses"
+AchDat.SEALED_ALL.Name = "Sealed with death's kiss"
+AchDat.SEALED_ALL.only_trueabyss = false
+AchDat.SEALED_ALL.ProcessMax = 0
+AchDat.SEALED_ALL.ProcessString = "{Value} or {Max}"
+AchDat.SEALED_ALL.skill_3 = false
+AchDat.SEALED_ALL.skill_2 = false
+AchDat.SEALED_ALL.ProcessValue = ""
+AchDat.SEALED_ALL.skill_1 = false
+AchDat.SEALED_ALL.Require_Medals = false
+AchDat.SEALED_ALL.skill_check = false
+
+
+AchDat.BOSS_BLENCHY_2 = new AchRecord()
+AchDat.BOSS_BLENCHY_2.hidden = true
+AchDat.BOSS_BLENCHY_2.allow_trueabyss = false
+AchDat.BOSS_BLENCHY_2.AutoProcess = true
+AchDat.BOSS_BLENCHY_2.Description = "Defeat Blenchy in Dyrt"
+AchDat.BOSS_BLENCHY_2.Name = "More Bitter Tears"
+AchDat.BOSS_BLENCHY_2.only_trueabyss = false
+AchDat.BOSS_BLENCHY_2.ProcessMax = 1
+AchDat.BOSS_BLENCHY_2.ProcessString = ""
+AchDat.BOSS_BLENCHY_2.skill_3 = true
+AchDat.BOSS_BLENCHY_2.skill_2 = true
+AchDat.BOSS_BLENCHY_2.ProcessValue = "KILLED_BOSS_BLENCHY2"
+AchDat.BOSS_BLENCHY_2.skill_1 = true
+AchDat.BOSS_BLENCHY_2.Require_Medals = false
+AchDat.BOSS_BLENCHY_2.skill_check = false
+
+
+AchDat.KILL_SNAKES = new AchRecord()
+AchDat.KILL_SNAKES.hidden = false
+AchDat.KILL_SNAKES.allow_trueabyss = true
+AchDat.KILL_SNAKES.AutoProcess = true
+AchDat.KILL_SNAKES.Description = "Kill 20 cobras"
+AchDat.KILL_SNAKES.Name = "Snakes! Why did it have to be snakes!?"
+AchDat.KILL_SNAKES.only_trueabyss = false
+AchDat.KILL_SNAKES.ProcessMax = 20
+AchDat.KILL_SNAKES.ProcessString = "{Value} of {Max} cobras ceased to be!"
+AchDat.KILL_SNAKES.skill_3 = false
+AchDat.KILL_SNAKES.skill_2 = false
+AchDat.KILL_SNAKES.ProcessValue = "KILLED_REG_COBRA"
+AchDat.KILL_SNAKES.skill_1 = false
+AchDat.KILL_SNAKES.Require_Medals = false
+AchDat.KILL_SNAKES.skill_check = false
+
+
+AchDat.SCYNDI_THRUR = new AchRecord()
+AchDat.SCYNDI_THRUR.hidden = true
+AchDat.SCYNDI_THRUR.allow_trueabyss = false
+AchDat.SCYNDI_THRUR.AutoProcess = false
+AchDat.SCYNDI_THRUR.Description = "Obtain Thrur's powers for Scyndi"
+AchDat.SCYNDI_THRUR.Name = "Electric Boogie"
+AchDat.SCYNDI_THRUR.only_trueabyss = false
+AchDat.SCYNDI_THRUR.ProcessMax = 0
+AchDat.SCYNDI_THRUR.ProcessString = "{Value} of {Max}"
+AchDat.SCYNDI_THRUR.skill_3 = true
+AchDat.SCYNDI_THRUR.skill_2 = true
+AchDat.SCYNDI_THRUR.ProcessValue = ""
+AchDat.SCYNDI_THRUR.skill_1 = true
+AchDat.SCYNDI_THRUR.Require_Medals = false
+AchDat.SCYNDI_THRUR.skill_check = false
+
+
+AchDat.SCEN_ZONDRA = new AchRecord()
+AchDat.SCEN_ZONDRA.hidden = true
+AchDat.SCEN_ZONDRA.allow_trueabyss = false
+AchDat.SCEN_ZONDRA.AutoProcess = false
+AchDat.SCEN_ZONDRA.Description = "Hear Jack's story about Zondra"
+AchDat.SCEN_ZONDRA.Name = "She's always a woman to me"
+AchDat.SCEN_ZONDRA.only_trueabyss = false
+AchDat.SCEN_ZONDRA.ProcessMax = 0
+AchDat.SCEN_ZONDRA.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_ZONDRA.skill_3 = true
+AchDat.SCEN_ZONDRA.skill_2 = true
+AchDat.SCEN_ZONDRA.ProcessValue = ""
+AchDat.SCEN_ZONDRA.skill_1 = true
+AchDat.SCEN_ZONDRA.Require_Medals = false
+AchDat.SCEN_ZONDRA.skill_check = false
+
+
+AchDat.SCEN_TIGERION = new AchRecord()
+AchDat.SCEN_TIGERION.hidden = false
+AchDat.SCEN_TIGERION.allow_trueabyss = false
+AchDat.SCEN_TIGERION.AutoProcess = false
+AchDat.SCEN_TIGERION.Description = "Meet Tigerion"
+AchDat.SCEN_TIGERION.Name = "Everybody wants to be a cat!"
+AchDat.SCEN_TIGERION.only_trueabyss = false
+AchDat.SCEN_TIGERION.ProcessMax = 0
+AchDat.SCEN_TIGERION.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_TIGERION.skill_3 = true
+AchDat.SCEN_TIGERION.skill_2 = true
+AchDat.SCEN_TIGERION.ProcessValue = ""
+AchDat.SCEN_TIGERION.skill_1 = true
+AchDat.SCEN_TIGERION.Require_Medals = false
+AchDat.SCEN_TIGERION.skill_check = false
+
+
+AchDat.ABYSS_BOSS070 = new AchRecord()
+AchDat.ABYSS_BOSS070.hidden = false
+AchDat.ABYSS_BOSS070.allow_trueabyss = true
+AchDat.ABYSS_BOSS070.AutoProcess = false
+AchDat.ABYSS_BOSS070.Description = "Defeat the boss on the True Abyss, Floor #070"
+AchDat.ABYSS_BOSS070.Name = "True Abyss Boss - Floor #070"
+AchDat.ABYSS_BOSS070.only_trueabyss = true
+AchDat.ABYSS_BOSS070.ProcessMax = 0
+AchDat.ABYSS_BOSS070.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS070.skill_3 = true
+AchDat.ABYSS_BOSS070.skill_2 = true
+AchDat.ABYSS_BOSS070.ProcessValue = ""
+AchDat.ABYSS_BOSS070.skill_1 = true
+AchDat.ABYSS_BOSS070.Require_Medals = false
+AchDat.ABYSS_BOSS070.skill_check = false
+
+
+AchDat.SECDUNG_MADHOUSE = new AchRecord()
+AchDat.SECDUNG_MADHOUSE.hidden = false
+AchDat.SECDUNG_MADHOUSE.allow_trueabyss = false
+AchDat.SECDUNG_MADHOUSE.AutoProcess = false
+AchDat.SECDUNG_MADHOUSE.Description = "Complete the optional dungeon: The Mad House!"
+AchDat.SECDUNG_MADHOUSE.Name = "I'm going slightly mad!"
+AchDat.SECDUNG_MADHOUSE.only_trueabyss = false
+AchDat.SECDUNG_MADHOUSE.ProcessMax = 0
+AchDat.SECDUNG_MADHOUSE.ProcessString = "{Value} of {Max}"
+AchDat.SECDUNG_MADHOUSE.skill_3 = true
+AchDat.SECDUNG_MADHOUSE.skill_2 = true
+AchDat.SECDUNG_MADHOUSE.ProcessValue = ""
+AchDat.SECDUNG_MADHOUSE.skill_1 = true
+AchDat.SECDUNG_MADHOUSE.Require_Medals = false
+AchDat.SECDUNG_MADHOUSE.skill_check = false
+
+
+AchDat.KILL_05000 = new AchRecord()
+AchDat.KILL_05000.hidden = false
+AchDat.KILL_05000.allow_trueabyss = true
+AchDat.KILL_05000.AutoProcess = true
+AchDat.KILL_05000.Description = "Kill 5000 enemies"
+AchDat.KILL_05000.Name = "Leerooooooooy Jennnnnnkins"
+AchDat.KILL_05000.only_trueabyss = false
+AchDat.KILL_05000.ProcessMax = 5000
+AchDat.KILL_05000.ProcessString = "{Value} of {Max}"
+AchDat.KILL_05000.skill_3 = false
+AchDat.KILL_05000.skill_2 = false
+AchDat.KILL_05000.ProcessValue = "KILLS"
+AchDat.KILL_05000.skill_1 = false
+AchDat.KILL_05000.Require_Medals = false
+AchDat.KILL_05000.skill_check = false
+
+
+AchDat.ABYSS_COMPLETE_1 = new AchRecord()
+AchDat.ABYSS_COMPLETE_1.hidden = false
+AchDat.ABYSS_COMPLETE_1.allow_trueabyss = true
+AchDat.ABYSS_COMPLETE_1.AutoProcess = false
+AchDat.ABYSS_COMPLETE_1.Description = "Complete the True Abyss in the Easy mode"
+AchDat.ABYSS_COMPLETE_1.Name = "The Trye Abyss - Easy"
+AchDat.ABYSS_COMPLETE_1.only_trueabyss = true
+AchDat.ABYSS_COMPLETE_1.ProcessMax = 0
+AchDat.ABYSS_COMPLETE_1.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_COMPLETE_1.skill_3 = false
+AchDat.ABYSS_COMPLETE_1.skill_2 = false
+AchDat.ABYSS_COMPLETE_1.ProcessValue = ""
+AchDat.ABYSS_COMPLETE_1.skill_1 = true
+AchDat.ABYSS_COMPLETE_1.Require_Medals = false
+AchDat.ABYSS_COMPLETE_1.skill_check = true
+
+
+AchDat.SCEN_ORACLE = new AchRecord()
+AchDat.SCEN_ORACLE.hidden = true
+AchDat.SCEN_ORACLE.allow_trueabyss = false
+AchDat.SCEN_ORACLE.AutoProcess = false
+AchDat.SCEN_ORACLE.Description = "Meet the Oracle"
+AchDat.SCEN_ORACLE.Name = "What has been said is for you alone"
+AchDat.SCEN_ORACLE.only_trueabyss = false
+AchDat.SCEN_ORACLE.ProcessMax = 0
+AchDat.SCEN_ORACLE.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_ORACLE.skill_3 = true
+AchDat.SCEN_ORACLE.skill_2 = true
+AchDat.SCEN_ORACLE.ProcessValue = ""
+AchDat.SCEN_ORACLE.skill_1 = true
+AchDat.SCEN_ORACLE.Require_Medals = false
+AchDat.SCEN_ORACLE.skill_check = false
+
+
+AchDat.ZZZ_FINISH3 = new AchRecord()
+AchDat.ZZZ_FINISH3.hidden = false
+AchDat.ZZZ_FINISH3.allow_trueabyss = false
+AchDat.ZZZ_FINISH3.AutoProcess = false
+AchDat.ZZZ_FINISH3.Description = "Complete game in the HARD difficulty setting"
+AchDat.ZZZ_FINISH3.Name = "Bow to the MASTER!"
+AchDat.ZZZ_FINISH3.only_trueabyss = false
+AchDat.ZZZ_FINISH3.ProcessMax = 0
+AchDat.ZZZ_FINISH3.ProcessString = "{Value} of {Max}"
+AchDat.ZZZ_FINISH3.skill_3 = true
+AchDat.ZZZ_FINISH3.skill_2 = false
+AchDat.ZZZ_FINISH3.ProcessValue = ""
+AchDat.ZZZ_FINISH3.skill_1 = false
+AchDat.ZZZ_FINISH3.Require_Medals = false
+AchDat.ZZZ_FINISH3.skill_check = true
+
+
+AchDat.SEALED_SHADOWROGUE = new AchRecord()
+AchDat.SEALED_SHADOWROGUE.hidden = false
+AchDat.SEALED_SHADOWROGUE.allow_trueabyss = false
+AchDat.SEALED_SHADOWROGUE.AutoProcess = true
+AchDat.SEALED_SHADOWROGUE.Description = "Defeat the Shadow Rogue"
+AchDat.SEALED_SHADOWROGUE.Name = "He has fallen into shadow!"
+AchDat.SEALED_SHADOWROGUE.only_trueabyss = false
+AchDat.SEALED_SHADOWROGUE.ProcessMax = 1
+AchDat.SEALED_SHADOWROGUE.ProcessString = ""
+AchDat.SEALED_SHADOWROGUE.skill_3 = true
+AchDat.SEALED_SHADOWROGUE.skill_2 = true
+AchDat.SEALED_SHADOWROGUE.ProcessValue = "KILLED_SEALED_ShadowRogue"
+AchDat.SEALED_SHADOWROGUE.skill_1 = true
+AchDat.SEALED_SHADOWROGUE.Require_Medals = false
+AchDat.SEALED_SHADOWROGUE.skill_check = false
+
+
+AchDat.SEALED_KABI = new AchRecord()
+AchDat.SEALED_KABI.hidden = false
+AchDat.SEALED_KABI.allow_trueabyss = false
+AchDat.SEALED_KABI.AutoProcess = true
+AchDat.SEALED_KABI.Description = "Defeat the Kabi"
+AchDat.SEALED_KABI.Name = "The world is not enough"
+AchDat.SEALED_KABI.only_trueabyss = false
+AchDat.SEALED_KABI.ProcessMax = 1
+AchDat.SEALED_KABI.ProcessString = ""
+AchDat.SEALED_KABI.skill_3 = true
+AchDat.SEALED_KABI.skill_2 = true
+AchDat.SEALED_KABI.ProcessValue = "KILLED_SEALED_Kabi"
+AchDat.SEALED_KABI.skill_1 = true
+AchDat.SEALED_KABI.Require_Medals = false
+AchDat.SEALED_KABI.skill_check = false
+
+
+AchDat.KILL_00250 = new AchRecord()
+AchDat.KILL_00250.hidden = false
+AchDat.KILL_00250.allow_trueabyss = true
+AchDat.KILL_00250.AutoProcess = true
+AchDat.KILL_00250.Description = "Kill 250 enemies"
+AchDat.KILL_00250.Name = "ARE YOU NOT ENTERTAINED!?!?!"
+AchDat.KILL_00250.only_trueabyss = false
+AchDat.KILL_00250.ProcessMax = 250
+AchDat.KILL_00250.ProcessString = "{Value} of {Max}"
+AchDat.KILL_00250.skill_3 = false
+AchDat.KILL_00250.skill_2 = false
+AchDat.KILL_00250.ProcessValue = "KILLS"
+AchDat.KILL_00250.skill_1 = false
+AchDat.KILL_00250.Require_Medals = false
+AchDat.KILL_00250.skill_check = false
+
+
+AchDat.BOSS_KIRANA_2 = new AchRecord()
+AchDat.BOSS_KIRANA_2.hidden = true
+AchDat.BOSS_KIRANA_2.allow_trueabyss = false
+AchDat.BOSS_KIRANA_2.AutoProcess = true
+AchDat.BOSS_KIRANA_2.Description = "Defeat Kirana in the Dark Storage"
+AchDat.BOSS_KIRANA_2.Name = "Don't EVER hurt high class girls like me!"
+AchDat.BOSS_KIRANA_2.only_trueabyss = false
+AchDat.BOSS_KIRANA_2.ProcessMax = 1
+AchDat.BOSS_KIRANA_2.ProcessString = ""
+AchDat.BOSS_KIRANA_2.skill_3 = true
+AchDat.BOSS_KIRANA_2.skill_2 = true
+AchDat.BOSS_KIRANA_2.ProcessValue = "KILLED_BOSS_Kirana2"
+AchDat.BOSS_KIRANA_2.skill_1 = true
+AchDat.BOSS_KIRANA_2.Require_Medals = false
+AchDat.BOSS_KIRANA_2.skill_check = false
+
+
+AchDat.OVERSOUL_0300 = new AchRecord()
+AchDat.OVERSOUL_0300.hidden = false
+AchDat.OVERSOUL_0300.allow_trueabyss = true
+AchDat.OVERSOUL_0300.AutoProcess = true
+AchDat.OVERSOUL_0300.Description = "Defeat 300 enemy in *Oversoul* state"
+AchDat.OVERSOUL_0300.Name = "Save Our Souls"
+AchDat.OVERSOUL_0300.only_trueabyss = false
+AchDat.OVERSOUL_0300.ProcessMax = 300
+AchDat.OVERSOUL_0300.ProcessString = "You need {Max}. and you have {Value}"
+AchDat.OVERSOUL_0300.skill_3 = true
+AchDat.OVERSOUL_0300.skill_2 = true
+AchDat.OVERSOUL_0300.ProcessValue = "OversoulKills"
+AchDat.OVERSOUL_0300.skill_1 = false
+AchDat.OVERSOUL_0300.Require_Medals = false
+AchDat.OVERSOUL_0300.skill_check = true
+
+
+AchDat.CASH_000050000 = new AchRecord()
+AchDat.CASH_000050000.hidden = false
+AchDat.CASH_000050000.allow_trueabyss = true
+AchDat.CASH_000050000.AutoProcess = true
+AchDat.CASH_000050000.Description = "Have 25000+ shilders in cash"
+AchDat.CASH_000050000.Name = "Money! Money! Money! It's so funny! In a rich man's world!"
+AchDat.CASH_000050000.only_trueabyss = false
+AchDat.CASH_000050000.ProcessMax = 25000
+AchDat.CASH_000050000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_000050000.skill_3 = false
+AchDat.CASH_000050000.skill_2 = false
+AchDat.CASH_000050000.ProcessValue = "CASH"
+AchDat.CASH_000050000.skill_1 = false
+AchDat.CASH_000050000.Require_Medals = false
+AchDat.CASH_000050000.skill_check = false
+
+
+AchDat.NGP_HALLSMUSIC = new AchRecord()
+AchDat.NGP_HALLSMUSIC.hidden = false
+AchDat.NGP_HALLSMUSIC.allow_trueabyss = false
+AchDat.NGP_HALLSMUSIC.AutoProcess = false
+AchDat.NGP_HALLSMUSIC.Description = "Complete *The Halls Of Music*"
+AchDat.NGP_HALLSMUSIC.Name = "Eternal Sonata"
+AchDat.NGP_HALLSMUSIC.only_trueabyss = false
+AchDat.NGP_HALLSMUSIC.ProcessMax = 0
+AchDat.NGP_HALLSMUSIC.only_newgameplus = true
+AchDat.NGP_HALLSMUSIC.skill_3 = true
+AchDat.NGP_HALLSMUSIC.skill_2 = true
+AchDat.NGP_HALLSMUSIC.skill_1 = true
+AchDat.NGP_HALLSMUSIC.ProcessValue = ""
+AchDat.NGP_HALLSMUSIC.Require_Medals = false
+AchDat.NGP_HALLSMUSIC.ProcessString = "{Value} of {Max}"
+AchDat.NGP_HALLSMUSIC.skill_check = false
+
+
+AchDat["100_AZIELA"] = new AchRecord()
+AchDat["100_AZIELA"].hidden = false
+AchDat["100_AZIELA"].allow_trueabyss = true
+AchDat["100_AZIELA"].AutoProcess = false
+AchDat["100_AZIELA"].Description = "Azi|*ella to level C or higher"
+AchDat["100_AZIELA"].Name = "Open your mind, open your eyes! I have two wings!"
+AchDat["100_AZIELA"].only_trueabyss = false
+AchDat["100_AZIELA"].ProcessMax = 0
+AchDat["100_AZIELA"].ProcessString = "{Value} of {Max}"
+AchDat["100_AZIELA"].skill_3 = true
+AchDat["100_AZIELA"].skill_2 = true
+AchDat["100_AZIELA"].ProcessValue = ""
+AchDat["100_AZIELA"].skill_1 = true
+AchDat["100_AZIELA"].Require_Medals = false
+AchDat["100_AZIELA"].skill_check = false
+
+
+AchDat.NGP_ALLHERO = new AchRecord()
+AchDat.NGP_ALLHERO.hidden = false
+AchDat.NGP_ALLHERO.allow_trueabyss = false
+AchDat.NGP_ALLHERO.AutoProcess = false
+AchDat.NGP_ALLHERO.Description = "Visit the Hall of Heroes once all representatives have arrived there (New Game+ only)"
+AchDat.NGP_ALLHERO.Name = "A SUPER Hero"
+AchDat.NGP_ALLHERO.only_trueabyss = false
+AchDat.NGP_ALLHERO.ProcessMax = 0
+AchDat.NGP_ALLHERO.only_newgameplus = true
+AchDat.NGP_ALLHERO.skill_3 = true
+AchDat.NGP_ALLHERO.skill_2 = true
+AchDat.NGP_ALLHERO.skill_1 = true
+AchDat.NGP_ALLHERO.ProcessValue = ""
+AchDat.NGP_ALLHERO.Require_Medals = false
+AchDat.NGP_ALLHERO.ProcessString = "{Value} of {Max}"
+AchDat.NGP_ALLHERO.skill_check = false
+
+
+AchDat.MAXSKILL_1_MERYA = new AchRecord()
+AchDat.MAXSKILL_1_MERYA.hidden = false
+AchDat.MAXSKILL_1_MERYA.allow_trueabyss = true
+AchDat.MAXSKILL_1_MERYA.AutoProcess = false
+AchDat.MAXSKILL_1_MERYA.Description = "Bring Merya's rogue skills to the max level"
+AchDat.MAXSKILL_1_MERYA.Name = "I am a TREASURE HUNTER!"
+AchDat.MAXSKILL_1_MERYA.only_trueabyss = false
+AchDat.MAXSKILL_1_MERYA.ProcessMax = 0
+AchDat.MAXSKILL_1_MERYA.only_newgameplus = false
+AchDat.MAXSKILL_1_MERYA.skill_3 = false
+AchDat.MAXSKILL_1_MERYA.skill_2 = false
+AchDat.MAXSKILL_1_MERYA.skill_1 = false
+AchDat.MAXSKILL_1_MERYA.ProcessValue = ""
+AchDat.MAXSKILL_1_MERYA.Require_Medals = false
+AchDat.MAXSKILL_1_MERYA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_1_MERYA.skill_check = false
+
+
+AchDat.BOSS_KING = new AchRecord()
+AchDat.BOSS_KING.hidden = false
+AchDat.BOSS_KING.allow_trueabyss = false
+AchDat.BOSS_KING.AutoProcess = true
+AchDat.BOSS_KING.Description = "Defeat *The King*"
+AchDat.BOSS_KING.Name = "You ain't nothing but a hound dog"
+AchDat.BOSS_KING.only_trueabyss = false
+AchDat.BOSS_KING.ProcessMax = 1
+AchDat.BOSS_KING.only_newgameplus = true
+AchDat.BOSS_KING.skill_3 = true
+AchDat.BOSS_KING.skill_2 = true
+AchDat.BOSS_KING.skill_1 = true
+AchDat.BOSS_KING.ProcessValue = "KILLED_BOSS_THEKING"
+AchDat.BOSS_KING.Require_Medals = false
+AchDat.BOSS_KING.ProcessString = ""
+AchDat.BOSS_KING.skill_check = false
+
+
+AchDat.WILL_SCYNDI = new AchRecord()
+AchDat.WILL_SCYNDI.hidden = false
+AchDat.WILL_SCYNDI.allow_trueabyss = true
+AchDat.WILL_SCYNDI.AutoProcess = true
+AchDat.WILL_SCYNDI.Description = "Make Seelah Gandra use her Emergency call skill 112 times"
+AchDat.WILL_SCYNDI.Name = "Calling 911?"
+AchDat.WILL_SCYNDI.only_trueabyss = false
+AchDat.WILL_SCYNDI.ProcessMax = 112
+AchDat.WILL_SCYNDI.ProcessString = "{Value} of {Max}"
+AchDat.WILL_SCYNDI.skill_3 = true
+AchDat.WILL_SCYNDI.skill_2 = true
+AchDat.WILL_SCYNDI.ProcessValue = "WILL_SCYNDI"
+AchDat.WILL_SCYNDI.skill_1 = true
+AchDat.WILL_SCYNDI.Require_Medals = false
+AchDat.WILL_SCYNDI.skill_check = false
+
+
+AchDat.MAXSKILL_3_SCYNDI = new AchRecord()
+AchDat.MAXSKILL_3_SCYNDI.hidden = false
+AchDat.MAXSKILL_3_SCYNDI.allow_trueabyss = true
+AchDat.MAXSKILL_3_SCYNDI.AutoProcess = false
+AchDat.MAXSKILL_3_SCYNDI.Description = "Max level Scyndi with Thrur"
+AchDat.MAXSKILL_3_SCYNDI.Name = "It's electrifying"
+AchDat.MAXSKILL_3_SCYNDI.only_trueabyss = false
+AchDat.MAXSKILL_3_SCYNDI.ProcessMax = 0
+AchDat.MAXSKILL_3_SCYNDI.only_newgameplus = false
+AchDat.MAXSKILL_3_SCYNDI.skill_3 = false
+AchDat.MAXSKILL_3_SCYNDI.skill_2 = false
+AchDat.MAXSKILL_3_SCYNDI.skill_1 = false
+AchDat.MAXSKILL_3_SCYNDI.ProcessValue = ""
+AchDat.MAXSKILL_3_SCYNDI.Require_Medals = false
+AchDat.MAXSKILL_3_SCYNDI.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_3_SCYNDI.skill_check = false
+
+
+AchDat.MAXSKILL_3_ERIC = new AchRecord()
+AchDat.MAXSKILL_3_ERIC.hidden = false
+AchDat.MAXSKILL_3_ERIC.allow_trueabyss = true
+AchDat.MAXSKILL_3_ERIC.AutoProcess = false
+AchDat.MAXSKILL_3_ERIC.Description = "Have Eric's Green Dragon skills to the maximum level"
+AchDat.MAXSKILL_3_ERIC.Name = "The only brew for the brave and true comes from the green dragon"
+AchDat.MAXSKILL_3_ERIC.only_trueabyss = false
+AchDat.MAXSKILL_3_ERIC.ProcessMax = 0
+AchDat.MAXSKILL_3_ERIC.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_3_ERIC.skill_3 = false
+AchDat.MAXSKILL_3_ERIC.skill_2 = false
+AchDat.MAXSKILL_3_ERIC.ProcessValue = ""
+AchDat.MAXSKILL_3_ERIC.skill_1 = false
+AchDat.MAXSKILL_3_ERIC.Require_Medals = false
+AchDat.MAXSKILL_3_ERIC.skill_check = false
+
+
+AchDat.MAXSKILL_2_SCYNDI = new AchRecord()
+AchDat.MAXSKILL_2_SCYNDI.hidden = false
+AchDat.MAXSKILL_2_SCYNDI.allow_trueabyss = true
+AchDat.MAXSKILL_2_SCYNDI.AutoProcess = false
+AchDat.MAXSKILL_2_SCYNDI.Description = "Max level Scyndi with Hando Stillor"
+AchDat.MAXSKILL_2_SCYNDI.Name = "Of all your virtues you have not wisdom"
+AchDat.MAXSKILL_2_SCYNDI.only_trueabyss = false
+AchDat.MAXSKILL_2_SCYNDI.ProcessMax = 0
+AchDat.MAXSKILL_2_SCYNDI.only_newgameplus = false
+AchDat.MAXSKILL_2_SCYNDI.skill_3 = false
+AchDat.MAXSKILL_2_SCYNDI.skill_2 = false
+AchDat.MAXSKILL_2_SCYNDI.skill_1 = false
+AchDat.MAXSKILL_2_SCYNDI.ProcessValue = ""
+AchDat.MAXSKILL_2_SCYNDI.Require_Medals = false
+AchDat.MAXSKILL_2_SCYNDI.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_2_SCYNDI.skill_check = false
+
+
+AchDat.MAXSKILL_2_ERIC = new AchRecord()
+AchDat.MAXSKILL_2_ERIC.hidden = false
+AchDat.MAXSKILL_2_ERIC.allow_trueabyss = true
+AchDat.MAXSKILL_2_ERIC.AutoProcess = false
+AchDat.MAXSKILL_2_ERIC.Description = "Have Eric's White Dragon skills to the max. level"
+AchDat.MAXSKILL_2_ERIC.Name = "The cold never bothered me anyway"
+AchDat.MAXSKILL_2_ERIC.only_trueabyss = false
+AchDat.MAXSKILL_2_ERIC.ProcessMax = 0
+AchDat.MAXSKILL_2_ERIC.only_newgameplus = false
+AchDat.MAXSKILL_2_ERIC.skill_3 = false
+AchDat.MAXSKILL_2_ERIC.skill_2 = false
+AchDat.MAXSKILL_2_ERIC.skill_1 = false
+AchDat.MAXSKILL_2_ERIC.ProcessValue = ""
+AchDat.MAXSKILL_2_ERIC.Require_Medals = false
+AchDat.MAXSKILL_2_ERIC.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_2_ERIC.skill_check = false
+
+
+AchDat.MAXSKILL_1_AZIELLA = new AchRecord()
+AchDat.MAXSKILL_1_AZIELLA.hidden = false
+AchDat.MAXSKILL_1_AZIELLA.allow_trueabyss = true
+AchDat.MAXSKILL_1_AZIELLA.AutoProcess = false
+AchDat.MAXSKILL_1_AZIELLA.Description = "Aziella max level with her Befindo Enchantments"
+AchDat.MAXSKILL_1_AZIELLA.Name = "Swish and flick!"
+AchDat.MAXSKILL_1_AZIELLA.only_trueabyss = false
+AchDat.MAXSKILL_1_AZIELLA.ProcessMax = 0
+AchDat.MAXSKILL_1_AZIELLA.only_newgameplus = false
+AchDat.MAXSKILL_1_AZIELLA.skill_3 = false
+AchDat.MAXSKILL_1_AZIELLA.skill_2 = false
+AchDat.MAXSKILL_1_AZIELLA.skill_1 = false
+AchDat.MAXSKILL_1_AZIELLA.ProcessValue = ""
+AchDat.MAXSKILL_1_AZIELLA.Require_Medals = false
+AchDat.MAXSKILL_1_AZIELLA.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_1_AZIELLA.skill_check = false
+
+
+AchDat.MAXSKILL_0_BRENDOR = new AchRecord()
+AchDat.MAXSKILL_0_BRENDOR.hidden = false
+AchDat.MAXSKILL_0_BRENDOR.allow_trueabyss = true
+AchDat.MAXSKILL_0_BRENDOR.AutoProcess = false
+AchDat.MAXSKILL_0_BRENDOR.Description = "Have Brendor's hammer skills to the max"
+AchDat.MAXSKILL_0_BRENDOR.Name = "STOP! Hammer Time!"
+AchDat.MAXSKILL_0_BRENDOR.only_trueabyss = false
+AchDat.MAXSKILL_0_BRENDOR.ProcessMax = 0
+AchDat.MAXSKILL_0_BRENDOR.only_newgameplus = false
+AchDat.MAXSKILL_0_BRENDOR.skill_3 = false
+AchDat.MAXSKILL_0_BRENDOR.skill_2 = false
+AchDat.MAXSKILL_0_BRENDOR.skill_1 = false
+AchDat.MAXSKILL_0_BRENDOR.ProcessValue = ""
+AchDat.MAXSKILL_0_BRENDOR.Require_Medals = false
+AchDat.MAXSKILL_0_BRENDOR.ProcessString = "{Value} or {Max}"
+AchDat.MAXSKILL_0_BRENDOR.skill_check = false
+
+
+AchDat.WILL_REBECCA = new AchRecord()
+AchDat.WILL_REBECCA.hidden = false
+AchDat.WILL_REBECCA.allow_trueabyss = true
+AchDat.WILL_REBECCA.AutoProcess = true
+AchDat.WILL_REBECCA.Description = "Make Rebecca perform Strike Streak 30 times"
+AchDat.WILL_REBECCA.Name = "Serial Sis!"
+AchDat.WILL_REBECCA.only_trueabyss = false
+AchDat.WILL_REBECCA.ProcessMax = 30
+AchDat.WILL_REBECCA.ProcessString = "{Value} of {Max}"
+AchDat.WILL_REBECCA.skill_3 = true
+AchDat.WILL_REBECCA.skill_2 = true
+AchDat.WILL_REBECCA.ProcessValue = "WILL_REBECCA"
+AchDat.WILL_REBECCA.skill_1 = true
+AchDat.WILL_REBECCA.Require_Medals = false
+AchDat.WILL_REBECCA.skill_check = false
+
+
+AchDat.KILL_CROCODILE = new AchRecord()
+AchDat.KILL_CROCODILE.hidden = false
+AchDat.KILL_CROCODILE.allow_trueabyss = true
+AchDat.KILL_CROCODILE.AutoProcess = true
+AchDat.KILL_CROCODILE.Description = "Defeat 25 Crocs... CRICKEY!"
+AchDat.KILL_CROCODILE.Name = "The Crocodile Hunter"
+AchDat.KILL_CROCODILE.only_trueabyss = false
+AchDat.KILL_CROCODILE.ProcessMax = 25
+AchDat.KILL_CROCODILE.ProcessString = "{Value} of {Max} Crocs killed"
+AchDat.KILL_CROCODILE.skill_3 = true
+AchDat.KILL_CROCODILE.skill_2 = true
+AchDat.KILL_CROCODILE.ProcessValue = "KILLED_REG_CROC"
+AchDat.KILL_CROCODILE.skill_1 = true
+AchDat.KILL_CROCODILE.Require_Medals = false
+AchDat.KILL_CROCODILE.skill_check = false
+
+
+AchDat.BOSS_GRWOL = new AchRecord()
+AchDat.BOSS_GRWOL.hidden = false
+AchDat.BOSS_GRWOL.allow_trueabyss = false
+AchDat.BOSS_GRWOL.AutoProcess = true
+AchDat.BOSS_GRWOL.Description = "Defeat the Grwol in the Dark Storage"
+AchDat.BOSS_GRWOL.Name = "Grwolololololo!"
+AchDat.BOSS_GRWOL.only_trueabyss = false
+AchDat.BOSS_GRWOL.ProcessMax = 1
+AchDat.BOSS_GRWOL.ProcessString = ""
+AchDat.BOSS_GRWOL.skill_3 = true
+AchDat.BOSS_GRWOL.skill_2 = true
+AchDat.BOSS_GRWOL.ProcessValue = "KILLED_BOSS_GRWOL"
+AchDat.BOSS_GRWOL.skill_1 = true
+AchDat.BOSS_GRWOL.Require_Medals = false
+AchDat.BOSS_GRWOL.skill_check = false
+
+
+AchDat.BOSS_GIANTSQUID = new AchRecord()
+AchDat.BOSS_GIANTSQUID.hidden = false
+AchDat.BOSS_GIANTSQUID.allow_trueabyss = false
+AchDat.BOSS_GIANTSQUID.AutoProcess = true
+AchDat.BOSS_GIANTSQUID.Description = "Defeat the Giant Squid in the Dark Storage"
+AchDat.BOSS_GIANTSQUID.Name = "Say, player? Do you fear death?"
+AchDat.BOSS_GIANTSQUID.only_trueabyss = false
+AchDat.BOSS_GIANTSQUID.ProcessMax = 1
+AchDat.BOSS_GIANTSQUID.ProcessString = ""
+AchDat.BOSS_GIANTSQUID.skill_3 = true
+AchDat.BOSS_GIANTSQUID.skill_2 = true
+AchDat.BOSS_GIANTSQUID.ProcessValue = "KILLED_BOSS_GIANTSQUID"
+AchDat.BOSS_GIANTSQUID.skill_1 = true
+AchDat.BOSS_GIANTSQUID.Require_Medals = false
+AchDat.BOSS_GIANTSQUID.skill_check = false
+
+
+AchDat.KILL_12000 = new AchRecord()
+AchDat.KILL_12000.hidden = false
+AchDat.KILL_12000.allow_trueabyss = true
+AchDat.KILL_12000.AutoProcess = true
+AchDat.KILL_12000.Description = "Kill more than 12000 enemies"
+AchDat.KILL_12000.Name = "The little girl would be missing her doll. We should return it!"
+AchDat.KILL_12000.only_trueabyss = false
+AchDat.KILL_12000.ProcessMax = 12000
+AchDat.KILL_12000.ProcessString = "{Value} of {Max}"
+AchDat.KILL_12000.skill_3 = false
+AchDat.KILL_12000.skill_2 = false
+AchDat.KILL_12000.ProcessValue = "KILLS"
+AchDat.KILL_12000.skill_1 = false
+AchDat.KILL_12000.Require_Medals = false
+AchDat.KILL_12000.skill_check = false
+
+
+AchDat.BOSS_UBERMUMMY = new AchRecord()
+AchDat.BOSS_UBERMUMMY.hidden = false
+AchDat.BOSS_UBERMUMMY.allow_trueabyss = false
+AchDat.BOSS_UBERMUMMY.AutoProcess = true
+AchDat.BOSS_UBERMUMMY.Description = "Defeat the Ubermummy"
+AchDat.BOSS_UBERMUMMY.Name = "Look Mummy! I'm a Mummy!"
+AchDat.BOSS_UBERMUMMY.only_trueabyss = false
+AchDat.BOSS_UBERMUMMY.ProcessMax = 1
+AchDat.BOSS_UBERMUMMY.ProcessString = ""
+AchDat.BOSS_UBERMUMMY.skill_3 = true
+AchDat.BOSS_UBERMUMMY.skill_2 = true
+AchDat.BOSS_UBERMUMMY.ProcessValue = "KILLED_BOSS_Ubermummy"
+AchDat.BOSS_UBERMUMMY.skill_1 = true
+AchDat.BOSS_UBERMUMMY.Require_Medals = false
+AchDat.BOSS_UBERMUMMY.skill_check = false
+
+
+AchDat.BOSS_MOUNTAINKING = new AchRecord()
+AchDat.BOSS_MOUNTAINKING.hidden = false
+AchDat.BOSS_MOUNTAINKING.allow_trueabyss = false
+AchDat.BOSS_MOUNTAINKING.AutoProcess = true
+AchDat.BOSS_MOUNTAINKING.Description = "Defeat the Mountain King"
+AchDat.BOSS_MOUNTAINKING.Name = "Hall of the Mountain King"
+AchDat.BOSS_MOUNTAINKING.only_trueabyss = false
+AchDat.BOSS_MOUNTAINKING.ProcessMax = 1
+AchDat.BOSS_MOUNTAINKING.ProcessString = ""
+AchDat.BOSS_MOUNTAINKING.skill_3 = true
+AchDat.BOSS_MOUNTAINKING.skill_2 = true
+AchDat.BOSS_MOUNTAINKING.ProcessValue = "KILLED_BOSS_MOUNTAINKING"
+AchDat.BOSS_MOUNTAINKING.skill_1 = true
+AchDat.BOSS_MOUNTAINKING.Require_Medals = false
+AchDat.BOSS_MOUNTAINKING.skill_check = false
+
+
+AchDat.BOSS_ONYX = new AchRecord()
+AchDat.BOSS_ONYX.hidden = true
+AchDat.BOSS_ONYX.allow_trueabyss = false
+AchDat.BOSS_ONYX.AutoProcess = false
+AchDat.BOSS_ONYX.Description = "Defeat the Order of Onyx"
+AchDat.BOSS_ONYX.Name = "The Order of Onyx"
+AchDat.BOSS_ONYX.only_trueabyss = false
+AchDat.BOSS_ONYX.ProcessMax = 0
+AchDat.BOSS_ONYX.ProcessString = "{Value} of {Max}"
+AchDat.BOSS_ONYX.skill_3 = true
+AchDat.BOSS_ONYX.skill_2 = true
+AchDat.BOSS_ONYX.ProcessValue = ""
+AchDat.BOSS_ONYX.skill_1 = true
+AchDat.BOSS_ONYX.Require_Medals = false
+AchDat.BOSS_ONYX.skill_check = false
+
+
+AchDat.BOSS_RONDOMO_1 = new AchRecord()
+AchDat.BOSS_RONDOMO_1.hidden = false
+AchDat.BOSS_RONDOMO_1.allow_trueabyss = false
+AchDat.BOSS_RONDOMO_1.AutoProcess = false
+AchDat.BOSS_RONDOMO_1.Description = "Face Rondomo at the exit of the Black Dragon Cave"
+AchDat.BOSS_RONDOMO_1.Name = "You're so unsophisticated"
+AchDat.BOSS_RONDOMO_1.only_trueabyss = false
+AchDat.BOSS_RONDOMO_1.ProcessMax = 0
+AchDat.BOSS_RONDOMO_1.ProcessString = "{Value} of {Max}"
+AchDat.BOSS_RONDOMO_1.skill_3 = true
+AchDat.BOSS_RONDOMO_1.skill_2 = true
+AchDat.BOSS_RONDOMO_1.ProcessValue = ""
+AchDat.BOSS_RONDOMO_1.skill_1 = true
+AchDat.BOSS_RONDOMO_1.Require_Medals = false
+AchDat.BOSS_RONDOMO_1.skill_check = false
+
+
+AchDat.KILL_01000 = new AchRecord()
+AchDat.KILL_01000.hidden = false
+AchDat.KILL_01000.allow_trueabyss = true
+AchDat.KILL_01000.AutoProcess = true
+AchDat.KILL_01000.Description = "Kill 1000 enemies"
+AchDat.KILL_01000.Name = "Another one bites the dust"
+AchDat.KILL_01000.only_trueabyss = false
+AchDat.KILL_01000.ProcessMax = 1000
+AchDat.KILL_01000.ProcessString = "{Value} of {Max}"
+AchDat.KILL_01000.skill_3 = false
+AchDat.KILL_01000.skill_2 = false
+AchDat.KILL_01000.ProcessValue = "KILLS"
+AchDat.KILL_01000.skill_1 = false
+AchDat.KILL_01000.Require_Medals = false
+AchDat.KILL_01000.skill_check = false
+
+
+AchDat.SCEN_PURPLEFOREST = new AchRecord()
+AchDat.SCEN_PURPLEFOREST.hidden = false
+AchDat.SCEN_PURPLEFOREST.allow_trueabyss = false
+AchDat.SCEN_PURPLEFOREST.AutoProcess = false
+AchDat.SCEN_PURPLEFOREST.Description = "Complete the Purple Forest"
+AchDat.SCEN_PURPLEFOREST.Name = "I only wanted 2 see u laughing in the purple rain"
+AchDat.SCEN_PURPLEFOREST.only_trueabyss = false
+AchDat.SCEN_PURPLEFOREST.ProcessMax = 0
+AchDat.SCEN_PURPLEFOREST.ProcessString = "{Value} of {Max}"
+AchDat.SCEN_PURPLEFOREST.skill_3 = true
+AchDat.SCEN_PURPLEFOREST.skill_2 = true
+AchDat.SCEN_PURPLEFOREST.ProcessValue = ""
+AchDat.SCEN_PURPLEFOREST.skill_1 = true
+AchDat.SCEN_PURPLEFOREST.Require_Medals = false
+AchDat.SCEN_PURPLEFOREST.skill_check = false
+
+
+AchDat.GJ_COMPLETE_BOTANICA = new AchRecord()
+AchDat.GJ_COMPLETE_BOTANICA.hidden = false
+AchDat.GJ_COMPLETE_BOTANICA.allow_trueabyss = false
+AchDat.GJ_COMPLETE_BOTANICA.AutoProcess = true
+AchDat.GJ_COMPLETE_BOTANICA.Description = "Complete the special dungeon: Botanica"
+AchDat.GJ_COMPLETE_BOTANICA.Name = "Feed me, Seymour"
+AchDat.GJ_COMPLETE_BOTANICA.only_trueabyss = false
+AchDat.GJ_COMPLETE_BOTANICA.ProcessMax = 1
+AchDat.GJ_COMPLETE_BOTANICA.ProcessString = ""
+AchDat.GJ_COMPLETE_BOTANICA.skill_3 = true
+AchDat.GJ_COMPLETE_BOTANICA.skill_2 = true
+AchDat.GJ_COMPLETE_BOTANICA.ProcessValue = "KILLED_BOSS_AUDREY"
+AchDat.GJ_COMPLETE_BOTANICA.skill_1 = true
+AchDat.GJ_COMPLETE_BOTANICA.Require_Medals = true
+AchDat.GJ_COMPLETE_BOTANICA.skill_check = false
+
+
+AchDat.COMBAT_LOSE = new AchRecord()
+AchDat.COMBAT_LOSE.hidden = false
+AchDat.COMBAT_LOSE.allow_trueabyss = true
+AchDat.COMBAT_LOSE.AutoProcess = false
+AchDat.COMBAT_LOSE.Description = "Lose a battle (does not work on Game Over or bound-to-lose fights)"
+AchDat.COMBAT_LOSE.Name = "Always look on the bright side of life!"
+AchDat.COMBAT_LOSE.only_trueabyss = false
+AchDat.COMBAT_LOSE.ProcessMax = 0
+AchDat.COMBAT_LOSE.ProcessString = "{Value} or {Max}"
+AchDat.COMBAT_LOSE.skill_3 = false
+AchDat.COMBAT_LOSE.skill_2 = false
+AchDat.COMBAT_LOSE.ProcessValue = ""
+AchDat.COMBAT_LOSE.skill_1 = false
+AchDat.COMBAT_LOSE.Require_Medals = false
+AchDat.COMBAT_LOSE.skill_check = false
+
+
+AchDat.BOSS_CGA = new AchRecord()
+AchDat.BOSS_CGA.hidden = false
+AchDat.BOSS_CGA.allow_trueabyss = false
+AchDat.BOSS_CGA.AutoProcess = false
+AchDat.BOSS_CGA.Description = "Defeat the CGA Brothers"
+AchDat.BOSS_CGA.Name = "Color Graphics Adapter"
+AchDat.BOSS_CGA.only_trueabyss = false
+AchDat.BOSS_CGA.ProcessMax = 0
+AchDat.BOSS_CGA.only_newgameplus = true
+AchDat.BOSS_CGA.skill_3 = true
+AchDat.BOSS_CGA.skill_2 = true
+AchDat.BOSS_CGA.skill_1 = true
+AchDat.BOSS_CGA.ProcessValue = ""
+AchDat.BOSS_CGA.Require_Medals = false
+AchDat.BOSS_CGA.ProcessString = "{Value} of {Max}"
+AchDat.BOSS_CGA.skill_check = false
+
+
+AchDat.COMBAT_FIRST = new AchRecord()
+AchDat.COMBAT_FIRST.hidden = false
+AchDat.COMBAT_FIRST.allow_trueabyss = true
+AchDat.COMBAT_FIRST.AutoProcess = false
+AchDat.COMBAT_FIRST.Description = "Be the first to perform an action in combat"
+AchDat.COMBAT_FIRST.Name = "The very annoying *FIRST!* spam... I mean memes"
+AchDat.COMBAT_FIRST.only_trueabyss = false
+AchDat.COMBAT_FIRST.ProcessMax = 0
+AchDat.COMBAT_FIRST.ProcessString = "{Value} or {Max}"
+AchDat.COMBAT_FIRST.skill_3 = false
+AchDat.COMBAT_FIRST.skill_2 = false
+AchDat.COMBAT_FIRST.ProcessValue = ""
+AchDat.COMBAT_FIRST.skill_1 = false
+AchDat.COMBAT_FIRST.Require_Medals = false
+AchDat.COMBAT_FIRST.skill_check = false
+
+
+AchDat.CHAPTER3 = new AchRecord()
+AchDat.CHAPTER3.hidden = false
+AchDat.CHAPTER3.allow_trueabyss = false
+AchDat.CHAPTER3.AutoProcess = false
+AchDat.CHAPTER3.Description = "Complete chapter 3"
+AchDat.CHAPTER3.Name = "People Long Forgotten"
+AchDat.CHAPTER3.only_trueabyss = false
+AchDat.CHAPTER3.ProcessMax = 0
+AchDat.CHAPTER3.ProcessString = "{Value} of {Max}"
+AchDat.CHAPTER3.skill_3 = true
+AchDat.CHAPTER3.skill_2 = true
+AchDat.CHAPTER3.ProcessValue = ""
+AchDat.CHAPTER3.skill_1 = true
+AchDat.CHAPTER3.Require_Medals = false
+AchDat.CHAPTER3.skill_check = false
+
+
+AchDat.CASH_001000000 = new AchRecord()
+AchDat.CASH_001000000.hidden = false
+AchDat.CASH_001000000.allow_trueabyss = true
+AchDat.CASH_001000000.AutoProcess = true
+AchDat.CASH_001000000.Description = "Have 100,000+ shilders in cash"
+AchDat.CASH_001000000.Name = "Welcome to Ferenginar"
+AchDat.CASH_001000000.only_trueabyss = false
+AchDat.CASH_001000000.ProcessMax = 100000
+AchDat.CASH_001000000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_001000000.skill_3 = false
+AchDat.CASH_001000000.skill_2 = false
+AchDat.CASH_001000000.ProcessValue = "CASH"
+AchDat.CASH_001000000.skill_1 = false
+AchDat.CASH_001000000.Require_Medals = false
+AchDat.CASH_001000000.skill_check = false
+
+
+AchDat.BOSS_REDDRAGON = new AchRecord()
+AchDat.BOSS_REDDRAGON.hidden = false
+AchDat.BOSS_REDDRAGON.allow_trueabyss = false
+AchDat.BOSS_REDDRAGON.AutoProcess = true
+AchDat.BOSS_REDDRAGON.Description = "Defeat the red dragon"
+AchDat.BOSS_REDDRAGON.Name = "NO! Not the red button!"
+AchDat.BOSS_REDDRAGON.only_trueabyss = false
+AchDat.BOSS_REDDRAGON.ProcessMax = 1
+AchDat.BOSS_REDDRAGON.ProcessString = ""
+AchDat.BOSS_REDDRAGON.skill_3 = true
+AchDat.BOSS_REDDRAGON.skill_2 = true
+AchDat.BOSS_REDDRAGON.ProcessValue = "KILLED_BOSS_REDDRAGON"
+AchDat.BOSS_REDDRAGON.skill_1 = true
+AchDat.BOSS_REDDRAGON.Require_Medals = false
+AchDat.BOSS_REDDRAGON.skill_check = false
+
+
+AchDat.OVERSOUL_0001 = new AchRecord()
+AchDat.OVERSOUL_0001.hidden = false
+AchDat.OVERSOUL_0001.allow_trueabyss = true
+AchDat.OVERSOUL_0001.AutoProcess = true
+AchDat.OVERSOUL_0001.Description = "Defeat an enemy in *Oversoul* state"
+AchDat.OVERSOUL_0001.Name = "Oversoul"
+AchDat.OVERSOUL_0001.only_trueabyss = false
+AchDat.OVERSOUL_0001.ProcessMax = 1
+AchDat.OVERSOUL_0001.ProcessString = ""
+AchDat.OVERSOUL_0001.skill_3 = true
+AchDat.OVERSOUL_0001.skill_2 = true
+AchDat.OVERSOUL_0001.ProcessValue = "OversoulKills"
+AchDat.OVERSOUL_0001.skill_1 = false
+AchDat.OVERSOUL_0001.Require_Medals = false
+AchDat.OVERSOUL_0001.skill_check = true
+
+
+AchDat.CASH_000001000 = new AchRecord()
+AchDat.CASH_000001000.hidden = false
+AchDat.CASH_000001000.allow_trueabyss = true
+AchDat.CASH_000001000.AutoProcess = true
+AchDat.CASH_000001000.Description = "Have 1000+ shilders in cash"
+AchDat.CASH_000001000.Name = "Young man! There's a place you can go! Young man! When you're short on your dough!"
+AchDat.CASH_000001000.only_trueabyss = false
+AchDat.CASH_000001000.ProcessMax = 1000
+AchDat.CASH_000001000.ProcessString = "{Value} of {Max} shilders"
+AchDat.CASH_000001000.skill_3 = false
+AchDat.CASH_000001000.skill_2 = false
+AchDat.CASH_000001000.ProcessValue = "CASH"
+AchDat.CASH_000001000.skill_1 = false
+AchDat.CASH_000001000.Require_Medals = false
+AchDat.CASH_000001000.skill_check = false
+
+
+AchDat.PUZ_INSANE = new AchRecord()
+AchDat.PUZ_INSANE.hidden = false
+AchDat.PUZ_INSANE.allow_trueabyss = false
+AchDat.PUZ_INSANE.AutoProcess = false
+AchDat.PUZ_INSANE.Description = "Solve all the switch puzzles in Malabia's caves"
+AchDat.PUZ_INSANE.Name = "Sanity is not required for the job!"
+AchDat.PUZ_INSANE.only_trueabyss = false
+AchDat.PUZ_INSANE.ProcessMax = 0
+AchDat.PUZ_INSANE.ProcessString = "{Value} of {Max}"
+AchDat.PUZ_INSANE.skill_3 = true
+AchDat.PUZ_INSANE.skill_2 = true
+AchDat.PUZ_INSANE.ProcessValue = ""
+AchDat.PUZ_INSANE.skill_1 = true
+AchDat.PUZ_INSANE.Require_Medals = false
+AchDat.PUZ_INSANE.skill_check = false
+
+
+AchDat.BOSS_SUPERHAG = new AchRecord()
+AchDat.BOSS_SUPERHAG.hidden = false
+AchDat.BOSS_SUPERHAG.allow_trueabyss = false
+AchDat.BOSS_SUPERHAG.AutoProcess = true
+AchDat.BOSS_SUPERHAG.Description = "Defeat the SuperHag in the Dark Storage"
+AchDat.BOSS_SUPERHAG.Name = "Double double foil and trouble"
+AchDat.BOSS_SUPERHAG.only_trueabyss = false
+AchDat.BOSS_SUPERHAG.ProcessMax = 1
+AchDat.BOSS_SUPERHAG.ProcessString = ""
+AchDat.BOSS_SUPERHAG.skill_3 = true
+AchDat.BOSS_SUPERHAG.skill_2 = true
+AchDat.BOSS_SUPERHAG.ProcessValue = "KILLED_BOSS_SUPERHAG"
+AchDat.BOSS_SUPERHAG.skill_1 = true
+AchDat.BOSS_SUPERHAG.Require_Medals = false
+AchDat.BOSS_SUPERHAG.skill_check = false
+
+
+AchDat.BOSS_SMILEY = new AchRecord()
+AchDat.BOSS_SMILEY.hidden = false
+AchDat.BOSS_SMILEY.allow_trueabyss = false
+AchDat.BOSS_SMILEY.AutoProcess = true
+AchDat.BOSS_SMILEY.Description = "Defeat Smiley  in the Dark Storage"
+AchDat.BOSS_SMILEY.Name = "I love your smile!"
+AchDat.BOSS_SMILEY.only_trueabyss = false
+AchDat.BOSS_SMILEY.ProcessMax = 1
+AchDat.BOSS_SMILEY.ProcessString = ""
+AchDat.BOSS_SMILEY.skill_3 = true
+AchDat.BOSS_SMILEY.skill_2 = true
+AchDat.BOSS_SMILEY.ProcessValue = "KILLED_BOSS_SMILEY"
+AchDat.BOSS_SMILEY.skill_1 = true
+AchDat.BOSS_SMILEY.Require_Medals = false
+AchDat.BOSS_SMILEY.skill_check = false
+
+
+AchDat.KILL_09001 = new AchRecord()
+AchDat.KILL_09001.hidden = false
+AchDat.KILL_09001.allow_trueabyss = true
+AchDat.KILL_09001.AutoProcess = true
+AchDat.KILL_09001.Description = "Kill more than 9000 enemies"
+AchDat.KILL_09001.Name = "It's over NINE THOUSAND"
+AchDat.KILL_09001.only_trueabyss = false
+AchDat.KILL_09001.ProcessMax = 9001
+AchDat.KILL_09001.ProcessString = "{Value} of 9000"
+AchDat.KILL_09001.skill_3 = false
+AchDat.KILL_09001.skill_2 = false
+AchDat.KILL_09001.ProcessValue = "KILLS"
+AchDat.KILL_09001.skill_1 = false
+AchDat.KILL_09001.Require_Medals = false
+AchDat.KILL_09001.skill_check = false
+
+
+AchDat.BOSS_RONDOMO_2 = new AchRecord()
+AchDat.BOSS_RONDOMO_2.hidden = true
+AchDat.BOSS_RONDOMO_2.allow_trueabyss = false
+AchDat.BOSS_RONDOMO_2.AutoProcess = true
+AchDat.BOSS_RONDOMO_2.Description = "Defeat Rondomo in the Dark Storage"
+AchDat.BOSS_RONDOMO_2.Name = "This is getting more and more unsophisticated!"
+AchDat.BOSS_RONDOMO_2.only_trueabyss = false
+AchDat.BOSS_RONDOMO_2.ProcessMax = 1
+AchDat.BOSS_RONDOMO_2.ProcessString = ""
+AchDat.BOSS_RONDOMO_2.skill_3 = true
+AchDat.BOSS_RONDOMO_2.skill_2 = true
+AchDat.BOSS_RONDOMO_2.ProcessValue = "KILLED_BOSS_Rondomo2"
+AchDat.BOSS_RONDOMO_2.skill_1 = true
+AchDat.BOSS_RONDOMO_2.Require_Medals = false
+AchDat.BOSS_RONDOMO_2.skill_check = false
+
+
+AchDat.OVERSOUL_2500 = new AchRecord()
+AchDat.OVERSOUL_2500.hidden = false
+AchDat.OVERSOUL_2500.allow_trueabyss = true
+AchDat.OVERSOUL_2500.AutoProcess = true
+AchDat.OVERSOUL_2500.Description = "Kill 2500 enemies in *Oversoul* state"
+AchDat.OVERSOUL_2500.Name = "Shadows and dust"
+AchDat.OVERSOUL_2500.only_trueabyss = false
+AchDat.OVERSOUL_2500.ProcessMax = 2500
+AchDat.OVERSOUL_2500.ProcessString = "{Max} needed. You got then all?"
+AchDat.OVERSOUL_2500.skill_3 = true
+AchDat.OVERSOUL_2500.skill_2 = true
+AchDat.OVERSOUL_2500.ProcessValue = "OversoulKills"
+AchDat.OVERSOUL_2500.skill_1 = false
+AchDat.OVERSOUL_2500.Require_Medals = false
+AchDat.OVERSOUL_2500.skill_check = true
+
+
+AchDat.BOSS_JUGGERNAUT = new AchRecord()
+AchDat.BOSS_JUGGERNAUT.hidden = false
+AchDat.BOSS_JUGGERNAUT.allow_trueabyss = false
+AchDat.BOSS_JUGGERNAUT.AutoProcess = true
+AchDat.BOSS_JUGGERNAUT.Description = "Defeat Juggernaut"
+AchDat.BOSS_JUGGERNAUT.Name = "Bright Eyes, burning like fire!"
+AchDat.BOSS_JUGGERNAUT.only_trueabyss = false
+AchDat.BOSS_JUGGERNAUT.ProcessMax = 1
+AchDat.BOSS_JUGGERNAUT.only_newgameplus = false
+AchDat.BOSS_JUGGERNAUT.skill_3 = true
+AchDat.BOSS_JUGGERNAUT.skill_2 = true
+AchDat.BOSS_JUGGERNAUT.skill_1 = true
+AchDat.BOSS_JUGGERNAUT.ProcessValue = "KILLED_ULTRABOSS_JUGGERNAUT"
+AchDat.BOSS_JUGGERNAUT.Require_Medals = false
+AchDat.BOSS_JUGGERNAUT.ProcessString = ""
+AchDat.BOSS_JUGGERNAUT.skill_check = false
+
+
+AchDat.BOSS_FRUNDARMON = new AchRecord()
+AchDat.BOSS_FRUNDARMON.hidden = false
+AchDat.BOSS_FRUNDARMON.allow_trueabyss = false
+AchDat.BOSS_FRUNDARMON.AutoProcess = true
+AchDat.BOSS_FRUNDARMON.Description = "Defeat Frundarmon and release the children from his curse"
+AchDat.BOSS_FRUNDARMON.Name = "Resident Evil"
+AchDat.BOSS_FRUNDARMON.only_trueabyss = false
+AchDat.BOSS_FRUNDARMON.ProcessMax = 1
+AchDat.BOSS_FRUNDARMON.ProcessString = ""
+AchDat.BOSS_FRUNDARMON.skill_3 = true
+AchDat.BOSS_FRUNDARMON.skill_2 = true
+AchDat.BOSS_FRUNDARMON.ProcessValue = "KILLED_BOSS_FRUNDARMON"
+AchDat.BOSS_FRUNDARMON.skill_1 = true
+AchDat.BOSS_FRUNDARMON.Require_Medals = false
+AchDat.BOSS_FRUNDARMON.skill_check = false
+
+
+AchDat.BOSS_GREENGUARDIAN = new AchRecord()
+AchDat.BOSS_GREENGUARDIAN.hidden = false
+AchDat.BOSS_GREENGUARDIAN.allow_trueabyss = false
+AchDat.BOSS_GREENGUARDIAN.AutoProcess = true
+AchDat.BOSS_GREENGUARDIAN.Description = "Defeat the green guardian"
+AchDat.BOSS_GREENGUARDIAN.Name = "The Green Children"
+AchDat.BOSS_GREENGUARDIAN.only_trueabyss = false
+AchDat.BOSS_GREENGUARDIAN.ProcessMax = 1
+AchDat.BOSS_GREENGUARDIAN.ProcessString = ""
+AchDat.BOSS_GREENGUARDIAN.skill_3 = true
+AchDat.BOSS_GREENGUARDIAN.skill_2 = true
+AchDat.BOSS_GREENGUARDIAN.ProcessValue = "KILLED_BOSS_GREENGUARDIAN"
+AchDat.BOSS_GREENGUARDIAN.skill_1 = true
+AchDat.BOSS_GREENGUARDIAN.Require_Medals = false
+AchDat.BOSS_GREENGUARDIAN.skill_check = false
+
+
+AchDat.BOSS_GIANTSCORPION = new AchRecord()
+AchDat.BOSS_GIANTSCORPION.hidden = false
+AchDat.BOSS_GIANTSCORPION.allow_trueabyss = false
+AchDat.BOSS_GIANTSCORPION.AutoProcess = true
+AchDat.BOSS_GIANTSCORPION.Description = "Defeat the giant scropion in the mysterious crypt"
+AchDat.BOSS_GIANTSCORPION.Name = "You're poison running through my vains"
+AchDat.BOSS_GIANTSCORPION.only_trueabyss = false
+AchDat.BOSS_GIANTSCORPION.ProcessMax = 1
+AchDat.BOSS_GIANTSCORPION.ProcessString = ""
+AchDat.BOSS_GIANTSCORPION.skill_3 = true
+AchDat.BOSS_GIANTSCORPION.skill_2 = true
+AchDat.BOSS_GIANTSCORPION.ProcessValue = "KILLED_BOSS_BIG_SCORPION"
+AchDat.BOSS_GIANTSCORPION.skill_1 = true
+AchDat.BOSS_GIANTSCORPION.Require_Medals = false
+AchDat.BOSS_GIANTSCORPION.skill_check = false
+
+
+AchDat.ABYSS_BOSS090 = new AchRecord()
+AchDat.ABYSS_BOSS090.hidden = false
+AchDat.ABYSS_BOSS090.allow_trueabyss = true
+AchDat.ABYSS_BOSS090.AutoProcess = false
+AchDat.ABYSS_BOSS090.Description = "Defeat the boss on the True Abyss, Floor #090"
+AchDat.ABYSS_BOSS090.Name = "True Abyss Boss - Floor #090"
+AchDat.ABYSS_BOSS090.only_trueabyss = true
+AchDat.ABYSS_BOSS090.ProcessMax = 0
+AchDat.ABYSS_BOSS090.ProcessString = "{Value} of {Max}"
+AchDat.ABYSS_BOSS090.skill_3 = true
+AchDat.ABYSS_BOSS090.skill_2 = true
+AchDat.ABYSS_BOSS090.ProcessValue = ""
+AchDat.ABYSS_BOSS090.skill_1 = true
+AchDat.ABYSS_BOSS090.Require_Medals = false
+AchDat.ABYSS_BOSS090.skill_check = false
+
+End
