@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Prison.scyndi
 // 
-// 	  Version: 25.04.27 VI
+// 	  Version: 25.04.27 VII
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -100,7 +100,7 @@ class Torch
 	
 end
 
-class Skeleton
+class Skeleton_Prison
 	static var List
 	static var Tex
 	int x
@@ -138,7 +138,7 @@ end
 	end
 	
 	link TorchList = Torch.list
-	link SkeletonList = Lua.Scyndi.Class.Skeleton.List
+	//link SkeletonList = Lua.Scyndi.Class.Skeleton.List
 	
 	string Wall
 	string Floor
@@ -148,7 +148,7 @@ end
 	
 	Init
 		TorchList = new TLinkedList()
-		SkeletonList = new TLinkedList()
+		Skeleton_Prison.List = new TLinkedList()
 	end
 	
 	void PInit()
@@ -190,7 +190,7 @@ end
 								end
 							case 5
 								if Skeleton
-									new Skeleton(tx)
+									new Skeleton_Prison(tx)
 									ok = true
 								end
 						end
