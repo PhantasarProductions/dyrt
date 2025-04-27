@@ -1,3 +1,10 @@
+# NOTE
+
+This document is outdated.
+It countains data no longer applicable.
+A new document will be created soon enough
+
+
 # Trouble shooting
 
 Please only reports actual bugs. Things that go wrong can also be due to things that are not bugs.
