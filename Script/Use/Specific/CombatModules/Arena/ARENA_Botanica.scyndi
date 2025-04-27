@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Botanica.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/ARENA_Botanica.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.27 III
+// 
+// End License
+
+
+Module
+
+#use "Libs/SCI/Graphics"
+
 #use "libs/LinkedList"
+
+#use "script/use/need"
 
 class TBlaadje
 	int x
@@ -44,52 +55,52 @@ class TBlaadje
 	
 	void Draw()
 		__white
-		Rotate.Deg = self.degrees
-		self.blaadje.XDraw(self.x,self.y)
-		Rotate.Deg = 0
+		//Rotate.Deg = self.degrees
+		self.blaadje.Draw(self.x,self.y,degrees)
+		//Rotate.Deg = 0
 	end
 	
-	void CONSTRUCTOR(int x,int y)
-		self.x = x
-		self.y = y
+	CONSTRUCTOR(int _x,int _y)
+		self.x = _x
+		self.y = _y
 		self.degrees = -math.random(85,95)
 	end
 end
 
-module ARENA_Botanica
+//module ARENA_Botanica
 
 	var blaadje
 	var gras
 	var list
 	
-	void CONSTRUCTOR()
-		self.list = new TLinkedList
+	Init
+		list = new TLinkedList()
 		int x 
 		int y 
 		x = -40
 		y = -50
 		int midy
-		midy = math.floor(Screen.H / 2)
-		self.blaadje = LoadIfNew("gfx/Textures/Botanica/Leaf.png","Arena_Blaadje")
-		self.gras = LoadIfNew("GFX/Textures/Road/Grass1.png","Arena_Grasveldje")
-		TBlaadje.blaadje = self.blaadje
+		midy = math.floor(Graphics.H / 2)
+		blaadje = LoadNewImage("gfx/Textures/Botanica/Leaf.png","Arena_Blaadje")
+		gras = LoadNewImage("GFX/Textures/Road/Grass1.png","Arena_Grasveldje")
+		TBlaadje.blaadje = blaadje
 		repeat
 			var blad
 			blad = new TBlaadje(x,y)
-			self.list.AddLast(blad)
-			#- y math.random(70,180)
+			list.AddLast(blad)
+			y -= math.random(70,180)
 			if y<0
 				y = midy
-				#+ x math.random(20,70)
+				x += math.random(20,70)
 			end
-		until x>Screen.W
+		until x>Graphics.W
 	end
 	
 	void Draw()
-		self.gras.Tile(0,math.floor(Screen.H/2)-100,Screen.W,math.floor(Screen.H/2)+100)
-		for blad in self.list.Each
+		gras.Tile(0,math.floor(Graphics.H/2)-100,Graphics.W,math.floor(Graphics.H/2)+100)
+		for blad in list.Each
 			blad.Draw()
 		end
 	end
 
-end
+//end
