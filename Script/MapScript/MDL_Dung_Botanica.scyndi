@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/GJ_DUNG_Botanica.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/MDL_Dung_Botanica.scyndi
+// (c) Jeroen Broks, 2019, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.12.26
-// End License Information
+// 
+// version: 25.04.27 III
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#say "Map Script - Botanica!"
+
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 group MScript
 	
 	void TOPRISON()
@@ -56,7 +63,7 @@ group MScript
 	end
 	
 	void TUTOR()
-		if not Done.GameJoltExclusiveTutorial_Botanica
+		if not Done.MedalExclusiveTutorial_Botanica
 			MapText("TUTOR")
 		end
 	end
@@ -74,16 +81,6 @@ group MScript
 	
 	
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("ToPrison","ToPrison")
-		Map.ZA_Enter("BackNext","BackNext")
-		Map.ZA_Enter("BackPrev","BackPrev")
-		Map.ZA_Enter("ABoss","SASKIA:Boss")
-		Map.ZA_Enter("Tutor","Tutor")
-		if not Done.EnterPrisonForReal
-			gv.Bool["RESPAWN_INITIATED"] = false
-		end
-	end
 	
 	void Draw()
 	end
@@ -92,4 +89,16 @@ group MScript
 	end
 	
 end
+
+Init
+	Map.ZA_Enter("ToPrison","ToPrison")
+	Map.ZA_Enter("BackNext","BackNext")
+	Map.ZA_Enter("BackPrev","BackPrev")
+	Map.ZA_Enter("ABoss","SASKIA:Boss")
+	Map.ZA_Enter("Tutor","Tutor")
+	if ! Done.EnterPrisonForReal
+		gv.Bool["RESPAWN_INITIATED"] = false
+	end
+end
+
 #say "Map Script - Compiling!"
