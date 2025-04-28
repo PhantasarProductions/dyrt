@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28 I
+// version: 25.04.28 II
 // 
 // End License
 
@@ -90,7 +90,7 @@ group MScript
 	end
 	
 	
-	void CONSTRUCTOR()
+	void StartDungeon()
 		UseKettingKaart()
 		Map.ZA_Enter("ZA_Dragon","SASKIA:Dragon")
 	end
@@ -102,4 +102,8 @@ group MScript
 	end
 	
 end
+
+Init
+	MScript.StartDungeon()
+End
 #say "Map Script - Compiling!"
