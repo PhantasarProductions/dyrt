@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.04.28 I
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -155,6 +155,20 @@ Class __RPGChar
 	//      LISTSTATS
 	Get Var ListStats
 		return Pure.ListOfStats
+	End
+	
+	Get Var EachStat
+		Int i=0
+		iList:=Pure.ListOfStats
+		ddef funret
+			ret:=iList[i]
+			i++
+			if i>=len(ret)
+				return nil
+			end
+			return ret
+		end
+		return funret		
 	End
 		
 	Constructor(String _Tag)
