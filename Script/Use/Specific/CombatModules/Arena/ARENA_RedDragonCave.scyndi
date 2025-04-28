@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/RedDragonCave.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/ARENA_RedDragonCave.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,20 +33,25 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-module Arena_RedDragon
+// 
+// version: 25.04.28
+// 
+// End License
 
-	var Dung
+module 
+
+	#use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Cave" 
+
+	locExtern Dung "Scyndi.Class.TMP_Cave"
 	
-	void CONSTRUCTOR()
-		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Cave")
-		self.Dung.Wall  = 'GFX/Textures/RedDragon/N.png'
-		self.Dung.Floor = "GFX/Textures/RedDragon/Floor.png"
+	Init
+		//self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Cave")
+		Dung.Wall  = "GFX/Textures/RedDragon/N.png"
+		Dung.Floor = "GFX/Textures/RedDragon/Floor.png"
 	end
 	
 	void Draw() 
-		self.Dung.Draw()
+		Dung.Draw()
 	end
 
 end
