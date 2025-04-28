@@ -1,7 +1,7 @@
 // License:
-// 	  src/Script/Script/Use/Specific/CombatModules/Arena/ReinerForest.scyndi
+// 	  src/Script/Script/Use/Specific/CombatModules/Arena/ARENA_ReinerForest.scyndi
 // 
-// 	  Version: 25.04.28 I
+// 	  Version: 25.04.28 II
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -45,8 +45,8 @@
 
 module 
 //Arena_ReinerForest
+	#Use "Script/Use/Specific/CombatModules/Arena/templates/TMP_Forest"
 
-	var Forest
 
 	locExtern Forest "Scyndi.Class.TMP_Forest"
 
