@@ -35,10 +35,13 @@
 ; version: 20.04.28
 ; End License Information
 :OnLoad
-	chk Done.AnnounceChapter2,DungAnnounce
+	chk  Done.ScenarioStart_DragonCrack,Ch2Announce
+	call MapScript.HideSecret
 	call Map.GoToLayer,"#001","Start"
 	call MapText,"A"
-	call Fader,LoadImage("GFX/Chapter/2.png")
+:Ch2Announce	
+	chk  Done.Announce2ndChapter,DungAnnounce
+	call Fader,Scyndi.Globals.LoadImage("GFX/Chapter/2.png","Chap2")
 :DungAnnounce
 	call Fader,"Dragon Crack Forest"
 	end
