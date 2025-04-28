@@ -34,12 +34,13 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28 VI
+// version: 25.04.28 VIII
 // 
 // End License
 
 Script
 
+#use "Libs/SCI/Sys"
 #use "Libs/SCI/Graphics"
 
 #use "script/use/need"
@@ -158,7 +159,8 @@ Global Void MainFlow()
 	
 	if Mouse.HitRight
 		Map.WipeSASKIA()
-		GoToFlow("FIELD")
+		//GoToFlow("FIELD")
+		Sys.CurrentFlow = "FIELD"
 	end
 	
 	bool goed = true
