@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28 V
+// version: 25.04.28 VI
 // 
 // End License
 
@@ -154,7 +154,7 @@ Global Void MainFlow()
 
 
 //global void BUB_Update()
-	Dev.ConCheck()
+	//Dev.ConCheck()
 	
 	if Mouse.HitRight
 		Map.WipeSASKIA()
