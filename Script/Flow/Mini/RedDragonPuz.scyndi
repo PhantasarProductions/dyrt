@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Flow/Mini/RedDragonPuz.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Flow/Mini/RedDragonPuz.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,19 +33,29 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/tables"
+// 
+// version: 25.04.28 V
+// 
+// End License
+
+Script
+
+#use "Libs/SCI/Graphics"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
+//#use "libs/tables"
 
 var IMGUP
 var IMGDOWN
 var CIJFERS
 
-IMGUP = TImage.Obtain("UP")
-IMGDOWN = TImage.Obtain("DOWN")
-CIJFERS = LoadImageFont("Fonts/ECN.jfbf")
+Init
+	IMGUP = TImage.Obtain("UP")
+	IMGDOWN = TImage.Obtain("DOWN")
+	CIJFERS = LinkFont("Fonts/ECN.jfbf")
+End
+		
 
 class Kleur
 	readonly int R
@@ -58,11 +69,11 @@ class Kleur
 	int Y
 	
 	get int x
-		return self.X
+		return X
 	end
 	
 	get int y
-		return self.Y
+		return Y
 	end
 	
 	readonly int Goed
@@ -74,10 +85,10 @@ class Kleur
 	end
 	
 	set int waarde
-		self.t_waarde = math.abs((value + 10) % 10)
+		t_waarde = math.abs((value + 10) % 10)
 	end
 	
-	void CONSTRUCTOR(int rood,int groen,int blauw,int goed)
+	CONSTRUCTOR(int rood,int groen,int blauw,int goed)
 		self.R = rood
 		self.G = groen
 		self.B = blauw
@@ -88,23 +99,23 @@ class Kleur
 		Color($R,$G,$B)
 	end
 	
-	void DrukAf(int x,int y)
+	void DrukAf(int _x,int _y)
 		self.ZetKleur()
-		CIJFERS.DrawText(tostring(self.waarde),x,y,2)
+		CIJFERS.DrawText(tostring(self.waarde),_x,_y,2)
 		__white
-		IMGUP.Draw(x-16,y-self.upy)
-		IMGDOWN.Draw(x-16,y+self.dny)
-		self.X = x
-		self.Y = y
+		IMGUP.Draw(_x-16,_y-self.upy)
+		IMGDOWN.Draw(_x-16,_y+self.dny)
+		self.X = _x
+		self.Y = _y
 		
 	end
 		
-	get boolean Up
-		return Mouse.X>self.x-16 and Mouse.X<self.x+16 and Mouse.Y>self.y-self.upy and Mouse.Y<(self.y-self.upy)+32 and Mouse.HitLeft
+	get bool Up
+		return Mouse.X>x-16 && Mouse.X<x+16 && Mouse.Y>y-upy && Mouse.Y<(y-upy)+32 && Mouse.HitLeft
 	end
 
-	get boolean Down
-		return Mouse.X>self.x-16 and Mouse.X<self.x+16 and Mouse.Y>self.y+self.dny and Mouse.Y< self.y+self.dny+32  and Mouse.HitLeft
+	get bool Down
+		return Mouse.X>x-16 && Mouse.X<x+16 && Mouse.Y>y+dny && Mouse.Y< y+dny+32  && Mouse.HitLeft
 	end
 	
 end
@@ -112,21 +123,21 @@ end
 var Rood
 var Wit
 var Blauw
+Init
+	Rood  = new Kleur(255,  0,  0,2)
+	Wit   = new Kleur(255,255,255,1)
+	Blauw = new Kleur(  0,  0,255,9)
+End
 
-Rood  = new Kleur(255,  0,  0,2)
-Wit   = new Kleur(255,255,255,1)
-Blauw = new Kleur(  0,  0,255,9)
+int colw = math.floor(Graphics.W/4)
 
-int colw
-colw = math.floor(Screen.W/4)
+table KleurSet = { [0]=Rood, Wit, Blauw }
 
-table KleurSet
-KleurSet = { Rood, Wit, Blauw }
-
-global void BUB_Draw()
+Global Void MainFlow()
+//global void BUB_Draw()
 	// The three digits
 	for i,k in pairs(KleurSet)
-		k.DrukAf(i*colw,100)
+		k.DrukAf((i+1)*colw,100)
 	end
 	
 	// Party bar (no further function of that)
@@ -139,10 +150,10 @@ global void BUB_Draw()
 	// Show Mouse
 	__white
 	Mouse.Show()
-end
+//end
 
 
-global void BUB_Update()
+//global void BUB_Update()
 	Dev.ConCheck()
 	
 	if Mouse.HitRight
@@ -158,7 +169,7 @@ global void BUB_Update()
 		elseif k.Down
 			-- k.waarde
 		end
-		goed = goed and k.waarde == k.Goed
+		goed = goed && k.waarde == k.Goed
 	end
 	
 	if goed
