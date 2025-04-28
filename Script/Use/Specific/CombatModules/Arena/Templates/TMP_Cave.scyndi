@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Cave.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.04.28 V
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -44,6 +44,8 @@
 
 //#use "libs/strings"
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
 #use "Libs/SCI/Graphics"
 
 module 
@@ -59,34 +61,34 @@ module
 	set var Wall
 		switch type(value)
 			case "string"
-				self.trueWall = LoadNewImage(value,replace(value,"/","."))
+				trueWall = LoadNewImage(value,replace(value,"/","."))
 			case "table"
 				assert(value[".classname"] == "TImage","Invalid value for ArenaTemplate_Cave.Wall")
-				self.trueWall = value
+				trueWall = value
 			default
 				error("Type "..type(value).." invalid for Cave Wall!")
 		end
 	end
 	
 	get var Floor
-		return self.trueFloor
+		return trueFloor
 	end
 	
 	set var Floor
 		switch type(value)
 			case "string"
-				self.trueFloor = LoadIfNew(value,replace(value,"/","."))
+				trueFloor = LoadNewImage(value,replace(value,"/","."))
 			case "table"
 				assert(value[".classname"] == "TImage","Invalid value for ArenaTemplate_Cave.Floor")
-				self.trueFloor = value
+				trueFloor = value
 			default
 				error("Type "..type(value).." invalid for Cave Floor!")
 		end
 	end
 	
 	void Draw()
-		self.Floor.Tile(0,Screen.H/2,Screen.W,Screen.H/2)
-		self.Wall.Tile(0,(Screen.H/2)-50,Screen.W,64)
+		Floor.Tile(0,Graphics.H/2,Graphics.W,Graphics.H/2)
+		Wall.Tile(0,(Graphics.H/2)-50,Graphics.W,64)
 	end
 	
 	Init
