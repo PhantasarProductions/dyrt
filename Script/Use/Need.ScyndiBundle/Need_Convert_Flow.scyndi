@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_Flow.scyndi
 // 	Flow
-// 	version: 25.04.28
+// 	version: 25.04.28 II
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -59,7 +59,7 @@ End
 //	Sys.CurrentFlow=F
 //End
 
-extern StateExists "Scyndi.Class.Sys.HasState"
+global readOnly Var StateExists = Sys.HasState
 
 Global Void QuitRequest()
 	If Events.AppTerminate() 
