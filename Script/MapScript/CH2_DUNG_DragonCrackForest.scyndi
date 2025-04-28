@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_DUNG_DragonCrackForest.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_DUNG_DragonCrackForest.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.28 IV
+// 
+// End License
 
 
+Module
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Intervar"
+
+#use "script/use/need"
+//#use "Script/Use/StartCombatMod"
 group MScript
 	
 	void HIDESECRET()
@@ -60,13 +66,6 @@ group MScript
 	
 
 	
-	void CONSTRUCTOR()
-		CSayF("Let's check how things are with magic stones. So far they were set to %s",tostring(Done.AllowMagicStones))
-		Map.ZA_Enter("HideSecret","HideSecret")
-		Map.ZA_Leave("ShowSecret","HideSecret")
-		Map.ZA_Enter("ShowSecret","ShowSecret")
-		Map.ZA_Enter("EindeOefening","Einde")		
-	end
 	
 	void Draw()
 	end
@@ -75,4 +74,12 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	CSayF("Let's check how things are with magic stones. So far they were set to %s",tostring(Done.AllowMagicStones))
+	Map.ZA_Enter("HideSecret","HideSecret")
+	Map.ZA_Leave("ShowSecret","HideSecret")
+	Map.ZA_Enter("ShowSecret","ShowSecret")
+	Map.ZA_Enter("EindeOefening","Einde")		
+End
