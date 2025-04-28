@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_Dung_RedDragonCave.nil
-// (c) Jeroen Broks, 2019, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_Dung_RedDragonCave.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,12 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.07.01
-// End License Information
+// 
+// version: 25.04.28 I
+// 
+// End License
+
+
+Script
 	
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#say "Map Script - Red Dragon!"
+
+#use "Libs/SCI/Sys"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 group MScript
 		
 	void Panel()
@@ -50,7 +59,8 @@ group MScript
 
 	void NPC_TRAVEL()
 		CSay("Fake the travel emblem effect")
-		LuaDoString("FLOW_FIELD","FlowField.TravelEmblem('NPC_TRAVEL')")
+		//LuaDoString("FLOW_FIELD","FlowField.TravelEmblem('NPC_TRAVEL')")
+		Sys.Call("FLOW_FIELD","FlowField.TravelEmblem","NPC_TRAVEL")
 		Map.Kill("TRAVEL_BARRIER",true)
 	end
 	
