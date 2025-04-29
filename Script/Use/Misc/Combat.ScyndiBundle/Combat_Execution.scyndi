@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Execution.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.04.29 III
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -86,7 +86,11 @@ group Execution
 		
 		// Calculate damage
 		rand = math.random
-		base = math.ceil(RPG.Char(Exe.Tag).Stat(sprintf("END_%s",Act.Act.AttackStat)).Value*(Act.Act.Attack/100))
+		if Exe.Team=="Hero"	
+			base = math.ceil(RPG.Char(Exe.Tag).Stat(sprintf("END_%s",Act.Act.AttackStat)).Value*(Act.Act.Attack/(85+(__skill*5))))
+		else
+			base = math.ceil(RPG.Char(Exe.Tag).Stat(sprintf("END_%s",Act.Act.AttackStat)).Value*(Act.Act.Attack/100))
+		end
 		// local base = Combat_Stat(TGROUP,TACTOR,abl.AttackStat); CSay("AttackStat = "..abl.AttackStat); CSay("base = "..base)
 		// if abl.UseModifier then base = round(base * (abl.Modifier/100)) end
 		adie = rand(1,math.max(2,math.ceil(base/2)))
@@ -95,6 +99,11 @@ group Execution
 		totaldmg = base + adie
 		totaldef = defb + ddie
 		dmg = xmath.round(totaldmg-totaldef); if dmg<1 ; dmg=1; end
+		CSayF("Attack %s -> %s",Exe.Tag,Tar.Tag)
+		CSayF("- %s vs %s",Act.Act.AttackStat,Act.Act.DefenseStat)
+		CSayF("- base=%d; adie=%d;",base,adie)
+		CSayF("- bdef=%d; ddie=%d;",defb,ddie)
+		CSayF("- damage:   %d - %d = %d",totaldmg,totaldef,dmg)
 		
 		// Modify by attack type
 		fatal = prefixed(Tar.Tag,"FOE_") and Tar.Fatal[Act.Act.AttackType]
