@@ -138,7 +138,7 @@ Var RetFunc()
 		foeret.Char.Stat("BUFF_Agility").Value=0
 		foeret.Char.Stat( "END_Agility").Value=0
 // Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-		foeret.Char.Stat("BASE_Defense").Value=200
+		foeret.Char.Stat("BASE_Defense").Value=120 div (4 - __skill)
 		foeret.Char.Stat("BUFF_Defense").Value=0
 		foeret.Char.Stat( "END_Defense").Value=0
 // Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -171,7 +171,7 @@ Var RetFunc()
 		foeret.Char.Stat("BUFF_Agility").Value=0
 		foeret.Char.Stat( "END_Agility").Value=0
 // Used to be: foeret.Char.Stat( "END_Agility").Script="SUM:BASE_Agility,BUFF_Agility"
-		foeret.Char.Stat("BASE_Defense").Value=75
+		foeret.Char.Stat("BASE_Defense").Value=75 div (4 - __skill)
 		foeret.Char.Stat("BUFF_Defense").Value=0
 		foeret.Char.Stat( "END_Defense").Value=0
 // Used to be: foeret.Char.Stat( "END_Defense").Script="SUM:BASE_Defense,BUFF_Defense"
@@ -187,7 +187,7 @@ Var RetFunc()
 		foeret.Char.Stat("BUFF_Intelligence").Value=0
 		foeret.Char.Stat( "END_Intelligence").Value=0
 // Used to be: foeret.Char.Stat( "END_Intelligence").Script="SUM:BASE_Intelligence,BUFF_Intelligence"
-		foeret.Char.Stat("BASE_Resistance").Value=125
+		foeret.Char.Stat("BASE_Resistance").Value=125 div (4 - __skill)
 		foeret.Char.Stat("BUFF_Resistance").Value=0
 		foeret.Char.Stat( "END_Resistance").Value=0
 // Used to be: foeret.Char.Stat( "END_Resistance").Script="SUM:BASE_Resistance,BUFF_Resistance"
