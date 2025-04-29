@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28 VIII
+// version: 25.04.29 I
 // 
 // End License
 
@@ -54,7 +54,7 @@ var CIJFERS
 Init
 	IMGUP = TImage.Obtain("UP")
 	IMGDOWN = TImage.Obtain("DOWN")
-	CIJFERS = LinkFont("Fonts/ECN.jfbf")
+	CIJFERS = LinkFont("Fonts/ECN.jfbf","ECN_FONT_REDDRAGON")
 End
 		
 
@@ -79,21 +79,21 @@ class Kleur
 	
 	readonly int Goed
 	
-	int t_waarde
+	int t_waarde = 0
 	
 	get int waarde
-		return self.t_waarde
+		return t_waarde
 	end
 	
 	set int waarde
 		t_waarde = math.abs((value + 10) % 10)
 	end
 	
-	CONSTRUCTOR(int rood,int groen,int blauw,int goed)
+	CONSTRUCTOR(int rood,int groen,int blauw,int _goed)
 		self.R = rood
 		self.G = groen
 		self.B = blauw
-		self.Goed = goed
+		self.Goed = _goed
 	end
 	
 	void ZetKleur()
@@ -102,7 +102,7 @@ class Kleur
 	
 	void DrukAf(int _x,int _y)
 		self.ZetKleur()
-		CIJFERS.DrawText(tostring(self.waarde),_x,_y,2)
+		CIJFERS.Text(tostring(self.waarde),_x,_y,2)
 		__white
 		IMGUP.Draw(_x-16,_y-self.upy)
 		IMGDOWN.Draw(_x-16,_y+self.dny)
@@ -124,15 +124,16 @@ end
 var Rood
 var Wit
 var Blauw
+table KleurSet
 Init
 	Rood  = new Kleur(255,  0,  0,2)
 	Wit   = new Kleur(255,255,255,1)
 	Blauw = new Kleur(  0,  0,255,9)
+	KleurSet = { [0]=Rood, Wit, Blauw }
 End
 
 int colw = math.floor(Graphics.W/4)
 
-table KleurSet = { [0]=Rood, Wit, Blauw }
 
 Global Void MainFlow()
 //global void BUB_Draw()
@@ -165,13 +166,14 @@ Global Void MainFlow()
 	
 	bool goed = true
 	
-	for k in each(KleurSet)
+	for i,k in pairs(KleurSet)
 		if k.Up
 			++ k.waarde
 		elseif k.Down
 			-- k.waarde
 		end
 		goed = goed && k.waarde == k.Goed
+		// CSayF("Kleurset Check -- %d: %d -> %d -> %s",i,k.waarde,k.goed,goed)
 	end
 	
 	if goed
