@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_HUB_XRoads.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_HUB_XRoads.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,12 +33,16 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.04.29 I
+// 
+// End License
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
+Script
+
+#say "Map Script - Cross Roads!"
+#use "script/use/need"
 group MScript
 	
 	void SOUTH()
@@ -59,12 +64,6 @@ group MScript
 		Map.GoToLayer("OUTSIDE","Start")
 	end
 	
-	void CONSTRUCTOR()
-		// From Original: ExitReveal = { N = {}, S = {'CRYPT','FRENDOR'}, W = {'EXAMRUINS','XENOR','XENORBUSHES','XENORBUSHESNORTH','XENORBUSHESWEST'} }
-		Map.ZA_Enter("Exit_South","South")
-		Map.ZA_Enter("Exit_West","West")
-		Map.ZA_Enter("Madhouse","MadHouse")
-	end
 	
 	void Draw()
 	end
@@ -73,4 +72,13 @@ group MScript
 	end
 	
 end
+
+
+Init
+	// From Original: ExitReveal = { N = {}, S = {'CRYPT','FRENDOR'}, W = {'EXAMRUINS','XENOR','XENORBUSHES','XENORBUSHESNORTH','XENORBUSHESWEST'} }
+	Map.ZA_Enter("Exit_South","South")
+	Map.ZA_Enter("Exit_West","West")
+	Map.ZA_Enter("Madhouse","MadHouse")
+End
+
 #say "Map Script - Compiling!"
