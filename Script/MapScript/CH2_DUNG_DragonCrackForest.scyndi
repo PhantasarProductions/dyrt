@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28 IV
+// version: 25.04.29
 // 
 // End License
 
@@ -82,4 +82,13 @@ Init
 	Map.ZA_Leave("ShowSecret","HideSecret")
 	Map.ZA_Enter("ShowSecret","ShowSecret")
 	Map.ZA_Enter("EindeOefening","Einde")		
+	if gbool.Done_DragonCrackForestCompleted && (!Done.RestorePartyAfterRedDragon)
+		CSayF("Restore!")
+		for i,ch in pairs{"Eric","Irravonia","Rebecca","Scyndi","Brendor"}
+			RPG.Party[i]=ch
+			CSayF("- %d::%s",i,ch)
+		end
+	Else
+		CSay("Nothing to restore")
+	end
 End
