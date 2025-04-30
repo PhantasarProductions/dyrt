@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_CITY_Xenor.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_CITY_Xenor.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,13 +33,18 @@
 // 
 // **********************************************
 // 
-// version: 20.10.04
-// End License Information
+// 
+// version: 25.04.30 II
+// 
+// End License
 
+Script
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 
 #say "Map Script - None!"
-#use "script/use/anyway"
+#use "script/use/need"
 group MScript
 	
 	void SHOWOUTSIDE()
@@ -80,7 +86,7 @@ group MScript
 	end
 	
 	void NPC_MIRANDA()
-		MapText(sprintf("MIRANDA.%s",Map.Leader:upper()))
+		MapText(sprintf("MIRANDA.%s",Upper(Map.Leader)))
 	end
 	
 	void NPC_BBANK()
@@ -108,25 +114,28 @@ group MScript
 			MapText("DISCO_DOG")
 		end
 	end
-	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("Outside","ShowOutSide")
-		Map.ZA_Enter("Bank","ShowBank")
-		Map.ZA_Enter("Store","ShowStore")
 		
-		Map.ZA_Enter("Exit_Store","Exit_Store")
-		Map.ZA_Enter("LeaveBank","LeaveBank")
-		if not __newgameplus
-			Map.Kill("NPC_Dog")
-		end
-	end
-	
 	
 	void Draw()
 	end
 	
 	void Update()
 	end
-	
 end
+	
+	
+INIT
+	Kthura.CurrentLayer = "CITY"
+	Map.ZA_Enter("Outside","ShowOutSide")
+	Map.ZA_Enter("Bank","ShowBank")
+	Map.ZA_Enter("Store","ShowStore")
+	
+	Map.ZA_Enter("Exit_Store","Exit_Store")
+	Map.ZA_Enter("LeaveBank","LeaveBank")
+	if not __newgameplus
+		Map.Kill("NPC_Dog")
+	end
+End
+
+	
 #say "Map Script - Compiling!"
