@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.04.29
+// 	  Version: 25.04.30
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -209,11 +209,13 @@ group Map
 	end
 	
 	void ShowByZone(string zone)
-		FLD_Exe(sprintf("FieldMap.Kthura.ShowByZone(trim(\"%s\"))",zone))
+		//FLD_Exe(sprintf("FieldMap.Kthura.ShowByZone(trim(\"%s\"))",zone))
+		Kthura.ShowByZone(zone)
 	end
 	
 	void HideByZone(string zone)
-		FLD_Exe(sprintf("FieldMap.Kthura.HideByZone(trim(\"%s\"))",zone))
+		//FLD_Exe(sprintf("FieldMap.Kthura.HideByZone(trim(\"%s\"))",zone))
+		Kthura.HideByZone(zone)
 	end
 	
 	get string MapFile
