@@ -68,7 +68,7 @@
 	
 	
 :Wendy
-	call MapText,"WENDY."..Map.Leader:upper()
+	call MapText,"WENDY."..Scyndi.Class.Map.Leader:upper()
 	chk Map.Leader=="Rebecca",WendyUnlock
 	chk gv.Bool.WendySpokenRebecca,WendyStoneTalk
 	end
