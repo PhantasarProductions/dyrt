@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_DUNG_MadHouse.nil
-// (c) Jeroen Broks, 2020, 2021, 2022, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_DUNG_MadHouse.scyndi
+// (c) Jeroen Broks, 2020, 2021, 2022, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,34 @@
 // 
 // **********************************************
 // 
-// version: 22.08.02
-// End License Information
+// 
+// version: 25.05.07 II
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
 
-bool gj_checked
+Script
+
+#use "Libs/SCI/Sys"
+#Use "Libs/SCI/Medals"
+#use "Libs/SCI/InterVar"
+
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+
+bool Medal_checked
 bool gjout_checked
 
 group MScript
 	
 	void Fader(string p)
 		string do_it
-		do_it = sprintf("Fader(trim('%s'))",p)
-		LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD")
+		//do_it = sprintf("Fader(trim('%s'))",p)
+		//LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD")
+		Sys.Call("FLOW_FIED","Fader","The Mad House")
 	end
 	
 	void NPC_HOUSE()
@@ -57,70 +68,71 @@ group MScript
 		Map.GoToLayer("#001","Start")
 	end
 	
-	void GJ_OPEN_FUCKYOU()
-		var GJ
-		//if (not gv.Bool.GameJolt) or gj_checked
+	void Medal_OPEN_FUCKYOU()
+		//var GJ
+		//if (not gv.Bool.GameJolt) or Medal_checked
 		//	return
 		//end
-		CSayF("gvgj%s",tostring(gv.Bool.GameJolt))
-		CSayF("chek%s",tostring(gj_checked))
-		CSayF("fail%s",tostring(gj_failed()))
-		if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
-			return
-		end
+		//CSayF("gvgj%s",tostring(gv.Bool.GameJolt))
+		//CSayF("chek%s",tostring(Medal_checked))
+		//CSayF("fail%s",tostring(Medal_failed()))
+		//if (not gv.Bool.GameJolt) or Medal_checked or (Medal_failed())
+		//	return
+		//end
 
-		gj_checked = true
-		GJ = NIL.Use("Secu/Include/GJSecret.nil")
-		if not GJ
-			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
-			return
-		end
-		if GJ.ImpureRatio>=36
-			Map.Kill("GJ_Barrier")
-		end
+		//Medal_checked = true
+		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		//if not GJ
+		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+		//	return
+		//end
+		//if GJ.ImpureRatio>=36
+		//	Map.Kill("Medal_Barrier")
+		//end
+		Lua.error("Medal_OPEN_FUCKYOU called. Purpose unclear")
 	end
 	
-	void GJ_OPEN()
-		int p 
-		p = math.floor(NALA_Medals:AltRatio())
-		CSayF("Medal rate %03d%%",p)
-		gj_checked = true
-		if p>=36
-			Map.Kill("GJ_Barrier")
-		end
+	void Medal_OPEN()
+		LocExtern WantRatio "36"
+		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
+		if MedalRatio>=WantRatio
+			Map.Kill("MedalBarrier",false)
+			CSayF("-> Open Sesame!")
+		End
+		medal_checked=true
 	end
 
 	
-	void GJ_ALWAYSOPEN()
-		if not gj_checked
-			Map.Kill("GJ_Barrier")
-			gj_checked = true
+	void Medal_ALWAYSOPEN()
+		if not Medal_checked
+			Map.Kill("Medal_Barrier")
+			Medal_checked = true
 		end
 	end
 	
-	void GJWARP()
-		Field.LoadMap("GJ_DUNG_Facility")
+	void Medal_WARP()
+		Field.LoadMap("Medal_Dung_Facility")
 		Map.GoToLayer("#001","Start")
 	end
 	
 	void REMFAC1()
 		CSay(tostring(Done.FacilityPortal1))
 		if not gjout_checked
-			Map.Kill("Bars1")
+			Map.Kill("Bars1",true)
 			gjout_checked = true
 		end
 	end
 	void REMFAC2()
 		CSay(tostring(Done.FacilityPortal2))
 		if not gjout_checked
-			Map.Kill("Bars2")
+			Map.Kill("Bars2",true)
 			gjout_checked = true
 		end
 	end
 	void REMFAC3()
 		CSay(tostring(Done.FacilityPortal3))
 		if not gjout_checked
-			Map.Kill("Bars3")
+			Map.Kill("Bars3",true)
 			gjout_checked = true
 		end
 	end
@@ -135,15 +147,15 @@ group MScript
 		end
 	end
 	void TOFAC1()
-		Field.LoadMap("GJ_DUNG_Facility")
+		Field.LoadMap("Medal_DUNG_Facility")
 		Map.GoToLayer("#999","NPC_Trans_SPOT")
 	end
 	void TOFAC2()
-		Field.LoadMap("GJ_DUNG_Facility2")
+		Field.LoadMap("Medal_DUNG_Facility2")
 		Map.GoToLayer("#018","NPC_Trans_SPOT")
 	end
 	void TOFAC3()
-		Field.LoadMap("GJ_DUNG_Facility2")
+		Field.LoadMap("Medal_DUNG_Facility2")
 		Map.GoToLayer("#024","NPC_Trans_SPOT")
 	end
 	
@@ -154,7 +166,7 @@ group MScript
 	void TOMAIN()
 		Map.GoToLayer("#002","FromGameJoltOpvang")
 		if not Done.GJOPVANGBARRIERREMOVEDINMADHOUSE
-			Map.Kill("GJ_Dicht",true)
+			Map.Kill("Medal_Dicht",true)
 		end
 	end
 	
@@ -196,9 +208,20 @@ group MScript
 		Map.GoToLayer("XROADS","FromMadhouse")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("GJ_Open","GJ_Open")
-		Map.ZA_Enter("GJ_AlwaysOpen","GJ_AlwaysOpen")
+
+	
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+
+
+Init
+		Map.ZA_Enter("Medal_Open","Medal_Open")
+		Map.ZA_Enter("Medal_AlwaysOpen","Medal_AlwaysOpen")
 		Map.ZA_Enter("GJWARP","GJWARP")
 		for i=1,3
 			Map.ZA_Enter("RemBars"..i,"RemFac"..i)
@@ -215,13 +238,4 @@ group MScript
 		Map.ZA_Enter("Complete","Complete")
 		Map.ZA_Enter("Boss","SASKIA:Boss")
 		Map.ZA_Enter("Leave","Leave")
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-	end
-	
-end
-#say "Map Script - Compiling!"
+End
