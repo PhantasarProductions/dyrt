@@ -40,7 +40,7 @@
 	end
 :Mariska
 	call MapText,"MARISKA"
-	call MapText,"MARISKA."..Map.Leader:upper()
+	call MapText,"MARISKA."..Scyndi.AllIdentifiers.Map.Leader:upper()
 	end
 :Weapons
 	call MapText,"SALVIUS"
