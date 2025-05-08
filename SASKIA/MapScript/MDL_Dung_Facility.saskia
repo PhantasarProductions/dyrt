@@ -77,3 +77,4 @@
 	call Map.Kill,"ExLinks",true
 	call Map.Kill,"ExRechts",true
 	end
+All OK
