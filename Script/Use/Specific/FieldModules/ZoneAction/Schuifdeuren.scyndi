@@ -1,0 +1,217 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Use/Specific/FieldModules/ZoneAction/Schuifdeuren.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.05.08 XVII
+// 
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+
+#use "libs/linkedlist"
+
+#accept ZoneAction
+//#use "libs/tables"
+
+//#pure
+//local
+//#endpure
+
+class SchuifDeur
+
+	//link Kthura = FlowField.Map.Kthura
+
+	bool open
+	readonly int x
+	readonly int y
+	readonly string Richting
+	readonly string Layer
+	readonly string Name
+	
+	readonly static table Lijst
+	
+	CONSTRUCTOR(string aLayer,string NxPv)
+		Lua.assert(aLayer!="",sprintf("New Schuifdeur(\"%s\",\"%s\"): No valid layer!",Layer,NxPv))
+		self.Lijst[aLayer..NxPv] = self
+		self.Name = NxPv
+		self.Layer = aLayer
+		//self.Kthura.Obj = NxPv
+		//self.x = self.Kthura.ObjInt.x
+		//self.y = self.Kthura.ObjInt.y
+		oldLayer:=Kthura.CurrentLayer
+		Kthura.CurrentLayer = aLayer
+		x=Kthura.Obj[NxPv].X
+		y=Kthura.Obj[NxPv].Y
+		Kthura.CurrentLayer = Ternary (oldlayer=="",aLayer,oldlayer)
+		if suffixed(NxPv,"Links")
+			self.Richting = "Links"
+		elseif suffixed(NxPv,"Rechts")
+			self.Richting = "Rechts"
+		else
+			Lua.error("Unknown direction name: "..NxPv)
+		end
+		
+	end
+	
+	DESTRUCTOR
+		CSay("Schuifdeur entry "..self.Name.." has been removed from memory!")
+	end
+end
+
+//module AutomatischeSchuifDeuren
+	
+	table scanlist
+	
+	//link Kthura = FlowField.Map.Kthura
+	
+	//void CONSTRUCTOR()
+	Init
+		CSay("Automatische schuifdeuren worden voorbereid!")
+		scanlist = {[0]="NextLinks","NextRechts","PrevLinks","PrevRechts"}
+	end
+	
+	
+	void NextRoom()
+		ZoneAction.RoomChange( 1,"Start")
+		Scan()
+		Schuif("Prev",true,true)
+	end
+	
+	void PrevRoom()
+		ZoneAction.RoomChange(-1,"Einde")
+		Scan()
+		Schuif("Next",true,true)
+	end
+	
+	void Schuif(string pn,bool open,instant)
+		var dl
+		var dr
+		dl = SchuifDeur.Lijst[Kthura.CurrentLayer..pn.."Links"]
+		dr = SchuifDeur.Lijst[Kthura.CurrentLayer..pn.."Rechts"]
+		if dl
+			dl.open = open
+		end
+		if dr
+			dr.open = open
+		end
+		if instant
+			if dl
+				//self.Kthura.Obj=dl.Name
+				//self.Kthura.ObjInt.x = dl.x-30
+				Kthura.Obj[dl.name].x=dl.x-30
+			end
+			if dr
+				//self.Kthura.Obj=dr.Name
+				//self.Kthura.ObjInt.x = dr.x+30
+				Kthura.Obj[dl.name].x=dl.x+30
+			end
+		end
+	end
+	
+	void OpenNext()
+		Scan()
+		CSay("NEXT: Open Sesame!")
+		Schuif("Next",true)
+	end
+	
+	void CloseNext()
+		CSay("NEXT: Sesam! Sluit u!")
+		Schuif("Next",false)
+	end
+	
+	void OpenPrev()
+		CSay("PREV: Open Sesame!")
+		Scan()		
+		Schuif("Prev",true)
+	end
+	
+	void ClosePrev()
+		CSay("PREV: Sesam! Sluit u!")
+		Schuif("Prev",false)
+	end
+	
+	void Cycle()
+		// This is the callback function that runs on every game cycle 
+		// to make sure the doors are operating properly when instructed 
+		// to
+		// CSay("Cycle!") // Must be on comment when nog debugging!
+		for tag,deur in pairs(SchuifDeur.Lijst)
+			if deur.Layer==Kthura.CurrentLayer
+				//self.Kthura.Obj=deur.Name
+				KO:=Kthura.obj[deur.Name]
+				switch deur.Richting
+					case "Links"
+						if deur.open && deur.x-31<KO.X
+							CSay("NEXT: Open links!")
+							KO.X--
+						elseif (! deur.open) && deur.x>Kthura.Obj[deur.Name].X
+							KO.X++
+						end
+					case "Rechts"
+						if deur.open && deur.x+31>Kthura.Obj[deur.Name].X
+							CSay("NEXT: Open rechts!")
+							KO.X++
+						elseif (! deur.open) && deur.x<Kthura.Obj[deur.Name].X
+							KO.X--
+						end
+				end
+			end
+		end
+	end
+	
+	void Scan()
+		for t in each(scanlist)
+			//if self.Kthura.HasTag(t) && (not SchuifDeur.Lijst[Kthura.CurrentLayer..t])
+			if Kthura.HasObj(t) && (!SchuifDeur.Lijst[Kthura.CurrentLayer..t])
+				KCL:=Kthura.CurrentLayer
+				CSayF("Registering sliding door: %5s:%s",KCL,t)
+				new SchuifDeur(KCL,t)
+			end
+		end
+	end
+	
+
+	Void StartUp()
+		CSay("Init Schuifdeuren") //,180,0,255)
+		tableclear(SchuifDeur.Lijst)
+		new ZoneAction("Enter","SchuifNext",OpenNext)
+		new ZoneAction("Enter","SchuifPrev",OpenPrev)
+		new ZoneAction("Leave","SchuifNext",CloseNext)
+		new ZoneAction("Leave","SchuifPrev",ClosePrev)
+		Scan()
+	end
