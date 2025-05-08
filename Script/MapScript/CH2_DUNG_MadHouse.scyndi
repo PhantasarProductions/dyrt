@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.07 II
+// version: 25.05.08 III
 // 
 // End License
 
@@ -60,7 +60,7 @@ group MScript
 		string do_it
 		//do_it = sprintf("Fader(trim('%s'))",p)
 		//LuaDoString("FLOW_FIELD",do_it,"Call flow: FIELD")
-		Sys.Call("FLOW_FIED","Fader","The Mad House")
+		Sys.Call("FLOW_FIELD","Fader","The Mad House")
 	end
 	
 	void NPC_HOUSE()
@@ -96,7 +96,7 @@ group MScript
 		LocExtern WantRatio "36"
 		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
 		if MedalRatio>=WantRatio
-			Map.Kill("MedalBarrier",false)
+			Map.Kill("Medal_Barrier",false)
 			CSayF("-> Open Sesame!")
 		End
 		medal_checked=true
@@ -111,7 +111,7 @@ group MScript
 	end
 	
 	void Medal_WARP()
-		Field.LoadMap("Medal_Dung_Facility")
+		Field.LoadMap("MDL_Dung_Facility")
 		Map.GoToLayer("#001","Start")
 	end
 	
@@ -222,7 +222,7 @@ end
 Init
 		Map.ZA_Enter("Medal_Open","Medal_Open")
 		Map.ZA_Enter("Medal_AlwaysOpen","Medal_AlwaysOpen")
-		Map.ZA_Enter("GJWARP","GJWARP")
+		Map.ZA_Enter("Medal_Warp","Medal_Warp")
 		for i=1,3
 			Map.ZA_Enter("RemBars"..i,"RemFac"..i)
 		end
