@@ -35,7 +35,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
 
-module SpellAni_LaserShoot
+module 
 
 	var PRJ
 	var Sound
@@ -44,15 +44,14 @@ module SpellAni_LaserShoot
 		return self.PRJ.Cycle
 	end
 	
-	void Init(act)
-		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
+	void SA_Init(act)
+		assert(len(act.Targets)==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
 		self.PRJ.Start("GFX/Combat/SpellAni/Yirl_Laser.png",act.Executor,act.Targets[1],false,true)		
 		self.Sound.Play()
 	end
 	
-	void CONSTRUCTOR()
+	Init
 		self.PRJ = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/Projectile")
 		self.Sound = LoadNewAudio("SFX/Combat/SpellANI/photon.wav","SPELLANI_PHOTON")
 	end
 
-end
