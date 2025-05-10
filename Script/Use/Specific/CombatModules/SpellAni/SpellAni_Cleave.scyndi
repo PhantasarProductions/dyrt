@@ -34,12 +34,15 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
+
+Module
+
 class CleaveLine
 	readonly int x1
 	readonly int x2
 	readonly int y1
 	readonly int y2
-	void CONSTRUCTOR(AX1,AY1,AX2,AY2)
+	CONSTRUCTOR(AX1,AY1,AX2,AY2)
 		self.x1=AX1
 		self.x2=AX2
 		self.y1=AY1
@@ -47,16 +50,16 @@ class CleaveLine
 	end
 end
 
-module SpellAni_Cleave
+//module SpellAni_Cleave
 
 	table lines
 	int countdown
 	
-	void CONSTRUCTOR()
+	Init
 		CSay("Cleave SpellAni loaded")
 	end
 	
-	void Init()
+	void SA_Init()
 		int lnum
 		lnum = math.random(5,10)
 		self.lines = {}
