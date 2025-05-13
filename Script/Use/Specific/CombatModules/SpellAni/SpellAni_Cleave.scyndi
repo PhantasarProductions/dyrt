@@ -1,41 +1,51 @@
-// License Information:
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/Cleave.nil
-// Version: 21.01.01
-// Copyright (C) 2020, 2021 Jeroen Petrus Broks
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_Cleave.scyndi
 // 
-// ===========================
-// This file is part of a project related to the Phantasar Chronicles or another
-// series or saga which is property of Jeroen P. Broks.
-// This means that it may contain references to a story-line plus characters
-// which are property of Jeroen Broks. These references may only be distributed
-// along with an unmodified version of the game.
+// 	  Version: 25.05.12 V
+// 	
+// 	  Copyright (C) 2020-'21, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
 // 
-// As soon as you remove or replace ALL references to the storyline or character
-// references, or any termology specifically set up for the Phantasar universe,
-// or any other univers a story of Jeroen P. Broks is set up for,
-// the restrictions of this file are removed and will automatically become
-// zLib licensed (see below).
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
 // 
-// Please note that doing so counts as a modification and must be marked as such
-// in accordance to the zLib license.
-// ===========================
-// zLib license terms:
-// This software is provided 'as-is', without any express or implied
-// warranty.  In no event will the authors be held liable for any damages
-// arising from the use of this software.
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-// 1. The origin of this software must not be misrepresented; you must not
-// claim that you wrote the original software. If you use this software
-// in a product, an acknowledgment in the product documentation would be
-// appreciated but is not required.
-// 2. Altered source versions must be plainly marked as such, and must not be
-// misrepresented as being the original software.
-// 3. This notice may not be removed or altered from any source distribution.
-// End License Information
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
 
 Module
+
+#use "LIBS/SCI/SYS"
+#use "LIBS/SCI/GRAPHICS"
 
 class CleaveLine
 	readonly int x1
@@ -62,43 +72,43 @@ end
 	void SA_Init()
 		int lnum
 		lnum = math.random(5,10)
-		self.lines = {}
+		lines = {}
 		for i=0,lnum
 			int st
 			st = math.random(1,6)
 			switch st
 				case 1
 					// left to top
-					self.lines[#self.lines+1] = new CleaveLine(0,math.random(10,Screen.H-10),math.random(10,Screen.W-10),0)
+					lines += new CleaveLine(0,math.random(10,Graphics.H-10),math.random(10,Graphics.W-10),0)
 				case 2
 					// right to top
-					self.lines[#self.lines+1] = new CleaveLine(Screen.W,math.random(10,Screen.H-10),math.random(10,Screen.W-10),0)
+					lines += new CleaveLine(Graphics.W,math.random(10,Graphics.H-10),math.random(10,Graphics.W-10),0)
 				case 3
 					// left to bottom
-					self.lines[#self.lines+1] = new CleaveLine(0,math.random(10,Screen.H-10),math.random(10,Screen.W-10),Screen.H)
+					lines += new CleaveLine(0,math.random(10,Graphics.H-10),math.random(10,Graphics.W-10),Graphics.H)
 				case 4
 					// right to bottom
-					self.lines[#self.lines+1] = new CleaveLine(Screen.W,math.random(10,Screen.H-10),math.random(10,Screen.W-10),Screen.H)
+					lines += new CleaveLine(Graphics.W,math.random(10,Graphics.H-10),math.random(10,Graphics.W-10),Graphics.H)
 				case 5
 					// left to right
-					self.lines[#self.lines+1] = new CleaveLine(0,math.random(10,Screen.H-10),Screen.W,math.random(10,Screen.H-10))
+					lines += new CleaveLine(0,math.random(10,Graphics.H-10),Graphics.W,math.random(10,Graphics.H-10))
 				case 6
 					// top to bottom
-					self.lines[#self.lines+1] = new CleaveLine(math.random(10,Screen.W-10),0,math.random(10,Screen.W-10),Screen.H)
+					lines += new CleaveLine(math.random(10,Graphics.W-10),0,math.random(10,Graphics.W-10),Graphics.H)
 				default
 					error("Invalid cleave line code: "..st)
 			end
-			self.countdown = math.random(25,75)
+			countdown = math.random(25,75)
 		end
 	end
 	
 	bool Cycle()
-		for _,l in ipairs(self.lines)
-			Color(math.random(0,255),math.random(0,255),math.random(0,255))
-			DrawLine(l.x1,l.y1,l.x2,l.y2)
+		for _,l in ipairs(lines)
+			SetColor(math.random(0,255),math.random(0,255),math.random(0,255))
+			Line(l.x1,l.y1,l.x2,l.y2)
 		end
-		self.countdown--
-		return self.countdown<=0
+		countdown--
+		return countdown<=0
 	end
 
-end
+//end
