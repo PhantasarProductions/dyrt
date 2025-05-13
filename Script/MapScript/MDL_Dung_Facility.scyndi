@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.08 II
+// version: 25.05.13 II
 // 
 // End License
 
@@ -42,6 +42,7 @@
 Script
 
 
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/Intervar"
 
 #use "script/use/need"
@@ -145,11 +146,11 @@ group MScript
 	end
 	
 	void Update()
-		if self.ogo and self.ogx<30
-			Map.Obj = "GeheimLinks"
-			--Map.ObjInt.X
-			Map.Obj = "GeheimRechts"
-			++Map.ObjInt.X
+		if self.ogo && self.ogx<30
+			//Map.Obj = "GeheimLinks"			
+			--Kthura.Obj.GeheimLinks.X
+			//Map.Obj = "GeheimRechts"
+			++Kthura.Obj.GeheimRechts.X
 			self.ogx++
 		end
 	end
