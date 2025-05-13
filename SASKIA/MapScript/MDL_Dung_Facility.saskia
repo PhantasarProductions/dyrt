@@ -34,6 +34,7 @@
 ; 
 ; version: 20.04.28
 ; End License Information
+
 :OnLoad
 	chk Map.Layer=="#013",Nothing
 	call Fader,"Eugorvnia Science Facility"
@@ -47,8 +48,8 @@
 	end
 	
 :GoodBye
-	Call MapText,"BYEBYE_"..Map.Leader:upper()
-	chk Yes("Do you want to return to the MadHouse?"),Out
+	Call MapText,"BYEBYE_"..Scyndi.Class.Map.Leader:upper()
+	chk Events.Yes("Do you want to return to the MadHouse?"),Out
 	end
 :Out
 	chk Map.Layer=="#999",OutOne
