@@ -58,6 +58,7 @@
 	mov "#999",Map.Layer
 	end
 	
+:NPC_SASKIA_PRIEST	
 :NPC_SASKIA_Priest
 	call MapText,"FATHER"
 	call StoneMaster,"HindroAstra"
