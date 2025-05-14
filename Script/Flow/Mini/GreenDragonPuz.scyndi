@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Mini/GreenDragonPuz.scyndi
 // 
-// 	  Version: 25.05.14 IV
+// 	  Version: 25.05.14 XII
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -89,9 +89,9 @@ class Fles
 	int x
 	int movex = 0
 	
-	get int X
-		return self.x
-	end
+	//get int X
+	//	return self.x
+	//end
 	
 	void Draw()
 		flask.Draw(self.x,yline)
@@ -99,6 +99,7 @@ class Fles
 	
 	CONSTRUCTOR(int sx)
 		self.x = sx
+		CSayF("Flesje op x: %d",sx)
 	end
 end
 
@@ -109,14 +110,16 @@ Init
 	end
 	for i=1,4
 		// CSay("???"..i.."\t"..tostring(giftig[i]))
+		CSayF("%d> Flesje %d is giftig! Niet drinken dus!",i,giftig[i])
 		Flessen[giftig[i]].giftig = true
-		Flessen[giftig[i]].marked = gv.Bool["GREENDRAGONFLASKMARKED"..i]
-		CSayF("Flesje %d is giftig! Niet drinken dus!",i)
+		Flessen[giftig[i]].marked = gv.Bool["GREENDRAGONFLASKMARKED"..giftig[i]]
 	end
 
 End
 
 Get Int MaxMoves
+
+	CSayF("Maxmoves wanted for skill #%d",__skill)
 	
 	switch __skill
 	
@@ -130,7 +133,7 @@ Get Int MaxMoves
 		speed = 8
 		return 10
 	default
-		Lua.error("Unknown skill __skill")
+		Lua.error("Unknown skill "..__skill)
 		return 0
 	end
 
@@ -153,6 +156,8 @@ group Start
 	void Update()
 		self.Time--
 		if self.Time<=0
+			Lua.Scyndi.Globals.Moving.Moves = MaxMoves
+			CSayF("Going to move at speed %d for %d moves",speed,MaxMoves)
 			Stage++
 		end
 	end
@@ -173,7 +178,7 @@ group Moving
 	
 	void Update()
 		bool moved
-		for i,fles in ipairs(Flessen)
+		for i,fles in pairs(Flessen)
 			int mbx
 			mbx = i * spacing
 			if fles.x<mbx 
@@ -191,6 +196,7 @@ group Moving
 			end
 		end
 		if ! moved
+			CSayF("Moves left:%d",moves)
 			if self.moves<=0
 				Stage++
 				return
@@ -205,6 +211,7 @@ group Moving
 			sf = Flessen[s1]
 			Flessen[s1]=Flessen[s2]
 			Flessen[s2]=sf
+			CSayF("Swapping flask #%d and #%d",s1,s2)
 			self.moves--
 		end
 	end
@@ -213,6 +220,7 @@ end
 	
 Init
 	Moving.Moves = MaxMoves
+	CSayF("Max Moves: %d",Moving.Moves)
 End
 
 group Ask
@@ -227,19 +235,19 @@ group Ask
 	void Draw()
 		self.MYC.Draw(math.floor(Screen.W/2),25,2)
 		self.hover = 0
-		for i,f in ipairs(Flessen)
+		for i,f in pairs(Flessen)
 			int xline
 			xline = i * spacing
-			if Mouse.X>xline and Mouse.Y>yline and Mouse.X<xline+flask.W and Mouse.Y<yline+flask.H
+			if Mouse.X>xline and Mouse.Y>yline and Mouse.X<xline+flask.Width and Mouse.Y<yline+flask.Height
 				self.hover = i
-				Rect(xline,yline,flask.W,flask.H,"line")
+				Rect(xline,yline,flask.Width,flask.Height,1)
 			end
 		end
 		Mouse.Show()		
 	end 
 	
 	void Update()
-		if Mouse.HitLeft and self.hover>0
+		if Mouse.HitLeft && self.hover>0
 			Stage++
 		end
 	end
