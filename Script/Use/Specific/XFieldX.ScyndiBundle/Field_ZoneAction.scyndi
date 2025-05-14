@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_ZoneAction.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.14 IV
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -178,12 +178,14 @@ class ZoneAction
 				if i>0
 					para+=","
 				end
-				para+="\""..p.."\""
+				//para+="\""..p.."\""
+				para+=p
 			end
 			para+=")"
 			CSayF("ZA.%s.%s -> %s%s",Event,Zone,_AAct,para)
 			afun,aerror = Lua.load(_AAct..para)
 			if (!afun)
+				printf("\x1b[94m%s\x1b[0m\n",_AAct..para)
 				Lua.error(sprintf("Zone action %s construction errror: %s",event,aerror))
 				return
 			end
