@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_HUB_HiddenBush.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_HUB_HiddenBush.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,17 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.14
+// 
+// End License
 
+Module
 
+#use "Libs/SCI/Sys"
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 group MScript
 
 	void TOWHITE()
@@ -70,22 +74,6 @@ group MScript
 		StartCombat.Ready()	
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("ToWhite","ToWhite")
-		Map.ZA_Enter("ToGreen","ToGreen")
-		// Map.ZA_Enter("LaughSheckLock","Laugh_SheckLock")
-		if (gv.Bool.Done_WhiteDragonComplete and gv.Bool.Done_GreenDragonComplete) and (not gv.Bool.DefeatedSheckLock1)
-			CSay("Dragons complete, so let's get to Sheck-Lock's encounter!")
-			CSay("= Init: Laugh")
-			Map.ZA_Enter("LaughSheckLock","LAUGH_SHECKLOCK")
-			CSay("= Show: The idiot")
-			Map.Show("SheckLock")
-			CSay("= Init: Action zone")
-			Map.ZA_Enter("ActSheckLock","SheckLock")
-			CSay("= All cool, and over to you!")
-		end
-	end
-	
 	void Draw()
 	end
 	
@@ -93,4 +81,20 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Map.ZA_Enter("ToWhite","ToWhite")
+	Map.ZA_Enter("ToGreen","ToGreen")
+	// Map.ZA_Enter("LaughSheckLock","Laugh_SheckLock")
+	if (gv.Bool.Done_WhiteDragonComplete and gv.Bool.Done_GreenDragonComplete) and (not gv.Bool.DefeatedSheckLock1)
+		CSay("Dragons complete, so let's get to Sheck-Lock's encounter!")
+		CSay("= Init: Laugh")
+		Map.ZA_Enter("LaughSheckLock","LAUGH_SHECKLOCK")
+		CSay("= Show: The idiot")
+		Map.Show("SheckLock")
+		CSay("= Init: Action zone")
+		Map.ZA_Enter("ActSheckLock","SheckLock")
+		CSay("= All cool, and over to you!")
+	end
+end
