@@ -35,14 +35,14 @@
 // version: 20.04.28
 // End License Information
 
-
+Script
 
 #say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "libs/strings"
 
-quickmeta group flasks
+quickmeta flasks
 	index
 		return gv.Int["GreenDragonFlask"..key]
 	end
@@ -51,9 +51,9 @@ quickmeta group flasks
 		gv.Int["GreenDragonFlask"..key] = value
 	end
 	
-	len
-		return 5
-	end
+	//len
+	//	return 5
+	//end
 end
 
 void Note(string tag)
@@ -70,13 +70,13 @@ group MScript
 	end
 	
 	void GEN_PUZZLE()
-		if not Done.Done_GreenDragon_PuzzleGenerated
+		if ! Done.Done_GreenDragon_PuzzleGenerated
 			table poison
 			for i=1,4
 				int p
 				repeat
-					p = math.random(1,4)
-				until not poison[p]
+					p = math.random(1,5)
+				until ! poison[p]
 				poison[p] = i
 			end
 			// please note ipairs may NOT be used here! pairs must do!
@@ -130,11 +130,6 @@ group MScript
 		end
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("LeaveCave","LeaveCave")
-		Map.ZA_Enter("Gen_Puzzle","Gen_Puzzle")
-		Map.ZA_Enter("SASKIA_Dragon","SASKIA_Dragon")
-	end
 	
 	void Draw()
 	end
@@ -143,4 +138,11 @@ group MScript
 	end
 	
 end
+
+Init
+	Map.ZA_Enter("LeaveCave","LeaveCave")
+	Map.ZA_Enter("Gen_Puzzle","Gen_Puzzle")
+	Map.ZA_Enter("SASKIA_Dragon","SASKIA_Dragon")
+end
+
 #say "Map Script - Compiling!"
