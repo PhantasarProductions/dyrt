@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.14 III
+// version: 25.05.14 IV
 // 
 // End License
 
@@ -132,7 +132,7 @@ group MScript
 	
 	void RESTOREPARTY()
 		//RPG.Party = {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
-		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+		for i,ch in Lua.ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
 			RPG.Party[i] = ch
 		end
 	end
