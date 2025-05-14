@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_HUB_ElfImpCastle.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_HUB_ElfImpCastle.scyndi
+// (c) Jeroen Broks, 2020-'21, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,39 +33,40 @@
 // 
 // **********************************************
 // 
-// version: 21.01.16
-// End License Information
+// 
+// version: 25.05.14 I
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+//#use "Script/Use/StartCombatMod"
 group MScript
 	
 	void NPC_KEIZER()
-		if not Done.Spoken_To_Elven_Emperor
+		if ! Done.Spoken_To_Elven_Emperor
 			MapText("EMP")
 			WM_Unlocked.D_HIDDENBUSH = true
 			return
 		end
 		//if not gv.Bool.Chapter3Complete
-		if not gv.Bool.Chapter2Complete
+		if ! gv.Bool.Chapter2Complete
 			MapText("EMPBEBACK")
 			return
 		end
 		
 		switch Map.Leader
 			case "Dernor" "Merya" "Aziella"
-				MapText("EMP"..(Map.Leader:upper()))			
+				MapText("EMP"..(Upper(Map.Leader)))			
 			default
 				MapScript.SASKIA("StoneMaster")
 		end
 	end
-	
-	void CONSTRUCTOR()
-	end
-	
+		
 	void Draw()
 	end
 	
@@ -72,4 +74,3 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
