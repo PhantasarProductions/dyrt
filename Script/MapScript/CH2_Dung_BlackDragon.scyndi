@@ -1,3 +1,4 @@
+
 // License Information:
 // **********************************************
 // 
@@ -37,8 +38,9 @@
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
+Script
+
+#use "script/use/Misc"
 #use "Script/Use/StartCombatMod"
 #use "Script/Use/MapScript/Memory"
 
@@ -63,7 +65,7 @@ group MScript
 	link DoneMemory = gv.Bool.Done_BlackDragon_MemoryPuzzle
 	
 	void MUSIC()
-		if not Done.Done_BlackDragon_First_Enter_Music
+		if ! Done.Done_BlackDragon_First_Enter_Music
 			Music.Play("Music/Event/DernorAndMerya.wav")
 		else
 			Music.Play("Music/Dungeon/BlackDragon.wav")
@@ -71,13 +73,20 @@ group MScript
 	end
 	
 	void TRUESTART()
-		if not Done.Done_BlackDragon_First_Enter_Event
+		if ! Done.Done_BlackDragon_First_Enter_Event
 			Map.GoToLayer("OUTSIDE","Start")
 			Map.Hide("Player")
 			Map.ShowByLabel("START")
-			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActDernor.Spawn(\"Dernor\"); FlowField.Map.Kthura.Actor.ActMerya.Spawn(\"Merya\");","Spawn Dernor & Merya")
-			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActDernor.Wind=\"East\"; FlowField.Map.Kthura.Actor.ActMerya.Wind=\"East\";","Wind Dernor & Merya")
-			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActDernor.Texture = 'gfx/actors/heroes/Dernor.East.jpbf'; FlowField.Map.Kthura.Actor.ActMerya.Texture = 'gfx/actors/heroes/Merya.East.jpbf';","Tex Dernor & Merya")
+			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActDernor.Spawn(\"Dernor\"); FlowField.Map.Kthura.Actor.ActMerya.Spawn(\"Merya\");","Spawn Dernor & Merya")
+			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActDernor.Wind=\"East\"; FlowField.Map.Kthura.Actor.ActMerya.Wind=\"East\";","Wind Dernor & Merya")
+			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActDernor.Texture = 'gfx/actors/heroes/Dernor.East.jpbf'; FlowField.Map.Kthura.Actor.ActMerya.Texture = 'gfx/actors/heroes/Merya.East.jpbf';","Tex Dernor & Merya")
+			for ch in each{[0]="Dernor","Merya"}
+				CSayF("Spawning: %s",ch)
+				Kthura.Spawn("Act"..ch,ch)
+				cho:=Kthura.Obj["Act"..ch]
+				cho.Wind="East"
+				cho.Texture=sprintf("GFX/Actors/Heroes/%s.East.jpbf")
+			end
 			MapScript.SASKIA("DernorAndMerya")
 		else
 			Map.GoToLayer("#000","Start")
@@ -89,7 +98,7 @@ group MScript
 	end
 	
 	void LEAVECAVE()
-		if gv.Bool.Chapter2Complete or (not gv.Bool.Done_BlackDragonComplete)
+		if gv.Bool.Chapter2Complete || (! gv.Bool.Done_BlackDragonComplete)
 			WorldMap.Delisto()
 		else
 			MapScript.SASKIA("Rondomo")
@@ -151,7 +160,7 @@ group MScript
 	
 	void RESTOREPARTY()
 		//RPG.Party = {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
-		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+		for i,ch in pairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
 			RPG.Party[i] = ch
 		end
 	end
@@ -176,13 +185,6 @@ group MScript
 
 
 	
-	void CONSTRUCTOR()
-		BoxText.Load("GENSCEN/CH2/DERNORANDMERYA","BLACKDRAGONOUTSIDE")
-		Map.ZA_Enter("TrueStart","TrueStart")
-		Map.ZA_Enter("ExitCave","LEAVECAVE")
-		Map.ZA_Enter("MEMORY","ResetMemory")
-		Map.ZA_Enter("Dragon","SASKIA_Dragon")
-	end
 	
 	
 	
@@ -196,4 +198,11 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	BoxText.Load("GENSCEN/CH2/DERNORANDMERYA","BLACKDRAGONOUTSIDE")
+	Map.ZA_Enter("TrueStart","TrueStart")
+	Map.ZA_Enter("ExitCave","LEAVECAVE")
+	Map.ZA_Enter("MEMORY","ResetMemory")
+	Map.ZA_Enter("Dragon","SASKIA_Dragon")
+End
