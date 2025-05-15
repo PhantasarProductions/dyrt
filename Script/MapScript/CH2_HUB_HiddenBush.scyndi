@@ -34,13 +34,14 @@
 // **********************************************
 // 
 // 
-// version: 25.05.14
+// version: 25.05.14 II
 // 
 // End License
 
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 
 #use "script/use/Need"
 #use "Script/Use/Misc/StartCombatMod"
@@ -92,7 +93,9 @@ Init
 		CSay("= Init: Laugh")
 		Map.ZA_Enter("LaughSheckLock","LAUGH_SHECKLOCK")
 		CSay("= Show: The idiot")
-		Map.Show("SheckLock")
+		Kthura.CurrentLayer="BOS"
+		Kthura.Obj.SheckLock.Visible=true
+		//Map.Show("SheckLock")
 		CSay("= Init: Action zone")
 		Map.ZA_Enter("ActSheckLock","SheckLock")
 		CSay("= All cool, and over to you!")
