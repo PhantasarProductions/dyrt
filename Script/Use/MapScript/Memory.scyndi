@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/MapScript/Memory.scyndi
 // 
-// 	  Version: 25.05.15 IX
+// 	  Version: 25.05.15 XIII
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -143,13 +143,13 @@ Module
 	void Cycle()
 		if tiletime>0
 			--tiletime
-			if tiletime==0
+			if tiletime==0 && tile1>0 && tile2>0
 				//Map.Obj="NPC_MEMORY"..tile1
 				//Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
 				//Map.Obj="NPC_MEMORY"..tile2
 				//Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
 				for t in each{[0]=tile1,tile2}
-					Kthura.Obj["NPC_MEMORY"..t]="gfx/Textures/Scenario/Memory/Hide.png"
+					Kthura.Obj["NPC_MEMORY"..t].Texture="gfx/Textures/Scenario/Memory/Hide.png"
 				end
 				tile1=0
 				tile2=0
@@ -179,8 +179,9 @@ Module
 		tile2=t
 		//Map.Obj="NPC_MEMORY"..tile2
 		//Map.ObjString.Texture=TileTex[t]
-		Kthura.Obj["NPC_MEMORY"..tile2] = TileTex[t]
-		Map.WalkTo(Map.ObjInt.X,Map.ObjInt.Y+32)
+		TO:=Kthura.Obj["NPC_MEMORY"..tile2]
+		Kthura.Obj["NPC_MEMORY"..tile2].Texture = TileTex[t]
+		Map.WalkTo(TO.X,TO.Y+32)
 		if TilesAssigned[tile1]==TilesAssigned[tile2]
 			goed++
 			tile1=0
