@@ -41,7 +41,7 @@
 :Lachen
 	call CSay,"WTF?"
 	call MapText,"SHEKKIE_INTRO"
-	call MapText,"SHEKKIE_I_"..(Map.Leader:upper())
+	call MapText,"SHEKKIE_I_"..(Scyndi.Class.Map.Leader:upper())
 	call Map.Kill,"LaughSheckLock",true
 	end
 	
