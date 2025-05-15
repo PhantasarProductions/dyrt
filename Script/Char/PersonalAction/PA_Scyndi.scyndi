@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.05.15 V
 // 
 // End License
 
@@ -108,10 +108,13 @@ Module
 			wx += _X
 			wy += _Y
 			CSayF("Testing (%5d,%5d) Mv(%d,%d) ",wx,wy,_X,_Y)
-			for tag in FieldMap.Kthura.EachTag()
-				skip = skip or ( prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy) )
+			//for tag in FieldMap.Kthura.EachTag()
+			for tag in each(Kthura.TagList)
+				//skip = skip or ( prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy) )
+				skip = skip || ( prefixed(tag,"SCYNDIHOOK_") && Kthura.InObj(tag,wx,wy) )
 				// CSayF("= Checking zone: %s; For Scyndi and in there: %s; Skip: %s",tag,tostring(prefixed(tag,"ScyndiHook_") and FieldMap.Kthura.InObj(tag,wx,wy)),tostring(skip) )
-				if prefixed(tag,"ScyndiHookSpot_") 
+				//if prefixed(tag,"ScyndiHookSpot_")
+				if Prefixed(Tag,"SCYNDIHOOKSPOT_")
 					foundhook = true
 					var m
 					//m = FieldFlow.Map.Kthura
@@ -149,11 +152,11 @@ Module
 			if HookMove
 				return
 			end
-			if not foundhook
+			if ! foundhook
 				CSay("No need to keep on scanning if there isn't any hookspot at all in this place!")
 				return
 			end
-		until (not skip) and FieldMap.Kthura.Blocked(wx,wy,true)
+		until (! skip) && Kthura.Blocked(wx div 32,wy div 32)
 	end
 	
 	bool Click(int but,int _x, int _y)
