@@ -1,9 +1,8 @@
-
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_Dung_BlackDragon.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_Dung_BlackDragon.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -25,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -33,15 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.15 VIII
+// 
+// End License
 
 
 
 Script
 
-#use "script/use/Misc"
-#use "Script/Use/StartCombatMod"
+#use "Libs/Music"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "Script/Use/MapScript/Memory"
 
 group MScript
@@ -85,7 +94,7 @@ group MScript
 				Kthura.Spawn("Act"..ch,ch)
 				cho:=Kthura.Obj["Act"..ch]
 				cho.Wind="East"
-				cho.Texture=sprintf("GFX/Actors/Heroes/%s.East.jpbf")
+				cho.Texture=sprintf("GFX/Actors/Heroes/%s.East.jpbf",ch)
 			end
 			MapScript.SASKIA("DernorAndMerya")
 		else
@@ -109,13 +118,13 @@ group MScript
 		if self.DoneMemory
 			return
 		end
-		Memory.Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Shanda"})
+		Memory.Mem_Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Shanda"})
 	end
 	
 	link MEMORYCYCLE = Memory.Cycle
 	
 	void MemoryPuzzleSolved()
-		LoadAudio("SFX/Puzzle/Solved.wav").Play()
+		Audio.Load("SFX/Puzzle/Solved.wav","MEMORY_SOLVED").Play()
 		MapScript.SASKIA("Guardian")
 	end
 	
