@@ -1,0 +1,190 @@
+// License:
+// 	  src/Script/Script/Use/MapScript/Memory.scyndi
+// 
+// 	  Version: 25.05.15 II
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+#say "Compiling memory script"
+
+#use "libs/sci/sys"
+#use "libs/sci/sstring"
+
+// #macro MemoryButtonScript "Memory.OpenTile(%d)"
+
+//module Geheugen
+
+	var parent
+	table MemoryPics
+	
+	
+	// Open tiles when still checking
+	int tile1 = 0
+	int tile2 = 0
+	int tiletime = 0
+	
+	int goed = 0
+	table perm
+	
+	table TilesAssigned
+	
+	//readonly 
+	table TileTex
+	
+	//void CONSTRUCTOR()
+	Init
+		//setmetatable(TileTex,{
+		//	["__index"] = string(s,int k)
+		//		return MemoryPics[TilesAssigned[k]]
+		//	end,
+	//		["__newindex"] = void()
+		//		error("READONLY table written to!")
+		//	end
+		//})
+		ddef TTEX_IDX
+			plua s
+			int k
+			s,k = infinity
+			return MemoryPics[TilesAssigned[k]]
+		end
+		ddef TTEX_NIX
+			print("ERROR!\n",infinity)
+			Lua.error("READONLY table written to!")
+		end
+		TileTex = SetMetaTable({},{["__index"]=TTEX_IDX,["__newindex"]=TTEX_NIX})
+	end
+	
+	void MEM_Init(ouder,table party)
+		CSay("Memory game start sequence has commenced!")
+		assert(ouder,"No parent mapscript given for memory game")
+		assert(len(party)==8,"Invalid party")
+		parent = ouder
+		// Loading memory tiles if needed
+		for i,ch in Lua.ipairs(party)
+			//CSay("Loading and assigning "..ch.." to slot "..i)
+			//MemoryPics = LoadIfNew(sprintf("GFX/Textures/Scenario/Memory/Face/%s.png",ch),sprintf("MEMORY_FACE_%s",ch))
+			MemoryPics[i] = sprintf("GFX/Textures/Scenario/Memory/Face/%s.png",ch)
+		end
+		for i=1,16
+			parent["NPC_MEMORY"..i] = Lua.load(sprintf("Scyndi.Class.Memory.OpenTile(%d)",i),"NPC_BUTTON_CHUNK["..i.."]")
+		end
+
+		
+		// A few start up values
+		tile1 = 0
+		tile2 = 0
+		tiletime = 0
+		perm = {}
+		goed = 0
+		
+		// Let's assign the tiles
+		TilesAssigned = {}
+		for i=1,8 
+			for j=1,2 
+				int tn
+				int timeout = 0
+				repeat
+					tn = math.random(1,16)
+					timeout++
+					assert(timeout<10000,"Memory puzzle generation time-out!")
+				until not TilesAssigned[tn]
+				TilesAssigned[tn] = i
+				CSayF("Picture #%d is now assigned to tile #%2d",i,tn)
+				CSayF("- %2d tiles assigned now! (Inaccurate)",Len(TilesAssigned))
+			end
+		end
+		CSay("Are you ready?")
+	end
+	
+	void Cycle()
+		if tiletime>0
+			--tiletime
+			if tiletime==0
+				//Map.Obj="NPC_MEMORY"..tile1
+				//Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
+				//Map.Obj="NPC_MEMORY"..tile2
+				//Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
+				for t in each{[0]=tile1,tile2}
+					Kthura.Obj["NPC_MEMORY"..t]="gfx/Textures/Scenario/Memory/Hide.png"
+				end
+				tile1=0
+				tile2=0
+			end
+		end
+	end
+	
+	void OpenTile(int t)
+		if tile2!=0
+//			Map.Obj="NPC_MEMORY"..tile1
+//			Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
+//			Map.Obj="NPC_MEMORY"..tile2
+//			Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
+			for t in each{[0]=tile1,tile2}
+				Kthura.Obj["NPC_MEMORY"..t]="gfx/Textures/Scenario/Memory/Hide.png"
+			end
+			tile1=0
+			tile2=0			
+		end
+		if tile1==0
+			tile1=t
+			//Map.Obj="NPC_MEMORY"..tile1
+			//Map.ObjString.Texture=TileTex[t]
+			Kthura.Obj["NPC_MEMORY"..tile1] = TileTex[t]
+			return
+		end
+		tile2=t
+		//Map.Obj="NPC_MEMORY"..tile2
+		//Map.ObjString.Texture=TileTex[t]
+		Kthura.Obj["NPC_MEMORY"..tile2] = TileTex[t]
+		Map.WalkTo(Map.ObjInt.X,Map.ObjInt.Y+32)
+		if TilesAssigned[tile1]==TilesAssigned[tile2]
+			goed++
+			tile1=0
+			tile2=0
+			if goed==8
+				parent.MemoryPuzzleSolved()
+			end
+		else
+			tiletime = 64
+		end
+	end
+
