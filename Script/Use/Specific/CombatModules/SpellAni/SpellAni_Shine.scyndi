@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_Shine.scyndi
 // 
-// 	  Version: 25.05.15
+// 	  Version: 25.05.15 V
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -49,6 +49,8 @@ Module
 #use "Libs/SCI/Audio"
 #use "Libs/SCI/Graphics"
 
+#use "Script/Use/Need"
+
 class Shine
 	static var List 
 	static int Count
@@ -62,18 +64,18 @@ class Shine
 	int C=0
 	
 	CONSTRUCTOR(target)
-		self.Count++
-		self.List = self.List or new TLinkedList()
-		self.ID = self.Count
-		CSayF("Shine #%05d created!",self.ID)
-		self.W = math.floor(target.Width / 2)
-		self.X = target.X+self.W
-		self.Y = target.Y+target.Height
-		self.List.AddLast(self)
+		Count++
+		List = List || new TLinkedList()
+		ID = Count
+		CSayF("Shine #%05d created!",ID)
+		W = math.floor(target.Width / 2)
+		X = target.X+W
+		Y = target.Y+target.Height
+		List.AddLast(self)
 	end
 	
 	void DESTRUCTOR()
-		CSayF("Shine #%05d destroyed!",self.ID)
+		CSayF("Shine #%05d destroyed!",ID)
 	end
 end
 
@@ -87,7 +89,7 @@ end
 	// Is that CONSTRUCTOR is only automatically loaded when this
 	// module is called fo the first time in a combat.
 	// Init will be called EVERY time a move is being performed.
-	void CONSTRUCTOR()
+	Init
 		ShAudio = Audio.LoadNew("SFX/Combat/SpellAni/Glitter.wav","SPELLANI_Glitter")
 	end	
 
@@ -95,7 +97,7 @@ end
 		for tar in each(act.Targets)
 			new Shine(tar)
 		end
-		self.Audio.Play()
+		ShAudio.Play()
 	end
 	
 	
@@ -117,4 +119,3 @@ end
 		return Shine.List.Count<=0
 	end
 	
-end
