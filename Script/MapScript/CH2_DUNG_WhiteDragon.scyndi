@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH2_DUNG_WhiteDragon.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH2_DUNG_WhiteDragon.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.14 XVI
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Kthura"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 
 #macro MaxIce 16
 
@@ -54,37 +61,56 @@ group MScript
 		Map.HideByZone("SecretPassage")
 	end
 	
+	
+	int IceTimer = 0
 	void ICE(string tag)
+		if Kthura.CurrentLayer=="#003"
+			CSay("Ignore! Doesn't work!")
+			return
+		end
+		
 		int sx
 		int sy
 		int ex
 		int ey
 		CSay("ICE: "..tag)
+		if IceTimer>0
+			CSayF("Ice timer still running: %02d",IceTimer)
+			return
+		end
 		if self.IceTagsActive>0
 			CSay("Ignore! There still are active tags!")
 			return
 		end
 		OnIce[tag]=true
 		__nowalk=true
-		Map.Obj = tag
-		sx = Map.ObjInt.X
-		sy = Map.ObjInt.Y
-		ex = Map.ObjInt.X + Map.ObjInt.W
-		ey = Map.ObjInt.Y + Map.ObjInt.H
+		IceTimer=32
+		//Map.Obj = tag
+	//	sx = Map.ObjInt.X
+	//	sy = Map.ObjInt.Y
+	//	ex = Map.ObjInt.X + Map.ObjInt.W
+	//	ey = Map.ObjInt.Y + Map.ObjInt.H
+		MO:=Kthura.Obj[tag]
+		sx=MO.X
+		sy=MO.Y
+		ex=MO.X+MO.W
+		ey=MO.X+MO.H
 		Map.StopWalking()
-		switch Map.PlayerWind
+		switch Upper(Kthura.Obj.Player.Wind)
 			case "NORTH"
-				Map.MoveTo(Map.PlayerX,sy-3)
+				CSayF("North: Move to (%04d,%04d)",Kthura.Obj.Player.X,sy)
+				Map.MoveTo(Kthura.Obj.Player.X,sy)
 			case "SOUTH"
-				Map.MoveTo(Map.PlayerX,ey+32)
+				CSayF("SOUTH: Move to (%04d,%04d)",Kthura.Obj.Player.X,ey+32)
+				Map.MoveTo(Kthura.Obj.Player.X,ey+32)
 			case "WEST"
-				CSayF("WEST: Move to (%04d,%04d)",sx-16,Map.PlayerY)
-				Map.MoveTo(sx-16,Map.PlayerY)
+				CSayF("WEST: Move to (%04d,%04d)",sx-16,Kthura.Obj.Player.Y)
+				Map.MoveTo(sx-16,Kthura.Obj.Player.Y)
 			case "EAST"
-				CSayF("EAST: Move to (%04d,%04d)",ex+16,Map.PlayerY)
-				Map.MoveTo(ex+16,Map.PlayerY)
+				CSayF("EAST: Move to (%04d,%04d)",ex+16,Kthura.Obj.Player.Y)
+				Map.MoveTo(ex+16,Kthura.Obj.Player.Y)
 			default
-				error("Unknown wind direction for ICE slide: "..Map.PlayerWind)
+				error("Unknown wind direction for ICE slide: "..Kthura.Obj.Player.Wind)
 		end
 	end
 	
@@ -101,14 +127,18 @@ group MScript
 	end
 	
 	void END_ICE(string tag)
-		CSay("End of ice"..tag..";")
+		CSay("End of ice: "..tag..";")
 		OnIce[tag]=nil;
 		__nowalk = self.IceTagsActive>0
+		if (!__nowalk)
+			Kthura.Obj.Player.StopWalking()
+			Kthura.Obj.Player.WalkTo(Kthura.Obj.Player.X,Kthura.Obj.Player.Y)
+		end
 	end
 	
 	void GAT()
 		Map.GoToLayer(Map.Layer,"Start")
-		LoadAudio("SFX/General/FallDown.wav").Play()
+		Audio.LoadNew("SFX/General/FallDown.wav","FALLDOWN").Play()
 	end
 	
 	void STARTGUARDIAN()
@@ -145,7 +175,7 @@ group MScript
 	
 	void RESTOREPARTY()
 		//RPG.Party = {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
-		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
+		for i,ch in Lua.ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca"}
 			RPG.Party[i] = ch
 		end
 	end
@@ -159,27 +189,30 @@ group MScript
 		Map.GoToLayer("BOS","FromWhite")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("SecretPassage","SecretPassage")
-		Map.ZA_Enter("HideSecret","HideSecret")
-		Map.ZA_Enter("Reset_Start","Gat")
-		Map.ZA_Enter("GAT2","Gat")
-		Map.ZA_Enter("GAT3","Gat")
-		for i=1,MaxIce
-			string tag
-			tag = sprintf("Ice_%03d",i)
-			Map.ZA_Enter(tag,'ICE',tag)
-			Map.ZA_Leave(tag,'END_ICE',tag)
-		end
-		Map.ZA_Enter("Dragon","SASKIA_Dragon")
-		Map.ZA_Enter("LeaveCave","LeaveCave")
-	end
+	
 	
 	void Draw()
 	end
 	
 	void Update()
+		IceTimer=Math.max(0,IceTimer-1)
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Map.ZA_Enter("SecretPassage","SecretPassage")
+	Map.ZA_Enter("HideSecret","HideSecret")
+	Map.ZA_Enter("Reset_Start","Gat")
+	Map.ZA_Enter("GAT2","Gat")
+	Map.ZA_Enter("GAT3","Gat")
+	for i=1,MaxIce
+		string tag
+		tag = sprintf("Ice_%03d",i)
+		Map.ZA_Enter(tag,"ICE",tag)
+		Map.ZA_Leave(tag,"END_ICE",tag)
+	end
+	Map.ZA_Enter("Dragon","SASKIA_Dragon")
+	Map.ZA_Enter("LeaveCave","LeaveCave")
+end
