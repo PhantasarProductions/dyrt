@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/MapScript/Memory.scyndi
 // 
-// 	  Version: 25.05.15 II
+// 	  Version: 25.05.15 IX
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -47,7 +47,10 @@ Module
 #say "Compiling memory script"
 
 #use "libs/sci/sys"
+#use "libs/sci/kthura"
 #use "libs/sci/sstring"
+
+#use "script/use/need"
 
 // #macro MemoryButtonScript "Memory.OpenTile(%d)"
 
@@ -93,10 +96,12 @@ Module
 		TileTex = SetMetaTable({},{["__index"]=TTEX_IDX,["__newindex"]=TTEX_NIX})
 	end
 	
-	void MEM_Init(ouder,table party)
+	void MEM_Init(ouder,party)
+		plua luap = party
+		locExtern lparty "#luap"
 		CSay("Memory game start sequence has commenced!")
 		assert(ouder,"No parent mapscript given for memory game")
-		assert(len(party)==8,"Invalid party")
+		assert(lparty,"Invalid party")
 		parent = ouder
 		// Loading memory tiles if needed
 		for i,ch in Lua.ipairs(party)
@@ -126,7 +131,7 @@ Module
 					tn = math.random(1,16)
 					timeout++
 					assert(timeout<10000,"Memory puzzle generation time-out!")
-				until not TilesAssigned[tn]
+				LoopWhile TilesAssigned[tn]
 				TilesAssigned[tn] = i
 				CSayF("Picture #%d is now assigned to tile #%2d",i,tn)
 				CSayF("- %2d tiles assigned now! (Inaccurate)",Len(TilesAssigned))
@@ -159,7 +164,7 @@ Module
 //			Map.Obj="NPC_MEMORY"..tile2
 //			Map.ObjString.Texture = "gfx/Textures/Scenario/Memory/Hide.png"
 			for t in each{[0]=tile1,tile2}
-				Kthura.Obj["NPC_MEMORY"..t]="gfx/Textures/Scenario/Memory/Hide.png"
+				Kthura.Obj["NPC_MEMORY"..t].Texture="gfx/Textures/Scenario/Memory/Hide.png"
 			end
 			tile1=0
 			tile2=0			
@@ -168,7 +173,7 @@ Module
 			tile1=t
 			//Map.Obj="NPC_MEMORY"..tile1
 			//Map.ObjString.Texture=TileTex[t]
-			Kthura.Obj["NPC_MEMORY"..tile1] = TileTex[t]
+			Kthura.Obj["NPC_MEMORY"..tile1].Texture = TileTex[t]
 			return
 		end
 		tile2=t
