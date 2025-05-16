@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.15 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -1009,7 +1009,8 @@ group FlowField
 	
 		// Draw Map
 		//FieldMap.Kthura.Draw()
-		Kthura.Draw(self.Map.ScrollX,self.Map.ScrollY)
+		//Kthura.Draw(self.Map.ScrollX,self.Map.ScrollY)
+		Kthura.Draw(gint.ScrollX,gint.ScrollY)
 		
 		// Map Script Draw
 		//LuaDoString("MAP","MScript.Draw()","LINK: MapScript.Draw()")
@@ -1060,8 +1061,12 @@ group FlowField
 		end
 		//self.Map.ScrollX = self.Map.Kthura.Actor.Player.X - (Screen.Width /2)
 		//self.Map.ScrollY = self.Map.Kthura.Actor.Player.Y - (Screen.Height/2)
-		self.Map.ScrollX = Kthura.Obj.Player.X - (Graphics.Width  div 2)
-		self.Map.ScrollY = Kthura.Obj.Player.Y - (Graphics.Height div 2)
+		gint.ScrollX = Kthura.Obj.Player.X - (Graphics.Width  div 2)
+		gint.ScrollY = Kthura.Obj.Player.Y - (Graphics.Height div 2)
+	end
+	
+	void SetAutoScroll(v)
+		self.AutoScroll=v
 	end
 	
 	void FieldStats()
