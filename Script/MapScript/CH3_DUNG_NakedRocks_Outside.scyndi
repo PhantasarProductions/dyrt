@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_NakedRocks_Outside.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_DUNG_NakedRocks_Outside.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,15 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.15 I
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "libs/strings"
-#use "script/use/anyway"
+
+Script
+
+#use "libs/SCI/sstring"
+#use "script/use/need"
 //#use "Script/Use/StartCombatMod"
+
 group MScript
 	void RANDOMSCYNDI()
 		Map.WalkTo(sprintf("RandomScyndi%d",math.random(1,10)))
@@ -51,6 +57,7 @@ group MScript
 		RPG.GetChar("Irravonia").Points("HP").Have=1
 		RPG.GetChar("Irravonia").Points("VIT").Have=0
 		RPG.GetChar("Scyndi").Points("HP").Have=1000000000
+		RPG.GetChar("Scyndi").Points("VIT").Have=1000000000
 	end
 	
 	void NAARBINNEN()
@@ -58,9 +65,6 @@ group MScript
 		Map.GoToLayer("#003","Start")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("NaarBinnen","NaarBinnen")
-	end
 	
 	void Draw()
 	end
@@ -69,4 +73,7 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("NaarBinnen","NaarBinnen")
+End
