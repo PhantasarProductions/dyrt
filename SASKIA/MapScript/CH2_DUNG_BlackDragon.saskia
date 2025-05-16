@@ -62,32 +62,37 @@
 
 :Rondomo
 	; First set up the scenery well
-	group 10		
+	call Map.AutoScroll,false
+	group 12		
 		call Map.GoToLayer,"OUTSIDE","Start"
+		mov 0,gv.Int.ScrollX
+		mov 0,gv.Int.ScrollY
 		call Map.Hide,"Player"
 		call Map.HideByLabel,"START"
 		call Map.ShowByLabel,"Ron"
-		call FlowField.Map.Kthura.Actor.ActScyndi.Spawn,"Ron_Scyndi","North"
-		call FlowField.Map.Kthura.Actor.ActRebecca.Spawn,"Ron_Rebecca","East"
-		mov "North",FlowField.Map.Kthura.Actor.ActScyndi.Wind
-		mov "East",FlowField.Map.Kthura.Actor.ActRebecca.Wind
-		mov 'gfx/actors/heroes/Scyndi.North.jpbf',FlowField.Map.Kthura.Actor.ActScyndi.Texture
-		mov 'gfx/actors/heroes/Rebecca.East.jpbf',FlowField.Map.Kthura.Actor.ActRebecca.Texture
+		call Kthura.Spawn,"ActScyndi","Ron_Scyndi","North"
+		call Kthura.Spawn,"ActRebecca","Ron_Rebecca","East"
+		mov "North",Kthura.Obj.ActScyndi.Wind
+		mov "East", Kthura.Obj.ActRebecca.Wind
+		mov "gfx/actors/heroes/Scyndi.North.jpbf",Kthura.Obj.ActScyndi.Texture
+		mov "gfx/actors/heroes/Rebecca.East.jpbf",Kthura.Obj.ActRebecca.Texture
 	; Start the conversation
 	call MapScript.OutsideText,"RONDOMO_START"
 	; Irravonia falls off the edge
-	call FlowField.Map.Kthura.Actor.ActScyndi.MoveTo,"Fall_Irravonia"
+	call Kthura.Obj.ActScyndi.MoveTo,"Fall_Irravonia"
 	call Map.Hide,"Fall_Irravonia"
 	call MapScript.OutsideText,"RONDOMO_BYE_IRRA"
 	; Scyndi runs away
-	call FlowField.Map.Kthura.Actor.ActScyndi.WalkTo,"LeaveTheRoom"
-	mov 'gfx/actors/heroes/Scyndi.East.jpbf',FlowField.Map.Kthura.Actor.ActScyndi.Texture
+	call Kthura.Obj.ActScyndi.WalkTo,"LeaveTheRoom"
+	mov "gfx/actors/heroes/Scyndi.East.jpbf",Kthura.Obj.ActScyndi.Texture
 	call MapScript.OutsideText,"RONDOMO_BEFORE_POP"
 	; Rondomo appears
-	call Map.Show,"OnyxBang"
+	;call Map.Show,"OnyxBang"
+	mov true,Kthura.Obj.OnyxBang.Visible
 	mov 0,gv.Int.OnyxBang_i
 	call OnyxBang.Start
-	call Map.ShowObj,"Rondomo"
+	;call Map.ShowObj,"Rondomo"
+	mov true,Kthura.Obj.Rondomo.Visible
 	:OnyxBang
 	chk OnyxBang.Going,OnyxBang	
 	:Rondomo_Next
@@ -95,14 +100,15 @@
 	call MapScript.OutsideText,"RONDOMO"
 	; Rebecca runs away
 	mov 150,gv.Int.OnyxBang_i
-	call FlowField.Map.Kthura.Actor.ActRebecca.WalkTo,"LeaveTheRoom"
+	call Kthura.Obj.ActRebecca.WalkTo,"LeaveTheRoom"
 	:Rebecca_Run
-	mov gv.Int.OnyxBang_i-1,gv.Int.OnyxBang_i
+	mov Scyndi.AllIdentifiers.gv.Int.OnyxBang_i-1,gv.Int.OnyxBang_i
 	chk gv.Int.OnyxBang_i<=0,Rondomo_Fight
 	jmp Rebecca_Run
 	:Rondomo_Fight
 	call MapScript.RondomoFight
 	call CSay,"Load Dungeon Naked Rocks!"
+	call Map.AutoScroll,true
 	group 5
 		call Field.LoadMap,"CH3_DUNG_NakedRocks_Outside"
 		call Map.GoToLayer,"#002","Einde"
