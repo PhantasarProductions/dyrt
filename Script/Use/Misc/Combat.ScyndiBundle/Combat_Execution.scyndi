@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Execution.scyndi
 // 
-// 	  Version: 25.04.29 III
+// 	  Version: 25.05.17 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -163,8 +163,13 @@ group Execution
 			Tar.Char.Points("HP").Have = 0
 		end
 		CSayF("%s got %d damage and has %d left",Tar.Tag,enddmg,Tar.Char.Points("HP").Have)
-		if prefixed(Tar.Tag,"FOE_") and Tar.AI_Data[".hasmember"]("Hurt")
-			Tar.AI_Data.Hurt(Tar,Act.Act.Element,enddmg, Act)
+		if prefixed(Tar.Tag,"FOE_") 
+			If Tar.AI_Data[".hasmember"]("Hurt")
+				CSayF("%s has hurt reaction!",Tar.Tag)
+				Tar.AI_Data.Hurt(Tar,Act.Act.Element,enddmg, Act)
+			Else				
+				CSayF("%s doesn't have hurt reaction!",tar.Tag)
+			End
 		end
 	end
 	
