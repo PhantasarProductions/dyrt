@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/CrystalGetElement.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_CrystalLoseElement.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,31 +33,30 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.17 II
+// 
+// End License
+
+
+Module
+
+#accept CSay
+#accept RPG
+
 #accept CrystalSettings
-do
-	bool VerkrijgCharge(Act,Target,string el)
+
+	//bool VerliesCharge()
+	bool DoEffect()
 		var f
+		CSay("Charge lost!")
 		f = RPG.GetChar("FOE_1")
-		CrystalSettings.Element = el
-		switch el
-			case "Flame"
-				CrystalSettings.TegenElement = "Water"
-			case "Wind"
-				CrystalSettings.TegenElement = "Earth"
-			case "Water"
-				CrystalSettings.TegenElement = "Flame"
-			case "Earth"
-				CrystalSettings.TegenElement = "Wind"
-			default
-				error("Unknown element for crystal charge: "..el)
-		end
-		CSayF("Element charge set to : %s",el)
-		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.TegenElement).Value=-(60000/__skill)
-		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.Element).Value=2000 * __skill
+		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.TegenElement).Value=100
+		f.Stat("BASE__RESIST_Elem_"..CrystalSettings.Element).Value=100
+		CrystalSettings.TegenElement = ""
+		CrystalSettings.Element = ""
 		return true
 	end
 	
-	return VerkrijgCharge
-end
+	//return VerliesCharge
+//end
