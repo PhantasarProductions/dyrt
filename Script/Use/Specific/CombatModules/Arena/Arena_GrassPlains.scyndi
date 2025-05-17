@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/GrassPlains.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_GrassPlains.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,14 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-module Arena_NROUTSIDE
+// 
+// version: 25.05.17 III
+// 
+// End License
+
+module
+
+#use "Libs/SCI/Graphics"
 
 	var wolk
 	var zee
@@ -45,27 +51,27 @@ module Arena_NROUTSIDE
 	
 	table wolken
 	
-	void CONSTRUCTOR()
-		self.wolk = LoadIfNew("gfx/Textures/Sky/cloud.png","ARENA_CLOUD")
-		self.midden = Screen.H/2
-		self.kwart  = Screen.H/4
-		self.vloer    = LoadIfNew("GFX/Textures/Floor/grass.png","ARENA_GP_Gras")
-		self.zee  = LoadIfNew("GFX/Textures/Pond/P.png","ARENA_GP_Pond")
-		self.kust   = LoadIfNew("GFX/Textures/Pond/PBS.png","ARENA_GP_SHORE")
-		for i=1,5 do
-			self.wolken[i] = { ['x']=math.random(10,Screen.W-100), ['y'] = math.random(4,self.kwart-75) }
+	Init
+		wolk   = LoadNewImage("gfx/Textures/Sky/cloud.png","ARENA_CLOUD")
+		midden = Graphics.H div 2
+		kwart  = Graphics.H div 4
+		vloer  = LoadNewImage("GFX/Textures/Floor/grass.png","ARENA_GP_Gras")
+		zee    = LoadNewImage("GFX/Textures/Pond/P.png","ARENA_GP_Pond")
+		kust   = LoadNewImage("GFX/Textures/Pond/PBS.png","ARENA_GP_SHORE")
+		for i=1,5 
+			wolken[i] = { ["x"]=math.random(10,Graphics.W-100), ["y"] = math.random(4,kwart-75) }
 		end
 	end
 	
 	void Draw()
-		Color(0,180,255)
-		Rect(0,0,Screen.W,self.midden)
-		__white
-		for i,w in pairs(self.wolken)
-			self.wolk.Draw(w.x,w.y)
+		SetColor(0,180,255)
+		Rect(0,0,Graphics.W,midden)
+		SetColor(255,255,255)
+		for i,w in pairs(wolken)
+			wolk.Draw(w.x,w.y)
 		end
-		self.zee.Tile(0,self.kwart,Screen.W,self.kwart)
-		self.vloer.Tile(0,self.midden,Screen.W,self.midden)
-		self.kust.Tile(0,self.midden,Screen.W,32)
+		zee.Tile(0,kwart,Graphics.W,kwart)
+		vloer.Tile(0,midden,Graphics.W,midden)
+		kust.Tile(0,midden,Graphics.W,32)
 	end
-end
+//end
