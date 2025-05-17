@@ -34,12 +34,14 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.05.17 II
 // 
 // End License
 
 
 module
+
+#accept CSayF
 
 #use "Script/Use/Need"
 	
@@ -100,4 +102,4 @@ module
 	// Merya
 	delegate ManipulateItemUsage
 	
-end
+//end

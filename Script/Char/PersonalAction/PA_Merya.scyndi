@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.05.17 XVII
 // 
 // End License
 
@@ -42,11 +42,22 @@ Module
 
 #say "Let's load Merya's personal action!"
 
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
+
 #use "libs/linkedlist"
 #use "libs/xmath"
-#use "libs/strings"
+//#use "libs/strings"
+
+#use "Script/Use/Need"
 
 #say "Merya Scan class!"
+
+LocExtern DrawCircle "Scyndi.Globals.Circle" 
+
 class MeryaScan
 
 	static var Lijst
@@ -55,7 +66,8 @@ class MeryaScan
 		for punt,schakel in self.Lijst.Each
 			schakel.UnLink()
 		end
-		for Tag in FieldFlow.Map.Kthura.EachTag(Map.Layer)
+		//for Tag in FieldFlow.Map.Kthura.EachTag(Map.Layer)
+		For Tag in Each(Kthura.TagList)
 			if prefixed(Tag,"MeryaScan_")
 				new MeryaScan(Tag)
 			end
@@ -74,10 +86,10 @@ class MeryaScan
 	string Layer
 	
 	get int X
-		return self.trueX - FieldFlow.Map.ScrollX
+		return self.trueX - gint.ScrollX
 	end
 	get int Y 
-		return self.trueY - FieldFlow.Map.ScrollY
+		return self.trueY - gint.ScrollY
 	end
 	
 	get int Radius
@@ -86,24 +98,26 @@ class MeryaScan
 	
 	CONSTRUCTOR(string tag)
 		number afstand
-		Map.Obj=tag
-		self.trueX = Map.ObjInt.X
-		self.trueY = Map.ObjInt.Y
-		afstand = xmath.Pythagoras(self.trueX,self.trueY,Map.PlayerX,Map.PlayerY)
+//		Map.Obj=tag
+//		self.trueX = Map.ObjInt.X
+//		self.trueY = Map.ObjInt.Y
+		trueX = Kthura.Obj[Tag].X
+		trueY = Kthura.Obj[Tag].Y
+		afstand = xmath.Pythagoras(self.trueX,self.trueY,Kthura.Player.X,Kthura.Player.Y)
 		self.CD = math.ceil(320 - afstand)
 		if self.CD<8 
 			self.CD=8
 		end
-		self.Layer = Map.Layer
+		self.Layer = Kthura.CurrentLayer
 		self.Lijst.AddLast(self)
 	end
 	
 	void Show(schakel)
-		Color(180,180,0)
+		SetColor(180,180,0)
 		DrawCircle(self.X,self.Y,self.Radius)
 		if schakel
 			--self.CD
-			if self.CD<0 or self.Layer!=Map.Layer
+			if self.CD<0 || self.Layer!=Kthura.CurrentLayer
 				schakel.UnLink()
 			end
 		end
@@ -135,10 +149,10 @@ end
 	end
 	
 	void RadarCircle()
-		Color(180,0,255)
+		SetColor(180,0,255)
 		Circle(MeryaX,MeryaY,Radius)
 		Radius++
-		if Radius>150 and Stage==1
+		if Radius>150 && Stage==1
 			Stage=2
 			MeryaScan.Detect()
 		elseif Radius>300
@@ -161,7 +175,7 @@ end
 	end
 	
 	bool Click(int but,int x, int y)
-		if Mouse.X>X and Mouse.Y>Y and Mouse.X<X+W and Mouse.Y<Y+Y
+		if Mouse.X>X && Mouse.Y>Y && Mouse.X<X+W && Mouse.Y<Y+Y
 			Stage = 1
 			Radius = 0
 			return true

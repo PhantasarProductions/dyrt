@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.05.17 I
 // 
 // End License
 
@@ -62,4 +62,4 @@ module
 	// Merya
 	delegate ManipulateItemUsage
 	
-end
+// end

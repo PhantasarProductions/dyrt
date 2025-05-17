@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.05.17
 // 
 // End License
 
@@ -58,23 +58,23 @@ Init
 		a.Vitalize        = { ["Skill_Nature"] = 40 + (s * 20) },
 	
 		// Charm
-		a.BloodSucker     = { ["Charm"] = { "Bat" } },
-		a.Claw            = { ["Charm"] = { "Tiger","Cheetah","PolarBear" } },
-		a.Peck            = { ["Charm"] = { "Pinguin", "Raven" }, ["Skill_Nature"] = 30 + (s*10) },
-		a.Croc_Bite       = { ["Charm"] = { "Croc" }, ["Skill_Nature"] = 10 + (10 * s) },
-		a.Spores          = { ["Charm"] = { "DeathCap", "Shroom" } },
-		a.Growl           = { ["Charm"] = { "GuardDog" } },
-		a.Howling         = { ["Charm"] = { "Wolf" } },
-		a.SickBite        = { ["Charm"] = { "Salamander" }, ["Skill_Bat"] = 15 },
-		a.Burp            = { ["Charm"] = { "Toad" } },
-		a.Suicide         = { ["Charm"] = { "Lemming" } },
-		a.RavenPeck       = { ["Charm"] = { "Raven"}, ["Scharum"]=true, ["Skill_Bat"]=30,["Skill_Nature"]=31 },
-		a.LethalPollen    = { ["Charm"] = { "TrueDeathCap" }, ["Skill_Nature"] = 6*s },
-		a.AttackInDamnnation = { ["Charm"] = { "UndeadHound" }, ["Skill_Bat"] = s*5, ["Skill_Nature"] = s * 8 },
-		a.Inferno         = { ["Charm"] = { "HellHound"}, ["Skill_Nature"] = (s+s) * s } ,
-		a.Dive            = { ["Charm"] = { "Eagle" }, ["Skill_Bat"] = 20 },
-		a.SpitPoison      = { ["Charm"] = { "Cobra" }, ["Skill_Bat"] = s },
-		a.Tsunami         = { ["Charm"] = { "Squid"}, ["Skill_Bat"] = 2^s, ["Skill_Nature"] = 20 * s }, 
+		a.BloodSucker     = { ["Charm"] = {  [0] = "Bat" } },
+		a.Claw            = { ["Charm"] = {  [0] = "Tiger","Cheetah","PolarBear" } },
+		a.Peck            = { ["Charm"] = {  [0] = "Pinguin", "Raven" }, ["Skill_Nature"] = 30 + (s*10) },
+		a.Croc_Bite       = { ["Charm"] = {  [0] = "Croc" }, ["Skill_Nature"] = 10 + (10 * s) },
+		a.Spores          = { ["Charm"] = {  [0] = "DeathCap", "Shroom" } },
+		a.Growl           = { ["Charm"] = {  [0] = "GuardDog" } },
+		a.Howling         = { ["Charm"] = {  [0] = "Wolf" } },
+		a.SickBite        = { ["Charm"] = {  [0] = "Salamander" }, ["Skill_Bat"] = 15 },
+		a.Burp            = { ["Charm"] = {  [0] = "Toad" } },
+		a.Suicide         = { ["Charm"] = {  [0] = "Lemming" } },
+		a.RavenPeck       = { ["Charm"] = {  [0] = "Raven"}, ["Scharum"]=true, ["Skill_Bat"]=30,["Skill_Nature"]=31 },
+		a.LethalPollen    = { ["Charm"] = {  [0] = "TrueDeathCap" }, ["Skill_Nature"] = 6*s },
+		a.AttackInDamnnation = { ["Charm"] = {  [0] = "UndeadHound" }, ["Skill_Bat"] = s*5, ["Skill_Nature"] = s * 8 },
+		a.Inferno         = { ["Charm"] = {  [0] = "HellHound"}, ["Skill_Nature"] = (s+s) * s } ,
+		a.Dive            = { ["Charm"] = {  [0] = "Eagle" }, ["Skill_Bat"] = 20 },
+		a.SpitPoison      = { ["Charm"] = {  [0] = "Cobra" }, ["Skill_Bat"] = s },
+		a.Tsunami         = { ["Charm"] = {  [0] = "Squid"}, ["Skill_Bat"] = 2^s, ["Skill_Nature"] = 20 * s }, 
 	
 		// Scharum
 		a.MotherNature   = { ["Scharum"] = true }
@@ -86,10 +86,10 @@ Init
 	
 	// Medals
 	
-		a.PollenRed    = { ["Charm"] = {"RedFlower"}, ["Skill_Nature"] = 25 }
-		a.PollenBlue   = { ["Charm"] = {"BlueFlower"}, ["Skill_Nature"] = 25 }
-		a.PollenPurple = { ["Charm"] = {"PurpleFlower"}, ["Skill_Nature"] = 25 }
-		a.Moo          = { ["Charm"] = {"Moo-Moo-Ant"}, ["Skill_Nature"]=math.ceil(s*2.5) }
+		a.PollenRed    = { ["Charm"] = { [0]="RedFlower"}, ["Skill_Nature"] = 25 }
+		a.PollenBlue   = { ["Charm"] = { [0]="BlueFlower"}, ["Skill_Nature"] = 25 }
+		a.PollenPurple = { ["Charm"] = { [0]="PurpleFlower"}, ["Skill_Nature"] = 25 }
+		a.Moo          = { ["Charm"] = { [0]="Moo-Moo-Ant"}, ["Skill_Nature"]=math.ceil(s*2.5) }
 	
 	
 	

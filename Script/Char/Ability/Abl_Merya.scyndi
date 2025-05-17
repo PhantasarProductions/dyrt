@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.05.17 IV
 // 
 // End License
 
@@ -46,35 +46,40 @@ Module
 #accept CSay
 #accept CSayF
 
+
+Var Lijst
+
 Init
 	//int s
 	//s = __skill
 	locExtern s "Scyndi.Globals.gint.skill"
-	locExtern abls "Scyndi.Class.Abl_Eric.Lijst"
+	locExtern abls "Scyndi.Class.Abl_Merya.Lijst"
+	
+	abls = {}
 	//var abls
 
 
 	
 	// Dagger
-	FastDraw       = { ["Skill_Dagger"] = 25 },
+	abls.FastDraw       = { ["Skill_Dagger"] = 25 },
 	
 	// Rogue
-	AAA_ID         = { ["Start"]=true },
-	Pickpocket     = { ["Start"]=true },
-	Intimidate     = { ["Start"]=true },
-	SmokeBomb      = { ["Start"]=not(s==3) },
+	abls.AAA_ID         = { ["Start"]=true },
+	abls.Pickpocket     = { ["Start"]=true },
+	abls.Intimidate     = { ["Start"]=true },
+	abls.SmokeBomb      = { ["Start"]=not(s==3) },
 	
-	Virusstab      =  { ["Skill_Dagger"] = 18, ["Skill_Rogue"] = 19 },
-	Poisonstab     =  { ["Skill_Dagger"] = 19, ["Skill_Rogue"] = 25 },
-	StubStab       =  { ["Skill_Dagger"] = 20, ["Skill_Rogue"] = 27 },
-	BackStab       =  { ["Skill_Dagger"] = 21, ["Skill_Rogue"] = 30 },
-	Disembowel     =  { ["Skill_Dagger"] = 35, ["Skill_Rogue"] = 35 },
+	abls.Virusstab      =  { ["Skill_Dagger"] = 18, ["Skill_Rogue"] = 19 },
+	abls.Poisonstab     =  { ["Skill_Dagger"] = 19, ["Skill_Rogue"] = 25 },
+	abls.StubStab       =  { ["Skill_Dagger"] = 20, ["Skill_Rogue"] = 27 },
+	abls.BackStab       =  { ["Skill_Dagger"] = 21, ["Skill_Rogue"] = 30 },
+	abls.Disembowel     =  { ["Skill_Dagger"] = 35, ["Skill_Rogue"] = 35 },
 	
 	// Scharum
-	FollowMe       =  { ["Scharum"] = true },
+	abls.FollowMe       =  { ["Scharum"] = true },
 	
 	// Sealed Boss
-	KillerStab     =  { ["SealedBoss "] =  true },
+	abls.KillerStab     =  { ["SealedBoss"] =  true },
 	
 
 	

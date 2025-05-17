@@ -34,14 +34,15 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.05.17 I
 // 
 // End License
 
 
 Module
 
-#accept RPG
+#use "Script/Use/Need"
+
 #accept CSayF
 
 	void SU(int skill)
