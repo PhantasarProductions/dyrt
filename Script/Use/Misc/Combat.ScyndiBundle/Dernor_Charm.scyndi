@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.05.17 II
 // 
 // End License
 
@@ -76,12 +76,13 @@ group Charm
 	void _CONSTRUCTOR()
 		//self.Abl = NIL.Use("Script/Char/Ability/Dernor")
 		Lua.Scyndi.Use("Script/Char/Ability/Abl_Dernor")
-		self.Abl=Lua.Scyndi.Class.Abl_Dernor
+		self.Abl=Lua.Scyndi.Class.Abl_Dernor.Lijst
 	end
 	
-	bool AblCharm(Act,Target)
+	bool AblCharm(Act,Target)		
 		string fname
 		fname = replace(Upper(Target.FromFile),"REG/","")
+		CSayF("Charm initatied: %s -> %s",Target.Tag,fname)
 		// Reject if the enemy is a boss, or already charmed
 		if Target.Boss or Charmed[fname]
 			CSayF("Charm rejected: Boss Check: %s; Charmed Check: %s", tostring(Target.Boss), tostring(Charmed[fname]))
@@ -89,11 +90,12 @@ group Charm
 		end
 		// Reject if the spell this monster gives has already been given
 		// Accept if not and attach enemy to it
-		for abltag,need in pairs ( self.Abl) 
+		for abltag,need in pairs ( self.Abl)
+			CSayF("Ability %s has need: %s",abltag,need!=nil)
 			if need.Charm
 				CSayF("Checking for charm %s => %s",abltag,tostring(need.Charm))
 				for _,needfoe in pairs(need.Charm)
-					CSayF("Found: %s; Have: %s ==> match: %s",needfoe,fname,tostring(needfoe:upper()==fname))
+					CSayF("Found: %s; Have: %s ==> match: %s",needfoe,fname,tostring(Upper(needfoe)==fname))
 					if Upper(needfoe)==fname
 						CSayF("Match %s",fname)
 						if SpellCharmed[abltag]
