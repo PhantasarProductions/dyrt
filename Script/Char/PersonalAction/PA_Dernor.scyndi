@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Create/Dernor.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/PersonalAction/PA_Dernor.scyndi
+// (c) Jeroen Broks, 2019, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,29 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.17
+// 
+// End License
 
-#use "Script/Use/AnyWay"
-var Dernor
+module 
 
-Dernor = RPG.GetChar("Dernor")
-Dernor.Name = Names.Dernor
-
-Dernor.Data["SKILL0"] = "Bat Skills"
-Dernor.Data["SKILL1"] = "Nature Power"
-
-
-// The dragon skills will be put in once Dernor actually obtains them!
-
-// if __newgameplus
-	for i=0,1
-		Dernor.Points(sprintf("SKILLEXP%d",i),true).Have    = 24 / __skill
-		Dernor.Points(sprintf("SKILLLVL%d",i),true).Have    = 30 / __skill
+	
+	
+	void Draw()
 	end
-// end
-
-
-Dernor.Data.Weapon = "EQW_DERNOR_BAT"
-Dernor.Data.Armor  = "EQA_SHIRT"
-Dernor.Data.Jewel  = "JWL_BRACERS"
+	
+	void Click(int but,int x, int y)
+	end
+	
+	
+end

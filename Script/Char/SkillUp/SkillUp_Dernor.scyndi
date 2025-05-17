@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Dernor.nil
-// (c) Jeroen Broks, , All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Dernor.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,21 +33,28 @@
 // 
 // **********************************************
 // 
-// version: 20.02.04
-// End License Information
-do
-	delegate ret
-	ret = void(int skill)
+// 
+// version: 25.05.17
+// 
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+
+#use "Script/Use/Need"
+	
+	void SU(int skill)
 		int lvl
 		lvl = RPG.GetChar("Dernor").Points("SKILLLVL"..skill).Have
 		CSayF("Well Dernor! Let's upgrade with skill %d",skill)
 		switch skill
 			case 0
 				// Bat
-				if lvl % 12 == 0 or lvl % (__skill*2)
+				if lvl % 12 == 0 || lvl % (__skill*2)
 					RPG.GetChar("Dernor").Stat("PERMPOWERUP_Strength").Value ++
 				end
-				if lvl % (__skill * 4) or lvl % (1+__skill) == 0
+				if lvl % (__skill * 4)==0 || lvl % (1+__skill) == 0
 					RPG.GetChar("Scyndi").Stat("PERMPOWERUP_HP").Value ++
 				end
 			case 1
@@ -67,5 +75,5 @@ do
 	
 	end
 	
-	return ret
+	//return ret
 end

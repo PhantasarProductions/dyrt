@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Dernor.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Will/Will_Dernor.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,30 @@
 // 
 // **********************************************
 // 
-// version: 20.07.14
-// End License Information
-module Will_Dernor
+// 
+// version: 25.05.17
+// 
+// End License
+
+
+module
+
+#use "Script/Use/Need"
 	
 	int TrueCount 
 	
 	get int Count
 		if __skill==3
-			self.TrueCount = math.max(__skill^__skill,gv.Int.Will_Dernor)
+			TrueCount = math.max(__skill^__skill,gv.Int.Will_Dernor)
 		end
-		return self.TrueCount
+		return TrueCount
 	end
 	
 	set int Count
 		int Verschil
-		Verschil = value - self.TrueCount
-		self.TrueCount = value
-		#+ gv.Int.Will_Dernor Verschil
+		Verschil = value - TrueCount
+		TrueCount = value
+		gv.Int.Will_Dernor += Verschil
 	end
 	
 	// Scyndi
@@ -66,14 +73,14 @@ module Will_Dernor
 			CSayF("Dernor's HP is now %3.1f$$! That's too high!",procent)
 			return
 		end
-		r = math.random(0,self.Count+__skill)
+		r = math.random(0,Count+__skill)
 		if r>1
 			return
 		end
-		for _,p in ipairs {"HP","AP","VIT"}
+		for _,p in pairs {"HP","AP","VIT"}
 			Dernor.Points(p).Have = Dernor.Points(p).Maximum
 		end
-		self.Count++
+		Count++
 		new Hurt("Personal will:","Dernor",255,180,0)
 		new Hurt("Willpower","Dernor",0,180,255)
 	end
