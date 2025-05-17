@@ -58,7 +58,7 @@
 :Rebecca
 	mov "Irravonia",Map.Leader
 	;call ScyndiSpawn
-	call Map.WalkTo,"Irra_End"
+	call Map.WalkTo,"Irra_End"	
 	call CSay,"Frame #1"
 	call CSay,"Frame #2"
 	call CSay,"Frame #3"
@@ -102,12 +102,17 @@
 	call CSay,"Frame #38"
 	call CSay,"Frame #39"
 	call CSay,"Frame #40"
-	call FlowField.Map.Kthura.Actor.ActScyndi.WalkTo,"Scyndi_End"
+	;call FlowField.Map.Kthura.Actor.ActScyndi.WalkTo,"Scyndi_End"
+	;Call CSay,"Spawn Scyndi!"
+;	call Kthura.Spawn,"Player","ActScyndi"
+	;call Kthura.Obj.ActScyndi.WalkTo,"Scyndi_End"
+	mov true,Kthura.Obj.R_Scyndi.Visible
 	call MapText,"REB1A"
 	call MapScript.RebeccaDernorMeryaJoin
 	call Map.HideByLabel,"RebCrew"
 	call Map.Kill,"ActScyndi"
 	call Map.Kill,"NoExit",true
+	mov false,Kthura.Obj.R_Scyndi.Visible
 	end
 	
 :Pre_Storage

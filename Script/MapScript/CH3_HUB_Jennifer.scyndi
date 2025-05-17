@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.05.17 VI
 // 
 // End License
 
@@ -43,6 +43,7 @@
 Script
 
 #use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
 
 #use "script/use/Need"
 //#use "Script/Use/StartCombatMod"
@@ -86,7 +87,7 @@ group MScript
 	end
 	
 	void OPEN()
-		Map.Hide("DEURTJE")
+		Kthura.Obj.DEURTJE.Visible = false
 		if ! gv.Bool.Done_SpokenToJennifer1
 			return
 		end
@@ -95,7 +96,7 @@ group MScript
 			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Spawn(\"Player\")")
 			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Wind=\"East\";")
 			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Texture = 'gfx/actors/heroes/Scyndi.East.jpbf'")
-			Kthura.Spawn("ActScyndi","Player")
+			//Kthura.Spawn("ActScyndi","Player")
 			Kthura.Obj.Player.Wind="East"
 			Kthura.Obj.Player.Texture="/media/tricky/Scyndi/Projects/Applications/Scyndi/Secrets Of Dyrt/src/Script/Archief/Script/MapScript/CH3_HUB_Jennifer.nil"
 			RebeccaJoin = true
@@ -103,7 +104,7 @@ group MScript
 	end
 	
 	void CLOSE()
-		Map.Show("DEURTJE")
+		Kthura.Obj.DEURTJE.Visible = true
 	end
 	
 	void REBECCADERNORMERYAJOIN()
@@ -131,17 +132,14 @@ group MScript
 			Dernor.Points(sprintf("SKILLEXP%d",i),true).Have    = 24 / __skill
 			Dernor.Points(sprintf("SKILLLVL%d",i),true).Have    = 30 / __skill
 		end
-		for i,c in ipairs { "Rebecca", "Dernor", "Merya" }
-			RPG.Party[i+2] = c
+		for i,c in pairs { "Scyndi","Irravonia","Rebecca", "Dernor", "Merya" }
+			RPG.Party[i] = c
+			chd:=RPG.GetChar(c)
+			chd.Points.HP.Have =chd.Points.HP.Maximum
+			chd.Points.VIT.Have=chd.Points.VIT.Maximum
 		end
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("EnterCave","Cave")
-		Map.ZA_Enter("Action","Action")
-		Map.ZA_Enter("Open","Open")
-		Map.ZA_Leave("Open","Close")
-	end
 	
 	void Draw()
 	end
@@ -150,4 +148,10 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("EnterCave","Cave")
+	Map.ZA_Enter("Action","Action")
+	Map.ZA_Enter("Open","Open")
+	Map.ZA_Leave("Open","Close")
+end
