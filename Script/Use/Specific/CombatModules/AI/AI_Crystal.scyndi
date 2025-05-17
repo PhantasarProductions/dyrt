@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17 V
+// version: 25.05.17 XIII
 // 
 // End License
 
@@ -49,9 +49,25 @@ Module
 
 #Accept Fighter
 
-	string Element
-	string TegenElement
+	//string Element
+	//string TegenElement
 	table Elementen
+	Global Var CrystalSettings
+	
+	get string Element
+		Return CrystalSettings.Element || ""
+	End
+	Set string Element
+		CrystalSettings.Element = Value
+	End
+	
+	Get string TegenElement
+		Return CrystalSettings.TegenElement || ""
+	End
+	Set string TegenElement
+		CrystalSettings.TegenElement = Value
+	End
+
 	
 	Init
 		
@@ -77,8 +93,9 @@ Module
 			end
 			CSayF("Boss stat %s is now %4d",st,v)
 			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = v
-			Elementen = {[1]="Flame","Wind","Water","Earth"}
+			Elementen = {[1]="Flame",[2]="Wind",[3]="Water",[4]="Earth"}
 		end
+		CrystalSettings = {}
 	end
 	
 	void Decide(foe)
@@ -87,7 +104,7 @@ Module
 			table nact			
 			nact.ActTag = "ZZZ_BIGCRYSTAL_CHARGE_"..Elementen[math.random(1,4)]
 			nact.ExeTag = foe.Tag
-			nact.Targets = {foe}
+			nact.Targets = {[0]=foe}
 			foe.NextAct = new Actions(nact)
 			foe.NextActSpeed = 100
 			foe.GaugePosition = 10001
@@ -124,6 +141,8 @@ Module
 			if foe.GaugePosition >= 10001
 				foe.GaugePosition = 0
 			end
+		else
+			CSayF("Struck with %s, yet %s was expected so nothing happens!",elem,TegenElement)
 		end
 	end
 //end
