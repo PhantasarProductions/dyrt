@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_HUB_Jennifer.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_HUB_Jennifer.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,17 +33,22 @@
 // 
 // **********************************************
 // 
-// version: 20.10.02
-// End License Information
+// 
+// version: 25.05.17
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/SCI/Kthura"
+
+#use "script/use/Need"
+//#use "Script/Use/StartCombatMod"
 
 #macro RebeccaJoin gv.Bool.SpeakRebeccaDernorAndMeryaAfterSpeakingWithJennifer
-#macro JenniferMentionedToHerondo gv.Bool.DefeatedFrundarmon and gv.Bool.MeetMalabiaAtEndOfSplitTeamEric
+#macro JenniferMentionedToHerondo gv.Bool.DefeatedFrundarmon && gv.Bool.MeetMalabiaAtEndOfSplitTeamEric
 
 group MScript
 	
@@ -71,7 +77,7 @@ group MScript
 	void ACTION()
 		WM_Unlocked.D_Jennifer = true
 		WM_Unlocked.D_GrassPlain = true
-		if not gv.Bool.Done_SpokenToJennifer1
+		if ! gv.Bool.Done_SpokenToJennifer1
 			return
 		end
 		if not RebeccaJoin
@@ -81,14 +87,17 @@ group MScript
 	
 	void OPEN()
 		Map.Hide("DEURTJE")
-		if not gv.Bool.Done_SpokenToJennifer1
+		if ! gv.Bool.Done_SpokenToJennifer1
 			return
 		end
-		if not RebeccaJoin
+		if ! RebeccaJoin
 			MapScript.SASKIA("Rebecca")
-			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Spawn(\"Player\")")
-			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Wind=\"East\";")
-			LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Texture = 'gfx/actors/heroes/Scyndi.East.jpbf'")
+			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Spawn(\"Player\")")
+			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Wind=\"East\";")
+			//LuaDoString("FLOW_FIELD","FlowField.Map.Kthura.Actor.ActScyndi.Texture = 'gfx/actors/heroes/Scyndi.East.jpbf'")
+			Kthura.Spawn("ActScyndi","Player")
+			Kthura.Obj.Player.Wind="East"
+			Kthura.Obj.Player.Texture="/media/tricky/Scyndi/Projects/Applications/Scyndi/Secrets Of Dyrt/src/Script/Archief/Script/MapScript/CH3_HUB_Jennifer.nil"
 			RebeccaJoin = true
 		end 
 	end
