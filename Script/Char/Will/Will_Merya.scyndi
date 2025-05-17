@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Ability/Merya.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Will/Will_Merya.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,39 +33,33 @@
 // 
 // **********************************************
 // 
-// version: 20.07.24
-// End License Information
+// 
+// version: 25.05.17
+// 
+// End License
 
+module 
 
-#pure
 	
-local
-a = {
-	-- Dagger
-	FastDraw       = { Skill_Dagger = 25 },
+	// Scyndi
+	delegate AfterEnemyAttack
 	
-	-- Rogue
-	AAA_ID         = { Start=true },
-	Pickpocket     = { Start=true },
-	Intimidate     = { Start=true },
-	SmokeBomb      = { Start=not(s==3) },
+	// Dernor
+	delegate AfterBeingHurt
 	
-	Virusstab      = { Skill_Dagger=18, Skill_Rogue=19 },
-	Poisonstab     = { Skill_Dagger=19, Skill_Rogue=25 },
-	StubStab       = { Skill_Dagger=20, Skill_Rogue=27 },
-	BackStab       = { Skill_Dagger=21, Skill_Rogue=30 },
-	Disembowel     = { Skill_Dagger=35, Skill_Rogue=35 },
+	// Eric, Rebecca
+	delegate AfterAttack
 	
-	-- Scharum
-	FollowMe       = { Scharum = true },
+	// Irravonia, Brendor
+	delegate DamageManipulation
 	
-	-- Sealed Boss
-	KillerStab     = { SealedBoss = true },
+	// Aziella
+	delegate Targeted
 	
-}
+	// Kirana
+	delegate PreInput
 	
-if s==3 then a.SmokeBomb.SkillRogue=75 end
+	// Merya
+	delegate ManipulateItemUsage
 	
-return a
-	
-#endpure
+end

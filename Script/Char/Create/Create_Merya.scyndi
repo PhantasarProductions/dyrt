@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Will/Merya.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Create/Create_Merya.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,29 +33,34 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
-module Will_Merya
-	
-	// Scyndi
-	delegate AfterEnemyAttack
-	
-	// Dernor
-	delegate AfterBeingHurt
-	
-	// Eric, Rebecca
-	delegate AfterAttack
-	
-	// Irravonia, Brendor
-	delegate DamageManipulation
-	
-	// Aziella
-	delegate Targeted
-	
-	// Kirana
-	delegate PreInput
-	
-	// Merya
-	delegate ManipulateItemUsage
-	
-end
+// 
+// version: 25.05.17 I
+// 
+// End License
+
+Module
+
+#use "Script/Use/Need"
+var Merya
+Init
+
+Merya = RPG.GetChar("Merya")
+Merya.Name = Names.Merya
+
+Merya.Data["SKILL0"] = "Dagger Skills"
+Merya.Data["SKILL1"] = "Rogue Skills"
+
+
+//if __newgameplus
+	for i=0,1
+		Merya.Points(sprintf("SKILLEXP%d",i),true).Have    = 17
+		Merya.Points(sprintf("SKILLLVL%d",i),true).Have    = 17
+	end
+//end
+
+
+Merya.Data.Weapon = "EQW_Merya_Dagger"
+Merya.Data.Armor  = "EQA_SHIRT"
+Merya.Data.Jewel  = "JWL_BRACERS"
+
+End

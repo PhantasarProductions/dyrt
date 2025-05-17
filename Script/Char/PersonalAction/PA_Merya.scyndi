@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/PersonalAction/Merya.nil
-// (c) Jeroen Broks, 2019, All Rights Reserved.
+// src/Script/Script/Char/PersonalAction/PA_Merya.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,8 +33,12 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.17
+// 
+// End License
+
+Module
 
 #say "Let's load Merya's personal action!"
 
@@ -79,7 +84,7 @@ class MeryaScan
 		return self.CD % 64
 	end
 	
-	void CONSTRUCTOR(string tag)
+	CONSTRUCTOR(string tag)
 		number afstand
 		Map.Obj=tag
 		self.trueX = Map.ObjInt.X
@@ -106,47 +111,49 @@ class MeryaScan
 end
 
 #say "Merya Personal Action Module!"
-module Merya_Personal_Action
+//module Merya_Personal_Action
 	var Img
 	int X
 	int Y
 	int Stage = 0
 	int Radius = 0 
 	get int W
-		return self.Img.Width
+		return Img.Width
 	end
 	get int H
-		return self.Img.Height
+		return Img.Height
 	end
 	
 	get int MeryaX
-		return FieldFlow.Map.Kthura.Actor.Player.X - FieldFlow.Map.ScrollX
+		//return FieldFlow.Map.Kthura.Actor.Player.X - FieldFlow.Map.ScrollX
+		return Kthura.Obj.Player.X - gint.ScrollX
 	end
 	
 	get int MeryaY
-		return FieldFlow.Map.Kthura.Actor.Player.Y - FieldFlow.Map.ScrollY
+		//return FieldFlow.Map.Kthura.Actor.Player.Y - FieldFlow.Map.ScrollY
+		return Kthura.Obj.Player.Y - gint.ScrollY
 	end
 	
 	void RadarCircle()
 		Color(180,0,255)
-		DrawCircle(self.MeryaX,self.MeryaY,self.Radius)
-		self.Radius++
-		if self.Radius>150 and self.Stage==1
-			self.Stage=2
+		Circle(MeryaX,MeryaY,Radius)
+		Radius++
+		if Radius>150 and Stage==1
+			Stage=2
 			MeryaScan.Detect()
-		elseif self.Radius>300
-			self.Stage=3
+		elseif Radius>300
+			Stage=3
 		end
 		__white
 	end
 	
 	void Draw()
-		self.Img.Draw(self.X,self.Y)
-		switch self.Stage
+		Img.Draw(X,Y)
+		switch Stage
 			case 1 
-				self.RadarCircle()
+				RadarCircle()
 			case 2
-				self.RadarCircle()
+				RadarCircle()
 				MeryaScan.ShowAll()
 			case 3
 				MeryaScan.ShowAll()			
@@ -154,22 +161,22 @@ module Merya_Personal_Action
 	end
 	
 	bool Click(int but,int x, int y)
-		if Mouse.X>self.X and Mouse.Y>self.Y and Mouse.X<self.X+self.W and Mouse.Y<self.Y+self.Y
-			self.Stage = 1
-			self.Radius = 0
+		if Mouse.X>X and Mouse.Y>Y and Mouse.X<X+W and Mouse.Y<Y+Y
+			Stage = 1
+			Radius = 0
 			return true
 		end
 		return false		
 	end
 	
-	void CONSTRUCTOR()
+	Init
 		CSay("Loading Merya's button!")
-		self.Img = LoadImage("GFX/PersAction/Merya.png")
-		self.X = Screen.Width -300
-		self.Y = Screen.Height-400
+		Img = LoadImage("GFX/PersAction/Merya.png","PA_Merya")
+		X = Graphics.Width -300
+		Y = Graphics.Height-400
 		CSay("Starting up a linked list for found pivots!")
-		MeryaScan.Lijst = new TLinkedList
+		MeryaScan.Lijst = new TLinkedList()
 	end
 
 #say "End of Merya's personal action module! Let's compile and continue!"
-end
+//end

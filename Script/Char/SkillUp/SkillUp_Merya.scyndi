@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Merya.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Merya.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,18 +33,25 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-do
-	delegate ret
-	ret = void(int skill)
+// 
+// version: 25.05.17
+// 
+// End License
+
+
+Module
+
+#accept RPG
+#accept CSayF
+
+	void SU(int skill)
 		int lvl
 		lvl = RPG.GetChar("Merya").Points("SKILLLVL"..skill).Have
 		CSayF("Well Merya! Let's upgrade with skill %d",skill)
 		switch skill
 			case 0
 				// Dagger
-				if lvl % 40 == 0 or lvl % ((__skill+1)^2)
+				if lvl % 40 == 0 || lvl % ((__skill+1)^2)
 					RPG.GetChar("Merya").Stat("PERMPOWERUP_Strength").Value ++
 				end
 				RPG.GetChar("Merya").Stat("PERMPOWERUP_Agility").Value ++
@@ -52,7 +60,7 @@ do
 				RPG.GetChar("Merya").Stat("PERMPOWERUP_Agility").Value ++
 				RPG.GetChar("Merya").Stat("PERMPOWERUP_Evansion").Value ++
 				RPG.GetChar("Merya").Stat("PERMPOWERUP_Accuracy").Value ++
-				if __skill!=3 and lvl % (__skill*3)
+				if __skill!=3 && lvl % (__skill*3) == 0
 					RPG.GetChar("Merya").Stat("PERMPOWERUP_Agility").Value ++
 					RPG.GetChar("Merya").Stat("PERMPOWERUP_Evansion").Value ++
 					RPG.GetChar("Merya").Stat("PERMPOWERUP_Accuracy").Value ++
@@ -62,5 +70,3 @@ do
 	
 	end
 	
-	return ret
-end
