@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Rondomo_FirstTime.nil
-// (c) Jeroen Broks, , All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Rondomo_FirstTime.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,31 +33,44 @@
 // 
 // **********************************************
 // 
-// version: 20.01.28
-// End License Information
-#use "libs/tables"
+// 
+// version: 25.05.15 V
+// 
+// End License
 
-module Rondomo_AI1
+
+
+//#use "libs/tables"
+
+module 
+
+#use "Libs/SCI/InterVar"
+
+#use "Script/Use/Need"
+
+#use "Script/Use/Specific/CombatModules/AI/AI_Default"
+
+#accept Fighter
 	
-	var Default
+	//var Default
 	int beurt = 0
 	
-	void CONSTRUCTOR()
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-	end
+	//void CONSTRUCTOR()
+	//	Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+	//end
 
 	void Decide(foe)
-		self.beurt++
-		if self.beurt<5
-			self.Default.Decide(foe)
+		beurt++
+		if beurt<5
+			AI_Default.Decide(foe)
 			return
 		end
-		if not Done.RondomoSophisticatedYellPriorToUsingMOABToKillYouAll
+		if ! Done.RondomoSophisticatedYellPriorToUsingMOABToKillYouAll
 			MapScript.OutsideText("RONDOMO_MOAB")
 		end
 		table heroes
 		for tag,hero in pairs(Fighter.Team.Hero)
-			heroes[#heroes+1]=hero
+			heroes+=hero
 		end		
 		table nact
 		nact.ActTag = "ZZZ_KILLER_MOAB"
@@ -64,7 +78,8 @@ module Rondomo_AI1
 		nact.Targets = {}
 		for check in each(heroes)
 			if check.Char.Points("HP").Have>0
-				nact.Targets[#nact.Targets+1]=check
+				//nact.Targets[#nact.Targets+1]=check
+				nact.Targets+=check
 			end
 		end
 		foe.NextAct = new Actions(nact)
@@ -73,4 +88,4 @@ module Rondomo_AI1
 	end
 	
 	
-end
+//end
