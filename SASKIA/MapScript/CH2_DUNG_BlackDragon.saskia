@@ -109,12 +109,12 @@
 	call MapScript.RondomoFight
 	call CSay,"Load Dungeon Naked Rocks!"
 	call Map.AutoScroll,true
-	group 5
+	group 4
 		call Field.LoadMap,"CH3_DUNG_NakedRocks_Outside"
 		call Map.GoToLayer,"#002","Einde"
 		mov "Scyndi",RPG.Party[1]
 		mov "",RPG.Party[2]
-		call Map.SpawnPlayer,"Einde"
+		;call Map.SpawnPlayer,"Einde"
 	call CSay,"And over to the new dung SASKIA SCRIPT!"
 	call MapScript.SASKIA,"ScyndiStart"
 	;call error,"Meeting with Rondomo not yet completely scripted"
