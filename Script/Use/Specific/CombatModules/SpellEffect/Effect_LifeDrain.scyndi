@@ -34,8 +34,12 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
-do
-	bool DrainThatHP(Act,Target,string procentstring)
+
+Module
+
+#accept Hurt
+
+	bool DoEffect(Act,Target,string procentstring)
 		int procent
 		int drain
 		int need
@@ -53,5 +57,5 @@ do
 		new Hurt(drain,Act.Executor.Tag,0,255,0)
 		new Hurt(drain,Target.Tag,255,255,0)
 	end
-	return DrainThatHP
-end
+	//return DrainThatHP
+//end
