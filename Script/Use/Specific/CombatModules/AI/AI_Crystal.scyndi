@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Crystal.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Crystal.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,21 +33,33 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-#use "libs/tables"
+// 
+// version: 25.05.17 V
+// 
+// End License
 
-group CrystalSettings
+//#use "libs/tables"
+
+//group CrystalSettings
+Module
+
+#use "Libs/SCI/Sys"
+
+#use "Script/Use/Need"
+
+#Accept Fighter
+
 	string Element
 	string TegenElement
 	table Elementen
-	void CONSTRUCTOR()
+	
+	Init
 		
 		// Set up base stats for this boss
 		table tst
-		for ch in each { "Scyndi", "Irravonia" }
-			for st in each { "Strength", "Intelligence", "Resistance", "Agility", "Evasion" }
-				tst[st] = (tst[st] or __skill) + RPG.GetChar(ch).Stat("END_"..st).Value
+		for ch in each { [0]="Scyndi", "Irravonia" }
+			for st in each { [0]="Strength", "Intelligence", "Resistance", "Agility", "Evasion" }
+				tst[st] = (tst[st] || __skill) + RPG.GetChar(ch).Stat("END_"..st).Value
 				CSayF("Char: %s, Stat %s, Total: %4d",ch,st,tst[st])
 			end
 		end
@@ -64,33 +77,33 @@ group CrystalSettings
 			end
 			CSayF("Boss stat %s is now %4d",st,v)
 			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = v
-			self.Elementen = {"Flame","Wind","Water","Earth"}
+			Elementen = {[1]="Flame","Wind","Water","Earth"}
 		end
 	end
 	
 	void Decide(foe)
-		if self.Element==""
+		if Element==""
 			CSay("No charge, so charging now!")
 			table nact			
-			nact.ActTag = "ZZZ_BIGCRYSTAL_CHARGE_"..self.Elementen[math.random(1,4)]
+			nact.ActTag = "ZZZ_BIGCRYSTAL_CHARGE_"..Elementen[math.random(1,4)]
 			nact.ExeTag = foe.Tag
 			nact.Targets = {foe}
 			foe.NextAct = new Actions(nact)
 			foe.NextActSpeed = 100
 			foe.GaugePosition = 10001
 		else
-			CSayF("I got charge! Getting spell: ",self.Element)
+			CSayF("I got charge! Getting spell: ",Element)
 			table nact
-			nact.ActTag = "ZZZ_BIGCRYSTAL_"..self.Element
+			nact.ActTag = "ZZZ_BIGCRYSTAL_"..Element
 			nact.ExeTag = foe.Tag
 			nact.Targets = {}
 			table heroes
 			for tag,hero in pairs(Fighter.Team.Hero)
-				heroes[#heroes+1]=hero
+				heroes+=hero
 			end
 			for check in each(heroes)
 				if check.Char.Points("HP").Have>0
-					nact.Targets[#nact.Targets+1]=check
+					nact.Targets+=check
 				end
 			end
 			foe.NextAct = new Actions(nact)
@@ -102,18 +115,18 @@ group CrystalSettings
 	void Hurt(foe,string elem,int damage, act)
 		var f
 		f = RPG.GetChar("FOE_1")
-		if elem==self.TegenElement
-			CSayF("Struck with element %s, losing charge on element %s",elem,self.Element)
-			f.Stat("BASE__RESIST_Elem_"..self.TegenElement).Value=100
-			f.Stat("BASE__RESIST_Elem_"..self.Element).Value=100
-			self.TegenElement = ""
-			self.Element = ""
+		if elem==TegenElement
+			CSayF("Struck with element %s, losing charge on element %s",elem,Element)
+			f.Stat("BASE__RESIST_Elem_"..TegenElement).Value=100
+			f.Stat("BASE__RESIST_Elem_"..Element).Value=100
+			TegenElement = ""
+			Element = ""
 			if foe.GaugePosition >= 10001
 				foe.GaugePosition = 0
 			end
 		end
 	end
-end
+//end
 
 // Not the usual setting, but an easier way to go this time!
-return CrystalSettings
+//return CrystalSettings
