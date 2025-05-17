@@ -1,0 +1,165 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_MOAB.scyndi
+// 
+// 	  Version: 25.05.16 IV
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
+class MOAB_Bommetje
+	int x
+	int y
+	int to_x
+	int to_y
+	int fase
+	int plofframe
+	static var Bom
+	static var Ontplof
+	static table Lijstje
+	
+	CONSTRUCTOR()
+		self.Bom     = self.Bom     || LoadNewImage("GFX/Combat/SpellAni/SmallBomb.png","SPELLANI_BOMMETJE")
+		self.Ontplof = self.Ontplof || LoadNewImage("GFX/Combat/SpellAni/Explosion.jpbf","SPELLANI_EXPLOSION")
+		self.x = math.random(0,Graphics.W)
+		self.to_x = self.x
+		self.to_y = math.random(Graphics.H div 40,Graphics.H)
+		self.y = -math.random(100,200)
+		self.fase = 2
+		self.plofframe = 0
+		self.Lijstje += self
+	end
+		
+	void Cycle(act)
+		switch self.fase
+			case 2
+				// Bommetje omlaag
+				self.y += 8
+				if self.y>=self.to_y
+					self.fase = 3
+				end
+				self.DrawBom()
+				return
+			case 3
+				// Bommetje BOEM!
+				self.Ontplof.Draw(self.x+16,self.y+32,self.plofframe)
+				self.plofframe++
+				if self.plofframe>=16
+					self.fase=4
+				end
+				return
+		end
+	end
+	
+	get int CountActive
+		int ret
+		for i,v in pairs(self.Lijstje)
+			if v.fase<4
+				ret ++
+			end
+		end
+		return ret
+	end
+	
+	void DrawBom()
+		self.Bom.Draw(self.x-math.floor(self.Bom.Width/2),self.y-self.Bom.Height)
+	end
+	
+end
+
+
+//module SpellAni_MOAB
+	bool DrawOvertake
+	var Bom
+	var Ontplof
+	int x
+	int y
+	int to_x
+	int to_y
+	int fase
+	int plofframe
+	
+	Init
+		Bom     = LoadNewImage("GFX/Combat/SpellAni/BigBomb.png","SPELLANI_BOMGROOT")
+		Ontplof = LoadNewImage("GFX/Combat/SpellAni/Explosion.jpbf","SPELLANI_EXPLOSION")
+	end
+	
+	void SA_Init(act)
+		x = act.Executor.X+40
+		y = act.Executor.Y+60
+		to_x = act.Targets[1].X
+		to_y = act.Targets[1].Y
+		fase = 1
+		plofframe = 0
+		MOAB_Bommetje.Lijstje = {}
+		int r
+		r = math.random(30,70)
+		for i=1,r
+			new MOAB_Bommetje()
+		end
+		CSayF("We got %d bombs here!",MOAB_Bommetje.Lijstje[0].CountActive)
+	end
+	
+	bool Cycle(act)
+		switch fase
+			case 1
+				// Bommetje omhoog
+				y -= 8
+				if y<-200
+					x = to_x
+					fase = 2
+				end
+				DrawBom()
+				return false
+			case 2
+				for _,bom in pairs(MOAB_Bommetje.Lijstje)
+					bom.Cycle()
+				end
+				return MOAB_Bommetje.Lijstje[0].CountActive<=0
+		end
+	end
+	
+	void DrawBom()
+		Bom.Draw(x-math.floor(Bom.Width/2),y-Bom.Height)
+	end
+	
