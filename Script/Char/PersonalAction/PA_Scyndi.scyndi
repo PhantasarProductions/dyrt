@@ -122,24 +122,28 @@ Module
 					mo:=Kthura.Obj[tag]
 					if math.abs(wx-mo.X)<30 and math.abs(wy-mo.Y)<30
 						if X<0
+							// West
 							HookMoveX = mo.X //+16
 							HookMoveY = mo.Y-16
 							HookMove  = true
 							__player.Y = HookMoveY
 							__player.MoveTo(HookMoveX,HookMoveY)
 						elseif X>0
+							// East
 							HookMoveX = mo.X //+16
 							HookMoveY = mo.Y-16
 							HookMove  = true
 							__player.Y = HookMoveY
 							__player.MoveTo(HookMoveX,HookMoveY)
 						elseif Y<0
+							// North
 							HookMoveX = mo.X
 							HookMoveY = mo.Y-16
 							HookMove  = true
 							__player.X = HookMoveX
 							__player.MoveTo(HookMoveX,HookMoveY+32)
 						elseif Y>0
+							//South
 							HookMoveX = mo.X
 							HookMoveY = mo.Y-16
 							HookMove  = true
