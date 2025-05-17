@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FlowSaveGame.scyndi
 // 
-// 	  Version: 25.04.28 I
+// 	  Version: 25.05.15
 // 	
 // 	  Copyright (C) // License Information:, 2025 Jeroen Petrus Broks
 // 	
@@ -304,7 +304,7 @@ Void Action_Save(int Spot)
 	d = SlotData.Obtain(spot)
 	d.Location  = Kthura.Data.Title //Map.Title
 	//d.Myrah    = sprintf("%d",Party.GetLevel("Myrah"))
-	d.Leader    = gstr.Field_Leader
+	d.Leader    = RPG.Char(gstr.Field_Leader).Name
 	d.LeaderLv  = RPG.Char(gstr.Field_Leader).Stat("Level").Value
 	//d.Time      = GameTime.FShow
 	d.Time      = sprintf("%5d:%02d:%02d",gInt.PlayTime_Hours,gInt.PlayTime_Minutes,gInt.PlayTime_Seconds)
