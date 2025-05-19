@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.05.19
 // 
 // End License
 
@@ -56,7 +56,7 @@ class TBlaadje
 	void Draw()
 		__white
 		//Rotate.Deg = self.degrees
-		self.blaadje.Draw(self.x,self.y,degrees)
+		self.blaadje.DrawR(self.x,self.y,degrees)
 		//Rotate.Deg = 0
 	end
 	
