@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17 XVII
+// version: 25.05.18 V
 // 
 // End License
 
@@ -68,7 +68,8 @@ class MeryaScan
 		end
 		//for Tag in FieldFlow.Map.Kthura.EachTag(Map.Layer)
 		For Tag in Each(Kthura.TagList)
-			if prefixed(Tag,"MeryaScan_")
+			//if prefixed(Tag,"MeryaScan_")
+			if prefixed(Upper(Tag),"MERYASCAN_")
 				new MeryaScan(Tag)
 			end
 		end
@@ -86,14 +87,14 @@ class MeryaScan
 	string Layer
 	
 	get int X
-		return self.trueX - gint.ScrollX
+		return trueX - gint.ScrollX
 	end
 	get int Y 
-		return self.trueY - gint.ScrollY
+		return trueY - gint.ScrollY
 	end
 	
 	get int Radius
-		return self.CD % 64
+		return CD % 64
 	end
 	
 	CONSTRUCTOR(string tag)
@@ -103,7 +104,7 @@ class MeryaScan
 //		self.trueY = Map.ObjInt.Y
 		trueX = Kthura.Obj[Tag].X
 		trueY = Kthura.Obj[Tag].Y
-		afstand = xmath.Pythagoras(self.trueX,self.trueY,Kthura.Player.X,Kthura.Player.Y)
+		afstand = xmath.Pythagoras(self.trueX,self.trueY,Kthura.Obj.Player.X,Kthura.Obj.Player.Y)
 		self.CD = math.ceil(320 - afstand)
 		if self.CD<8 
 			self.CD=8
@@ -174,8 +175,9 @@ end
 		end
 	end
 	
-	bool Click(int but,int x, int y)
-		if Mouse.X>X && Mouse.Y>Y && Mouse.X<X+W && Mouse.Y<Y+Y
+	bool Click(int but,int _x, int _y)
+		CSay("Merya tries to scan the area")
+		if Mouse.X>X && Mouse.Y>Y && Mouse.X<X+W && Mouse.Y<Y+H
 			Stage = 1
 			Radius = 0
 			return true
