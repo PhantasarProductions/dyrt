@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_CITY_Gagolton.nil
-// (c) Jeroen Broks, 2020, 2021, 2022, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_CITY_Gagolton.scyndi
+// (c) Jeroen Broks, 2020, 2021, 2022, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,12 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 22.08.02
-// End License Information
+// 
+// version: 25.05.19 VIII
+// 
+// End License
+
 
 Script
 
+#use "Libs/Music"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
 
 #use "script/use/Need"
 #use "Script/Use/Misc/StartCombatMod"
@@ -100,10 +109,10 @@ group MScript
 	end
 	
 	get delegate NPC_GUARD_DISA
-		return Guard
+		return self.Guard
 	end
 	get delegate NPC_GUARD2_DISA
-		return Guard
+		return self.Guard
 	end
 	
 	void NPC_DOG_DISA()
@@ -201,22 +210,22 @@ group MScript
 		
 	
 	void NPC_JSOCKET1()
-		UseBlackOrb("NPC_JSOCKET1")
+		MScript.UseBlackOrb("NPC_JSOCKET1")
 	end
 	void NPC_JSOCKET2()
-		UseBlackOrb("NPC_JSOCKET2")
+		MScript.UseBlackOrb("NPC_JSOCKET2")
 	end
 	void NPC_JSOCKET3()
-		UseBlackOrb("NPC_JSOCKET3")
+		MScript.UseBlackOrb("NPC_JSOCKET3")
 	end
 	void NPC_JSOCKET4()
-		UseBlackOrb("NPC_JSOCKET4")
+		MScript.UseBlackOrb("NPC_JSOCKET4")
 	end
 	void NPC_JSOCKET5()
-		UseBlackOrb("NPC_JSOCKET5")
+		MScript.UseBlackOrb("NPC_JSOCKET5")
 	end
 	void NPC_JSOCKET6()
-		UseBlackOrb("NPC_JSOCKET6")
+		MScript.UseBlackOrb("NPC_JSOCKET6")
 	end
 
 
@@ -234,7 +243,10 @@ group MScript
 end
 
 Init
-	for tag in Map.EachTag
+	Kthura.CurrentLayer="TOWN"
+	CSayF("DISA! -> %s",__EMPTY)
+	//for tag in Map.EachTag
+	for tag in each(Kthura.TagList)
 		if __EMPTY and suffixed(tag,"_DISA")
 			Map.Kill(tag)
 			// Please note that the table used for EachTag won't 
@@ -248,9 +260,12 @@ Init
 			Map.ZA_Leave(tag,"Leave",tag)
 		end
 	end
-	if not(__newgameplus and gv.Bool.AziellaJoined)
+	CSay("Thief's Den Check")
+	if not(__newgameplus && gv.Bool.AziellaJoined)
 		Map.Kill("NPC_ThiefDen")
 	end
+	CSay("General ZA initations")
+		
 	Map.ZA_Enter("Delisto2","Delisto")
 	Map.ZA_Enter("Delisto3","Delisto")
 	Map.ZA_Enter("ToBasement","ToBasement")
