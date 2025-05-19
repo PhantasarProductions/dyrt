@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Yasathar.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Yasathar.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,23 +33,27 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.18 IV
+// 
+// End License
 
-module Yas_Arena
 
-	var Dung
+module 
+
+#use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Dungeon"
+
+	//var Dung
+	locExtern Dung "Scyndi.Class.TMP_Dungeon"
 	
-	void CONSTRUCTOR()
-		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Dungeon")
-		self.Dung.Wall  = "GFX/Textures/Yasathar/Wall.png"
-		self.Dung.Floor = "GFX/Textures/Yasathar/Floor.png"
-		self.Dung.Torches = false
-		self.Dung.Init()
+	Init
+		Dung.Floor = "GFX/Textures/Yasathar/Floor.png"
+		Dung.Wall  = "GFX/Textures/Yasathar/Wall.png"
+		Dung.Torches = false
+		Dung.DInit()
 	end
 	
 	void Draw() 
-		self.Dung.Draw()
+		Dung.Draw()
 	end
 
-end
