@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_Azquakunda.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_DUNG_Azquakunda.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,15 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.18 XVIII
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/strings"
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
+
 
 #macro numfloors 8
 #macro strfloors 0
@@ -48,7 +58,7 @@
 group MScript
 	
 	void MERYATUTOR()
-		if not Done.Done_Tutorial_MeryaScan
+		if ! Done.Done_Tutorial_MeryaScan
 			MapText("MERYASCOUTTUTORIAL")
 		end
 	end
@@ -82,11 +92,14 @@ group MScript
 	string cage = "No!"
 	void CAGEDOWN()
 		CSay("Cage down order, received!")
-		Map.Obj="TrapCage"
+		//Map.Obj="TrapCage"
 		//#- Map.ObjInt.Y Screen.H
-		Map.ObjInt.Y = (0-math.abs(Map.ScrollY))
-		CSayF("Y of scroll is now %d; Y of cage is now %d",Map.ScrollY,Map.ObjInt.Y)
-		self.cage = "DOWN"
+		//Map.ObjInt.Y = (0-math.abs(Map.ScrollY))
+		ocage:=Kthura.Obj.TrapCage
+		ocage.Y = (0-math.abs(Map.ScrollY))
+		ocage.Visible=true
+		CSayF("Y of scroll is now %d; Y of cage is now %d",Map.ScrollY,ocage.Y)
+		cage = "DOWN"
 	end
 			
 	void CAGEUP()
@@ -97,18 +110,22 @@ group MScript
 		//;mov "OnyxBang",Map.Obj
 		//;mov 223,Map.ObjInt.X
 		//;mov 347,Map.ObjInt.Y
-		Map.Obj = "OnyxBang"
-		Map.ObjInt.X = 223
-		Map.ObjInt.Y = 347
+		//Map.Obj = "OnyxBang"
+		//Map.ObjInt.X = 223
+		//Map.ObjInt.Y = 347
+		OB:=Kthura.Obj.OnyxBang
+		OB.X=223
+		OB.Y=347
 	end
 	
 	void RESTOREPARTY()
-		for i,ch in ipairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya" }
+		for i,ch in pairs {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya" }
 			RPG.Party[i] = ch
 		end
 	end
 
 	void BOSS()
+		// if true; return; end // Temporary skip boss
 		for i=2,8
 			RPG.Party[i] = ""
 		end
@@ -127,48 +144,71 @@ group MScript
 	
 	
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("ResetRespawn","ResetRespawn")
-		Map.ZA_Enter("MeryaTutor","MeryaTutor")
-		Map.ZA_Enter("MeryaSecret","ShowSecret")
-		Map.ZA_Leave("MeryaSecret","HideSecret")
-		Map.ZA_Enter("FindEric","SASKIA:Rejoin")
-		Map.ZA_Enter("BackTo001","BackTo001")
-		Map.ZA_Enter("To008","To008")
-		Map.ZA_Enter("StartAldarus","SASKIA:Aldarus")
-		for i=strfloors,numfloors
-			Map.Layer = sprintf("#%03d",i)
-			if Map.HasTag("MeryaSecret")
-				Map.HideByZone("MeryaSecret")
-				CSayF("Secret on floor #%03d has been hidden",i)
-			end
-		end
-	end
 	
 	void Update()
 	end
 	
 	void Draw()
 		//CSay(Map.Layer)
-		if Map.Layer=="#000"
+		if Kthura.CurrentLayer=="#000"
 			switch self.cage
 				case "DOWN"
-					Map.Obj="TrapCage"
-					Map.ObjBool.Visible=true
-					if Map.ObjInt.Y<256
-						Map.ObjInt.Y++
-						CSayF("Cage on position %3d",Map.ObjInt.Y)
-					end
+					//Map.Obj="TrapCage"
+					//Map.ObjBool.Visible=true
+					//if Map.ObjInt.Y<256
+					//	Map.ObjInt.Y++
+					//	CSayF("Cage on position %3d",Map.ObjInt.Y)
+					//end
+					OCage:=Kthura.Obj.TrapCage
+					OCage.Y = math.min(256,OCage.Y+2)
+					OCage.Visible=true
 				case "UP"
-					Map.Obj="TrapCage"
-					Map.ObjInt.Y--
-					if Map.ObjInt.Y<-Screen.H
-						Map.ObjBool.Visible=false
-						self.cage = "No!"
-					end
+					//Map.Obj="TrapCage"
+					//Map.ObjInt.Y--
+					//if Map.ObjInt.Y<-Screen.H
+					//	Map.ObjBool.Visible=false
+					//	self.cage = "No!"
+					//end
+					mmmy:=-Graphics.H
+					OCage:=Kthura.Obj.TrapCage
+					OCage.Y = math.max(mmmy,OCage.Y-1)
+					OCage.Visible=OCage.Y>mmmy
+					//if (!mmmy)
+					if (!OCage.Visible)
+						cage="No!"
+					end					
 			end
 		end
 	end
 	
+	Void Aldarus()
+		CSay("Should Aldarus appear or not?")
+		MapScript.Saskia("Aldarus")
+	End
+	
+	Void FindEric()
+		MapScript.Saskia("Rejoin")
+	End
+	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Map.ZA_Enter("ResetRespawn","ResetRespawn")
+	Map.ZA_Enter("MeryaTutor","MeryaTutor")
+	Map.ZA_Enter("MeryaSecret","ShowSecret")
+	Map.ZA_Leave("MeryaSecret","HideSecret")
+	//Map.ZA_Enter("FindEric","SASKIA:Rejoin")
+	Map.ZA_Enter("FindEric","FindEric")
+	Map.ZA_Enter("BackTo001","BackTo001")
+	Map.ZA_Enter("To008","To008")
+	//Map.ZA_Enter("StartAldarus","SASKIA:Aldarus")
+	Map.ZA_Enter("StartAldarus","Aldarus")
+	for i=strfloors,numfloors
+		Kthura.CurrentLayer = sprintf("#%03d",i)
+		if Map.HasTag("MeryaSecret")
+			Map.HideByZone("MeryaSecret")
+			CSayF("Secret on floor #%03d has been hidden",i)
+		end
+	end
+end
