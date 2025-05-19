@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_Airom.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_DUNG_Airom.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,15 +33,22 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.19 II
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/strings"
+Script
+
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Intervar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+
 
 #macro __SECRETS 4
 
@@ -55,21 +63,24 @@ group MScript
 	end
 	
 	void TUTOR_REFILL()
-		if not Done.Done_Tutorial_InfEncounter_Airom
-			MapText("INF_TUTOR")
-		end
+		//if not Done.Done_Tutorial_InfEncounter_Airom
+		//	MapText("INF_TUTOR")
+		//
+		//end
 	end
 	
 	void SPROUTWINGS()
 		int x
 		int y
-		Map.Obj = "Kirana"
-		Map.ObjString.Texture = "gfx/actors/people/Onyx/Kirana.wings.png"
-		x = Map.ObjInt.x
-		y = Map.ObjInt.y
-		Map.Obj = "OnyxBang"
-		Map.ObjInt.x = x
-		Map.ObjInt.y = y + 100
+		OKir:=Kthura.Obj.Kirana
+		//Map.Obj = "Kirana"
+		//Map.ObjString.Texture = "gfx/actors/people/Onyx/Kirana.wings.png"
+		OKir.Texture = "gfx/actors/people/Onyx/Kirana.wings.png"
+		x = OKir.x
+		y = OKir.y
+		OBng := Kthura.Obj.OnyxBang
+		OBng.x = x
+		OBng.y = y + 100
 	end
 	
 	void FIGHTKIRANA()
@@ -84,16 +95,6 @@ group MScript
 		StartCombat.Ready()
 	end
 	
-	void CONSTRUCTOR()
-		for i=1,__SECRETS
-			self.HSECRET(i)
-			Map.ZA_Enter(sprintf("ShowSecret%d",i),'SSecret',i)
-			Map.ZA_Enter(sprintf("HideSecret%d",i),'HSecret',i)
-		end
-		Map.RENC_Inf = true
-		Map.ZA_Enter("Tutor_Refill","Tutor_Refill")
-		Map.ZA_Enter("Boss","SASKIA:Kirana")
-	end
 	
 	void Draw()
 	end
@@ -102,4 +103,16 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Kthura.CurrentLayer = "MINE"
+	for i=1,__SECRETS
+		MScript.HSECRET(i)
+		Map.ZA_Enter(sprintf("ShowSecret%d",i),"SSecret",i)
+		Map.ZA_Enter(sprintf("HideSecret%d",i),"HSecret",i)
+	end
+	Map.RENC_Inf = true
+	Map.ZA_Enter("Tutor_Refill","Tutor_Refill")
+	Map.ZA_Enter("Boss","SASKIA:Kirana")
+end
