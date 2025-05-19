@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.05.15 I
+// 	  Version: 25.05.19 II
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -632,7 +632,11 @@ group FlowField
 		int mx
 		int my
 		//var kth
-		//kth = FieldMap.Kthura
+		kth := Lua.Scyndi.Class.Kthura	
+		if (!Kth.HasObj(Tag))
+			CSayF("\007Random treasure %s doesn't exist anymore(?), so let's ignore this!",Tag)
+			return
+		end		
 		mx = kthura.Obj[tag].X - FieldMap.ScrollX
 		my = kthura.Obj[Tag].Y - FieldMap.ScrollY
 		ItemTag = Upper(ItemTag)
@@ -720,6 +724,10 @@ group FlowField
 		//var dat
 		//kth = FieldMap.Kthura
 		//kth.Obj = Tag
+		if (!Kth.HasObj(Tag))
+			CSayF("\007Chest %s doesn't exist anymore(?), so let's ignore this!",Tag)
+			return
+		end
 		ktho := Kth.Obj[Tag]
 		dat := kthO.Data
 		if Upper(kthO.Texture)=="GFX/TEXTURES/OBJECTS/CHEST_CLOSED.PNG"
