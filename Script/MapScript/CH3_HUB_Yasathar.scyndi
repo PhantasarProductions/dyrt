@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_HUB_Yasathar.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_HUB_Yasathar.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,15 +33,23 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.18 III
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/strings"
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+
 
 group MScript
 	
@@ -57,34 +66,27 @@ group MScript
 	void Z(int z)
 		for i=1,7
 			if i>z
-				Map.HideByZone(sprintf("Z%02d",i))
+				Kthura.HideByZone(sprintf("Z%02d",i))
 				CSayF("Hiding:  %d/%d",i,z)
 			else
-				Map.ShowByZone(sprintf("Z%02d",i))
+				Kthura.ShowByZone(sprintf("Z%02d",i))
 				CSayF("Showing: %d/%d",i,z)
 			end
 		end
 		Map.HideByLabel("Hero")
-		Map.ShowObj("Player")
-		Map.Obj="Player"
-		Map.ObjInt.Dominance=40		
-		if z==7 and not gv.Bool.Defeated_MountainKing
+		//Map.ShowObj("Player")
+		//Map.Obj="Player"
+		//Map.ObjInt.Dominance=40
+		Kthura.Obj.Player.Visible=true
+		Kthura.Obj.Player.Dominance=40
+		if z==7 && (! gv.Bool.Defeated_MountainKing )
 			Map.ShowByLabel("Hero")
-			Map.HideObj("Player")
+			//Map.HideObj("Player")
+			Kthura.Obj.Player.Visible=false
 			MapScript.SASKIA("Boss")
 		end
 	end
 	
-	void CONSTRUCTOR()
-		int act
-		for i=1,7
-			act = i
-			if i>=2 and i<=4
-				act = 4
-			end
-			Map.ZA_Enter(sprintf("Z%02d",i),"Z",act)
-		end
-	end
 	
 	void Draw()
 	end
@@ -93,4 +95,16 @@ group MScript
 	end
 	
 end
+
+Init
+	int act
+	for i=1,7
+		act = i
+		if i>=2 and i<=4
+			act = 4
+		end
+		Map.ZA_Enter(sprintf("Z%02d",i),"Z",act)
+	end
+End
+
 #say "Map Script - Compiling!"
