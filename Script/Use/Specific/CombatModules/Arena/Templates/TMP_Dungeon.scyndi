@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Dungeon.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.18
 // 	
 // 	  Copyright (C) 2019, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -187,8 +187,10 @@ end
 		for y = sy,ey,32
 			ImgWall.Tile(0,y,Screen.Width,64)
 		end
-		for trc in Torch.list.Each
-			trc.Draw()
+		if Torch.list
+			for trc in Torch.list.Each
+				trc.Draw()
+			end
 		end
 	end
 
