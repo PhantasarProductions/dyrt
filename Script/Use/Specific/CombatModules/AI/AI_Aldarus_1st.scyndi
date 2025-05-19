@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Aldarus_1st.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Aldarus_1st.scyndi
+// (c) Jeroen Broks, 2020-'21, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,38 +33,52 @@
 // 
 // **********************************************
 // 
-// version: 21.01.06
-// End License Information
-module Aldarus_AI1
+// 
+// version: 25.05.18 VII
+// 
+// End License
+
+module 
 	
-	var Default
+#use "Script/Use/Specific/CombatModules/AI/AI_Default"
+
+#accept RPG
+#accept CSayF
+#accept Fighter
+
+LocExtern __skill "Scyndi.globals.gint.skill"
+
+	//var AI_Default
 	int beurt = 0
 	
-	void CONSTRUCTOR()
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
+	Init
+		//AI_Default = NIL.Use("Script/Use/Specific/CombatModules/AI/AI_Default")
+		for st in each { [0] = "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
 			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Eric").Stat("END_"..st).Value * (0.33*__skill)
 			CSayF("%10s = %3d",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value) 
 		end
 	end
 
 	void Decide(foe)
-		self.beurt++
-		switch self.beurt % 5
+		beurt++
+		CSayF("Aldarus Turn #%d -> %d",beurt,beurt % 5)
+		switch beurt % 5
 			case 0 1
-				self.Default.Decide(foe)
+				AI_Default.Decide(foe)
 			case 2
-				foe.NextAct = new Actions({['ActTag']="Act_Attack",['Targets']={Fighter.Team.Hero.Eric},['ExeTag']=foe.Tag})
+				foe.NextAct = new Actions({["ActTag"]="Act_Attack",["Targets"]={[0]=Fighter.Team.Hero.Eric},["ExeTag"]=foe.Tag})
 				foe.NextActSpeed = 100
+				foe.GaugePosition = 10001
 			case 3
-				foe.NextAct = new Actions({['ActTag']="ABL_HERO_REBECCA_LAY",['Targets']={foe},['ExeTag']=foe.Tag})
+				foe.NextAct = new Actions({["ActTag"]="ABL_HERO_REBECCA_LAY",["Targets"]={[0]=foe},["ExeTag"]=foe.Tag})
 				foe.NextActSpeed = 100
+				foe.GaugePosition = 10001
 			case 4
-				foe.NextAct = new Actions({['ActTag']="ABL_ALDARUSSTRIKE",['Targets']={Fighter.Team.Hero.Eric},['ExeTag']=foe.Tag})
-				foe.NextActSpeed = 100
-
+				foe.NextAct = new Actions({["ActTag"]=Ternary(__skill==3,"ABL_ALDARUSSTRIKE","Act_Attack"),["Targets"]={[0]=Fighter.Team.Hero.Eric},["ExeTag"]=foe.Tag})
+				foe.NextActSpeed = 50
+				foe.GaugePosition = 10001
 		end
 	end
 	
 	
-end
+//end
