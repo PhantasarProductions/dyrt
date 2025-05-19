@@ -36,7 +36,8 @@
 ; End License Information
 
 :OnLoad
-	call Fader,Field.MapData.Title
+	;call Fader,Field.MapData.Title
+	call Fader.Create,"Azquakunda Prison"
 	end
 
 ; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice
@@ -52,7 +53,7 @@
 	jmp einde
 	
 :Aldarus
-	chk not gv.Bool.Done_Azquakunda_Eric_found,einde
+	chk gv.Bool.Done_Azquakunda_Eric_found~=true,einde
 	chk gv.Bool.Done_Azquakunda_AldarusDefeated,einde
 	call Map.ShowByLabel,"Hero"
 	mov "Eric",Map.Leader
@@ -64,7 +65,8 @@
 	;mov 347,Map.ObjInt.Y
 	call MapScript.OnyxConfig
 	call OnyxBang.Start
-	call Map.ShowObj,"Aldarus"
+	;call Map.ShowObj,"Aldarus"
+	mov true,Kthura.Obj.Aldarus.Visible
 	:OnyxBang
 	chk OnyxBang.Going,OnyxBang
 	call MapText,"ALDARUS_B"
@@ -75,6 +77,7 @@
 	call Map.HideObj,"Aldarus"
 	call MapScript.CageUp
 	call OnyxBang.Start
+	mov false,Kthura.Obj.Aldarus.Visible
 	:OnyxBang2
 	chk OnyxBang.Going,OnyxBang2
 	call MapText,"ALDARUS_D"
@@ -113,3 +116,5 @@
 	call Party.LvUp,"Yasathar"
 	call AllSealedCheck
 	end
+	
+	
