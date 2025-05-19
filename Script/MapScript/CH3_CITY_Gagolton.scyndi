@@ -35,10 +35,13 @@
 // version: 22.08.02
 // End License Information
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/strings"
+Script
+
+#use "Libs/SCI/SString"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+
 
 #macro __EMPTY gv.Bool.GagoltonEmpty
 #macro __JUGDEFEATED gv.Bool.UltimateBossJuggernautDefeated
@@ -61,15 +64,15 @@ group MScript
 	
 	void MUSIC()
 		if __EMPTY
-			Music.Play('Music/Cities/Gagolton_Deserted.wav')
+			Music.Play("Music/Cities/Gagolton_Deserted.wav")
 		else
-			Music.Play('Music/Cities/Gagolton_Populated.wav')
+			Music.Play("Music/Cities/Gagolton_Populated.wav")
 		end
 	end
 	
 	void ENTER(string zone)
 		Map.ShowByZone(zone)
-		if __EMPTY and (not Done.SeeEmptyGagoltonTown)
+		if __EMPTY && (! Done.SeeEmptyGagoltonTown)
 			MapText("LEEG")
 			WM_Unlocked.D_IndieBush = true
 		end
@@ -97,10 +100,10 @@ group MScript
 	end
 	
 	get delegate NPC_GUARD_DISA
-		return self.Guard
+		return Guard
 	end
 	get delegate NPC_GUARD2_DISA
-		return self.Guard
+		return Guard
 	end
 	
 	void NPC_DOG_DISA()
@@ -120,34 +123,34 @@ group MScript
 	end
 	
 	void GJ_UNLOCK_GoodBye()
-		var GJ
-		if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
-			return
-		end
-		gj_checked = true
-		GJ = NIL.Use("Secu/Include/GJSecret.nil")
-		if not GJ
-			Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
-			return
-		end
-		if GJ.ImpureRatio>=54
-			Map.Kill("GJ_Barrier")
-		end
+		//var GJ
+		//if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
+		//	return
+		//end
+		//gj_checked = true
+		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
+		//if not GJ
+		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
+		//	return
+		//end
+		//if GJ.ImpureRatio>=54
+		//	Map.Kill("GJ_Barrier")
+		//end
 	end
 	
 	void GJ_UNLOCK()
-		int p 
-		p = math.floor(NALA_Medals:AltRatio())
-		CSayF("Medal rate %03d%%",p)
-		gj_checked = true
-		if p>=54
-			Map.Kill("GJ_Barrier")
-		end
+		//int p 
+		//p = math.floor(NALA_Medals:AltRatio())
+		//CSayF("Medal rate %03d%%",p)
+		//gj_checked = true
+		//if p>=54
+		//	Map.Kill("GJ_Barrier")
+		//end
 	end
 	
 	void GJ_BACK()
-		Map.Kill("GJ_Barrier")
-		gj_checked = true
+		//Map.Kill("GJ_Barrier")
+		//gj_checked = true
 	end
 	
 	void TOSUGARLAND()
@@ -198,54 +201,29 @@ group MScript
 		
 	
 	void NPC_JSOCKET1()
-		self.UseBlackOrb("NPC_JSOCKET1")
+		UseBlackOrb("NPC_JSOCKET1")
 	end
 	void NPC_JSOCKET2()
-		self.UseBlackOrb("NPC_JSOCKET2")
+		UseBlackOrb("NPC_JSOCKET2")
 	end
 	void NPC_JSOCKET3()
-		self.UseBlackOrb("NPC_JSOCKET3")
+		UseBlackOrb("NPC_JSOCKET3")
 	end
 	void NPC_JSOCKET4()
-		self.UseBlackOrb("NPC_JSOCKET4")
+		UseBlackOrb("NPC_JSOCKET4")
 	end
 	void NPC_JSOCKET5()
-		self.UseBlackOrb("NPC_JSOCKET5")
+		UseBlackOrb("NPC_JSOCKET5")
 	end
 	void NPC_JSOCKET6()
-		self.UseBlackOrb("NPC_JSOCKET6")
+		UseBlackOrb("NPC_JSOCKET6")
 	end
 
 
 
 
 	
-	void CONSTRUCTOR()
-		for tag in Map.EachTag
-			if __EMPTY and suffixed(tag,"_DISA")
-				Map.Kill(tag)
-				// Please note that the table used for EachTag won't 
-				// change anymore once the for-loop has begun, so this is safe!
-				CSayF("Removed NPC: %s",tag)
-			elseif prefixed(tag,"GOTO_")
-				Map.ZA_Enter(tag,"GoTo",tag)
-			elseif prefixed(tag,"ZONE_")
-				Map.HideByZone(tag)
-				Map.ZA_Enter(tag,"Enter",tag)
-				Map.ZA_Leave(tag,"Leave",tag)
-			end
-		end
-		if not(__newgameplus and gv.Bool.AziellaJoined)
-			Map.Kill("NPC_ThiefDen")
-		end
-		Map.ZA_Enter("Delisto2","Delisto")
-		Map.ZA_Enter("Delisto3","Delisto")
-		Map.ZA_Enter("ToBasement","ToBasement")
-		Map.ZA_Enter("GJ_Back","GJ_Back")
-		Map.ZA_Enter("GJ_Unlock","GJ_Unlock")
-		Map.ZA_Enter("ToSugarland","ToSugarland")
-		Map.ZA_Enter("ZONE_Juggernaut","SASKIA:Juggernaut")
-	end
+	
 	
 	void Draw()
 	end
@@ -254,4 +232,30 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	for tag in Map.EachTag
+		if __EMPTY and suffixed(tag,"_DISA")
+			Map.Kill(tag)
+			// Please note that the table used for EachTag won't 
+			// change anymore once the for-loop has begun, so this is safe!
+			CSayF("Removed NPC: %s",tag)
+		elseif prefixed(tag,"GOTO_")
+			Map.ZA_Enter(tag,"GoTo",tag)
+		elseif prefixed(tag,"ZONE_")
+			Map.HideByZone(tag)
+			Map.ZA_Enter(tag,"Enter",tag)
+			Map.ZA_Leave(tag,"Leave",tag)
+		end
+	end
+	if not(__newgameplus and gv.Bool.AziellaJoined)
+		Map.Kill("NPC_ThiefDen")
+	end
+	Map.ZA_Enter("Delisto2","Delisto")
+	Map.ZA_Enter("Delisto3","Delisto")
+	Map.ZA_Enter("ToBasement","ToBasement")
+	Map.ZA_Enter("GJ_Back","GJ_Back")
+	Map.ZA_Enter("GJ_Unlock","GJ_Unlock")
+	Map.ZA_Enter("ToSugarland","ToSugarland")
+	Map.ZA_Enter("ZONE_Juggernaut","SASKIA:Juggernaut")
+end
