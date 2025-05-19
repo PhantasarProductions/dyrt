@@ -1,0 +1,33 @@
+
+
+module Arena_AIROM
+
+	var muur
+	var vloer
+	var hout
+	var spoor
+	int midden
+	int kwart
+	
+	table wolken
+	
+	void CONSTRUCTOR()
+		//self.wolk = LoadIfNew("gfx/Textures/Sky/cloud.png","ARENA_CLOUD")
+		self.midden = Screen.H/2
+		self.kwart  = Screen.H/4
+		self.vloer  = LoadIfNew("GFX/Textures/NRCaves/F.png","ARENA_NR_VLOER")
+		self.hout   = LoadIfNew("GFX/Textures/Phantasar/Mijn/Hout.png","ARENA_AIROM_WOOD")
+		self.muur   = LoadIfNew("GFX/Textures/NRCaves/N.png","ARENA_NR_WALL")
+		self.spoor  = LoadIfNew("GFX/Textures/Phantasar/Rails/EW2.png","ARENA_AIROM_RAILS")
+	end
+	
+	void Draw()
+		Color(5,6,7)
+		Rect(0,0,Screen.W,self.midden)
+		__white
+		self.vloer.Tile(0,self.kwart,Screen.W,Screen.H-self.kwart)
+		self.spoor.Tile(0,self.midden,Screen.W,32)
+		self.muur.Tile(0,self.kwart,Screen.W,64)
+		self.hout.Tile(0,self.kwart,Screen.W,64)
+	end
+end
