@@ -35,7 +35,7 @@
 ; version: 20.12.12
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"The city of Gagolton"
 	end
 
 :Rosetta
