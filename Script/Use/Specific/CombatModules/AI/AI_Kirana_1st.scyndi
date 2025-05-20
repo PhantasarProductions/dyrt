@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Kirana_1st.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Kirana_1st.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,50 +33,53 @@
 // 
 // **********************************************
 // 
-// version: 20.05.17
-// End License Information
-#use "libs/tables"
+// 
+// version: 25.05.19 III
+// 
+// End License
+#use "Script/Use/Specific/CombatModules/AI/AI_Default"
+
+//#use "libs/tables"
+
+#accept Fighter
 
 module Kirana_AI1
 	
-	var Default
 	int beurt = 0
 	
-	void CONSTRUCTOR()
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-	end
 
 	void Decide(foe)
-		self.beurt++
-		table heroes
+		beurt++
+		table heroes:={}
 		for tag,hero in pairs(Fighter.Team.Hero)
-			heroes[#heroes+1]=hero
+			heroes+=hero
 		end
-		bool AnyOneFull()
+		//bool AnyOneFull()
+		ddef AnyOneFull
 			bool ret = false
 			for i,h in ipairs(heroes)
-				ret = ret or h.Char.Points("HP").Have==h.Char.Points("HP").Maximum
+				ret = ret || h.Char.Points("HP").Have==h.Char.Points("HP").Maximum
 			end
 			return ret
 		end
-		if (self.beurt % 3 == 0) or AnyOneFull()
+		if (beurt % 3 == 0) || AnyOneFull()
 			table nact
 			nact.ActTag = "ABL_FOE_DEMONSOULBREAKER"
 			nact.ExeTag = foe.Tag
 			nact.Targets = {}
 			for check in each(heroes)
 				if check.Char.Points("HP").Have>0
-					nact.Targets[#nact.Targets+1]=check
+					nact.Targets+=check
 				end
 			end
 			foe.NextAct = new Actions(nact)
 			foe.NextActSpeed = 200
 			foe.GaugePosition = 10001
 		else
-			self.Default.Decide(foe)
+			AI_Default.Decide(foe)
 			return
 		end
 	end
 	
 	
-end
+//end
