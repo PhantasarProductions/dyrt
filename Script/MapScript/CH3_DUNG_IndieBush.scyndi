@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_IndieBush.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_DUNG_IndieBush.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,21 @@
 // 
 // **********************************************
 // 
-// version: 20.07.16
-// End License Information
+// 
+// version: 25.05.20 IV
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+
+Script
+
+#use "libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 group MScript
 	
 	void HSECRET()
@@ -51,8 +59,8 @@ group MScript
 	end
 	
 	void TUTORBLACKORB()
-		if not Done.TutorBlackOrbIndieBush
-			LuaDoString("FLOW_FIELD","FlowField.DoAutoScroll()")
+		if ! Done.TutorBlackOrbIndieBush
+			//LuaDoString("FLOW_FIELD","FlowField.DoAutoScroll()")
 			MapText("BLACKORB")
 		end
 	end
@@ -61,14 +69,7 @@ group MScript
 		WM_Unlocked.D_Independence = true
 	end
 	
-	void CONSTRUCTOR()
-		Map.Layer="#001"
-		Map.HideByZone("Secret")
-		Map.ZA_Enter("Secret","SSECRET")
-		Map.ZA_Leave("Secret","HSECRET")
-		Map.ZA_Enter("TutorBlackOrb","TutorBlackOrb")
-		Map.ZA_Enter("IndieUnlock","IndieUnlock")
-	end
+	
 	
 	void Draw()
 	end
@@ -77,4 +78,12 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Kthura.CurrentLayer="#001"
+	Map.HideByZone("Secret")
+	Map.ZA_Enter("Secret","SSECRET")
+	Map.ZA_Leave("Secret","HSECRET")
+	Map.ZA_Enter("TutorBlackOrb","TutorBlackOrb")
+	Map.ZA_Enter("IndieUnlock","IndieUnlock")
+End
