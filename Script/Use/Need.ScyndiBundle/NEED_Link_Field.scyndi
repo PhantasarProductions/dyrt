@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.05.19 I
+// 	  Version: 25.05.19 VIII
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -136,12 +136,13 @@ group Map
 			case "MAPSCRIPT"
 				actiondelegate = sprintf("Scyndi.Globals.MapScript.%s",ActSplit[1])
 			case "SASKIA"
-				actiondelegate = sprintf("Scyndi.Globals.MapScript.SASKIA")
+				//actiondelegate = sprintf("\"SASKIA\"")
+				actiondelegate = "Scyndi.Globals.MapScript.SASKIA"
 				if params!=""
 					CSay("WARNING! Parameters in SASKIA script are alwas ignored!")
 				end
 				//CSay(NIL.LuaSerialize("ActSplit",ActSplit))
-				params = ActSplit[1]
+				params = sprintf("\"%s\"",ActSplit[1])
 				CSayF("ZA.%s -> SASKIA: %s",event,params)
 			default
 				Lua.error(sprintf("I don't know how to handle: %s",ActSplit[0]))
@@ -512,7 +513,8 @@ group Map
 	end
 	
 	set bool RENC_Inf
-		FLD_Exe(sprintf("RENC.Infinite = %s",tostring(value)))
+		//FLD_Exe(sprintf("RENC.Infinite = %s",tostring(value)))
+		Sys.Call("FLOW_FIELD","RENC.xInfinite",value)
 	end
 	
 	bool Blocked(int x,int y,real)
@@ -618,8 +620,9 @@ group Respawn
 		//FLD_Exe(sprintf("FlowField.LoadMap(trim(\"%s\"))",self.Map))
 		FLD_Call("SASKIA.Wipe")
 		FLD_Call("FlowField.LoadMap",Trim(gstring.Respawn_Map))
-		Map.Layer = self.Layer
-		FLD_Exe(sprintf("FlowField.CoordSpawnPlayer(%4d,%4d)",self.X,self.Y))
+		Kthura.CurrentLayer = self.Layer
+		//FLD_Exe(sprintf("FlowField.CoordSpawnPlayer(%4d,%4d)",self.X,self.Y))
+		Sys.Call("FLOW_FIELD","FlowField.CoordSpawnPlayer",X,Y)
 		switch(__skill)
 			case 1
 				__cash--
