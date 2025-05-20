@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.08 III
+// version: 25.05.20
 // 
 // End License
 
@@ -147,15 +147,15 @@ group MScript
 		end
 	end
 	void TOFAC1()
-		Field.LoadMap("Medal_DUNG_Facility")
+		Field.LoadMap("Mdl_DUNG_Facility")
 		Map.GoToLayer("#999","NPC_Trans_SPOT")
 	end
 	void TOFAC2()
-		Field.LoadMap("Medal_DUNG_Facility2")
+		Field.LoadMap("Mdl_DUNG_Facility2")
 		Map.GoToLayer("#018","NPC_Trans_SPOT")
 	end
 	void TOFAC3()
-		Field.LoadMap("Medal_DUNG_Facility2")
+		Field.LoadMap("Mdl_DUNG_Facility2")
 		Map.GoToLayer("#024","NPC_Trans_SPOT")
 	end
 	
