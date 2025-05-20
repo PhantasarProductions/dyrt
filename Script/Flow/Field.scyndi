@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.05.19 II
+// 	  Version: 25.05.20 II
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -777,14 +777,15 @@ group FlowField
 	end
 	
 	void BlackOrb()
-		var kth
-		int mx
-		int my
-		kth = FieldMap.Kthura
-		kth.Obj = "BlackOrb"
-		mx = kth.ObjInt.X - FieldMap.ScrollX
-		my = kth.ObjInt.Y - FieldMap.ScrollY
-		new MiniMsg(mx,my,"Black Orb found",180,0,255)
+		//var kth
+		//int mx
+		//int my
+		//kth = FieldMap.Kthura
+		//kth.Obj = "BlackOrb"
+		//mx = kth.ObjInt.X - FieldMap.ScrollX
+		//my = kth.ObjInt.Y - FieldMap.ScrollY
+		blo:=Kthura.Obj.BlackOrb
+		new MiniMsg(blo.x - FieldMap.ScrollX,blo.y - FieldMap.ScrollY,"Black Orb found",180,0,255)
 		__orbblack++
 		self.Map.Kill("BlackOrb",true)
 	end
@@ -892,7 +893,8 @@ group FlowField
 			kthura.CurrentLayer = Lay
 			//for Tag in kth.EachTag(Lay)
 			For Tag in Each(Kthura.TagList)
-				if Tag=="BlackOrb"
+				//if Tag=="BlackOrb"
+				if Upper(Tag)=="BLACKORB"
 					//kth.Obj="BlackOrb"
 					new Clickables("BlackOrb",kthura.Obj.BlackOrb.x, kthura.Obj.BlackOrb.y,FlowField.BlackOrb)
 				end
@@ -1055,8 +1057,10 @@ group FlowField
 	void CoordSpawnPlayer(int x, int y, wind)
 		wind = wind or "North"
 		assert(type(wind),sprintf("CoordSpawnPlayer(%4d,%4d,'%s'): Wind must be of type string! got %s",x,y,tostring(wind),type(wind)))
-		self.Map.Kthura.Actor.Player.SpawnCoords(x,y)
-		self.Map.Kthura.Actor.Player.Wind=wind
+		//self.Map.Kthura.Actor.Player.SpawnCoords(x,y)
+		//self.Map.Kthura.Actor.Player.Wind=wind
+		Kthura.Spawn("Player",x,y)
+		Kthura.Obj.Player.Wind=wind
 		self.UpdatePlayerTex()
 	end
 	
