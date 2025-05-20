@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/GJ_DUNG_Sugarland.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/MDL_Dung_Sugarland.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,17 @@
 // 
 // **********************************************
 // 
-// version: 20.07.22
-// End License Information
+// 
+// version: 25.05.19 I
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 
 group MScript
 	void GAGOLTON()
@@ -95,4 +99,3 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
