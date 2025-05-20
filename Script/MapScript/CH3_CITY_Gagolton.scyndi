@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.19 VIII
+// version: 25.05.19 XII
 // 
 // End License
 
@@ -56,7 +56,7 @@ Script
 #macro __JUGDEFEATED gv.Bool.UltimateBossJuggernautDefeated
 // #macro __EMPTY true
 
-bool gj_checked
+bool MDL_checked
 
 group MScript
 	
@@ -131,39 +131,47 @@ group MScript
 		MapScript.SASKIA("Kirana")
 	end
 	
-	void GJ_UNLOCK_GoodBye()
+	void MDL_UNLOCK_GoodBye()
 		//var GJ
-		//if (not gv.Bool.GameJolt) or gj_checked or (gj_failed())
+		//if (not gv.Bool.GameJolt) or MDL_checked or (MDL_failed())
 		//	return
 		//end
-		//gj_checked = true
+		//MDL_checked = true
 		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
 		//if not GJ
 		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
 		//	return
 		//end
 		//if GJ.ImpureRatio>=54
-		//	Map.Kill("GJ_Barrier")
+		//	Map.Kill("MDL_Barrier")
 		//end
 	end
 	
-	void GJ_UNLOCK()
+	void MDL_UNLOCK()
 		//int p 
 		//p = math.floor(NALA_Medals:AltRatio())
 		//CSayF("Medal rate %03d%%",p)
-		//gj_checked = true
+		//MDL_checked = true
 		//if p>=54
-		//	Map.Kill("GJ_Barrier")
+		//	Map.Kill("MDL_Barrier")
 		//end
+		
+		LocExtern WantRatio "54"
+		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
+		if MedalRatio>=WantRatio
+			Map.Kill("MDL_Barrier",false)
+			CSayF("-> Open Sesame!")
+		End
+		mdl_checked=true
 	end
 	
-	void GJ_BACK()
-		//Map.Kill("GJ_Barrier")
-		//gj_checked = true
+	void MDL_BACK()
+		Map.Kill("MDL_Barrier")
+		MDL_checked = true
 	end
 	
 	void TOSUGARLAND()
-		Field.LoadMap("GJ_DUNG_Sugarland")
+		Field.LoadMap("MDL_DUNG_Sugarland")
 		Map.GoToLayer("#001","Start")
 	end
 	
@@ -228,7 +236,13 @@ group MScript
 		MScript.UseBlackOrb("NPC_JSOCKET6")
 	end
 
-
+	Void ShowMedal()
+		Kthura.ShowByLabel("Medal")
+	End
+	
+	Void HideMedal()
+		Kthura.HideByLabel("Medal")
+	End
 
 
 	
@@ -269,8 +283,12 @@ Init
 	Map.ZA_Enter("Delisto2","Delisto")
 	Map.ZA_Enter("Delisto3","Delisto")
 	Map.ZA_Enter("ToBasement","ToBasement")
-	Map.ZA_Enter("GJ_Back","GJ_Back")
-	Map.ZA_Enter("GJ_Unlock","GJ_Unlock")
+	Map.ZA_Enter("MDL_Back","MDL_Back")
+	Map.ZA_Enter("MDL_Unlock","MDL_Unlock")
 	Map.ZA_Enter("ToSugarland","ToSugarland")
 	Map.ZA_Enter("ZONE_Juggernaut","SASKIA:Juggernaut")
+	
+	MScript.HideMedal()
+	Map.ZA_Enter("Show_Medal","ShowMedal")
+	Map.ZA_Enter("Hide_Medal","HideMedal")
 end
