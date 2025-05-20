@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_ZoneAction.scyndi
 // 
-// 	  Version: 25.05.19 V
+// 	  Version: 25.05.19 XI
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -203,9 +203,11 @@ class ZoneAction
 		self.ActZone = Zone
 		self.Act = AAct
 		self.ActParams = { [0]=infinity }
-		If Upper(AAct)=="SASKIA"
-			self.SaskiaLabel = infinity || ""
-		End
+		//If (Lua.type (AAct)=="string" && Upper(AAct)=="SASKIA") 
+		//	//|| AAct==Lua.Scyndi.Globals.MapScript.SASKIA
+		//	self.Act=Lua.Scyndi.Globals.MapScript.SASKIA
+		//	self.SaskiaLabel = infinity || ""
+		//End
 		self.List[Event].AddLast(self)
 		print(infinity)
 		CSayF("%s event created in zone %s",Event,Zone)
