@@ -1,0 +1,81 @@
+; License Information:
+; **********************************************
+; 
+; src/Tricky Script/SASKIA/MapScript/GJ_DUNG_Facility.saskia
+; (c) Jeroen Broks, 2020, All Rights Reserved.
+; 
+; This file contains material that is related
+; to a storyline that is which is strictly
+; copyrighted to Jeroen Broks.
+; 
+; This file may only be used in an unmodified
+; form with an unmodified version of the
+; software this file belongs to.
+; 
+; You may use this file for your study to see
+; how I solved certain things in the creation
+; of this project to see if you find valuable
+; leads for the creation of your own.
+; 
+; Mostly this file comes along with a project
+; that is for most part released under an
+; open source license and that means that if
+; you use that code with this file removed
+; from it, you can use it under that license.
+; Please check out the other files to find out
+; which license applies.
+; This file comes 'as-is' and in no possible
+; way the author can be held responsible of
+; any form of damages that may occur due to
+; the usage of this file
+; 
+; 
+; **********************************************
+; 
+; version: 20.04.28
+; End License Information
+
+:OnLoad
+	chk Map.Layer=="#013",Nothing
+	call Fader.Create,"Eugorvnia Science Facility"
+:Nothing
+	end
+	
+:CyberPup
+	call MapScript.InitCyber
+	call Map.Kill,"ActivateCyber",true
+	call Map.Kill,"Cyber",true
+	end
+	
+:GoodBye
+	Call MapText,"BYEBYE_"..Scyndi.Class.Map.Leader:upper()
+	chk Events.Yes("Do you want to return to the MadHouse?"),Out
+	end
+:Out
+	chk Map.Layer=="#999",OutOne
+	chk Map.Layer=="#018",OutTwo
+	chk Map.Layer=="#024",OutThree
+	call error,"I do not know to which exit point to hook from this room! => "..Map.Layer
+	:OutOne
+	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
+	call Map.GoToLayer,"#999","Fac1"
+	end
+	:OutTwo
+	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
+	call Map.GoToLayer,"#999","Fac2"
+	end
+	:OutThree
+	call Field.LoadMap,"CH2_DUNG_MADHOUSE"
+	call Map.GoToLayer,"#999","Fac3"
+	end
+	
+	
+:ExHuRU
+	call MapText,"EX1"
+	call MapScript.FightExHuRU
+	call Map.Show,"Dead_Ex"
+	call Map.Kill,"NPC_ExHuRU",true
+	call Map.Kill,"ExLinks",true
+	call Map.Kill,"ExRechts",true
+	end
+All OK
