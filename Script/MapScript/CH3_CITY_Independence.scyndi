@@ -42,7 +42,7 @@ bool beenonbeach
 #use "Script/Use/StartCombatMod"
 #use "libs/tables"
 
-#macro BeenInArea gv.Bool.Ever_Been_In_Aeria_Before
+#macro BeenInAeria gv.Bool.Ever_Been_In_Aeria_Before
 
 group MScript
 	void SING()
@@ -147,13 +147,13 @@ group MScript
 	end
 	
 	void NPC_GUARD()
-		if BeenInAreaBefore
+		if BeenInAeriaBefore
 			WorldMap.Phantasar()
 		elseif Yes("Are you ready to fly to Aeria?")
 			Field.LoadMap("CH4_HUB_AERIA_BEACH")
 			Map.GoToLayer("BEACH","FromWorld")
 			Map.HideObj("Player")
-			BeenInAreaBefore=true
+			BeenInAeriaBefore=true
 			MapScript.SASKIA("Entree")
 		end
 	end
