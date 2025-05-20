@@ -34,14 +34,14 @@
 // **********************************************
 // 
 // 
-// version: 25.05.13 II
+// version: 25.05.20 I
 // 
 // End License
 
 
 Script
 
-
+#use "Libs/SCI/Sys"
 #use "Libs/SCI/Kthura"
 #use "Libs/SCI/Intervar"
 
@@ -83,7 +83,7 @@ group MScript
 		StartCombat.Ready()
 	end
 	
-	void GAMEJOLTNEXT()
+	//void GAMEJOLTNEXT()
 		//var GJ
 		//CSay("Start Check")
 		//if (not gv.Bool.GameJolt) or gj_checked or gj_failed()
@@ -112,14 +112,25 @@ group MScript
 		//	Map.Kill("GJ_Barrier")
 		//	LuaDoString("FLOW_FIELD","ZoneAction.AltNext.OpenNext()")
 		//end
-	end
+	//end
+	Void OpenPart2()
+		LocExtern WantRatio "50"
+		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
+		if MedalRatio>=WantRatio
+			Map.Kill("Medal_Barrier",false)
+			CSayF("-> Open Sesame!")
+			Sys.Call("FLOW_FIELD", "ZoneAction.AltNext.OpenNext")
+		End
+		//medal_checked=true
+	End
+		
 	
 	void NPC_TRANS()
 		MapScript.SASKIA("GoodBye")
 	end
 	
 	void TOFACILITY2()
-		Field.LoadMap("GJ_DUNG_FACILITY2")
+		Field.LoadMap("MDL_Dung_Facility_2")
 		Map.GoToLayer("#013","Start")
 	end
 	
@@ -166,7 +177,7 @@ Init
 	Achievements.Award("GJ_START_FACILITY")
 	UseKettingKaart()
 	Map.ZA_Enter("ActivateCyber","SASKIA:CyberPup")
-	Map.ZA_Enter("GJ_Open","GameJoltNext")
+	Map.ZA_Enter("Medal_Open","OpenPart2")
 	Map.ZA_Enter("ToFacility2","ToFacility2")
 	Map.ZA_Enter("Einde_Missie","Einde_Missie")
 end
