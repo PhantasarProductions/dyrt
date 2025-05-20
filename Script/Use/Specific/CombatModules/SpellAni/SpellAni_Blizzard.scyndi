@@ -1,7 +1,7 @@
 // License:
-// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/Blizzard.scyndi
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_Blizzard.scyndi
 // 
-// 	  Version: 25.05.14 I
+// 	  Version: 25.05.19 II
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -57,11 +57,11 @@ module
 		Img = LoadNewImage("gfx/Combat/SpellAni/Ice32.png","SPELLANI_Ice32")
 	end
 	
-	void Init()
+	void SA_Init()
 		cnt = math.random(20,25)
 	end
 	
-	int Cycle()
+	bool Cycle()
 		int m
 		m = math.random(10,100)
 		Color(255,100,0)
