@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Aziella.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Aziella.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,22 +33,29 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-do
-	delegate ret
-	ret = void(int skill)
+// 
+// version: 25.05.22 I
+// 
+// End License
+
+Module
+
+	#accept CSayF
+	
+	#use "Script/use/Need"
+
+	void SU(int skill)
 		int lvl
 		lvl = RPG.GetChar("Dernor").Points("SKILLLVL"..skill).Have
 		CSayF("Well Dernor! Let's upgrade with skill %d",skill)
 		switch skill
 			case 0
 				// Crossbow
-				if lvl % 12 == 0 or lvl % (__skill*2)
+				if lvl % 12 == 0 || lvl % (__skill*2)
 					RPG.GetChar("Aziella").Stat("PERMPOWERUP_Strength").Value ++
 				end
-				if lvl % (__skill * 6) or lvl % (2+__skill) == 0
-					RPG.GetChar("Aziella").Stat("PERMPOWERUP_HP").Value ++
+				if lvl % (__skill * 6) == 0 || lvl % (2+__skill) == 0
+					RPG.GetChar("Aziella").Stat("PERMPOWERUP_HP").Value += 2
 				end
 			case 1
 				// Enchants
@@ -62,5 +70,3 @@ do
 	
 	end
 	
-	return ret
-end

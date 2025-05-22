@@ -1,0 +1,81 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/Ability/Abl_Aziella.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.05.22 II
+// 
+// End License
+
+Module
+
+Table Lijst
+
+#use "Script/Use/Need"
+
+#accept CSay
+#accept CSayF
+
+Init
+	//int s
+	//s = __skill
+	locExtern s "Scyndi.Globals.gint.skill"
+	locExtern a "Scyndi.Class.Abl_Aziella.Lijst"
+	s = __skill
+
+	a = { }
+		// Crossbow
+		a.BlessedArrow   = { ["Skill_Crossbow"] = s * 2, ["Skill_Befindo enchants"] = s + 1 }
+		a.PoisonArrow    = { ["Skill_Crossbow"] = (s * 2) + 15 }
+		a.Double_Bolt    = { ["Skill_Crossbow"] = 5 * s }
+	
+		// Befindo Enchanments
+		a.MysticCare     = { ["Start"] = true }
+		a.Confusion      = { ["Skill_Befindo enchants"] = 5 + (s * 5) }
+		a.Protect        = { ["Skill_Befindo enchants"] = s * 3 }
+		a.Permanence     = { ["Skill_Befindo enchants"] = s * 6 }
+		a.Vanish         = { ["Skill_Befindo enchants"] = s * 7 }
+		a.Shield         = { ["Skill_Befindo enchants"] = s * 8 }
+		a.Blunt          = { ["Skill_Befindo enchants"] = s * 10 }
+		a.Hyper          = { ["Skill_Befindo enchants"] = (s+2) ^ 2 }
+		a.Purify         = { ["Skill_Befindo enchants"] = s * 30 }
+	
+		// Scharum
+		a.Triple_Bolt    = { ["Scharum"] = true }
+	
+		// Sealed Boss
+		a.CursedArrow    = { ["SealedBoss"] = true }
+	
+	
+End

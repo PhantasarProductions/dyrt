@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Create/Aziella.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Create/Create_Aziella.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,16 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-#use "Script/Use/AnyWay"
+// 
+// version: 25.05.22 I
+// 
+// End License
+
+Module
+
+#use "Script/Use/Need"
+
+Init
 var Aziella
 
 
@@ -56,3 +64,5 @@ Aziella.Data["SKILL1"] = "Befindo enchants"
 Aziella.Data.Weapon = "EQW_AZIELLA_BOLT"
 Aziella.Data.Armor  = "EQA_TOGA"
 Aziella.Data.Jewel  = "JWL_BRACERS"
+
+end

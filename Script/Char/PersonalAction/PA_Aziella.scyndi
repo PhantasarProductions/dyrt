@@ -1,0 +1,190 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Char/PersonalAction/PA_Aziella.scyndi
+// (c) Jeroen Broks, 2019-'20, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.05.22 VII
+// 
+// End License
+
+
+module 
+	//Aziella_Personal_Action
+	
+#use "Libs/SCI/Sys"	
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "libs/xmath"
+//#use "libs/tables"
+
+#use "Script/Use/Need"
+
+#accept PermaChanges
+	
+	
+	readonly int skip = 8
+	readonly var Img
+	get int X
+		//Map.Obj"AziellaArrowObject"
+		return Kthura.Obj.AziellaArrowObject.X
+	end
+	set int X
+		//Map.Obj"AziellaArrowObject"
+		Kthura.Obj.AziellaArrowObject.X = value
+	end
+	get int Y
+		//Map.Obj"AziellaArrowObject"
+		return Kthura.Obj.AziellaArrowObject.Y
+	end
+	set int Y
+		//Map.Obj"AziellaArrowObject"
+		Kthura.Obj.AziellaArrowObject.Y = value
+	end
+	
+	int IX
+	int IY
+	
+	int DX
+	int DY
+	
+	table tags
+	
+	void ArrowMove()
+		for i=1,skip
+			X += DX
+			Y += DY
+			bool going = false
+			for tag in each(tags)
+				int tx
+				int ty
+				number afstand = 0
+				//if Kthura.Blocked(X,Y,true)
+				if Kthura.Blocked(X div 32,Y div 32)	
+					going = going || ( ( prefixed(tag,"IRRAFLY_") || prefixed(tag,"SCYNDIHOOK_") || prefixed(tag,"AZIELLASHOOTZONE_")) && Kthura.InObj(tag,X,Y) )
+					//if (not going)
+					//	CSayF("Blocked: (%5d,%5d) >> %s",X,Y,tag)
+					//end
+				else
+					going = true
+				end
+				//Map.Obj=tag
+				tx=Kthura.Obj[tag].X
+				ty=Kthura.Obj[tag].Y
+				afstand=xmath.Pythagoras(tx,ty,X,Y)
+				// CSayF("Target %s(%5d,%5d); afstand: %5.3f pixels; pijltje(%5d,%5d) ",tag,tx,ty,afstand,X,Y)
+				if afstand<8 && prefixed(tag,"Schiet_") 
+					//Map.Obj=tag
+					if Upper(Kthura.Obj[tag].Texture)=="GFX/TEXTURES/SCHIETSCHIJF/UNHIT.PNG"
+						Kthura.Obj[tag].Texture="GFX/TEXTURES/SCHIETSCHIJF/HIT.PNG"
+						if true // Map.Data.NoPerm!="YES"
+							string m
+							//m = "MAPCHANGES."..FieldMap.LoadedMap
+							//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..FieldMap.Kthura.Layer.."\";\t//Map.Obj\""..tag.."\";\tMap.ObjString.Texture=\""..Map.ObjString.Texture.."\"\n"
+							PermaChanges.Add(StripDir(Kthura.LastLoaded),"Kills."..Kthura.CurrentLayer,tag)							
+						end
+						MapScript[tag]()
+					end
+					Map.Kill("AziellaArrowObject")
+					return
+				end
+			end
+			if ! going
+				Map.Kill("AziellaArrowObject")
+				return
+			end
+		end
+	end
+		
+	void Draw()
+		Img.Draw(IX,IY)
+		if Map.HasTag("AziellaArrowObject")
+			ArrowMove()
+		end
+	end
+	
+	void Shoot(int _dx, int _dy, string w)
+		if Map.HasTag("AziellaArrowObject")
+			return
+		end
+		tags = {}
+		//for tag in FieldMap.Kthura.EachTag()
+		for tag in Each(Kthura.TagList)
+			if prefixed(tag,"IRRAFLY_") || prefixed(tag,"SCYNDIHOOK_") || prefixed(tag,"AZIELLASHOOTZONE_") || prefixed(tag,"SCHIET_") 
+				tags+=tag
+			end
+		end
+		//FieldFlow.Map.Kthura.CreateObstacle("GFX/AziellaBolt/"..w..".png",__player.X,__player.Y,"AziellaArrowObject")
+		NAAO:=Kthura.NewObstacle(Kthura.Obj.Player.X,Kthura.Obj.Player.Y,"GFX/AziellaBolt/"..w..".png")
+		NAAO.Tag="AziellaArrowObject"
+		//Map.Obj = "AziellaArrowObject"
+		// Map.ObjTexture = "GFX/AziellaBolt/"..w..".png"
+		NAAO.Visible = true
+		NAAO.Impassible = false
+		NAAO.Dominance = 20
+		NAAO.Alpha = 255 //1000
+		CSayF("Bolt created at (%5d,%5d)",NAAO.X,NAAO.Y)
+		DX = _dx
+		DY = _dy
+	end
+	
+	bool Click(int but,int x, int y)
+		bool ret
+		ret = x>IX && y>IY && x<IX+200 && y<IY+200
+		if ret
+			// left
+			if x<IX+25 and y>IY+25 and y<IY+175
+				Shoot(-1, 0,"W")
+			// right
+			elseif x>IX-175 and y>IY+25 and y<IY+175
+				Shoot( 1, 0,"E")
+			// up
+			elseif y<IY+25 and x>IX+25 and x<IX+175
+				Shoot( 0,-1,"N")
+			// down
+			elseif y>IY+175 and x>IX+25 and x<IX+175
+				Shoot( 0, 1,"S")
+			end
+		end
+		return ret
+	end
+	
+	Init
+		Img = LoadImage("GFX/PersAction/Aziella.png","PA_AZIELLA_BUTTON")
+		IX = Graphics.Width -300
+		IY = Graphics.Height-400
+	end
+
+//end
