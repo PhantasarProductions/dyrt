@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_Marshes.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// src/Script/Script/MapScript/CH3_DUNG_Marshes.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,22 @@
 // 
 // **********************************************
 // 
-// version: 21.11.26
-// End License Information
+// 
+// version: 25.05.22 V
+// 
+// End License
 
 #macro __LAYERS 4
 
-#say "Map Script - None!"
-#use "script/Use/Anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/Music"
+
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/Intervar"
+
+#use "script/Use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "Script/Use/MapScript/Dernor"
 //   "Script/Use/MapScript/Dernor"
 
@@ -63,6 +72,7 @@ group MScript
 	end
 	
 	void FIGHTBOSS()
+		//IF TRUE;RETURN;END
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/Reg.Wav"
 		StartCombat.Arena = "Marshes"
@@ -72,9 +82,9 @@ group MScript
 		StartCombat.Ready()	
 	end
 	
-	void STARTBOSS()
+	void STARTBOSS()		
 		if Map.Leader == "Dernor"
-			if not Map.HasTag("VisDern_Boss")
+			if ! Map.HasTag("VisDern_Boss")
 				Map.Kill("StartBoss",true) // autofix the damage of an earlier bug!
 				return
 			end
@@ -84,15 +94,16 @@ group MScript
 		else
 			Map.StopWalking()
 			Map.WalkTo("Start")
-			MapText("NOBOSS_"..(Map.Leader:upper()))
+			MapText("NOBOSS_"..(Upper(Map.Leader)))
 		end
 	end
 	
 	void KILLBOSS()
 		Map.Kill("VisDern_Boss",true)
-		Map.Remap()		
-		Dernor.Init(__LAYERS)
-		Map.Layer="#003"
+		Kthura.Remap()
+		Dernor.DInit(__LAYERS)
+		//Map.Layer="#003"
+		Kthura.CurrentLayer="#003"
 	end
 	
 	void SCYNDISTILLOR()
@@ -106,22 +117,21 @@ group MScript
 	void OOZE()
 		Music.Play("Music/Dungeon/Marshes.wav")
 	end
-	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("StartSheck-Lock","SASKIA:SheckLock")
-		Map.ZA_Enter("DernorTutorial","DernorTutorial")
-		Map.ZA_Enter("StartBoss","StartBoss")
-		Map.ZA_Enter("Angevin","Angevin")
-		Map.ZA_Leave("Angevin","Ooze")
-		Dernor.Init(__LAYERS)
-	end
-	
+		
 	void Draw()
 	end
 	
 	void Update()
-		Dernor.Update(Map.Layer)
+		Dernor.Update(Kthura.CurrentLayer)
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("StartSheck-Lock","SASKIA:SheckLock")
+	Map.ZA_Enter("DernorTutorial","DernorTutorial")
+	Map.ZA_Enter("StartBoss","StartBoss")
+	Map.ZA_Enter("Angevin","Angevin")
+	Map.ZA_Leave("Angevin","Ooze")
+	Dernor.DInit(__LAYERS)
+End
