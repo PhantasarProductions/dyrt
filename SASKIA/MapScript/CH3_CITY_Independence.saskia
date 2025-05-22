@@ -35,7 +35,7 @@
 ; version: 20.04.28
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"The Elfish City of Independence"
 	end
 
 :Niks
@@ -43,8 +43,8 @@
 
 :EntreeAziella
 	; Not yet been for to the temple? Then let's not even check for Aziella's presence
-	chk not gv.Bool.Marshes_HandoStillor,Niks
-	; Aziella already annouved, then nothing to see here
+	chk gv.Bool.Marshes_HandoStillor~=true,Niks
+	; Aziella already announced, then nothing to see here
 	chk Done.EntreeAziellaAnnounced,Niks
 	; Aziella announcement by Trixia
 	call MapText,"TRIXIATELLSABOUTAZIELLA"
@@ -64,7 +64,13 @@
 	mov false,FlowField.AutoScroll
 	call Music.Play,"Music/Cities/Independence_Night.wav"
 	call CSay,"Start Scroller!"
-	call ScenScroll,"ScrollStart","CamPoint"
+	;call ScenScroll,"ScrollStart","CamPoint"
+	mov false,FlowField.AutoScroll
+	mov 928,gv.Int.ScrollX
+	mov 352,gv.int.ScrollY
+	:Herhaal_YMCA
+	mov Scyndi.allidentifiers.gv.int.scrolly+1,gv.int.ScrollY
+	chk gv.int.ScrollY<896,Herhaal_YMCA
 	call CSay,"Scroller ended?"
 	call Map.HideByLabel,"VP"
 	call MapText,"PARTY__A"
@@ -87,7 +93,10 @@
 	call Music.Play,"Music/Event/Romance.wav"
 	call MapText,"SEX_A"
 	mov false,FlowField.AutoScroll
-	call ScenScroll,FlowField.Map.ScrollX,FlowField.Map.ScrollY,"Sex"
+	;call ScenScroll,gv.int.ScrollX,gv.int.ScrollY,"Sex"
+	:Sex_Scroll
+	mov Scyndi.allidentifiers.gv.int.scrolly-1,gv.int.ScrollY
+	chk gv.int.ScrollY>0,Sex_Scroll
 	call MapText,"SEX_B"
 	call CSay,"1"
 	call CSay,"2"
@@ -117,7 +126,8 @@
 	call CSay,"4"
 	call MapText,"KLAARVOORVERTREK"
 	call Map.HideByLabel,"LOVE"
-	call Map.ShowObj,"Player"
+	;call Map.ShowObj,"Player"
+	mov true,Kthura.Obj.Player.Visible
 	; Unlock the marshes
 	mov true,WM_Unlocked.D_Marshes
 	;call error,"Rest not yet scripted"
@@ -178,3 +188,6 @@
 	call MapScript.AZ_Remove
 	call Achievements.Award,"CHAPTER3"
 	end
+	
+	
+	
