@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/MapScript/Dernor.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/MapScript/Dernor.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,63 +33,80 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-#use "libs/strings"
-#use "libs/tables"
+// 
+// version: 25.05.21 XVIII
+// 
+// End License
+
+#use "libs/sci/sys"
+#use "libs/sci/kthura"
+#use "libs/sci/sstring"
+#use "libs/sci/intervar"
+
+//#use "libs/strings"
+//#use "libs/tables"
 #use "libs/xmath"
 
-module ModuleDernorNatureVision
+module 
+//ModuleDernorNatureVision
 
-	table Objects
+	table Objects = {}
 	
-	table distances
+	table distances = {}
 	
 	number Dist(int x1, int y1, int x2, int y2)
 		string t
 		t = sprintf("%4d.%4d.%4d.%4d",x1,y1,x2,y2)
-		self.distances[t] = self.distances[t] or xmath.Pythagoras(x1,y1,x2,y2)
-		return self.distances[t]
+		distances[t] = distances[t] || xmath.Pythagoras(x1,y1,x2,y2)
+		return distances[t]
 	end
 	
-	void Init(int Layers)
-		self.Objects = {}
+	void DInit(int Layers)
+		Objects = {}
 		for i=1,Layers
 			string L
-			table LT
+			LT:={}
 			L = sprintf("#%03d",i)
-			Map.Layer = L
-			self.Objects[L]=LT
-			for tag in Map.EachTag
-				if prefixed(tag,"DernVis") or prefixed(tag,"DernInvis") or prefixed(tag,"VisDern")
-					Map.Obj = tag
-					LT[#LT+1]={ ['tag']=tag, ['show'] = prefixed(tag,"DernVis") or prefixed(tag,"VisDern"), ['x'] = Map.ObjInt.X, ['y'] = Map.ObjInt.Y, ['last'] = 1234  }
+			Kthura.CurrentLayer = L
+			Objects[L]=LT
+			for _tag in each(Kthura.TagList) 
+			//Map.EachTag
+				tag:=Upper(_Tag)
+				if prefixed(tag,"DERNVIS") || prefixed(tag,"DERNINVIS") || prefixed(tag,"VISDERN")
+					//Map.Obj = tag
+					LT+={ ["tag"]=tag, ["show"] = prefixed(Upper(tag),"DERNVIS") || prefixed(Upper(tag),"VISDERN"), ["x"] = Kthura.Obj[tag].X, ["y"] = Kthura.Obj[tag].Y, ["last"] = 1234  }
 					CSayF("Added %s (layer %s)",tag,L)
-					CSay(NIL.LuaSerialize("data",LT[#LT]))
+					//CSay(NIL.LuaSerialize("data",LT[#LT]))
 				end
 			end
 		end
+		for k,h in pairs(Objects)
+			CSayF("Marsh objects in layer: %s (%d)",k,len(h))
+		End
 	end
 	
 	void Update(string L)
-		if not self.Objects[L]
+		if ! Objects[L]
+			//CSayF("No crap for layer '%s'! Next!",L)
 			return
 		end
 		int PX
 		int PY
-		Map.Obj = "Player"
-		PX = Map.ObjInt.X
-		PY = Map.ObjInt.Y
-		for o in each(self.Objects[L])
+		PLY:=Kthura.Obj.Player
+		//Map.Obj = "Player"
+		PX = PLY.X
+		PY = PLY.Y
+		for o in each(Objects[L])
 			number distance
 			number alpha
 			// Map.Obj = tag
-			if math.abs(PX-o.x)>200 or math.abs(PY-o.y)>200
+			//CSayF("%s::%s Player(%4d,%4d); Object(%4d,%4d)",L,o.tag,PX,PY,o.x,o.y)
+			if math.abs(PX-o.x)>200 || math.abs(PY-o.y)>200
 				alpha = 1000
 				distance = 5000
-			elseif Map.Leader == "Dernor"
+			elseif gstr.Field_Leader == "Dernor"
 				// distance = xmath.Pythagoras(PX,PY,Map.ObjInt.X,Map.ObjInt.Y)
-				distance = self.Dist(PX,PY,o.x,o.y)
+				distance = Dist(PX,PY,o.x,o.y)
 				alpha = math.floor(distance) * 5
 				//CSayF("Player(%4d,%4d); Object %s(%4d,%4d); Distance(%5.2f); Alpha:%04d",PX,PY,tag,Map.ObjInt.X,Map.ObjInt.Y,distance,alpha)
 				if alpha>1000
@@ -99,18 +117,23 @@ module ModuleDernorNatureVision
 			else
 				alpha = 1000
 			end
+			// Kthura no longer supports the 0 to 1000 scale for alpha
+			  
 			if o.last!=distance
+				int alpha255:= math.floor( (alpha/1000) * 255)
 				if o.show
-					Map.Obj = o.tag
-					Map.ObjInt.Alpha = 1000 - alpha
+					//Map.Obj = o.tag
+					//Map.ObjInt.Alpha = 1000 - alpha
+					Kthura.Obj[o.tag].Alpha=255-alpha255
 					o.last=distance
 				else 
-					Map.Obj = o.tag
-					Map.ObjInt.Alpha = alpha
+					//Map.Obj = o.tag
+					//Map.ObjInt.Alpha = alpha
+					Kthura.Obj[o.tag].Alpha=Alpha255
 					o.last=distance
 				end
 			end
 		end
 	end
 
-end
+//end
