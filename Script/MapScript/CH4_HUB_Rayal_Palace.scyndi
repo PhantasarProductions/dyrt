@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_HUB_Rayal_Palace.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_HUB_Rayal_Palace.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,15 +33,23 @@
 // 
 // **********************************************
 // 
-// version: 20.07.16
-// End License Information
+// 
+// version: 25.05.22 XIII
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/tables"
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+//#use "libs/tables"
 
 #macro ScharumMusic "Music/Combat/Random/Chapter4.wav"
 
@@ -49,7 +58,7 @@ group TempParty
 	void Push()
 		string L
 		L = Map.Leader
-		for i=1,8 do
+		for i=1,8 
 			self.pushed[i] = RPG.Party[i]
 			if i==1 
 				RPG.Party[1] = L
@@ -59,7 +68,7 @@ group TempParty
 		end
 	end
 	void Pop()
-		for i=1,8 do
+		for i=1,8 
 			RPG.Party[i] = self.pushed[i]
 		end
 	end
@@ -71,16 +80,20 @@ group MScript
 	bool dominate
 	
 	void HideSubs()
-		Map.VisibleOnlyByZone("Fake",false)
+		CSay("Hide Subs: Fake!")
+		Kthura.CurrentLayer="PALACE"
+		//Map.VisibleOnlyByZone("Fake",false)
 		for z in each(self.HideZones)
+			CSayF("Hide Subs Zone: %s",z)
 			Map.HideByZone(z)
 		end
 	end
 	
-	link HIDESUBS = MScript.HideSubs
+	//link HIDESUBS = MScript.HideSubs
 	
 	void SHOWPART(string z)
-		Map.VisibleOnlyByZone(z,true)
+		//Map.VisibleOnlyByZone(z,true)
+		Map.ShowByZone(z)
 		Map.HideByLabel("H")
 		Map.HideObj("Katha")
 	end
@@ -99,7 +112,7 @@ group MScript
 	void SCHARUMEND()
 		TempParty.Pop()
 		if gv.Bool.Victor
-			if not Done["Scharum_"..Map.Leader]
+			if ! Done["Scharum_"..Map.Leader]
 				CSayF("Unlocking Scharum Ability for %s",Map.Leader)
 			end
 			MapText("SCHARUM.WIN")
@@ -114,7 +127,7 @@ group MScript
 	end
 	
 	void NPC_KING()
-		if not Done.FirstTimeHerondoRayal
+		if ! Done.FirstTimeHerondoRayal
 			Map.HideObj("Player")
 			Map.ShowByLabel("H")
 			MapScript.SASKIA("Herondo_FirstTime")
@@ -128,15 +141,17 @@ group MScript
 	end
 	
 	void NIGHTNIGHT()
-		Field.LoadMap("CH4_HUB_Rayal_Palace_Upstairs_Night")
 		for i=2,8
 			RPG.Party[i]=""
 		end
 		RPG.Party[1] = "Eric"
 		Map.Leader = "Eric"
-		Map.GoToLayer("NACHT","Start_Nacht")
-		MapScript.ShowPart("Slaapkamer")
-		MapText("NOSLEEP")
+		//Field.LoadMap("CH4_HUB_Rayal_Palace_Upstairs_Night")		
+		//Map.GoToLayer("NACHT","Start_Nacht")
+		//MapScript.ShowPart("Slaapkamer")
+		//MapText("NOSLEEP")
+		Field.ChainMap("CH4_HUB_Rayal_Palace_Upstairs_Night","Arrive_Eric","NACHT")
+		Map.GoToLayer("NACHT","Start_Nacht_Neutral")
 	end
 	
 	void Guard()
@@ -168,23 +183,47 @@ group MScript
 	
 	void YASATHAR_DRESS()
 		Map.SpawnPlayer("Split_Start")
-		Map.Obj="Eric"
-		Map.ObjString.Texture="GFX/actors/heroes/Yasathar.North.jpbf/00000000.png"
+		//Map.Obj="Eric"
+		//Map.ObjString.Texture="GFX/actors/heroes/Yasathar.North.jpbf/00000000.png"
+		Kthura.Obj.Eric.Texture="GFX/actors/heroes/Yasathar.North.jpbf/00000000.png"
 		Map.HideObj("Player")
 		Map.ShowByLabel("H")
 		self.SHOWPART("Kings_Room")
 	end
 	
-	void CONSTRUCTOR()
-		self.HideZones = { "Scharum", "Kings_Room","Garden", "SecretPassage" }
-		self.HideSubs()
-		for z in each(self.HideZones)
+	
+	
+	void Draw()
+	end
+	
+	void Update()
+		if ! $dominate
+			//Map.Obj="Player"
+			Kthura.Obj.Player.Dominance=40
+			$dominate=true
+		end
+	end
+	
+end
+
+
+Init
+	CSay("Hide Subs::Init")
+		
+		MScript.HideZones = { [0]="Scharum", "Kings_Room","Garden", "SecretPassage" }
+	CSay("Hide Subs::Run")	
+		MScript.HideSubs()
+	CSay("Hide Subs::ZA")
+		for z in each(MScript.HideZones)
+			CSayF("Subs ZA: %s",z)
 			Map.ZA_Enter(z,"SHOWPART",z)
 			Map.ZA_Leave(z,"HideSubs")
 		end
-		if gv.Bool.SpokenToOracle and (not Done.SplitMissionStart_Eric)
+	CSay("Oracle and split mission check")	
+		if gv.Bool.SpokenToOracle && (!Done.SplitMissionStart_Eric)
 			Map.ZA_Enter("StartSplit","StartEricMission")
 		end
+	CSay("Aziella checkup")
 		var Az
 		Az = RPG.GetChar("Aziella")
 		if Az.Points("SKILLLVL0").Have == 1
@@ -193,19 +232,7 @@ group MScript
 		if Az.Points("SKILLLVL1").Have == 0
 			Az.Points("SKILLLVL1").Have = 24 / __skill
 		end
+	CSay("Zone Action")	
 		Map.ZA_Enter("Leave","Leave")
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-		if not $dominate
-			Map.Obj="Player"
-			Map.ObjInt.Dominance=40
-			$dominate=true
-		end
-	end
-	
+	CSay("Welcome to Rayal Palace")
 end
-#say "Map Script - Compiling!"
