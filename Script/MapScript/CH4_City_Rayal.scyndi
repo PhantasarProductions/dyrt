@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_CITY_Rayal.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_City_Rayal.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.23 II
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+//#use "Script/Use/StartCombatMod"
 group MScript
 	
 	void NO_WAY(string p,string txt)
@@ -52,9 +59,10 @@ group MScript
 	end
 	
 	void DOM40()
-		Map.Obj = "Player"
-		Map.ObjInt.Dominance=40
-		if not Done.Rayal_City_Welcome
+		//Map.Obj = "Player"
+		//Map.ObjInt.Dominance=40
+		Kthura.Obj.Player.Dominance=40
+		if ! Done.Rayal_City_Welcome
 			MapText("WELCOME")
 		end
 	end
@@ -62,12 +70,6 @@ group MScript
 	link NPC_GUARD1 = MScript.Guard
 	link NPC_GUARD2 = MScript.Guard
 	
-	void CONSTRUCTOR()
-		for w,tag in pairs {["S"]="FLY",["W"]="VOOGELAER",["E"]="WAZNABAER"}
-			Map.ZA_Enter("NO_"..w,"No_Way",w,tag)
-		end
-		Map.ZA_Enter("Dom40","Dom40")
-	end
 	
 	void Draw()
 	end
@@ -76,4 +78,10 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	for w,tag in pairs {["S"]="FLY",["W"]="VOOGELAER",["E"]="WAZNABAER"}
+		Map.ZA_Enter("NO_"..w,"No_Way",w,tag)
+	end
+	Map.ZA_Enter("Dom40","Dom40")
+end
