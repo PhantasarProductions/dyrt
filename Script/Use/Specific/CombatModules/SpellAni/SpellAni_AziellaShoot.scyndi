@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/AziellaShoot.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_AziellaShoot.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,32 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.22 I
+// 
+// End License
+
 
 module SpellAni_AziellaShoot
 
-	var PRJ
+
+
+
+
+#use "Script/Use/Specific/CombatModules/SpellAni/SAT_Projectile"
+
+	locextern PRJ "Scyndi.Class.SAT_Projectile"
+
+	//var PRJ/
 	
 	get delegate Cycle
-		return self.PRJ.Cycle
+		return PRJ.Cycle
 	end
 	
-	void Init(act)
-		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
-		self.PRJ.Start("gfx/Combat/SpellAni/AziellaBolt.png",act.Executor,act.Targets[1],false,true)
+	void SA_Init(act)
+		assert(len(act.Targets)==1,sprintf("Invalid number of targets for this spellani (%d)",Len(act.Targets)))
+		PRJ.Start("gfx/Combat/SpellAni/AziellaBolt.png",act.Executor,act.Targets[0],false,true)				
 	end
 	
-	void CONSTRUCTOR()
-		self.PRJ = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/Projectile")
-	end
-
-end
+	
+	
