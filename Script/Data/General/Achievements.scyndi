@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.05.24
 // 
 // End License
 Module
@@ -2602,21 +2602,21 @@ AchDat.NGP_HALLSMUSIC.ProcessString = "{Value} of {Max}"
 AchDat.NGP_HALLSMUSIC.skill_check = false
 
 
-AchDat["100_AZIELA"] = new AchRecord()
-AchDat["100_AZIELA"].hidden = false
-AchDat["100_AZIELA"].allow_trueabyss = true
-AchDat["100_AZIELA"].AutoProcess = false
-AchDat["100_AZIELA"].Description = "Azi|*ella to level C or higher"
-AchDat["100_AZIELA"].Name = "Open your mind, open your eyes! I have two wings!"
-AchDat["100_AZIELA"].only_trueabyss = false
-AchDat["100_AZIELA"].ProcessMax = 0
-AchDat["100_AZIELA"].ProcessString = "{Value} of {Max}"
-AchDat["100_AZIELA"].skill_3 = true
-AchDat["100_AZIELA"].skill_2 = true
-AchDat["100_AZIELA"].ProcessValue = ""
-AchDat["100_AZIELA"].skill_1 = true
-AchDat["100_AZIELA"].Require_Medals = false
-AchDat["100_AZIELA"].skill_check = false
+AchDat["100_AZIELLA"] = new AchRecord()
+AchDat["100_AZIELLA"].hidden = false
+AchDat["100_AZIELLA"].allow_trueabyss = true
+AchDat["100_AZIELLA"].AutoProcess = false
+AchDat["100_AZIELLA"].Description = "Azi|*ella to level C or higher"
+AchDat["100_AZIELLA"].Name = "Open your mind, open your eyes! I have two wings!"
+AchDat["100_AZIELLA"].only_trueabyss = false
+AchDat["100_AZIELLA"].ProcessMax = 0
+AchDat["100_AZIELLA"].ProcessString = "{Value} of {Max}"
+AchDat["100_AZIELLA"].skill_3 = true
+AchDat["100_AZIELLA"].skill_2 = true
+AchDat["100_AZIELLA"].ProcessValue = ""
+AchDat["100_AZIELLA"].skill_1 = true
+AchDat["100_AZIELLA"].Require_Medals = false
+AchDat["100_AZIELLA"].skill_check = false
 
 
 AchDat.NGP_ALLHERO = new AchRecord()
