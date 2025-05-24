@@ -37,15 +37,15 @@
 
 :OnLoad
 	chk Done.Chapter4Shown,NoChapter
-	call Fader,LoadImage("GFX/Chapter/4.png")
+	call Fader.Create,Scyndi.Globals.LoadImage("GFX/Chapter/4.png","Hoofdstuk 4 banner")
 	:NoChapter
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Rayal Palace"
 	end
 
 
 :Scharum
 	call MapText,"SCHARUM" 
-	chk Yes("Do you want to Duel Scharum?"),ScharumYes
+	chk Events.Yes("Do you want to Duel Scharum?"),ScharumYes
 	end
 	:ScharumYes
 	call MapScript.ScharumStart
@@ -55,7 +55,8 @@
 	
 :Herondo_FirstTime
 	call MapText,"KONINGSTORY"
-	call Map.ShowObj,"Katha"
+	;call Map.ShowObj,"Katha"
+	mov true,Kthura.Obj.Katha.Visible
 	call MapText,"KONINGKATHA"
 	;call error,"Script ends here... for now!"
 	call MapScript.NightNight
@@ -80,8 +81,9 @@
 :StartChapter5
 	call MapScript.Yasathar_Dress
 	call MapText,"START_CHAPTER_FIVE"
-	call Fader,LoadImage("GFX/Chapter/5.png")
-	call Map.HideByLabel,"H"
-	call Map.ShowObj,"Player"
+	call Fader.Create,Scyndi.Globals.LoadImage("GFX/Chapter/5.png","Hoofdstuk 5 banner")
+	call Kthura.HideByLabel,"H"
+	;call Map.ShowObj,"Player"
+	mov true,Kthura.Obj.Player.Visible
 	mov true,gv.Bool.BoysOnly
 	end
