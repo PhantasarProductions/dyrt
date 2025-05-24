@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.22 VII
+// version: 25.05.24 I
 // 
 // End License
 
@@ -52,7 +52,8 @@ module
 
 #use "Script/Use/Need"
 
-#accept PermaChanges
+//#accept PermaChanges
+LocExtern PermaChanges "PermaChanges"
 	
 	
 	readonly int skip = 8
@@ -105,7 +106,7 @@ module
 				ty=Kthura.Obj[tag].Y
 				afstand=xmath.Pythagoras(tx,ty,X,Y)
 				// CSayF("Target %s(%5d,%5d); afstand: %5.3f pixels; pijltje(%5d,%5d) ",tag,tx,ty,afstand,X,Y)
-				if afstand<8 && prefixed(tag,"Schiet_") 
+				if afstand<8 && prefixed(Upper(tag),"SCHIET_") 
 					//Map.Obj=tag
 					if Upper(Kthura.Obj[tag].Texture)=="GFX/TEXTURES/SCHIETSCHIJF/UNHIT.PNG"
 						Kthura.Obj[tag].Texture="GFX/TEXTURES/SCHIETSCHIJF/HIT.PNG"
