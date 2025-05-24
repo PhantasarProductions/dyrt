@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_HUB_Rayal_Palace_Upstairs_Night.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_HUB_Rayal_Palace_Upstairs_Night.scyndi
+// (c) Jeroen Broks, 2020,'21, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,41 +33,60 @@
 // 
 // **********************************************
 // 
-// version: 21.01.15
-// End License Information
+// 
+// version: 25.05.22 X
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "libs/tables"
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+//#use "Script/Use/StartCombatMod"
+//#use "libs/tables"
 group MScript
 	
 	bool dominate
 
 	
 	void NOWAY(string c)
-		MapText("DD_"..replace(c:upper(),"2", ""))
+		MapText("DD_"..replace(Upper(c),"2", ""))
 		Map.WalkTo("DD_"..c)
 	end
 	
 	table HideZones
 	
 	void HideSubs()
-		Map.VisibleOnlyByZone("Fake",false)
+		CSay("HideSubs::Fake")
+		Kthura.CurrentLayer="NACHT"
+		//Map.VisibleOnlyByZone("Fake",false)
+		Kthura.ShowAll()
+		CSay("HideSubs::Others")
 		for z in each(self.HideZones)
+			CSayF("=> %s",z)
 			Map.HideByZone(z)
 		end
+		CSay("HideSubs::Done")
 	end
 	
-	link HIDESUBS = MScript.HideSubs
+	//link HIDESUBS = MScript.HideSubs
 	
 	void SHOWPART(string z)
 		CSay("Showing zone: "..z)
 		Map.VisibleOnlyByZone(z,true)
-		if z=="Slaapkamer" and gv.Bool.SpokenToOracle
-			MapScript.SASKIA("Sleep")
+		if z=="Slaapkamer" 
+			If gv.Bool.SpokenToOracle
+				MapScript.SASKIA("Sleep")
+			Elif !Done.ArrivedAtRayalCastleDuringTheNight
+				//MapScript.ShowPart("Slaapkamer")
+				MapText("NOSLEEP")
+			End						
 		end
 	end
 	
@@ -85,7 +105,7 @@ group MScript
 		Achievements.Award("SCEN_ORACLE")
 		Map.Cam(1600,800)
 		self.SHOWPART("Orakel")
-		if not Done.SpokenToOracle
+		if ! Done.SpokenToOracle
 			MapText("ORACLE")
 		end
 	end
@@ -115,33 +135,38 @@ group MScript
 		end
 	end
 	
-	void CONSTRUCTOR()
-		for _,ch in ipairs { "Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Zooi", "Zooi2" }
-			Map.ZA_Enter("NOWAY_"..ch,"NOWAY",ch)
-		end
-		self.HideZones = { "Slaapkamer", "Orakel", "Bergpad" }
-		self.HideSubs()
-		for z in each(self.HideZones)
-			Map.ZA_Enter(z,"SHOWPART",z)
-			Map.ZA_Leave(z,"HideSubs")
-		end
-		Map.ZA_Enter("TalkCrack","TalkCrack")
-		Map.ZA_Enter("Zone_Crack","Bergpad_Z")
-		Map.ZA_Enter("Exit_Orakel","Bergpad_N")
-		Map.ZA_Enter("BackToMain","BackToMain")
-		Map.ZA_Enter("Orakel","ShowOrakel")
-	end
 	
 	void Draw()
 	end
 	
 	void Update()
-		if not $dominate
-			Map.Obj="Player"
-			Map.ObjInt.Dominance=40
+		if ! $dominate
+			//Map.Obj="Player"
+			//Map.ObjInt.Dominance=40
+			Kthura.Obj.Player.Dominance=40
 			$dominate=true
 		end
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	CSay("Setting NOWAY zones")
+		for _,ch in ipairs { [0]="Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella","Zooi", "Zooi2" }
+			Map.ZA_Enter("NOWAY_"..ch,"NOWAY",ch)
+		end
+	CSay("Setting hide zones and subs!")	
+		MScript.HideZones = { [0]="Slaapkamer", "Orakel", "Bergpad" }
+		MScript.HideSubs()
+		for z in each(MScript.HideZones)
+			Map.ZA_Enter(z,"SHOWPART",z)
+			Map.ZA_Leave(z,"HideSubs")
+		end
+	CSay("Setting general zone actions!")
+		Map.ZA_Enter("TalkCrack","TalkCrack")
+		Map.ZA_Enter("Zone_Crack","Bergpad_Z")
+		Map.ZA_Enter("Exit_Orakel","Bergpad_N")
+		Map.ZA_Enter("BackToMain","BackToMain")
+		Map.ZA_Enter("Orakel","ShowOrakel")
+end
