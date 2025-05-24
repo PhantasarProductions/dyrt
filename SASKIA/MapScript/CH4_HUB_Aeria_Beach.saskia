@@ -35,15 +35,19 @@
 ; version: 20.04.28
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Aeria Beach"
 	call Achievements.Award,"SCEN_AERIA"
+	chk gv.bool.BeenOnAeriaBeachBeforeSoHideH,OnLoadEnd
+	call Kthura.HideByLabel,"H"
+:OnLoadEnd	
 	end
 	
 :Entree
 	call Map.Cam,0,0
 	call MapText,"WELCOME1."
 	call MapText,"WELCOME2."
-	mov "Map.HideByLabel('H')",Swap.Data['MAPCHANGES.CH4_HUB_AERIA_BEACH']
+	;mov "Map.HideByLabel('H')",Swap.Data['MAPCHANGES.CH4_HUB_AERIA_BEACH']
+	mov true,gv.bool.BeenOnAeriaBeachBeforeSoHideH
 	call Field.LoadMap,"CH4_HUB_Rayal_Palace"
 	call Map.GoToLayer,"PALACE","Start"
 	call MapText,"WELCOME"
