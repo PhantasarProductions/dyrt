@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.05.20 II
+// 	  Version: 25.05.24
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -79,7 +79,7 @@ LocExtern tonumber "tonumber"
 
 global bool FLOW_FIELD = true
 
-plua PermaChanges = GINIE.CreateNew("Map_PermaChanges")
+global plua PermaChanges = GINIE.CreateNew("Map_PermaChanges")
 
 // Requires linked list, so I need this to be last!
 #use "Script/Use/Misc/MiniMessages"
