@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_MalabiaCaves.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_MalabiaCaves.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,32 +33,39 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.24 XVII
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-// #use "Script/Use/StartCombatMod"
+#use "script/use/need"
+
+
 #use "libs/linkedlist"
+
+#use "libs/sci/sys"
+#use "libs/sci/kthura"
+#use "libs/sci/intervar"
 
 class Knopje
 
-	readonly static table All
-	readonly static table Room
+	static table All
+	static table Room
 	static int TimeOut = 15000
 	
 	readonly var Nodes
 	readonly string tag
 	readonly string roomtag
 	
-	void DESTRUCTOR()
-		self.Nodes.Clear()
+	DESTRUCTOR
+		Nodes.Clear()
 		table kill
-		CSay("Destroying Knopje: "..self.tag)
-		self.All[self.tag] = nil;
-		self.Room[self.tag] = nil;		
+		CSay("Destroying Knopje: "..tag)
+		All[tag] = nil;
+		Room[tag] = nil;		
 	end
 	
 	bool HasNode(string n)
@@ -70,11 +78,11 @@ class Knopje
 	end
 	
 	void Add(string Node,string Room,dontcomeback)
-		--self.TimeOut
-		assert(self.TimeOut,"Addition Time-Out!")
+		--TimeOut
+		assert(TimeOut>0,"Addition Time-Out!")
 		//if not self.HasNode(Node)
-		CSay("Check self.All[\""..Node.."\"] >> "..tostring(self.All[Node]))
-		if not self.All[Node]
+		CSay("Check self.All[\""..Node.."\"] >> "..Lua.tostring(self.All[Node]))
+		if ! self.All[Node]
 			// Wrong!!
 			// self.Nodes[Node] = self.Nodes[Node] or new Knopje(Node,Room)
 			// self.Nodes[Node].Add(self.tag,Room)
@@ -93,20 +101,21 @@ class Knopje
 	end
 	
 	get bool On
-		Map.Obj = self.tag
-		return Map.ObjString.Texture:upper() == "GFX/TEXTURES/JEWELBUTTONS/GREEN.PNG"
+		//Map.Obj = self.tag
+		r:= upper(Kthura.Obj[tag].Texture) == "GFX/TEXTURES/JEWELBUTTONS/GREEN.PNG"
+		return r
 	end
 	
 	set bool On
 		if value
-			Map.ObjString.Texture = "GFX/TEXTURES/JEWELBUTTONS/GREEN.PNG"
+			Kthura.Obj[tag].Texture = "GFX/TEXTURES/JEWELBUTTONS/GREEN.PNG"
 		else
-			Map.ObjString.Texture = "GFX/TEXTURES/JEWELBUTTONS/BLUE.PNG"
+			Kthura.Obj[tag].Texture = "GFX/TEXTURES/JEWELBUTTONS/BLUE.PNG"
 		end
 	end
 	
 	void Toggle()
-		self.On = not self.On
+		self.On = ! self.On
 	end
 	
 	void FullToggle()
@@ -116,34 +125,34 @@ class Knopje
 		end
 	end
 	
-	void Link(string Room,infinity)
-		for i,Node in ipairs({infinity})
+	void LinkTo(string Room,infinity)
+		for i,Node in Lua.ipairs{infinity}
 			assert(type(Node)=="string","All nodes must be strings!")
 			self.Add(Node,Room)
 		end
 	end
 	
-	static var MK(string tag, string Room, infinity)
-		self.All[tag] = self.All[tag] or new Knopje(tag,Room,infinity)
-		self.All[tag].Link(Room,infinity)
-		return self.All[tag]
+	static var MK(string _tag, string Room, infinity)
+		self.All[_tag] = self.All[_tag] || new Knopje(_tag,Room,infinity)
+		self.All[_tag].LinkTo(Room,infinity)
+		return self.All[_tag]
 	end
 	
-	void CONSTRUCTOR(string tag, string Room, infinity)
-		assert(not self.All[tag],"Duplicate switch button: "..tag.."/"..Room)
-		Map.ZA_Enter(tag,"KNOPJE",tag)
-		CSayF("Creating %s::%s",Room,tag)
-		self.Nodes = new TLinkedList
-		self.Room[Room] = self.Room[Room] or {}
-		self.Room[Room][#self.Room[Room]+1] = self
-		self.All[tag] = self
-		self.tag = tag
-		self.roomtag = Room
+	CONSTRUCTOR(string _tag, string _Room, infinity)
+		assert(! self.All[_tag],"Duplicate switch button: ".._tag.."/".._Room)
+		Map.ZA_Enter(_tag,"KNOPJE",_tag)
+		CSayF("Creating %s::%s",_Room,tag)
+		self.Nodes = new TLinkedList()
+		self.Room[_Room] = self.Room[_Room] || {}
+		self.Room[_Room] += self
+		self.All[_tag] = self
+		self.tag = _tag
+		self.roomtag = _Room
 	end
 	
 end
 
-quickmeta group Solved
+quickmeta Solved
 	index
 		return gv.Bool["MALABIACAVES_KNOPJE_"..key]
 	end
@@ -157,7 +166,7 @@ end
 group MScript
 	
 	void TUT_SCHIETEN()
-		if not Done.Tutorial_Aziella_Kan_Schieten
+		if ! Done.Tutorial_Aziella_Kan_Schieten
 			MapText("TUT_SCHIETEN")
 		end
 	end
@@ -169,12 +178,15 @@ group MScript
 	
 	void SCHIET_MAAKBRUG()
 		string m
-		string doit = "Map.Obj='Brug';\tMap.ObjBool.Visible=true;\tMap.ObjBool.ForcePassible=true"
-		delegate doitf
-		doitf = NIL.Load(doit,"Maak een brug")
-		doitf()
-		m = "MAPCHANGES.CH4_DUNG_MalabiaCaves"
-		Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..Map.Layer.."\";"..doit.."\n"
+		//string doit = "Map.Obj='Brug';\tMap.ObjBool.Visible=true;\tMap.ObjBool.ForcePassible=true"
+		//delegate doitf		
+		//doitf = Lua.assert(Lua.load(doit,"Maak een brug"))
+		//doitf()
+		//m = "MAPCHANGES.CH4_DUNG_MalabiaCaves"
+		//Swap.Data[m] = Swap.Data[m] .. "FieldMap.Kthura.Layer=\""..Map.Layer.."\";"..doit.."\n"
+		Kthura.obj.Brug.Visible=true
+		Kthura.obj.Brug.ForcePassible=true		
+		gbool["MalabiaCaves_"..Kthura.CurrentLayer]=true
 	end
 	
 	void KNOPJE(string tag)
@@ -201,21 +213,31 @@ group MScript
 	end
 	
 	void BOVEN()
-		Map.Obj="Boven"
-		Map.ObjBool.ForcePassible=true
-		Map.Obj="Beneden"
-		Map.ObjBool.ForcePassible=false
-		Map.Obj="Player"
-		Map.ObjInt.Dominance = 50
+//		Map.Obj="Boven"
+//		Map.ObjBool.ForcePassible=true
+//		Map.Obj="Beneden"
+//		Map.ObjBool.ForcePassible=false
+//		Map.Obj="Player"
+//		Map.ObjInt.Dominance = 50
+		Kthura.Obj.Boven.ForcePassible=True
+		Kthura.Obj.Beneden.ForcePassible=False
+		Kthura.Obj.Player.Dominance = 50
+		CSay("Upstairs")
+		Kthura.Remap()
 	end
 
 	void BENEDEN()
-		Map.Obj="Boven"
-		Map.ObjBool.ForcePassible=false
-		Map.Obj="Beneden"
-		Map.ObjBool.ForcePassible=true
-		Map.Obj="Player"
-		Map.ObjInt.Dominance = 20
+		//Map.Obj="Boven"
+		//Map.ObjBool.ForcePassible=false
+		//Map.Obj="Beneden"
+		//Map.ObjBool.ForcePassible=true
+		//Map.Obj="Player"
+		//Map.ObjInt.Dominance = 20
+		Kthura.Obj.Boven.ForcePassible=False
+		Kthura.Obj.Beneden.ForcePassible=True
+		Kthura.Obj.Player.Dominance = 20
+		CSay("Downstairs")
+		Kthura.Remap()
 	end
 	
 	void TOTHETEMPLE()
@@ -223,7 +245,17 @@ group MScript
 		WorldMap.Aeria()
 	end
 	
-	void CONSTRUCTOR()
+	
+		
+	void Draw()
+	end
+	
+	void Update()
+	end
+	
+end
+	
+Init
 		Map.ZA_Enter("TUT_Schieten","TUT_Schieten")
 		Map.ZA_Enter("Oben","Boven")
 		Map.ZA_Enter("Upstairs","Boven")
@@ -249,28 +281,31 @@ group MScript
 		for i=1,3
 			for j=1,3
 				var kn
-				kn = Knopje.MK(string.char(i+64)..string.char(j+48),"#008")
+				kn = Knopje.MK(lstring.char(i+64)..lstring.char(j+48),"#008")
 				if i>1
-					kn.Add(string.char(i+63)..string.char(j+48),"#008")
+					kn.Add(lstring.char(i+63)..lstring.char(j+48),"#008")
 				end
 				if i<3
-					kn.Add(string.char(i+65)..string.char(j+48),"#008")
+					kn.Add(lstring.char(i+65)..lstring.char(j+48),"#008")
 				end
 				if j>1
-					kn.Add(string.char(i+64)..string.char(j+47),"#008")
+					kn.Add(lstring.char(i+64)..lstring.char(j+47),"#008")
 				end
 				if j<3
-					kn.Add(string.char(i+64)..string.char(j+49),"#008")
+					kn.Add(lstring.char(i+64)..lstring.char(j+49),"#008")
 				end
 			end
 		end
-	end
-	
-	void Draw()
-	end
-	
-	void Update()
-	end
-	
-end
+		oldb:=Kthura.CurrentLayer
+		for i=0,8
+			tb:=sprintf("#%03d",i)
+			if gbool["MalabiaCaves_"..tb]==true
+				Kthura.CurrentLayer=sprintf("#%03d",i)
+				Kthura.obj.Brug.Visible=true
+				Kthura.obj.Brug.ForcePassible=true
+			end
+		end
+		if oldb!="";Kthura.CurrentLayer=oldb;end
+End
+
 #say "Map Script - Compiling!"
