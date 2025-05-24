@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/XFieldX.ScyndiBundle/Field_ZoneAction.scyndi
 // 
-// 	  Version: 25.05.19 XI
+// 	  Version: 25.05.23
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -118,6 +118,10 @@ class ZoneAction
 		new ZoneAction("Enter","Aeria",WorldMap.Aeria)
 		new ZoneAction("Enter","Dyrt",WorldMap.Dyrt)
 		new ZoneAction("Enter","CatIsland",WorldMap["Cat-Island"])
+	end
+	
+	static void SAS_Create(infinity)
+		new ZoneAction(infinity)
 	end
 	
 	string ActEvent
