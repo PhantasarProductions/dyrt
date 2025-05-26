@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_HUB_MalabiaTemple.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_HUB_MalabiaTemple.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,26 +33,33 @@
 // 
 // **********************************************
 // 
-// version: 20.07.20
-// End License Information
+// 
+// version: 25.05.25 VI
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
+
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
 #use "Script/Use/MapScript/EndSplit"
 
 #macro Scyndi_Goddess RPG.GetChar("Scyndi").Points("SKILLLVL4").Have
 
 group MScript
 	
-	link ENDSPLIT = EndSplit
+	link ENDSPLIT = Lua.Scyndi.Class.EndSplit.RunEndSplit
 	
 	get bool NoEric
 		for i=1,8
 			string p
 			p = RPG.Party[i]
-			if p=="Eric" or p=="Yasathar"
+			if p=="Eric" || p=="Yasathar"
 				return false
 			end
 		end
@@ -59,7 +67,7 @@ group MScript
 	end
 	
 	void NPC_MALABIA()
-		if not Done.MeetMalabiaAtEndOfSplitTeamEric
+		if ! Done.MeetMalabiaAtEndOfSplitTeamEric
 			MapScript.SASKIA("Malabia_TeamEric")
 			return
 		end
@@ -93,7 +101,7 @@ group MScript
 		end
 		Yasathar.Stat("Level").Link("Eric")
 		Eric.Stat("Level").Link("Yasathar")
-		for _,st in ipairs { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
+		for _,st in pairs { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
 			CSay("Linking Stat: "..st)
 			Eric.Stat("PERMPOWERUP_"..st).Link("Yasathar")
 		end
@@ -127,19 +135,20 @@ group MScript
 		Map.WalkTo("Start")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("TheGordo","SASKIA:TheGordo")
-		if self.NoEric
-			Map.ZA_Enter("NoEric","NoEricBack")
-		end
-	end
 	
 	void Draw()
 	end
 	
 	void Update()
 	end
-	
 end
 
-#say "Map Script - Compiling!"
+init
+	Map.ZA_Enter("TheGordo","SASKIA:TheGordo")
+	if MScript.NoEric
+		Map.ZA_Enter("NoEric","NoEricBack")
+	end
+end
+	
+	
+
