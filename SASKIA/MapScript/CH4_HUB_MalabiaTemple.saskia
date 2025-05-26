@@ -34,8 +34,9 @@
 ; 
 ; version: 20.05.29
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Malabia's Temple"
 	end
 
 :TheGordo
