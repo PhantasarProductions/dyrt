@@ -37,14 +37,17 @@
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "script/use/Need"
+//#use "Script/Use/StartCombatMod"
+
 group MScript
 	void WELCOME()
-		if not Done.Done_PurpleForestWelcome
+		if ! Done.Done_PurpleForestWelcome
 			MapText("PURPLE")
 		end
+		Fader.Create("Purple Forest")
 	end
 	
 	void DOEL()
@@ -53,11 +56,6 @@ group MScript
 		WorldMap["Cat-Island"]()
 	end
 	
-	void CONSTRUCTOR()
-		Map.RENC_Inf = true
-		Map.ZA_Enter("Welcome","Welcome")
-		Map.ZA_Enter("Frundarmon","Doel")
-	end
 	
 	void Draw()
 	end
@@ -66,4 +64,9 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.RENC_Inf = true
+	Map.ZA_Enter("Welcome","Welcome")
+	Map.ZA_Enter("Frundarmon","Doel")
+End
