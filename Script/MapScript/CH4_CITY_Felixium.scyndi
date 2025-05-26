@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_CITY_Felixium.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_CITY_Felixium.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,31 +33,34 @@
 // 
 // **********************************************
 // 
-// version: 20.11.25
-// End License Information
+// 
+// version: 25.05.26
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-// #use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/SCI/Kthura"
+
+#use "script/use/Need"
+
+
 group MScript
 	
 	void WELCOMECAM()
-		int x
-		int y
-		Map.Obj = "Welcome"
-		x = Map.ObjInt.X
-		y = Map.ObjInt.Y
+		int x:=Kthura.Obj.Welcome.X
+		int y:=Kthura.Obj.Welcome.Y
+		//Map.Obj = "Welcome"
+		//x = Map.ObjInt.X
+		//y = Map.ObjInt.Y		
 		Map.Cam(x,y)
 	end
 	
 	void TIGERIONCAM()
-		int x
-		int y
-		Map.Obj = "Welcome"
-		x = Map.ObjInt.X
-		y = Map.ObjInt.Y
+		int x:=Kthura.Obj.Welcome.X
+		int y:=Kthura.Obj.Welcome.Y
 		for i=0,100
 			Map.Cam(x,y-i)
 		end
@@ -96,7 +100,7 @@ group MScript
 	end
 	
 	void NPC_KATHA()
-		if not gv.Bool.DefeatedFrundarmon
+		if ! gv.Bool.DefeatedFrundarmon
 			MapText("KATHA.BEFOREFRUNDARMON")
 		else
 			MapText("KATHA.AFTERFRUNDARMON")
@@ -119,16 +123,7 @@ group MScript
 		end
 	end	
 	
-	void CONSTRUCTOR()
-		self.HIDEHOUSE()
-		Map.ZA_Enter("Welcome","SASKIA:Welcome")
-		Map.ZA_Enter("InHouse","ShowHouse")
-		Map.ZA_Leave("InHouse","HideHouse")
-		Map.ZA_Enter("Leave_TigHouse","Leave_TigHouse")
-		if (not __newgameplus) or (not gv.Bool.DefeatedFrundarmon)
-			Map.Kill("NPC_Jeroen")
-		end
-	end
+
 	
 	void Draw()
 	end
@@ -137,4 +132,16 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Kthura.CurrentLayer="CAT"
+	MScript.HIDEHOUSE()
+	Map.ZA_Enter("Welcome","SASKIA:Welcome")
+	Map.ZA_Enter("InHouse","ShowHouse")
+	Map.ZA_Leave("InHouse","HideHouse")
+	Map.ZA_Enter("Leave_TigHouse","Leave_TigHouse")
+	if (! __newgameplus) or (not gv.Bool.DefeatedFrundarmon)
+		Map.Kill("NPC_Jeroen")
+	End
+end
