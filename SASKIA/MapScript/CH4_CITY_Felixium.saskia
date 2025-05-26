@@ -36,7 +36,7 @@
 ; End License Information
 
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Felixium"
 	mov true,WM_Unlocked.C_PURPLEFOREST
 	end
 	
