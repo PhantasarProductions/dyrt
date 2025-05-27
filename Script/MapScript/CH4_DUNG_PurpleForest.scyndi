@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_PurpleForest.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_PurpleForest.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,12 +33,17 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.26 III
+// 
+// End License
 
 
 
 Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
 
 #use "script/use/Need"
 //#use "Script/Use/StartCombatMod"
@@ -47,7 +53,7 @@ group MScript
 		if ! Done.Done_PurpleForestWelcome
 			MapText("PURPLE")
 		end
-		Fader.Create("Purple Forest")
+		Sys.Call("FLOW_FIELD","Fader.Create","Purple Forest")
 	end
 	
 	void DOEL()
