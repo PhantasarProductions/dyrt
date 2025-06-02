@@ -1,4 +1,4 @@
-// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+// Converted from NIL to Scyndi on 28 May 2025; 18:32:47
 
 
 Module
@@ -61,8 +61,8 @@ Var RetFunc()
 	foeret.AI_Module = "Juggernault"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "The ultimate Lord of Darkness.\nThey say nobody can beat this one.\nCan you do it?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/UltraBoss/Juggernaut.png","FOE_IMAGE_000000382")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/ULTRABOSS/JUGGERNAUT.NEGATIVE.PNG","FOE_IMAGE_000000383")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/UltraBoss/Juggernaut.png","FOE_IMAGE_000000042")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/ULTRABOSS/JUGGERNAUT.NEGATIVE.PNG","FOE_IMAGE_000000043")
 	foeret.Instant.CANCEL = "Cancel_Armageddon"
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "JWL_DZGJYMZA"
