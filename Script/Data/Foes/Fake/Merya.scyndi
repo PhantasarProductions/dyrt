@@ -1,4 +1,4 @@
-// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+// Converted from NIL to Scyndi on 28 May 2025; 18:32:31
 
 
 Module
@@ -61,8 +61,8 @@ Var RetFunc()
 	foeret.AI_Module = "Fake"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "She's sneaking around the Abyss...\nOr isn't she?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Fake/Merya.png","FOE_IMAGE_000000136")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/MERYA.NEGATIVE.PNG","FOE_IMAGE_000000137")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Fake/Merya.png","FOE_IMAGE_000000010")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/MERYA.NEGATIVE.PNG","FOE_IMAGE_000000011")
 	foeret.Cash = 10000
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "JWL_AURINA"
