@@ -1,0 +1,104 @@
+// License:
+// 	  src/Script/Script/Use/MapScript/CircularDarkness.scyndi
+// 
+// 	  Version: 25.05.28 V
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
+#use "script/use/need"
+
+#macro __CDFile "GFX/MapEffects/CircularDarkness.png"
+
+#macro __StyleStretch 1
+#macro __StyleSmall 2
+
+module 
+	
+	int x1
+	int y1
+	int w1
+	int h1
+	int x2
+	int y2
+	int w2
+	int h2
+	var img
+	int style = __StyleStretch
+	
+	Init
+		img = LoadNewImage(__CDFile,"CDFX")
+		// Stretch
+		x__StyleStretch   = 0
+		y__StyleStretch   = 0
+		w__StyleStretch   = Graphics.W
+		h__StyleStretch   = Graphics.H - 120
+		// Small
+		x__StyleSmall     = math.floor(w__StyleStretch-(img.Width  / 2))
+		y__StyleSmall     = math.floor(y__StyleStretch-(img.Height / 2))
+		w__StyleSmall     = img.Width
+		h__StyleSmall     = img.Height
+		CSayF("Stretch: (%4d,%4d)  %4dx%4d",x1,y1,w1,h1)
+		CSayF("Small:   (%4d,%4d)  %4dx%4d",x2,y2,w2,h2)
+	end
+	
+	void Draw__StyleStretch()
+		img.Stretch(x1,y1,w1,h1)
+	end
+	
+	void Draw__StyleSmall()
+		__black
+		Rect(0,0,Graphics.W,y2)                       // Top
+		Rect(0,0,x2,h1)                        // Left
+		Rect(0,y2+h2,Graphics.W,h1-h2) // Bottom
+		Rect(x2+w2,0,w1-w2,h1)  // Right
+		__white
+		img.Draw(x2,y2)
+	end
+	
+	void Draw()
+		//Lua.Scyndi.Class.CircularDarkness["Draw"..style]()
+		Draw1()
+	end
+	
+//end
