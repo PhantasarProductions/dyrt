@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Frundarmon.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Frundarmon.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,22 +33,28 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.29 IV
+// 
+// End License
 
-#use "Script/Use/Anyway"
 
-group AI_OF_FRUNDARMON
+#use "Script/Use/Need"
+
+//group AI_OF_FRUNDARMON
+Module
+
+	#accept Fighter
 
 	int turn
 	
 	get bool DoSummon
-		return self.turn % (4-__skill) == 0 or self.CountZero
+		return turn % (4-__skill) == 0 or CountZero
 	end
 	
 	get bool CountZero
 		int ret
-		for k,v in pairs(Fighter.Team.Foe) do
+		for k,v in pairs(Fighter.Team.Foe)
 			ret++
 		end
 		return ret<=1
@@ -55,22 +62,24 @@ group AI_OF_FRUNDARMON
 	
 	void Decide(Frund)
 		table nact
-		if self.DoSummon
+		if DoSummon
 			nact.ActTag = "ZZZ_FRUNDARMON_SUMMON"
 		else
 			nact.ActTag = "BTY_OBSERVE"
-			self.turn++
+			turn++
 		end
 		nact.ExeTag = Frund.Tag
-		nact.Targets = {Frund}
+		nact.Targets = {[0]=Frund}
 		Frund.NextAct = new Actions(nact)
 		Frund.NextActSpeed = 150
 		Frund.GaugePosition = 10001
 	end
 	
 
-end
+	
+	
+//end
 
 // I did not go for a module as the Spell Effector needs to access the 
 // turn field.
-return AI_OF_FRUNDARMON
+//return AI_OF_FRUNDARMON

@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_Frundarmon.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_Frundarmon.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,22 @@
 // 
 // **********************************************
 // 
-// version: 20.07.19
-// End License Information
+// 
+// version: 25.05.29
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
+#use "Libs/SCI/Graphics"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
 #use "Script/Use/MapScript/EndSplit"
 
@@ -51,18 +60,12 @@
 
 
 
-table KidGen
-KidGen = {
-	["Befindo"] = "boy",
-	["human"]   = "boy",
-	["Fairy"]   = "girl",
-	["Phelynx"] = "girl",
-	["Elf"]     = "girl"
-}
+table KidGen = { ["Befindo"] = "boy",  ["human"]   = "boy", ["Fairy"]   = "girl", ["Phelynx"] = "girl", ["Elf"]     = "girl" }
+
 
 group MScript
 	
-	link THEEND = EndSplit
+	link THEEND = EndSplit.RunEndSplit
 	
 	bool kidkill_diningroom
 	
@@ -78,7 +81,7 @@ group MScript
 	void ENTERKAMER(string tag)
 		Map.VisibleOnlyByZone(tag,true)
 		self.Kamer = replace(tag,"_"," ")
-		self.KamerKop[tag] = self.Font.Text(tag)
+		self.KamerKop[tag] = self.Font.iText(tag)
 	end
 	
 	void InitKamer(string tag)
@@ -93,12 +96,12 @@ group MScript
 		StartCombat.Arena = "Frundarmon"
 		StartCombat.NoLose = false
 		StartCombat.FoeIDDQD = false
-		for i,kid in ipairs {infinity}
+		for i,kid in Lua.ipairs {infinity}
 			StartCombat.Foe[i] = sprintf("Kids/%s",kid)
 		end
 		StartCombat.Ready()
 	end
-	link Kid = MScript.KID
+	//link Kid = MScript.KID
 	
 	void SWITCH_TO2()
 		Map.Kill("Barrier_TO2",true)
@@ -110,10 +113,10 @@ group MScript
 	end
 	
 	void WELCOME2()
-		if not Done.Frundarmon_Welcome_2ndFloor
+		if ! Done.Frundarmon_Welcome_2ndFloor
 			self.Kid("Elf","Human","Phelynx","Fairy")
 		end
-		if (not ClosetPuzzle) or gv.Bool.Frundarmon_KillK3
+		if (! ClosetPuzzle) or gv.Bool.Frundarmon_KillK3
 			Map.HideByLabel("K3")
 		end
 	end
@@ -131,7 +134,7 @@ group MScript
 		if ClosetPuzzle
 			return
 		end
-		Annoy("Hey, there's a list of questions on the backside")
+		Events.Annoy("Hey, there's a list of questions on the backside")
 		bool r = true
 		table gn
 		gn = {"boy","girl"}
@@ -139,16 +142,16 @@ group MScript
 			bool chk
 			string g
 			g = gn[math.random(1,2)]
-			chk = Yes(sprintf("Is the undead %s kid a %s?",race,g))
+			chk = Events.Yes(sprintf("Is the undead %s kid a %s?",race,g))
 			r = r and (g == gender)==chk
 			CSayF("Is the undead %s kid a %s? %s/%s[%s] => %s",race,g,tostring(chk),tostring(KidGen[race]==gender),gender,tostring(r))
 		end
 		ClosetPuzzle = r
 		if ClosetPuzzle
-			Annoy("You hear a door open in the corridor. But not only that. Some undead children appear to have run into the corridor to guard it!")
+			Events.Annoy("You hear a door open in the corridor. But not only that. Some undead children appear to have run into the corridor to guard it!")
 			Map.Kill("Barrier",true)
 		else
-			Annoy("Nothing happens")
+			Events.Annoy("Nothing happens")
 		end
 	end
 	
@@ -165,7 +168,7 @@ group MScript
 	void KIDKILL()
 		string old
 		old = Map.Layer
-		Map.Layer='#001'
+		Map.Layer="#001"
 		Map.Kill("KID_T11",true)
 		Map.Kill("KID_T12",true)
 		Map.Layer=old // Bug prevention
@@ -180,49 +183,21 @@ group MScript
 		self.kidkill_diningroom = true
 	end
 	
-	void CONSTRUCTOR()
-		CSay("Entering the mansion")
-		//self.Lijst = new TLinkedList
-		self.Font = GetFont("BIGTEXT")
-		self.InitKamer("Lobby")
-		self.InitKamer("Corridor 1st Floor")
-		self.InitKamer("Living Room")
-		self.InitKamer("Secret Passage")
-		self.InitKamer("Storage")
-		self.InitKamer("Kitchen")
-		self.InitKamer("Corridor 2nd Floor")
-		self.InitKamer("Dining Room")
-		self.InitKamer("Bed Room")
-		self.InitKamer("Study")
-		Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
-		Map.ZA_Enter("ToBasement","ToBasement")
-		Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
-		Map.ZA_Enter("Bed Room","Guard_Closet")
-		Map.ZA_Enter("K3","SASKIA:K3")
-		if FrunDefeated
-			Map.ZA_Enter("Dining Room","KidKillDiningRoom")
-		end
-		
-		if not FrunDefeated
-			Map.ZA_Enter("FrunBoss","SASKIA:Boss")
-		end
-		//self.boy  = { ["boy"]=true,  ["girl"] = false }
-		//self.girl = { ["boy"]=false, ["girl"] = true  }
-	end
 	
-	void DESTRUCTOR()
-		CSay("Leaving the mansion")
+//	void DESTRUCTOR()
+//		CSay("Leaving the mansion")
 		//self.Lijst.Clear()
-	end
+//	end
 	
-	  link DarkDraw = CircularDarkness.Draw__StyleStretch
+	//link DarkDraw = CircularDarkness.Draw__StyleStretch
 	//link DarkDraw = CircularDarkness.Draw__StyleSmall
+	link DarkDraw = CircularDarkness.Draw1
 	
 	void Draw()
 		self.DarkDraw()
 		__yellow
-		if self.Kamer!="" and Map.Layer!="#003"
-			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
+		if self.Kamer!="" && Map.Layer!="#003"
+			self.KamerKop[self.Kamer].Draw(math.floor(Graphics.W/2),5,2,0)
 		end
 	end
 	
@@ -230,4 +205,34 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	CSay("Entering the mansion")
+	//self.Lijst = new TLinkedList
+	MScript.Font = GetFont("BIGTEXT")
+	MScript.InitKamer("Lobby")
+	MScript.InitKamer("Corridor 1st Floor")
+	MScript.InitKamer("Living Room")
+	MScript.InitKamer("Secret Passage")
+	MScript.InitKamer("Storage")
+	MScript.InitKamer("Kitchen")
+	MScript.InitKamer("Corridor 2nd Floor")
+	MScript.InitKamer("Dining Room")
+	MScript.InitKamer("Bed Room")
+	MScript.InitKamer("Study")
+	Map.ZA_Enter("Kitchen","SASKIA:Kitchen")
+	Map.ZA_Enter("ToBasement","ToBasement")
+	Map.ZA_Enter("Corridor 2nd Floor","Welcome2")
+	Map.ZA_Enter("Bed Room","Guard_Closet")
+	Map.ZA_Enter("K3","SASKIA:K3")
+	if FrunDefeated
+		Map.ZA_Enter("Dining Room","KidKillDiningRoom")
+	end
+	
+	if ! FrunDefeated
+		Map.ZA_Enter("FrunBoss","SASKIA:Boss")
+	end
+	//self.boy  = { ["boy"]=true,  ["girl"] = false }
+	//self.girl = { ["boy"]=false, ["girl"] = true  }
+end

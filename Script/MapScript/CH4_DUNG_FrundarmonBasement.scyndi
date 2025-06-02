@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_FrundarmonBasement.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_FrundarmonBasement.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,26 +33,30 @@
 // 
 // **********************************************
 // 
-// version: 20.04.30
-// End License Information
+// 
+// version: 25.05.30
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
 
 group MScript
 	
 	void IRRANOUSE()
-		if not gv.Bool.DefeatedFrundarmon
+		if ! gv.Bool.DefeatedFrundarmon
 			MapText("SCYNDINOUSE")
 		end
 	end
 	
 	void WELCOME()
-		if not Done.Frundarmon_Basement_Welcome
+		if ! Done.Frundarmon_Basement_Welcome
 			MapText("WELCOME")
 		end
 	end
@@ -78,26 +83,16 @@ group MScript
 	end
 	
 	void TOTREASURE()
-		Map.GoToLayer('#010','Start')
+		Map.GoToLayer("#010","Start")
 	end
 	
 	void BACK2MAIN()
-		Map.GoToLayer('#000','FromTreasure');
+		Map.GoToLayer("#000","FromTreasure");
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("Welcome","Welcome")
-		Map.ZA_Enter("IrraNoUse","IrraNoUse")
-		Map.ZA_Enter("ToMansion","ToMansion")
-		Map.ZA_Enter("Boss","SASKIA:Boss")
-		Map.ZA_Enter("ToEnd","ToEinde")
-		Map.ZA_Enter("To009","To009")
-		Map.ZA_Enter("RemoveEndBarrier","RemEndBarrier")
-		Map.ZA_Enter("ToTreasure","ToTreasure")
-		Map.ZA_Enter("BackToMain","Back2Main")
-	end
 	
-	link DarkDraw = CircularDarkness.Draw__StyleStretch
+	//link DarkDraw = CircularDarkness.Draw__StyleStretch
+	link DarkDraw = CircularDarkness.Draw1
 
 	void Draw()
 		self.DarkDraw()
@@ -107,4 +102,15 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("Welcome","Welcome")
+	Map.ZA_Enter("IrraNoUse","IrraNoUse")
+	Map.ZA_Enter("ToMansion","ToMansion")
+	Map.ZA_Enter("Boss","SASKIA:Boss")
+	Map.ZA_Enter("ToEnd","ToEinde")
+	Map.ZA_Enter("To009","To009")
+	Map.ZA_Enter("RemoveEndBarrier","RemEndBarrier")
+	Map.ZA_Enter("ToTreasure","ToTreasure")
+	Map.ZA_Enter("BackToMain","Back2Main")
+End

@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Frundarmon.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Frundarmon.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,11 +33,17 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.28 III
+// 
+// End License
+
+
+#use "Libs/SCI/Graphics"
+
 #use "Script/Use/MapScript/CircularDarkness"
 
-module Arena_Frundarmon
+module 
 	
 	readonly var Vloer
 	readonly var Muur
@@ -46,29 +53,30 @@ module Arena_Frundarmon
 	readonly int schilderij_x
 	readonly int schilderij_y
 	
-	void CONSTRUCTOR()
-		self.center       = math.floor(Screen.H/2)-64
-		self.kwart        = math.floor(Screen.H/4)
-		self.schilderij_x = math.random(40,Screen.W-40)
-		self.schilderij_y = math.random(self.kwart+40,self.center-40)		
-		self.Muur         = LoadIfNew("GFX/Textures/Frundarmon/MWall.png",      "ARENA_FRUNDARMONMUUR")
-		self.Vloer        = LoadIfNew("GFX/Textures/Frundarmon/MVloer.png",     "ARENA_FRUNDARMONVLOER")
-		self.Schilderij   = LoadIfNew("GFX/Textures/Frundarmon/SchilderijM.png","ARENA_FRUNDARMONSCHILDERIJ")
+	Init
+		center       = math.floor(Graphics.H/2)-64
+		kwart        = math.floor(Graphics.H/4)
+		schilderij_x = math.random(40,Graphics.W-40)
+		schilderij_y = math.random(kwart+40,center-40)		
+		Muur         = LoadNewImage("GFX/Textures/Frundarmon/MWall.png",      "ARENA_FRUNDARMONMUUR")
+		Vloer        = LoadNewImage("GFX/Textures/Frundarmon/MVloer.png",     "ARENA_FRUNDARMONVLOER")
+		Schilderij   = LoadNewImage("GFX/Textures/Frundarmon/SchilderijM.png","ARENA_FRUNDARMONSCHILDERIJ")
 	end
 	
 	void Draw()
-		__white
+		SetColor(255,255,255)
 		// vloer
-		self.Vloer.Tile(0,self.center-3,Screen.W,self.center)
+		Vloer.Tile(0,center-3,Graphics.W,center)
 		
 		// muur
-		for y=self.center,self.kwart,-32
-			self.Muur.Tile(0,y,Screen.W,32)
+		for y=center,kwart,-32
+			Muur.Tile(0,y,Graphics.W,32)
 		end
-		self.Muur.Tile(0,self.center,Screen.W,64)
-		self.Schilderij.Draw(self.schilderij_x,self.schilderij_y)
+		Muur.Tile(0,center,Graphics.W,64)
+		Schilderij.Draw(schilderij_x,schilderij_y)
 	end
 	
-	link AfterDraw = CircularDarkness.Draw__StyleStretch
+	link AfterDraw = CircularDarkness.Draw1 
+	//__StyleStretch
 
-end
+//end
