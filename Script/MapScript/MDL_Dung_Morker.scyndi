@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/GJ_DUNG_Morker.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/MDL_Dung_Morker.scyndi
+// (c) Jeroen Broks, May 2020, June 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 20.05.17
-// End License Information
+// 
+// version: 25.06.02 III
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/SCI/InterVar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 
 #macro QueesteVolbracht gv.Bool.KthuraPendantReturnedMorkerGJBonus
 // #macro Gevonden gv.Bool.KthuraPendantFound
@@ -49,7 +55,7 @@ group MScript
 	
 	void LEAVE()
 		Field.LoadMap("CH4_DUNG_DarkStorage")
-		Map.GoToLayer("#002","StartGJ")
+		Map.GoToLayer("#002","Start_Medal")
 	end
 	
 	void NPC_KTHURA()
@@ -69,7 +75,7 @@ group MScript
 		MapText("KTHURA_RECOVER")
 		Inventory.JWL_DIAMOND ++
 		Inventory.KEY_KTHURAPENDANT = 0
-		Achievements.Award('GJ_COMPLETE_MORKER')
+		Achievements.Award("GJ_COMPLETE_MORKER")
 		QueesteVolbracht = true
 	end
 	
@@ -82,11 +88,6 @@ group MScript
 		StartCombat.FoeIDDQD = false
 		StartCombat.Ready()
 	end
-
-	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("Leave","Leave")
-	end
 	
 	void Draw()
 	end
@@ -95,4 +96,8 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Map.ZA_Enter("Leave","Leave")
+end

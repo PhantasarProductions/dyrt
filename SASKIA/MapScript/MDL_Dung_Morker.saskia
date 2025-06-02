@@ -36,7 +36,7 @@
 ; End License Information
 :OnLoad
 	;call Fader,Field.MapData.Title
-	call Fader,"M|"..string.char(34).."orker"
+	call Fader.Create,"M|uorker"
 	end
 
 :NPC_SASKIA_Thief
