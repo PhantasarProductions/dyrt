@@ -1,4 +1,4 @@
-// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+// Converted from NIL to Scyndi on 28 May 2025; 18:32:42
 
 
 Module
@@ -24,8 +24,8 @@ Var RetFunc()
 	foeret.Char = RPG.CreateChar(foeret.Tag)
 	foeret.AI_Module = "Default"
 	foeret.AllowOversoul = false and __skill!=1
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/sealed/kabi.png","FOE_IMAGE_000000380")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/SEALED/KABI.NEGATIVE.PNG","FOE_IMAGE_000000381")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/sealed/kabi.png","FOE_IMAGE_000000040")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/SEALED/KABI.NEGATIVE.PNG","FOE_IMAGE_000000041")
 	foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
 	foeret.Cash = 100000
 	foeret.Steal = foeret.Steal || {}

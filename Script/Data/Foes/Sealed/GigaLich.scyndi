@@ -1,4 +1,4 @@
-// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+// Converted from NIL to Scyndi on 28 May 2025; 18:32:42
 
 
 Module
@@ -25,8 +25,8 @@ Var RetFunc()
 	foeret.AI_Module = "Default"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "It's gigantic isn't it?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/sealed/GigaLich.png","FOE_IMAGE_000000368")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/SEALED/GIGALICH.NEGATIVE.PNG","FOE_IMAGE_000000369")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/sealed/GigaLich.png","FOE_IMAGE_000000028")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/SEALED/GIGALICH.NEGATIVE.PNG","FOE_IMAGE_000000029")
 	foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
 	foeret.Cash = 10000
 	foeret.Drop = foeret.Drop || {}

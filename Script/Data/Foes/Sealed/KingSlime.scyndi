@@ -1,4 +1,4 @@
-// Converted from NIL to Scyndi on 15 Apr 2025; 20:33:06
+// Converted from NIL to Scyndi on 28 May 2025; 18:32:42
 
 
 Module
@@ -25,8 +25,8 @@ Var RetFunc()
 	foeret.AI_Module = "Default"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "Wait, these things have a KING??"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Sealed/SlimeKing.png","FOE_IMAGE_000000372")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/SEALED/SLIMEKING.NEGATIVE.PNG","FOE_IMAGE_000000373")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Sealed/SlimeKing.png","FOE_IMAGE_000000032")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/SEALED/SLIMEKING.NEGATIVE.PNG","FOE_IMAGE_000000033")
 	foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
 	foeret.Cash = 1000000
 	foeret.Drop = foeret.Drop || {}
