@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/Steal.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_Steal.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.12.03
-// End License Information
-do
+// 
+// version: 25.05.28 VI
+// 
+// End License
+
+
+
+
+
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/InterVar"
+
+#use "Script/Use/Need"
+
 	var stealitems
 	
 	bool StealOnyx(foe,string name)
@@ -51,7 +67,8 @@ do
 		return true
 	end
 	
-	bool PickPocket(Act,Target)
+	//bool PickPocket(Act,Target)
+	bool DoEffect(Act,Target)
 		bool okdrop
 		if Target.Char.Points("HP").Have == 0
 			return false
@@ -70,17 +87,17 @@ do
 		elseif prefixed(Target.Tag,"FOE_") and (Target.FromFile=="BOSS/RONDOMO2")
 			return StealOnyx(Target,"Rondomo")			
 		elseif prefixed(Target.Tag,"FOE_")
-			if Target.StolenFrom or (not Target.Steal) or (#Target.Steal==0)
+			if Target.StolenFrom || (! Target.Steal) || (len(Target.Steal)==0)
 				new Hurt("Has nothing!",Target.StolenFrom)
 				return false
 			end
 			int r
-			r = math.random(1,#Target.Steal)
+			r = math.random(0,len(Target.Steal)-1)
 			switch type(Target.Steal[r])
 				case "number"
 					if __cash<(900000000/__skill)
 						okdrop=true
-						LoadAudio("SFX/Treasure/ChaChing.wav").Play()
+						Audio.Load("SFX/Treasure/ChaChing.wav").Play()
 						int getcash
 						switch __skill
 							case 1
@@ -115,14 +132,17 @@ do
 			int i
 			string itemtag
 			var Exe
-			stealitems = stealitems or NIL.Use("Script/Data/General/EnemyStealItems.nil")
-			i = math.random(1,#stealitems)
+			Lua.Scyndi.Use("Script/Data/General/EnemyStealItem")
+			stealitems = stealitems || Lua.Scyndi.Class.EnemyStealItem
+			//stealitems = stealitems or NIL.Use("Script/Data/General/EnemyStealItems.nil")
+			i = math.random(0,len(stealitems)-1)
 			itemtag = stealitems[i]
 			if Inventory[itemtag]<=0
 				return false
 			end
 			Exe = Act.Executor
-			Exe.StolenItems[#Exe.StolenItems+1] = itemtag
+			//Exe.StolenItems[#Exe.StolenItems+1] = itemtag
+			Exe.StolenItems += itemtag
 			Inventory[itemtag]--
 			new Hurt(sprintf("Stolen %s",Item[itemtag].Name),Target.Tag,255,255,0)
 			// error("Stealing from heroes not yet implemented")
@@ -131,5 +151,3 @@ do
 		return okdrop
 	end
 	
-	return PickPocket
-end
