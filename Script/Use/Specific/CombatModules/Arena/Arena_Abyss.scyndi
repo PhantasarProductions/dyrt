@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Abyss.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Abyss.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,10 +33,15 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
+// 
+// version: 25.05.30
+// 
+// End License
 
-module Abyss_Arena
+
+module 
+
+#use "Libs/SCI/Graphics"
 	
 	var Floor
 	var Plasma
@@ -45,23 +51,22 @@ module Abyss_Arena
 	int skip = 3
 	int frame
 	
-	void CONSTRUCTOR()
-		self.R = math.random(0,255)
-		self.G = math.random(0,255)
-		self.B = math.random(0,255)
-		self.Plasma = LoadIfNew('GFX/Textures/Abyss/Plasma_short.jpbf',"ARENA_ABYSS_PLASMA")
-		self.Floor  = LoadIfNew("GFX/Textures/Abyss/Top.png","ARENA_ABYSS_TOP")
+	Init
+		R = math.random(0,255)
+		G = math.random(0,255)
+		B = math.random(0,255)
+		Plasma = LoadNewImage("GFX/Textures/Abyss/Plasma_short.jpbf","ARENA_ABYSS_PLASMA")
+		Floor  = LoadNewImage("GFX/Textures/Abyss/Top.png","ARENA_ABYSS_TOP")
 	end
 	
 	void Draw()
-		Color(self.R,self.G,self.B)
-		self.Plasma.Tile(0,0,Screen.W,Screen.H,self.frame)
-		self.frame++
-		if self.frame>=self.Plasma.Frames
-			self.frame = 0
+		SetColor(R,G,B)
+		Plasma.Tile(0,0,Graphics.W,Graphics.H,frame)
+		frame++
+		if frame>=Plasma.Frames
+			frame = 0
 		end
-		__white
-		self.Floor.Tile(0,Screen.H/2,Screen.W,Screen.H/2)
+		SetColor(255,255,255)
+		Floor.Tile(0,Graphics.H/2,Graphics.W,Graphics.H/2)
 	end
 
-end

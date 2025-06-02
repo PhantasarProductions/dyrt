@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH3_DUNG_Abyss.nil
-// (c) Jeroen Broks, , All Rights Reserved.
+// src/Script/Script/MapScript/CH3_Dung_Abyss.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,20 +33,40 @@
 // 
 // **********************************************
 // 
-// version: 20.02.27
-// End License Information
+// 
+// version: 25.05.29 VI
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
-#use "Script/use/Specific/CheckTrueAbyss" as CTA
-#use "libs/strings"
+
+Script
+
+#use "Libs/SCI/GINIE"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
+#use "Script/Use/MapScript/MapGenerator"
+//#use "Script/use/Specific/CheckTrueAbyss" as CTA
+//#use "libs/strings"
+
+extern tonumber "tonumber"
 
 group MScript
 	
 	table plasmasized
+	
+	void GiantBlock()
+		If !Kthura.HasObj("BlockZone")
+			BZ:=Kthura.newZone(0,0,4000,4000)
+			BZ.Tag="BlockZone"
+			BZ.Impassible=true
+		End
+	End
 	
 	void NPC_NEXT()
 		int l 
@@ -55,7 +76,9 @@ group MScript
 		v = l+1
 		n = sprintf("#%03d",v)
 		if v%5!=0
-			Map.Generate(n)
+			Kthura.CurrentLayer=n
+			MScript.GiantBlock()
+			MapGenerator.Generate(n)
 		end
 		Map.GoToLayer(n,"Start")
 	end
@@ -69,7 +92,9 @@ group MScript
 	end
 	
 	void UNLOCK_TRUEABYSS()
-		CTA.Unlocked_TrueAbyss = true
+		//CTA.Unlocked_TrueAbyss = true
+		b:=GINIE.LoadHomeNew("Config.ini","GlobCONFIG","Config.ini","Global Configuration\nThe Secrets of Dyrt\n(c) Jeroen P. Broks")
+		b.Value("Cast","Irravonia","6f96b2b3dae0379e9c0f1325b83fddd4")
 	end
 	
 	void BOSS()
@@ -83,31 +108,36 @@ group MScript
 		StartCombat.FoeIDDQD = false
 		StartCombat.Ready()
 	end
-	
-	void CONSTRUCTOR()
-		KthuraGenerator.IgnoreDestroy("Plasma")
-		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
-		KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
-		KthuraGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
-		KthuraGenerator.Size.X      = 6400
-		KthuraGenerator.Size.Y      = 3200
-		Map.TieGenerator()
-		Map.ZA_Enter("ExitMap","ExitMap")
-		Map.ZA_Enter("Boss","SASKIA:Boss")
-	end
+		
 	
 	void Draw()
 	end
 	
 	void Update()
-		Map.Obj="Plasma"
-		Map.ObjInt.X = Map.ScrollX
-		Map.ObjInt.Y = Map.ScrollY
-		if not self.plasmasized[Map.Layer]
-			Map.ObjInt.W = Screen.W
-			Map.ObjInt.H = Screen.H
+		//Map.Obj="Plasma"
+		LocExtern Plsm "Scyndi.Class.Kthura.Obj.Plasma"
+		Plsm.X = Map.ScrollX-2
+		Plsm.Y = Map.ScrollY-2
+		if ! self.plasmasized[Kthura.CurrentLayer]
+			Plsm.W = Graphics.W+4
+			Plsm.H = Graphics.H+4
+			self.plasmasized[Kthura.CurrentLayer]=true
 		end
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+	
+Init
+		//KthuraGenerator.IgnoreDestroy("Plasma")
+		//KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
+		//KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
+		//KthuraGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
+		//KthuraGenerator.Size.X      = 6400
+		//KthuraGenerator.Size.Y      = 3200
+		//Map.TieGenerator()
+		Map.ZA_Enter("ExitMap","ExitMap")
+		Map.ZA_Enter("ZA_NextMap","ExitMap")
+		Map.ZA_Enter("Boss","SASKIA:Boss")
+End
