@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/PurpleForest.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_PurpleForest.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,25 +33,31 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-	
-module Arena_SparForest
-	
-	var Forest
-	
-	void CONSTRUCTOR()
-		self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
-		self.Forest.LoadTex("GFX/Textures/PurpleForest/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
-		self.Forest.CloudR=180
-		self.Forest.CloudG=100
-		self.Forest.CloudB=255
-		self.Forest.texsky={['R']=180,['G']=0,['B']=225}
-		self.Forest.texfloorfile = "GFX/Textures/PurpleForest/Grass1.png"
-		self.Forest.Generate()
+// 
+// version: 25.05.27 II
+// 
+// End License
+
+
+
+#use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest"
+
+module
+
+	//var Forest
+	locExtern Forest "Scyndi.Class.TMP_Forest"
+
+	Init
+		Forest.LoadTex("GFX/Textures/PurpleForest/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
+		Forest.CloudR=180
+		Forest.CloudG=100
+		Forest.CloudB=255
+		Forest.texsky={["R"]=180,["G"]=0,["B"]=225}
+		Forest.texfloorfile = "GFX/Textures/PurpleForest/Grass1.png"
+		Forest.Generate()
 	end
 	
 	void Draw()
-		self.Forest.Draw()
+		Forest.Draw()
 	end
-end
+
