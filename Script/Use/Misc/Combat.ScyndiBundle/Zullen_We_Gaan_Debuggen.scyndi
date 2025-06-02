@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Misc/Combat.ScyndiBundle/Zullen_We_Gaan_Debuggen.scyndi
 // 	Debug Combat
-// 	version: 25.04.28
+// 	version: 25.05.30 II
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -24,6 +24,7 @@
 Module
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/InterVar"
 
 
 #accept Fighter
@@ -39,12 +40,29 @@ Void QDoing(String A, String B)
 	printf("\x1b[93m%s\x1b[96m%s\x1b[37m\n",PA,B)
 End
 
+// Quick Show Mode
+void QSM(String _Mode,A)
+	cout(_Mode," is now ",Ternary(A,"\x1b[92mON","\x1b[91mOFF"),"\x1b[37m\n")
+End
+
 global void DEBUG_VIEW_HP()
 	for iteam,imember,ifighter in Fighter.ForAllQuick()
 		QDoing(iteam.."::"..imember,sprintf("%4d/%4d  (%s -- %s)",ifighter.char.points("HP").have,ifighter.char.points("HP").maximum,ifighter.char.Name,ifighter.char.Tag))
 	end
 end
 
+global void DEBUG_GOD()
+	gBool.DEBUG_GODMODE = !gBool.DEBUG_GODMODE
+	QSM("God mode",gBool.DEBUG_GODMODE)
+End
+
+Global void DEBUG_JACK()
+	gbool.DEBUG_CHEAT_JACKTHERIPPER=!gbool.DEBUG_CHEAT_JACKTHERIPPER
+	QSM("Jack The Ripper Mode",gbool.DEBUG_CHEAT_JACKTHERIPPER)
+End
+
 Init
 	Sys.ConsoleLocal("HP","DEBUG_VIEW_HP")
+	Sys.ConsoleLocal("GOD","DEBUG_GOD")
+	Sys.ConsoleLocal("IDDQD","DEBUG_GOD")
 End
