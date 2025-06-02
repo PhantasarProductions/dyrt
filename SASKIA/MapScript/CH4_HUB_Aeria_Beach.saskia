@@ -37,7 +37,7 @@
 :OnLoad
 	call Fader.Create,"Aeria Beach"
 	call Achievements.Award,"SCEN_AERIA"
-	chk gv.bool.BeenOnAeriaBeachBeforeSoHideH,OnLoadEnd
+	chk gv.bool.BeenOnAeriaBeachBeforeSoHideH==false,OnLoadEnd
 	call Kthura.HideByLabel,"H"
 :OnLoadEnd	
 	end
