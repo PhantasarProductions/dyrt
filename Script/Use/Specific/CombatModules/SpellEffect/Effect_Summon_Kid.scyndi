@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/Summon_Kid.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_Summon_Kid.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,22 +33,40 @@
 // 
 // **********************************************
 // 
-// version: 20.04.28
-// End License Information
-do
-	table kids
-	kids = {"Befindo","Elf","Fairy","Human","Phelynx"}
-	bool SummonKid(Act,Target)
+// 
+// version: 25.05.29 V
+// 
+// End License
+
+
+
+
+
+
+
+
+Module
+	#accept Foe
+	#accept Hurt
+	#accept CSay
+	#accept Fighter
+	#accept CombatTime
+	
+	LocExtern AI_OF_FRUNDARMON "Scyndi.Class.AI_FRUNDARMON"
+	
+	table kids = {"Befindo","Elf","Fairy","Human","Phelynx"}
+	bool DoEffect(Act,Target)
 		int i=1
 		string t
 		string kid
+		locExtern LuaLen "#"
 		repeat
 			i++
 			t=sprintf("FOE_%d",i)
 			CSay("Checking: "..t)
-		until not Fighter.ByTag[t]
+		until ! Fighter.ByTag[t]
 		CSay(t.." it will be")
-		kid = kids[math.random(1,#kids)]
+		kid = kids[math.random(1,LuaLen kids)]
 		CSay(kid)
 		Foe.Compile(i,"Kids/"..kid)
 		new Hurt("Summoned",t,255,180,0)
@@ -55,5 +74,5 @@ do
 		AI_OF_FRUNDARMON.turn++
 	end
 	
-	return SummonKid
-end
+//	return SummonKid
+//end
