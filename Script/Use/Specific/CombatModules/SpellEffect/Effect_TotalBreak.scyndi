@@ -1,0 +1,73 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_TotalBreak.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.06.02
+// 
+// End License
+
+
+// June 4th 2020 last edit for NALA
+// June 2nd 2025 first edit for SCI
+// What a coincidence
+
+Module
+
+	#use "Script/Use/Need"
+	
+	#accept CSayF
+	
+	bool DoEffect(Act,Target)
+		CSayF("Total Break on %s",Target.Tag)
+		int rew = 0
+		rew += (Target.Char.Points("HP").Have-1)
+		rew += Target.Char.Points("AP").Have
+		Target.Char.Points("HP").Have = 1
+		Target.Char.Points("AP").Have = 0
+		if __skill!=3
+			for i=0,4
+				if Target.Char.Points("SKILLLVL"..i).Have>0
+					var e
+					e = Target.Char.Points("SKILLEXP"..i)
+					e.Have += rew
+					CSayF("%s: Maxed exp for skill %d",Target.Tag,i)
+				end
+			end
+		end
+		return true
+	end
+	
+//	return TotalBreak
+//end
