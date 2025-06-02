@@ -34,8 +34,9 @@
 ; 
 ; version: 20.07.19
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Fundarmon's Mansion"
 	end
 
 :NPC_SASKIA_Kid1
