@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/MainMenu.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.30 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -47,6 +47,7 @@ Script
 #say "MainMenu: Use commands"
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/GINIE"
 #use "Libs/SCI/Events"
 #use "Libs/SCI/Graphics"
 
@@ -284,9 +285,11 @@ end
 
 #say "MainMenu: Init menu items"
 Init
+	b:=GINIE.LoadHomeNew("Config.ini","GlobCONFIG","Config.ini","Global Configuration\nThe Secrets of Dyrt\n(c) Jeroen P. Broks")
+	Allow_NGTA:=b.Value("Cast","Irravonia")=="6f96b2b3dae0379e9c0f1325b83fddd4"
 	ni := new MenuItem("New Game",NewGame,true)
 	ni  = new MenuItem("New Game+",NewGamePlus,CTA.Unlocked_NewGamePlus)
-	ni  = new MenuItem("New Game: True Abyss",NewGameTrueAbyss,CTA.Unlocked_TrueAbyss)
+	ni  = new MenuItem("New Game: True Abyss",NewGameTrueAbyss,Allow_NGTA)
 	ni  = new MenuItem("Continue a game",SGLink.OpenSG,SGLink.Allow)
 	// new MenuItem("Encyclopedia",NOTHINGYET,true) // Idea scrapped!
 	ni  = new MenuItem("Jukebox",StartJukeBox,true)
