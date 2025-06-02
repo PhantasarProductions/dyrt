@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_DarkStorage.nil
-// (c) Jeroen Broks, 2020, 2021, 2022, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_DarkStorage.scyndi
+// (c) Jeroen Broks, 2020, 2021, 2022, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,22 +33,32 @@
 // 
 // **********************************************
 // 
-// version: 22.08.02
-// End License Information
+// 
+// version: 25.06.02 VI
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 
 #macro OnyxBlock gv.Bool.DarkStorage_OnyxBlock
 #macro OnyxKilled gv.Bool.DarkStorage_OnyxKilled
 #macro SoulOrbsSeen gv.Bool.DarkStorage_Soul_Orbs_Seen
 
-bool gj_checked
+bool MDL_checked
 
 group MScript
+
+	bool medal_checked = false
 	
 	void GOSUB(int i, string onyx)
 		Field.LoadMap("CH4_DUNG_DarkStorage_"..onyx)
@@ -55,51 +66,37 @@ group MScript
 	end
 	
 	void MEANWHILE()
-		if Inventory.KEY_DARKSTORAGEKEY>=4 and (not Done.DarkStorageOnyx_Meanwhile_Cutscene)
+		if Inventory.KEY_DARKSTORAGEKEY>=4 && (! Done.DarkStorageOnyx_Meanwhile_Cutscene)
 			MapScript.SASKIA("Meanwhile")
+		elif gbool.DarkStorageOnyx_Meanwhile_Cutscene
+			Map.Kill("Deur")
 		end
 	end
 	
-	void GJ_OPEN()
-		//var GJ
-		//if (not gv.Bool.GameJolt) or gj_checked or gj_failed()
-		//	return
-		//end
-		//gj_checked = true
-		//GJ = NIL.Use("Secu/Include/GJSecret.nil")
-		//if not GJ
-		//	Annoy("Unfortunately I failed to contact Game Jolt, so I could not open the secret passage tied to this area!\n\n- Is your internet connection okay?\n- You never changed your credentials on Game Jolt?\n-Is Game Jolt up and running?\n\nIf you want to try again, leave this dungeon and come back later!")
-		//	return
-		//end
-		//if GJ.ImpureRatio>=64
-		//	Map.Kill("GameJoltBarrier")
-		//	Map.ShowByLabel("GJ")
-		//end
-		if gj_checked
-			return
-		end
-		gj_checked=true
-		var p 
-		p = NALA_Medals:AltRatio()
-		CSayF("Medal rate %03.2f%%",p)
-		gj_checked = true
-		if p>=64
-			Map.Kill("GameJoltBarrier")
-			Map.ShowByLabel("GJ")
-		end
+	void MDL_OPEN()
+		LocExtern WantRatio "64"
+		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
+		if MedalRatio>=WantRatio
+			Map.Kill("Medal_Barrier",false)
+			Kthura.ShowByLabel("Medal")
+			Kthura.ShowByLabel("GJ") // Should be obsolete, but I cannot be sure.
+			CSayF("-> Open Sesame!")
+		End
+		medal_checked=true
 	end
 	
-	void FROMGJ()
-		if gj_checked
+	void FROM_MEDAL()
+		if medal_checked
 			return
 		end
-		Map.Kill("GameJoltBarrier")
-		Map.ShowByLabel("GJ")
-		gj_checked = true
+		Kthura.ShowByLabel("Medal")
+		Kthura.ShowByLabel("GJ") // Should be obsolete, but I cannot be sure.
+		Map.Kill("Medal_Barrier")
+		medal_checked = true	
 	end
 	
 	void ENTERMORKER()
-		Field.LoadMap("GJ_DUNG_MORKER")
+		Field.LoadMap("MDL_DUNG_MORKER")
 		Map.GoToLayer("#001","Start")
 	end
 	
@@ -107,9 +104,9 @@ group MScript
 		if OnyxBlock
 			Map.StopWalking()
 			Map.WalkTo("Start")
-			MapText("NOTBACK_"..(Map.Leader:upper()))
+			MapText("NOTBACK_"..Upper(Map.Leader))
 		else
-			Map.GoToLayer('#002','Einde')
+			Map.GoToLayer("#002","Einde")
 		end
 	end
 	
@@ -171,7 +168,7 @@ group MScript
 		end
 		bool Eric = false
 		for i=1,7
-			Eric = Eric or RPG.Party[i]=="Eric"
+			Eric = Eric || RPG.Party[i]=="Eric"
 			if Eric
 				RPG.Party[i] = RPG.Party[i+1]
 			end
@@ -198,7 +195,7 @@ group MScript
 		for i=0,4
 			Kirana.Points("SKILLLVL"..i).Have = Kirana.Points("SKILLLVL"..i).Maximum
 		end
-		for _,e in ipairs { "Flame","Wind","Water","Earth","Frost","Thunder" }
+		for _,e in pairs { "Flame","Wind","Water","Earth","Frost","Thunder" }
 			Kirana.Stat("BASE__RESIST_Elem_"..e).Value=math.random(60/__skill,90/__skill)
 		end
 		Kirana.Stat("BASE__RESIST_Elem_Darkness").Value=math.random(90/__skill,96/__skill)
@@ -206,20 +203,6 @@ group MScript
 		OnyxBlock=false	
 	end
 
-	
-	void CONSTRUCTOR()
-		for i,onyx in pairs { "Aldarus", "Jeracko", "Kirana", "Rondomo" } 
-			Map.ZA_Enter("Go"..onyx,"GoSub",i,onyx)
-		end
-		Map.ZA_Enter("MainHall","Meanwhile")
-		Map.ZA_Enter("CheckGJ","GJ_Open")
-		Map.ZA_Enter("FromGJ","FROMGJ")
-		Map.ZA_Enter("ToMorker","EnterMorker")
-		Map.ZA_Enter("AltPrev","AltPrev")
-		Map.ZA_Enter("Onyx","OnyxStart")
-		Map.ZA_Enter("RemoveEric","RemoveEric")
-	end
-	
 	void Draw()
 	end
 	
@@ -227,4 +210,18 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+
+init
+	for i,onyx in pairs { "Aldarus", "Jeracko", "Kirana", "Rondomo" } 
+		Map.ZA_Enter("Go"..onyx,"GoSub",i,onyx)
+	end
+	Map.ZA_Enter("MainHall","Meanwhile")
+	Map.ZA_Enter("Check_Medal","MDL_Open")
+	Map.ZA_Enter("From_Medal","FROM_Medal")
+	Map.ZA_Enter("ToMorker","EnterMorker")
+	Map.ZA_Enter("AltPrev","AltPrev")
+	Map.ZA_Enter("Onyx","OnyxStart")
+	Map.ZA_Enter("RemoveEric","RemoveEric")
+end

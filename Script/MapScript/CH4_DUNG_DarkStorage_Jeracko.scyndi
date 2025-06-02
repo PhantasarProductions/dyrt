@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_DarkStorage_Aldarus.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_DarkStorage_Jeracko.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,67 +33,51 @@
 // 
 // **********************************************
 // 
-// version: 20.05.07
-// End License Information
+// 
+// version: 25.06.01
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Module
 
-#macro MaxSecret 10
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 
 group MScript
 	
-	void SHOW(int i)
-		Map.ShowByLabel(sprintf("SECRET%d",i))
-	end
-	
-	void HIDE(int i)
-		Map.HideByLabel(sprintf("SECRET%d",i))
+	void TOMAIN()
+		Field.LoadMap("CH4_DUNG_DarkStorage")
+		Map.GoToLayer("#000","FromJeracko")
 	end
 	
 	void BOSS()
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/Reg.wav"
-		StartCombat.Arena = "DS_Aldarus"
-		StartCombat.Foe[1] = "Boss/GiantSquid"
+		StartCombat.Arena = "DS_Jeracko"
+		StartCombat.Foe[1] = "Boss/SuperHag"
 		StartCombat.NoLose = false
 		StartCombat.FoeIDDQD = false
 		StartCombat.Ready()
 	end
 	
-	void ALDARUS()
+	void JERACKO()
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/OrderOfOnyx.wav"
-		StartCombat.Arena = "DS_Aldarus"
-		StartCombat.Foe[1] = "Boss/Aldarus2"
+		StartCombat.Arena = "DS_Jeracko"
+		StartCombat.Foe[1] = "Boss/Jeracko2"
 		StartCombat.NoLose = false
 		StartCombat.FoeIDDQD = false
-		StartCombat.OnyxSteal = "Aldarus"
+		StartCombat.OnyxSteal = "Jeracko"
 		StartCombat.Ready()
 	end
 	
-	void WARPBACK()
-		Map.GoToLayer("#100","Start")
+	void GOBACK()
+		Map.GoToLayer("#200","Start")
 	end
-	
-	void TOMAIN()
-		Field.LoadMap("CH4_DUNG_DarkStorage")
-		Map.GoToLayer("#000","FromAldarus")
-	end
-	
-	void CONSTRUCTOR()
-		for i=1,MaxSecret 
-			Map.ZA_Enter(sprintf("SECRET%d",i),"Show",i)
-			Map.ZA_Leave(sprintf("SECRET%d",i),"Hide",i)
-			CSayF("Secret set %2d",i)
-		end
-		Map.ZA_Enter("Kantine","SASKIA:Kantine")
-		Map.ZA_Enter("WarpBack","WarpBack")
-		Map.ZA_Enter("ToMain","ToMain")
-	end
+
+
 	
 	void Draw()
 	end
@@ -101,4 +86,11 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+	
+Init
+	Map.ZA_Enter("ToMain","ToMain")
+	Map.ZA_Enter("Boss","SASKIA:Boss")
+	Map.ZA_Enter("GoBack","GoBack")
+End

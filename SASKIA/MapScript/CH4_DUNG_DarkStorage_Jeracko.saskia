@@ -34,8 +34,9 @@
 ; 
 ; version: 20.05.07
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.create,"Dark Storage"
 	jmp Niks
 
 :Boss

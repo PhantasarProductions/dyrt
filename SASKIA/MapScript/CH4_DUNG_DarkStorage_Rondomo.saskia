@@ -34,8 +34,9 @@
 ; 
 ; version: 20.05.09
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Dark Storage: Rondomo"
 	end
 
 :Boss

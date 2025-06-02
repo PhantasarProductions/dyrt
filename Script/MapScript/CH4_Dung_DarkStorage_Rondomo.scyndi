@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_DarkStorage_Rondomo.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_Dung_DarkStorage_Rondomo.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.05.10
-// End License Information
+// 
+// version: 25.06.01 III
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Module
+
+#use "libs/sci/sys"
+#use "libs/sci/audio"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 
 #use "Script/Use/MapScript/Memory"
 
@@ -71,13 +78,13 @@ group MScript
 		if self.DoneMemory
 			return
 		end
-		Memory.Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Aziella"})
+		Memory.Mem_Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Aziella"})
 	end
 	
 	link MEMORYCYCLE = Memory.Cycle
 	
 	void MemoryPuzzleSolved()
-		LoadAudio("SFX/Puzzle/Solved.wav").Play()
+		Audio.Load("SFX/Puzzle/Solved.wav").Play()
 		Map.Kill("Barrier",true)
 		Map.Kill("StartPuzzle",true)
 		self.KILLMEMORY()
@@ -132,19 +139,7 @@ group MScript
 		Map.HideByLabel(sprintf("SECRET_%d",i))
 	end
 
-	
-	void CONSTRUCTOR()
-		for i=1,MaxSecret 
-			Map.ZA_Enter(sprintf("SECRET_%d",i),"Show",i)
-			Map.ZA_Leave(sprintf("SECRET_%d",i),"Hide",i)
-			CSayF("Secret set %2d",i)
-		end
-		Map.ZA_Enter("GoMain","ToMain")
-		Map.ZA_Enter("Boss","SASKIA:Boss")
-		Map.ZA_Enter("GoBack","GoBack")
-		Map.ZA_Enter("StartPuzzle","ResetMemory")
-		CSay("Welcome to Rondomo's section of the Dark Storage")
-	end
+
 	
 	void Draw()
 	end
@@ -153,4 +148,18 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+	
+Init
+	for i=1,MaxSecret 
+		Map.ZA_Enter(sprintf("SECRET_%d",i),"Show",i)
+		Map.ZA_Leave(sprintf("SECRET_%d",i),"Hide",i)
+		CSayF("Secret set %2d",i)
+	end
+	Map.ZA_Enter("GoMain","ToMain")
+	Map.ZA_Enter("Boss","SASKIA:Boss")
+	Map.ZA_Enter("GoBack","GoBack")
+	Map.ZA_Enter("StartPuzzle","ResetMemory")
+	CSay("Welcome to Rondomo's section of the Dark Storage")
+end
