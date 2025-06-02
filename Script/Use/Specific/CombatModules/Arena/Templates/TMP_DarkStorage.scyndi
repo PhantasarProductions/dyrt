@@ -1,0 +1,144 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_DarkStorage.scyndi
+// 
+// 	  Version: 25.06.01 IX
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
+#use "libs/xrandom"
+#use "libs/LinkedList"
+
+class DSItem
+	readonly int X
+	readonly int Y
+	readonly var img
+	readonly int iX
+	readonly int iY
+	
+	CONSTRUCTOR(int ax,int ay, aimg)
+		self.X=ax;
+		self.Y=ay
+		self.img=aimg
+		self.iX = ax - aimg.Width div 2
+		self.iY = ay - aimg.Height
+	end
+	
+	void Draw()
+		self.img.Draw(self.iX,self.iY)
+	end
+end
+
+group DarkStorage_Arena
+
+	string Name
+	var ImgWall
+	var ImgWall2
+	var ImgFloor
+	var ImgBarrel
+	var ImgCrate
+	
+	readonly var Troep
+	readonly int ymodulo
+	readonly int ycenter
+	
+	Void LoadMe()
+		self.ImgBarrel = LoadNewImage("GFX/Textures/Obstacles/Barrel.png","ARENA_DS_Barrel")
+		self.ImgCrate  = LoadNewImage("GFX/Textures/Obstacles/Crate.png","ARENA_DS_Create")
+		self.ycenter = math.floor(Graphics.H/2)
+		self.ymodulo = self.ycenter % 64
+		self.Troep = new TLinkedList()
+		CSayF("Screen: %dx%d; Center %d; Modulo %d;",Graphics.W,Graphics.H,self.ycenter,self.ymodulo)
+		int x = 0		
+		Shit:={}		
+		shit+= self.ImgBarrel
+		shit+= self.ImgCrate
+		repeat
+			int y
+			int r 
+			r = math.random(1,2)
+			CSayF("%4d: up/down: %d",x,r)
+			switch r
+				case 1					
+					y = math.random(Graphics.H-130,Graphics.H-120)
+					CSayF("%4d: down: %d",x,y)
+				case 2
+					y = math.random(self.ycenter,self.ycenter+10)
+					CSayF("%4d: up:   %d",x,y)
+			end
+			CSayF("%4d: Decide object",x)
+			//self.Troep.AddLast(new DSItem(x,y,shit[math.random(0,len(shit))-1]))
+			self.Troep.AddLast(new DSItem(x,y,xRND(shit)))
+			CSayF("%4d: End, and increment!",x)
+			x += math.random(32,100)
+		until x>=Graphics.W
+		CSay("Done!")
+	end
+
+	void DS_Init(string Name,ToModule)
+		CSay("Loading the required textures for: "..Name)
+		self.ImgWall   = LoadNewImage(sprintf("GFX/Textures/DarkStorage/%s1.png",Name),sprintf("ARENA_WALL_DS_%s1",Name))
+		self.ImgWall2  = LoadNewImage(sprintf("GFX/Textures/DarkStorage/%s2.png",Name),sprintf("ARENA_WALL_DS_%s2",Name))
+		self.ImgFloor  = LoadNewImage(sprintf("GFX/Textures/DarkStorage/%s_Floor.png",Name),sprintf("ARENA_FLOOR_DS_%s",Name))
+		CSay("Done")
+		//return self
+		ToModule.Draw = DarkStorage_Arena.Draw
+	end
+	
+	void Draw()
+		// CSay("DS.DRAW") // debug!
+		self.ImgFloor.Tile(0,self.ycenter-10,Graphics.W,self.ycenter)
+		//self.ImgWall.ITile(0,0,Graphics.W,self.ycenter,0,self.ymodulo)
+		self.ImgWall.Tile(0,0-ymodulo,Graphics.W,self.ycenter+ymodulo)
+		for ding in self.Troep.Each
+			ding.Draw()
+		end
+	end
+
+end
+
+Init 
+	DarkStorage_Arena.LoadMe()
+ENd
