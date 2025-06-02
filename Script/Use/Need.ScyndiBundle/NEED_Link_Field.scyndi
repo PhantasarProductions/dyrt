@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/NEED_Link_Field.scyndi
 // 
-// 	  Version: 25.05.22 II
+// 	  Version: 25.06.01
 // 	
 // 	  Copyright (C) 2019, 2020, 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -358,7 +358,7 @@ group Map
 	end
 	
 	void ShowObj(string tag)
-		Kthura.Obj[Tag].visible=false
+		Kthura.Obj[Tag].visible=true
 	end
 	
 	void Cam(int x,int y)
