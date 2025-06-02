@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Execution.scyndi
 // 
-// 	  Version: 25.05.17 I
+// 	  Version: 25.05.30 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -157,7 +157,9 @@ group Execution
 		end
 
 		//Tar.Char.Points("HP").Dec(enddmg)
-		Tar.Char.Points("HP").Have-=enddmg
+		if (!gv.Bool.DEBUG_GODMODE) || (prefixed(Tar.Tag,"FOE_"))
+			Tar.Char.Points("HP").Have-=enddmg
+		end
 		if gv.Bool.DEBUG_CHEAT_JACKTHERIPPER && ( prefixed(Tar.Tag,"FOE_") )
 			CSay("Killing foe due to the Jack The Ripper mode")
 			Tar.Char.Points("HP").Have = 0

@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.22 XIII
+// version: 25.05.29 III
 // 
 // End License
 
@@ -74,10 +74,31 @@ group TempParty
 	end
 end
 
+LocExtern MaxCorridor "8"
+	
 group MScript
 	
 	table HideZones
 	bool dominate
+		
+	void showCorridor()
+		Kthura.CurrentLayer="PALACE"
+		Map.ShowByLabel("Hall")
+		Map.HideByLabel("Corridor")
+		for i=1,MaxCorridor
+			Map.ShowByZone(sprintf("Corridor%03d",i))
+		end
+	end
+
+	void HideCorridor()
+		Kthura.CurrentLayer="PALACE"
+		Map.HideByLabel("Hall")
+		Map.HideByLabel("Corridor")
+		for i=1,MaxCorridor
+			Map.HideByZone(sprintf("Corridor%03d",i))
+		end
+	end
+	
 	
 	void HideSubs()
 		CSay("Hide Subs: Fake!")
@@ -87,6 +108,7 @@ group MScript
 			CSayF("Hide Subs Zone: %s",z)
 			Map.HideByZone(z)
 		end
+		MScript.ShowCorridor()
 	end
 	
 	//link HIDESUBS = MScript.HideSubs
@@ -96,6 +118,11 @@ group MScript
 		Map.ShowByZone(z)
 		Map.HideByLabel("H")
 		Map.HideObj("Katha")
+		If Upper(z)=="SCHARUM"
+			MScript.HideCorridor()
+		Else
+			MScript.ShowCorridor()
+		End
 	end
 	
 	void SCHARUMSTART()

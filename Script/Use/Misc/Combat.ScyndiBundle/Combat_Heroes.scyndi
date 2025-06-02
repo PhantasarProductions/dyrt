@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.04.29 I
+// 	  Version: 25.05.29
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -411,7 +411,7 @@ group Stage_SelectTarget extends Stage
 	
 	void Draw()
 		for tag,fight in pairs(self.targetted)
-			if not Combat_Status.UnTargetable(tag)
+			if ! Combat_Status.UnTargetable(tag)
 				__white
 				fight.Icon(fight.X+40,fight.Y+20)
 				if self.wrongteam
@@ -452,10 +452,10 @@ group Stage_SelectTarget extends Stage
 							else
 								CombatTime.FontGauge.Dark(IAA_Item[fight.NextAct.ActTag].Name,fight.X+80,ystat)
 							end
-							if fight.NextAct.Targets[0].Icon
+							if fight.NextAct.Targets[0] && fight.NextAct.Targets[0].Icon
 								// it's not possible in any single way for the game to crash out on this one, 
 								// yet it did happen. This routine makes sure that if it happens the instruction is ignored.
-								// Yes this is safe... I couldn't happen in the first place.
+								// Yes this is safe... It couldn't happen in the first place.
 								fight.NextAct.Targets[0].Icon(fight.X+40,ystat)
 							end
 						end
@@ -569,10 +569,11 @@ group Stage_SelectTarget extends Stage
 		end
 		
 		// Cancel?
-		//if Mouse.HitRight or Keyboard.Code=="Escape"
-		//	Stage.Go("PLAYERINPUT")
-		//	return
-		//end
+		if Mouse.HitRight 
+			//or Keyboard.Code=="Escape"
+			Stage.Go("PLAYERINPUT")
+			return
+		end
 		
 		// Confirmed
 		if gotone and (Mouse.HitLeft)

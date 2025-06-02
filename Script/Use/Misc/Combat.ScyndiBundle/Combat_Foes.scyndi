@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Foes.scyndi
 // 
-// 	  Version: 25.05.08
+// 	  Version: 25.06.02
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -233,10 +233,11 @@ class Foe extends Fighter
 		CSayF("Compiling foe %s: %s",Foe.LoadFoeTag,FoeFile)
 		//myFoeUse = NIL.Use("Script/Data/Foes/"..FoeFile);
 		//Lua.error("Combat_Foes:213 -> Foe loader not yet present")
-		Lua.Scyndi.Use("Script/Data/Foes/"..FoeFile)		
+		RFoeFile:=Replace(Replace(FoeFile,"-","_")," ","_")
+		Lua.Scyndi.Use("Script/Data/Foes/"..RFoeFile)		
 		//myFoe = myFoeUse()
-		myFoe := Lua.Scyndi.Class[StripDir(Replace(Replace(FoeFile,"-","_")," ","_"))].retfunc()
-		myFoe.FromFile = Upper(FoeFile)
+		myFoe := Lua.Scyndi.Class[StripDir(RFoeFile)].retfunc()
+		myFoe.FromFile = Upper(RFoeFile)
 		myFoe.Char = RPG.Char(Foe.LoadFoeTag)
 		myFoe.Oversoul = FoeOversoul==true
 		if Combat_Start.FoeIDDQD

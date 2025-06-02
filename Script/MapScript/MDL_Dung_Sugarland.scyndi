@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.19 I
+// version: 25.05.30
 // 
 // End License
 
@@ -81,16 +81,6 @@ group MScript
 		Map.ShowByZone("Secret")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("ToGagolton","Gagolton")
-		Map.ZA_Enter("StartBoss","SASKIA:Boss")
-		Map.ZA_Enter("ToEinde","GoEind")
-		Map.ZA_Enter("WayBack","GoBack")
-		//Map.Layer="#001"
-		//Map.HideByZone("Secret")
-		//Map.ZA_Enter("Secret","SSECRET")
-		//Map.ZA_Leave("Secret","HSECRET")
-	end
 	
 	void Draw()
 	end
@@ -98,4 +88,16 @@ group MScript
 	void Update()
 	end
 	
+end
+
+
+Init
+	Map.ZA_Enter("ToGagolton","Gagolton")
+	Map.ZA_Enter("StartBoss","SASKIA:Boss")
+	Map.ZA_Enter("ToEinde","GoEind")
+	Map.ZA_Enter("WayBack","GoBack")
+	//Map.Layer="#001"
+	//Map.HideByZone("Secret")
+	//Map.ZA_Enter("Secret","SSECRET")
+	//Map.ZA_Leave("Secret","HSECRET")
 end

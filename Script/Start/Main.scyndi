@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Start/Main.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.29 I
 // 	
 // 	  Copyright (C) 2019, 2022, 2025 Jeroen Petrus Broks
 // 	
@@ -49,6 +49,7 @@
 Script
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/GINIE"
 #use "Libs/SCI/Events"
 #use "Libs/SCI/Graphics"
 
@@ -64,6 +65,17 @@ Init
 	CSay("Welcome to Phantasar!")
 	CSay("Join us on our travel to Dyrt!");
 	CSay("")
+	
+	b:=GINIE.LoadHomeNew("Config.ini","GlobCONFIG","Config.ini","Global Configuration\nThe Secrets of Dyrt\n(c) Jeroen P. Broks")
+	b.NewValue("Cast","Eric","77dcd555f38b965d220a13a3bb080260")
+	b.NewValue("Cast","Irravonia","80dfa6b501b72b13dab760e315f83cdb")
+	b.NewValue("Cast","Brendor","98f736852d7b4a5799aac0165dc07b06")
+	b.NewValue("Cast","Scyndi","4d20611f1878c4224f9a33cdca794ff0")
+	b.NewValue("Cast","Rebecca","65ed72f435ddd53cb3efb0b018ce2af4")
+	b.NewValue("Cast","Dernor","003c78c8ad68e2103c6a4b396d3f9c2e")
+	b.NewValue("Cast","Merya","171985d831739fceb8f65353ba03c59b")
+	b.NewValue("Cast","Aziella","6a3b30297898944bde26035c131af409")
+
 
 //global void Bubble_Init()
 	//BubbleTimer.ShowTime = __showtime

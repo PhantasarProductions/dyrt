@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Instant.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.02
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -75,7 +75,7 @@ quickmeta Instant
 			trueinstant[key] = Lua.Scyndi.Class["Instant_"..Key]
 		End
 		InstantDone = true
-		return trueinstant[key]
+		return trueinstant[key].Do_Instant
 	end
 	
 	newindex

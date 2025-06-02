@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.30
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -51,6 +51,7 @@ Script
 #use "Libs/SCI/Sys"
 #use "Libs/SCI/JCR6"
 #use "Libs/SCI/Audio"
+#use "Libs/SCI/Events"
 #use "libs/sci/sstring"
 #use "LIBS/SCI/GRAPHICS"
 #use "Libs/SCI/InterVar"
@@ -234,6 +235,7 @@ group SubParty
 		tag = trim(tag)
 		ch = RPG.Char(tag)
 		ch.Stat("Level").Value=level
+		Events.Poll()
 		if level>=100 and tag!="YoungIrravonia" and tag!="Kirana" and tag!="Shanda"
 			if tag=="Yasathar"
 				Achievements.Award("100_ERIC")
@@ -244,6 +246,10 @@ group SubParty
 		lines = JCR6.GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
 		CSayF("Parsing %s lines of LvStat data",len(lines))
 		for ln,line in ipairs(lines)
+			if ln%10==0
+				// Should prevent Linux to cry about non-responsive behavior!
+				Events.Poll()
+			end
 			line = Trim(line)
 			if line!=""
 				table gespleten
@@ -256,7 +262,8 @@ group SubParty
 				if cmd=="REM"
 					// Alright, move along, there's nothing to see here!
 				elseif Upper(cmd)=="LEVEL"
-					chklevel = tonumber(para) or 0
+					chklevel = tonumber(para) || 0
+					Events.Poll()
 				elseif Upper(cmd)=="STAT.EXPERIENCE" and chklevel==level
 					int exp
 					exp = tonumber(para) or 0
@@ -266,6 +273,7 @@ group SubParty
 						ch.Stat("Experience").Value=ch.Stat("Experience").Value+exp
 					end
 				elseif Upper(Left(cmd,5))=="STAT." and chklevel==level
+					Events.Poll()
 					levelfound=true
 					table splitmore
 					string stat

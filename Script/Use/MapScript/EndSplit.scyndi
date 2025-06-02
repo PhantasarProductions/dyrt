@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.25 III
+// version: 25.05.29
 // 
 // End License
 
@@ -76,6 +76,7 @@ void Rejoin()
 	RPG.Party[7] = "Merya"
 	RPG.Party[8] = "Aziella"
 	Field.LoadMap("CH4_HUB_RAYAL_PALACE")
+	Kthura.CurrentLayer="PALACE"
 	Map.SpawnPlayer("Split_Start")
 	MapScript.ShowPart("Kings_Room")
 	Map.Cam(Player.X-(Graphics.W/2),Player.Y-(Graphics.H/2))

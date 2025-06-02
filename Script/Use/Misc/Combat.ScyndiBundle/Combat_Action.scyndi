@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Action.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.05.27
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -140,8 +140,8 @@ group Action_Exe
 			if Inventory[ Stage_Action.Act.RemoveItem ] > 0
 				if F.Tag=="Merya" && math.random(1,(__skill^2)*2)==1
 					//#pure
-					Hurt("Personal will:","Merya",255,180,0)
-					Hurt("Conserve Items","Merya",0,180,255)
+					new Hurt("Personal will:","Merya",255,180,0)
+					new Hurt("Conserve Items","Merya",0,180,255)
 					//#endpure
 					gv.Int.WILL_MERYA++
 					F.Char.Points("SKILLEXP1").Have = F.Char.Points("SKILLEXP1").Have + (900/__skill)
