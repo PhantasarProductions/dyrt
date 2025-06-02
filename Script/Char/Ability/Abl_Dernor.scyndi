@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17
+// version: 25.06.02
 // 
 // End License
 
@@ -89,7 +89,7 @@ Init
 		a.PollenRed    = { ["Charm"] = { [0]="RedFlower"}, ["Skill_Nature"] = 25 }
 		a.PollenBlue   = { ["Charm"] = { [0]="BlueFlower"}, ["Skill_Nature"] = 25 }
 		a.PollenPurple = { ["Charm"] = { [0]="PurpleFlower"}, ["Skill_Nature"] = 25 }
-		a.Moo          = { ["Charm"] = { [0]="Moo-Moo-Ant"}, ["Skill_Nature"]=math.ceil(s*2.5) }
+		a.Moo          = { ["Charm"] = { [0]="Moo_Moo_Ant"}, ["Skill_Nature"]=math.ceil(s*2.5) }
 	
 	
 	
