@@ -1,0 +1,323 @@
+// License:
+// 	  src/Script/Script/Use/MapScript/MapGenerator.scyndi
+// 
+// 	  Version: 25.05.29 III
+// 	
+// 	  Copyright (C) 2024, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/Graphics"
+
+Var ImgGen = LoadNewImage("GFX/Alg/Generating.png","Generating")
+
+String LastMap = ""
+Table Generated
+
+Int StartX = 32
+Int StartY = 128
+
+Int EndX = 3200
+int EndY = 3200
+
+Get Int Width;  Return EndX-StartX; End
+Get Int Height; Return EndY-StartY; End
+
+//Int FloorModuloX = 130
+//Int FloorModuloY = 130
+
+Int FloorModuloX = 0
+Int FloorModuloY = 0
+
+
+Int FloorDominance = 5
+
+String FloorTexture = "GFX/Textures/Abyss/Top.png"
+
+Int FrontModuloX = 0
+Int FrontModuloY = 0
+Int FrontDominance = 2
+	
+String FrontTexture = "GFX/Textures/Abyss/Bottom.png"
+
+Int GridX = 32
+Int GridY = 32
+
+Int MWX = 96
+int MWY = 96
+
+int SQX = 160
+int SQY = 160
+
+Get int MWHX; return MWX div 3; End
+Get int MWHY; return MWY div 3; End
+Get int SQHX; return SQX div 2; End
+Get int SQHY; return SQY div 2; End
+
+String TransTex = "GFX/Textures/Abyss/Exit2.png"
+String TransTag = "TransPic"
+Int    TransRad = 32
+String TransZAT = "ZA_NextMap" // ZAT = Zone Action Tag (it also means "drunk" in Dutch).
+
+//                    0   1   2   3      4
+Var Winds = NewArray("N","E","S","W","SQUARE")
+
+// Square is not really a wind direction, but will create the bigger platforms that surround the start and finish location.
+
+Class MG_Tak
+	ReadOnly Int X
+	ReadOnly Int Y
+	ReadOnly Int W
+	ReadOnly Int L
+	Get String Wind; Return Winds[W] || "???"; End
+	
+	// Object X
+	Get Int OX
+		Switch W
+			case 0 2 1
+				Return math.max(StartX,x-MWHX)
+			case 3
+				int r;r=(x-L)-MWHX
+				return math.max(r,StartX)
+			case 4
+				return X-SQHX			
+		End
+		Return 0
+	End
+	
+	// Object Y
+	Get Int OY
+		Switch W
+			case 1 2 3
+				Return math.max(StartY,y-MWHY)
+			case 0
+				int r;r=(Y-L)-MWHY
+				return math.max(r,StartY)
+			case 4
+				Return Y-SQHY
+		End
+		Return 0
+	End
+
+	// Object Width
+	Get Int OW
+		Switch W
+			case 0 2
+				Return MWX
+			case 1 3
+				int r;r = L+MWHX
+				if (r+OX>EndX)
+					return EndX-OX
+				Else
+					Return r
+				End			
+			case 4
+				Return SQX
+		End
+		Return 0
+	End
+	
+	Get Int OH
+		Switch W
+			case 1 3
+				Return MWY
+			case 0 2
+				int r;r = L+MWHY
+				if (r+OY>EndY)
+					return EndX-OY
+				Else
+					Return r
+				End	
+			case 4
+				Return SQY
+		End
+		Return 0
+	End
+	
+	Get Int OEX; Return OX+OW; End
+	Get Int OEY; Return OY+OH; End
+	
+	Get Int NextX
+		Switch W
+			case 0 2 3
+				return OX+MWHX
+			case 1
+				Return OEX-MWHX
+			case 4
+				Return X
+		End
+		Return 0
+	End
+	
+	Get Int NextY
+		Switch W
+			case 0 1 3
+				Return OY+MWHY
+			case 2
+				Return OEY-MWHY
+			case 4
+				Return Y
+		End
+	End
+	
+	Static Int Cnt = 0
+	ReadOnly Int ID
+	Constructor (Int _X, Int _Y,Int _L,Int _W=10)
+		Cnt++; ID=Cnt
+		X = (_X div GridX)*GridX // This removes any modulos not being right.
+		Y = (_Y div GridY)*GridY // This removes any modulos not being right.
+		W = _W
+		If _W<0 || _W>4; W = math.random(0,3); End
+		Switch W
+			case 4
+				L = 0
+				if OX<StartX;X=StartX+SQX; End
+				if OY<StartY;Y=StartY+SQY; End
+			case 0 2
+				L = (_L div GridY)*GridY
+			default
+				L = (_L div GridX)*GridX
+		End
+		CSayF("Tak #%04d -> P(%d,%d,%d,%d)",ID,_X,_Y,_L,_W)
+		CSayF("Tak     -> O(%d,%d,%d,%d) -> %s",OX,OY,OW,OH,Winds[W])
+	End
+	
+	Destructor
+		CSayF("Tak #%04d has been destroyed",ID)
+	End
+	
+	Bool Generated = False
+	Void Generate()
+		If Generated; Return; End // Dupe Prevention
+		plua platform
+		plua bottom
+		platform = Kthura.NewTiledArea(OX, OY, OW, OH, FloorTexture)
+		platform.ForcePassible = true
+		platform.Dominance = FloorDominance
+		if FloorModuloX>0;platform.InsertX=-(OX % FloorModuloX); End
+		if FloorModuloY>0;platform.InsertY=-(OY % FloorModuloY); End
+		if OY+OH<EndY
+			//bottom = Kthura.NewTiledArea(OX,OY+OH,OW,64,FrontTexture)
+			bottom = Kthura.NewTiledArea(OX,OY+OH,OW,26,FrontTexture)
+			//bottom.ForcePassible = true
+			bottom.Dominance = FrontDominance
+			if FrontModuloX>0;bottom.InsertX=-(OX % FrontModuloX); End
+			if FrontModuloY>0;bottom.InsertY=-(OY % FrontModuloY); End
+			While Bottom.Y+Bottom.H>EndY && Bottom.H>0;Bottom.H--;End
+		End
+		Generated = True
+	End
+	
+End
+
+Void Generate()
+	Cls()
+	ImgGen.HotCenter()
+	ImgGen.Draw(Graphics.Width div 2,Graphics.Height div 2)
+	Flip()
+	// Conflict preventor
+	If LastMap!=Kthura.LastLoadedMap
+		CSayF("MapGen: New map %s encountered. Resetting generation table",Kthura.LastLoadedMap)
+		Generated = {}
+		LastMap=Kthura.LastLoadedMap
+	End
+	If Generated[Kthura.CurrentLayer]
+		CSayF("It appears layer '%s' had its map generated before. Getting out!",Kthura.CurrentLayer)
+		Return
+	End
+	plua Start;Start = New MG_Tak(math.random(StartX,EndX),math.random(StartY,EndY),0,4)
+	plua StartExit;StartExit = Kthura.NewExit(Start.NextX,Start.NextY,"Start","South")
+	plua Einde = nil
+	plua EindeZone = nil
+	plua EindeTeleporter = nil
+	Start.Generate()
+	Int Takken = math.random(2,6)
+	Table TakTab = {}
+	Table TakNew
+	For i=0,Takken
+		TakTab[i] = New MG_Tak(Start.NextX,Start.NextY,math.random(32,256))
+	End
+	Int TimeOut=10000
+	Int UlMax=100
+	plua LastTak = {}
+	// Safety precaution. It *is* tecnically possible (with a bit of bad luck) 
+	// No map is generated at all, and then it least there'll be an exit now!
+	if Start.NextX<EndX div 2
+		LastTak.NextX = Start.NextX+SQX
+	Else
+		LastTak.NextX = Start.NextX-SQX
+	End
+	// Generate the map
+	Repeat
+		TakNew = {}
+		For i,t in pairs(TakTab)
+			CSayF("Growth %02d/%02d",i,Takken)
+			LastTak=t
+			t.Generate()
+			If UlMax<=0 || math.random(0,UlMax)==0
+				if (!Einde) && math.random(1,math.max(2,UlMax))==1
+					Einde = New MG_Tak(t.NextX,t.NextY,0,4)
+					if math.random(1,math.max(2,UlMax))!=1
+						TakNew[i]=New MG_Tak(t.NextX,t.NextY,math.random(32,256))
+					End
+				End
+			Else
+				TakNew[i]=New MG_Tak(t.NextX,t.NextY,math.random(32,256))
+			End
+		End
+		int NieuweTakken=0
+		for i,t in pairs(TakNew); NieuweTakken++; End
+		TimeOut--
+		CSay("New branches: %d; Timeou:%04d",NieuweTakken,TimeOut)
+		TakTab = TakNew
+	Until NieuweTakken==0 || TimeOut<=0
+	// Make sure there's an ending platform
+	Einde = Einde || New MG_Tak(Lasttak.NextX,lasttak.NextY,0,4)
+	// Set up the einding platform
+	Einde.Generate()
+	EindeTeleporter = Kthura.NewObstacle(Einde.NextX,Einde.NextY,TransTex)
+	EindeTeleporter.Tag = TransTag
+	EindeZone = Kthura.NewZone(EindeTeleporter.X-TransRad,EindeTeleporter.Y-TransRad,TransRad*2,TransRad*2)
+	EindeZone.Tag = TransZAT
+	CSayF("End zone '%s::%s' on (%04d,%04d) %04dx%04d",EindeZone.Kind,EindeZone.Tag,EindeZone.X,EindeZone.Y,EindeZone.W,EindeZone.H)
+	Kthura.Remap()
+End
