@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Kirana_3rd.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Kirana_3rd.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,22 +33,39 @@
 // 
 // **********************************************
 // 
-// version: 20.05.17
-// End License Information
-module Kirana_AI3
+// 
+// version: 25.06.02 V
+// 
+// End License
 
-	var Default
-	int Beurt = 1
-	readonly int modulo
+
+
+
+
+
+
+module 
+	//Kirana_AI3
+
+	//var Default
+	#use "Script/Use/Need"
+	#use "Script/Use/Specific/CombatModules/AI/AI_Default"
 	
-	void CONSTRUCTOR()
-		self.modulo = 24 / __skill
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-	end
+	#accept Fighter
+	
+	
+	int Beurt = 1
+	readonly int modulo = 24 div __skill
+	
+	//void CONSTRUCTOR()
+	//	modulo = 24 / __skill
+	//	Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+	//end
 	
 	get var FoeR
 		int i = 0
-		return var()
+		//return var()
+		ddef RetFoeR
 			i++
 			if i>3
 				return nil
@@ -57,11 +75,13 @@ module Kirana_AI3
 				return i
 			end
 		end
+		Return RetFoeR
 	end
 	
 	get var eachheroes
 		int i=0
-		return var()
+		//return var()
+		ddef R_EH
 			i++
 			if i>4
 				return nil
@@ -69,6 +89,7 @@ module Kirana_AI3
 				return Fighter.ByTag[RPG.Party[i]]
 			end
 		end
+		return R_EH
 	end
 	
 	void AltMove(foe,string abl)
@@ -82,9 +103,15 @@ module Kirana_AI3
 		end
 		nact.ExeTag = foe.Tag
 		nact.Targets = {}
-		for check in self.eachheroes
-			if check.Char.Points("HP").Have>0
-				nact.Targets[#nact.Targets+1]=check
+		if abl!="ALLHEAL"
+			for check in eachheroes
+				if check.Char.Points("HP").Have>0
+					nact.Targets+=check
+				end
+			end
+		else
+			for i=1,4
+				nact.Targets+=Fighter.ByTag[sprintf("FOE_%d",i)]
 			end
 		end
 		foe.NextAct = new Actions(nact)
@@ -94,7 +121,7 @@ module Kirana_AI3
 	void Decide(foe)
 		bool death
 		bool damaged
-		for i in self.FoeR
+		for i in FoeR
 			var f
 			var HP
 			f = Fighter.ByTag["FOE_"..i]
@@ -104,18 +131,18 @@ module Kirana_AI3
 		end
 		if death
 			MapText("AI_KIRANA_FURY")
-			self.AltMove(foe,"ALLDEATH")
+			AltMove(foe,"ALLDEATH")
 			return
 		end
 		if damaged
-			self.AltMove(foe,"ALLHEAL")
+			AltMove(foe,"ALLHEAL")
 			return
 		end
-		self.Beurt++
-		if self.Beurt % self.modulo == 0
-			self.AltMove(foe,"SOUL")
+		Beurt++
+		if Beurt % modulo == 0
+			AltMove(foe,"SOUL")
 			return
 		end
-		self.Default.Decide(foe)
+		AI_Default.Decide(foe)
 	end
-end
+//end
