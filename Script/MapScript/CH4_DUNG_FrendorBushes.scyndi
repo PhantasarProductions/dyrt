@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_FrendorBushes.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_DUNG_FrendorBushes.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,19 +33,25 @@
 // 
 // **********************************************
 // 
-// version: 20.05.21
-// End License Information
+// 
+// version: 25.06.03
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+
+Module
+
+#use "Libs/SCI/Sys"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 group MScript
 	
 	void NPC_SHECKLOCK()
 		CSay("Sheck-Lock")
-		if not gv.Bool.Defeated_SheckLock3
+		if ! gv.Bool.Defeated_SheckLock3
 			MapScript.SASKIA("SheckLock")
 			return
 		end
@@ -73,11 +80,7 @@ group MScript
 		WorldMap.Delisto()
 	end
 	
-	void CONSTRUCTOR()
-		Map.RENC_Inf = true
-		Map.ZA_Enter("ForceSheckLock","ForceSheckLock")
-		Map.ZA_Enter("Eindpunt","Finish")
-	end
+
 	
 	void Draw()
 	end
@@ -86,4 +89,10 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+Init
+	Map.RENC_Inf = true
+	Map.ZA_Enter("ForceSheckLock","ForceSheckLock")
+	Map.ZA_Enter("Eindpunt","Finish")
+End
