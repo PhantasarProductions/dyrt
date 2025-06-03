@@ -70,8 +70,8 @@
 	;call Map.StopMoving
 	call Map.MoveTo,"GaWeg"
 	mov false,FlowField.AutoScroll
-	mov 0,Map.CamX
-	mov 0,Map.CamY
+	mov 0,gv.int.CamX
+	mov 0,gv.int.CamY
 	call Map.ShowObj,"Dzgjymza"
 	call MapText,"DZGJYMZA"
 	mov true,FlowField.AutoScroll
