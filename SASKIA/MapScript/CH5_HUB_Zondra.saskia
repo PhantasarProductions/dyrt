@@ -35,7 +35,7 @@
 ; version: 20.06.01
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Zondra's Grave"
 	end
 
 :Zondra
