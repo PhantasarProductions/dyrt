@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.25 VI
+// version: 25.06.03
 // 
 // End License
 
@@ -99,33 +99,35 @@ group MScript
 			Yasathar.Points("SKILLLVL"..i).Have = Eric.Points("SKILLLVL"..i).Have
 			Yasathar.Points("SKILLEXP"..i).Have = Eric.Points("SKILLEXP"..i).Have
 		end
-		Yasathar.Stat("Level").Link("Eric")
-		Eric.Stat("Level").Link("Yasathar")
+		Yasathar.Stat("Level").Lnk("Eric")
+		Eric.Stat("Level").Lnk("Yasathar")
 		for _,st in pairs { "Strength", "Defense", "Intelligence", "Resistance", "Agility", "Accuracy", "Evasion" }
 			CSay("Linking Stat: "..st)
-			Eric.Stat("PERMPOWERUP_"..st).Link("Yasathar")
+			Eric.Stat("PERMPOWERUP_"..st).Lnk("Yasathar")
 		end
 		for _,st in pairs { "Poison",	"Disease",	"Silence",	"Paralysis",	"Sleep",	"Exhaustion",	"Confusion",	"Fear",	"Death",	"Destruction",	"Zombie" }
 			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
 				CSayF("Linking Status Resitance %s.%s",st,sub)
-				Eric.Stat(sprintf("%s__RESIST_Stat_%s",sub,st)).Link("Yasathar")
+				Eric.Stat(sprintf("%s__RESIST_Stat_%s",sub,st)).Lnk("Yasathar")
 			end
 		end
 		for _,st in pairs { "Poison",	"Disease",	"Silence",	"Paralysis",	"Sleep",	"Exhaustion",	"Confusion",	"Fear",	"Death",	"Destruction",	"Zombie" }
 			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
 				CSayF("Linking Status Resitance %s.%s",st,sub)
-				Eric.Stat(sprintf("%s__RESIST_Stat_%s",sub,st)).Link("Yasathar")
+				Eric.Stat(sprintf("%s__RESIST_Stat_%s",sub,st)).Lnk("Yasathar")
 			end
 		end
 		for _,st in pairs {"None", 	"Flame",	"Wind",	"Water",	"Earth",	"Frost",	"Thunder",	"Light",	"Darkness" }
 			for _,sub in pairs {"BASE","PERMPOWERUP","BUFF" }
 				CSayF("Linking Elemental Resitance %s.%s",st,sub)
-				Eric.Stat(sprintf("%s__RESIST_Elem_%s",sub,st)).Link("Yasathar")
+				Eric.Stat(sprintf("%s__RESIST_Elem_%s",sub,st)).Lnk("Yasathar")
 			end
 		end
 		RPG.Party[1] = "Yasathar"
 		RPG.Party[2] = "Brendor"
 		RPG.Party[3] = "Dernor"
+		Yasathar.Points("HP").Have = Yasathar.Points("HP").Maximum
+		Yasathar.Points("VIT").Have = Yasathar.Points("VIT").Maximum
 		__EricIsYasathar = true
 	end
 	
