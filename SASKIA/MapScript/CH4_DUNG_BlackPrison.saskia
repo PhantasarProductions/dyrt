@@ -34,8 +34,9 @@
 ; 
 ; version: 20.05.29
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"The Black Prison"
 	end
 
 :NPC_SASKIA_Dernor
@@ -45,17 +46,18 @@
 	
 :MeryaIsDead
 	mov false,FlowField.AutoPlayerUpdate 
-	mov "Player",Map.Obj
-	mov "GFX/combat/Fighters/Hero/Merya.Dead.png",Map.ObjString.Texture
+	;mov "Player",Map.Obj
+	mov "GFX/combat/Fighters/Hero/Merya.Dead.png",Kthura.Obj.Player.Texture
 	call MapText,"OOPS"
 	mov true,FlowField.AutoPlayerUpdate 
-	call Map.GoToLayer,Map.Layer,"Start"
+	call Map.GoToLayer,Scyndi.Class.Kthura.CurrentLayer,"Start"
 	end
 
 :NPC_SASKIA_Mort
 	call MapText,"MORT"
 	call MapScript.FightMort
 	call Map.Kill,"NPC_SASKIA_Mort",true
+	call Map.Kill,"Block_Mort",true
 	end
 	
 :Eric
