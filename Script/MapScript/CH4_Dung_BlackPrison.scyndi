@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH4_DUNG_BlackPrison.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH4_Dung_BlackPrison.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,20 +33,32 @@
 // 
 // **********************************************
 // 
-// version: 20.05.28
-// End License Information
+// 
+// version: 25.06.03 XII
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 // #use "Libs/Collections"
 
 #macro Voltooid gv.Bool.BlackPrison_Merya_Solo_Rescue_Eric_Completed
 
 #macro MaxLayers 6
 #macro MaxGuards 25
+
+Extern Merya "Scyndi.Class.Kthura.Obj.Player"
 
 bool EntranceChecked = false
 bool MeryaOnlyChecked = false
@@ -56,7 +69,7 @@ class TGuardZone
 	readonly int EX
 	readonly int EY
 	
-	void CONSTRUCTOR(int ASX,int ASY,int AEX,int AEY)
+	CONSTRUCTOR(int ASX,int ASY,int AEX,int AEY)
 		self.SX = ASX
 		self.SY = ASY
 		self.EX = AEX
@@ -64,7 +77,7 @@ class TGuardZone
 		CSayF("Created GuardZone (%d,%d)-(%d,%d)",self.SX,self.SY,self.EX,self.EY)
 	end
 	
-	void DESTRUCTOR()
+	DESTRUCTOR
 		CSayF("Destroyed GuardZone (%d,%d)-(%d,%d)",self.SX,self.SY,self.EX,self.EY)
 	end
 end
@@ -76,25 +89,34 @@ class TGuard
 	readonly var Z1
 	readonly var Z2
 	
-	void CONSTRUCTOR(string l,string g)
-		self.Zones = setmetatable({},{
-			["__index"] = var(s,i)
-				return self['Z'..i]
-			end
-		})
+	CONSTRUCTOR(string l,string g)
+		//self.Zones = setmetatable({},{
+		//	["__index"] = var(s,i)
+		//		return self['Z'..i]
+		//	end
+		//})
+		ddef zidx 
+			plua s
+			plua i
+			s,i = infinity
+			return self["Z"..i]
+		end
+		Zones = SetMetaTable( {},{["__index"]=zidx} )			
 		CSayF("Creating guard '%s' on '%s'!",g,l)
 		self.Lay = l
 		self.Tag = g
-		Map.Layer = l
-		Map.Obj = g
+		Kthura.CurrentLayer = l
+		//Map.Obj = g
 		int x
 		int y
 		string w
-		x = Map.ObjInt.X
-		y = Map.ObjInt.y
-		w = Map.ObjString.Texture:upper()
-		w = replace(w,'GFX/ACTORS/MERYAGUARD/','')
-		w = replace(w,'.PNG','')
+		gobj:=Kthura.Obj[g]
+		x = gobj.X
+		y = gobj.y
+		w = Upper(gobj.Texture)
+		//w = replace(w,"GFX/ACTORS/MERYAGUARD/","")
+		//w = replace(w,".PNG","")
+		w = StripAll(Upper(gobj.Texture))
 		self.Z1 = new TGuardZone(x-32,y-32,x+32,y+32)
 		switch w 
 			case "NORTH"
@@ -103,24 +125,24 @@ class TGuard
 				self.Z2 = new TGuardZone(x    ,y    ,x    ,y+160)
 			case "WEST"
 				self.Z2 = new TGuardZone(x-160,y    ,x    ,y    )
-			case "EAST"
+			case "EAST" "TD_THIEF"
 				self.Z2 = new TGuardZone(x    ,y    ,x+160,y    )
 			default
-				error("Unknown guard wind: "..w)
+				Lua.error("Unknown guard wind: "..w.." ("..gobj.Texture..")" )
 		end
 	end
 	
-	void DESTRUCTOR()
+	DESTRUCTOR
 		CSayF("Destroying guard '%s' on '%s'!",self.Tag,self.Lay)
 	end
 	
 	get bool Check
 		bool ret = false
-		if Map.Layer!=self.Lay
+		if Kthura.CurrentLayer!=Lay
 			return false
 		end
 		for i=1,2
-			ret = ret or (Map.PlayerX>=self.Zones[i].SX and Map.PlayerY>=self.Zones[i].SY and Map.PlayerX<=self.Zones[i].EX and Map.PlayerY<=self.Zones[i].EY)
+			ret = ret || (Map.PlayerX>=Zones[i].SX && Map.PlayerY>=Zones[i].SY && Map.PlayerX<=Zones[i].EX && Map.PlayerY<=Zones[i].EY)
 		end
 		return ret
 	end
@@ -138,8 +160,8 @@ group MScript
 			WorldMap.Delisto()
 			return
 		end
-		if Yes("Do you want to leave the prison for now?")
-			for i,c in ipairs { "Kirana", "Irravonia", "Brendor", "Scyndi", "Rebecca", "Dernor", "Merya", "Aziella" }
+		if Events.Yes("Do you want to leave the prison for now?")
+			for i,c in pairs { "Kirana", "Irravonia", "Brendor", "Scyndi", "Rebecca", "Dernor", "Merya", "Aziella" }
 				RPG.Party[i] = c
 			end
 			WorldMap.Delisto()
@@ -155,7 +177,7 @@ group MScript
 			RPG.Party[i]=""
 		end
 		RPG.Party[1] = "Merya"
-		if not Done.BlackPrison_Merya_Solo_Introduction_Shown
+		if ! Done.BlackPrison_Merya_Solo_Introduction_Shown
 			MapText("ENTER")
 		end
 	end
@@ -187,7 +209,7 @@ group MScript
 			layname = sprintf("#%03d",layi)
 			self.Guard[layname] = {}
 			CSayF("Checking for guards on floor '%s",layname)
-			Map.Layer = layname
+			Kthura.CurrentLayer = layname
 			for gi = 1,MaxGuards
 				string guardtag
 				CSayF("Found guard #%d",gi)
@@ -200,12 +222,12 @@ group MScript
 	end
 	
 	void CheckGuards()
-		for tag,data in pairs(self.Guard[Map.Layer])
+		for tag,data in pairs(self.Guard[Kthura.CurrentLayer])
 			if data.Check
 				CSayF("%s sees Merya and kills her!",tag)
 				Map.StopWalking()
-				Map.Obj="Player"
-				Map.ObjString.Texture="GFX/combat/Fighters/Hero/Merya.Dead.png"
+				//Map.Obj="Player"
+				Merya.Texture="GFX/combat/Fighters/Hero/Merya.Dead.png"
 				self.GunShot.Play()
 				MapScript.SASKIA("MeryaIsDead")
 			end
@@ -221,7 +243,7 @@ group MScript
 	end
 	
 	void MORTWELCOME()
-		if not Done.BlackPrison_Mort_Welcome
+		if ! Done.BlackPrison_Mort_Welcome
 			Party.LvUp("Merya")
 			MapText("MORTWELCOME")
 		end
@@ -247,27 +269,31 @@ group MScript
 		MapScript.SASKIA("Eric")
 	end
 	
-	void CONSTRUCTOR()
-		if not Voltooid
-			Map.ZA_Enter("MeryaOnly","MeryaOnly")
-			Map.ZA_Enter("CheckBarrier","CheckBarrier")
-			self.InitGuards()
-		end
-		Map.ZA_Enter("Leave","Leave")
-		Map.ZA_Enter("TutSneak","TutSneak")
-		self.GunShot = LoadAudio("SFX/Black Prison/GunShot.Wav")
-		Map.ZA_Enter("EnterEric","EnterEric")
-		Map.ZA_Enter("MortWelcome","MortWelcome")
-	end
+	
 	
 	void Draw()
 	end
 	
 	void Update()
-		if (not Voltooid) and Map.Layer!="#000" and Map.Layer!="#001" and Map.Layer!="#007"
+		if (not Voltooid) and Kthura.CurrentLayer!="#000" and Kthura.CurrentLayer!="#001" and Kthura.CurrentLayer!="#007"
 			self.CheckGuards()
 		end
 	end
 	
+end
+
+
+
+Init
+	if ! Voltooid
+		Map.ZA_Enter("MeryaOnly","MeryaOnly")
+		Map.ZA_Enter("CheckBarrier","CheckBarrier")
+		MScript.InitGuards()
+	end
+	Map.ZA_Enter("Leave","Leave")
+	Map.ZA_Enter("TutSneak","TutSneak")
+	MScript.GunShot = Audio.Load("SFX/Black Prison/GunShot.Wav","BlackPrison_GunShot")
+	Map.ZA_Enter("EnterEric","EnterEric")
+	Map.ZA_Enter("MortWelcome","MortWelcome")
 end
 #say "Map Script - Compiling!"
