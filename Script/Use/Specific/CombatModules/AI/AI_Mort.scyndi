@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Mort.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Mort.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,31 @@
 // 
 // **********************************************
 // 
-// version: 20.05.28
-// End License Information
+// 
+// version: 25.06.03 III
+// 
+// End License
 
-module AI_Mort
 
-	var Default
+module 
+	#use "Script/Use/Specific/CombatModules/AI/AI_Default"
+	#accept RPG
+	#accept CSayF
+	//AI_Mort
+
+	//var Default
 	int beurt = 0
 	
 	void CONSTRUCTOR()
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
+		//self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+		for st in each { [0]="Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
 			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = RPG.GetChar("Merya").Stat("END_"..st).Value
 			CSayF("%10s = %3d",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value)
 		end
 	end
 	
 	get var Decide
-		return self.Default.Decide
+		return AI_Default.Decide
 	end
 
-end
+//end
