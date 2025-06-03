@@ -34,8 +34,9 @@
 ; 
 ; version: 20.05.28
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Frendor Bushes"
 	end
 
 :SheckLock
