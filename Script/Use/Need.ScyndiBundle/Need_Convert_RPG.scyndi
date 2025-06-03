@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Convert_RPG.scyndi
 // 
-// 	  Version: 25.04.28 I
+// 	  Version: 25.06.03
 // 	
 // 	  Copyright (C) 2025 Jeroen Petrus Broks
 // 	
@@ -116,6 +116,10 @@ Class __RPGCharStat
 		// CSayF("Stat %s::%s -> %d (%s/%s)",Parent.Tag,PrTag,_Value,Parent,Parent.Pure) // Hardcore debug
 		Parent.Pure.Stat[PrTag] = _Value
 	End
+	
+	void Lnk(TCT)
+		Parent.Pure.LinkStat(PrTag,TCT,PrTag)
+	end	
 		
 	
 	Constructor(ouwe,String _stat)
