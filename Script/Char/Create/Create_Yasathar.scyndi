@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/Create/Yasathar.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/Create/Create_Yasathar.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 20.05.29
-// End License Information
-#use "Script/Use/AnyWay"
+// 
+// version: 25.06.03
+// 
+// End License
+
+
+
+Module
+
+#use "Script/Use/Need"
+
+Init
+
 var Yasathar
 var Eric
 Eric = RPG.GetChar("Eric")
@@ -62,3 +73,5 @@ Yasathar.Data["SKILL4"] = "Black Dragon Power"
 Yasathar.Data.Weapon = "EQW_YASATHAR_BLUEMOON"
 Yasathar.Data.Armor  = Eric.Data.Armor
 Yasathar.Data.Jewel  = Eric.Data.Jewel
+
+End

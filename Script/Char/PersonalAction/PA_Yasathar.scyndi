@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/PersonalAction/Yasathar.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/PersonalAction/PA_Yasathar.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,36 @@
 // 
 // **********************************************
 // 
-// version: 20.07.22
-// End License Information
+// 
+// version: 25.06.03 V
+// 
+// End License
+
+
+#use "Script/Use/need"
+
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/Graphics"
 
 #use "libs/xmath"
 
-module Yasathar_Personal_Action
+#accept RENC
+
+module 
+	//Yasathar_Personal_Action
 
 	var Img
 	int X
 	int Y
 	
 	link Unlocked = gv.Bool.RedStaffTaken
+	Link __player = Kthura.Obj.Player
 	
 	void Draw()
-		if not self.Unlocked
+		if !Unlocked
 			return
 		end
-		self.Img.Draw(self.X,self.Y)
+		Img.Draw(X,Y)
 	end
 	
 	void InstantEncounter()
@@ -57,39 +70,40 @@ module Yasathar_Personal_Action
 	end
 	
 	get bool RedSeal
-		int x
-		int y
-		if not Map.HasTag("RED_SEAL")
+		//int x
+		//int y
+		if ! Kthura.HasObj("RED_SEAL")
 			return false
 		end
-		Map.Obj = "RED_SEAL"
-		x = Map.ObjInt.X
-		y = Map.ObjInt.Y
-		return xmath.Pythagoras(x,y,__player.X,__player.Y)<96
+		//Map.Obj = "RED_SEAL"
+		//x = Map.ObjInt.X
+		//y = Map.ObjInt.Y
+		Seal:=Kthura.Obj.RED_SEAL
+		return xmath.Pythagoras(seal.x,seal.y,__player.X,__player.Y)<96
 	end
 	
-	bool Click(int but,int x, int y)
-		if not self.Unlocked
+	bool Click(int but,int ax, int ay)
+		if ! Unlocked
 			return false
 		end
-		if x<self.X or y<self.Y or x>self.X+200 or y>self.Y+200
+		if ax<X || ay<Y || ax>X+200 || ay>Y+200
 			return false;
 		end
 		// Red Seal
-		if self.RedSeal
+		if RedSeal
 			MapScript.SASKIA("REDSEAL")
 			return true;
 		end
 		
 		// Instant Encounter
-		self.InstantEncounter() 
+		InstantEncounter() 
 		return true;
 	end
 	
-	void CONSTRUCTOR()
-		self.Img = LoadImage("GFX/PersAction/Eric.png")
-		self.X = Screen.Width -300
-		self.Y = Screen.Height-400
+	Init
+		Img = LoadImage("GFX/PersAction/Eric.png","PA_Eric")
+		X = Graphics.Width -300
+		Y = Graphics.Height-400
 	end
 
-end
+//end

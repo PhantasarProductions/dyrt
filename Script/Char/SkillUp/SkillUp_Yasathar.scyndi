@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Char/SkillUp/Yasathar.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Char/SkillUp/SkillUp_Yasathar.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,18 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.12.15
-// End License Information
-do
-	delegate ret
-	ret = void(int skill)
+// 
+// version: 25.06.04
+// 
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Script/Use/Need"
+
+	void SU(int skill)
 		int lvl
 		lvl = RPG.GetChar("Yasathar").Points("SKILLLVL"..skill).Have
 		CSayF("Well Yasathar! Let's upgrade with skill %d",skill)
 		switch skill
 			case 0
 				// Sword
-				if lvl % 9 == 0 or lvl % __skill
+				if lvl % 9 == 0 || lvl % __skill == 0
 					RPG.GetChar("Yasathar").Stat("PERMPOWERUP_Strength").Value ++
 				end
 				if lvl % (__skill * 11) == 0
@@ -55,22 +62,25 @@ do
 				// Red Dragon
 				if lvl % __skill == 0
 					RPG.GetChar("Yasathar").Stat("PERMPOWERUP_Strength").Value ++
-					if lvl % 2
-						RPG.GetChar("Yasathar").Stat("PERMPOWERUP_Intelligence").Value ++
+					if lvl % 2 == 0
+						RPG.GetChar("Irravonia").Stat("PERMPOWERUP_Intelligence").Value ++						
 					end
+					RPG.GetChar("Yasathar").Stat("PERMPOWERUP_Intelligence").Value ++
 				end
 			case 2
 				// White Dragon
 				if lvl % __skill == 0
 					RPG.GetChar("Yasathar").Stat("PERMPOWERUP_Accuracy").Value ++
-					if lvl % 2
+					if lvl % 2 == 0
 						RPG.GetChar("Yasathar").Stat("PERMPOWERUP_Intelligence").Value ++
+					elif lvl % 5 == 0
+						RPG.GetChar("Irravonia").Stat("PERMPOWERUP_Intelligence").Value ++
 					end
 				end
 			case 3
 				// Green Dragon
 				RPG.GetChar("Yasathar").Stat("PERMPOWERUP_HP").Value ++
-				if lvl % __skill == 0 and RPG.GetChar("Yasathar").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value < (90/__skill)
+				if lvl % __skill == 0 && RPG.GetChar("Yasathar").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value < (90/__skill)
 					RPG.GetChar("Yasathar").Stat("PERMPOWERUP__RESIST_Stat_Poison").Value ++
 				end
 				if lvl % __skill == 0
@@ -93,5 +103,5 @@ do
 	
 	end
 	
-	return ret
-end
+//	return ret
+//end
