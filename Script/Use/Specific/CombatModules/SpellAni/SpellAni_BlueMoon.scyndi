@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellAni/BlueMoon.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_BlueMoon.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,9 +33,14 @@
 // 
 // **********************************************
 // 
-// version: 20.06.02
-// End License Information
-module SpellAni_BlueMoon
+// 
+// version: 25.06.04 II
+// 
+// End License
+
+
+module
+	#use "Libs/SCI/Graphics"
 
 	int x
 	int y
@@ -42,23 +48,23 @@ module SpellAni_BlueMoon
 	
 	var sword
 	
-	void CONSTRUCTOR()
-		self.sword = LoadIfNew("GFX/Combat/Spellani/Blue Moon.png","SpellAni_BlueMoon")
+	Init
+		sword = LoadNewImage("GFX/Combat/Spellani/Blue Moon.png","SpellAni_BlueMoon")
 	end
 	
-	void Init(act)
+	void SA_Init(act)
 		var tar
-		assert(#act.Targets==1,sprintf("Invalid number of targets for this spellani (%d)",#act.Targets))
-		tar = act.Targets[1]
-		self.x = math.floor((tar.X + tar.Width/2) - (self.sword.Width/2))
-		self.y = - self.sword.Height
-		self.to_y = (tar.Y + tar.Height) - self.sword.Height
+		lua.assert(len(act.Targets)==1,sprintf("Invalid number of targets for this spellani (%d)",len(act.Targets) ))
+		tar = act.Targets[0]
+		x = math.floor((tar.X + tar.Width/2) - (sword.Width/2))
+		y = - sword.Height
+		to_y = (tar.Y + tar.Height) - sword.Height
 	end
 	
 	bool Cycle()
-		#+ self.y 2
-		self.sword.Draw(self.x,self.y)
-		return self.y>self.to_y
+		y += 2
+		sword.Draw(x,y)
+		return y>to_y
 	end
 
-end
+
