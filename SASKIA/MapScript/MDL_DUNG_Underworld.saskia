@@ -34,8 +34,9 @@
 ; 
 ; version: 20.06.30
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"The Underworld"
 	end
 
 :Charon
