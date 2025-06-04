@@ -35,7 +35,7 @@
 ; version: 20.06.08
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Mermaid Harbor"
 	; This will unlock the cat in Independence
 	mov true,gv.Bool.VisitedMermaidHarbor
 	end
@@ -46,7 +46,7 @@
 	
 :Ariel
 	call MapText,"ARIELALREADY"
-	chk not Yes("Do you want to go to Dyrt?"),NoGo
+	chk not Events.Yes("Do you want to go to Dyrt?"),NoGo
 	chk Done.FirstTimeMermaidToDyrt,GoToDyrt
 	call MapText,"ARIELINTRO"
 :GoToDyrt
