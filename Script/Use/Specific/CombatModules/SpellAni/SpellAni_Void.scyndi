@@ -1,0 +1,183 @@
+// License:
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_Void.scyndi
+// 
+// 	  Version: 25.06.05 II
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+
+// Unfortunately I had to make this one ugly.
+// When I looked up how to grab stuff in SDL2 all I learned is that the coders
+// community is filled with overinflated narcistic rude morons, not willing to
+// help even deeming the grab feature "bad practice"... well, actually most of
+// the terms I found were too rude to repeat here (and when I say that, it 
+// counts for something. And NO I AM NOT GOING TO REDUCE MYSELF TO ChatGPT).
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
+#use "libs/xmath"
+
+#use "Script/Use/Need"
+
+#say "Module VOID"
+module 
+	//SpellAni_VOID
+	
+	LocExtern _self "Scyndi.Class.SpellAni_Void"
+	
+	#say "Standard Declarations!"
+	var BlackHole
+	var Screen
+	
+	int Stage
+	int Scale = 1000
+	int Deg
+	int Rot
+	int Radius
+	int Alpha
+	
+	table Targets
+	
+	#say "Link voided"
+	link voided = gv.Int.Voided
+	
+	#say "(X,Y) properties"
+	get int X
+		return math.floor( xmath.sin(Deg) * Radius ) + (Graphics.W/2)
+	end
+		
+	get int Y
+		return math.floor( xmath.cos(Deg) * Radius ) + (Graphics.H/2)
+	end
+	
+	#say "CONSTRUCTOR"
+	Init
+		CSay("VOID.CONSTRUCTOR() - Loading the Black Hole picture")
+		BlackHole = LoadNewImage("GFX/Combat/SpellAni/BlackHole.png","SPELLANI_VOID_VOID")
+	end
+	
+	#say "Init"
+	void SA_Init(act)
+		CSay("VOID.Init( --ACT-- )")
+		CSay("- Grab Screen")
+		//Screen = Grab("SPELLANI_VOID_SCREEN")
+		//CSay("- Rand Grad Tile")
+		//Screen = RandGradTile(Graphics.W,Graphics.H)
+		CSay("- Configuring data")
+		Stage  = 1
+		Scale  = 1000
+		Rot    = 0
+		Radius = 0
+		Targets = act.Targets
+		Alpha   = 250
+		CSay("- Hotcentering screen (replacement)")
+		//Screen.HotCenter()
+		CSay("- Done")
+	end
+	
+	#say "Cycle"
+	bool Cycle()
+		// say Als hij hier op crasht dan is de computer aan het liegen, want GrabDone bestaat wel degelijk!
+		// if not GrabDone()
+		//	return false
+		// end
+		// CSayF("VOID.Cycle() - Stage %d!",Stage)
+		if Stage!=0
+			BlackHole.Stretch(0,0,Graphics.W,Graphics.H)
+		end
+		SetAlpha(Alpha)
+		//Rotate.Deg = Rot
+		SetScale(Scale/1000,Scale/1000)
+		//Screen.XDraw(X,Y) // Old
+		//Screen.DrawR(X,Y,Rot)
+		SetAlpha(255)
+		//Rotate.Deg = 0
+		SetScale(1)
+		return _self["Stage"..Stage]()
+	end
+	
+	#say "Stage 0"
+	void Stage0()
+		Alpha = math.min(255,Alpha+1)
+		if Alpha==255
+			Stage=1
+		end
+	end
+	
+	#say "Stage 1"
+	void Stage1()
+		Radius += 4
+		Rot += math.max(math.min(1,math.floor(Radius/100)),5)
+		Deg++
+		if Radius>=Graphics.H/3
+			Stage = 2
+		end
+	end
+	
+	#say "Stage 2"
+	bool Stage2()
+		Rot += 5
+		Deg += 2
+		Radius -= 1
+		Scale = math.max(3,Scale - 4)
+		if Radius<=4 
+			RemoveTargets()
+			return true
+		end
+		return false
+	end
+	
+	#say "Target removal"
+	void RemoveTargets()
+		for _,target in pairs(Targets)
+			if target.Boss
+				CSayF("NOT voided: %s (boss)",target.Tag)
+			else
+				CSayF("--> voided: %s",target.Tag)
+				target.StatusChanges.Gone = true
+				voided++
+				CSayF("That makes a total of %5d enemies voided now!",voided)
+			end
+		end
+	end
+	#say "Closure"
+	
+//end
