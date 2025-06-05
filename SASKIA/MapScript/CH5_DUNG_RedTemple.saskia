@@ -39,7 +39,7 @@
 	end
 	
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"The Red Temple"
 	jmp Niks
 	
 :NPC_SASKIA_Monk1
@@ -50,7 +50,7 @@
 :NPC_SASKIA_Monk6
 :NPC_SASKIA_Monk7
 :NPC_SASKIA_Monk8
-	call MapText,"MONK."..(Map.Leader:upper())
+	call MapText,"MONK."..(Scyndi.AllIdentifiers.Map.Leader:upper())
 	chk Map.Leader~="Merya",Niks
 	chk Done.MeryaStoleRedKeyFromMonk,Niks
 	call MapText,"MERYASTEAL"

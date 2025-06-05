@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/RedTemple.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_RedTemple.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,23 +33,29 @@
 // 
 // **********************************************
 // 
-// version: 20.06.04
-// End License Information
+// 
+// version: 25.06.04 I
+// 
+// End License
 
-module Exa_Arena
 
-	var Dung
+// Last edit NALA: June 4th, 2020
+// First edit SCI: June 4th, 2025
+
+module
+
+	#use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Dungeon"
 	
-	void CONSTRUCTOR()
-		self.Dung = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Dungeon")
-		self.Dung.Wall  = "GFX/Textures/RedTemple/WR_N.png"
-		self.Dung.Floor = "GFX/Textures/RedTemple/Floor.png"
-		self.Dung.TorchOff = false
-		self.Dung.Init()
+	locExtern Dung "Scyndi.Class.TMP_Dungeon"
+	
+	Init
+		Dung.Wall  = "GFX/Textures/RedTemple/WR_N.png"
+		Dung.Floor = "GFX/Textures/RedTemple/Floor.png"
+		Dung.TorchOff = false
+		Dung.DInit()
 	end
 	
 	void Draw() 
-		self.Dung.Draw()
+		Dung.Draw()
 	end
 
-end

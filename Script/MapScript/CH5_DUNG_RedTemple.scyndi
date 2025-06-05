@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH5_DUNG_RedTemple.nil
-// (c) Jeroen Broks, 2020, 2021, 2022, All Rights Reserved.
+// src/Script/Script/MapScript/CH5_DUNG_RedTemple.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,16 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 22.08.02
-// End License Information
+// 
+// version: 25.06.04 XII
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
 
-bool gj_checked
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+
+bool medal_checked
 
 group MScript
 	
@@ -83,16 +92,24 @@ group MScript
 			//Map.Kill("GJ_Barrier")
 			// Map.ShowByLabel("GJ")
 		//end
-		if gj_checked
-			return
-		end
-		int p 
-		p = math.floor(NALA_Medals:Ratio())
-		CSayF("Medal rate %03d%%",p)
-		gj_checked = true
-		if p>=72
-			Map.Kill("GJ_Barrier")
-		end
+		
+		//if gj_checked
+		//	return
+		//end
+		//int p 
+		//p = math.floor(NALA_Medals:Ratio())
+		//CSayF("Medal rate %03d%%",p)
+		//gj_checked = true
+		//if p>=72
+		//	Map.Kill("GJ_Barrier")
+		//end
+		LocExtern WantRatio "72"
+		CSayF("Medal ratio: %05.1f%%; must be at least:%03d%%",MedalRatio,WantRatio)
+		if MedalRatio>=WantRatio
+			Map.Kill("GJ_Barrier",false)
+			CSayF("-> Open Sesame!")
+		End
+		medal_checked=true
 	end
 	
 	void GJ_HIDE()
@@ -101,29 +118,26 @@ group MScript
 	
 	void NPC_REDSTAFF()
 		if Done.RedStaffTaken
+			//Kthura.Obj.NPC_RedStaff.Texture="GFX/Textures/Objects/Chest_Open.png"
 			return
 		end
 		Achievements.Award("SCEN_REDSTAFF")
 		Inventory.KEY_REDSTAFF++
-		Map.Obj="NPC_RedStaff"
-		Map.ObjString.Texture="GFX/Textures/Objects/Chest_Open.png"
-		Map.AddSwap("Map.Layer='#003' ")
-		Map.AddSwap("Map.Obj='NPC_RedStaff' ")
-		Map.AddSwap("Map.ObjString.Texture='GFX/Textures/Objects/Chest_Open.png' ")
+		//Map.Obj="NPC_RedStaff"
+		//Map.ObjString.Texture="GFX/Textures/Objects/Chest_Open.png"
+		//Kthura.Obj.NPC_RedStaff.Texture="GFX/Textures/Objects/Chest_Open.png"
+		//Map.AddSwap("Map.Layer='#003' ")
+		//Map.AddSwap("Map.Obj='NPC_RedStaff' ")
+		//Map.AddSwap("Map.ObjString.Texture='GFX/Textures/Objects/Chest_Open.png' ")
+		Map.Kill("NPC_RedStaff",true)
 		MapText("RED_STAFF")
 	end
 	
 	void GJ_EXIT()
-		Field.LoadMap("GJ_DUNG_Underworld")
+		Field.LoadMap("MDL_Dung_Underworld")
 		Map.GoToLayer("#001","Start")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("OpenDeur","OpenDeur")
-		Map.ZA_Enter("GJ_SECRET","GJ_OPEN")
-		Map.ZA_Leave("GJ_SECRET","GJ_HIDE")
-		Map.ZA_Enter("GJ_EXIT","GJ_EXIT")
-	end
 	
 	void Draw()
 	end
@@ -132,4 +146,10 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("OpenDeur","OpenDeur")
+	Map.ZA_Enter("GJ_SECRET","GJ_OPEN")
+	Map.ZA_Leave("GJ_SECRET","GJ_HIDE")
+	Map.ZA_Enter("GJ_EXIT","GJ_EXIT")
+End
