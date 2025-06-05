@@ -34,15 +34,19 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // End License Information
-do
-	void C_BackStab(ron,act)
+
+Module
+
+	#accept Actions
+
+	void Do_Instant(ron,act)
 		table nact
 		nact.ActTag = "ABL_HERO_MERYA_BACKSTAB"
 		nact.ExeTag = ron.Tag
-		nact.Targets = {act.Executor}
+		nact.Targets = {[0]=act.Executor}
 		ron.NextAct = new Actions(nact)
 		ron.NextActSpeed = 3000
 		ron.GaugePosition = 10001
 	end
-	return C_BackStab
-end
+//	return C_BackStab
+//end
