@@ -91,13 +91,14 @@
 	call Map.ShowByLabel,"G"
 	call Map.WalkTo,"BoysJoin"
 	:WalkLook
-	chk FlowField.Map.Kthura.Actor.Player.Walking,WalkLook
-	group 2
-		mov "Player",Map.Obj
-		mov false,Map.ObjBool.Visible
+	chk Kthura.Obj.Player.Walking,WalkLook
+	;group 2
+		;mov "Player",Map.Obj
+		;mov false,Map.ObjBool.Visible
+	mov false,Kthura.Obj.Player.Visible
 	call Map.ShowByLabel,"B"
 	call MapText,"ZONDRA"
-	mov "GFX/combat/Fighters/Hero/Rebecca.dead.png",MapObjTex.Rebecca
+	mov "GFX/combat/Fighters/Hero/Rebecca.dead.png",Kthura.Obj.Rebecca.Texture
 	Call MapText,"ZONDRAFAINT"
 	mov "Yasathar",RPG.Party[1]
 	mov "Irravonia",RPG.Party[2]
