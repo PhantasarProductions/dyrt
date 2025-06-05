@@ -126,7 +126,7 @@ Init
 	IAADATA["Sellable"] = true
 	IAADATA["SpellAniArgument"] = ""
 	IAADATA["SpellAniFunction"] = ""
-	IAADATA["SpellAniScript"] = "Sprakle"
+	IAADATA["SpellAniScript"] = "Sparkle"
 	IAADATA["Stance"] = "CAST"
 	IAADATA["Target"] = "AF"
 	IAADATA["TriggerAfterAttack"] = false
