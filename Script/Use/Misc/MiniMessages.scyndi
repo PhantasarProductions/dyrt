@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/MiniMessages.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.05 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -118,8 +118,8 @@ class MiniMsg
 		self.List.AddLast(self)
 	end
 	
-	static var CreateCenter(string msg,r,g,b)
-		return new MiniMsg(Screen.W/2,Screen.H/2,msg,r,g,b)
+	static var CreateCenter(string _msg,_r,_g,_b)
+		return new MiniMsg(Screen.W/2,Screen.H/2,_msg,_r,_g,_b)
 	end
 	
 	DESTRUCTOR
