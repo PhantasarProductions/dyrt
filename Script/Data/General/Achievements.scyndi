@@ -34,11 +34,13 @@
 // **********************************************
 // 
 // 
-// version: 25.05.24
+// version: 25.06.04 II
 // 
 // End License
+
 Module
 
+#use "Libs/SCI/Sys"
 
 Class AchRecord
 	Bool Allow_TrueAbyss
@@ -63,7 +65,7 @@ Table AchDat = {}
 Init
 
 LocExtern AchData "Scyndi.Class.Achievements.AchDat"
-
+AchDat = {}
 AchDat.BOSS_CRYSTAL = new AchRecord()
 AchDat.BOSS_CRYSTAL.hidden = false
 AchDat.BOSS_CRYSTAL.allow_trueabyss = false
@@ -3324,5 +3326,7 @@ AchDat.ABYSS_BOSS090.ProcessValue = ""
 AchDat.ABYSS_BOSS090.skill_1 = true
 AchDat.ABYSS_BOSS090.Require_Medals = false
 AchDat.ABYSS_BOSS090.skill_check = false
+
+CSay("AchData set!")
 
 End
