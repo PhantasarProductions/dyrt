@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH5_HUB_Zondra.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH5_HUB_Zondra.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,26 +33,29 @@
 // 
 // **********************************************
 // 
-// version: 20.06.01
-// End License Information
+// 
+// version: 25.06.03 II
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
+Script
+
+#use "Libs/SCI/InterVar"
+
+#use "script/use/Need"
 // #use "Script/Use/StartCombatMod"
 group MScript
 	
 	void NPC_JACK()
-		if not Done.SpokenToJackAboutZondra
+		if ! Done.SpokenToJackAboutZondra
 			MapScript.SASKIA("Zondra")
 		else
-			MapText("JACK."..(Map.Leader:upper()))
+			MapText("JACK."..Upper(Map.Leader))
 		end
 	end
 	
-	void CONSTRUCTOR()
-	end
 	
 	void Draw()
 	end
@@ -60,4 +64,3 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
