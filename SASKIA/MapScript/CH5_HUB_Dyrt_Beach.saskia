@@ -34,13 +34,18 @@
 ; 
 ; version: 20.06.09
 ; End License Information
+
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	chk Done.BeenInDyrtBeforeYesOrNo,Beach
+	call Fader,"The forgotten realm of Dyrt"
+:Beach	
+	call Fader,"Beach"
 	end
 
 :Ariel
 	call MapText,"ARIELREADY"
-	chk Yes("Do you want to go back to Delisto?"),Delisto
+	chk Events.Yes("Do you want to go back to Delisto?"),Delisto
 	end
 	
 :Delisto
