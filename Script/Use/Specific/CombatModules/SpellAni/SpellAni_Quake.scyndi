@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_Quake.scyndi
 // 
-// 	  Version: 25.05.17
+// 	  Version: 25.06.07
 // 	
 // 	  Copyright (C) 2021, 2025 Jeroen Petrus Broks
 // 	
@@ -104,7 +104,7 @@ Class Rock
 		End
 	End
 	
-	ReadOnly Static Var Img = LoadNewImage("GFX/Inventory/Rock.png","SPELLANI_ROCK")
+	ReadOnly Static Var Img = LoadNewImage("GFX/Combat/SpellAni/Rock.png","SPELLANI_ROCK")
 	
 	Void Draw()
 		Img.Draw(X,Y)
