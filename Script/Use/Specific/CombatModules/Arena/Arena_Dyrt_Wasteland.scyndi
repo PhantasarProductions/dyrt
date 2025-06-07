@@ -1,0 +1,105 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Dyrt_Wasteland.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.06.07 IV
+// 
+// End License
+
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
+#use "libs/LinkedList"
+
+
+class WRock
+	static var rock
+	static var Lijst
+	static int count
+	int ID
+	int x
+	int y
+	
+	DESTRUCTOR
+		CSayF("Rock #%04d destroyed!",self.ID)
+	end
+	
+	CONSTRUCTOR(int ix,int iy)
+		count++
+		ID = self.count
+		x = ix
+		y = iy
+		self.Lijst.AddLast(self)
+		CSayF("Rock #%04d created!",ID)
+	end
+	
+	void Draw()
+		self.rock.Draw(self.x,self.y)
+	end
+	
+end
+
+//module Dyrt_Wasteland_Arena
+	
+	var back
+	
+	void Draw()
+		back.Tile(0,0,Graphics.W,Graphics.H)
+		for rock in WRock.Lijst.Each
+			rock.Draw()
+		end
+	end
+	
+	Init
+		int x
+		int y
+		WRock.Lijst = new TLinkedList
+		repeat
+			x += math.random(100,500)
+			if x>Graphics.W
+				x = math.random(0,250)
+				y +=math.random(25,100)
+			end
+			new WRock(x,y)
+		until y>=Graphics.H/2
+		back = LoadNewImage("GFX/Textures/Dyrt/Road/Grass.png","Dyrt_Grass")
+		WRock.rock = LoadNewImage("GFX/Textures/NRCaves/Rock.png","Dyrt_Rock")
+	end
+	
+
+//end
