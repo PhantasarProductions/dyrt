@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/StoneMaster.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.06 II
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -61,35 +61,35 @@ class SMUpdate
 	string Element
 	string StatusChange
 	get bool CanDo 
-		if self.skill>=0
-			return RPG.GetChar(self.CharTag).Points(sprintf("SKILLLVL%d",self.skill)).Have>0
+		if skill>=0
+			return RPG.GetChar(CharTag).Points(sprintf("SKILLLVL%d",skill)).Have>0
 		end
 		return true
 	end
 	
 	
 	get string UpdateName
-		return self.NameUpdate
+		return NameUpdate
 	end
 		
 	set string UpdateName
-		self.NameUpdate = value
+		NameUpdate = value
 	end
 	
 		
 	get int RequireStones
 		var ch
 		int ret
-		ch = RPG.GetChar(self.chTag)
-		if self.skill>=0
-			ret = ret + ch.Points(sprintf("SKILLLVL%d",self.skill)).Have+1
-			//CSay("Calc from skill "..self.skill.." => "..ret)
+		ch = RPG.GetChar(chTag)
+		if skill>=0
+			ret = ret + ch.Points(sprintf("SKILLLVL%d",skill)).Have+1
+			//CSay("Calc from skill "..skill.." => "..ret)
 		end
-		if self.Element!=""
-			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..self.Element).Value + ch.Stat("PERMPOWERUP__RESIST_Elem_"..self.Element).Value + 1)
+		if Element!=""
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Elem_"..Element).Value + ch.Stat("PERMPOWERUP__RESIST_Elem_"..Element).Value + 1)
 		end
-		if self.StatusChange!=""
-			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..self.StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_Stat_"..self.StatusChange).Value+1)
+		if StatusChange!=""
+			ret = ret + math.abs(ch.Stat("BASE__RESIST_Stat_"..StatusChange).Value + ch.Stat("PERMPOWERUP__RESIST_Stat_"..StatusChange).Value+1)
 		end
 		//CSay(tostring(ret))
 		switch __skill
@@ -107,9 +107,9 @@ class SMUpdate
 	end
 	
 	CONSTRUCTOR(string ch)
-		self.skill = -1
-		self.chTag = ch
-		//self.MyList.AddLast(self)
+		skill = -1
+		chTag = ch
+		//MyList.AddLast(self)
 	end
 end
 
@@ -149,8 +149,8 @@ class CStoneMaster
 	get delegate Each
 		table lst
 		int i=-1
-		for SMU in self.MyList.Each
-			if SMU.chTag == self.CharTag
+		for SMU in MyList.Each
+			if SMU.chTag == CharTag
 				lst+=SMU
 			end
 		end
@@ -181,12 +181,16 @@ group MStoneMaster
 	
 	Static Var GetStoneMaster(smt)
 		Lua.Scyndi.Use("Script/Data/StoneMaster/SM_"..smt)
-		return Lua.Scyndi.Class["SM_"..smt]
+		return Lua.Scyndi.Class["SM_"..smt].Ret
 	End
 	
 	get var CUpdates
 		CStoneMaster.MyMasters[self.csm] = CStoneMaster.MyMasters[self.csm] || self.GetStoneMaster(self.csm) //NIL.Use("Script/Data/StoneMaster/"..self.csm)
 		return CStoneMaster.MyMasters[self.csm]
+	end
+	
+	void WantMaster(string ___csm)
+		csm=___csm
 	end
 	
 	void Act()
@@ -202,8 +206,8 @@ group MStoneMaster
 				if self.Hover.skill>=0
 					//delegate su
 					//su = NIL.Use("Script/Char/SkillUp/"..self.CharTag)
-					Lua.Scyndi.Use("Script/Char/SkillUp/SU_"..self.CharTag)
-					su:=Lua.Scyndi.Class["SU_"..self.CharTag].SkillUp					
+					Lua.Scyndi.Use("Script/Char/SkillUp/SkillUp_"..self.CharTag)
+					su:=Lua.Scyndi.Class["SkillUp_"..self.CharTag].SU //SkillUp					
 					RPG.GetChar(self.CharTag).Points(sprintf("SKILLLVL%d",self.Hover.skill)).Have++
 					RPG.GetChar(self.CharTag).Points(sprintf("SKILLEXP%d",self.Hover.skill)).Have=0
 					su(self.Hover.skill)
@@ -221,7 +225,7 @@ group MStoneMaster
 	void Panel(ubox)
 		int y
 		__amber
-		self.FBig.DrawText(self.csm,ubox.x+20,ubox.y+20)
+		self.FBig.Text(self.csm,ubox.x+20,ubox.y+20)
 		y = ubox.y+80
 		self.Hover = nil;
 		for upd in self.CUpdates.Each
@@ -238,16 +242,16 @@ group MStoneMaster
 				indx = 5
 			end
 			if upd.CanDo
-				self.FTxt.DrawText(upd.UpdateName,ubox.x+10+indx,y)
-				self.FTxt.DrawText(sprintf("need %4d stones",upd.RequireStones),(ubox.w+ubox.x)-20,y,1)
+				self.FTxt.Text(upd.UpdateName,ubox.x+10+indx,y)
+				self.FTxt.Text(sprintf("need %4d stones",upd.RequireStones),(ubox.w+ubox.x)-20,y,1)
 			else
 				Color(123,123,123)
-				self.FTxt.DrawText("???",ubox.x+10+indx,y)
+				self.FTxt.Text("???",ubox.x+10+indx,y)
 			end
 			y += 25
 		end
 		__white
-		self.FTxt.DrawText(sprintf("Magic Stones: %4d",__magicstones),ubox.x+5,(ubox.y+ubox.h)-30)
+		self.FTxt.Text(sprintf("Magic Stones: %4d",__magicstones),ubox.x+5,(ubox.y+ubox.h)-30)
 	end
 	
 	void _CONSTRUCTOR()

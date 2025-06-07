@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Need.ScyndiBundle/Need_Link_GoToMenu.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.05 I
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -99,6 +99,7 @@ end
 global void StoneMaster(string master)
 	LMenu()
 	//LuaDoString("Flow_FIELDMENU",'NIL.Use("Script/Use/Specific/StoneMaster").csm = trim("'..master..'")',"Stone Master Chain!")
-	Lua.error("Need_Link_GoToMenu::134 -> Go Stone Master changer not yet possible!")
+	//Lua.error("Need_Link_GoToMenu::134 -> Go Stone Master changer not yet possible!")
+	Sys.Call("FLOW_FIELDMENU","MStoneMaster.WantMaster",master)
 	GoMenu(1,"STONEMASTER")
 end
