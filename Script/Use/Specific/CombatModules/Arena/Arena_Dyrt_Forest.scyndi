@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Dyrt_Forest.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Dyrt_Forest.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,26 +33,31 @@
 // 
 // **********************************************
 // 
-// version: 20.06.10
-// End License Information
+// 
+// version: 25.06.07 I
+// 
+// End License
 
-module Arena_DyrtForest
 
-	var Forest
 
-	void CONSTRUCTOR()
-		self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
-		//self.Forest.LoadTex("GFX/Textures/Dyrt/Trees/SPAR.png",self.Forest.LoadComm.Cloud,"gfx/Textures/Sky/cloud.png")
-		self.Forest.LoadTex("GFX/Textures/Dyrt/Trees/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
-		self.Forest.CloudR=80
-		self.Forest.CloudG=80
-		self.Forest.CloudB=95
-		self.Forest.texsky={['R']=80,['G']=80,['B']=95}
-		self.Forest.texfloorfile = "GFX/Textures/Dyrt/Road/Grass.png"
-		self.Forest.Generate()
+#use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest"
+
+module
+
+	//var Forest
+	locExtern Forest "Scyndi.Class.TMP_Forest"
+
+	Init
+		Forest.LoadTex("GFX/Textures/Dyrt/Trees/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
+		Forest.CloudR=80
+		Forest.CloudG=80
+		Forest.CloudB=95
+		Forest.texsky={["R"]=80,["G"]=80,["B"]=95}
+		Forest.texfloorfile = "GFX/Textures/Dyrt/Road/Grass.png"
+		Forest.Generate()
 	end
 	
 	void Draw()
-		self.Forest.Draw()
+		Forest.Draw()
 	end
-end
+//end
