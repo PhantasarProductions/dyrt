@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH5_CITY_Umerington.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH5_CITY_Umerington.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,18 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.06.13
-// End License Information
+// 
+// version: 25.06.08 II
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "libs/Tables"
+Script
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+
+#use "script/use/Need"
+//#use "libs/Tables"
 
 group MScript
 	
-	table Houses
+	Var Houses
 	
 	delegate NPC_ENTERITEMSHOP
 	delegate NPC_ENTERBANK
@@ -51,21 +58,20 @@ group MScript
 	delegate NPC_ENTERWEAPONSHOP
 	
 	void DownTown(z)
-		Map.ShowByZone("Everything")
-		for h in each(self.Houses)
+		CSay("DownTown: Umerington")
+		Map.ShowByZone("Everything")			
+		for h in each(Houses)
+			CSayF("- Hide: %s",h)
 			Map.HideByZone(h)
 		end
+		CSay("- Hide the secret passage")
 		Map.HideByZone("ToSecret")
 		if z
 			Map.GoToLayer("CITY","NPC_Enter"..z.."_SPOT")
 			MapScript.SASKIA("RencOn")
 		end
 	end
-	
-	void DOWNTOWN(string z)
-		self.DownTown(z)
-	end
-	
+		
 	void ShowBuilding(string z)
 		Map.HideByZone("Everything")
 		Map.ShowByZone(z)
@@ -81,6 +87,9 @@ group MScript
 	end
 	
 	void SHOWSECRET()
+		for i=1,2
+			Kthura.Obj[sprintf("VoidSecretIssue%d",i)].Visible = False
+		end
 		Map.ShowByZone("ToSecret")
 	end
 	
@@ -94,24 +103,24 @@ group MScript
 		WorldMap.Dyrt()
 	end
 	
-	void CONSTRUCTOR()
-		self.Houses = { "ItemShop", "Bank", "ArmorShop", "WeaponShop" }
-		self.DownTown()
-		for init in each(self.Houses)
-			CSayF("Init zone: %s",init)
-			self["NPC_ENTER"..init:upper()] = NIL.Load(sprintf("Map.GoToLayer('CITY','Start%s')\nMScript.ShowBuilding('%s')",init,init),sprintf("Enter:%s",init))
-			Map.ZA_Enter("Leave"..init,"DownTown",init)
-		end
-		Map.ZA_Enter("ShowSecret","ShowSecret"); Map.HideByZone("ToSecret")
-		Map.ZA_Enter("Dzgjymza","Dzgjymza")
-		Map.ZA_Enter("DeathCaves","DeathCaves")
-	end
 	
 	void Draw()
 	end
 	
 	void Update()
 	end
-	
 end
-#say "Map Script - Compiling!"
+	
+Init
+	MScript.Houses = { [0]="ItemShop", "Bank", "ArmorShop", "WeaponShop" }
+	Kthura.CurrentLayer="CITY"
+	MScript.DownTown()
+	for li in each(MScript.Houses)
+		CSayF("Init zone: %s",li)
+		MScript["NPC_ENTER"..Upper(li)] = Lua.load(sprintf("Scyndi.AllIdentifiers.Map.GoToLayer('CITY','Start%s')\nScyndi.Class.MScript.ShowBuilding('%s')",li,li),sprintf("Enter:%s",li))
+		Map.ZA_Enter("Leave"..li,"DownTown",li)
+	end
+	Map.ZA_Enter("ShowSecret","ShowSecret"); Map.HideByZone("ToSecret")
+	Map.ZA_Enter("Dzgjymza","Dzgjymza")
+	Map.ZA_Enter("DeathCaves","DeathCaves")
+end

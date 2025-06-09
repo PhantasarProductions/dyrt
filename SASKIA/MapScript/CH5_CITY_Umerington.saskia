@@ -36,7 +36,7 @@
 ; End License Information
 
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader,"The City Of Umerington"
 	end
 
 :NPC_SASKIA_Michael
@@ -74,7 +74,7 @@
 
 :Jurgen
 	call MapText,"JURGEN"
-	chk Yes("Play 20"..string.char(44).."000 shilders to obtain a Traveler's emblem?"),Emblem
+	chk Events.Yes("Play 20"..string.char(44).."000 shilders to obtain a Traveler's emblem?"),Emblem
 	call MapText,"JURGENNO"
 	end
 	
