@@ -34,8 +34,9 @@
 ; 
 ; version: 20.12.14
 ; End License Information
+
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Lord Dzgjymza's Keep"
 	end
 
 :NPC_SASKIA_Blenchy	
