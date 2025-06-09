@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/Blenchy_Study.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_Blenchy_Study.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,33 @@
 // 
 // **********************************************
 // 
-// version: 20.07.05
-// End License Information
+// 
+// version: 25.06.09 I
+// 
+// End License
 
 
-do
-	string upper(string s)
-		return s:upper()
-	end
+Module
+
+#use "Libs/SCI/Sys"
+
+#use "Script/Use/Need"
+
+LocExtern AI_Blenchy "Scyndi.Class.AI_Blenchy2"
+
+	//string upper(string s)
+	//	return s:upper()
+	//end
 	
 	void StatCopy(Act,Target)
-		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
-			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = math.ceil( RPG.GetChar(Target.Tag).Stat("END_"..st).Value * (1+(__skill*.25)))
+		for st in each { [0]="Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion" }
+			RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = math.ceil( RPG.GetChar(Target.Tag).Stat("END_"..st).Value * (1+(__skill*0.25)))
 			CSayF("Blenchy: %10s = %3d (from %s)",st,RPG.GetChar("FOE_1").Stat("BASE_"..st).Value,Target.Tag)
 		end
 
 	end
 	
-	bool Studeren(Act,Target)
+	bool DoEffect(Act,Target)
 		CSay("Spell effect: Study")
 		// This is based on the original script... I copied it here for reference
 		// function Combat_AbilityEffect.BlenchyStudy(TG,TT)
@@ -62,29 +72,30 @@ do
 		string ch	
 		var AllowCopy
 		ch  = Target.Tag
-		chi = ch:upper()
+		chi = upper(ch)
 		if chi=="YASATHAR"
 			chi="ERIC"
 		end
 		// Copied from the original // Adaptions may be done/needed
-		#pure
-		AllowCopy  = {
-			Yasathar   = {"Bact","Bio","Biohazard","Corna","Darkness","DarkVision","Death","Disintegrate","FireBlast","Flame","Freeze","Frost","Inferno","PowerEvil","Vitalize"},
-			Irravonia  = {"Breeze","Catastrophe","FireBlast","Heal","Hurricane","Inferno","Rock","Quake","Splash","Tsunami"},
-			-- Brendor    = {"CRASHHAMMER"},
-			Brendor    = { 'Charge','HammerSmash','QuakeStrike'},
-			Scyndi     = {"Blast","Devistate","Enlighten","FirstAid","HolyShit","Jolt","Lightning","MentalGym","Mjollner","Shine","Smite","Recover","Solaria","Vigor","Vitalize"},
-			-- Rebecca    = {"2XPS","3XPS","4XPS","5XPS","BATTLECRY"},
-			Rebecca    = {"Power2x","Power3x","Power4x","Power5x","WarShout","Cleave"},
-			-- Dernor     = {"BACT","BIO","BLOODSUCKER","BURP","CHARM","CROCBITE","DEATHPECK","FIREBLAST","GROWL","HOWLING","MULTITUSK","PARADIVE","PECK","POISONSPIT","RECOVER","SCRATCH","SPORES","TSUNAMI","VIRUSBUBBLE","WILLPOWER"},
-			Dernor     = {"Vitalize",'BloodSucker','Claw','Peck','CrocBite','Spores','Growl','Howling','SickBite','Burp','RavenPeck','AttackInDamnnation','Inferno','Dive'},
-			Merya      = {"Backstab","FastDraw","Stunstab","Killerstab","Intimidate"},
-			--Aziella    = {'ACCELERATOR',"BLUNT","VANISH","DOUBLE_BOLT","MYSTICCARE","HYPER","PIERCE","PROTECT","SHIELD","SHOWER","SLEEP","TRIPLE_BOLT","POISONARROW"}
-			Aziella    = {"MysticCare","Confusion","Protect","Vanish","Shield","Blunt","Hyper"}
-		}
-		#endpure
+		//#pure
+		AllowCopy  = {}
+		
+		AllowCopy.Yasathar   = { [0] = "Bact","Bio","Biohazard","Corna","Darkness","DarkVision","Death","Disintegrate","FireBlast","Flame","Freeze","Frost","Inferno","PowerEvil","Vitalize"}
+		AllowCopy.Irravonia  = { [0] = "Breeze","Catastrophe","FireBlast","Heal","Hurricane","Inferno","Rock","Quake","Splash","Tsunami"}
+		// Brendor    = {"CRASHHAMMER"},
+		AllowCopy.Brendor    = { [0]="Charge","HammerSmash","QuakeStrike"}
+		AllowCopy.Scyndi     = { [0]="Blast","Devistate","Enlighten","FirstAid","HolyShit","Jolt","Lightning","MentalGym","Mjollner","Shine","Smite","Recover","Solaria","Vigor","Vitalize"}
+		// Rebecca    = {"2XPS","3XPS","4XPS","5XPS","BATTLECRY"},
+		AllowCopy.Rebecca    = { [0]="Power2x","Power3x","Power4x","Power5x","WarShout","Cleave"}
+		// Dernor     = {"BACT","BIO","BLOODSUCKER","BURP","CHARM","CROCBITE","DEATHPECK","FIREBLAST","GROWL","HOWLING","MULTITUSK","PARADIVE","PECK","POISONSPIT","RECOVER","SCRATCH","SPORES","TSUNAMI","VIRUSBUBBLE","WILLPOWER"},
+		AllowCopy.Dernor     = { [0]="Vitalize","BloodSucker","Claw","Peck","CrocBite","Spores","Growl","Howling","SickBite","Burp","RavenPeck","AttackInDamnnation","Inferno","Dive"},
+		AllowCopy.Merya      = {"Backstab","FastDraw","Stunstab","Killerstab","Intimidate"},
+		// Aziella    = {'ACCELERATOR',"BLUNT","VANISH","DOUBLE_BOLT","MYSTICCARE","HYPER","PIERCE","PROTECT","SHIELD","SHOWER","SLEEP","TRIPLE_BOLT","POISONARROW"}
+		AllowCopy.Aziella    = { [0]="MysticCare","Confusion","Protect","Vanish","Shield","Blunt","Hyper"}
+		//}
+		//#endpure
 		// if not AllowCopy[ch] then Sys.Error("Tried to study an unknown character ("..ch..")") end
-		assert(AllowCopy[Target.Tag],"Tried to study an unknown character ("..Target.Tag..")")
+		Lua.assert(AllowCopy[Target.Tag],"Tried to study an unknown character ("..Target.Tag..")")
 		
 		// local abl,trueabl
 		string trueabl
@@ -99,17 +110,18 @@ do
 			if AbilitiesMastered[Target.Tag][abl]
 				trueabl = "ABL_HERO_"..upper(chi).."_"..upper(abl)
 				// if not Abilities[trueabl] then Sys.Error("Ability: "..trueabl.." does not appear to exist") end
-				assert(Item[trueabl],"Ability: "..trueabl.." does not appear to exist")
-				for ak_,ak in ipairs({100,75,50,25,10,5}) do
-					if math.random(0,Item[trueabl].AP_Cost or 1)<ak 
-						table.insert(AI_Blenchy.BlenchySpells,trueabl) 
+				Lua.assert(Item[trueabl],"Ability: "..trueabl.." does not appear to exist")
+				for ak_,ak in pairs({100,75,50,25,10,5}) 
+					if math.random(0,Item[trueabl].AP_Cost || 1)<ak 
+						//table.insert(AI_Blenchy.BlenchySpells,trueabl)
+						AI_Blenchy.BlenchySpells+=trueabl
 					end
 				end
 			end
 		end
 		// -- Finish this analysis
 		StatCopy(Act,Target)
-		if #AI_Blenchy.BlenchySpells==0 then 
+		if len(AI_Blenchy.BlenchySpells)==0 
 			CSay("Blenchy has copied 0 abilities.... So another study is in order!")
 			AI_Blenchy.BlenchySpells=nil ;
 			return false ;
@@ -118,5 +130,5 @@ do
 	end
 
 		
-	return Studeren
-end
+	//return Studeren
+//end

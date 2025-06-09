@@ -1,0 +1,122 @@
+// License:
+// **********************************************
+// 
+// src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_BlenchyStudy.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
+// 
+// This file contains material that is related
+// to a storyline that is which is strictly
+// copyrighted to Jeroen Broks.
+// 
+// This file may only be used in an unmodified
+// form with an unmodified version of the
+// software this file belongs to.
+// 
+// You may use this file for your study to see
+// how I solved certain things in the creation
+// of this project to see if you find valuable
+// leads for the creation of your own.
+// 
+// Mostly this file comes along with a project
+// that is for most part released under an
+// open source license and that means that if
+// you use that code with this file removed
+// from it, you can use it under that license.
+// Please check out the other files to find out
+// which license applies.
+// 
+// This file comes 'as-is' and in no possible
+// way the author can be held responsible of
+// any form of damages that may occur due to
+// the usage of this file
+// 
+// 
+// **********************************************
+// 
+// 
+// version: 25.06.09 IV
+// 
+// End License
+
+module 
+	//SpellAni_BlenchyStudy
+	
+	#use "Libs/SCI/Graphics"
+	#use "Script/Use/Misc/BoxPics"
+	
+	#accept Fighter
+	#accept CSay
+	#accept CSayF
+
+	readonly var think
+	readonly int x
+	readonly int y
+	readonly var Blenchy
+	
+	int alpha = 0
+	int time = 0
+	
+	string face
+	
+	Init
+		Blenchy = Fighter.ByTag.FOE_1
+		think = LoadNewImage("GFX/Combat/Spellani/Think.png","BLENCHY_THINK")
+		//think.Hot(math.floor(295/2),281)
+		x = Blenchy.X - 20
+		y = Blenchy.Y - 250
+		CSayF("Blenchy think point (%d,%d)",x,y)
+	end
+	
+	void SA_Init(act)
+		CSay("Init Spellani")
+		assert(Len(act.Targets)==1,sprintf("Invalid number of targets for this spellani (%d)",len(act.Targets)))
+		alpha = 0
+		time = 200
+		face = act.Targets[0].Tag
+	end
+	
+	bool Cycle()
+		// Dummy... Only put here for quick referrence: BoxPic(BarBoxes[num].x+16,Screen.Height-16,RPG.Party[num])
+		//think.Draw(x,y)
+		think.Draw(x+150,y+280)
+		SetAlpha(alpha)
+		BoxPic(x+100,y+125,face)
+		SetAlpha(255)
+		if alpha<255
+			alpha++
+		else
+			time--
+		end
+		return time<=0
+	end
+	
+//end
+
+//#pure
+//--[[ Only placed here fore quick referrence. This was the original Lua code
+//
+//function SpellAni.BlenchyStudy(TG,TT,TA)
+	//local think = Image.Load("GFX/Combat/Spellani/Think.png")
+	//Image.Hot(think,295/2,281)
+	//local x,y = Combat_EnemySpot(5)
+	//y = y - 64
+	//local ch = party[TA.Target]
+	//if ch=="Yasathar" then ch="Eric" end
+	//if not ch then Sys.Error("Blenchy cannot study character #"..TA.Target) end
+	//local pic = BoxPic({ Pic = char[ch].Name})
+	//local px,py
+	//px = x-(295/2)+85
+	//py = y-281+55+96
+	//local alpha = 0
+	//for ak=1,250 do
+	//if alpha<1 then alpha = alpha + 0.005 else alpha=1 end
+		//Combat_DrawScreen()
+		//Image.Draw(think,x,y)
+		//Image.SetAlpha(alpha)
+		//Image.Draw(pic,px,py)
+		//Image.SetAlpha(1)
+		//Flip()
+	//end
+//end
+//]]
+//#endpure

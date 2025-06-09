@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Blenchy2.nil
-// (c) Jeroen Broks, 2020, 2021, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Blenchy2.scyndi
+// (c) Jeroen Broks, 2020-2021, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,8 +33,10 @@
 // 
 // **********************************************
 // 
-// version: 21.01.02
-// End License Information
+// 
+// version: 25.06.08 VII
+// 
+// End License
 
 
 
@@ -57,7 +60,7 @@
 //     
 //     
 //     The study ability itself can be found in:
-//          Scripts/Use/Game/Combat/AbilityEffect/BlenchyStudy.lua
+//          Scripts/Use/Game/Combat/AbilityEffect/Effect_BlenchyStudy.scyndi
 //          
 //     How to use this ability is described in this script. ;)     
 // 
@@ -66,9 +69,18 @@
 // Please note that this is a kind of a translation of code original written in Lua to NIL, with some adaptions for the new system.
 
 
+Module
+
+#use "Libs/SCI/Sys"
+
+
+#use "Script/Use/Need"
+
+#accept Fighter
+
 global var AI_Blenchy
 
-module Blenchy_AI2
+//module Blenchy_AI2
 	// -- @IF IGNOREME
 	// E_IMove = {}
 	// -- @FI
@@ -80,7 +92,7 @@ module Blenchy_AI2
 		CSay("Blenchy will study the a party member")
 		int TimeOut=10000
 		bool GoedGekeurd
-		table nact
+		nact:={}
 		// FoeAct = {
 		//
 		//	TargetGroup = "Heroes",
@@ -92,19 +104,19 @@ module Blenchy_AI2
 		// }
 		
 		repeat
-			assert(TimeOut>=0,"Blenchy Study -- Timeout!")
+			Lua.assert(TimeOut>=0,"Blenchy Study -- Timeout!")
 			nact.ActTag = "ZZZ_BLENCHY_STUDY"
 			//nact.Targets = {foes[math.random(1,#foes)]}
-			nact.Targets = { Fighter.ByTag[RPG.Party[math.random(1,4)]] }
+			nact.Targets = { [0]=Fighter.ByTag[RPG.Party[math.random(1,4)]] }
 			nact.ExeTag = foe.Tag
-			GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+			GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
 			--TimeOut
 		until GoedGekeurd
 		foe.NextAct = new Actions(nact)
 		foe.NextActSpeed = math.random(150,250)
 		foe.GaugePosition = 10001
 
-		self.BlenchyTurns=3
+		BlenchyTurns=3
 	end
 	
 	//
@@ -113,90 +125,89 @@ module Blenchy_AI2
 	void Decide(foe)
 		int TimeOut=20000
 		int abr
-		var nitem
-		table heroes
-		table foes
-		table nact
+		nitem:=nil
+		heroes:={}
+		foes:={}
+		nact:={}
 			
 		bool GoedGekeurd
 		
 		for tag,hero in pairs(Fighter.Team.Hero)
-			heroes[#heroes+1]=hero
+			heroes+=hero
 		end
 		for tag,ifoe in pairs(Fighter.Team.Foe)
-			foes[#foes+1]=ifoe
+			foes+=ifoe
 		end
 
 		// function E_IMove.Blenchy(ACTOR)
 		// if (not BlenchySpells) or (not BlenchyTurns) or BlenchyTurns==0 then return BlenchyStudy() end
-		if self.BlenchyTurns <= 0 or (not self.BlenchySpells) or (#self.BlenchySpells<=0)
-			self.BlenchyStudy(foe)
+		if BlenchyTurns <= 0 || (! BlenchySpells) || (len(BlenchySpells)<=0)
+			BlenchyStudy(foe)
 			return
 		end
 		// FoeAct = FoeAct or {}
-		abr = math.random(1,#self.BlenchySpells)
+		abr = math.random(0,Len(BlenchySpells)-1)
 		// FoeAct[5] = {
 		//	Action   = "ABL",
 		//	Ability  = BlenchySpells[abr],
 		//	ActSpeed = 300
 		// }
-		nitem = Item[self.BlenchySpells[abr]] // local abl = Abilities[BlenchySpells[abr]]
-		nact.ActTag = self.BlenchySpells[abr]
+		nitem = Item[BlenchySpells[abr]] // local abl = Abilities[BlenchySpells[abr]]
+		nact.ActTag = BlenchySpells[abr]
 		nact.ExeTag = foe.Tag
 		repeat
 			// target
 			switch nitem.Target
 				case "OS"
-					nact.Targets = {foe}
+					nact.Targets = {[0]=foe}
 					GoedGekeurd=true
 				case "1A"
-					nact.Targets = {foes[math.random(1,#foes)]}
-					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+					nact.Targets = {[0]=foes[math.random(0,len(foes)-1)]}
+					GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
 				case "AA"
 					nact.Targets = {}
 					for check in each(foes)
 						if check.Char.Points("HP").Have>0
-							nact.Targets[#nact.Targets+1]=check
+							nact.Targets+=check
 						end
 					end
-					GoedGekeurd = #nact.Targets>0
+					GoedGekeurd = len(nact.Targets)>0
 				case "1F"
 					int maxheroes
-					maxheroes = #heroes
+					maxheroes = len(heroes)
 					if maxheroes>4
 						maxheroes=4
 					end
-					nact.Targets = {heroes[math.random(1,maxheroes)]}
-					GoedGekeurd = nact.Targets[1].Char.Points("HP").Have>0
+					nact.Targets = {[0]=heroes[math.random(0,maxheroes-1)]}
+					GoedGekeurd = nact.Targets[0].Char.Points("HP").Have>0
 				case "AF"
 					nact.Targets = {}
 					for check in each(heroes)
 						if check.Char.Points("HP").Have>0
-							nact.Targets[#nact.Targets+1]=check
+							nact.Targets+=check
 						end
 					end
-					GoedGekeurd = #nact.Targets>0
+					GoedGekeurd = len(nact.Targets)>0
 				case "EV"
 					nact.Targets = {}
 					for iteam,imember,ifighter in Fighter.ForAll()
-						nact.Targets[#nact.Targets+1]=ifighter
+						nact.Targets+=ifighter
 					end
-					GoedGekeurd = #nact.Targets>0
+					GoedGekeurd = len(nact.Targets)>0
 				default
-					error(sprintf("Unknown target type '%s'!",nitem.Target))
+					Lua.error(sprintf("Unknown target type '%s'!",nitem.Target))
 			end
 			TimeOut--
-			assert(GoedGekeurd or TimeOut>0,"Blenchy's AI timeout!")
+			assert(GoedGekeurd || TimeOut>0,"Blenchy's AI timeout!")
 		until GoedGekeurd
-		self.BlenchyTurns = (self.BlenchyTurns or 3) - 1
+		BlenchyTurns = (BlenchyTurns || 3) - 1
 		foe.NextAct = new Actions(nact)
 		foe.NextActSpeed = nitem.COM2ACT
 		foe.GaugePosition = 10001
 	end
 	
-	void CONSTRUCTOR()
-		AI_Blenchy = self
+	Init
+		AI_Blenchy = AI_Blenchy2
 	end
 	
 	
-end
