@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Dzgjymza.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Dzgjymza.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,8 +33,16 @@
 // 
 // **********************************************
 // 
-// version: 20.07.03
-// End License Information
+// 
+// version: 25.06.08 VII
+// 
+// End License
+
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Graphics"
+
 class ctroep
 	int x
 	int y
@@ -43,14 +52,14 @@ class ctroep
 		self.img.Draw(self.x,self.y)
 	end
 	
-	void CONSTRUCTOR(int x,int y, img)
+	CONSTRUCTOR(int x,int y, img)
 		self.x = x
 		self.y = y
 		self.img = img
 		self.lijst.AddLast(self)
 	end
 	
-	void DESTRUCTOR()
+	DESTRUCTOR
 		CSayF("Cleaning up crap at (%4d,%4d)",self.x,self.y)
 	end
 	
@@ -64,38 +73,40 @@ class ctroep
 	
 end
 
-module Arena_Dzgjymza_Castle
+//module 
+	//Arena_Dzgjymza_Castle
 
-	table itroep
+	plua itroep 
 	link troep = ctroep.lijst
 	var Muur
 	var Vloer
 	
-	void CONSTRUCTOR()
-		self.Vloer    = LoadIfNew("GFX/Textures/Dyrt/Dzgjymza/Floor.png",  "ARENA_DZGJYMZA_FLOOR")
-		self.Muur     = LoadIfNew("GFX/Textures/Dyrt/Dzgjymza/W__N.png" ,  "ARENA_DZGJYMZA_WALL")
-		self.itroep[1] = LoadIfNew("GFX/Textures/Dyrt/Dzgjymza/Pillar.PNG","ARENA_DZGJYMZA_PILLAR")
-		self.itroep[2] = LoadIfNew("GFX/Textures/Objects/Kaars Uit.png",   "ARENA_DZGJYMZA_CANDLE")
+	Init
+		itroep    = {}
+		Vloer     = LoadNewImage("GFX/Textures/Dyrt/Dzgjymza/Floor.png", "ARENA_DZGJYMZA_FLOOR")
+		Muur      = LoadNewImage("GFX/Textures/Dyrt/Dzgjymza/W__N.png" , "ARENA_DZGJYMZA_WALL")
+		itroep[1] = LoadNewImage("GFX/Textures/Dyrt/Dzgjymza/Pillar.PNG","ARENA_DZGJYMZA_PILLAR")
+		itroep[2] = LoadNewImage("GFX/Textures/Objects/Kaars Uit.png",   "ARENA_DZGJYMZA_CANDLE")
 		int x = 100
 		int y = 200
-		self.troep = new TLinkedList
+		troep = new TLinkedList()
 		repeat
-			#+ y math.random(100,500)
-			if y>Screen.H/2
-				#- y (Screen.H/2)
-				#+ y 200
-				#+ x math.random(100,500)
+			y += math.random(100,500)
+			if y>Graphics.H/2
+				y -= (Graphics.H/2)
+				y += 200
+				x += math.random(100,500)
 			end
-			if x>=Screen.W-100
+			if x>=Graphics.W-100
 				break
 			end
 		forever
 	end
 	
 	void Draw()
-		self.Vloer.Tile(0,0,Screen.W,Screen.H)
-		self.Muur.Tile(0,0,Screen.W,96)
+		Vloer.Tile(0,0,Graphics.W,Graphics.H)
+		Muur.Tile(0,0,Graphics.W,96)
 		ctroep.DrawAll()
 	end
 
-end
+
