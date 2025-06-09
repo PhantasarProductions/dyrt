@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH5_DUNG_DYRT_DZGJYMZA.NIL
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH5_Dung_Dyrt_Dzgjymza.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,37 +33,55 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
+// 
+// version: 25.06.08 XIV
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Module
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Audio"
+#use "Libs/SCI/GINIE"
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
+
+#use "Libs/Music"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
 #use "Script/Use/MapScript/Memory"
-#use "Script/use/Specific/CheckTrueAbyss" as CTA
+
+//#use "Script/use/Specific/CheckTrueAbyss"
+
+extern SkipFight "false"
 
 #macro maxsecrets 2
 #macro CURRENT_KAMER self.KamerNames[Map.Layer]
 
 #macro SKIP_DZGJYMZA false
 
-#macro ZO_GAAN_WE_SKIPPEN_OF_NIET if SKIP_DZGJYMZA then Annoy("Skipped boss fight!") return end
+// #macro ZO_GAAN_WE_SKIPPEN_OF_NIET if SKIP_DZGJYMZA Events.Annoy("Skipped boss fight!"); return; end
 
 
 #accept MScript
+plua bngpcheck=GINIE.LoadHomeNew("Config.ini","GlobCONFIG","Config.ini","Global Configuration\nThe Secrets of Dyrt\n(c) Jeroen P. Broks")
+//	Allow_NGTA:=b.Value("Cast","Irravonia")=="6f96b2b3dae0379e9c0f1325b83fddd4"
+//	Allow_NGPL:=b.Value("Cast","Scyndi")=="56dcd25b31538f9bc183f5b791a8cf45"
 
-quickmeta group MetaSwitch
+quickmeta MetaSwitch
 	index
-		return gv.Bool["DZGJYMZA_KEEP_SWITCH_DONE."..(key:upper())]
+		return gv.Bool["DZGJYMZA_KEEP_SWITCH_DONE."..(Upper(key))]
 	end
 	
 	newindex
-		gv.Bool["DZGJYMZA_KEEP_SWITCH_DONE."..(key:upper())] = value
-		for _,n in ipairs { "Jeracko","Rondomo","Aldarus","Kirana" }
-			if not MScript.Switch[n]
+		gv.Bool["DZGJYMZA_KEEP_SWITCH_DONE."..(Upper(key))] = value
+		for _,n in pairs { "Jeracko","Rondomo","Aldarus","Kirana" }
+			if ! MetaSwitch[n]
 				CSayF("Exiting: Switch for %s not yet flipped!",n)
 				return				
 			end
@@ -86,26 +105,26 @@ group MScript
 	var Font
 	
 	get string Kamer
-		if (not CURRENT_KAMER) or prefixed(CURRENT_KAMER,"END")
+		if (! CURRENT_KAMER) || prefixed(CURRENT_KAMER,"END")
 			return ""
 		end
 		// assert(CURRENT_KAMER,"No data for area: "..Map.Layer)
-		self.KamerKop[CURRENT_KAMER] = self.KamerKop[CURRENT_KAMER] or self.Font.Text(CURRENT_KAMER)
+		KamerKop[CURRENT_KAMER] = KamerKop[CURRENT_KAMER] || Font.iText(CURRENT_KAMER)
 		return CURRENT_KAMER
 	end
 	
-	link Switch = MetaSwitch
+	//link Switch = MetaSwitch
 		
 	void SWITCH_JERACKO()
-		self.Switch.Jeracko = true
+		MetaSwitch.Jeracko = true
 	end
 	
 	void SWITCH_ALDARUS()
-		self.Switch.Aldarus = true
+		MetaSwitch.Aldarus = true
 	end
 	
 	void SWITCH_KIRANA()
-		self.Switch.Kirana = true
+		MetaSwitch.Kirana = true
 	end
 	
 	void SHOWSECRET(int i)
@@ -116,9 +135,10 @@ group MScript
 		Map.HideByLabel("SECRET"..i)
 	end
 	
-	link DarkDraw = CircularDarkness.Draw__StyleStretch
+	link DarkDraw = CircularDarkness.Draw1
+	//__StyleStretch
 	
-		// Memory puzzle
+	// Memory puzzle
 	delegate NPC_MEMORY1
 	delegate NPC_MEMORY2
 	delegate NPC_MEMORY3
@@ -140,16 +160,16 @@ group MScript
 	
 	// Memory
 	void RESETMEMORY()
-		if self.Switch.Rondomo
+		if MetaSwitch.Rondomo
 			return
 		end
-		Memory.Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Aziella"})
+		Memory.Mem_Init(self,{"Eric","Irravonia","Brendor","Scyndi","Dernor","Merya","Rebecca","Aziella"})
 	end
 	
 	link MEMORYCYCLE = Memory.Cycle
 	
 	void MemoryPuzzleSolved()
-		LoadAudio("SFX/Puzzle/Solved.wav").Play()
+		Audio.Load("SFX/Puzzle/Solved.wav","PUZZLE_SOLVED").Play()
 		Map.Kill("StartPuzzle",true)
 		self.KILLMEMORY()
 		Party.LvUp()
@@ -159,7 +179,7 @@ group MScript
 		for i=1,16
 			Map.Kill("NPC_MEMORY"..i,true)
 		end
-		self.Switch.Rondomo = true
+		MetaSwitch.Rondomo = true
 	end
 	// End Memory
 	
@@ -172,7 +192,7 @@ group MScript
 	end
 	
 	void NPC_WENIARIA()
-		if not Done.Weniaria_in_DzgjymzaKeep_In_Dyrt
+		if ! Done.Weniaria_in_DzgjymzaKeep_In_Dyrt
 			MapScript.SASKIA("Weniaria")
 			Map.Layer="#009"
 			Map.Kill("DeurDzgjymza",true)
@@ -194,7 +214,8 @@ group MScript
 	
 	void DZGJYMZA_START1()
 		CSay("Let's start round #1")
-		ZO_GAAN_WE_SKIPPEN_OF_NIET
+		//ZO_GAAN_WE_SKIPPEN_OF_NIET
+		if SkipFight; return; end
 		// error("First Dzgjymza fight not yet scripted")
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/Dzgjymza_Human.wav"
@@ -207,7 +228,8 @@ group MScript
 	
 	void DZGJYMZA_START2()
 		CSay("Let's start round #2")
-		ZO_GAAN_WE_SKIPPEN_OF_NIET
+		//ZO_GAAN_WE_SKIPPEN_OF_NIET
+		if SkipFight; return; end
 		// error("Second Dzgjymza fight not yet scripted")
 		StartCombat.StartSession()
 		StartCombat.Music = "Music/Combat/Boss/Dzgjymza_God.wav"
@@ -221,22 +243,26 @@ group MScript
 	void BANGSET(string o)
 		int x
 		int y
-		Map.Obj = o
-		x = Map.ObjInt.x
-		y = Map.ObjInt.y
-		Map.Obj = "OnyxBang"
-		Map.ObjInt.x = x
-		Map.ObjInt.y = y
+		//Map.Obj = o
+		//x = Map.ObjInt.x
+		//y = Map.ObjInt.y
+		//Map.Obj = "OnyxBang"
+		//Map.ObjInt.x = x
+		//Map.ObjInt.y = y
+		Kthura.Obj.OnyxBang.X = Kthura.Obj[o].X
+		Kthura.Obj.OnyxBang.Y = Kthura.Obj[o].Y
 		CSayF("Coordinates for OnyxBang set to (%04d,%04d)",x,y)
 	end
 	
 	void BLENCHY_FADE()
-		#- gv.Int.FadeBlenchy 2
+		gv.Int.FadeBlenchy -= 2
 		for i=0,9
-			Map.Obj = "DS"..i
-			Map.ObjInt.Alpha = gv.Int.FadeBlenchy
+			//Map.Obj = "DS"..i
+			//Map.ObjInt.Alpha = gv.Int.FadeBlenchy
+			Kthura.Obj["DS"..i].Alpha = gv.Int.FadeBlenchy
 		end
-		CTA.Unlocked_NewGamePlus = true
+		//CTA.Unlocked_NewGamePlus = true
+		bngpcheck.Value("Cast","Scyndi","56dcd25b31538f9bc183f5b791a8cf45")
 	end
 	
 	void ENDACHIEVEMENT()
@@ -248,65 +274,41 @@ group MScript
 	bool LoveFlits
 	bool LoveDrawn
 	void LOVE()
-		if not self.LoveDrawn
+		if ! self.LoveDrawn
 			return
 		end
-		if (self.LoveDone>11 or self.LoveLoop<=0) and (not self.LoveFlits)
-			if self.LoveDone<=0 or (self.LoveDone<5 and math.random(0,self.LoveDone)==1)
+		LocExtern Bliksem "Scyndi.Class.Kthura.Obj.Bliksem"
+
+		if (self.LoveDone>11 || self.LoveLoop<=0) && (not self.LoveFlits)
+			if self.LoveDone<=0 || (self.LoveDone<5 && math.random(0,self.LoveDone)==1)
 				gv.Bool.EndLoveStop=true
 				return
 			end
-			--self.LoveDone
-			self.LoveLoop=math.random(20,30)
-			Map.Obj="Bliksem"
-			Map.ObjInt.X = math.random(300,500)
-			Map.ObjInt.Rotation = math.random(0,90)-45
-			Map.ObjInt.R = math.random(0,255)
-			Map.ObjInt.G = math.random(0,255)
-			Map.ObjInt.B = math.random(0,255)
+			--LoveDone
+			LoveLoop = math.random(20,30)
+			//Map.Obj="Bliksem"
+			Bliksem.X = math.random(300,500)
+			Bliksem.Rotation = math.random(0,90)-45
+			Bliksem.R = math.random(0,255)
+			Bliksem.G = math.random(0,255)
+			Bliksem.B = math.random(0,255)
 		end
-		self.LoveFlits = not self.LoveFlits
-		Map.Obj="Bliksem"
-		Map.ObjBool.Visible = self.LoveFlits
+		LoveFlits = ! LoveFlits
+		//Map.Obj="Bliksem"
+		Bliksem.Visible = self.LoveFlits
 		self.LoveDrawn = false
 		--self.LoveLoop
-	end
-	
-	void CONSTRUCTOR()
-		UseKettingKaart()
-		self.Font = GetFont("BIGTEXT")
-		self.KamerNames = {
-			["#000"] = "Lobby",
-			["#001"] = "Grand Hall",
-			["#002"] = "Upstairs Corridor",
-			["#003"] = "Wanda's bedroom",
-			["#004"] = "Lord Dzgjymza's bedroom",
-			["#005"] = "Jeracko's bedroom",
-			["#006"] = "Rondomo's bedroom",
-			["#007"] = "Aldarus' bedroom",
-			["#008"] = "Kirana's bedroom",
-			["#009"] = "Passage",
-			["#010"] = "Sanctuary",
-			["#011"] = "Audience Chamber"			
-		}
-		for i=1,maxsecrets
-			Map.ZA_Enter("SECRET"..i,"SHOWSECRET",i)
-			Map.ZA_Leave("SECRET"..i,"HIDESECRET",i)
-		end
-		Map.ZA_Enter("StartPuzzle","ResetMemory")
-		Map.ZA_Enter("Sanctuary","Sanctuary")
-		Map.ZA_Leave("Sanctuary","LeaveSanctuary")
-	end
+	end		
 	
 	void Draw()
-		if Map.Layer!="#010" and (not prefixed(Map.Layer,"END"))
+		if Map.Layer!="#010" && (! prefixed(Map.Layer,"END"))
 			self.DarkDraw()
 		else
 			self.LoveDrawn = true
 		end
 		__yellow
 		if self.Kamer!=""
-			self.KamerKop[self.Kamer].Draw(math.floor(Screen.W/2),5,2,0)
+			self.KamerKop[self.Kamer].Draw(math.floor(Graphics.W/2),5,2,0)
 		end		
 	end
 	
@@ -314,4 +316,30 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+
+Init
+	UseKettingKaart()
+	MScript.Font = GetFont("BIGTEXT")
+	MScript.KamerNames = {}
+	MScript.KamerNames["#000"] = "Lobby"
+	MScript.KamerNames["#001"] = "Grand Hall"
+	MScript.KamerNames["#002"] = "Upstairs Corridor"
+	MScript.KamerNames["#003"] = "Wanda's bedroom"
+	MScript.KamerNames["#004"] = "Lord Dzgjymza's bedroom"
+	MScript.KamerNames["#005"] = "Jeracko's bedroom"
+	MScript.KamerNames["#006"] = "Rondomo's bedroom"
+	MScript.KamerNames["#007"] = "Aldarus' bedroom"
+	MScript.KamerNames["#008"] = "Kirana's bedroom"
+	MScript.KamerNames["#009"] = "Passage"
+	MScript.KamerNames["#010"] = "Sanctuary"
+	MScript.KamerNames["#011"] = "Audience Chamber"
+	for i=1,maxsecrets
+		Map.ZA_Enter("SECRET"..i,"SHOWSECRET",i)
+		Map.ZA_Leave("SECRET"..i,"HIDESECRET",i)
+	end
+	Map.ZA_Enter("StartPuzzle","ResetMemory")
+	Map.ZA_Enter("Sanctuary","Sanctuary")
+	Map.ZA_Leave("Sanctuary","LeaveSanctuary")
+End
