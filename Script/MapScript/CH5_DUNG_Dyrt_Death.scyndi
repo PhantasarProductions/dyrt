@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/CH5_DUNG_Dyrt_Death.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/CH5_DUNG_Dyrt_Death.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,19 +33,23 @@
 // 
 // **********************************************
 // 
-// version: 20.06.24
-// End License Information
+// 
+// version: 25.06.08
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 #use "Script/Use/MapScript/CircularDarkness"
 
 group MScript
 	
-	link DarkDraw = CircularDarkness.Draw__StyleStretch
+	//link DarkDraw = CircularDarkness.Draw__StyleStretch
+	link DarkDraw = CircularDarkness.Draw1
 	
 	void TO001()
 		Map.GoToLayer("#001","From008")
@@ -82,16 +87,6 @@ group MScript
 		MapScript.SASKIA("BlackMarket")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("To001","To001")
-		Map.ZA_Enter("To008","To008")
-		Map.ZA_Enter("StartBoss","SASKIA:Boss")
-		Map.ZA_Enter("LeaveBlackMarket","LeaveBlackmarket")
-		Map.ZA_Enter("ToBlackMarket","EnterMarket")
-		Map.ZA_Enter("ORB","ShowOrb")
-		Map.ZA_Leave("ORB","HideOrb")
-	end
-	
 	void Draw()
 		self.DarkDraw()
 	end
@@ -100,4 +95,13 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("To001","To001")
+	Map.ZA_Enter("To008","To008")
+	Map.ZA_Enter("StartBoss","SASKIA:Boss")
+	Map.ZA_Enter("LeaveBlackMarket","LeaveBlackmarket")
+	Map.ZA_Enter("ToBlackMarket","EnterMarket")
+	Map.ZA_Enter("ORB","ShowOrb")
+	Map.ZA_Leave("ORB","HideOrb")
+End
