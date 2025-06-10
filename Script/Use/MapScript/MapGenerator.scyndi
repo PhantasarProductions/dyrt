@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/MapScript/MapGenerator.scyndi
 // 
-// 	  Version: 25.05.29 III
+// 	  Version: 25.06.10 I
 // 	
 // 	  Copyright (C) 2024, 2025 Jeroen Petrus Broks
 // 	
@@ -249,7 +249,9 @@ Class MG_Tak
 	
 End
 
-Void Generate()
+Void Generate(l)
+	old:=Kthura.CurrentLayer
+	if l; Kthura.CurrentLayer=l; end
 	Cls()
 	ImgGen.HotCenter()
 	ImgGen.Draw(Graphics.Width div 2,Graphics.Height div 2)
@@ -320,4 +322,5 @@ Void Generate()
 	EindeZone.Tag = TransZAT
 	CSayF("End zone '%s::%s' on (%04d,%04d) %04dx%04d",EindeZone.Kind,EindeZone.Tag,EindeZone.X,EindeZone.Y,EindeZone.W,EindeZone.H)
 	Kthura.Remap()
+	if l && old && old!=""; Kthura.CurrentLayer=old; end
 End
