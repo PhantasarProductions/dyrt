@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/TrueAbyss_01.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/TrueAbyss_01.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,18 +33,34 @@
 // 
 // **********************************************
 // 
-// version: 20.08.10
-// End License Information
+// 
+// version: 25.06.10 XII
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/Music"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/GINIE"
+#use "Libs/SCI/Events"
+#use "Libs/SCI/Intervar"
+
+#use "script/use/need"
+#use "Script/Use/Misc/StartCombatMod"
 
 #macro ScharumMusic "Music/Combat/Random/Chapter"..math.random(1,4)..".wav"
 
 #macro MaxTreasure 123
+
+global plua PermaChanges = GINIE.CreateNew("Map_PermaChanges")
+
+#use "Script/Use/MapScript/MapGenerator"
+
+extern tonumber "tonumber"
 
 // Needed for Scharum
 group TempParty
@@ -51,7 +68,7 @@ group TempParty
 	void Push()
 		string L
 		L = Map.Leader
-		for i=1,8 do
+		for i=1,8 
 			self.pushed[i] = RPG.Party[i]
 			if i==1 
 				RPG.Party[1] = L
@@ -61,7 +78,7 @@ group TempParty
 		end
 	end
 	void Pop()
-		for i=1,8 do
+		for i=1,8 
 			RPG.Party[i] = self.pushed[i]
 		end
 	end
@@ -85,7 +102,7 @@ group MScript
 	
 	// Next Floor
 	void NPC_NEXT()
-		if self.LayerNum>0 and self.LayerNum % 15 == 0 and (not Yes("Do you want to leave this town to continue to the next floor?"))
+		if self.LayerNum>0 && self.LayerNum % 15 == 0 && (! Events.Yes("Do you want to leave this town to continue to the next floor?"))
 			return
 		end
 		int l 
@@ -103,7 +120,8 @@ group MScript
 		v = l+1
 		n = sprintf("#%03d",v)
 		if v%5!=0
-			Map.Generate(n)
+			//Map.Generate(n)
+			MapGenerator.Generate(n)
 		end
 		Map.GoToLayer(n,"Start")
 		self.Score = self.LayerNum + self.FloorsReset
@@ -146,6 +164,7 @@ group MScript
 	
 	bool MusicBegun
 	void StartMusic()
+		locextern ll "#"
 		CSay("Get music to start")
 		if self.LayerNum == 0
 			Music.Play("Music/Dungeon/Abyss.wav")
@@ -153,9 +172,9 @@ group MScript
 			CSay("Kick out on floor 1... Safety precaution")
 			return
 		elseif self.LayerNum % 5 == 1
-			Music.Play("Music/Dungeon/"..self.General[math.random(1,#self.General)]..".wav")
+			Music.Play("Music/Dungeon/"..self.General[math.random(1,ll self.General)]..".wav")
 		elseif self.LayerNum % 15 == 0
-			Music.Play("Music/Cities/"..self.Cities[math.random(1,#self.Cities)]..".wav")
+			Music.Play("Music/Cities/"..self.Cities[math.random(1,ll self.Cities)]..".wav")
 		elseif self.LayerNum %  5 == 0
 			Music.Play("Music/Original/Silence.wav")
 		else
@@ -169,23 +188,23 @@ group MScript
 	
 	// Conchita
 	void CONCHITA_WELCOME()
-		if not Done.Conchita_Welcome
+		if ! Done.Conchita_Welcome
 			MapText("NPC_MT_CONCHITASTART")
 		end
 	end
 	
 	// Reset
 	void NPC_YELLOW()
-		if Yes("These yellow orbs are resetters.\nUsing them will bring you back to floor 000, and all your levels will be reset to 1\n\nInventory, equipment, money and mastered abilities will however be transferred.\n\nYou will also, based on how many floors you already passed, also gain extra bonuses on your experience gained (both regular as for your skill groups).\n\nDo you want to perform this reset?")
+		if Events.Yes("These yellow orbs are resetters.\nUsing them will bring you back to floor 000, and all your levels will be reset to 1\n\nInventory, equipment, money and mastered abilities will however be transferred.\n\nYou will also, based on how many floors you already passed, also gain extra bonuses on your experience gained (both regular as for your skill groups).\n\nDo you want to perform this reset?")
 			self.Reset()
 		end
 	end
 	
 	void Reset()
-		for _,ch in ipairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+		for _,ch in pairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
 			CSayF("Resetting: %10s",ch)
 			Party.SetLevelStats(ch, 1)
-			RPG.GetChar(ch).Stat('Experience').Value = (math.random(25,100)*__skill)-self.Score
+			RPG.GetChar(ch).Stat("Experience").Value = (math.random(25,100)*__skill)-self.Score
 			for sk=0,4
 				var skill
 				var expp
@@ -196,9 +215,14 @@ group MScript
 					expp.Have = 6/__skill
 				end
 			end
+			for _,k in pairs{"HP","VIT"}
+				p:=RPG.GetChar(ch).Points(k)
+				p.Have = P.Maximum
+			end
 		end
-		#+ self.FloorsReset self.LayerNum
-		NIL.Use("Script/Auto/SwapKill.nil")
+		self.FloorsReset += self.LayerNum
+		//NIL.Use("Script/Auto/SwapKill.nil")
+		PermaChanges.Clear()
 		Field.LoadMap("TrueAbyss_01")		
 		Map.GoToLayer("#000","Start")
 		self.Score = self.LayerNum + self.FloorsReset
@@ -282,17 +306,18 @@ group MScript
 						error("Unknown boss number: "..kies)
 				end
 			case 90
-				table sealed
+				//table sealed
 				int chosen
-				sealed[#sealed+1] = "Sealed/GhoulKing"
-				sealed[#sealed+1] = "Sealed/GigaLich"
-				sealed[#sealed+1] = "Sealed/HobGoblin"
-				sealed[#sealed+1] = "Sealed/kabi"
-				sealed[#sealed+1] = "Sealed/KingSlime"
-				sealed[#sealed+1] = "Sealed/MountainEmperor"
-				sealed[#sealed+1] = "Sealed/OrcOverlord"
-				sealed[#sealed+1] = "Sealed/ShadowRogue"
-				chosen = math.random(1,#sealed)
+				sealed:={}
+				sealed += "Sealed/GhoulKing"
+				sealed += "Sealed/GigaLich"
+				sealed += "Sealed/HobGoblin"
+				sealed += "Sealed/kabi"
+				sealed += "Sealed/KingSlime"
+				sealed += "Sealed/MountainEmperor"
+				sealed += "Sealed/OrcOverlord"
+				sealed += "Sealed/ShadowRogue"
+				chosen = math.random(0,len(sealed)-1)
 				if sealed[chosen]=="Sealed/MountainEmperor" 
 					StartCombat.Music = "Music/combat/boss/mountainking.wav"
 				else
@@ -302,7 +327,7 @@ group MScript
 			case 100
 				StartCombat.Foe[1] = "Boss/AbyssGuardian"
 			default
-				error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
+				lua.error(sprintf("I don't know what boss goes on floor #%03d!",self.LayerNum))
 		end
 		StartCombat.NoLose = false
 		StartCombat.FoeIDDQD = false
@@ -317,17 +342,15 @@ group MScript
 	end
 	
 	void FinalBossDown()
-		table Heroes 
-		table Weapons
-		Heroes = {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
-		SealedDefeated[Heroes[math.random(1,#Heroes)]] = true // Will get one hero to learn their ultimate ability
-		Weapons = {"EQW_ERIC_BLUEMOON","EQW_IRRAVONIA_WAND_SUPER",
-		           "EQW_BRENDOR_HAMMER_SUPER","EQW_SCYNDI_WHIP_SUPER",
-		           "EQW_REBECCA_SWORD_SUPER","EQW_DERNOR_BAT_SUPER",
-		           "EQW_MERYA_DAGGER_SUPER","EQW_AZIELLA_BOLT_SUPER" }
+		//table Heroes 
+		///table Weapons
+		locextern ll "#"
+		Heroes := {"Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+		SealedDefeated[Heroes[math.random(1,ll Heroes)]] = true // Will get one hero to learn their ultimate ability
+		Weapons := {"EQW_ERIC_BLUEMOON","EQW_IRRAVONIA_WAND_SUPER", "EQW_BRENDOR_HAMMER_SUPER","EQW_SCYNDI_WHIP_SUPER", "EQW_REBECCA_SWORD_SUPER","EQW_DERNOR_BAT_SUPER", "EQW_MERYA_DAGGER_SUPER","EQW_AZIELLA_BOLT_SUPER" }
 		int rw
 		string w
-		rw = math.random(1,#Weapons)
+		rw = math.random(1,ll Weapons)
 		w = Weapons[rw]
 		Inventory[w]++
 		gv.String.AbyssSuperWeapon = Item[w].Name
@@ -368,7 +391,7 @@ group MScript
 	
 	// EXP madness stop
 	void EXP_NO_NEG()
-		for _,ch in ipairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
+		for _,ch in pairs { "Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella" }
 			var p
 			p = RPG.GetChar(ch).Stat("Experience")
 			switch __skill
@@ -392,29 +415,7 @@ group MScript
 		Map.Kill("TheEnd",true)
 	end
 	
-	// Init
-	void CONSTRUCTOR()
-		self.Score = self.LayerNum + self.FloorsReset
-		KthuraGenerator.IgnoreDestroy("Plasma")
-		for i=1,math.ceil(MaxTreasure/__skill)
-			CSay("Ignore Treasure "..i)
-			KthuraGenerator.IgnoreDestroy("RANDOMTREASURE_"..i)
-		end
-		KthuraGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
-		KthuraGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
-		KthuraGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
-		KthuraGenerator.Size.X      = 6400
-		KthuraGenerator.Size.Y      = 3200
-		Map.TieGenerator()
-		Map.ZA_Enter("ExitMap","ExitMap")
-		Map.ZA_Enter("Boss","SASKIA:Boss")
-		
-		self.Cities = {"Doubline","Felixium","Frendor","Independence","Iskarderiu","Xenor"}
-		self.General = {"Abyss","Airom","BlackDragon","Botanica","DeathCaves","ExamRuins","Frundarmon","Fruskbrando","Marshes","Morker","NakedRocks"}
-		Map.ZA_Enter("Welcome","Conchita_Welcome")
-		Map.ZA_Enter("EXP_NO_NEG","EXP_NO_NEG")
-		Map.ZA_Enter("TheEnd","TheEnd")
-	end
+
 	
 	void Draw()
 	end
@@ -436,4 +437,28 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+
+// Init
+Init
+	MScript.Score = MScript.LayerNum + MScript.FloorsReset
+	MapGenerator.IgnoreDestroy("Plasma")
+	for i=1,math.ceil(MaxTreasure/__skill)
+		CSay("Ignore Treasure "..i)
+		MapGenerator.IgnoreDestroy("RANDOMTREASURE_"..i)
+	end
+	MapGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
+	MapGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
+	MapGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
+	MapGenerator.Size.X      = 6400
+	MapGenerator.Size.Y      = 3200
+	Map.TieGenerator()
+	Map.ZA_Enter("ExitMap","ExitMap")
+	Map.ZA_Enter("Boss","SASKIA:Boss")
+		
+	MScript.Cities = {"Doubline","Felixium","Frendor","Independence","Iskarderiu","Xenor"}
+	MScript.General = {"Abyss","Airom","BlackDragon","Botanica","DeathCaves","ExamRuins","Frundarmon","Fruskbrando","Marshes","Morker","NakedRocks"}
+	Map.ZA_Enter("Welcome","Conchita_Welcome")
+	Map.ZA_Enter("EXP_NO_NEG","EXP_NO_NEG")
+	Map.ZA_Enter("TheEnd","TheEnd")
+end
