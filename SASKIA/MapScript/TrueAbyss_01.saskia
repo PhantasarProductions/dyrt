@@ -36,7 +36,7 @@
 ; End License Information
 :OnLoad
 	chk Done.WelcomeFaderTrueAbyss,End
-	call Fader,"The True Abyss"
+	call Fader.Create,"The True Abyss"
 	jmp End
 	
 :End
