@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Instant/DzRestore.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Instant/Instant_DzRestore.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,12 +33,20 @@
 // 
 // **********************************************
 // 
-// version: 20.07.08
-// End License Information
-do
-	void D_Restore(ron,act)
+// 
+// version: 25.06.09 I
+// 
+// End License
+
+
+Module
+
+	#Accept CSayF
+	#Accept LordDzgjymza 
+	
+	void Do_Instant(ron,act)
 		--LordDzgjymza.beurt
 		CSayF("Turn restoration: %d",LordDzgjymza.beurt)
 	end
-	return D_Restore
-end
+	//return D_Restore
+//end

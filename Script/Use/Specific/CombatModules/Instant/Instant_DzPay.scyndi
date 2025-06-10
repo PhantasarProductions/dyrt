@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Instant/DzPay.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Instant/Instant_DzPay.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,17 +33,29 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
-do
-	delegate usb
-	usb = NIL.Use("Script/Use/Specific/CombatModules/Instant/Cancel_UltimateSoulBreaker")
-	void D_Pay(ron,act)
+// 
+// version: 25.06.09 I
+// 
+// End License
+
+
+Module
+
+#use "Script/Use/Specific/CombatModules/Instant/Instant_Cancel_UltimateSoulBreaker"
+
+#accept LordDzgjymza
+#accept Fighter
+#accept CSayF
+
+	//delegate usb
+	//usb = NIL.Use("Script/Use/Specific/CombatModules/Instant/Cancel_UltimateSoulBreaker")
+	LocExtern usb "Scyndi.Class.Instant_Cancel_UltimateSoulBreaker"
+	void Do_Instant(ron,act)
 		--LordDzgjymza.beurt
 		CSayF("Turn restoration: %9d",LordDzgjymza.beurt)
 		Fighter.ByTag.FOE_1.SpeedBonus++
 		CSayF("Speed Bonus:      %9d",Fighter.ByTag.FOE_1.SpeedBonus)
 		usb(ron,act)
 	end
-	return D_Pay
-end
+	//return D_Pay
+//end
