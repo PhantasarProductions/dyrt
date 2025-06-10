@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.10 XII
+// version: 25.06.10 XX
 // 
 // End License
 
@@ -46,6 +46,7 @@ Script
 
 #use "Libs/SCI/Sys"
 #use "Libs/SCI/GINIE"
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/Events"
 #use "Libs/SCI/Intervar"
 
@@ -119,6 +120,7 @@ group MScript
 		end
 		v = l+1
 		n = sprintf("#%03d",v)
+		CSayF("Generating",n)
 		if v%5!=0
 			//Map.Generate(n)
 			MapGenerator.Generate(n)
@@ -421,16 +423,19 @@ group MScript
 	end
 	
 	void Update()
-		Map.Obj="Plasma"
-		Map.ObjInt.X = Map.ScrollX
-		Map.ObjInt.Y = Map.ScrollY
-		if not self.plasmasized[Map.Layer]
-			Map.ObjInt.W = Screen.W
-			Map.ObjInt.H = Screen.H
+		//Map.Obj="Plasma"
+		//Map.ObjInt.X = Map.ScrollX
+		//Map.ObjInt.Y = Map.ScrollY
+		myPlasma:=Kthura.Obj.Plasma
+		myPlasma.X = Map.ScrollX - 2
+		myPlasma.Y = Map.ScrollY - 2
+		if ! self.plasmasized[Map.Layer]
+			MyPlasma.W = Screen.W + 4
+			MyPlasma.H = Screen.H + 4
 		end
-		Map.ObjInt.InsertX = math.floor(Map.ScrollX/10)
-		Map.ObjInt.InsertY = math.floor(Map.ScrollY/10)
-		if not self.MusicBegun
+		MyPlasma.InsertX = math.floor(Map.ScrollX/10)
+		MyPlasma.InsertY = math.floor(Map.ScrollY/10)
+		if ! self.MusicBegun
 			self.StartMusic()
 			self.MusicBegun = true
 		end
@@ -442,17 +447,19 @@ end
 // Init
 Init
 	MScript.Score = MScript.LayerNum + MScript.FloorsReset
-	MapGenerator.IgnoreDestroy("Plasma")
-	for i=1,math.ceil(MaxTreasure/__skill)
-		CSay("Ignore Treasure "..i)
-		MapGenerator.IgnoreDestroy("RANDOMTREASURE_"..i)
-	end
-	MapGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
-	MapGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
-	MapGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
-	MapGenerator.Size.X      = 6400
-	MapGenerator.Size.Y      = 3200
-	Map.TieGenerator()
+	//MapGenerator.IgnoreDestroy("Plasma")
+	//for i=1,math.ceil(MaxTreasure/__skill)
+	//	CSay("Ignore Treasure "..i)
+	//	MapGenerator.IgnoreDestroy("RANDOMTREASURE_"..i)
+	//end
+	
+	//MapGenerator.TexBottom   = "GFX/Textures/Abyss/Bottom.png"
+	//MapGenerator.TexPlatform = "GFX/Textures/Abyss/Top.png"
+	//MapGenerator.TexExit     = "GFX/Textures/Abyss/Exit2.png"
+	//MapGenerator.Size.X      = 6400
+	//MapGenerator.Size.Y      = 3200
+	
+	//Map.TieGenerator()
 	Map.ZA_Enter("ExitMap","ExitMap")
 	Map.ZA_Enter("Boss","SASKIA:Boss")
 		
@@ -461,4 +468,13 @@ Init
 	Map.ZA_Enter("Welcome","Conchita_Welcome")
 	Map.ZA_Enter("EXP_NO_NEG","EXP_NO_NEG")
 	Map.ZA_Enter("TheEnd","TheEnd")
+	
+	for ch in each{[0]="Eric","Irravonia","Brendor","Scyndi","Rebecca","Dernor","Merya","Aziella"}
+		HP:=RPG.GetChar(ch).Points("HP")
+		VT:=RPG.GetChar(ch).Points("VIT")
+		HP.have=HP.Maximum
+		VT.have=VT.Maximum
+		CSayF("%9s has %3d / %3d HP", ch,HP.Have,HP.Maximum)
+		CSayF("%9s has %3d / %3d VIT",ch,VT.Have,VT.Maximum)
+	end
 end
