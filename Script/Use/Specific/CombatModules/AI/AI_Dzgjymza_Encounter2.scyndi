@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Dzgjymza_Encounter2.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Dzgjymza_Encounter2.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,13 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
+// 
+// version: 25.06.09 II
+// 
+// End License
+
+
+module 
+
+// DZGJYMZA_AI1
 
 global var LordDzgjymza
 
-module DZGJYMZA_AI1
+	#use "Libs/SCI/Sys"
 	
+	#use "Script/Use/Need"
+	
+	#accept Fighter
+
 	int beurt
 	readonly table Actions
 	
@@ -46,45 +58,45 @@ module DZGJYMZA_AI1
 		int r 
 		r = math.random(1,4)
 		for i=1,4
-			if RPG.Party[i]=="Yasathar" and RPG.GetChar("Yasathar").Points("HP").Have>0
+			if RPG.Party[i]=="Yasathar" && RPG.GetChar("Yasathar").Points("HP").Have>0
 				r = i
 			end
 		end
 		CSayF("Eric: Picked %d >> %s",r,RPG.Party[r] or "???")
-		return { Fighter.ByTag[RPG.Party[r]] }
+		return { [0] = Fighter.ByTag[RPG.Party[r]] }
 	end
 	
 	get table RandomTarget
 		int r 
 		r = math.random(1,4)
 		CSayF("Random: Picked %d >> %s",r,RPG.Party[r] or "???")
-		return { Fighter.ByTag[RPG.Party[r]] }
+		return { [0] = Fighter.ByTag[RPG.Party[r]] }
 	end
 	
 	get table All
 		table ret
 		for i=1,4
-			ret[i] = Fighter.ByTag[RPG.Party[i]] 
+			ret[i-1] = Fighter.ByTag[RPG.Party[i]] 
 		end
 		return ret
 	end
 	
 	get table Everybody
 		table ret
-		ret = self.All
-		ret[#ret+1] = Fighter.ByTag.FOE_1
+		ret = All
+		ret += Fighter.ByTag.FOE_1
 		return ret
 	end
 	
-	void CONSTRUCTOR()
-		for st in each { "Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion", "HP","_RESIST_Elem_None","_RESIST_Elem_Flame","_RESIST_Elem_Wind","_RESIST_Elem_Water","_RESIST_Elem_Earth","_RESIST_Elem_Frost","_RESIST_Elem_Thunder","_RESIST_Elem_Light","_RESIST_Elem_Darkness" }
-			int stat 
+	Init
+		for st in each { [0]="Strength", "Defense","Intelligence", "Resistance", "Agility", "Evasion", "HP","_RESIST_Elem_None","_RESIST_Elem_Flame","_RESIST_Elem_Wind","_RESIST_Elem_Water","_RESIST_Elem_Earth","_RESIST_Elem_Frost","_RESIST_Elem_Thunder","_RESIST_Elem_Light","_RESIST_Elem_Darkness" }
+			int stat = 0
 			for i=1,8
-				#+ stat RPG.GetChar(RPG.Party[i]).Stat("END_"..st).Value
+				stat += RPG.GetChar(RPG.Party[i]).Stat("END_"..st).Value
 				CSayF("Build %d: %10s = %5d",i,st,stat)
 			end
 			if st!="HP"
-				RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = stat / (7-(__skill))
+				RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = stat Div (7-(__skill))
 			else
 				RPG.GetChar("FOE_1").Stat("BASE_"..st).Value = stat * (__skill^2)
 			end
@@ -92,14 +104,14 @@ module DZGJYMZA_AI1
 		end
 		Fighter.ByTag.FOE_1.Char.Points("HP").Have = Fighter.ByTag.FOE_1.Char.Points("HP").Maximum
 		Fighter.ByTag.FOE_1.Char.Points("HP").Minimum = 1
-		LordDzgjymza = self
+		LordDzgjymza = Lua.Scyndi.Class.AI_Dzgjymza_Encounter2
 	end
 	
-	void SetTurn(string Tag, table Targets)
+	void SetTurn(string Tag, Targets)
 		var foe
 		table nact
 		var nitem
-		assert(#Targets>0,"No targets set for Dzgjymza's move \""..Tag.."\"???")
+		assert(Len(Targets)>0,"No targets set for Dzgjymza's move \""..Tag.."\"???")
 		foe = Fighter.ByTag.FOE_1
 		nitem = Item[Tag]
 		nact.ActTag = Tag
@@ -111,39 +123,39 @@ module DZGJYMZA_AI1
 	end
 
 	void Decide(foe)		
-		self.beurt = (self.beurt + 1 ) % 10
-		switch self.beurt 
+		beurt = (beurt + 1 ) % 10
+		switch beurt 
 			case 0
-				self.SetTurn("ABL_HERO_AZIELLA_BLUNT",self.RandomTarget)
+				SetTurn("ABL_HERO_AZIELLA_BLUNT",RandomTarget)
 			case 1
 				if __skill==3
-					self.SetTurn('ABL_FOE_DEMONSOULBREAKER',self.All)
+					SetTurn("ABL_FOE_DEMONSOULBREAKER",All)
 				else
-					self.SetTurn("BTY_OBSERVE",self.Eric)
+					SetTurn("BTY_OBSERVE",Eric)
 				end
 			case 2
-				self.SetTurn( ({"ABL_HERO_IRRAVONIA_FIRE","ABL_HERO_IRRAVONIA_SPLASH","ABL_HERO_IRRAVONIA_BREEZE","ABL_HERO_IRRAVONIA_ROCK"})[math.random(1,4)],self.RandomTarget)
+				SetTurn( ({"ABL_HERO_IRRAVONIA_FIRE","ABL_HERO_IRRAVONIA_SPLASH","ABL_HERO_IRRAVONIA_BREEZE","ABL_HERO_IRRAVONIA_ROCK"})[math.random(1,4)],RandomTarget)
 			case 3
-				self.SetTurn( "ABL_HERO_AZIELLA_VANISH",self.Everybody)
+				SetTurn( "ABL_HERO_AZIELLA_VANISH",Everybody)
 			case 4
 				if __skill==3
-					self.SetTurn('ABL_FOE_ULTIMATESOULBREAKER',self.All)
+					SetTurn("ABL_FOE_ULTIMATESOULBREAKER",All)
 				else
-					self.SetTurn( "ZZZ_DZGJYMZA_CHARGE",{Fighter.ByTag.FOE_1})
+					SetTurn( "ZZZ_DZGJYMZA_CHARGE",{[0]=Fighter.ByTag.FOE_1})
 				end
 			case 5 
-				self.SetTurn("ZZZ_DZGJYMZA_JUDGMENT",self.All)
+				SetTurn("ZZZ_DZGJYMZA_JUDGMENT",All)
 			case 6
-				self.SetTurn("ABL_HERO_SCYNDI_RECOVER",{Fighter.ByTag.FOE_1})
+				SetTurn("ABL_HERO_SCYNDI_RECOVER",{[0]=Fighter.ByTag.FOE_1})
 			case 7
-				self.SetTurn('ABL_FOE_DEMONSOULBREAKER',self.All)
+				SetTurn("ABL_FOE_DEMONSOULBREAKER",All)
 			case 8
-				self.SetTurn('ABL_FOE_MALIFICATION',self.All)
+				SetTurn("ABL_FOE_MALIFICATION",All)
 			case 9
-				self.SetTurn( ({"ABL_HERO_IRRAVONIA_FIREBLAST","ABL_HERO_IRRAVONIA_TSUNAMI","ABL_HERO_IRRAVONIA_HURRICANE","ABL_HERO_IRRAVONIA_QUAKE"})[math.random(1,4)],self.RandomTarget)
+				SetTurn( ({"ABL_HERO_IRRAVONIA_FIREBLAST","ABL_HERO_IRRAVONIA_TSUNAMI","ABL_HERO_IRRAVONIA_HURRICANE","ABL_HERO_IRRAVONIA_QUAKE"})[math.random(1,4)],RandomTarget)
 			default
-				error("Unknown turn number: "..self.beurt)
+				error("Unknown turn number: "..beurt)
 		end
 	end
 	
-end
+//end

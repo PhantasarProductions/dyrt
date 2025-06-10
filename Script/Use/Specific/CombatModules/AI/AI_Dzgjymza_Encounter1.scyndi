@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Dzgjymza_Encounter1.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Dzgjymza_Encounter1.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,12 +33,26 @@
 // 
 // **********************************************
 // 
-// version: 20.07.09
-// End License Information
+// 
+// version: 25.06.09 VII
+// 
+// End License
 
-global var LordDzgjymza
 
-module DZGJYMZA_AI1
+module 
+	//DZGJYMZA_AI1
+	
+	#use "Libs/Music"
+	
+	#use "Libs/SCI/Sys"
+	
+	#use "Script/Use/Need"
+	
+	#accept Fighter
+	#accept End_Combat
+
+	global var LordDzgjymza
+
 	
 	int beurt
 	readonly table Actions
@@ -46,32 +61,33 @@ module DZGJYMZA_AI1
 		int r 
 		r = math.random(1,4)
 		for i=1,4
-			if RPG.Party[i]=="Yasathar" and RPG.GetChar("Yasathar").Points("HP").Have>0
+			if RPG.Party[i]=="Yasathar" && RPG.GetChar("Yasathar").Points("HP").Have>0
 				r = i
 			end
 		end
-		CSayF("Eric: Picked %d >> %s",r,RPG.Party[r] or "???")
-		return { Fighter.ByTag[RPG.Party[r]] }
+		CSayF("Eric: Picked %d >> %s",r,RPG.Party[r] || "???")
+		return { [0] = Fighter.ByTag[RPG.Party[r]] }
 	end
 	
 	get table All
-		table ret
+		//table ret
+		ret:={}
 		for i=1,4
-			ret[i] = Fighter.ByTag[RPG.Party[i]] 
+			ret+= Fighter.ByTag[RPG.Party[i]] 
 		end
 		return ret
 	end
 	
-	void CONSTRUCTOR()
+	Init
 		Fighter.ByTag.FOE_1.Char.Points("HP").Minimum = Fighter.ByTag.FOE_1.Char.Points("HP").Maximum
-		LordDzgjymza = self
+		LordDzgjymza = Lua.Scyndi.Class.AI_Dzgjymza_Encounter1
 	end
 	
-	void SetTurn(string Tag, table Targets)
+	void SetTurn(string Tag, Targets)
 		var foe
 		table nact
 		var nitem
-		assert(#Targets>0,"No targets set for Dzgjymza's move \""..Tag.."\"???")
+		assert(Len(Targets)>0,"No targets set for Dzgjymza's move \""..Tag.."\"???")
 		foe = Fighter.ByTag.FOE_1
 		nitem = Item[Tag]
 		nact.ActTag = Tag
@@ -83,34 +99,35 @@ module DZGJYMZA_AI1
 	end
 
 	void Decide(foe)		
-		self.beurt++
-		switch self.beurt 
+		beurt++
+		switch beurt 
 			case 0 1
 				if __skill==3
-					self.SetTurn('ABL_FOE_DEMONSOULBREAKER',self.All)
+					SetTurn('ABL_FOE_DEMONSOULBREAKER',All)
 				else
-					self.SetTurn("BTY_OBSERVE",self.Eric)
+					SetTurn("BTY_OBSERVE",Eric)
 				end
 			case 2
-				self.SetTurn("ABL_FOE_CURSE",self.Eric)
+				SetTurn("ABL_FOE_CURSE",Eric)
 			case 3
 				if __skill==3
-					self.SetTurn("ABL_HERO_ERIC_DEATH",self.All)
+					SetTurn("ABL_HERO_ERIC_DEATH",All)
 				else
-					self.SetTurn("ABL_HERO_ERIC_DEATH",self.Eric)
+					SetTurn("ABL_HERO_ERIC_DEATH",Eric)
 				end
 			case 4
-				self.SetTurn("ABL_HERO_IRRAVONIA_DISPELL",self.All)
+				SetTurn("ABL_HERO_IRRAVONIA_DISPELL",All)
 			case 5
-				self.SetTurn("ABL_FOE_ULTIMATESOULBREAKER",self.All)
-			case 6 7 8 9 10
+				SetTurn("ABL_FOE_ULTIMATESOULBREAKER",All)
+			//case 6 7 8 9 10
+			default
 				GoToFlow("FIELD")
 				End_Combat.EndIt()
 				Music.Pop()
 				KillFlow("COMBAT")
-			default
-				error("Unknown turn number: "..self.beurt)
+			//default
+			//	error("Unknown turn number: "..beurt)
 		end
 	end
 	
-end
+//end
