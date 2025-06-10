@@ -149,7 +149,7 @@
 		call MapText,"FOREST_B" 
 	
 	; Credits reel
-	call LoadFlow,"CREDITS","Script/Flow/Credits.nil"
+	call LoadFlow,"CREDITS","Script/Flow/Flow_Credits.lbc"
 	call GoToFlow,"CREDITS"
 	
 	; Post Credits
@@ -171,8 +171,8 @@
 	;The End
 	call Map.GoToLayer,"END_THE_END","Start"
 	call MapText,"NEWGAME+"
-	call Annoy,"Thank you for playing 'The Secrets of Dyrt'!"
-	call Bye
+	call Events.Annoy,"Thank you for playing 'The Secrets of Dyrt'!"
+	call Sys.Exit
 
-	call error,"The rest of the Dzgjymza stuff has not yet been scripted"
+	;call error,"The rest of the Dzgjymza stuff has not yet been scripted"
 	end
