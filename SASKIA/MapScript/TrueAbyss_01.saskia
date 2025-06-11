@@ -44,7 +44,7 @@
 	
 	
 :Boss
-	call CSayF,"Boss Time: %s",Map.Layer
+	call CSayF,"Boss Time: %s",Scyndi.Class.Kthura.CurrentLayer
 	call MapScript.Boss
 	call Party.LvUp
 	call MapScript.BossAchievement
