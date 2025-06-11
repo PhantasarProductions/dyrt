@@ -25,8 +25,8 @@ Var RetFunc()
 	foeret.AI_Module = "Aldarus_1st"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "Defends the True Abyss with honor"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Boss/Abyss_Aldarus.png","FOE_IMAGE_000000002")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSS_ALDARUS.NEGATIVE.PNG","FOE_IMAGE_000000003")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/Boss/Abyss_Aldarus.png","FOE_IMAGE_000000002_Aldarus")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSS_ALDARUS.NEGATIVE.PNG","FOE_IMAGE_000000003_Aldarus")
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "EQW_ERICREBECCA_SWORD7"
 	 foeret.Drop += "EQW_ERICREBECCA_SWORD7"

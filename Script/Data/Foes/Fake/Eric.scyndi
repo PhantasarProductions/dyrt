@@ -61,8 +61,8 @@ Var RetFunc()
 	foeret.AI_Module = "Default"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "Roaming the True Abyss to prove himself to be better than his sister.\nOr isn't he?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Eric.png","FOE_IMAGE_000000006")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/ERIC.NEGATIVE.PNG","FOE_IMAGE_000000007")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Eric.png","FOE_IMAGE_000000006_Eric")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/ERIC.NEGATIVE.PNG","FOE_IMAGE_000000007_Eric")
 	foeret.Cash = 1234
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "ITM_MYSTERIOUSPOTION"

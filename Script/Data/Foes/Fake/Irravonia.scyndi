@@ -61,8 +61,8 @@ Var RetFunc()
 	foeret.AI_Module = "Fake"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "Using magic in the True Abyss\nOr isn't she?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Irravonia.png","FOE_IMAGE_000000008")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/IRRAVONIA.NEGATIVE.PNG","FOE_IMAGE_000000009")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Irravonia.png","FOE_IMAGE_000000008_IRRA")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/IRRAVONIA.NEGATIVE.PNG","FOE_IMAGE_000000009_VONIA")
 	foeret.Cash = 50
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "ITM_MYSTERIOUSPOTION"

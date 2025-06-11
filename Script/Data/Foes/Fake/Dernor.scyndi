@@ -61,8 +61,8 @@ Var RetFunc()
 	foeret.AI_Module = "Fake"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "He is manipulating nature... or isn't he?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Dernor.png","FOE_IMAGE_000000004")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/DERNOR.NEGATIVE.PNG","FOE_IMAGE_000000005")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Dernor.png","FOE_IMAGE_000000004_Dernor")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/DERNOR.NEGATIVE.PNG","FOE_IMAGE_000000005_Woodlock")
 	foeret.Instant.CANCEL = "Cancel_UltimateSoulBreaker"
 	foeret.Cash = 1234
 	foeret.Drop = foeret.Drop || {}

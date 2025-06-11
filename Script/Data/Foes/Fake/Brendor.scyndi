@@ -60,8 +60,8 @@ Var RetFunc()
 	foeret.Char = RPG.CreateChar(foeret.Tag)
 	foeret.AI_Module = "Fake"
 	foeret.AllowOversoul = false and __skill!=1
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Brendor.png","FOE_IMAGE_000000002")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/BRENDOR.NEGATIVE.PNG","FOE_IMAGE_000000003")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Brendor.png","FOE_IMAGE_000000002_FakeBrendor")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/BRENDOR.NEGATIVE.PNG","FOE_IMAGE_000000003_FakeBrendor")
 	foeret.Cash = 1234
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "ITM_MYSTERIOUSPOTION"

@@ -61,8 +61,8 @@ Var RetFunc()
 	foeret.AI_Module = "Default"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "She's the scorpion of the Abyss, or isn't she?"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Scyndi.png","FOE_IMAGE_000000014")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/SCYNDI.NEGATIVE.PNG","FOE_IMAGE_000000015")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/fake/Scyndi.png","FOE_IMAGE_000000014_Scyndi")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/FAKE/SCYNDI.NEGATIVE.PNG","FOE_IMAGE_000000015_Scyndi")
 	if not Foe.LoadOversoul
 		foeret.Experience = 2
 	end
