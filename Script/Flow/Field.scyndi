@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/Field.scyndi
 // 
-// 	  Version: 25.05.24
+// 	  Version: 25.06.10 VI
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -834,10 +834,10 @@ group FlowField
 		CSay("= Map Text")
 		do
 			string scenfile
-			scenfile = "Scenario/"..__lang.."/Maps/"..MapFile
+			scenfile = "Scenario/"..__lang.."/Maps/"..Ternary(Prefixed( Upper(MapFile),"TRUEABYSS_"),"TrueAbyss_01",MapFile)
 			if JCR6.EntryExists(scenfile)
 				CSay("= Scenario 'MAP' >> "..scenfile) //,180,255,0)				
-				BoxText.Load("Maps/"..MapFile,"MAP")
+				BoxText.Load("Maps/"..StripDir(ScenFile),"MAP")
 			else
 				CSay("= WARNING! Scenario \""..scenfile.."\" not found!") //,255,0,0)
 			end
