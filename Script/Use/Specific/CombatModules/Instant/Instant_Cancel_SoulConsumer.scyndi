@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Instant/Cancel_SoulConsumer.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Instant/Instant_Cancel_SoulConsumer.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,24 +33,32 @@
 // 
 // **********************************************
 // 
-// version: 20.07.27
-// End License Information
+// 
+// version: 25.06.11 V
+// 
+// End License
 
-do
-	void UltimateCounter(ArmageddonCounter,act)
-		table nact
+
+Module
+
+	#accept RPG
+	#accept CSayF
+	#accept Fighter
+
+	void Do_Instant(ArmageddonCounter,act)
+		nact:={}
 		nact.ActTag = "ABL_FOE_ARMAGEDDON"
 		nact.ExeTag = ArmageddonCounter.Tag
 		nact.Targets = {} //{act.Executor}
-		for i=1,4 do
+		for i=1,4 
 			if RPG.Party[i]!=""
 				CSayF("USB Tagging: %d/%s",i,RPG.Party[i])
-				nact.Targets[#nact.Targets+1] = Fighter.ByTag[RPG.Party[i]]
+				nact.Targets += Fighter.ByTag[RPG.Party[i]]
 			end
 		end
 		ArmageddonCounter.NextAct = new Actions(nact)
 		ArmageddonCounter.NextActSpeed = 3000
 		ArmageddonCounter.GaugePosition = 10001
 	end
-	return UltimateCounter
-end
+	//return UltimateCounter
+//end
