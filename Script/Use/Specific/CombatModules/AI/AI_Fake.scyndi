@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Fake.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Fake.scyndi
+// (c) Jeroen Broks, Aug 2020, Jun 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,13 +33,25 @@
 // 
 // **********************************************
 // 
-// version: 20.08.03
-// End License Information
-module Fake_AI
+// 
+// version: 25.06.10 VII
+// 
+// End License
+
+
+
+module 
+	//Fake_AI
+	
+	#use "Script/Use/Need"
+	
+	#use "Script/Use/Specific/CombatModules/AI/AI_Default"
+		
+	#accept CSayF
 	
 	void SyncStats(foe,string char)
-		char = left(char,1)..string.lower(right(char,#char-1))
-		for _,s in ipairs {"HP","Strength","Defense","Intelligence","Resistance","Agility","Accuracy","Evasion","_RESIST_Elem_Flame","_RESIST_Elem_Wind","RESIST_Elem_Water","_RESIST_Elem_Earth","_RESIST_Stat_Posion","_RESIST_Stat_Disease","_RESIST_Stat_Silence","_RESIST_Stat_Paralysis","_RESIST_Stat_Sleep","_RESIST_Stat_Exhaustion","_RESIST_Stat_Fear","_RESIST_Stat_Death","_RESIST_Stat_Destruction","_RESIST_Stat_Fear"}
+		char = left(char,1)..lower(right(char,len(char)-1))
+		for _,s in pairs {"HP","Strength","Defense","Intelligence","Resistance","Agility","Accuracy","Evasion","_RESIST_Elem_Flame","_RESIST_Elem_Wind","RESIST_Elem_Water","_RESIST_Elem_Earth","_RESIST_Stat_Posion","_RESIST_Stat_Disease","_RESIST_Stat_Silence","_RESIST_Stat_Paralysis","_RESIST_Stat_Sleep","_RESIST_Stat_Exhaustion","_RESIST_Stat_Fear","_RESIST_Stat_Death","_RESIST_Stat_Destruction","_RESIST_Stat_Fear"}
 			foe.Char.Stat("BASE_"..s).Value = RPG.GetChar(char).Stat("END_"..s).Value
 			CSayF("Copying %s into %s: Hero.Stat.END_%s => Foe.Stat.BASE_%s .... %4d => %4d",char,foe.Tag,s,s, RPG.GetChar(char).Stat("END_"..s).Value,foe.Char.Stat("BASE_"..s).Value)
 		end
@@ -49,20 +62,22 @@ module Fake_AI
 	end
 	
 	void OnCompile(foe)
-		self.SyncStats(foe,right(foe.FromFile,#foe.FromFile-5))
+		SyncStats(foe,right(foe.FromFile,len(foe.FromFile)-5))
 	end
 	
-	void CONSTRUCTOR()
-		//for tag,foe in pairs(Fighter.ByTag)
-		//	if prefixed(tag,"FOE_") and prefixed(foe.FromFile,"FAKE/")
-		//		self.SyncStats(foe,right(foe.FromFile,#foe.FromFile-5))
-		//	end
-		//end
-		self.Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
-		self.Decide = self.Default.Decide
-	end
-	
-	var Default
 	delegate Decide
 	
-end
+	Init
+		//for tag,foe in pairs(Fighter.ByTag)
+		//	if prefixed(tag,"FOE_") and prefixed(foe.FromFile,"FAKE/")
+		//		SyncStats(foe,right(foe.FromFile,#foe.FromFile-5))
+		//	end
+		//end
+		//Default = NIL.Use("Script/Use/Specific/CombatModules/AI/Default")
+		Decide = AI_Default.Decide
+	end
+	
+	//var Default
+	
+	
+//end
