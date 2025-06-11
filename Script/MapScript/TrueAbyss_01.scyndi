@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.10 XX
+// version: 25.06.10 XXIX
 // 
 // End License
 
@@ -116,34 +116,42 @@ group MScript
 			CSay("Loading Map: %s",m)
 			Field.LoadMap(m)
 		else
-			self.MUSIC()
+			//self.MUSIC()
+			self.MusicBegun=false
 		end
 		v = l+1
 		n = sprintf("#%03d",v)
 		CSayF("Generating",n)
-		if v%5!=0
-			//Map.Generate(n)
+		if v%5!=0	
 			MapGenerator.Generate(n)
 		end
 		Map.GoToLayer(n,"Start")
+		if v%5!=0
+			Block:=Kthura.NewZone(0,0,4000,4000)
+			Block.Impassible=true
+		end
 		self.Score = self.LayerNum + self.FloorsReset
 		gv.Bool.AllowMagicStones = self.Score >= 5 * __skill
-		gv.Bool.AllowOversoul = __skill!=1 and (self.Score >= 90 / __skill) 
+		gv.Bool.AllowOversoul = __skill!=1 && (self.Score >= 90 / __skill)
+ 		CSay("Random Treasures")
 		for i=1,MaxTreasure
+			
 			if Map.HasTag("RANDOMTREASURE_"..i)
 				CSayF("Checking %03d",i)
 				int x
 				int y
-				int v
-				Map.Obj = "RANDOMTREASURE_"..i
-				x,y = Map.ObjInt.X,Map.ObjInt.Y
-				v = not Map.Blocked(x,y,true)
-				Map.ObjBool.Visible = v
+				bool v
+				//Map.Obj = "RANDOMTREASURE_"..i
+				KRT:=Kthura.Obj["RANDOMTREASURE_"..i]
+				CSay("-> (%d,%d)",KRT.X,KRT.Y)
+				x,y = KRT.X,KRT.Y //Map.ObjInt.X,Map.ObjInt.Y
+				v = ! Map.Blocked(x div 32,y div 32)
+				KRT.Visible = v
 				CSayF("Hidden   %03d: (%d,%d) > %s",i,x,y,tostring(v))
 			else
 				CSayF("Not there %03d!",i)
 			end
-		end
+		end		
 		CSay("All checking accounted for!")
 	end
 	
@@ -161,6 +169,7 @@ group MScript
 	table General
 	
 	void MUSIC()
+		CSay("Music Called")
 		self.MusicBegun=false
 	end
 	
@@ -477,4 +486,6 @@ Init
 		CSayF("%9s has %3d / %3d HP", ch,HP.Have,HP.Maximum)
 		CSayF("%9s has %3d / %3d VIT",ch,VT.Have,VT.Maximum)
 	end
+	
+	Map.ZA_Enter(MapGenerator.TransZAT,"NPC_NEXT")
 end
