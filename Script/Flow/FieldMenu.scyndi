@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.05.17
+// 	  Version: 25.06.14
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -328,7 +328,7 @@ group Flow_FieldMenu
 				__white
 				Font.Dark(sprintf("%s resistance",stat),(x+10)+(w div 2),ty)
 				__amber
-				Font.Dark(ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value.."%",(x+10)+(w-20),ty,1)
+				Font.Dark(math.min(100,ch.Stat( sprintf("END__RESIST_Stat_%s",stat) ).Value).."%",(x+10)+(w-20),ty,1)
 			end
 		End
 		
