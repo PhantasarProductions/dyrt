@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.10 XXIX
+// version: 25.06.15
 // 
 // End License
 
@@ -436,11 +436,11 @@ group MScript
 		//Map.ObjInt.X = Map.ScrollX
 		//Map.ObjInt.Y = Map.ScrollY
 		myPlasma:=Kthura.Obj.Plasma
-		myPlasma.X = Map.ScrollX - 2
-		myPlasma.Y = Map.ScrollY - 2
+		myPlasma.X = Map.ScrollX - 4
+		myPlasma.Y = Map.ScrollY - 4
 		if ! self.plasmasized[Map.Layer]
-			MyPlasma.W = Screen.W + 4
-			MyPlasma.H = Screen.H + 4
+			MyPlasma.W = Screen.W + 8
+			MyPlasma.H = Screen.H + 8
 		end
 		MyPlasma.InsertX = math.floor(Map.ScrollX/10)
 		MyPlasma.InsertY = math.floor(Map.ScrollY/10)
