@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/MapScript/MapGenerator.scyndi
 // 
-// 	  Version: 25.06.10 I
+// 	  Version: 25.06.12
 // 	
 // 	  Copyright (C) 2024, 2025 Jeroen Petrus Broks
 // 	
@@ -46,6 +46,7 @@ Module
 
 #use "Libs/SCI/Sys"
 #use "Libs/SCI/Kthura"
+#use "Libs/SCI/Events"
 #use "Libs/SCI/Graphics"
 
 Var ImgGen = LoadNewImage("GFX/Alg/Generating.png","Generating")
@@ -219,6 +220,7 @@ Class MG_Tak
 		End
 		CSayF("Tak #%04d -> P(%d,%d,%d,%d)",ID,_X,_Y,_L,_W)
 		CSayF("Tak     -> O(%d,%d,%d,%d) -> %s",OX,OY,OW,OH,Winds[W])
+		Events.Poll()
 	End
 	
 	Destructor
