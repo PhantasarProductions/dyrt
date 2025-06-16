@@ -25,8 +25,8 @@ Var RetFunc()
 	foeret.AI_Module = "Default"
 	foeret.AllowOversoul = false and __skill!=1
 	foeret.Description = "Arrogantly befouls... I mean guards the True Abyss"
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/boss/Abyss_Kirana.png","FOE_IMAGE_000000006")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSS_KIRANA.NEGATIVE.PNG","FOE_IMAGE_000000007")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/boss/Abyss_Kirana.png","FOE_IMAGE_000000006_Kara")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/BOSS/ABYSS_KIRANA.NEGATIVE.PNG","FOE_IMAGE_000000007_Irana")
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "ITM_MYSTERIOUSPOTION"
 	foeret.Steal = foeret.Steal || {}
