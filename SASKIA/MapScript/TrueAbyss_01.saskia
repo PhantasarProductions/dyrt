@@ -84,7 +84,7 @@
 	
 :NPC_SASKIA_Scharum
 	call MapText,"SCHARUM" 
-	chk Yes("Do you want to Duel Scharum?"),ScharumYes
+	chk Events.Yes("Do you want to Duel Scharum?"),ScharumYes
 	end
 	:ScharumYes
 	call MapScript.ScharumStart
@@ -97,5 +97,5 @@
 	end
 	
 :SUPER
-	call MiniMsg.CreateCenter,"Ultra weapon '"..gv.String.AbyssSuperWeapon.."' obtained!",0,180,255
+	call MiniMsg.CreateCenter,"Ultra weapon '"..Scyndi.AllIdentifiers.gv.String.AbyssSuperWeapon.."' obtained!",0,180,255
 	end
