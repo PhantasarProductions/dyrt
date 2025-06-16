@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.05.30
+// 	  Version: 25.06.15
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -236,14 +236,14 @@ group SubParty
 		ch = RPG.Char(tag)
 		ch.Stat("Level").Value=level
 		Events.Poll()
-		if level>=100 and tag!="YoungIrravonia" and tag!="Kirana" and tag!="Shanda"
+		if level>=100 && tag!="YoungIrravonia" && tag!="Kirana" && tag!="Shanda"
 			if tag=="Yasathar"
 				Achievements.Award("100_ERIC")
 			else
 				Achievements.Award("100_"..tag)
 			end
 		end
-		lines = JCR6.GetLines(sprintf("Data/LvStats/%s",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
+		lines = JCR6.GetLines(sprintf("Data/LvStats/%s.svs",tag)) //qff.LoadLines(sprintf("Data/LvStats/%s",tag))
 		CSayF("Parsing %s lines of LvStat data",len(lines))
 		for ln,line in ipairs(lines)
 			if ln%10==0
@@ -307,7 +307,7 @@ group SubParty
 		ch.Points("VIT",true)["Maximum"] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
 		// Not efficient, I know, but this routine only gets called when a new character 
 		// is created anyway, and that process only takes place about 11 times in the entire game!
-		for p in each({"HP","VIT"})
+		for p in each({[0]="HP","VIT"})
 			CSayF("Maxing Points %s",p)
 			ch.Points(p)["Have"] = ch.Points(p)["Maximum"]
 		end
