@@ -36,8 +36,8 @@
 ; End License Information
 
 :OnLoad
-	chk Done.NPG_LostArk_Announced,einde
-	call Fader,Field.MapData.Title
+	;chk Done.NPG_LostArk_Announced,einde
+	call Fader.Create,"The Lost Ark"
 :einde
 	end
 	
