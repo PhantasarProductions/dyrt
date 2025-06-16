@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Misc/Combat.ScyndiBundle/Zullen_We_Gaan_Debuggen.scyndi
 // 	Debug Combat
-// 	version: 25.05.30 II
+// 	version: 25.06.13
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -65,4 +65,6 @@ Init
 	Sys.ConsoleLocal("HP","DEBUG_VIEW_HP")
 	Sys.ConsoleLocal("GOD","DEBUG_GOD")
 	Sys.ConsoleLocal("IDDQD","DEBUG_GOD")
+	Sys.ConsoleLocal("JACK","DEBUG_JACK")
+	Sys.ConsoleLocal("JACKTHERIPPER","DEBUG_JACK")
 End
