@@ -34,16 +34,19 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.16
 // 
 // End License
 
 
 Script
 
+#Macro IrraMax 1
+
 #say "Map Script - Shanda's Dungeon!" 
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
 #use "Libs/SCI/InterVar"
 
 #use "script/use/Need"
@@ -52,7 +55,7 @@ Script
 group MScript
 	
 	void STARTTUTORIAL()
-		if not Done.Tutorial_DisappearingDungeons_and_guest_characters
+		if ! Done.Tutorial_DisappearingDungeons_and_guest_characters
 			MapText("STARTTUT")
 		end
 		gBool.AllowOversoul = __skill>=2
@@ -103,7 +106,11 @@ group MScript
 		StartCombat.Ready()
 	end
 
-	
+	void IrraCorrect(int i)
+		Kthura.Obj.Player.X=Kthura.Obj["ExitIrra"..i].X
+		Kthura.Obj.Player.Y=Kthura.Obj["ExitIrra"..i].Y
+		CSayF("Corrected Irravonia: %d",i)
+	End
 	
 	void Draw()
 	end
@@ -121,6 +128,9 @@ Init
 	if ! Done.Done_ShandaDungRespawnReset
 		Respawn.Initiated = false
 	end
+	For i=1,IrraMax
+		Map.ZA_Enter("IrraCorrect"..i,"IrraCorrect",i)
+	End
 end
 
 #say "Map Script - Compiling!"
