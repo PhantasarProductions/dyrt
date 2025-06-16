@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/SpellEffect/CharmVrouw.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_CharmVrouw.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,11 +33,16 @@
 // 
 // **********************************************
 // 
-// version: 20.10.23
-// End License Information
+// 
+// version: 25.06.12
+// 
+// End License
 
-do
-	bool CharmeerDeMeiden(Act,Target)
+Module
+
+	#Use "Script/Use/Need"
+	
+	bool DoEffect(Act,Target)
 		switch Target.Tag
 			case "Irravonia" "Scyndi" "Rebecca" "Aziella" "Kirana" "Shanda"
 				Target.StatusChanges.Paralysis = true
@@ -54,5 +60,5 @@ do
 			end
 	end
 	
-	return CharmeerDeMeiden
-end
+	//return CharmeerDeMeiden
+//end
