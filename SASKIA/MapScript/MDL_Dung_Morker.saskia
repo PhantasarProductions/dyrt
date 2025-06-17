@@ -35,7 +35,6 @@
 ; version: 20.05.13
 ; End License Information
 :OnLoad
-	;call Fader,Field.MapData.Title
 	call Fader.Create,"M|uorker"
 	end
 

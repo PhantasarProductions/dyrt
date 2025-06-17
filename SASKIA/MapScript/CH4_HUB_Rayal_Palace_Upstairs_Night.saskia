@@ -36,7 +36,6 @@
 ; End License Information
 
 :OnLoad
-	;call Fader,Field.MapData.Title
 	call CSay,"SASKIA Script for night loaded"
 	end
 

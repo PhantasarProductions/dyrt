@@ -36,7 +36,7 @@
 ; End License Information
 
 :OnLoad
-	call Fader,"The Human City of Xenor"
+	call Fader.Create,"The Human City of Xenor"
 	end
 :Mariska
 	call MapText,"MARISKA"

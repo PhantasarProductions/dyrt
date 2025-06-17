@@ -35,7 +35,7 @@
 ; version: 20.05.28
 ; End License Information
 :OnLoad
-	call Fader,"Queen Shanda's Dungeon"
+	call Fader.Create,"Queen Shanda's Dungeon"
 	end
 
 

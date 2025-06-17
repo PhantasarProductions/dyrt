@@ -38,9 +38,9 @@
 
 :OnLoad
 	chk Done.BeenInDyrtBeforeYesOrNo,Beach
-	call Fader,"The forgotten realm of Dyrt"
+	call Fader.Create,"The forgotten realm of Dyrt"
 :Beach	
-	call Fader,"Beach"
+	call Fader.Create,"Beach"
 	end
 
 :Ariel
