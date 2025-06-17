@@ -36,8 +36,8 @@
 ; End License Information
 
 :OnLoad
-	Call CSay,"Welcome Game Jolt User"
-	call Fader,"Botanica"
+	Call CSay,"Welcome to Botanica"
+	call Fader.Create,"Botanica"
 	end
 	
 :Boss

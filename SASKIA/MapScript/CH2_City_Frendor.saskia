@@ -35,7 +35,7 @@
 ; version: 20.04.28
 ; End License Information
 :OnLoad
-	call Fader,"The Fairy City of Frendor"
+	call Fader.Create,"The Fairy City of Frendor"
 	end
 	
 :Feenalaria
