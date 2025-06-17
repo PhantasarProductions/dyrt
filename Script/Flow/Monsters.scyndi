@@ -34,11 +34,12 @@
 // **********************************************
 // 
 // 
-// version: 25.06.17 X
+// version: 25.06.17 XV
 // 
 // End License
 
 Script
+
 //#use "libs/tables"
 //#use "libs/DarkText"
 
@@ -92,7 +93,7 @@ class Foe
 	table DropCount
 	get int DropTotal
 		int ret = 0
-		for _,i in pairs(self.DropCount)
+		for _,i in pairs(DropCount)
 			ret += i
 		end
 		return ret
@@ -102,7 +103,7 @@ class Foe
 	table StealCount
 	get int StealTotal
 		int ret = 0
-		for _,i in pairs(self.StealCount)
+		for _,i in pairs(StealCount)
 			ret += i
 		end
 		return ret
@@ -128,11 +129,11 @@ class Foe
 	link AI_Moves = TableIgnore
 	
 	get int Width
-		return self.Image.Width
+		return Image.Width
 	end
 	
 	get int Height
-		return self.Image.Height
+		return Image.Height
 	end
 	
 	readonly table Instant
@@ -144,14 +145,17 @@ class Foe
 		//self.Drop = setmetatable(self.Drop,{ 
 			//["__newindex"] = void(s,k,v)
 			ddef DNI
-				v:=infinity
+				plua s
+				plua k
+				plua v
+				s,k,v=infinity
 				if type(v)=="string"
 					v = upper(v)
 					CSayF("Adding drop item: %s",v)
 				else
 					CSayF("Adding drop money: %d",v)
 				end				
-				self.DropCount[v] = (self.DropCount[v] or 0) + 1
+				self.DropCount[v] = (self.DropCount[v] || 0) + 1
 			end
 			//["__len"] = int(s)
 			//	return 0
@@ -161,8 +165,11 @@ class Foe
 		
 		//self.Steal = setmetatable(self.Steal,{
 		ddef SNI
-			v:=infinity
 			//["__newindex"] = void(s,k,v) 
+				plua s
+				plua k
+				plua v
+				s,k,v=infinity
 				if type(v)=="string"
 					v = upper(v)
 				end
@@ -268,8 +275,9 @@ group MIDM
 		MLoaded = MLoaded || {}
 		if !MLoaded[Foe]
 			Lua.Scyndi.Use(foe)
+			MLoaded[Foe] = Lua.Scyndi.Class[StripAll(Foe)]
 		End
-		return MLoaded.RetFunc
+		return MLoaded[Foe].RetFunc
 	End
 	
 	void Update()
