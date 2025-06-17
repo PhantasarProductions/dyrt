@@ -36,7 +36,7 @@
 ; End License Information
 
 :OnLoad
-	call Fader,"Exams Ruins"
+	call Fader.Create,"Exams Ruins"
 	end
 	
 :FirstTime

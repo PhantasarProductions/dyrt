@@ -42,8 +42,8 @@
 :ScyndiStart
 	call MapScript.RandomScyndi
 	call MapText,"START_A"
-	call Fader,Scyndi.Globals.LoadImage("GFX/Chapter/3.png","Hoofdstuk 3")
-	call Fader,"The Naked Rocks"
+	call Fader.Create,Scyndi.Globals.LoadImage("GFX/Chapter/3.png","Hoofdstuk 3")
+	call Fader.Create,"The Naked Rocks"
 	call SASTime.Start,160
 	:rep1
 	chk SASTime.Going,rep1

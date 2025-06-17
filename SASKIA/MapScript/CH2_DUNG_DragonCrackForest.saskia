@@ -41,9 +41,9 @@
 	call MapText,"A"
 :Ch2Announce	
 	chk  Done.Announce2ndChapter,DungAnnounce
-	call Fader,Scyndi.Globals.LoadImage("GFX/Chapter/2.png","Chap2")
+	call Fader.Create,Scyndi.Globals.LoadImage("GFX/Chapter/2.png","Chap2")
 :DungAnnounce
-	call Fader,"Dragon Crack Forest"
+	call Fader.Create,"Dragon Crack Forest"
 	end
 	
 :ToDragonCave

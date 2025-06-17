@@ -36,7 +36,7 @@
 ; End License Information
 
 :OnLoad
-	Call Fader,"The Elven City Of Iskarderiu"
+	Call Fader.Create,"The Elven City Of Iskarderiu"
 	end
 	
 :NPC_SASKIA_Items

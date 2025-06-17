@@ -40,7 +40,7 @@
 	chk Done.Aziella_Welcome_Fruskbrando,Title
 	call MapText,"WELCOME"
 :Title
-	call Fader,"The lost city of Fruskbrando"
+	call Fader.Create,"The lost city of Fruskbrando"
 	mov true,Map.RENC_Inf
 	;call Map.ZA_Enter,"S_Aeria",WorldMap.Aeria
 	call ZoneAction.SAS_Create,"Enter","S_Aeria",Scyndi.AllIdentifiers.WorldMap.Aeria
