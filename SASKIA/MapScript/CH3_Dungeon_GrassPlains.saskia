@@ -18,7 +18,6 @@
 ; 3. This notice may not be removed or altered from any source distribution.
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader,"The Grass Plains"
 	end
 
-; This script is used for quick maps that do not require any special scripting with SASKIA and where the regular NIL scripts therefore suffice

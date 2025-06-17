@@ -35,7 +35,7 @@
 ; version: 20.11.22
 ; End License Information
 :OnLoad
-	call Fader,Field.MapData.Title
+	call Fader.Create,"Thief's Den"
 	end
 	
 :Boss
