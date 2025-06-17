@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Flow/Monsters.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Flow/Monsters.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,16 +33,26 @@
 // 
 // **********************************************
 // 
-// version: 20.09.29
-// End License Information
-#use "libs/tables"
-#use "libs/DarkText"
+// 
+// version: 25.06.17 X
+// 
+// End License
 
-#use "Script/Use/Anyway"
-#use "Script/Use/Boxes"
+Script
+//#use "libs/tables"
+//#use "libs/DarkText"
 
-global delegate BUB_Draw
-global delegate BUB_Update
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/SString"
+#use "Libs/SCI/Graphics"
+
+#use "Script/Use/Need"
+#use "Script/Use/Misc/Boxes"
+
+#use "Script/Data/General/MonsterList"
+
+//global delegate BUB_Draw
+//global delegate BUB_Update
 
 group Ignore
 	get var Ignore
@@ -51,14 +62,14 @@ group Ignore
 	end
 end
 
-quickmeta group TableIgnore
+quickmeta TableIgnore
 	index
 	end
 	newindex
 	end
-	len
-		return 0
-	end
+	//len
+	//	return 0
+	//end
 end
 
 class Foe
@@ -69,7 +80,7 @@ class Foe
 	
 	link AI_Module = Ignore.Ignore
 	link AllowOverSoul = Ignore.Ignore
-	link AllowOversoul = Ignore.Ignore
+	//link AllowOversoul = Ignore.Ignore
 	
 	string Description
 	var Image
@@ -82,7 +93,7 @@ class Foe
 	get int DropTotal
 		int ret = 0
 		for _,i in pairs(self.DropCount)
-			#+ ret i
+			ret += i
 		end
 		return ret
 	end
@@ -92,7 +103,7 @@ class Foe
 	get int StealTotal
 		int ret = 0
 		for _,i in pairs(self.StealCount)
-			#+ ret i
+			ret += i
 		end
 		return ret
 	end
@@ -127,34 +138,41 @@ class Foe
 	readonly table Instant
 	readonly table StatusChanges
 	
-	void CONSTRUCTOR(string tag)
+	CONSTRUCTOR(string tag)
 		// tag is not importan here, so it'll be ignored!
 		RPG.KillChar("MONSTERLISTFOE")
-		self.Drop = setmetatable(self.Drop,{ 
-			["__newindex"] = void(s,k,v) 
+		//self.Drop = setmetatable(self.Drop,{ 
+			//["__newindex"] = void(s,k,v)
+			ddef DNI
+				v:=infinity
 				if type(v)=="string"
-					v = v:upper()
+					v = upper(v)
 					CSayF("Adding drop item: %s",v)
 				else
 					CSayF("Adding drop money: %d",v)
 				end				
 				self.DropCount[v] = (self.DropCount[v] or 0) + 1
-			end,
-			["__len"] = int(s)
-				return 0
 			end
-		})
-		self.Steal = setmetatable(self.Steal,{ 
-			["__newindex"] = void(s,k,v) 
+			//["__len"] = int(s)
+			//	return 0
+			//end
+		//})
+		Drop = SetMetaTable({},{["__newindex"]=DNI})
+		
+		//self.Steal = setmetatable(self.Steal,{
+		ddef SNI
+			v:=infinity
+			//["__newindex"] = void(s,k,v) 
 				if type(v)=="string"
-					v = v:upper()
+					v = upper(v)
 				end
-				self.StealCount[v] = (self.StealCount[v] or 0) + 1
-			end,
-			["__len"] = int(s)
-				return 0
+				self.StealCount[v] = (self.StealCount[v] || 0) + 1
 			end
-		})
+			//["__len"] = int(s)
+			//	return 0
+			//end
+		//})
+		Steal = SetMetaTable({},{["__newindex"]=SNI})
 	end
 	
 end
@@ -187,31 +205,30 @@ group MIDM
 		Party.ShowBar()
 		Box.DrawAll()
 		// Left
-		int y 		
-		y = 0-self.ScrollY
-		self.hover = nil;
+		int y := 0-self.ScrollY
+		self.hover = nil
 		for f,entry in spairs(self.Lijst)
-			if y>0 and y<$LeftBox.h-20
+			if y>0 && y<LeftBox.h-20
 				int insx=0
-				if Mouse.X<Screen.W/2 and Mouse.Y>=y and Mouse.y<y+20 and Mouse.X>60
+				if Mouse.X<Graphics.W/2 && Mouse.Y>=y && Mouse.y<y+20 && Mouse.X>60
 					insx=10
 					self.hover = entry
 				end
 				__white
-				if self.show and entry==self.show.entry
+				if self.show && entry==self.show.entry
 					__ember
 				end
-				DarkText.Font($Font,f,self.LeftBox.x+60+insx,y)
+				Font.Dark(f,self.LeftBox.x+60+insx,y)
 				Color(0,180,255)
-				DarkText.Font($Font,entry.Category,(self.LeftBox.x+self.LeftBox.w)-20-insx,y,1)
+				Font.Dark(entry.Category,(self.LeftBox.x+self.LeftBox.w)-20-insx,y,1)
 			end
-			#+ y 20
+			y += 20
 		end
 		__white
 		// Scroll
 		self.scrollhover = 0
 		if self.ScrollY>0
-			if Mouse.X<40 and Mouse.Y<40
+			if Mouse.X<40 && Mouse.Y<40
 				self.scrollhover = -2
 				Color(100,255,0)
 			end
@@ -219,7 +236,7 @@ group MIDM
 			__white
 		end
 		if y>=$LeftBox.h-20
-			if Mouse.X<40 and Mouse.Y<self.LeftBox.h and Mouse.Y>self.LeftBox.h-50
+			if Mouse.X<40 && Mouse.Y<self.LeftBox.h && Mouse.Y>self.LeftBox.h-50
 				self.scrollhover = 2
 				Color(100,255,0)
 			end
@@ -233,40 +250,50 @@ group MIDM
 			int rx 
 			rx = self.RightBox.x
 			d  = self.show.fulldata
-			d.Image.Draw(Screen.W-10-d.Width,10)
+			d.Image.Draw(Graphics.W-10-d.Width,10)
 			__ember
-			DarkText.Font($BigFont,d.Name,rx+10,10)
+			BigFont.Dark(d.Name,rx+10,10)
 			__white
-			DarkText.Font($Font,d.Description,rx+10,60)
-			self.pfunc[self.page+1]()
+			Font.Dark(d.Description,rx+10,60)
+			self.pfunc[self.page]()
 		end
 		// Mouse
 		__white
 		Mouse.Show()
 	end
 	
+	var MLoaded
+	var QUse(string foe)
+		foe = Upper(StripExt(foe))
+		MLoaded = MLoaded || {}
+		if !MLoaded[Foe]
+			Lua.Scyndi.Use(foe)
+		End
+		return MLoaded.RetFunc
+	End
+	
 	void Update()
-		Dev.ConCheck()
-		if self.hover and Mouse.HitLeft
-			self.show = { ['entry'] = self.hover, ['fulldata'] = NIL.Use(replace(self.hover.File,".nil",""))() }
+		//Dev.ConCheck()
+		if self.hover && Mouse.HitLeft
+			self.show = { ["entry"] = self.hover, ["fulldata"] = self.QUse(hover.File)() }
 		end
-		if Mouse.X>Screen.W/2 and Mouse.Y<Screen.H-128 and Mouse.HitLeft
-			self.page = (self.page+1) % #self.pfunc
+		if Mouse.X>Graphics.W/2 && Mouse.Y<Graphics.H-128 && Mouse.HitLeft
+			self.page = (self.page+1) % len(self.pfunc)
 		end
 		if Mouse.HitRight
 			GoToFlow("FIELD")
 		end
 		if Mouse.HeldLeft
-			#+ self.ScrollY self.scrollhover
+			self.ScrollY += self.scrollhover
 		end
 	end
 	
 	
-	void CONSTRUCTOR()
-		BUB_Draw = self.Draw
-		BUB_Update = self.Update
-		self.LeftBox = new Box(0,0,Screen.W/2,Screen.H-128)
-		self.RightBox = new Box(Screen.W/2,0,Screen.W/2,Screen.H-128)
+	void Start()
+		//BUB_Draw = self.Draw
+		//BUB_Update = self.Update
+		self.LeftBox = new Box(0,0,Graphics.W/2,Graphics.H-128)
+		self.RightBox = new Box(Graphics.W/2,0,Graphics.W/2,Graphics.H-128)
 		self.BigFont = GetFont("BIGTEXT")
 		assert(self.BigFont,"Font import failed!")
 		CSay("= Import Normal font")
@@ -275,86 +302,101 @@ group MIDM
 		CSay("= Import Sys font")
 		self.BlitzFont = GetFont("SYSFONT")
 		assert(self.BlitzFont,"Font import failed!")
-		self.Lijst = NIL.Use("Script/Data/General/MonsterList.nil")
-		self.pfunc[1] = void()
+		//self.Lijst = NIL.Use("Script/Data/General/MonsterList.nil")
+		Lijst = Lua.Scyndi.Class.MonsterList.Ret
+		//self.pfunc[1] = void()
+		ddef Een
 			int rw 
 			var d
-			rw = Screen.W/2
+			rw = Graphics.W/2
 			d  = self.show.fulldata
 			for i,k in pairs { "Strength", "Defense", "Intelligence", "Resistance", "Accuracy", "Evansion", "Agility", "HP" }
 				__white
-				DarkText.Font($Font,k,rw + 10,100+(i*25))
+				Font.Dark(k,rw + 10,100+(i*25))
 				__ember
 				if d.Boss
-					DarkText.Font($Font,"---",Screen.W-20,100+(i*25),1) 
+					Font.Dark("---",Graphics.W-20,100+(i*25),1) 
 				else
-					DarkText.Font($Font,tostring(d.Char.Stat("END_"..k).Value),Screen.W-20,100+(i*25),1) 
+					Font.Dark(tostring(d.Char.Stat("END_"..k).Value),Graphics.W-20,100+(i*25),1) 
 				end
 			end
 		end
-		self.pfunc[2] = void()
+		//self.pfunc[2] = void()
+		ddef Twee
 			var d
 			int rw
-			rw = Screen.W/2
+			rw = Graphics.W/2
 			d  = self.show.fulldata
 			for i,k in pairs { "Flame", "Wind", "Water", "Earth", "Frost", "Thunder", "Light", "Darkness" }
 				__white
-				DarkText.Font($Font,k,rw + 10,100+(i*25))
+				Font.Dark(k,rw + 10,100+(i*25))
 				if d.Fatal[k]
 					__red
-					DarkText.Font($Font,"Fatal",Screen.W-20,100+(i*25),1)
+					Font.Dark("Fatal",Graphics.W-20,100+(i*25),1)
 				else
 					__ember
-					DarkText.Font($Font,tostring(d.Char.Stat("END__RESIST_Elem_"..k).Value).."%",Screen.W-20,100+(i*25),1)
+					Font.Dark(tostring(d.Char.Stat("END__RESIST_Elem_"..k).Value).."%",Graphics.W-20,100+(i*25),1)
 				end
 			end
 		end
-		self.pfunc[3] = void()
+		//self.pfunc[3] = void()
+		ddef Drie
 			var d
 			int rw
-			rw = Screen.W/2
+			rw = Graphics.W/2
 			d  = self.show.fulldata
 			for i,k in pairs { "Poison", "Disease", "Sleep", "Silence", "Death", "Paralysis", "Fear", "Zombie" }
 				__white
-				DarkText.Font($Font,k,rw + 10,100+(i*25))
+				Font.Dark(k,rw + 10,100+(i*25))
 				__ember
-				DarkText.Font($Font,tostring(math.min(100,math.max(0,d.Char.Stat("END__RESIST_Stat_"..k).Value))).."%",Screen.W-20,100+(i*25),1)
+				Font.Dark(tostring(math.min(100,math.max(0,d.Char.Stat("END__RESIST_Stat_"..k).Value))).."%",Graphics.W-20,100+(i*25),1)
 			end
 		end
-		self.pfunc[4] = void()
+		//self.pfunc[4] = void()
+		ddef Vier
 			var d
 			int rw
 			int dh = 100
 			int sh 
 			table lst
-			sh = (Screen.H-228)/2
-			rw = Screen.W/2
+			sh = (Graphics.H-228)/2
+			rw = Graphics.W/2
 			d  = self.show.fulldata
-			lst[1] = { ['h']=dh, ['items'] = d.DropCount, ['total'] = d.DropTotal, ['name'] = "Item Drops" }
-			lst[2] = { ['h']=sh, ['items'] = d.StealCount, ['total'] = d.StealTotal, ['name'] = "Merya can steal" }
+			lst[1] = { ["h"]=dh, ["items"] = d.DropCount, ["total"] = d.DropTotal, ["name"] = "Item Drops" }
+			lst[2] = { ["h"]=sh, ["items"] = d.StealCount, ["total"] = d.StealTotal, ["name"] = "Merya can steal" }
 			for il,li in ipairs(lst)
 				int y
 				y = li.h + 25;
 				Color(0,180,255)
-				DarkText.Font($Font,li.name,rw+10,li.h)
+				Font.Dark(li.name,rw+10,li.h)
 				for k,itm in pairs(li.items)
 					__white
 					if type(k)=="number"
 						if k == 1
-							DarkText.Font($Font,"1 shilder",rw + 20, y)
+							Font.Dark("1 shilder",rw + 20, y)
 						else
-							DarkText.Font($Font,sprintf("%d shilders",k),rw + 20, y)
+							Font.Dark(sprintf("%d shilders",k),rw + 20, y)
 						end
 					else
-						DarkText.Font($Font,Item[k].Name or "Didn't fetch name <bug?>",rw + 20, y)
+						Font.Dark(Item[k].Name or "Didn't fetch name <bug?>",rw + 20, y)
 					end
 					__ember
-					DarkText.Font($Font,tostring(math.floor((itm/li.total)*100)).."%",Screen.W-20, y,2)
-					#+ y 20
+					Font.Dark(tostring(math.floor((itm/li.total)*100)).."%",Graphics.W-20, y,2)
+					y += 20
 				end
 			end
 		end
-		self.ArUp     = TImage.Obtain("UP")
-		self.ArDown   = TImage.Obtain("DOWN")
+		pfunc= { [0] = Een, Twee, Drie, Vier}
+		self.ArUp     = ObtainImage("UP")
+		self.ArDown   = ObtainImage("DOWN")
 	end
 end
+
+Init
+	MIDM.Start()
+End
+
+Global Void MainFlow()
+	MIDM.Draw()
+	MIDM.Update()
+End
