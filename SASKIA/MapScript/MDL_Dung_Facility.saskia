@@ -37,7 +37,7 @@
 
 :OnLoad
 	chk Map.Layer=="#013",Nothing
-	call Fader.Create,"Eugorvnia Science Facility
+	call Fader.Create,"Eugorvnia Science Facility"
 :Nothing
 	end
 	
