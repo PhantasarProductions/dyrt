@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubAchievements.scyndi
 // 
-// 	  Version: 25.06.04 IX
+// 	  Version: 25.06.18 I
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -152,7 +152,7 @@ class AchBox
 		Color(255,180,0)
 		self.TxAwarded.Draw(Graphics.Width div 2,self.y+7,2,2)
 		__white
-		self.TxAchName.Draw(Graphics.Width div 2,self.y+25,2,2)
+		self.TxAchName.Draw(Graphics.Width div 2,self.y+30,2,2)
 	end
 	
 	static void DrawAll()
