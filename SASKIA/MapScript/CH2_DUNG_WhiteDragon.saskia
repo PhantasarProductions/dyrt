@@ -36,7 +36,7 @@
 ; End License Information
 
 :OnLoad
-	call Fader,"White Dragon's Lair"
+	call Fader.Create,"White Dragon's Lair"
 	end
 	
 :Guardian

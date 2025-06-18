@@ -35,5 +35,5 @@
 ; version: 20.04.28
 ; End License Information
 :OnLoad
-  call Fader,"Crossroads"
+  call Fader.Create,"Crossroads"
 end
