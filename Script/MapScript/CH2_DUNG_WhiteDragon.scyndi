@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.14 XVI
+// version: 25.06.19 III
 // 
 // End License
 
@@ -189,6 +189,21 @@ group MScript
 		Map.GoToLayer("BOS","FromWhite")
 	end
 	
+	String IceGoLast
+	Bool IGIgnore = False
+	void IceGo(string p)
+		p = Upper(p)
+		if IGIgnore
+			IGIgnore = False
+		ElIf IceGoLast!=p
+			//Player.StopWalking()
+			//Player.WalkTo(p)
+			Kthura.Obj.Player.StopWalking()
+			Kthura.Obj.Player.WalkTo(p)
+			IceGoLast=p
+			IGIgnore = true
+		end			
+	End
 	
 	
 	void Draw()
@@ -207,6 +222,8 @@ Init
 	Map.ZA_Enter("Reset_Start","Gat")
 	Map.ZA_Enter("GAT2","Gat")
 	Map.ZA_Enter("GAT3","Gat")
+	if false
+		// dummy
 	for i=1,MaxIce
 		string tag
 		tag = sprintf("Ice_%03d",i)
@@ -215,4 +232,11 @@ Init
 	end
 	Map.ZA_Enter("Dragon","SASKIA_Dragon")
 	Map.ZA_Enter("LeaveCave","LeaveCave")
+	
+	For L in each{[0]="Out","Die_1","Die_2","Die_3","A","B","C"}
+		Map.ZA_Enter("Go_"..L,"IceGo",L)
+		Map.ZA_Enter("GB_"..L,"IceGo",L)
+	End
+	// End dummy
+	end 
 end
