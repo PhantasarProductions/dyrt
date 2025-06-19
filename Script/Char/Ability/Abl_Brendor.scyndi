@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.19
 // 
 // End License
 
@@ -49,7 +49,7 @@ Init
 	locExtern s "Scyndi.Globals.gint.skill"
 	locExtern a "Scyndi.Class.Abl_Brendor.Lijst"
 	a.Charge = { ["Skill_Hammer"]=s*5 }
-	a.HammerSmash = { ["Skill_Hammer"]=5^s },
-	a.Focus = { ["Scharum"] = true },
+	a.HammerSmash = { ["Skill_Hammer"]=5^s }
+	a.Focus = { ["Scharum"] = true }
 	a.QuakeStrike = { ["SealedBoss"] = true }
 end

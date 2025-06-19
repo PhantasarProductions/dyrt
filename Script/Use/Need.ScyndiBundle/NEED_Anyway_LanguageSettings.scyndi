@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.19
 // 
 // End License
 
@@ -59,24 +59,24 @@ Init
 //#pure
 //EnglishNames = {
    EN:={}
-   EN.Eric = "Eric",
-   EN.Irravonia = "Irravonia",
-   EN.Brendor = "Brendor",
-   EN.PreScyndi = "Seelah Gandra",
-   EN.PostScyndi = "Scyndi",
-   EN.Rebecca = "Rebecca",
-   EN.Dernor = "Dernor",
-   EN.Merya = "Merya",
-   EN.Aziella = "Azi|uella",
-   EN.Shanda = "Shanda",
-   EN.Kirana = "Kirana",
+   EN.Eric = "Eric"
+   EN.Irravonia = "Irravonia"
+   EN.Brendor = "Brendor"
+   EN.PreScyndi = "Seelah Gandra"
+   EN.PostScyndi = "Scyndi"
+   EN.Rebecca = "Rebecca"
+   EN.Dernor = "Dernor"
+   EN.Merya = "Merya"
+   EN.Aziella = "Azi|uella"
+   EN.Shanda = "Shanda"
+   EN.Kirana = "Kirana"
    EN.IrraShort = "Irra"
    //}
    //#endpure
    EnglishNames=EN
 End
 
-global table Names
+global var Names
 table LangToNames 
 table MetaNames
 
@@ -129,5 +129,5 @@ end
 
 //setmetatable(Names,MetaNames)
 Init
-	Names = SetMetaTable(Names,{ ["__index"]=MNI,["__newindex"]=MNNI,["__call"]=MNC } )
+	Names = SetMetaTable({},{ ["__index"]=MNI,["__newindex"]=MNNI,["__call"]=MNC } )
 End

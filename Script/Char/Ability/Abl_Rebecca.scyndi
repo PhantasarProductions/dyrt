@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.18
 // 
 // End License
 
@@ -50,14 +50,14 @@ Init
 	locExtern s "Scyndi.Globals.gint.skill"
 	locExtern RebAbl "Scyndi.Class.Abl_Rebecca.Lijst"
 	RebAbl = {}
-		RebAbl.QuickStrike = { ["Start"]=true },
-		RebAbl.Power2x = { ["Skill_Sword"]=5 },
-		RebAbl.Power3x = { ["Skill_Sword"]=10*s },
-		RebAbl.Power4x = { ["Skill_Sword"]=15*s },
-		RebAbl.Cleave  = { ["Skill_Sword"]=19+(s*s) },
-		RebAbl.WarShout = { ["Skill_Sword"]=8*(s*s) },
-		RebAbl.Focus = { ["Scharum"] = true },
-		RebAbl.Power5x = { ["SealedBoss"] = true },
+		RebAbl.QuickStrike = { ["Start"]=true }
+		RebAbl.Power2x = { ["Skill_Sword"]=5 }
+		RebAbl.Power3x = { ["Skill_Sword"]=10*s }
+		RebAbl.Power4x = { ["Skill_Sword"]=15*s }
+		RebAbl.Cleave  = { ["Skill_Sword"]=19+(s*s) }
+		RebAbl.WarShout = { ["Skill_Sword"]=8*(s*s) }
+		RebAbl.Focus = { ["Scharum"] = true }
+		RebAbl.Power5x = { ["SealedBoss"] = true }
 		RebAbl.Lay    =  { ["NumVar"] = {"KILLED_BOSS_ALDARUS3",1} }
 	if __trueabyss
 		RebAbl.Lay = { ["NumVar"] = {"TrueAbyssScore",15*(__skill+1) } }

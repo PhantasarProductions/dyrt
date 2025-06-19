@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.09 I
+// version: 25.06.18
 // 
 // End License
 
@@ -88,8 +88,8 @@ LocExtern AI_Blenchy "Scyndi.Class.AI_Blenchy2"
 		// Rebecca    = {"2XPS","3XPS","4XPS","5XPS","BATTLECRY"},
 		AllowCopy.Rebecca    = { [0]="Power2x","Power3x","Power4x","Power5x","WarShout","Cleave"}
 		// Dernor     = {"BACT","BIO","BLOODSUCKER","BURP","CHARM","CROCBITE","DEATHPECK","FIREBLAST","GROWL","HOWLING","MULTITUSK","PARADIVE","PECK","POISONSPIT","RECOVER","SCRATCH","SPORES","TSUNAMI","VIRUSBUBBLE","WILLPOWER"},
-		AllowCopy.Dernor     = { [0]="Vitalize","BloodSucker","Claw","Peck","CrocBite","Spores","Growl","Howling","SickBite","Burp","RavenPeck","AttackInDamnnation","Inferno","Dive"},
-		AllowCopy.Merya      = {"Backstab","FastDraw","Stunstab","Killerstab","Intimidate"},
+		AllowCopy.Dernor     = { [0]="Vitalize","BloodSucker","Claw","Peck","CrocBite","Spores","Growl","Howling","SickBite","Burp","RavenPeck","AttackInDamnnation","Inferno","Dive"}
+		AllowCopy.Merya      = {"Backstab","FastDraw","Stunstab","Killerstab","Intimidate"}
 		// Aziella    = {'ACCELERATOR',"BLUNT","VANISH","DOUBLE_BOLT","MYSTICCARE","HYPER","PIERCE","PROTECT","SHIELD","SHOWER","SLEEP","TRIPLE_BOLT","POISONARROW"}
 		AllowCopy.Aziella    = { [0]="MysticCare","Confusion","Protect","Vanish","Shield","Blunt","Hyper"}
 		//}

@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FieldMenu.scyndi
 // 
-// 	  Version: 25.06.14
+// 	  Version: 25.06.19
 // 	
 // 	  Copyright (C) 2019-'21, 2025 Jeroen Petrus Broks
 // 	
@@ -834,7 +834,7 @@ group Flow_FieldMenu
 				 
 		self.situations	["FIELD"] ["SwitchRange"] = {1,8}
 		self.situations	["FIELD"] ["SwitchAction"] = self.JustSwitch
-		self.situations	["FIELD"] ["ItemAction"] = self.FieldItemAction,
+		self.situations	["FIELD"] ["ItemAction"] = self.FieldItemAction
 		self.situations	["FIELD"] ["Return"] = "FIELD" 
 			
 		self.situations["COMBAT_ITEMS"] = {}
@@ -883,7 +883,7 @@ group Flow_FieldMenu
 			// ["BANK"] = {["MenuItems"] = {} } // unused
 			self.situations["COMBAT_SWITCH"] = {}
 			self.situations["COMBAT_SWITCH"]["MenuItems"] = {[0]={ ["IconFile"] = "Switch", ["Right"]=self.SwitchChar, ["Help"]="Switch chacters" } }
-			self.situations["COMBAT_SWITCH"]["SwitchRange"] = {5,8},
+			self.situations["COMBAT_SWITCH"]["SwitchRange"] = {5,8}
 			self.situations["COMBAT_SWITCH"]["SwitchAction"] = self.CombatSwitch
 			self.situations["COMBAT_SWITCH"]["Return"] = "COMBAT"					
 			self.situations["STONEMASTER"] = { }
@@ -893,7 +893,7 @@ group Flow_FieldMenu
 				tmp		["IconFile"] = "StoneMaster" 
 				//tmp		["Left"] = NIL.Use("Script/Use/Specific/StoneMaster").Panel,
 				tmp		["Left"] = Lua.Scyndi.Class.MStoneMaster.Panel
-				tmp		["Right"] = self.Status, 
+				tmp		["Right"] = self.Status
 				tmp		["Help"]="Can this stone master help you get better?" 
 				self.situations["STONEMASTER"]["Return"]="FIELD"
 		CSay("= Configuring Situation Data!")
