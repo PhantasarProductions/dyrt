@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_Lonesome.scyndi
 // 
-// 	  Version: 25.06.21
+// 	  Version: 25.06.21 II
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -45,6 +45,8 @@
 
 Module
 	#use "Libs/SCI/InterVar"
+	
+	#accept "RPG"
 
 	bool DoEffect(Act,Target)
 		for i=1,4
@@ -62,4 +64,4 @@ Module
 	end
 	
 	//return Eenzaam
-end
+//end
