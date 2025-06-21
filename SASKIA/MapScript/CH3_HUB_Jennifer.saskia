@@ -41,8 +41,9 @@
 :Jennifer1
 	call MapText,"JEN1A"
 	mov "Irravonia",Map.Leader
-	group 4
+	group 5
 		call Map.Kill,"NPC_OutJennifer",true
+		call Map.Kill,"Block_Jennifer",true	
 		call Map.GoToLayer,"#011","JenStart"
 		call Map.HideByZone,"House"
 		call MapText,"JEN1B"
