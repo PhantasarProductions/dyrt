@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/NGP_DUNG_HallMusic.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/NGP_DUNG_HallMusic.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,19 @@
 // 
 // **********************************************
 // 
-// version: 20.10.14
-// End License Information
+// 
+// version: 25.06.21 III
+// 
+// End License
 
 
+Script
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/Kthura"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
 
 #macro MINDISCO 0
 #macro MAXDISCO 7
@@ -56,15 +62,15 @@ group MScript
 		CSayF("Scanning layer: %s",Map.Layer)
 		self.DiscoFloor[Map.Layer] = {}
 		self.DiscoBall[Map.Layer] = {}
-		var tb 
-		var ball
-		tb = self.DiscoFloor[Map.Layer]
-		ball = self.DiscoBall[Map.Layer]
+		//var tb 
+		//var ball
+		tb := self.DiscoFloor[Map.Layer]
+		ball := self.DiscoBall[Map.Layer]
 		for t in Map.EachTag
 			if prefixed(t,"DISCOFLOOR_")
-				tb[#tb+1] = t
+				tb += t
 			elseif prefixed(t,"DISCOBALL_")
-				ball[#ball+1] = t
+				ball += t
 			end
 		end
 	end
@@ -85,13 +91,7 @@ group MScript
 		Map.GoToLayer("#004","Start")
 	end
 	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("HideSecret","HideSecret")
-		Map.ZA_Enter("ShowSecret","ShowSecret")
-		Map.ZA_Enter("To002","TO002")
-		Map.ZA_Enter("To004","TO004")
-		Map.ZA_Enter("Boss","SASKIA:Boss")
-	end
+	
 	
 	void Draw()
 	end
@@ -103,8 +103,9 @@ group MScript
 		int bg = 0
 		int bb = 0
 		tb = self.DiscoFloor[Map.Layer]
-		Map.Obj=tb[math.random(1,#tb)]
-		Map.ObjString.Texture = sprintf("GFX/Textures/DISCOFLR/%d.PNG",math.random(MINDISCO,MAXDISCO))
+		//Map.Obj=tb[math.random(0,len(tb)-1)]
+		//Map.ObjString.Texture = sprintf("GFX/Textures/DISCOFLR/%d.PNG",math.random(MINDISCO,MAXDISCO))
+		Kthura.Obj[tb[math.random(0,len(tb)-1)]].Texture = sprintf("GFX/Textures/DISCOFLR/%d.PNG",math.random(MINDISCO,MAXDISCO))
 		self.bc++
 		switch math.floor(self.bc/100)
 			case 0
@@ -123,13 +124,25 @@ group MScript
 				CSay("WARNING! self.bc - overflow! Reset!")
 		end
 		for _,ball in ipairs(self.DiscoBall[Map.Layer])
-			Map.Obj=ball
-			Map.ObjInt.InsertX = (Map.ObjInt.InsertX + 1) % 50
-			Map.ObjInt.R = br
-			Map.ObjInt.G = bg
-			Map.ObjInt.B = bb
+			//Map.Obj=ball
+			//Map.ObjInt.InsertX = (Map.ObjInt.InsertX + 1) % 50
+			//Map.ObjInt.R = br
+			//Map.ObjInt.G = bg
+			//Map.ObjInt.B = bb
+			wball:=Kthura.Obj[ball]
+			wball.InsertX = (wball.InsertX + 1) % 50
+			wball.R = br
+			wball.G = bg
+			wball.G = bb
 		end
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("HideSecret","HideSecret")
+	Map.ZA_Enter("ShowSecret","ShowSecret")
+	Map.ZA_Enter("To002","TO002")
+	Map.ZA_Enter("To004","TO004")
+	Map.ZA_Enter("Boss","SASKIA:Boss")
+End
