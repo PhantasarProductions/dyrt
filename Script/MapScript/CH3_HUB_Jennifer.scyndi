@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.17 VI
+// version: 25.06.21
 // 
 // End License
 
@@ -135,8 +135,8 @@ group MScript
 		for i,c in pairs { "Scyndi","Irravonia","Rebecca", "Dernor", "Merya" }
 			RPG.Party[i] = c
 			chd:=RPG.GetChar(c)
-			chd.Points.HP.Have =chd.Points.HP.Maximum
-			chd.Points.VIT.Have=chd.Points.VIT.Maximum
+			chd.Points("HP").Have =chd.Points("HP").Maximum
+			chd.Points("VIT").Have=chd.Points("VIT").Maximum
 		end
 	end
 	
