@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.21
 // 
 // End License
 
@@ -70,8 +70,9 @@ group OnyxBang
 		//self.Kthura.Obj = "OnyxBang"
 		//self.Kthura.ObjInt.ScaleX = math.abs(math.floor(xmath.sin(self.aftellen)*1000))
 		//self.Kthura.ObjInt.ScaleY = self.Kthura.ObjInt.ScaleX
-		Kthura.Obj.OnyxBang.ScaleX = math.abs(math.floor(xmath.sin(self.aftellen)*1000))
-		Kthura.Obj.OnyxBang.ScaleY = Kthura.Obj.OnyxBang.ScaleX
+		int Scale := math.abs(math.floor(xmath.sin(self.aftellen)*1000))		
+		Kthura.Obj.OnyxBang.ScaleX = Scale
+		Kthura.Obj.OnyxBang.ScaleY = Scale
 		Kthura.Obj.OnyxBang.Visible = True
 		if self.aftellen<=0
 			//Map.HideObj("OnyxBang")
