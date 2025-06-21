@@ -1,0 +1,199 @@
+// License:
+// 	  src/Script/Script/Flow/JukeBox.scyndi
+// 
+// 	  Version: 25.06.21 VIII
+// 	
+// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	
+// 	  ===========================
+// 	  This file is part of a project related to the Phantasar Chronicles or another
+// 	  series or saga which is property of Jeroen P. Broks.
+// 	  This means that it may contain references to a story-line plus characters
+// 	  which are property of Jeroen Broks. These references may only be distributed
+// 	  along with an unmodified version of the game.
+// 
+// 	  As soon as you remove or replace ALL references to the storyline or character
+// 	  references, or any termology specifically set up for the Phantasar universe,
+// 	  or any other univers a story of Jeroen P. Broks is set up for,
+// 	  the restrictions of this file are removed and will automatically become
+// 	  zLib licensed (see below).
+// 
+// 	  Please note that doing so counts as a modification and must be marked as such
+// 	  in accordance to the zLib license.
+// 	  ===========================
+// 
+// 
+// 	  zLib license terms:
+// 	
+// 	  This software is provided 'as-is', without any express or implied
+// 	  warranty.  In no event will the authors be held liable for any damages
+// 	  arising from the use of this software.
+// 
+// 	  Permission is granted to anyone to use this software for any purpose,
+// 	  including commercial applications, and to alter it and redistribute it
+// 	  freely, subject to the following restrictions:
+// 	
+// 	  1. The origin of this software must not be misrepresented; you must not
+// 	     claim that you wrote the original software. If you use this software
+// 	     in a product, an acknowledgment in the product documentation would be
+// 	     appreciated but is not required.
+// 	  2. Altered source versions must be plainly marked as such, and must not be
+// 	     misrepresented as being the original software.
+// 	  3. This notice may not be removed or altered from any source distribution.
+// End License
+
+Script
+
+#use "Libs/Music"
+
+#use "Libs/SCI/Sys"
+#use "Libs/SCI/GINIE"
+#use "Libs/SCI/Graphics"
+
+#use "Script/Use/Need"
+//#use "libs/tables"
+
+//global delegate BUB_Draw
+///global delegate BUB_Update
+
+group GROUP_JukeBox
+	
+	string ReturnFlow
+	table Data
+	Var GData
+	
+	var Background
+	var Font
+	var NotesFont
+	int Scroll
+	table Artists
+	var hover
+	var playing
+	var Pijl_Op
+	var Pijl_Neer
+	
+	get int PijlX
+		return Graphics.W-50
+	end
+	
+	get int PijlY_Op
+		return 5
+	end
+	
+	get int PijlY_Neer
+		return Graphics.H-120
+	end
+	
+	Table AutoData()
+		GData = GINIE.Load("Data/General/Jukebox.ini","JukeBox_Data")
+		lst:=GData.List("Index","Index")
+		ret:={}
+		for k in Each(Lst)
+			ret[k] = {}
+			for f in Each{[0]="License", "Title", "Artist", "WebSite", "File"}
+				ret[k][f] = GData.Value("Entry:"..k,f)
+			end
+			ret[k].Author=ret[k].Artist
+			ret[k].Notes=ret[k].License
+		end
+		Return Ret
+	End
+
+	
+	void SetUp()
+		//BUB_Draw        = self.Draw
+		//BUB_Update      = self.Update
+		//self.Data       = NIL.Use("Script/Data/General/Jukebox")
+		Data = self.AutoData()
+		self.Background = ObtainImage("MENUBACK")
+		self.NotesFont  = LoadImageFont(FONT_Blitz,"Juke_Blitz")
+		self.Font       = GetFont("BOXTEXT")
+		self.Pijl_Op    = ObtainImage("UP")
+		self.Pijl_Neer  = ObtainImage("DOWN")
+		// Music.Push();
+		Music.Stop();
+	end
+	
+	//void DESTRUCTOR()
+	//	CSay("Byebye! Jukebox!")
+	//end
+	
+	void Draw()
+		int y
+		y = 0 - self.Scroll
+		self.Background.Tile(0,0,Graphics.Width,Graphics.Height)
+		self.hover = nil;
+		for file,entry in spairs(self.Data)
+			entry.file = file
+			if y>=0 && y<=(Graphics.H-100)				
+				entry.TxtT = entry.TxtT || Font.iText(entry.Title)
+				self.Artists[entry.Author] = self.Artists[entry.Author] || Font.iText(entry.Author)
+				if Mouse.X<Graphics.W-40 && Mouse.Y>=y && Mouse.Y<=y+30
+					self.hover=entry
+					Color(255,180,0)
+					else
+					__white
+				end				
+				entry.TxtT.Draw(5,y)
+				self.Artists[entry.Author].Draw(Graphics.W/2,y)
+			end
+			y += 30
+		end
+		// Playing information
+		if self.playing
+			self.playing.Playing = self.playing.Playing || Font.iText("Playing '"..self.playing.Title.."' by "..self.playing.Author)
+			self.playing.TNotes  = self.playing.TNotes  || self.NotesFont.iText(self.playing.Notes)
+			Color(0,180,255)
+			self.playing.Playing.Draw(5,Graphics.H-85)
+			self.playing.TNotes.Draw( 5,Graphics.H-50)
+		end
+		
+		// Scroll
+		if self.Scroll!=0
+			__white
+			self.Pijl_Op.Draw(self.PijlX,self.PijlY_Op)
+			if Mouse.X>Graphics.W-40 && Mouse.Y>self.PijlY_Op && Mouse.Y<self.PijlY_Op+32 && Mouse.HeldLeft
+				self.Scroll--
+			end
+		end
+		if y>=(Graphics.H-100)
+			__white
+			self.Pijl_Neer.Draw(self.PijlX,self.PijlY_Neer)
+			if Mouse.X>Graphics.W-40 && Mouse.Y>self.PijlY_Neer && Mouse.Y<self.PijlY_Neer+32 &&  Mouse.HeldLeft
+				self.Scroll++
+			end
+		end
+		
+		// Mouse pointer
+		__white
+		Mouse.Show()
+	end
+	
+	void Update()
+		//Dev.ConCheck()
+		if Mouse.HitRight
+			GoToFlow(self.ReturnFlow)
+			KillFlow("JUKEBOX")
+			//Music.Pop()
+			return
+		end
+		if Mouse.HitLeft && self.hover
+			Music.Play(self.hover.file)
+			self.playing = self.hover
+		end
+	end
+	
+	void SetRet(String RF)
+		ReturnFlow = RF
+	End
+	
+end
+
+Init
+	GROUP_Jukebox.SetUp()
+End
+
+Global Void MainFlow()
+	GROUP_Jukebox.Update()
+	GROUP_Jukebox.Draw()
+End	
