@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.17 III
+// version: 25.06.21 I
 // 
 // End License
 
@@ -70,7 +70,9 @@ group MScript
 	void JUKEBOX()
 		//LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
 		//LuaDoString("FLOW_JUKEBOX","GROUP_JukeBox.ReturnFlow='FIELD'")
-		Lua.error("Jukebox linkup will need to be rewritten")
+		//Lua.error("Jukebox linkup will need to be rewritten")
+		LoadFlow("JUKEBOX","Script/Flow/Jukebox.lbc")
+		Sys.Call("FLOW_JUKEBOX","Group_JukeBox.SetRet","FIELD")
 		GoToFlow("JUKEBOX")
 	end
 	

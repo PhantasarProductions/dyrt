@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/MainMenu.scyndi
 // 
-// 	  Version: 25.06.08
+// 	  Version: 25.06.21
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -175,10 +175,9 @@ end
 
 
 void StartJukeBox()
-	//LoadFlow("JUKEBOX","Script/Flow/Jukebox.nil")
-	//LuaDoString("FLOW_JUKEBOX","GROUP_JukeBox.ReturnFlow='MAINMENU'")
-	//GoToFlow("JUKEBOX")
-	Lua.error("Jukebox not yet available")
+	LoadFlow("JUKEBOX","Script/Flow/Jukebox.lbc")
+	Sys.Call("FLOW_JUKEBOX","Group_JukeBox.SetRet","MAINMENU")
+	GoToFlow("JUKEBOX")
 end
 
 
