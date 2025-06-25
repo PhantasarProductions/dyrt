@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.02 VI
+// version: 25.06.24
 // 
 // End License
 
@@ -192,8 +192,10 @@ group MScript
 			RPG.Party[i] = RPG.Party[i-1]
 		end
 		RPG.Party[1] = "Kirana"
+		skn:={[0]="Scythe slashing","Ignis","Aer","Aqua","Terra"}
 		for i=0,4
 			Kirana.Points("SKILLLVL"..i).Have = Kirana.Points("SKILLLVL"..i).Maximum
+			Kirana.Data[sprintf("SKILL%d",i)]=skn[i];
 		end
 		for _,e in pairs { "Flame","Wind","Water","Earth","Frost","Thunder" }
 			Kirana.Stat("BASE__RESIST_Elem_"..e).Value=math.random(60/__skill,90/__skill)
