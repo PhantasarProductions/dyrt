@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/NGP_DUNG_ThiefDen.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/NGP_Dung_ThiefDen.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,17 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.11.22
-// End License Information
+// 
+// version: 25.06.24 IX
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
 
+Script
 
-quickmeta group Solved
+#use "Libs/SCI/Sys"
+
+#use "script/use/need"
+#use "Script/Use/misc/StartCombatMod"
+
+extern tonumber "tonumber"
+
+quickmeta Solved
 	index
 		return gv.Bool["THIEFDEN_GEOPUZZLE_SOLVED_"..key]
 	end
@@ -57,7 +65,7 @@ class PanelPop
 	readonly int y
 	readonly int changeto
 	readonly int wantcolor
-	void CONSTRUCTOR(int ax,int ay, int ac,int wc)
+	CONSTRUCTOR(int ax,int ay, int ac,int wc)
 		self.x         = ax
 		self.y         = ay
 		self.changeto  = ac
@@ -74,7 +82,7 @@ class GeoPanel
 	readonly int y
 	readonly int tocol
 	
-	void CONSTRUCTOR(int ax, int ay, int atocol)
+	CONSTRUCTOR(int ax, int ay, int atocol)
 		self.chain = self.chain or new TLinkedList
 		self.x     = ax
 		self.y     = ay
@@ -109,11 +117,11 @@ class GeoPanel
 		delegate Max
 		Max = math.max
 	
-		bool PopDone()
-			return Over['<'] and Over['>'] and Over['^'] and Over['V']
+		ddef PopDone
+			return Over["<"] and Over[">"] and Over["^"] and Over["V"]
 		end
 
-		void CUp()
+		ddef CUp
 			// Col:=Max(1,(Col+1) mod 16)
 			// Not reall relevant in the map script. Left over from the Pascal prototype.
 		end
@@ -122,13 +130,13 @@ class GeoPanel
 		if nieuw or (not self.chain)
 			self.chain = new TLinkedList()
 		end
-		Ch = '>'
+		Ch = ">"
 		X = 40
 		Y = 12
-		Over['<'] = false;
-		Over['>'] = false;
-		Over['^'] = false;
-		Over['V'] = false;
+		Over["<"] = false;
+		Over[">"] = false;
+		Over["^"] = false;
+		Over["V"] = false;
 		Col = 1;
 		D = 1;
 		DI = D;
@@ -140,13 +148,13 @@ class GeoPanel
 				// Write(Ch)
 				self.chain.AddLast(new PanelPop(X,Y,Point.N))
 			elseif X<minix 
-				Over['<'] = true
+				Over["<"] = true
 			elseif X>maxiy 
-				Over['>'] = true
+				Over[">"] = true
 			elseif Y<miniy 
-				Over['^'] = true
+				Over["^"] = true
 			elseif Y>maxiy 
-				Over['V'] = true;		
+				Over["V"] = true;		
 			end
 			switch Ch
 				case '<'
@@ -154,25 +162,25 @@ class GeoPanel
 					DI--
 					if DI==0 
 						DI = D
-						Ch = '^';
+						Ch = "^";
 					end				
-				case '^'
+				case "^"
 					Y--
 					DI--
 					if DI==0
 						D++
 						DI = D;
-						Ch = '>';
+						Ch = ">";
 						CUp()
 					end
-				case '>'
+				case ">"
 					X++
 					DI--
 					if DI==0
 						DI = D;
-						Ch = 'V';
+						Ch = "V";
 					end				
-				case 'V'
+				case "V"
 					Y++
 					DI--
 					if DI==0
@@ -197,7 +205,7 @@ group MScript
 		return self.Panels[Map.Layer]
 	end
 	
-	void SetPanel(table P,string ObjTag)
+	void SetPanel(P,string ObjTag)
 		table PN
 		Map.Obj = ObjTag
 		assert(Map.ObjInt.X % 32 == 0,"Panel X Grid Error!")
@@ -237,14 +245,15 @@ group MScript
 	
 	void PanelScan(string L)
 		var CPan
-		self.Panels[L] = {['Points']={}}
+		self.Panels[L] = {["Points"]={}}
 		CPan = self.Panels[L]
 		for t in Map.EachTag
 			if prefixed(t,"GeoFloor_")
 				self.SetPanel(CPan,t) 
 			elseif prefixed(t,"GeoPoint_")
 				Map.Obj=t;
-				CPan.Points[#CPan.Points+1]=t
+				//CPan.Points[#CPan.Points+1]=t
+				CPan.Points+=t
 				CPan.Points[t] = { ["X"] = math.floor(Map.ObjInt.X/32), ["Y"] = math.floor((Map.ObjInt.Y-6)/32), ["N"] = tonumber(Map.ObjData.Point) or 0 }
 				Map.Obj = t				
 				Map.NewClickable(t,Map.ObjInt.X,Map.ObjInt.Y,"GeoPoint",t)
@@ -252,7 +261,7 @@ group MScript
 		end
 	end
 	
-	void ResetPuzzle(table rt)
+	void ResetPuzzle(rt)
 	end
 	
 	void GEOPOINT(string t)
@@ -275,7 +284,7 @@ group MScript
 			CSay("Initiating puzzle on "..Map.Layer)
 			self.PanelScan(Map.Layer)
 		end
-		CSay(NIL.LuaSerialize("Panels",self.Panels))
+		//CSay(NIL.LuaSerialize("Panels",self.Panels))
 	end
 	
 	void STARTBOSS()
@@ -300,4 +309,8 @@ group MScript
 	end
 	
 end
-#say "Map Script - Compiling!"
+
+Init
+	Map.ZA_Enter("StartPuzzle","StartPuzzle")
+	Map.ZA_Enter("ActBoss","SASKIA:Boss")
+End
