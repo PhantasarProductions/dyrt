@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.05.28 VI
+// version: 25.06.25 I
 // 
 // End License
 
@@ -109,9 +109,9 @@ Module
 						end
 						__cash = __cash + getcash
 						if Target.Steal[r]==1
-							new Hurt("Stolen 1 __onecurrency",Target.Tag,255,255,0)
+							new Hurt("Stolen 1 shilder",Target.Tag,255,255,0)
 						else
-							new Hurt(sprintf("Stolen %d __currency",getcash),Target.Tag,255,255,0)
+							new Hurt(sprintf("Stolen %d shilders",getcash),Target.Tag,255,255,0)
 						end
 						Target.StolenFrom = true
 					end
@@ -132,8 +132,8 @@ Module
 			int i
 			string itemtag
 			var Exe
-			Lua.Scyndi.Use("Script/Data/General/EnemyStealItem")
-			stealitems = stealitems || Lua.Scyndi.Class.EnemyStealItem
+			Lua.Scyndi.Use("Script/Data/General/EnemyStealItems")
+			stealitems = stealitems || Lua.Scyndi.Class.EnemyStealItems.Ret
 			//stealitems = stealitems or NIL.Use("Script/Data/General/EnemyStealItems.nil")
 			i = math.random(0,len(stealitems)-1)
 			itemtag = stealitems[i]
