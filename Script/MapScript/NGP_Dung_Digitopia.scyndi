@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/MapScript/NGP_DUNG_Digitopia.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/MapScript/NGP_Dung_Digitopia.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,14 +33,24 @@
 // 
 // **********************************************
 // 
-// version: 20.12.05
-// End License Information
+// 
+// version: 25.06.25 IV
+// 
+// End License
 
 
 
-#say "Map Script - None!"
-#use "script/use/anyway"
-#use "Script/Use/StartCombatMod"
+Script
+
+#use "Libs/Music"
+
+#use "Libs/SCI/Kthura"
+#use "Libs/SCI/Intervar"
+
+#use "script/use/Need"
+#use "Script/Use/Misc/StartCombatMod"
+
+extern tonumber "tonumber"
 	
 group MScript
 
@@ -75,26 +86,24 @@ group MScript
 	void CALM()
 		Music.Play("Music/Dungeon/Digitopia_end.wav")
 	end
-	
-	void CONSTRUCTOR()
-		Map.ZA_Enter("ActJeroen","Jeroen")
-		Map.ZA_Enter("Boss","SASKIA:Boss")
-		Map.ZA_Enter("Calm","Calm")
-	end
-	
+		
 	void Draw()
 	end
 	
 	void Update()
-		Map.Obj="Back"
-		Map.ObjInt.X = Map.CamX - 20
-		Map.ObjInt.Y = Map.CamY - 20
-		Map.ObjInt.W = Screen.W + 40
-		Map.ObjInt.H = Screen.H + 40
-		Map.ObjInt.InsertX = math.floor(Player.X / 4)
-		Map.ObjInt.InsertY = math.floor(Player.Y / 4)
+		//Map.Obj="Back"
+		Kthura.Obj.Back.X = Map.CamX - 20
+		Kthura.Obj.Back.Y = Map.CamY - 20
+		Kthura.Obj.Back.W = Screen.W + 40
+		Kthura.Obj.Back.H = Screen.H + 40
+		Kthura.Obj.Back.InsertX = math.floor(Player.X / 4)
+		Kthura.Obj.Back.InsertY = math.floor(Player.Y / 4)
 	end
 	
 end
 
-#say "Map Script - Compiling!"
+Init
+	Map.ZA_Enter("ActJeroen","Jeroen")
+	Map.ZA_Enter("Boss","SASKIA:Boss")
+	Map.ZA_Enter("Calm","Calm")
+End

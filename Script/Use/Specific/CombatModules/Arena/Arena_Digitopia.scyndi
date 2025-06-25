@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/Arena/Digitopia.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/Arena/Arena_Digitopia.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,31 +33,38 @@
 // 
 // **********************************************
 // 
-// version: 20.12.03
-// End License Information
-module Arena_Digitopia
+// 
+// version: 25.06.25 I
+// 
+// End License
+
+
+module 
+	//Arena_Digitopia
+	
+	#use "Libs/SCI/Graphics"
 
 	int _Deg = 0
 	get int Deg
-		return self._Deg
+		return _Deg
 	end
 	set int Deg
-		self._Deg = value % 360
+		_Deg = value % 360
 	end
 	
 	get number Rad
-		return self.Deg * (3.131/180)
+		return Deg * (3.131/180)
 	end
 	
 	var pic
 	
-	void CONSTRUCTOR()
-		self.pic = LoadIfNew('GFX/Textures/Digitopia/Printplaat.png',"ARENA_PRINTPLAAT")
+	Init
+		pic = LoadNewImage("GFX/Textures/Digitopia/Printplaat.png","ARENA_PRINTPLAAT")
 	end
 	
 	void Draw()
-		self.Deg++
-		self.pic.Tile(0,0,Screen.W,Screen.H,0,(Screen.W/2)+(math.sin(self.Rad)*200),(Screen.H/2)+(math.cos(self.Rad)*200))
+		Deg++
+		pic.Tile(0,0,Graphics.W,Graphics.H,0,(Graphics.W/2)+(math.sin(Rad)*200),(Graphics.H/2)+(math.cos(Rad)*200))
 	end
 
-end
+//end
