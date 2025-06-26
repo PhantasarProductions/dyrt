@@ -1,8 +1,8 @@
-// License Information:
+// License:
 // **********************************************
 // 
-// src/Tricky Script/Script/Use/Specific/CombatModules/AI/Juggernault.nil
-// (c) Jeroen Broks, 2020, All Rights Reserved.
+// src/Script/Script/Use/Specific/CombatModules/AI/AI_Juggernault.scyndi
+// (c) Jeroen Broks, 2020, 2025, All Rights Reserved.
 // 
 // This file contains material that is related
 // to a storyline that is which is strictly
@@ -24,6 +24,7 @@
 // from it, you can use it under that license.
 // Please check out the other files to find out
 // which license applies.
+// 
 // This file comes 'as-is' and in no possible
 // way the author can be held responsible of
 // any form of damages that may occur due to
@@ -32,17 +33,27 @@
 // 
 // **********************************************
 // 
-// version: 20.12.12
-// End License Information
+// 
+// version: 25.06.26 IV
+// 
+// End License
 
-module AI_Jug
+module 
+	//AI_Jug
+	
+	#use "Script/Use/Need"
+	
+	#accept Fighter
+	
 
-	var Default
+	//var Default
 	int beurt = 0
 	table Elem
 	
-	void CONSTRUCTOR()
-		self.Elem = { "Flame", "Wind","Water","Earth","Thunder","Frost","Light","Darkness" }
+	locExtern ll "#"
+	
+	Init
+		Elem = { "Flame", "Wind","Water","Earth","Thunder","Frost","Light","Darkness" }
 	end
 	
 	var Decide(foe)
@@ -50,15 +61,15 @@ module AI_Jug
 		table nact
 		table heroes
 		for tag,hero in pairs(Fighter.Team.Hero)
-			heroes[#heroes+1]=hero
+			heroes+=hero
 		end
-		Elm = self.Elem[math.random(1,#self.Elem)]		
+		Elm = Elem[math.random(1,ll Elem)]		
 		nact.ActTag = "AAA_JUG_"..Elm
 		nact.ExeTag = foe.Tag
 		nact.Targets = {}
 		for check in each(heroes)
 			if check.Char.Points("HP").Have>0
-				nact.Targets[#nact.Targets+1]=check
+				nact.Targets+=check
 			end
 		end
 		foe.NextAct = new Actions(nact)
@@ -67,4 +78,4 @@ module AI_Jug
 		RPG.GetChar("FOE_1").Stat("BASE__RESIST_Elem_"..Elm).Value = RPG.GetChar("FOE_1").Stat("BASE__RESIST_Elem_"..Elm).Value + (__skill^__skill) 
 	end
 
-end
+//end
