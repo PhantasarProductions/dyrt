@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.10
+// version: 25.06.26
 // 
 // End License
 
@@ -262,7 +262,7 @@ group MScript
 			Kthura.Obj["DS"..i].Alpha = gv.Int.FadeBlenchy
 		end
 		//CTA.Unlocked_NewGamePlus = true
-		bngpcheck.Value("Cast","Scyndi","56dcd25b31538f9bc183f5b791a8cf45")
+		bngpcheck.Value("Cast","Scyndi","56dcd25b31538f9bc183f5b791a8cf45")		
 	end
 	
 	void ENDACHIEVEMENT()
