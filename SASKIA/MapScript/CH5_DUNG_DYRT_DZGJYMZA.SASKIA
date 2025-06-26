@@ -127,11 +127,16 @@
 	call Map.GoToLayer,"#001","Einde"
 	call Map.HideObj,"Player"
 	call Map.ShowByLabel,"BB"
+	call Map.AutoScroll,false
+	mov Scyndi.Class.Kthura.Obj.Mikpunt.Y,Map.ScrollY
+	mov Scyndi.Class.Kthura.Obj.Mikpunt.X - (Scyndi.Class.Graphics.Width // 2),Map.ScrollX
 	call MapText,"BYE_BLENCHY"
-	mov 1000,gv.Int.FadeBlenchy
+	;mov 1000,gv.Int.FadeBlenchy
+	mov 255,gv.Int.FadeBlenchy
 	:BlenchyLoop
 	call MapScript.Blenchy_Fade
 	chk gv.Int.FadeBlenchy>0,BlenchyLoop
+	call Map.AutoScroll,true
 	
 	;Time to get outta here!
 	call MapText,"UH-OH"
