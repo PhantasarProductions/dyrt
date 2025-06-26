@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Heroes.scyndi
 // 
-// 	  Version: 25.05.29
+// 	  Version: 25.06.26 III
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -49,6 +49,7 @@ Module
 #use "Libs/SCI/Events"
 #use "Libs/SCI/SString"
 #use "Libs/SCI/Graphics"
+#use "Libs/SCI/InterVar"
 
 #use "libs/xmath"
 //#use "libs/strings"
@@ -156,6 +157,11 @@ class Hero extends Fighter
 		self.AutoLoadPic()
 		// CSayF("Drawing %s.%s on (%d,%d)",self.Tag,self.Houding,self.X,self.Y) // <-- MUST BE ON COMMENT ALL THE TIME IF NOT IN USE!!!!
 		__white
+		if gBool.DEBUG_WHIZZY
+			for _,k in pairs{"HP","AP","VIT"}
+				RPG.GetChar(self.Tag).Points(k).Have++
+			end
+		end
 		SetAlpha(255)
 		delegate overdraw
 		for _,status in self.StatusChanges.QEach
