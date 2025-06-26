@@ -5,14 +5,19 @@
 // Too much trouble to do this manually all the time, so here goes :P
 // The tool has been written in Go...
 
-do
-	table ret
+
+Module
+
+Var Ret
+Init
+	Ret={}
+	//table ret
 
 		ret["GFX/TEXTURES/ABYSS/PLASMA_SHORT.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Abyss - Plasma" }
 		ret["GFX/BOXPIC/EXHURU/GENERAL.PNG"] = { ["Author"] = "Linvala Kemelon", ["Name"] = "Portraits: Experimental Human Replica Unit" }
 		ret["GFX/TEXTURES/ABYSS/EXIT2.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Abyss - Exit" }
 		ret["GFX/TEXTURES/SICKBAY/BED.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Science Facility - Bed" }
-		ret["GFX/TEXTURES/GJ/GJTRANS.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Game Jolt: Portal" }
+		//ret["GFX/TEXTURES/GJ/GJTRANS.JPBF"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Game Jolt: Portal" }
 		ret["GFX/COMBAT/UI/GAUGEICONS/YASATHAR.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Combat Icon: Eric (Y)" }
 		ret["GFX/ACTORS/HEROES/YOUNGIRRAVONIA.WEST.JPBF"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia (kid) - Walking West" }
 		ret["GFX/TEXTURES/FRUNDARMON/MWALL.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Frundarmon's Mansion - Wall" }
@@ -783,7 +788,7 @@ do
 		ret["GFX/COMBAT/FIGHTERS/FOES/FAKE/REBECCA.NEGATIVE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Fake: Rebecca (negative)" }
 		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/LICHKING.NEGATIVE.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Lich King (negative)" }
 		ret["GFX/TEXTURES/ASTRILOPUPS/FACILITY/SOUTH-EAST.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Textures: Science Facility - South-East" }
-		ret["GFX/ALG/GAME JOLT.PNG"] = { ["Author"] = "Game Jolt", ["Name"] = "Game Jolt: Game Jolt Logo" }
+		//ret["GFX/ALG/GAME JOLT.PNG"] = { ["Author"] = "Game Jolt", ["Name"] = "Game Jolt: Game Jolt Logo" }
 		ret["GFX/TEXTURES/PURPLEFOREST/LONG GRASS.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: Purple Forest - Long Grass" }
 		ret["GFX/TEXTURES/WHITEDRAGON/FLOORICE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Textures: White Dragon's Lair - Icy floor" }
 		ret["GFX/MENUICONS/SELL.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icon: Sell" }
@@ -885,7 +890,7 @@ do
 		ret["GFX/COMBAT/FIGHTERS/FOES/REG/ALIEN.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Alien" }
 		ret["GFX/COMBAT/FIGHTERS/HERO/IRRAVONIA.DEAD.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "Heroes: Irravonia - Fallen" }
 		ret["GFX/ACTORS/PEOPLE/FAIRIES/FEENALARIA_BACKSIDE.PNG"] = { ["Author"] = "Man of Steel", ["Name"] = "NPC: Fairies - Elder Feenalaria (back)" }
-		ret["GFX/ALG/GAME JOLT TRANSPARENT.PNG"] = { ["Author"] = "Game Jolt", ["Name"] = "Game Jolt: Logo (transparent)" }
+		//ret["GFX/ALG/GAME JOLT TRANSPARENT.PNG"] = { ["Author"] = "Game Jolt", ["Name"] = "Game Jolt: Logo (transparent)" }
 		ret["GFX/COMBAT/FIGHTERS/FOES/BOSS/AUDREY.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Boss: Audrey" }
 		ret["GFX/MENUICONS/STATUS.PNG"] = { ["Author"] = "Jeroen P. Broks", ["Name"] = "Menu Icons: Status" }
 		ret["GFX/TEXTURES/MUSIC/NOTE4.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Textures: Halls of Music - Note #4" }
@@ -1321,5 +1326,5 @@ do
 		ret["GFX/COMBAT/FIGHTERS/FOES/REG/GHOUL.PNG"] = { ["Author"] = "OCAL: Open Clip Art Library", ["Name"] = "Foe: Ghoul" }
 
 
-	return ret
+	//return ret
 end
