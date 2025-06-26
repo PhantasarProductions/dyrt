@@ -1,7 +1,7 @@
 // License:
 // 	src/Script/Script/Use/Misc/Combat.ScyndiBundle/Zullen_We_Gaan_Debuggen.scyndi
 // 	Debug Combat
-// 	version: 25.06.13
+// 	version: 25.06.26 I
 // 
 // 	Copyright (C) 2025 Jeroen P. Broks
 // 
@@ -61,10 +61,16 @@ Global void DEBUG_JACK()
 	QSM("Jack The Ripper Mode",gbool.DEBUG_CHEAT_JACKTHERIPPER)
 End
 
+global void DEBUG_WHIZZY()
+	gBool.DEBUG_WHIZZY = !gBool.DEBUG_WHIZZY
+	QSM("Whizzy mode",gBool.DEBUG_WHIZZY)
+End
+
 Init
 	Sys.ConsoleLocal("HP","DEBUG_VIEW_HP")
 	Sys.ConsoleLocal("GOD","DEBUG_GOD")
 	Sys.ConsoleLocal("IDDQD","DEBUG_GOD")
 	Sys.ConsoleLocal("JACK","DEBUG_JACK")
+	Sys.ConsoleLocal("WHIZZY","DEBUG_WHIZZY")
 	Sys.ConsoleLocal("JACKTHERIPPER","DEBUG_JACK")
 End
