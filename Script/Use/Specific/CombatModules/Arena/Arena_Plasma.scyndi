@@ -43,6 +43,7 @@
 // End License
 Module
 
+#use "Libs/SCI/Graphics"
 #use "Libs/SCI/BlopPlasma"
 
 	Init
@@ -50,6 +51,7 @@ Module
 	End
 	
 	Void Draw()
+		Cls()
 		BlopPlasma.Draw(255,255,255)
 	End
 	
