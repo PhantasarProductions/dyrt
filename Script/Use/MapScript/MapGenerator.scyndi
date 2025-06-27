@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/MapScript/MapGenerator.scyndi
 // 
-// 	  Version: 25.06.12
+// 	  Version: 25.06.26
 // 	
 // 	  Copyright (C) 2024, 2025 Jeroen Petrus Broks
 // 	
@@ -86,8 +86,10 @@ Int GridY = 32
 Int MWX = 96
 int MWY = 96
 
-int SQX = 160
-int SQY = 160
+//int SQX = 160
+//int SQY = 160
+int SQX = 192
+int SQY = 192
 
 Get int MWHX; return MWX div 3; End
 Get int MWHY; return MWY div 3; End
