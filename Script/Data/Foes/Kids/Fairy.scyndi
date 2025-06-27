@@ -26,8 +26,8 @@ Var RetFunc()
 	foeret.AllowOversoul = true and __skill!=1
 	foeret.Description = "A Fairy girl cursed by Frundarmon"
 	foeret.Fatal["Light"] = true
-	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/kids/Fairy_Girl.png","FOE_IMAGE_000000004")
-	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/KIDS/FAIRY_GIRL.NEGATIVE.PNG","FOE_IMAGE_000000005")
+	foeret.Image = LoadNewImage("GFX/Combat/Fighters/Foes/kids/Fairy_Girl.png","FOE_IMAGE_000000004_Fairy_Kid")
+	foeret.Image_Neg = LoadNewImage("GFX/COMBAT/FIGHTERS/FOES/KIDS/FAIRY_GIRL.NEGATIVE.PNG","FOE_IMAGE_000000005_Fairy_Kid")
 	foeret.Cash = 123
 	foeret.Drop = foeret.Drop || {}
 	 foeret.Drop += "ITM_POTION"
