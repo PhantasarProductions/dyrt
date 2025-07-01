@@ -38,7 +38,7 @@ Var RetFunc()
 	foeret.Steal += "ITM_MYSTERIOUSPOTION"
 	foeret.Steal += "ITM_MYSTERIOUSPOTION"
 	foeret.Steal += "ITM_AMBROSIA"
-	foeret.Steal += "ITM_BANBANA"
+	foeret.Steal += "ITM_Banana"
 	if not Foe.LoadOversoul
 		foeret.Experience = 10000000
 	end
