@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Time.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.29 II
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -52,6 +52,7 @@ Module
 //#use "libs/DarkText"
 
 #use "Libs/SCI/Sys"
+#use "Libs/SCI/JCR6"
 #use "Libs/SCI/Audio"
 #use "Libs/SCI/SString"
 #use "Libs/SCI/Graphics"
@@ -179,6 +180,7 @@ group CombatTime
 	end
 	
 	var signal
+	var aunames
 	
 	void UpdateGauge()
 		for iteam,imember,ifighter in Fighter.ForAllQuick()
@@ -214,8 +216,16 @@ group CombatTime
 					end
 					Stage.Go("PlayerInput")
 					Stage.Current.CharTag = imember
-					self.signal = self.signal or GetAudio("COMBATSIGNAL")
+					self.signal = self.signal || GetAudio("COMBATSIGNAL")
 					self.signal.Play()
+					aunames = aunames || {}
+					aun:=Ternary(ifighter.Tag=="Scyndi",ifighter.Name,ifighter.Tag)
+					auf:="SFX/Combat/Names/"..aun..".wav"
+					if JCR6.EntryExists(auf)
+						aunames[aun]=aunames[aun] || Audio.LoadNew(auf,"NAME_"..auf)
+						aunames[aun].Play()
+					end
+					return
 				elseif iteam=="Foe"
 					if ifighter.GoOversoul
 						ifighter.GaugePosition = -1000
@@ -230,6 +240,7 @@ group CombatTime
 				end
 			elseif ifighter.GaugePosition == 20000
 				Stage_Action.ComeToMe(ifighter.NextAct)
+				return
 			else
 				Lua.error(sprintf("Invalid gauge position! (%09d) (%s)",ifighter.GaugePosition,ifighter.Tag))
 			end
