@@ -34,13 +34,14 @@
 // **********************************************
 // 
 // 
-// version: 25.06.09 I
+// version: 25.07.01 I
 // 
 // End License
 
 
 Module
-
+   // Script/Use/Specific/CombatModules/Instant/Instant_Cancel_UltimateSoulBreaker
+   // Script/Use/Specific/CombatModules/Instant/Instant_Cancel_UltimateSoulBreaker.lbc
 #use "Script/Use/Specific/CombatModules/Instant/Instant_Cancel_UltimateSoulBreaker"
 
 #accept LordDzgjymza
