@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.19 III
+// version: 25.06.28
 // 
 // End License
 
@@ -222,6 +222,11 @@ Init
 	Map.ZA_Enter("Reset_Start","Gat")
 	Map.ZA_Enter("GAT2","Gat")
 	Map.ZA_Enter("GAT3","Gat")
+	
+	Map.ZA_Enter("Dragon","SASKIA_Dragon")
+	Map.ZA_Enter("LeaveCave","LeaveCave")
+	
+	
 	if false
 		// dummy
 	for i=1,MaxIce
@@ -230,8 +235,6 @@ Init
 		Map.ZA_Enter(tag,"ICE",tag)
 		Map.ZA_Leave(tag,"END_ICE",tag)
 	end
-	Map.ZA_Enter("Dragon","SASKIA_Dragon")
-	Map.ZA_Enter("LeaveCave","LeaveCave")
 	
 	For L in each{[0]="Out","Die_1","Die_2","Die_3","A","B","C"}
 		Map.ZA_Enter("Go_"..L,"IceGo",L)
