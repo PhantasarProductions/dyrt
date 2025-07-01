@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Misc/Combat.ScyndiBundle/Combat_Fighters.scyndi
 // 
-// 	  Version: 25.06.02 I
+// 	  Version: 25.06.30
 // 	
 // 	  Copyright (C) 2019-'20, 2025 Jeroen Petrus Broks
 // 	
@@ -56,8 +56,8 @@ LocExtern Combat_Status "Scyndi.Class.Combat_status"
 class Fighter
 	ReadOnly Var Me
 
-	table Permanenced
-	table Instant 
+	table Permanenced = {}
+	table Instant = {}
 	int SpotX
 	int SpotY
 	int TempX
