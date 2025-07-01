@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.28
 // 
 // End License
 
@@ -74,7 +74,7 @@ group MScript
 			Map.WalkTo("Start")
 			MapText("DONTGO")
 		else
-			WorldMap("Delisto")
+			WorldMap.Delisto()
 		end
 	end
 	
