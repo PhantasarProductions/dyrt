@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/ARENA_SparForest.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.30 I
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -43,7 +43,7 @@
 // End License
 
 
-
+#use "Libs/SCI/Graphics"
 #use "Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest"
 
 module
@@ -55,10 +55,17 @@ module
 		//self.Forest = NIL.Use("Script/Use/Specific/CombatModules/Arena/Templates/Forest")
 		//self.Forest.LoadTex("GFX/Textures/Trees/SPAR.png",self.Forest.LoadComm.Cloud,"gfx/Textures/Sky/cloud.png")
 		Forest.LoadTex("GFX/Textures/Trees/SPAR.png",4,"gfx/Textures/Sky/cloud.png")
+		Forest.CloudR=255
+		Forest.CloudG=255
+		Forest.CloudB=255
+		Forest.FloorR=255
+		Forest.FloorG=255
+		Forest.FloorB=255
 		Forest.Generate()
 	end
 	
 	void Draw()
+		SetColor(255,255,255)
 		Forest.Draw()
 	end
 //end
