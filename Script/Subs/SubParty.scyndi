@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Subs/SubParty.scyndi
 // 
-// 	  Version: 25.06.15
+// 	  Version: 25.06.29
 // 	
 // 	  Copyright (C) 2019,'20, 2025 Jeroen Petrus Broks
 // 	
@@ -304,7 +304,7 @@ group SubParty
 		CSay("Skill: "..tostring(__skill))
 		//ch.Points("HP",true)["MaxCopy"] = "END_HP"; CSayF("Max  HP: %4d",ch.Points("HP").Maximum)
 		ch.Points("AP",true)["Maximum"] = level * ({20,10,5})[__skill]; CSayF("Max  AP: %4d",ch.Points("AP").Maximum)
-		ch.Points("VIT",true)["Maximum"] = 0 + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
+		ch.Points("VIT",true)["Maximum"] = Ternary(__skill==1,50,0) + ((3 - __skill)*100); CSayF("Max VIT: %4d",ch.Points("AP").Maximum)
 		// Not efficient, I know, but this routine only gets called when a new character 
 		// is created anyway, and that process only takes place about 11 times in the entire game!
 		for p in each({[0]="HP","VIT"})
