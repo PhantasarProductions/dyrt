@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.04.28
+// version: 25.06.28
 // 
 // End License
 
@@ -150,7 +150,7 @@ group MScript
 	end
 	
 	void MERCHANTBEGONE()
-		if gv.Bool.Chapter1Complete and (not Done.Killed_MysteriousCrypt_Merchant)
+		if gv.Bool.Chapter1Complete && (not Done.Killed_MysteriousCrypt_Merchant)
 			Map.Kill("NPC_Merchant",true)
 			CSay("Merchant permanently removed!")
 		end
@@ -167,6 +167,7 @@ group MScript
 			end
 			lvl += (lvl*({0.25,0,-0.75})[__skill])
 			//RPG.GetChar("Brendor").Stat("Level").Value=lvl
+			lvl = math.floor(lvl+0.5)
 			Party.SetLevelStats("Brendor", lvl)
 			CSayF("Brendor's level corrected to %d",lvl)
 		end
