@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.06.30 I
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -95,14 +95,14 @@ LocExtern tonumber "tonumber"
 				case "string"
 					switch lc
 						case 1
-							textrees+=LoadNewImage(v,"ARENAFOREST::"..v)
+							textrees+=LoadNewImage(v,"ARENAFOREST::"..v.."::Tree")
 						case 2
-							texfloor = LoadNewImage(v,"ARENAFOREST::"..v)
+							texfloor = LoadNewImage(v,"ARENAFOREST::"..v.."::Floor")
 							lc = 1
 						case 3
 							Lua.error("Expected color table")
 						case 4
-							texclouds+=LoadNewImage(v,"ARENAFOREST::"..v)
+							texclouds+=LoadNewImage(v,"ARENAFOREST::"..v.."::Cloud")
 						default
 							Lua.error("Unknown string situation!")
 					end
@@ -181,13 +181,13 @@ LocExtern tonumber "tonumber"
 		// sky
 		SetColor(texsky.R,texsky.G,texsky.B)
 		Rect(0,0,Screen.Width,Screen.Height)
-		Color(CloudR,CloudG,CloudB)
+		SetColor(CloudR,CloudG,CloudB)
 		for cloud in each(clouds)
 			cloud.Tex.Draw(cloud.X,cloud.Y)
 		end
 		// floor
-		Color(FloorR,FloorG,FloorB)
-		texfloor = texfloor or LoadNewImage(texfloorfile or "GFX/Textures/Road/Grass1.png","GroenIsGras_OnderMijneVoeten")
+		SetColor(FloorR,FloorG,FloorB)
+		texfloor = texfloor or LoadNewImage(texfloorfile || "GFX/Textures/Road/Grass1.png","GroenIsGras_OnderMijneVoeten")
 		texfloor.Tile(0,HalfY,Screen.Width,HalfY)
 		//texfloor.Tile(0,539,Screen.Width,539) // DEBUG! Not usable, since screen heights can differ!
 		// trees
