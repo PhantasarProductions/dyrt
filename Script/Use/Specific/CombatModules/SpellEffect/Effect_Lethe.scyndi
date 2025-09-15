@@ -1,9 +1,9 @@
 // License:
-// 	  src/Script/Script/Use/Specific/CombatModules/Instant/Instant_Cancel_UltimateSoulBreaker.scyndi
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellEffect/Effect_Lethe.scyndi
 // 
-// 	  Version: 25.09.13
+// 	  Version: 25.09.11 II
 // 	
-// 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
+// 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
 // 	  ===========================
 // 	  This file is part of a project related to the Phantasar Chronicles or another
@@ -41,34 +41,16 @@
 // 	     misrepresented as being the original software.
 // 	  3. This notice may not be removed or altered from any source distribution.
 // End License
-
-
 Module
 
-#accept RPG
-#accept CSayF
-#accept Actions
-#accept Fighter
-
-
-void Do_Instant(UltimateSoulBreaker,act)
-	nact:={}
-	nact.ActTag = "ABL_FOE_ULTIMATESOULBREAKER"
-	nact.ExeTag = UltimateSoulBreaker.Tag
-	nact.Targets = {} //{act.Executor}
-	for i=1,4 
-		if RPG.Party[i]!=""
-			CSayF("USB Tagging: %d/%s",i,RPG.Party[i])
-			nact.Targets += Fighter.ByTag[RPG.Party[i]]
+	bool DoEffect(Act,Target)
+		locextern __skill "Scyndi.globals.gint.skill" 
+		if Target.Char.Stat("Experience").Value<=0
+			return false
 		end
+		Target.Char.Stat("Experience").Value = math.abs(Target.Char.Stat("Experience").Value + (Target.Char.Stat("Experience").Value * __skill)) //))
+		return true
 	end
-	UltimateSoulBreaker.NextAct = new Actions(nact)
-	UltimateSoulBreaker.NextActSpeed = 3000
-	UltimateSoulBreaker.GaugePosition = 10001
-end
-
-Delegate __Call
-
-Init
-	__Call=Do_Instant
-End
+	
+	//return Vergeet
+//end

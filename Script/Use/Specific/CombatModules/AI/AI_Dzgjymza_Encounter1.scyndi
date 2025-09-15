@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.09 VII
+// version: 25.09.13
 // 
 // End License
 
@@ -103,7 +103,7 @@ module
 		switch beurt 
 			case 0 1
 				if __skill==3
-					SetTurn('ABL_FOE_DEMONSOULBREAKER',All)
+					SetTurn("ABL_FOE_DEMONSOULBREAKER",All)
 				else
 					SetTurn("BTY_OBSERVE",Eric)
 				end

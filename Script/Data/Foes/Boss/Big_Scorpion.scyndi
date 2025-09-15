@@ -272,9 +272,9 @@ Var RetFunc()
 		foeret.AI_Moves += "ABL_FOE_POISONSTING"
 		foeret.AI_Moves += "ABL_FOE_POISONSTING"
 		foeret.AI_Moves += "ABL_HERO_BRENDOR_CHARGE"
-		foeret.AI_Moves += "ACT_ATTACK"
-		foeret.AI_Moves += "ACT_ATTACK"
-		foeret.AI_Moves += "ACT_ATTACK"
+		//foeret.AI_Moves += "ACT_ATTACK"
+		//foeret.AI_Moves += "ACT_ATTACK"
+		//foeret.AI_Moves += "ACT_ATTACK"
 		default
 		error("Unknown skill "..__skill)
 	end

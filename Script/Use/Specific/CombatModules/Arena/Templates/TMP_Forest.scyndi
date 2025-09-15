@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Use/Specific/CombatModules/Arena/Templates/TMP_Forest.scyndi
 // 
-// 	  Version: 25.06.30 I
+// 	  Version: 25.09.13
 // 	
 // 	  Copyright (C) 2019, 2025 Jeroen Petrus Broks
 // 	
@@ -125,6 +125,7 @@ LocExtern tonumber "tonumber"
 	
 	void Generate()
 		//with self
+			texfloor=nil
 			table temptrees
 			int y 
 			y = RelPos.Y[550]

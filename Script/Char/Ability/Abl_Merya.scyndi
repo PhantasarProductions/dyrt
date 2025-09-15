@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.19
+// version: 25.09.02
 // 
 // End License
 
@@ -84,7 +84,7 @@ Init
 
 	
 	if s==3
-		abls.SmokeBomb.SkillRogue=75 
+		abls.SmokeBomb.Skill_Rogue=75 
 	end
 	
 End

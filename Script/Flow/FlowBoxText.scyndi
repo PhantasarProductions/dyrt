@@ -1,7 +1,7 @@
 // License:
 // 	  src/Script/Script/Flow/FlowBoxText.scyndi
 // 
-// 	  Version: 25.04.28
+// 	  Version: 25.07.03 I
 // 	
 // 	  Copyright (C) 2019, 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -46,6 +46,7 @@
 Script
 
 #use "libs/sci/sys"
+#use "Libs/SCI/Graphics"
 #use "Libs/SCI/Intervar"
 #use "script/use/need"
 #use "script/use/misc/boxes"
@@ -156,6 +157,7 @@ class TextBox
 		self.txtbox.Draw()
 		
 		__white
+		SetAlpha(255)
 		BoxPic(20,self.boxy+math.floor(self.boxheight/2),self.PicDir,self.PicSpc,"center")
 		// CSayF("DEBUG: y:%4d; h:%4d; c:%4d",self.boxy,self.boxheight,self.boxy+math.floor(self.boxheight/2)) // debug! Must be commented out in distributions!!!
 		
@@ -336,6 +338,7 @@ End
 global void BUB_Draw()
 	//LuaDoString(trim(FlowBoxText.ReturnFlow),"BoxText_Back()","BoxText BackGrCall: ("..trim(FlowBoxText.ReturnFlow)..")")
 	Sys.Call(trim(FlowBoxText.ReturnFlow),"BoxText_Back")
+	SetAlpha(255)
 	TextBox.Current.Show()
 	
 	// Draw all achievement boxes

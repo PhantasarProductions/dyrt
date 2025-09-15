@@ -1,7 +1,7 @@
 // License:
-// 	  src/Script/Script/Use/Specific/CombatModules/Instant/Instant_Cancel_UltimateSoulBreaker.scyndi
+// 	  src/Script/Script/Use/Specific/CombatModules/SpellAni/SpellAni_SnowBall.scyndi
 // 
-// 	  Version: 25.09.13
+// 	  Version: 25.07.15 I
 // 	
 // 	  Copyright (C) 2020, 2025 Jeroen Petrus Broks
 // 	
@@ -41,34 +41,22 @@
 // 	     misrepresented as being the original software.
 // 	  3. This notice may not be removed or altered from any source distribution.
 // End License
+module 
+//SpellAni_Snowball
+#use "Script/Use/Specific/CombatModules/SpellAni/SAT_Projectile"
 
-
-Module
-
-#accept RPG
-#accept CSayF
-#accept Actions
-#accept Fighter
-
-
-void Do_Instant(UltimateSoulBreaker,act)
-	nact:={}
-	nact.ActTag = "ABL_FOE_ULTIMATESOULBREAKER"
-	nact.ExeTag = UltimateSoulBreaker.Tag
-	nact.Targets = {} //{act.Executor}
-	for i=1,4 
-		if RPG.Party[i]!=""
-			CSayF("USB Tagging: %d/%s",i,RPG.Party[i])
-			nact.Targets += Fighter.ByTag[RPG.Party[i]]
-		end
+	//var PRJ
+	locExtern PRJ "Scyndi.Class.SAT_Projectile"
+	
+	get delegate Cycle
+		return PRJ.Cycle
 	end
-	UltimateSoulBreaker.NextAct = new Actions(nact)
-	UltimateSoulBreaker.NextActSpeed = 3000
-	UltimateSoulBreaker.GaugePosition = 10001
-end
-
-Delegate __Call
-
-Init
-	__Call=Do_Instant
-End
+	
+	void SA_Init(act)
+		assert(len(act.Targets)==1,sprintf("Invalid number of targets for this spellani (%d)",Len(act.Targets)))
+		PRJ.Start("gfx/Combat/SpellAni/SNOWBALL.png",act.Executor,act.Targets[0],true,true)
+	end
+	
+	//void CONSTRUCTOR()
+	//	self.PRJ = NIL.Use("Script/Use/Specific/CombatModules/SpellAni/Projectile")
+	//end
