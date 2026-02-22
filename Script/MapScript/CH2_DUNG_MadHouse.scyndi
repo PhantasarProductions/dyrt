@@ -34,7 +34,7 @@
 // **********************************************
 // 
 // 
-// version: 25.06.25
+// version: 25.10.19
 // 
 // End License
 
@@ -165,7 +165,7 @@ group MScript
 	
 	void TOMAIN()
 		Map.GoToLayer("#002","FromGameJoltOpvang")
-		if not Done.GJOPVANGBARRIERREMOVEDINMADHOUSE
+		if ! Done.GJOPVANGBARRIERREMOVEDINMADHOUSE
 			Map.Kill("Medal_Dicht",true)
 		end
 	end
